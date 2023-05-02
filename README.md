@@ -85,7 +85,7 @@ I am a passionate 3rd year Computer Science student studying at the University o
       <a href="https://github.com/ThaboLetsoalo">
         <img src="https://img.icons8.com/material-rounded/24/000000/github.png" width="30" height="30"/>
       </a>
-  <a href="www.linkedin.com/in/t-joe-lets-992746270">
+  <a href="#">
   <img src="https://img.icons8.com/fluency/24/000000/linkedin.png"/>
   </a>
   </tr>
