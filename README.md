@@ -12,6 +12,19 @@
 
 ## Synapse Solutions - SweatSession - Project Description
 
+The purpose of SweatSession is to develop a social, location-based mobile app that will enable users to
+schedule workout sessions with their friends, track their progress, view their friends' personal bests, and earn
+rewards for achieving their fitness goals. The app aims to provide a platform that will make it easy for users to
+connect with workout partners, track their progress, and earn rewards. By incorporating social and gamification
+elements such as leaderboards amongst friends, the app hopes to encourage users to adopt a healthy and
+active lifestyle.
+The app will have many subsystems that will be integrated to provide its functionality. A non-exhaustive list of
+such subsystems will be the location-based element so that users can schedule workouts together, the social
+element in order to add friends as well as view their workout plans, personal bests, etc., a leaderboard element
+amongst friends based on workout times and more.
+The project presents many design elements that will have to be catered for such as a robust and scalable back-
+end to accommodate multiple users, designing an intuitive and aesthetic design to ensure that users continue to
+use the app, location-based services and more
 
 
 ## Technologies
