@@ -1,8 +1,22 @@
 # SweatSession
 
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li><a href="Synapse Solutions - SweatSession - Project Description">Project Description</a></li>
+    <li><a href="#Technologies">Technologies</a></li>
+    <li><a href="#Members">Usage</a></li>
+  </ol>
+</details>
+
 ## Synapse Solutions - SweatSession - Project Description
 
+
+
 ## Technologies
+
+
 
 ### Members
 
