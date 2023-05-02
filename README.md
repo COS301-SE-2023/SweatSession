@@ -57,15 +57,14 @@ I'm a 3rd year Computer Science student at the University of Pretoria. I'm passi
   </tr>
 </table>
  
- <table style="border: none;">
+<table style="border: none;">
   <tr>
     <td style="vertical-align: top; width: 30%;">
       <img src="" width="150" height="auto">
     </td>
     <td style="vertical-align: top; width: 70%;">
             <b>Luqmaan Abram</b><br>
-I am a passionate 3rd year Computer Science student studying at the University of Pretoria , as an aspiring Full Stack Developer I am familiar with multiple backend and frontend technologies. Other fields which I am interested in, include Cyper-security and Data-engineering
-
+I am a passionate 3rd year Computer Science student studying at the University of Pretoria , as an aspiring Full Stack Developer I am familiar with multiple backend and frontend technologies. Other fields which I am interested in, include Cyber-security and Data-engineering.
       <br>
       <a href="https://github.com/LUQMAAN-ABRAM">
         <img src="https://img.icons8.com/material-rounded/24/000000/github.png" width="30" height="30"/>
