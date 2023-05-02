@@ -51,7 +51,7 @@ I'm a 3rd year Computer Science student at the University of Pretoria. I'm passi
       <a href="https://github.com/ShuaibNuruddin">
         <img src="https://img.icons8.com/material-rounded/24/000000/github.png" width="30" height="30"/>
       </a>
-
-      
+  <a href="https://za.linkedin.com/in/shuaib-nuruddin-2b4808267">
+  <img src="https://img.icons8.com/fluency/24/000000/linkedin.png"/>
   </tr>
 </table>
