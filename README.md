@@ -33,7 +33,7 @@ I'm currently in my 3rd year of undergraduate studies at the University of Preto
       <br>
       <a href="https://github.com/Daniel-Bezuidenhout">
         <img src="https://img.icons8.com/material-rounded/24/000000/github.png" width="30" height="30"/>
-      </a>
+      </a></tr></table>
 
 <table style="border: none;">
   <tr>
