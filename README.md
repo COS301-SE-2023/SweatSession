@@ -53,6 +53,7 @@ I'm a 3rd year Computer Science student at the University of Pretoria. I'm passi
       </a>
   <a href="https://za.linkedin.com/in/shuaib-nuruddin-2b4808267">
   <img src="https://img.icons8.com/fluency/24/000000/linkedin.png"/>
+  </a>
   </tr>
 </table>
  
@@ -71,6 +72,7 @@ I am a passionate 3rd year Computer Science student studying at the University o
       </a>
   <a href="https://www.linkedin.com/in/luqmaan-abram-0a0807251/?originalSubdomain=za">
   <img src="https://img.icons8.com/fluency/24/000000/linkedin.png"/>
+  </a>
   </tr>
 </table>
 
