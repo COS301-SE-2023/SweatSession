@@ -29,7 +29,7 @@ use the app, location-based services and more
 
 ## Technologies
 
-
+* [![Angular][Angular.io]][Angular-url]
 
 ### Members
 
@@ -117,3 +117,8 @@ I am a passionate 3rd year Computer Science student studying at the University o
   </a>
   </tr>
 </table>
+
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+[Angular.io]: https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white
+[Angular-url]: https://angular.io/
