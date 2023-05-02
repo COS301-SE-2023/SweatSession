@@ -4,9 +4,9 @@
 <details>
   <summary>Table of Contents</summary>
   <ol>
-    <li><a href="Synapse Solutions - SweatSession - Project Description">Project Description</a></li>
+    <li><a href="#Synapse Solutions - SweatSession - Project Description">Project Description</a></li>
     <li><a href="#Technologies">Technologies</a></li>
-    <li><a href="#Members">Usage</a></li>
+    <li><a href="#Members">Members</a></li>
   </ol>
 </details>
 
