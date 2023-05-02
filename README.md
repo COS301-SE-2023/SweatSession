@@ -70,7 +70,7 @@ I'm a 3rd year Computer Science student at the University of Pretoria. I'm passi
         <img src="https://img.icons8.com/material-rounded/24/000000/github.png" width="30" height="30"/>
       </a>
      <a href="https://www.linkedin.com/in/luqmaan-abram-0a0807251/">
-  <img src="https://img.icons8.com/fluency/24/000000/linkedin.png">
+  <img src="https://img.icons8.com/fluency/24/000000/linkedin.png"/>
      
 
       
