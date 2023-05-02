@@ -21,7 +21,7 @@
       <a href="https://www.linkedin.com/in/triumph-ndlovu-425b73274/">
   <img src="https://img.icons8.com/fluency/24/000000/linkedin.png"/>
 </table>
-  
+
 <table style="border: none;">
   <tr>
     <td style="vertical-align: top; width: 30%;">
@@ -34,10 +34,6 @@ I'm currently in my 3rd year of undergraduate studies at the University of Preto
       <a href="https://github.com/Daniel-Bezuidenhout">
         <img src="https://img.icons8.com/material-rounded/24/000000/github.png" width="30" height="30"/>
       </a>
-
-      
-  </tr>
-</table>
 
 <table style="border: none;">
   <tr>
@@ -56,7 +52,7 @@ I'm a 3rd year Computer Science student at the University of Pretoria. I'm passi
   </a>
   </tr>
 </table>
- 
+
 <table style="border: none;">
   <tr>
     <td style="vertical-align: top; width: 30%;">
@@ -76,3 +72,21 @@ I am a passionate 3rd year Computer Science student studying at the University o
 </table>
 
 
+
+<table style="border: none;">
+  <tr>
+    <td style="vertical-align: top; width: 30%;">
+      <img src="" width="150" height="auto">
+    </td>
+    <td style="vertical-align: top; width: 70%;">
+            <b>Thabo Letsoalo ;)</b><br>
+ Hi, I am a Computer Science student at the University of Pretoria.I am a task oriented and dedicated individual who puts his all into bringing tasks into fruition. I am Passionate about coding and learning new techolologies.
+      <br>
+      <a href="https://github.com/ThaboLetsoalo">
+        <img src="https://img.icons8.com/material-rounded/24/000000/github.png" width="30" height="30"/>
+      </a>
+  <a href="www.linkedin.com/in/t-joe-lets-992746270">
+  <img src="https://img.icons8.com/fluency/24/000000/linkedin.png"/>
+  </a>
+  </tr>
+</table>
