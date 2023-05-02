@@ -1,5 +1,9 @@
 # SweatSession
 
+## Synapse Solutions - SweatSession - Project Description
+
+## Technologies
+
 ### Members
 
 <table style="border: none;">
@@ -28,6 +32,23 @@
 I'm currently in my 3rd year of undergraduate studies at the University of Pretoria, majoring in Computer Science. My main interests lie in Full Stack Development, Design and Databases. I love exploring the interplay between these fields and pushing the boundaries of what is possible.
       <br>
       <a href="https://github.com/Daniel-Bezuidenhout">
+        <img src="https://img.icons8.com/material-rounded/24/000000/github.png" width="30" height="30"/>
+      </a>
+
+      
+  </tr>
+</table>
+
+<table style="border: none;">
+  <tr>
+    <td style="vertical-align: top; width: 30%;">
+      <img src="" width="150" height="auto">
+    </td>
+    <td style="vertical-align: top; width: 70%;">
+            <b>Shuaib Nuruddin</b><br>
+I'm a 3rd year Computer Science student at the University of Pretoria. I'm passionate about software engineering and enjoy learning about new technologies. I am also interested in AI, data science and cyber security.
+      <br>
+      <a href="https://github.com/ShuaibNuruddin">
         <img src="https://img.icons8.com/material-rounded/24/000000/github.png" width="30" height="30"/>
       </a>
 
