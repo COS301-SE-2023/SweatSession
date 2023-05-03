@@ -1,1 +1,6 @@
 .env
+.firebaserc
+.env.prod
+
+# Angular
+.angular
