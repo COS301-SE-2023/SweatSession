@@ -29,7 +29,7 @@ use the app, location-based services and more
 
 ## Technologies
 
-* [![Angular][Angular.io]][Angular-url]
+[![Angular][Angular.io]][Angular-url] [![Node][Node.js]][Node-url]
 
 ### Members
 
@@ -122,3 +122,5 @@ I am a passionate 3rd year Computer Science student studying at the University o
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [Angular.io]: https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white
 [Angular-url]: https://angular.io/
+[Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
+[Next-url]: https://nextjs.org/
