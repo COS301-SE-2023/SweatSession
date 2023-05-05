@@ -1,0 +1,173 @@
+[debug] [2023-05-05T12:32:58.335Z] ----------------------------------------------------------------------
+[debug] [2023-05-05T12:32:58.338Z] Command:       /home/shuaib/.nvm/versions/node/v19.7.0/bin/node /home/shuaib/.nvm/versions/node/v19.7.0/bin/firebase emulators:exec --project=demo-project --ui ng serve
+[debug] [2023-05-05T12:32:58.338Z] CLI Version:   11.30.0
+[debug] [2023-05-05T12:32:58.338Z] Platform:      linux
+[debug] [2023-05-05T12:32:58.338Z] Node Version:  v19.7.0
+[debug] [2023-05-05T12:32:58.339Z] Time:          Fri May 05 2023 14:32:58 GMT+0200 (South Africa Standard Time)
+[debug] [2023-05-05T12:32:58.339Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2023-05-05T12:32:58.495Z] Object "" in "firebase.json" has unknown property: {"additionalProperty":"ui"}
+[debug] [2023-05-05T12:32:58.500Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-05-05T12:32:58.500Z] > authorizing via signed-in user (shuaibnuruddin555@gmail.com)
+[debug] [2023-05-05T12:32:58.859Z] openjdk version "11.0.18" 2023-01-17
+OpenJDK Runtime Environment (build 11.0.18+10-post-Ubuntu-0ubuntu120.04.1)
+OpenJDK 64-Bit Server VM (build 11.0.18+10-post-Ubuntu-0ubuntu120.04.1, mixed mode, sharing)
+
+[debug] [2023-05-05T12:32:58.868Z] Parsed Java major version: 11
+[info] i  emulators: Starting emulators: auth, functions, firestore, database, hosting, pubsub, storage, eventarc {"metadata":{"emulator":{"name":"hub"},"message":"Starting emulators: auth, functions, firestore, database, hosting, pubsub, storage, eventarc"}}
+[info] i  emulators: Detected demo project ID "demo-project", emulated services will use a demo configuration and attempts to access non-emulated services for this project will fail. {"metadata":{"emulator":{"name":"hub"},"message":"Detected demo project ID \"demo-project\", emulated services will use a demo configuration and attempts to access non-emulated services for this project will fail."}}
+[debug] [2023-05-05T12:32:58.887Z] [logging] Logging Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2023-05-05T12:32:58.888Z] [auth] Authentication Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2023-05-05T12:32:58.888Z] [firestore] Firestore Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2023-05-05T12:32:58.888Z] [firestore.websocket] websocket server for firestore only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2023-05-05T12:32:58.889Z] [database] Database Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2023-05-05T12:32:58.890Z] [hosting] Hosting Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2023-05-05T12:32:58.890Z] [pubsub] Pub/Sub Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2023-05-05T12:32:58.890Z] [storage] Storage Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2023-05-05T12:32:58.891Z] assigned listening specs for emulators {"user":{"hub":[{"address":"127.0.0.1","family":"IPv4","port":4400},{"address":"::1","family":"IPv6","port":4400}],"ui":[{"address":"127.0.0.1","family":"IPv4","port":4000},{"address":"::1","family":"IPv6","port":4000}],"logging":[{"address":"127.0.0.1","family":"IPv4","port":4500}],"auth":[{"address":"127.0.0.1","family":"IPv4","port":5002}],"firestore":[{"address":"127.0.0.1","family":"IPv4","port":5003}],"firestore.websocket":[{"address":"127.0.0.1","family":"IPv4","port":9150}],"database":[{"address":"127.0.0.1","family":"IPv4","port":5004}],"hosting":[{"address":"127.0.0.1","family":"IPv4","port":5007}],"pubsub":[{"address":"127.0.0.1","family":"IPv4","port":5008}],"storage":[{"address":"127.0.0.1","family":"IPv4","port":5006}]},"metadata":{"message":"assigned listening specs for emulators"}}
+[debug] [2023-05-05T12:32:58.942Z] [hub] writing locator at /tmp/hub-demo-project.json
+[debug] [2023-05-05T12:32:58.954Z] [functions] Functions Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2023-05-05T12:32:58.954Z] [eventarc] Eventarc Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2023-05-05T12:32:58.954Z] late-assigned ports for functions and eventarc emulators {"user":{"hub":[{"address":"127.0.0.1","family":"IPv4","port":4400},{"address":"::1","family":"IPv6","port":4400}],"ui":[{"address":"127.0.0.1","family":"IPv4","port":4000},{"address":"::1","family":"IPv6","port":4000}],"logging":[{"address":"127.0.0.1","family":"IPv4","port":4500}],"auth":[{"address":"127.0.0.1","family":"IPv4","port":5002}],"firestore":[{"address":"127.0.0.1","family":"IPv4","port":5003}],"firestore.websocket":[{"address":"127.0.0.1","family":"IPv4","port":9150}],"database":[{"address":"127.0.0.1","family":"IPv4","port":5004}],"hosting":[{"address":"127.0.0.1","family":"IPv4","port":5007}],"pubsub":[{"address":"127.0.0.1","family":"IPv4","port":5008}],"storage":[{"address":"127.0.0.1","family":"IPv4","port":5006}],"functions":[{"address":"127.0.0.1","family":"IPv4","port":5005}],"eventarc":[{"address":"127.0.0.1","family":"IPv4","port":5009}]},"metadata":{"message":"late-assigned ports for functions and eventarc emulators"}}
+[debug] [2023-05-05T12:32:58.963Z] defaultcredentials: writing to file /home/shuaib/.config/firebase/shuaibnuruddin555_gmail_com_application_default_credentials.json
+[debug] [2023-05-05T12:32:58.971Z] Setting GAC to /home/shuaib/.config/firebase/shuaibnuruddin555_gmail_com_application_default_credentials.json {"metadata":{"emulator":{"name":"functions"},"message":"Setting GAC to /home/shuaib/.config/firebase/shuaibnuruddin555_gmail_com_application_default_credentials.json"}}
+[debug] [2023-05-05T12:32:59.006Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"firestore"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2023-05-05T12:32:59.006Z] Ignoring unsupported arg: single_project_mode_error {"metadata":{"emulator":{"name":"firestore"},"message":"Ignoring unsupported arg: single_project_mode_error"}}
+[debug] [2023-05-05T12:32:59.006Z] Starting Firestore Emulator with command {"binary":"java","args":["-Dgoogle.cloud_firestore.debug_log_level=FINE","-Duser.language=en","-jar","/home/shuaib/.cache/firebase/emulators/cloud-firestore-emulator-v1.17.4.jar","--host","127.0.0.1","--port",5003,"--websocket_port",9150,"--project_id","demo-project","--rules","/home/shuaib/Documents/CompSciYear3/COS301/Capstone/First/SweatSession/firestore.rules","--single_project_mode",true,"--functions_emulator","127.0.0.1:5005"],"optionalArgs":["port","webchannel_port","host","rules","websocket_port","functions_emulator","seed_from_export","project_id","single_project_mode"],"joinArgs":false} {"metadata":{"emulator":{"name":"firestore"},"message":"Starting Firestore Emulator with command {\"binary\":\"java\",\"args\":[\"-Dgoogle.cloud_firestore.debug_log_level=FINE\",\"-Duser.language=en\",\"-jar\",\"/home/shuaib/.cache/firebase/emulators/cloud-firestore-emulator-v1.17.4.jar\",\"--host\",\"127.0.0.1\",\"--port\",5003,\"--websocket_port\",9150,\"--project_id\",\"demo-project\",\"--rules\",\"/home/shuaib/Documents/CompSciYear3/COS301/Capstone/First/SweatSession/firestore.rules\",\"--single_project_mode\",true,\"--functions_emulator\",\"127.0.0.1:5005\"],\"optionalArgs\":[\"port\",\"webchannel_port\",\"host\",\"rules\",\"websocket_port\",\"functions_emulator\",\"seed_from_export\",\"project_id\",\"single_project_mode\"],\"joinArgs\":false}"}}
+[info] i  firestore: Firestore Emulator logging to firestore-debug.log {"metadata":{"emulator":{"name":"firestore"},"message":"Firestore Emulator logging to \u001b[1mfirestore-debug.log\u001b[22m"}}
+[debug] [2023-05-05T12:33:01.462Z] May 05, 2023 2:33:01 PM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketServer start
+INFO: Started WebSocket server on ws://127.0.0.1:9150
+ {"metadata":{"emulator":{"name":"firestore"},"message":"May 05, 2023 2:33:01 PM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketServer start\nINFO: Started WebSocket server on ws://127.0.0.1:9150\n"}}
+[debug] [2023-05-05T12:33:01.505Z] API endpoint: http://127.0.0.1:5003
+ {"metadata":{"emulator":{"name":"firestore"},"message":"API endpoint: http://127.0.0.1:5003\n"}}
+[debug] [2023-05-05T12:33:01.506Z] If you are using a library that supports the FIRESTORE_EMULATOR_HOST environment variable, run:
+
+   export FIRESTORE_EMULATOR_HOST=127.0.0.1:5003
+
+Dev App Server is now running.
+
+ {"metadata":{"emulator":{"name":"firestore"},"message":"If you are using a library that supports the FIRESTORE_EMULATOR_HOST environment variable, run:\n\n   export FIRESTORE_EMULATOR_HOST=127.0.0.1:5003\n\nDev App Server is now running.\n\n"}}
+[info] ✔  firestore: Firestore Emulator UI websocket is running on 9150. {"metadata":{"emulator":{"name":"firestore"},"message":"Firestore Emulator UI websocket is running on 9150."}}
+[debug] [2023-05-05T12:33:01.569Z] > refreshing access token with scopes: []
+[debug] [2023-05-05T12:33:01.571Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2023-05-05T12:33:01.571Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2023-05-05T12:33:02.339Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2023-05-05T12:33:02.340Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2023-05-05T12:33:02.367Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/demo-project [none]
+[debug] [2023-05-05T12:33:03.357Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/demo-project 403
+[debug] [2023-05-05T12:33:03.359Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/demo-project {"error":{"code":403,"message":"The caller does not have permission","status":"PERMISSION_DENIED"}}
+[debug] [2023-05-05T12:33:03.361Z] HTTP Error: 403, The caller does not have permission
+[debug] [2023-05-05T12:33:03.361Z] Failed to retrieve default database instance: {"name":"FirebaseError","children":[],"exit":2,"message":"Failed to get Firebase project demo-project. Please make sure the project exists and your account has permission to access it.","original":{"name":"FirebaseError","children":[],"context":{"body":{"error":{"code":403,"message":"The caller does not have permission","status":"PERMISSION_DENIED"}},"response":{"statusCode":403}},"exit":1,"message":"HTTP Error: 403, The caller does not have permission","status":403},"status":500} {"metadata":{"emulator":{"name":"database"},"message":"Failed to retrieve default database instance: {\"name\":\"FirebaseError\",\"children\":[],\"exit\":2,\"message\":\"Failed to get Firebase project demo-project. Please make sure the project exists and your account has permission to access it.\",\"original\":{\"name\":\"FirebaseError\",\"children\":[],\"context\":{\"body\":{\"error\":{\"code\":403,\"message\":\"The caller does not have permission\",\"status\":\"PERMISSION_DENIED\"}},\"response\":{\"statusCode\":403}},\"exit\":1,\"message\":\"HTTP Error: 403, The caller does not have permission\",\"status\":403},\"status\":500}"}}
+[debug] [2023-05-05T12:33:03.363Z] database rules config:  [{"instance":"demo-project-default-rtdb","rules":"/home/shuaib/Documents/CompSciYear3/COS301/Capstone/First/SweatSession/database.rules.json"}]
+[debug] [2023-05-05T12:33:03.369Z] Ignoring unsupported arg: projectId {"metadata":{"emulator":{"name":"database"},"message":"Ignoring unsupported arg: projectId"}}
+[debug] [2023-05-05T12:33:03.370Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"database"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2023-05-05T12:33:03.370Z] Ignoring unsupported arg: rules {"metadata":{"emulator":{"name":"database"},"message":"Ignoring unsupported arg: rules"}}
+[debug] [2023-05-05T12:33:03.370Z] Starting Database Emulator with command {"binary":"java","args":["-Duser.language=en","-jar","/home/shuaib/.cache/firebase/emulators/firebase-database-emulator-v4.11.0.jar","--host","127.0.0.1","--port",5004,"--single_project_mode","Warning","--functions_emulator_host","127.0.0.1","--functions_emulator_port",5005],"optionalArgs":["port","host","functions_emulator_port","functions_emulator_host","single_project_mode"],"joinArgs":false} {"metadata":{"emulator":{"name":"database"},"message":"Starting Database Emulator with command {\"binary\":\"java\",\"args\":[\"-Duser.language=en\",\"-jar\",\"/home/shuaib/.cache/firebase/emulators/firebase-database-emulator-v4.11.0.jar\",\"--host\",\"127.0.0.1\",\"--port\",5004,\"--single_project_mode\",\"Warning\",\"--functions_emulator_host\",\"127.0.0.1\",\"--functions_emulator_port\",5005],\"optionalArgs\":[\"port\",\"host\",\"functions_emulator_port\",\"functions_emulator_host\",\"single_project_mode\"],\"joinArgs\":false}"}}
+[info] i  database: Database Emulator logging to database-debug.log {"metadata":{"emulator":{"name":"database"},"message":"Database Emulator logging to \u001b[1mdatabase-debug.log\u001b[22m"}}
+[debug] [2023-05-05T12:33:04.594Z] WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by io.netty.util.internal.ReflectionUtil (file:/home/shuaib/.cache/firebase/emulators/firebase-database-emulator-v4.11.0.jar) to field sun.nio.ch.SelectorImpl.selectedKeys
+WARNING: Please consider reporting this to the maintainers of io.netty.util.internal.ReflectionUtil
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+WARNING: All illegal access operations will be denied in a future release
+ {"metadata":{"emulator":{"name":"database"},"message":"WARNING: An illegal reflective access operation has occurred\nWARNING: Illegal reflective access by io.netty.util.internal.ReflectionUtil (file:/home/shuaib/.cache/firebase/emulators/firebase-database-emulator-v4.11.0.jar) to field sun.nio.ch.SelectorImpl.selectedKeys\nWARNING: Please consider reporting this to the maintainers of io.netty.util.internal.ReflectionUtil\nWARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations\nWARNING: All illegal access operations will be denied in a future release\n"}}
+[debug] [2023-05-05T12:33:05.687Z] 14:33:05.686 [NamespaceSystem-akka.actor.default-dispatcher-4] INFO akka.event.slf4j.Slf4jLogger - Slf4jLogger started
+ {"metadata":{"emulator":{"name":"database"},"message":"14:33:05.686 [NamespaceSystem-akka.actor.default-dispatcher-4] INFO akka.event.slf4j.Slf4jLogger - Slf4jLogger started\n"}}
+[debug] [2023-05-05T12:33:06.056Z] 14:33:06.055 [main] INFO com.firebase.server.forge.App$ - Listening at 127.0.0.1:5004
+ {"metadata":{"emulator":{"name":"database"},"message":"14:33:06.055 [main] INFO com.firebase.server.forge.App$ - Listening at 127.0.0.1:5004\n"}}
+[debug] [2023-05-05T12:33:16.021Z] Ignoring unsupported arg: projectId {"metadata":{"emulator":{"name":"pubsub"},"message":"Ignoring unsupported arg: projectId"}}
+[debug] [2023-05-05T12:33:16.021Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"pubsub"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2023-05-05T12:33:16.021Z] Starting Pub/Sub Emulator with command {"binary":"/home/shuaib/.cache/firebase/emulators/pubsub-emulator-0.7.1/pubsub-emulator/bin/cloud-pubsub-emulator","args":["--host=127.0.0.1","--port=5008"],"optionalArgs":["port","host"],"joinArgs":true} {"metadata":{"emulator":{"name":"pubsub"},"message":"Starting Pub/Sub Emulator with command {\"binary\":\"/home/shuaib/.cache/firebase/emulators/pubsub-emulator-0.7.1/pubsub-emulator/bin/cloud-pubsub-emulator\",\"args\":[\"--host=127.0.0.1\",\"--port=5008\"],\"optionalArgs\":[\"port\",\"host\"],\"joinArgs\":true}"}}
+[info] i  pubsub: Pub/Sub Emulator logging to pubsub-debug.log {"metadata":{"emulator":{"name":"pubsub"},"message":"Pub/Sub Emulator logging to \u001b[1mpubsub-debug.log\u001b[22m"}}
+[debug] [2023-05-05T12:33:16.550Z] This is the Google Pub/Sub fake.
+Implementation may be incomplete or differ from the real system.
+ {"metadata":{"emulator":{"name":"pubsub"},"message":"This is the Google Pub/Sub fake.\nImplementation may be incomplete or differ from the real system.\n"}}
+[debug] [2023-05-05T12:33:16.632Z] May 05, 2023 2:33:16 PM com.google.cloud.pubsub.testing.v1.Main main
+INFO: IAM integration is disabled. IAM policy methods and ACL checks are not supported
+ {"metadata":{"emulator":{"name":"pubsub"},"message":"May 05, 2023 2:33:16 PM com.google.cloud.pubsub.testing.v1.Main main\nINFO: IAM integration is disabled. IAM policy methods and ACL checks are not supported\n"}}
+[debug] [2023-05-05T12:33:17.203Z] SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
+SLF4J: Defaulting to no-operation (NOP) logger implementation
+SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
+ {"metadata":{"emulator":{"name":"pubsub"},"message":"SLF4J: Failed to load class \"org.slf4j.impl.StaticLoggerBinder\".\nSLF4J: Defaulting to no-operation (NOP) logger implementation\nSLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.\n"}}
+[debug] [2023-05-05T12:33:18.295Z] May 05, 2023 2:33:18 PM com.google.cloud.pubsub.testing.v1.Main main
+INFO: Server started, listening on 5008
+ {"metadata":{"emulator":{"name":"pubsub"},"message":"May 05, 2023 2:33:18 PM com.google.cloud.pubsub.testing.v1.Main main\nINFO: Server started, listening on 5008\n"}}
+[debug] [2023-05-05T12:33:18.323Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"storage"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2023-05-05T12:33:20.004Z] Temp file directory for storage emulator: /tmp/firebase/storage/blobs {"metadata":{"emulator":{"name":"storage"},"message":"Temp file directory for storage emulator: /tmp/firebase/storage/blobs"}}
+[debug] [2023-05-05T12:33:20.013Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/demo-project [none]
+[debug] [2023-05-05T12:33:20.715Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/demo-project 403
+[debug] [2023-05-05T12:33:20.715Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/demo-project {"error":{"code":403,"message":"The caller does not have permission","status":"PERMISSION_DENIED"}}
+[debug] [2023-05-05T12:33:20.716Z] HTTP Error: 403, The caller does not have permission
+[info] i  hosting[demo-project]: Serving hosting files from: public {"metadata":{"emulator":{"name":"hosting"},"message":"Serving hosting files from: \u001b[1mpublic\u001b[22m"}}
+[info] ✔  hosting[demo-project]: Local server: http://127.0.0.1:5007 {"metadata":{"emulator":{"name":"hosting"},"message":"Local server: \u001b[4m\u001b[1mhttp://127.0.0.1:5007\u001b[22m\u001b[24m"}}
+[debug] [2023-05-05T12:33:20.749Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2023-05-05T12:33:20.749Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2023-05-05T12:33:20.750Z] Starting Emulator UI with command {"binary":"node","args":["/home/shuaib/.cache/firebase/emulators/ui-v1.11.6/server/server.js"],"optionalArgs":[],"joinArgs":false} {"metadata":{"emulator":{"name":"ui"},"message":"Starting Emulator UI with command {\"binary\":\"node\",\"args\":[\"/home/shuaib/.cache/firebase/emulators/ui-v1.11.6/server/server.js\"],\"optionalArgs\":[],\"joinArgs\":false}"}}
+[info] i  ui: Emulator UI logging to ui-debug.log {"metadata":{"emulator":{"name":"ui"},"message":"Emulator UI logging to \u001b[1mui-debug.log\u001b[22m"}}
+[debug] [2023-05-05T12:33:21.015Z] Web / API server started at 127.0.0.1:4000
+ {"metadata":{"emulator":{"name":"ui"},"message":"Web / API server started at 127.0.0.1:4000\n"}}
+[debug] [2023-05-05T12:33:21.015Z] Web / API server started at ::1:4000
+ {"metadata":{"emulator":{"name":"ui"},"message":"Web / API server started at ::1:4000\n"}}
+[info] i  functions: Watching "/home/shuaib/Documents/CompSciYear3/COS301/Capstone/First/SweatSession/functions" for Cloud Functions... {"metadata":{"emulator":{"name":"functions"},"message":"Watching \"/home/shuaib/Documents/CompSciYear3/COS301/Capstone/First/SweatSession/functions\" for Cloud Functions..."}}
+[debug] [2023-05-05T12:33:21.057Z] Validating nodejs source
+[debug] [2023-05-05T12:33:23.556Z] > [functions] package.json contents: {
+  "name": "functions",
+  "scripts": {
+    "lint": "eslint --ext .js,.ts .",
+    "build": "tsc",
+    "build:watch": "tsc --watch",
+    "serve": "npm run build && firebase emulators:start --only functions",
+    "shell": "npm run build && firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "16"
+  },
+  "type": "module",
+  "main": "src/index.ts",
+  "dependencies": {
+    "firebase-admin": "^11.5.0",
+    "firebase-functions": "^4.2.0"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.12.0",
+    "@typescript-eslint/parser": "^5.12.0",
+    "eslint": "^8.9.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-plugin-import": "^2.25.4",
+    "firebase-functions-test": "^3.0.0",
+    "typescript": "^4.9.0"
+  },
+  "private": true
+}
+[debug] [2023-05-05T12:33:23.557Z] Building nodejs source
+[debug] [2023-05-05T12:33:23.557Z] Failed to find version of module node: reached end of search path /home/shuaib/Documents/CompSciYear3/COS301/Capstone/First/SweatSession/functions/node_modules
+[warn] ⚠  functions: Your requested "node" version "16" doesn't match your global version "19". Using node@19 from host. 
+[debug] [2023-05-05T12:33:23.561Z] Could not find functions.yaml. Must use http discovery
+[debug] [2023-05-05T12:33:23.564Z] Found firebase-functions binary at '/home/shuaib/Documents/CompSciYear3/COS301/Capstone/First/SweatSession/functions/node_modules/.bin/firebase-functions'
+[debug] [2023-05-05T12:33:23.877Z] Serving at port 8366
+
+[debug] [2023-05-05T12:33:24.378Z] Got response from /__/functions.yaml {"endpoints":{},"specVersion":"v1alpha1","requiredAPIs":[]}
+[debug] [2023-05-05T12:33:24.384Z] shutdown requested via /__/quitquitquit
+
+[info] ✔  functions: Loaded functions definitions from source: . {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: ."}}
+[debug] [2023-05-05T12:33:24.394Z] >>> [apiv2][query] PUT http://127.0.0.1:5004/.settings/rules.json ns=demo-project-default-rtdb
+[debug] [2023-05-05T12:33:24.394Z] >>> [apiv2][body] PUT http://127.0.0.1:5004/.settings/rules.json "{\n  \"rules\": {\n    \".read\": \"now < 1685743200000\",  // 2023-6-3\n    \".write\": \"now < 1685743200000\",  // 2023-6-3\n  }\n}"
+[debug] [2023-05-05T12:33:24.825Z] 14:33:24.824 [NamespaceSystem-akka.actor.default-dispatcher-5] INFO com.firebase.core.namespace.NamespaceActor - demo-project-default-rtdb successfully activated FBKV (SurveyIdle(0)) wait: 222ms, init: 0ms
+ {"metadata":{"emulator":{"name":"database"},"message":"14:33:24.824 [NamespaceSystem-akka.actor.default-dispatcher-5] INFO com.firebase.core.namespace.NamespaceActor - demo-project-default-rtdb successfully activated FBKV (SurveyIdle(0)) wait: 222ms, init: 0ms\n"}}
+[debug] [2023-05-05T12:33:25.014Z] 14:33:25.013 [NamespaceSystem-blocking-namespace-operation-dispatcher-6] INFO com.firebase.core.namespace.StateManager - Namespace demo-project-default-rtdb status Active to Active
+ {"metadata":{"emulator":{"name":"database"},"message":"14:33:25.013 [NamespaceSystem-blocking-namespace-operation-dispatcher-6] INFO com.firebase.core.namespace.StateManager - Namespace demo-project-default-rtdb status Active to Active\n"}}
+[debug] [2023-05-05T12:33:25.121Z] <<< [apiv2][status] PUT http://127.0.0.1:5004/.settings/rules.json 200
+[debug] [2023-05-05T12:33:25.121Z] <<< [apiv2][body] PUT http://127.0.0.1:5004/.settings/rules.json {"status":"ok"}
+[info] i  Running script: ng serve 
+[debug] [2023-05-05T12:33:25.135Z] Running ng serve with environment {"npm_package_devDependencies_ts_node":"^8.3.0","npm_package_devDependencies__types_node":"^12.11.1","npm_package_devDependencies__angular_language_service":"^16.0.0","npm_package_dependencies__angular_animations":"^16.0.0","LANGUAGE":"en_ZA:en","USER":"shuaib","npm_package_devDependencies_karma_coverage_istanbul_reporter":"~3.0.2","npm_package_dependencies__ionic_angular":"^7.0.0","npm_config_version_commit_hooks":"true","npm_config_user_agent":"yarn/1.22.19 npm/? node/v19.7.0 linux x64","npm_package_devDependencies__angular_eslint_eslint_plugin":"^16.0.0","npm_config_bin_links":"true","SSH_AGENT_PID":"2183","XDG_SESSION_TYPE":"x11","npm_node_execpath":"/home/shuaib/.nvm/versions/node/v19.7.0/bin/node","npm_package_devDependencies__angular_eslint_builder":"^16.0.0","npm_package_dependencies__angular_common":"^16.0.0","npm_config_init_version":"1.0.0","SHLVL":"1","npm_package_dependencies_rxjs":"~7.8.0","HOME":"/home/shuaib","npm_package_devDependencies__typescript_eslint_parser":"5.3.0","DESKTOP_SESSION":"ubuntu","NVM_BIN":"/home/shuaib/.nvm/versions/node/v19.7.0/bin","NVM_INC":"/home/shuaib/.nvm/versions/node/v19.7.0/include/node","npm_package_devDependencies_jasmine_core":"~4.6.0","npm_config_init_license":"MIT","GNOME_SHELL_SESSION_MODE":"ubuntu","GTK_MODULES":"gail:atk-bridge","YARN_WRAP_OUTPUT":"false","npm_package_devDependencies__types_jasmine":"~4.3.0","npm_package_devDependencies__angular_eslint_schematics":"^16.0.0","npm_config_version_tag_prefix":"v","MANAGERPID":"1737","MAVEN_HOME":"/opt/maven","npm_package_devDependencies_karma":"~6.4.0","DBUS_STARTER_BUS_TYPE":"session","DBUS_SESSION_BUS_ADDRESS":"unix:path=/run/user/1000/bus,guid=af231dd431a26e30c2a68ea96454efd1","npm_package_devDependencies_karma_chrome_launcher":"~3.2.0","npm_package_devDependencies__angular_compiler_cli":"^16.0.0","npm_package_devDependencies__angular_eslint_template_parser":"^16.0.0","npm_package_dependencies__angular_fire":"^7.5.0","COLORTERM":"truecolor","npm_package_devDependencies_typescript":"~5.0.2","NVM_DIR":"/home/shuaib/.nvm","npm_package_devDependencies_karma_coverage":"~2.2.0","npm_package_devDependencies_jasmine_spec_reporter":"~5.0.0","npm_package_homepage":"https://ionicframework.com/","IM_CONFIG_PHASE":"1","npm_package_dependencies_tslib":"^2.3.0","npm_package_dependencies__angular_core":"^16.0.0","LOGNAME":"shuaib","npm_package_devDependencies_eslint_plugin_import":"2.22.1","JOURNAL_STREAM":"8:40553","_":"/usr/bin/yarn","npm_package_dependencies__angular_platform_browser_dynamic":"^16.0.0","npm_package_private":"true","XDG_SESSION_CLASS":"user","npm_package_devDependencies__typescript_eslint_eslint_plugin":"5.3.0","npm_package_scripts_lint":"ng lint","npm_config_registry":"https://registry.yarnpkg.com","USERNAME":"shuaib","TERM":"xterm-256color","npm_package_devDependencies_karma_jasmine_html_reporter":"~2.0.0","npm_package_devDependencies_eslint_plugin_prefer_arrow":"1.2.2","GNOME_DESKTOP_SESSION_ID":"this-is-deprecated","npm_package_dependencies__angular_compiler":"^16.0.0","npm_package_scripts_start":"firebase emulators:exec --project=demo-project --ui 'ng serve'","npm_config_ignore_scripts":"","WINDOWPATH":"2","npm_package_dependencies_firebase_functions":"^4.3.1","PATH":"/tmp/yarn--1683289973743-0.13034334031522987:/home/shuaib/Documents/CompSciYear3/COS301/Capstone/First/SweatSession/node_modules/.bin:/home/shuaib/.config/yarn/link/node_modules/.bin:/home/shuaib/.yarn/bin:/home/shuaib/.nvm/versions/node/v19.7.0/libexec/lib/node_modules/npm/bin/node-gyp-bin:/home/shuaib/.nvm/versions/node/v19.7.0/lib/node_modules/npm/bin/node-gyp-bin:/home/shuaib/.nvm/versions/node/v19.7.0/bin/node_modules/npm/bin/node-gyp-bin:/home/shuaib/.nvm/versions/node/v19.7.0/bin:/home/shuaib/.local/bin:/opt/maven/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/shuaib/.local/bin","NODE":"/home/shuaib/.nvm/versions/node/v19.7.0/bin/node","SESSION_MANAGER":"local/shuaib-VirtualBox:@/tmp/.ICE-unix/2243,unix/shuaib-VirtualBox:/tmp/.ICE-unix/2243","INVOCATION_ID":"1886ef5003f94ad886079ae0d237ac72","npm_package_name":"ionic-app-base","XDG_MENU_PREFIX":"gnome-","GNOME_TERMINAL_SCREEN":"/org/gnome/Terminal/screen/43ee962a_ebae_4c32_99d1_f3fff3e625b6","XDG_RUNTIME_DIR":"/run/user/1000","npm_package_devDependencies__angular_eslint_eslint_plugin_template":"^16.0.0","DISPLAY":":0","npm_package_dependencies__angular_forms":"^16.0.0","npm_config_legacy_peer_deps":"true","LANG":"en_ZA.UTF-8","XDG_CURRENT_DESKTOP":"ubuntu:GNOME","npm_package_devDependencies_eslint":"^7.26.0","XMODIFIERS":"@im=ibus","XDG_SESSION_DESKTOP":"ubuntu","XAUTHORITY":"/run/user/1000/gdm/Xauthority","GNOME_TERMINAL_SERVICE":":1.100","npm_lifecycle_script":"firebase emulators:exec --project=demo-project --ui 'ng serve'","npm_package_scripts_ng":"ng","SSH_AUTH_SOCK":"/run/user/1000/keyring/ssh","npm_package_dependencies_ionicons":"^7.0.0","npm_package_scripts_test":"ng test","npm_config_version_git_message":"v%s","SHELL":"/bin/bash","npm_lifecycle_event":"start","npm_package_devDependencies__ionic_angular_toolkit":"^9.0.0","npm_package_version":"0.0.0","QT_ACCESSIBILITY":"1","GDMSESSION":"ubuntu","npm_config_argv":"{\"remain\":[],\"cooked\":[\"run\",\"start\"],\"original\":[\"start\"]}","npm_package_dependencies__angular_router":"^16.0.0","npm_package_scripts_build":"ng build","npm_package_devDependencies_karma_jasmine":"~5.1.0","npm_config_version_git_tag":"true","npm_config_version_git_sign":"","GPG_AGENT_INFO":"/run/user/1000/gnupg/S.gpg-agent:0:1","npm_config_strict_ssl":"true","QT_IM_MODULE":"ibus","npm_package_devDependencies__angular_cli":"^16.0.0","npm_package_dependencies_firebase":"^9.21.0","npm_package_scripts_stop":"lsof -t -i :5001 -i:5002 -i:5003 -i:5004 -i:5005 -i:5006 -i:5007 -i:5008 -i:5009 -i:4200 | xargs kill -9","JAVA_HOME":"/usr/lib/jvm/java-8-openjdk-amd64","PWD":"/home/shuaib/Documents/CompSciYear3/COS301/Capstone/First/SweatSession","npm_execpath":"/usr/share/yarn/bin/yarn.js","XDG_CONFIG_DIRS":"/etc/xdg/xdg-ubuntu:/etc/xdg","NVM_CD_FLAGS":"","DBUS_STARTER_ADDRESS":"unix:path=/run/user/1000/bus,guid=af231dd431a26e30c2a68ea96454efd1","XDG_DATA_DIRS":"/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop","npm_package_author_name":"Ionic Framework","M2_HOME":"/opt/maven","npm_package_devDependencies_eslint_plugin_jsdoc":"30.7.6","npm_package_scripts_watch":"ng build --watch --configuration development","npm_config_save_prefix":"^","npm_config_ignore_optional":"","VTE_VERSION":"6003","npm_package_devDependencies__angular_devkit_build_angular":"^16.0.0","npm_package_dependencies_zone_js":"~0.13.0","INIT_CWD":"/home/shuaib/Documents/CompSciYear3/COS301/Capstone/First/SweatSession","npm_package_dependencies__angular_platform_browser":"^16.0.0","IS_FIREBASE_CLI":"true","GCLOUD_PROJECT":"demo-project","FIREBASE_CONFIG":"{\"projectId\":\"demo-project\",\"storageBucket\":\"demo-project.appspot.com\",\"databaseURL\":\"https://demo-project.firebaseio.com\"}","FIREBASE_EMULATOR_HUB":"127.0.0.1:4400","FIREBASE_AUTH_EMULATOR_HOST":"127.0.0.1:5002","FIRESTORE_EMULATOR_HOST":"127.0.0.1:5003","FIREBASE_FIRESTORE_EMULATOR_ADDRESS":"127.0.0.1:5003","FIREBASE_DATABASE_EMULATOR_HOST":"127.0.0.1:5004","PUBSUB_EMULATOR_HOST":"127.0.0.1:5008","FIREBASE_STORAGE_EMULATOR_HOST":"127.0.0.1:5006","STORAGE_EMULATOR_HOST":"http://127.0.0.1:5006","CLOUD_EVENTARC_EMULATOR_HOST":"http://127.0.0.1:5009"}
+[debug] [2023-05-05T12:35:29.639Z] May 05, 2023 2:35:29 PM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketChannelHandler initChannel
+INFO: Connected to new websocket client
+ {"metadata":{"emulator":{"name":"firestore"},"message":"May 05, 2023 2:35:29 PM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketChannelHandler initChannel\nINFO: Connected to new websocket client\n"}}
+[debug] [2023-05-05T12:35:36.069Z] May 05, 2023 2:35:36 PM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketChannelHandler channelClosed
+INFO: Websocket client disconnected
+ {"metadata":{"emulator":{"name":"firestore"},"message":"May 05, 2023 2:35:36 PM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketChannelHandler channelClosed\nINFO: Websocket client disconnected\n"}}
+[debug] [2023-05-05T12:35:38.262Z] May 05, 2023 2:35:38 PM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketChannelHandler initChannel
+INFO: Connected to new websocket client
+ {"metadata":{"emulator":{"name":"firestore"},"message":"May 05, 2023 2:35:38 PM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketChannelHandler initChannel\nINFO: Connected to new websocket client\n"}}
