@@ -1,7 +1,4 @@
 /src/environments/**
-.env
-.firebaserc
-.env.prod
 
 # Angular
 .angular
@@ -26,3 +23,41 @@ yarn-error.log
 
 # dependencies
 node_modules
+
+# compiled output
+dist
+tmp
+/out-tsc
+
+# misc
+/.sass-cache
+/connect.lock
+/coverage
+/libpeerconnection.log
+npm-debug.log
+yarn-error.log
+testem.log
+/typings
+.env
+.firebaserc
+.env.prod
+
+# System Files
+.DS_Store
+Thumbs.db
+
+# Firebase Logs
+database-debug.log
+firebase-debug.log
+firestore-debug.log
+ui-debug.log
+pubsub-debug.log
+
+# Emulators
+.emulators
+
+# Keys
+.keys/*.json
+
+#text
+*.txt
