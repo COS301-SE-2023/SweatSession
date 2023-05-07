@@ -1,0 +1,61 @@
+\documentclass[12pt, letterpaper]{article}
+\usepackage{geometry}
+\geometry{legalpaper, portrait, margin=0.1in}
+\title{SweatSession Database Documentation}
+\author{Synapse Solutions - Capstone Project}
+\begin{document}
+\maketitle
+\section*{Objects}
+Documents (representing objects) are stored in Cloud Firestore.\\ Our database will have the following collections:
+    
+    \begin{table}[ht]
+      \centering
+      \caption{users}
+      \begin{tabular}{||c c c||} 
+        \hline
+        Property & Data Type & Description \\ [0.5ex] 
+        \hline\hline
+        %created & Timestamp$|$null$|$undefined & Stores when user account was created\\
+        %customClaims & map$|$null$|$undefined & Custom Claims\\
+        %displayName & string$|$null$|$undefined & The user's display name\\
+        email & string$|$null$|$undefined & Email of the user\\
+        id & string & Unique id of the user, same as profile userID\\
+        %phoneNumber & string$|$null$|$undefined & The mobile number of the user\\
+        %photoURL & string$|$null$|$undefined & Link to the user's profile picture\\
+        
+        \hline
+      \end{tabular}
+      \label{table:data}
+    \end{table}
+    
+    \begin{table}[ht]
+      \centering
+      \caption{profiles}
+      \begin{tabular}{||c c c||} 
+        \hline
+        Property & Data Type & Description \\ [0.1ex] 
+        \hline\hline
+        userId & string & id of user to whom the profile belongs, same as User id\\
+        
+        \hline
+      \end{tabular}
+      \label{table:data}
+    \end{table}
+    
+    \begin{table}[ht]
+      \centering
+      \caption{notifications}
+      \begin{tabular}{||c c c||} 
+        \hline
+        Property & Data Type & Description\\ [0.1ex] 
+        \hline\hline
+        message & string & the notification message\\
+        notificationID & string & the id of the notification\\
+        %notificationTime & Timestamp & time the notification was created\\ 
+        %read & boolean & says if the notification was read\\
+        %url & string & redirect link for the notifcation\\
+        \hline
+      \end{tabular}
+      \label{table:data}
+    \end{table}
+\end{document}
