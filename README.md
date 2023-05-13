@@ -29,7 +29,7 @@ use the app, location-based services and more
 
 ## Technologies
 
-[![Angular][Angular.io]][Angular-url] [![Node][Node.js]][Node-url]
+[![Angular][Angular.io]][Angular-url] [![Node][Node.js]][Node-url] [![TypeScript][typescript-badge]][typescript-url] [![JavaScript][javascript-badge]][javascript-url] [![Ionic][ionic-badge]][ionic-url] [![Firestore][firestore-badge]][firestore-url] [![Git][git-badge]][git-url] [![Jest][jest-badge]][jest-url] [![Cypress][cypress-badge]][cypress-url] [![GitHub Actions][github-actions-badge]][github-actions-url]
 
 ### Members
 
@@ -126,3 +126,19 @@ I am a passionate 3rd year Computer Science student studying at the University o
 [Node-url]: https://nodejs.org/
 [Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
 [Next-url]: https://nextjs.org/
+[typescript-badge]: https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white
+[typescript-url]: https://www.typescriptlang.org/
+[javascript-badge]: https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black
+[javascript-url]: https://developer.mozilla.org/en-US/docs/Web/JavaScript
+[ionic-badge]: https://img.shields.io/badge/Ionic-3880FF?style=for-the-badge&logo=ionic&logoColor=white
+[ionic-url]: https://ionicframework.com/
+[firestore-badge]: https://img.shields.io/badge/Firestore-FFA611?style=for-the-badge&logo=firebase&logoColor=white
+[firestore-url]: https://firebase.google.com/docs/firestore
+[git-badge]: https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white
+[git-url]: https://git-scm.com/
+[jest-badge]: https://img.shields.io/badge/Jest-C21325?style=for-the-badge&logo=jest&logoColor=white
+[jest-url]: https://jestjs.io/
+[cypress-badge]: https://img.shields.io/badge/Cypress-17202C?style=for-the-badge&logo=cypress&logoColor=white
+[cypress-url]: https://www.cypress.io/
+[github-actions-badge]: https://img.shields.io/badge/GitHub_Actions-2088FF?style=for-the-badge&logo=github-actions&logoColor=white
+[github-actions-url]: https://github.com/features/actions
