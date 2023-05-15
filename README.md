@@ -139,6 +139,10 @@ I am a passionate 3rd year Computer Science student studying at the University o
 [ionic-badge]: https://img.shields.io/badge/Ionic-3880FF?style=for-the-badge&logo=ionic&logoColor=white
 [ionic-url]: https://ionicframework.com/
 [firestore-badge]: https://img.shields.io/badge/Firestore-FFA611?style=for-the-badge&logo=firebase&logoColor=white
+[codecov-shield]: https://img.shields.io/codecov/c/github/COS301-SE-2023/SweatSession
+[closedissues-shield]: https://img.shields.io/github/issues-closed/COS301-SE-2023/SweatSession?color=purple
+[commits-shield]: https://img.shields.io/github/commit-activity/w/COS301-SE-2023/SweatSession
+[issues-shield]: https://img.shields.io/github/issues/COS301-SE-2023/SweatSession
 [firestore-url]: https://firebase.google.com/docs/firestore
 [git-badge]: https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white
 [git-url]: https://git-scm.com/
