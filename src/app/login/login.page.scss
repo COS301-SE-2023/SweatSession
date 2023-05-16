@@ -1,0 +1,237 @@
+:host,
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  background: none;
+  border: none;
+  flex-shrink: 0;
+  text-decoration: none;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+:host,
+:not(span, a, ul, ol, li, p) {
+  display: flex;
+}
+
+ul,
+ol {
+  text-indent: 0;
+  padding-inline-start: 1.5em;
+}
+
+p:empty::before {
+  content: '';
+  display: inline-block;
+}
+
+img {
+  object-fit: contain;
+}
+
+svg {
+  overflow: visible;
+}
+
+:host {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  align-items: flex-start;
+  border-radius: 15px;
+  background-color: #ffffff;
+  overflow: hidden;
+}
+.ellipse1 {
+  position: absolute;
+  left: calc(50% - -3px);
+  top: 116px;
+  width: 160px;
+  height: 149px;
+  overflow: visible;
+  transform: translateX(-50%);
+}
+.icon {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.sweatsessionlogotransparent1 {
+  position: absolute;
+  left: 144px;
+  top: 140px;
+  width: 106.8182px;
+  height: 100px;
+  background-image: url('/assets/sweatsessionlogotransparent1.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.signIn {
+  color: #000;
+  font-size: 30px;
+  font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
+    'Liberation Sans', sans-serif;
+  position: absolute;
+  left: 54px;
+  top: 275px;
+  width: 288px;
+  height: 44px;
+  text-align: center;
+  align-items: center;
+  flex-direction: column;
+}
+.profileTopnav {
+  position: absolute;
+  left: 47px;
+  top: 372px;
+  width: 295px;
+  height: 50px;
+  overflow: visible;
+}
+.icon2 {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.profileTopnav2 {
+  position: absolute;
+  left: 47px;
+  top: 448px;
+  width: 295px;
+  height: 50px;
+  outline: solid 1px #e63946;
+  outline-offset: -1px;
+  border-radius: 20px;
+  background-color: #a8dadc;
+}
+.profileTopnav3 {
+  position: absolute;
+  left: 76px;
+  top: 532px;
+  width: 233px;
+  height: 39px;
+  overflow: visible;
+}
+.icon3 {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.profileTopnav4 {
+  position: absolute;
+  left: 47px;
+  top: 650px;
+  width: 295px;
+  height: 50px;
+  outline: solid 1px #e63946;
+  outline-offset: -1px;
+  border-radius: 20px;
+  background-color: #a8dadc;
+}
+.donTHaveAnAccount {
+  color: #000;
+  font-size: 15px;
+  font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
+    'Liberation Sans', sans-serif;
+  position: absolute;
+  left: 93px;
+  top: 624px;
+  width: 204px;
+  height: 20px;
+  text-align: center;
+  align-items: center;
+  flex-direction: column;
+}
+.registerHere {
+  position: absolute;
+  left: 93px;
+  top: 662px;
+  width: 204px;
+  height: 21px;
+  text-align: center;
+  align-items: center;
+  flex-direction: column;
+}
+.labelWrapper {
+  font-size: 15px;
+  font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
+    'Liberation Sans', sans-serif;
+  flex-shrink: 1;
+}
+.label {
+  color: #000;
+  font-size: 20px;
+  font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
+    'Liberation Sans', sans-serif;
+}
+.label2 {
+  color: #000;
+  font-size: 15px;
+  font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
+    'Liberation Sans', sans-serif;
+}
+.label3 {
+  color: #000;
+  font-size: 20px;
+  font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
+    'Liberation Sans', sans-serif;
+}
+.login {
+  color: #000;
+  font-size: 20px;
+  font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
+    'Liberation Sans', sans-serif;
+  position: absolute;
+  left: 167px;
+  top: 540px;
+  width: min-content;
+  height: min-content;
+  text-align: center;
+  align-items: center;
+  white-space: nowrap;
+  flex-direction: column;
+}
+.vector {
+  position: absolute;
+  left: 16.9231%;
+  right: 76.1538%;
+  top: 45.2607%;
+  bottom: 51.8957%;
+  overflow: visible;
+}
+.icon4 {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.password {
+  color: #000;
+  font-size: 20px;
+  font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
+    'Liberation Sans', sans-serif;
+  position: absolute;
+  left: 113px;
+  top: 464px;
+  width: 100px;
+  height: 18px;
+  text-align: center;
+  align-items: center;
+  flex-direction: column;
+}
+.email {
+  color: #000;
+  font-size: 20px;
+  font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
+    'Liberation Sans', sans-serif;
+  position: absolute;
+  left: 113px;
+  top: 384px;
+  width: 61px;
+  height: 18px;
+  text-align: center;
+  align-items: center;
+  flex-direction: column;
+}
