@@ -1,13 +1,21 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>splash</ion-title>
-  </ion-toolbar>
-</ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">splash</ion-title>
-    </ion-toolbar>
-  </ion-header>
-</ion-content>
+
+  <ion-content  [fullscreen]="true">
+    <ion-header collapse="condense">
+    </ion-header>
+
+
+    <ion-img class = "logo-img" src="assets/Asset 1.png" alt="logo"></ion-img>
+
+    <ion-card class = "splash-card">
+
+      <ion-text class = "h1"> About: </ion-text>
+      <br>
+      <ion-text class = "h2"> Sweat Session is a fitness app that allows users to track their workouts and progress. </ion-text>
+
+      <ion-button class = "getStartedB" expand="block" fill="outline" routerLink="/register">Get started</ion-button>
+    
+    </ion-card>
+
+  </ion-content>
+

@@ -1,0 +1,46 @@
+
+.logo-img {
+    width: 170px;
+    height: 170px;
+    position:relative;
+    justify-items: center;
+    overflow: hidden;
+  }
+
+  .h1
+  {
+    font-size: 20px;
+    font-weight: 700;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: #000000;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  .splash-card
+  {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    border-radius: 20px;
+    background-color: #ffffff;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+    width: auto;
+    height: 70%;
+  }
+
+  .getStartedB
+  {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    border-radius: 20px;
+    background-color: #ffffff;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+    width: auto;
+    height: 8%;
+    position: bottom;
+  }
