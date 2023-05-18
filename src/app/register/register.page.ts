@@ -10,13 +10,13 @@ import { NavController } from '@ionic/angular';
 
 export class RegisterPage implements OnInit {
   
-  username:string; 
+  cPassword:string; 
   password:string;
   email:string;
   
   constructor(private Nav: NavController)
   {
-    this.username = "";
+    this.cPassword = "";
     this.password = "";
     this.email = "";
   }
