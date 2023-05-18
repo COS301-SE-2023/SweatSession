@@ -6,46 +6,56 @@ import { HomePage } from './home.page';
 const routes: Routes = [
   {
     path: '',
-    component: HomePage
-  }
+    component: HomePage,
+    children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'home/dashboard',
+      },
+      {
+        path: 'messages',
+        loadChildren: () => import('../messages/messages.module').then((m) => m.MessagesPageModule),
+      },
+      {
+        path: 'dashboard',
+        loadChildren: () => import('../dashboard/dashboard.module').then( m => m.DashboardPageModule)
+      },
+      {
+        path: 'search',
+        loadChildren: () => import('../search/search.module').then((m) => m.SearchPageModule),
+      },
+      {
+        path: 'profile',
+        loadChildren: () => import('../leaderboard/leaderboard.module').then((m) => m.LeaderboardPageModule),
+      },
+      {
+        path: 'notifications',
+        loadChildren: () => import('../notifications/notifications.module').then( m => m.NotificationsPageModule)
+      },
+      {
+        path: 'setprofile',
+        loadChildren: () => import('../setprofile/setprofile.module').then( m => m.SetprofilePageModule)
+      },
+      {
+        path: 'userprofile',
+        loadChildren: () => import('../userprofile/userprofile.module').then( m => m.UserprofilePageModule)
+      },
+      {
+        path: 'leaderboard',
+        loadChildren: () => import('../leaderboard/leaderboard.module').then( m => m.LeaderboardPageModule)
+      },
+    ],
+  },
+  {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: 'home/dashboard',
+  },
 ];
 
 @NgModule({
-  imports: [
-    RouterModule.forRoot([
-      {
-        path: '',
-        component: HomePage,
-        children: [
-          {
-            path: '',
-            pathMatch: 'full',
-            redirectTo: 'home',
-          },
-          {
-            path: 'home',
-            loadChildren: () => import('./home.module').then((m) => m.HomePageModule),
-          },
-          {
-            path: 'messages',
-            loadChildren: () => import('../messages/messages.module').then((m) => m.MessagesPageModule),
-          },
-          // {
-          //   path: 'search',
-          //   loadChildren: () => import('./search/search.module').then((m) => m.searchPageModule),
-          // },
-          // {
-          //   path: 'boards',
-          //   loadChildren: () => import('./boards/boards.module').then((m) => m.boardsPageModule),
-          // },
-          // {
-          //   path: 'profile',
-          //   loadChildren: () => import('./profile/profile.module').then((m) => m.profilePageModule),
-          // },
-        ],
-      },
-    ]),
-  ],
+  imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
 export class HomePageRoutingModule {}

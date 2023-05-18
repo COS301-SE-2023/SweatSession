@@ -14,7 +14,7 @@ export class RegisterPage implements OnInit {
   password:string;
   email:string;
   
-  constructor(private NavC: NavController)
+  constructor(private Nav: NavController)
   {
     this.username = "";
     this.password = "";
@@ -29,6 +29,6 @@ export class RegisterPage implements OnInit {
     //impliment it later
     
     // if(true) //will check if user registered successfully
-    //   this.NavC.navigateRoot('/home');
+    this.Nav.navigateRoot('/home');
   }
 }

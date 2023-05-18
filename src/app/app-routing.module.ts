@@ -4,11 +4,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () => import('./register/register.module').then(m => m.RegisterPageModule)
-  },
-  {
-    path: 'locations',
-    loadChildren: () => import('./locations/locations.module').then( m => m.LocationsPageModule)
+    loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
   },
   {
     path: 'home',
@@ -19,25 +15,37 @@ const routes: Routes = [
     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
   },
   {
-    path: 'notifications',
-    loadChildren: () => import('./notifications/notifications.module').then( m => m.NotificationsPageModule)
-  },
-  {
     path: 'register',
     loadChildren: () => import('./register/register.module').then( m => m.RegisterPageModule)
   },
   {
-    path: 'setprofile',
-    loadChildren: () => import('./setprofile/setprofile.module').then( m => m.SetprofilePageModule)
-  },
-  {
     path: 'splash',
     loadChildren: () => import('./splash/splash.module').then( m => m.SplashPageModule)
-  },
-  {
-    path: 'userprofile',
-    loadChildren: () => import('./userprofile/userprofile.module').then( m => m.UserprofilePageModule)
-  },
+  }
+
+  // {
+  //   path: 'locations',
+  //   loadChildren: () => import('./locations/locations.module').then( m => m.LocationsPageModule)
+  // },
+  // {
+  //   path: 'notifications',
+  //   loadChildren: () => import('./notifications/notifications.module').then( m => m.NotificationsPageModule)
+  // },
+  
+  // {
+  //   path: 'setprofile',
+  //   loadChildren: () => import('./setprofile/setprofile.module').then( m => m.SetprofilePageModule)
+  // },
+  
+  // {
+  //   path: 'userprofile',
+  //   loadChildren: () => import('./userprofile/userprofile.module').then( m => m.UserprofilePageModule)
+  // },
+  // {
+  //   path: 'search',
+  //   loadChildren: () => import('./search/search.module').then( m => m.SearchPageModule)
+  // },
+
   
 ];
 @NgModule({
