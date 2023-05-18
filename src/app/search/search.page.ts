@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { of } from 'rxjs';
+import { of, Observable,Subject } from 'rxjs';
+import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
+
 
 
 @Component({
@@ -7,28 +9,43 @@ import { of } from 'rxjs';
   templateUrl: './search.page.html',
   styleUrls: ['./search.page.scss'],
 })
-export class SearchPage implements OnInit {
+export class SearchPage {
 
-  searchTerm: string = '';
+  searchTerm: string | undefined;
+  filteredData$: Observable<any[]> = of([]);
+  private searchTerm$ = new Subject<string>();
   //will get this from the service
-  items = [
-    { "name": 'Amit' },
-    { "name": 'Amit1' },
-    { "name": 'Amit2' },
-    { "name": 'Amit3' },
-    { "name": 'Amit4' },
-    { "name": 'Amit5' },
+
+  data:any[] = [
+    { name: 'Amit' },
+    { name: 'Amit1' },
+    { name: 'Amit2' },
+    { name: 'Amit3' },
+    { name: 'Amit4' },
+    { name: 'Amit5' },
   ]
   
-  observableData = of(this.items);
-
   
 
   constructor() 
   { 
+    this.filteredData$ = this.searchTerm$.pipe(
+      debounceTime(300),
+      distinctUntilChanged(),
+      map(searchTerm => this.filterData(searchTerm))
+    );
   }
 
-  ngOnInit() {
+  filterData(searchTerm: string): any[] {
+    if (!searchTerm) {
+      return this.data;
+    }
+    return this.data.filter(item => item.name.includes(searchTerm));
   }
 
+
+  onSearchInput(event: any) {
+    const searchTerm = event.target.value;
+    this.searchTerm$.next(searchTerm);
+  }
 }
