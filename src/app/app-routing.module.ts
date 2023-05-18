@@ -23,7 +23,15 @@ const routes: Routes = [
   {
     path: 'splash',
     loadChildren: () => import('./splash/splash.module').then( m => m.SplashPageModule)
+  },  {
+    path: 'settings',
+    loadChildren: () => import('./settings/settings.module').then( m => m.SettingsPageModule)
   },
+  {
+    path: 'logout',
+    loadChildren: () => import('./logout/logout.module').then( m => m.LogoutPageModule)
+  },
+
 ];
 @NgModule({
   imports: [
