@@ -1,3 +1,10 @@
+/*.createaccount-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
 :host,
 * {
   box-sizing: border-box;
@@ -41,7 +48,7 @@ svg {
   height: 100vh;
   align-items: flex-start;
   border-radius: 15px;
-  background-color: #ffffff;
+  background-color: #F1FAEE;
   overflow: hidden;
 }
 .ellipse1 {
@@ -120,17 +127,7 @@ svg {
   height: 100%;
   object-fit: cover;
 }
-.profileTopnav4 {
-  position: absolute;
-  left: 47px;
-  top: 650px;
-  width: 295px;
-  height: 50px;
-  outline: solid 1px #e63946;
-  outline-offset: -1px;
-  border-radius: 20px;
-  background-color: #a8dadc;
-}
+
 .donTHaveAnAccount {
   color: #000;
   font-size: 15px;
@@ -147,6 +144,7 @@ svg {
 }
 .registerHere {
   position: absolute;
+  border-radius: 20px;
   left: 93px;
   top: 662px;
   width: 204px;
@@ -179,21 +177,51 @@ svg {
   font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
     'Liberation Sans', sans-serif;
 }
-.login {
-  color: #000;
-  font-size: 20px;
-  font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
-    'Liberation Sans', sans-serif;
+
+#registerButton {
+  --background: #A8DADC;
   position: absolute;
-  left: 167px;
-  top: 540px;
-  width: min-content;
-  height: min-content;
-  text-align: center;
+  left: 47px;
+  top: 650px;
+  width: 295px;
+  height: 50px;
+  outline-offset: -1px;
+  --border-radius: 20px;
+  border-radius: 20px;
+  background-color: rgba(255, 255, 255, 1);
+  border: 2px solid #E63946;
+
+}
+
+.loginButton {  
+  position: absolute;
+  display: flex;
+  justify-content: center;
   align-items: center;
+  height: 100%;
+  width: 150px;
+  height: 50px;
   white-space: nowrap;
   flex-direction: column;
+  justify-content: center;
+  --border-radius: 20px;
+    border-radius: 20px;
+    --background: #A8DADC;
+    border: 2px solid #E63946;
 }
+
+.centreButton {
+  left: calc(50% - -3px);
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width:100%;
+}
+
 .vector {
   position: absolute;
   left: 16.9231%;
@@ -238,3 +266,96 @@ svg {
 
 
 
+*/
+
+.loginContainer {
+  --ion-background-color: #F1FAEE;
+}
+
+.loginGrid{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
+}
+
+.loginHeader {
+  color: #000;
+  font-size: 30px;
+  font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
+    'Liberation Sans', sans-serif;
+    text-align: center;
+    align-items: center;
+    margin-bottom: 10%;
+}
+
+.sweatSessionLogo{
+  width: 150px;
+  height: 150px;
+  margin-bottom: 5%;
+}
+
+.label{
+  color: #000;
+}
+
+.emailSection, .passwordSection{
+  --border-radius: 30px;
+    border-radius: 30px;
+    --background: #A8DADC;
+    border: 3px solid #E63946;
+  //   --margin-top: 50px;
+  // --margin-bottom: 50px;
+}
+
+.emailSection{
+  margin-bottom: 5%;
+}
+
+.passwordSection{
+  margin-bottom: 10%;
+}
+
+.question {
+  margin-top: 20%;
+  --padding-bottom: 0;
+}
+
+ion-button {
+  --background: #A8DADC;
+  --background-hover: #9ce0be;
+  --background-activated: #88f4be;
+  --background-focused: #88f4be;
+
+  --color: #F1FAEE;
+
+  --border-radius: 30px;
+  --border-color: #E63946;
+  --border-style: solid;
+  --border-width: 3px;
+
+  
+
+  --ripple-color: deeppink;
+
+  --padding-top: 20px;
+  --padding-bottom: 20px;
+}
+
+span{
+  font-size: 20px;
+}
+
+#registerButton{
+  font-size: 20px;
+  width: 80%;
+  padding-bottom: 15%;
+}
+
+#loginButton{
+  margin-left: 25%;
+  width:50%;
+  justify-content: center;
+}
+// , .loginButton, .registerButton
