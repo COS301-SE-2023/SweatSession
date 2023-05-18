@@ -16,16 +16,43 @@ export class SearchPage {
   private searchTerm$ = new Subject<string>();
   //will get this from the service
 
-  data:any[] = [
-    { name: 'Amit' },
-    { name: 'Amit1' },
-    { name: 'Amit2' },
-    { name: 'Amit3' },
-    { name: 'Amit4' },
-    { name: 'Amit5' },
-  ]
+  data: any[] = [
+    {
+      name: 'Virgin Active',
+      description: 'A small Description of the Location',
+      image: 'https://source.unsplash.com/random/200x200?sig=1',
+      location: 'Hatfield',
+    },
+    {
+      name: 'Gym & Fitness Center',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+      image: 'https://source.unsplash.com/random/200x200?sig=1',
+      location: 'Pretoria',
+    },
+    {
+      name: 'Fitness First',
+      description: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem.',
+      image: 'https://source.unsplash.com/random/200x200?sig=1',
+      location: 'Johannesburg',
+    },
+    {
+      name: 'XYZ Gym',
+      description: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi.',
+      image: 'https://source.unsplash.com/random/200x200?sig=1',
+      location: 'Cape Town',
+    },
+    {
+      name: 'Active Life Fitness',
+      description: 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore.',
+      image: 'https://source.unsplash.com/random/200x200?sig=1',
+      location: 'Durban',
+    },
+  ];
   
   
+  ngOnInit() {
+    this.onSearchInput({ target: { value: '' } }); // Trigger initial filtering
+  }
 
   constructor() 
   { 

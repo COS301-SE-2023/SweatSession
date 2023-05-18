@@ -6,7 +6,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () => import('./register/register.module').then( m => m.RegisterPageModule)
+    loadChildren: () => import('./splash/splash.module').then( m => m.SplashPageModule)
   },
   {
     path: 'home',
