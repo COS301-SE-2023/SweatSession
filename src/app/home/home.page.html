@@ -1,69 +1,56 @@
-<ion-content [fullscreen]="true">
-  <ion-menu contentId="main-content">
-    <ion-header>
-      <ion-toolbar>
-        <ion-title>Menu</ion-title>
-      </ion-toolbar>
-    </ion-header>
-    
-    <!-- We will put the Menu Items Heree -->
+<ion-menu contentId="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Menu</ion-title>
+    </ion-toolbar>
+  </ion-header>
+</ion-menu>
 
-  </ion-menu>
-  <div class="ion-page" id="main-content">
-    <ion-header>
-      <ion-toolbar>
-        <ion-buttons slot="start">
-          <ion-menu-button></ion-menu-button>
-        </ion-buttons>
-        <ion-title>Home</ion-title>
-      </ion-toolbar>
-    </ion-header>
-    
-    <!-- Page content Goes Here -->
-    <!-- <ion-img src="assets/img/Asset 1.jpg"></ion-img> -->
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    <ion-tabs>
-      <ion-router-outlet></ion-router-outlet>
-    
-      <ion-tab-bar slot="bottom">
-        <ion-tab-button tab="dashboard">
-          <ion-icon name="home-outline"></ion-icon>
-          Home
-        </ion-tab-button>
-        
-        <ion-tab-button tab="messages">
-          <ion-icon name="send-sharp"></ion-icon>
-          Messages
-        </ion-tab-button >
 
-        <ion-tab-button tab="search">
-          <ion-icon name="search"></ion-icon>
-          Search
-        </ion-tab-button>
-        <ion-tab-button tab="leaderboard">
-          <ion-icon name="bar-chart-outline"></ion-icon>
-          Boards
-        </ion-tab-button>
-        <ion-tab-button tab="userprofile">
-          <ion-icon name="person-outline"></ion-icon>
-          Profile
-        </ion-tab-button>
-      </ion-tab-bar>
-    </ion-tabs>
-  </div>
+<ion-header>
+  <ion-toolbar class="toolbar">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>SweatSession</ion-title>
+    <ion-icon name="notifications-outline" class="clickable" slot="end"></ion-icon>
+    <ion-avatar slot="end">
+      <img src="https://ionicframework.com/docs/img/demos/avatar.svg"/>
+    </ion-avatar>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content id="main-content">
+  <ion-router-outlet></ion-router-outlet>
 </ion-content>
-  
-  
+
+
+
+<ion-tabs>
+  <ion-tab-bar slot="bottom" class="toolbar">
+    <ion-tab-button tab="dashboard">
+      <ion-icon name="home-outline"></ion-icon>
+    </ion-tab-button>
+    
+    <ion-tab-button tab="messages">
+      <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
+    </ion-tab-button >
+
+    <ion-tab-button tab="search">
+      <ion-icon name="search"></ion-icon>
+    </ion-tab-button>
+
+    <ion-tab-button tab="leaderboard">
+      <ion-icon name="bar-chart-outline"></ion-icon>
+    </ion-tab-button>
+
+    <ion-tab-button tab="userprofile">
+      <ion-icon name="person-outline"></ion-icon>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>
+
 
 
 
