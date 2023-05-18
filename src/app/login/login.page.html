@@ -1,13 +1,76 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>login</ion-title>
-  </ion-toolbar>
-</ion-header>
+<!-- <ion-content [fullscreen]="true"  class="createaccount-container">
+  
+<ion-grid  class="createaccount-createaccount">
+<div class="ellipse1"><img src="assets/ellipse-1-icon.svg" alt="" class="icon" /></div>
+<div class="sweatsessionlogotransparent1"></div>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">login</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<div class="signIn">Sign In</div>
+
+<div class="email">Email</div>
+<div class="profileTopnav"><img src="assets/profiletopnav-icon.svg" alt="" class="icon2" /></div>
+
+<div class="profileTopnav2"></div>
+
+<div class="vector"><img src="assets/vector-icon.svg" alt="" class="icon4" /></div>
+<div class="password">Password</div>
+<div class="donTHaveAnAccount">Don't have an account?</div>
+
+<ion-row class="centreButton">
+  <ion-col size="auto">
+<ion-button class="loginButton" expand="full" shape="round">
+  <ion-label class="labelWrapper">
+    <span class="label">Login</span>
+  </ion-label>
+</ion-button>
+</ion-col>
+</ion-row>
+
+<ion-button id="registerButton" expand="full" shape="round">
+  <ion-label class="labelWrapper">
+    <span class="label">Register Here</span>
+  </ion-label>
+</ion-button>
+</ion-grid>
+</ion-content> -->
+
+<ion-content [fullscreen]="true" class="loginContainer">
+  <ion-grid class="loginGrid">
+
+    <!-- <div class="ellipse1"><img src="assets/ellipse-1-icon.svg" alt="" class="icon" /></div> -->
+    <!-- <div class="sweatsessionlogotransparent1"></div> -->
+    <ion-img class="sweatSessionLogo" src="/assets/sweatsessionlogotransparent1.png"></ion-img>
+
+    <ion-text class="loginHeader">
+      Sign In
+    </ion-text>
+
+    <form>
+      <ion-item class="emailSection">
+        <ion-img class="emailLogo" src="/assets/vector-icon.svg"></ion-img>
+        <ion-label position="email"></ion-label>
+        <ion-input label="" type="email" placeholder="Enter your email"  required></ion-input> <!--[(ngModel)]="email"-->
+      </ion-item>
+
+      <ion-item class="passwordSection">
+        🔑
+        <ion-label position="password">Password</ion-label>
+        <ion-input label="" type="password" placeholder="Enter your password"  required></ion-input>  <!--[(ngModel)]="password"-->
+      </ion-item>
+
+      <ion-button id="loginButton" expand="block" shape="round" fill="clear">
+        <!-- <ion-label class="labelWrapper"> -->
+          <span class="label">Login</span>
+        <!-- </ion-label> -->
+      </ion-button>
+
+    </form><!-- <form (submit)="login()"> -->
+
+      <ion-text class="question">Don't have an account?</ion-text>
+      <ion-button id="registerButton" expand="block" shape="round" fill="clear">
+        <ion-label class="labelWrapper">
+          <span class="label">Register Here</span>
+        </ion-label>
+      </ion-button>
+
+  </ion-grid>
 </ion-content>
