@@ -7,59 +7,59 @@
 </ion-menu>
 
 
-  </ion-menu>
-  <ion-header>
-    <ion-toolbar class="toolbar">
-      <ion-buttons slot="start">
-        <ion-menu-button></ion-menu-button>
-      </ion-buttons>
-        <ion-title>Home</ion-title>
-      </ion-toolbar>
-    </ion-header>
-    
-    <!-- Page content Goes Here -->
-    <!-- <ion-img src="assets/img/Asset 1.jpg"></ion-img> -->
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    <ion-tabs>
-      <ion-router-outlet></ion-router-outlet>
-    
-      <ion-tab-bar slot="bottom">
-        <ion-tab-button tab="dashboard">
-          <ion-icon name="home-outline"></ion-icon>
-          Home
-        </ion-tab-button>
-        
-        <ion-tab-button tab="messages">
-          <ion-icon name="send-sharp"></ion-icon>
-          Messages
-        </ion-tab-button >
+<ion-header>
+  <ion-toolbar class="toolbar">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      <ion-chip>
+        Hi User
+        <ion-avatar>
+          <img src="https://ionicframework.com/docs/img/demos/avatar.svg"/>
+        </ion-avatar>
+      </ion-chip>
+    </ion-title>
+    <ion-icon name="receipt-outline" 
+              class="clickable" slot="end">
+    </ion-icon>
+    <ion-icon name="notifications-outline" 
+              class="clickable" slot="end">
+    </ion-icon>
+  </ion-toolbar>
+</ion-header>
 
-        <ion-tab-button tab="search">
-          <ion-icon name="search"></ion-icon>
-          Search
-        </ion-tab-button>
-        <ion-tab-button tab="leaderboard">
-          <ion-icon name="bar-chart-outline"></ion-icon>
-          Boards
-        </ion-tab-button>
-        <ion-tab-button tab="userprofile">
-          <ion-icon name="person-outline"></ion-icon>
-          Profile
-        </ion-tab-button>
-      </ion-tab-bar>
-    </ion-tabs>
-  </div>
+<ion-content id="main-content">
+  <ion-router-outlet></ion-router-outlet>
 </ion-content>
+  
+<ion-tabs>
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="dashboard">
+      <ion-icon name="home-outline"></ion-icon>
+      Home
+    </ion-tab-button>
+    
+    <ion-tab-button tab="messages">
+      <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
+      Messages
+    </ion-tab-button >
+
+    <ion-tab-button tab="search">
+      <ion-icon name="search"></ion-icon>
+      Search
+    </ion-tab-button>
+    <ion-tab-button tab="leaderboard">
+      <ion-icon name="bar-chart-outline"></ion-icon>
+      Boards
+    </ion-tab-button>
+    <ion-tab-button tab="chatbot">
+      <ion-icon name="logo-ionitron"></ion-icon>
+      chat bot
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>
+ 
   
   
 
