@@ -9,15 +9,15 @@
 <ion-content class = "ion-padding">
 
     <ion-searchbar 
-            placeholder = "Search for a location"
-            [(ngModel)] = "searchTerm"
-            showCancelButton = "focus"
-            animated
+          placeholder="Search for a location"
+          [(ngModel)]="searchTerm"
+          (ionInput)="onSearchInput($event)"
+          animated
             >
     </ion-searchbar>
 
   <ion-list>
-    <ion-item *ngFor="let item of observableData | async">
+    <ion-item *ngFor="let item of filteredData$ | async">
       <ion-label>{{item.name}}</ion-label>
     </ion-item>
   </ion-list>

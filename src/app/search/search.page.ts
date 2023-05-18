@@ -9,20 +9,20 @@ import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
   templateUrl: './search.page.html',
   styleUrls: ['./search.page.scss'],
 })
-export class SearchPage implements OnInit {
+export class SearchPage {
 
-  searchTerm: string = "";
-  filteredData$: Observable<any[]>;
+  searchTerm: string | undefined;
+  filteredData$: Observable<any[]> = of([]);
   private searchTerm$ = new Subject<string>();
   //will get this from the service
 
-  data = [
-    { "name": 'Amit' },
-    { "name": 'Amit1' },
-    { "name": 'Amit2' },
-    { "name": 'Amit3' },
-    { "name": 'Amit4' },
-    { "name": 'Amit5' },
+  data:any[] = [
+    { name: 'Amit' },
+    { name: 'Amit1' },
+    { name: 'Amit2' },
+    { name: 'Amit3' },
+    { name: 'Amit4' },
+    { name: 'Amit5' },
   ]
   
   
@@ -30,21 +30,19 @@ export class SearchPage implements OnInit {
   constructor() 
   { 
     this.filteredData$ = this.searchTerm$.pipe(
-      debounceTime(300), // Wait for 300ms of inactivity before considering a new search term
-      distinctUntilChanged(), // Only emit when the search term changes
+      debounceTime(300),
+      distinctUntilChanged(),
       map(searchTerm => this.filterData(searchTerm))
     );
   }
 
-  ngOnInit(){
-    
+  filterData(searchTerm: string): any[] {
+    if (!searchTerm) {
+      return this.data;
+    }
+    return this.data.filter(item => item.name.includes(searchTerm));
   }
 
-  filterData(searchTerm: string): any[] {
-  // Implement your filtering logic here
-  // For example, filter the original data array based on the search term
-  return this.data.filter(item => item.name.includes(searchTerm));
-  }
 
   onSearchInput(event: any) {
     const searchTerm = event.target.value;
