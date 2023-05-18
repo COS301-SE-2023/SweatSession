@@ -1,4 +1,31 @@
-.HomeProfile
-{
-    
+ion-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+ion-segment {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: transparent;
+}
+
+ion-icon {
+    width:25px;
+    height: 25px;
+}
+
+.clickable:hover {
+    zoom:1.05;
+    color:aqua;
+}
+
+.toolbar {
+    height:40px;
+}
+
+ion-avatar {
+    height:35px;
+    width:35px;
 }
