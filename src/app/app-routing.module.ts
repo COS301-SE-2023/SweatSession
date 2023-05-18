@@ -22,31 +22,6 @@ const routes: Routes = [
     path: 'splash',
     loadChildren: () => import('./splash/splash.module').then( m => m.SplashPageModule)
   }
-
-  // {
-  //   path: 'locations',
-  //   loadChildren: () => import('./locations/locations.module').then( m => m.LocationsPageModule)
-  // },
-  // {
-  //   path: 'notifications',
-  //   loadChildren: () => import('./notifications/notifications.module').then( m => m.NotificationsPageModule)
-  // },
-  
-  // {
-  //   path: 'setprofile',
-  //   loadChildren: () => import('./setprofile/setprofile.module').then( m => m.SetprofilePageModule)
-  // },
-  
-  // {
-  //   path: 'userprofile',
-  //   loadChildren: () => import('./userprofile/userprofile.module').then( m => m.UserprofilePageModule)
-  // },
-  // {
-  //   path: 'search',
-  //   loadChildren: () => import('./search/search.module').then( m => m.SearchPageModule)
-  // },
-
-  
 ];
 @NgModule({
   imports: [

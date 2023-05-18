@@ -45,6 +45,10 @@ const routes: Routes = [
         path: 'leaderboard',
         loadChildren: () => import('../leaderboard/leaderboard.module').then( m => m.LeaderboardPageModule)
       },
+      {
+        path: 'locations',
+        loadChildren: () => import('../locations/locations.module').then( m => m.LocationsPageModule)
+      },
     ],
   },
   {
