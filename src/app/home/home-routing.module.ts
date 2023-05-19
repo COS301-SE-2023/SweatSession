@@ -37,10 +37,7 @@ const routes: Routes = [
         path: 'setprofile',
         loadChildren: () => import('../setprofile/setprofile.module').then( m => m.SetprofilePageModule)
       },
-      {
-        path: 'userprofile',
-        loadChildren: () => import('../userprofile/userprofile.module').then( m => m.UserprofilePageModule)
-      },
+     
       {
         path: 'leaderboard',
         loadChildren: () => import('../leaderboard/leaderboard.module').then( m => m.LeaderboardPageModule)
