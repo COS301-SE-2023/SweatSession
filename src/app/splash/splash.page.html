@@ -1,36 +1,20 @@
-
-
-  <ion-content  [fullscreen]="true">
-    <ion-header collapse="condense">
-
-    </ion-header>
-
-    <!-- <ion-img class = "logo-img" src="assets/Asset 1.png" alt="logo"></ion-img> -->
-
-    <!-- <ion-card class = "splash-card">
-
-      <ion-text class = "h1"> About: </ion-text>
-      <br>
-      <ion-text class = "h2"> Sweat Session is a fitness app that allows users to track their workouts and progress. </ion-text>
-
-      <ion-button class = "getStartedB" expand="block" fill="outline" routerLink="/register">Get started</ion-button>
+<ion-content>
+  <ion-card class="full-screen-card">
+    <div class="logo-container">
+      <img class="logo-img" src="assets/sweatsessionlogotransparent1.png" alt="logo">
+    </div>
+    <ion-card-header>
+      <ion-card-title>About</ion-card-title>
+      <ion-card-subtitle></ion-card-subtitle>
+    </ion-card-header>
+  
+    <ion-card-content>
+      Sweat Session is a fitness app that allows users to track their workouts and progress.
+      more random text to describe the app to the user and welcome them to our Cool app.
+    </ion-card-content>
     
-    </ion-card> -->
-
-
-    <ion-card>
-      <img class = "logo-img" src="assets/sweatsessionlogotransparent1.png" alt="logo">
-        <ion-card-header>
-          <ion-card-title>About</ion-card-title>
-          <ion-card-subtitle></ion-card-subtitle>
-        </ion-card-header>
-      
-        <ion-card-content>
-          Sweat Session is a fitness app that allows users to track their workouts and progress.
-        </ion-card-content>
-        <!-- <background-img class = "logo-img" src="assets/Asset 1.png" alt="logo"> -->
-        <ion-button size = "large" class = "getSButton" expand="block" fill="outline" routerLink="/register">Get started</ion-button>
-    </ion-card>
-
-  </ion-content>
-
+    <ion-button size="large" class="getSButton" expand="block" fill="outline" routerLink="/register">
+      Get started
+    </ion-button>
+  </ion-card>
+</ion-content>

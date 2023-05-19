@@ -50,3 +50,27 @@
     height: 8%;
     position: bottom;
   }
+  // .full-screen-card {
+  //   display: flex;
+  //   flex-direction: column;
+  //   height: 100vh;
+  // }
+
+  .full-screen-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 80vh;
+  }
+  
+  .full-screen-card .getSButton {
+    // align-self: flex-end;
+    margin-bottom: 20px;
+  }
+  
+  .logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+  }
