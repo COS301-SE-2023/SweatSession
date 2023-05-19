@@ -51,16 +51,16 @@ export class SearchPage {
   
   
   ngOnInit() {
-    this.onSearchInput({ target: { value: '' } }); // Trigger initial filtering
-  }
-
-  constructor() 
-  { 
     this.filteredData$ = this.searchTerm$.pipe(
       debounceTime(300),
       distinctUntilChanged(),
       map(searchTerm => this.filterData(searchTerm))
     );
+  }
+
+  constructor() 
+  { 
+    this.filterData('');
   }
 
   filterData(searchTerm: string): any[] {
