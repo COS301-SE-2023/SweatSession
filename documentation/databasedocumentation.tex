@@ -15,13 +15,12 @@ Documents (representing objects) are stored in Cloud Firestore.\\ Our database w
         \hline
         Property & Data Type & Description \\ [0.5ex] 
         \hline\hline
-        %created & Timestamp$|$null$|$undefined & Stores when user account was created\\
+        created & Timestamp$|$null$|$undefined & Stores when user account was created\\
         %customClaims & map$|$null$|$undefined & Custom Claims\\
         %displayName & string$|$null$|$undefined & The user's display name\\
         email & string$|$null$|$undefined & Email of the user\\
         id & string & Unique id of the user, same as profile userID\\
-        %phoneNumber & string$|$null$|$undefined & The mobile number of the user\\
-        %photoURL & string$|$null$|$undefined & Link to the user's profile picture\\
+        phoneNumber & string$|$null$|$undefined & The mobile number of the user\\
         
         \hline
       \end{tabular}
@@ -36,7 +35,28 @@ Documents (representing objects) are stored in Cloud Firestore.\\ Our database w
         Property & Data Type & Description \\ [0.1ex] 
         \hline\hline
         userId & string & id of user to whom the profile belongs, same as User id\\
+        status & string$|$null$|$undefined & Profile Status (complete or incomplete)\\
+        displayName & string$|$null$|$undefined & the person's display name\\
+        age & Number$|$null$|$undefined & the person's age\\
+        gender & string$|$null$|$undefined & e.g. male\\
+        cellphone & string$|$null$|$undefined & user's cellphone number\\
+        placeOfResidence & geopoint$|$null$|$undefined & user's residence\\
+        description & string$|$null$|$undefined & Biography of the user\\
+        photoURL & string$|$null$|$undefined & Link to the user's profile picture\\
         
+        \hline
+      \end{tabular}
+      \label{table:data}
+    \end{table}
+    
+    \begin{table}[ht]
+      \centering
+      \caption{friends}
+      \begin{tabular}{||c c c||} 
+        \hline
+        Property & Data Type & Description\\ [0.1ex] 
+        \hline\hline
+        friendsList & array & has maps which contains friend information\\
         \hline
       \end{tabular}
       \label{table:data}
@@ -58,4 +78,59 @@ Documents (representing objects) are stored in Cloud Firestore.\\ Our database w
       \end{tabular}
       \label{table:data}
     \end{table}
+    
+    \begin{table}[ht]
+      \centering
+      \caption{fitnessRegimens}
+      \begin{tabular}{||c c c||} 
+        \hline
+        Property & Data Type & Description\\ [0.1ex] 
+        \hline\hline
+        sessions & array & array of ids of session documents\\
+        %notificationTime & Timestamp & time the notification was created\\ 
+        %read & boolean & says if the notification was read\\
+        %url & string & redirect link for the notifcation\\
+        \hline
+      \end{tabular}
+      \label{table:data}
+    \end{table}
+    
+    \begin{table}[ht]
+      \centering
+      \caption{sessions}
+      \begin{tabular}{||c c c||} 
+        \hline
+        Property & Data Type & Description\\ [0.1ex] 
+        \hline\hline
+        sessionID & string & the id of the session\\
+        startTime & Timestamp$|$null$|$undefined & Stores when user account was created\\
+        endTime & Timestamp$|$null$|$undefined & Stores when user account was created\\
+        workoutPlanDescription & String$|$null$|$undefined & describes what will be done in the session\\
+        exercises & array & array of maps (exercises)\\
+        %notificationTime & Timestamp & time the notification was created\\ 
+        %read & boolean & says if the notification was read\\
+        %url & string & redirect link for the notifcation\\
+        \hline
+      \end{tabular}
+      \label{table:data}
+    \end{table}
+    
+    \begin{table}[ht]
+      \centering
+      \caption{exercises this is a map instead of a collection}
+      \begin{tabular}{||c c c||} 
+        \hline
+        Property & Data Type & Description\\ [0.1ex] 
+        \hline\hline
+        reps & Number & number of times the exercise will be done e.g. 10 bicep curls\\
+        name & string & e.g.pushups\\
+
+        %notificationTime & Timestamp & time the notification was created\\ 
+        %read & boolean & says if the notification was read\\
+        %url & string & redirect link for the notifcation\\
+        \hline
+      \end{tabular}
+      \label{table:data}
+    \end{table}
+    
 \end{document}
