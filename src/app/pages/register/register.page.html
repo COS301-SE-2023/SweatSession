@@ -1,0 +1,54 @@
+<ion-content class="registrationContainer">
+  <ion-grid class="registrationGrid">
+    <!-- <ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>register</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
+    <ion-item class="logo-img">
+      <ion-img src="assets/Asset 1.png"></ion-img>
+    </ion-item>
+
+    <ion-text class="registrationHeader"> Register </ion-text>
+
+    <form (ngSubmit)="register()">
+      <ion-item class="emailSection">
+        <ion-img class="emailLogo" src="/assets/vector-icon.svg"></ion-img>
+        <ion-label>Email:</ion-label>
+        <ion-input
+          type="email"
+          name="email"
+          [(ngModel)]="email"
+          required
+        ></ion-input>
+      </ion-item>
+
+      <ion-item class="passwordSection">
+        🔑
+        <ion-label>Password:</ion-label>
+        <ion-input
+          type="password"
+          name="password"
+          [(ngModel)]="password"
+          required
+        ></ion-input>
+      </ion-item>
+
+      <ion-item class="cPasswordSection">
+        🔑
+        <ion-label>Confirm Password:</ion-label>
+        <ion-input
+          type="password"
+          name="cPassword"
+          [(ngModel)]="cPassword"
+          required
+        ></ion-input>
+      </ion-item>
+
+      <ion-button expand="block" type="submit" class="registerButton"
+        >Create Account</ion-button
+      >
+    </form>
+  </ion-grid>
+</ion-content>

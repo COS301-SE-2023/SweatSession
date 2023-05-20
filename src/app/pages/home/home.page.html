@@ -1,0 +1,86 @@
+<ion-menu contentId="main-content">
+  <ion-header>
+    <ion-toolbar class="toolbar">
+      <ion-title>Menu</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+    <ion-item class="clickable" routerLink="/settings">
+      <ion-icon name="settings-outline">
+      </ion-icon>
+      <ion-label class="menu-label">
+        Settings
+      </ion-label>
+    </ion-item>
+
+    <ion-item class="clickable" routerLink="/logout">
+      <ion-icon name="log-out-outline">
+      </ion-icon>
+      <ion-label class="menu-label">
+        Logout
+      </ion-label>
+    </ion-item>
+  </ion-content>
+</ion-menu>
+
+
+<ion-header>
+  <ion-toolbar class="toolbar">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      <ion-chip class="clickable" routerLink="/home/userprofile">
+        Hi User
+        <ion-avatar>
+          <img src="https://ionicframework.com/docs/img/demos/avatar.svg"/>
+        </ion-avatar>
+      </ion-chip>
+    </ion-title>
+    <ion-icon name="receipt-outline" 
+              class="clickable" slot="end">
+    </ion-icon>
+    <ion-icon name="notifications-outline" 
+              routerLink="/home/notifications"
+              class="clickable" slot="end">
+    </ion-icon>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content id="main-content">
+  <ion-router-outlet></ion-router-outlet>
+</ion-content>
+  
+<ion-tabs>
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="dashboard">
+      <ion-icon name="home-outline"></ion-icon>
+      Home
+    </ion-tab-button>
+    
+    <ion-tab-button tab="messages">
+      <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
+      Messages
+    </ion-tab-button >
+
+    <ion-tab-button tab="search">
+      <ion-icon name="search"></ion-icon>
+      Search
+    </ion-tab-button>
+    <ion-tab-button tab="leaderboard">
+      <ion-icon name="bar-chart-outline"></ion-icon>
+      Boards
+    </ion-tab-button>
+    <ion-tab-button tab="chatbot">
+      <ion-icon name="logo-ionitron"></ion-icon>
+      chat bot
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>
+ 
+  
+  
+
+
+
