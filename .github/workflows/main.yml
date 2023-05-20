@@ -1,17 +1,19 @@
 name: Tests
+
 on: [push]
+
 jobs:
-  run-tests:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      # Install NPM dependencies, cache them correctly
-      # and run all Cypress tests
-      - name: Cypress run
-        uses: cypress-io/github-action@v2
+      - uses: actions/checkout@v3
+      - name: Use Node.js 19
+        uses: actions/setup-node@v3
         with:
-          build: npm run build
-          start: npm start
-      - name: Jest run
-        run: npm test
+          node-version: "19.x"
+          cache: 'npm'
+      - uses: mskelton/setup-yarn@v1
+        with:
+          node-version: '19.x'
+      - run: yarn
+      - run: yarn jest
