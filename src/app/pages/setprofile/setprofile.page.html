@@ -6,12 +6,8 @@
         <ion-card-title>Edit Profile</ion-card-title>
       </ion-card-header>
   
-      <div class="preview-container" *ngIf="oldProfilePicture">
-        <img [src]="oldProfilePicture" alt="Old Profile Picture">
-      </div>
-  
-      <div class="preview-container" *ngIf="selectedPicture">
-        <img [src]="selectedPicture" alt="New Profile Picture">
+      <div class="preview-container" *ngIf="ProfilePicture">
+        <img [src]="ProfilePicture" alt="Old Profile Picture">
       </div>
       
       <ion-card-content>
@@ -41,6 +37,6 @@
         <ion-label position="stacked">Password</ion-label>
         <ion-input type="password"  [(ngModel)]="user.password"></ion-input>
       </ion-item>
-      <ion-button expand="block" (click)="saveProfile()">Save</ion-button>
+    
   </ion-card>
 
