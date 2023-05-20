@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-userprofile',
@@ -7,9 +8,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserprofilePage implements OnInit {
 
-  constructor() { }
+  constructor(private Nav: NavController) { }
 
   ngOnInit() {
+  }
+
+  Leaderboard(){
+    this.Nav.navigateRoot('/home/leaderboard');
+  }
+
+  Chats(){
+    this.Nav.navigateRoot('/home/chatbot');
+  }
+
+  Groups(){
+    this.Nav.navigateRoot('/home/messages');
+  }
+  Schedule(){
+    this.Nav.navigateRoot('/home/notifications');
   }
 
 }

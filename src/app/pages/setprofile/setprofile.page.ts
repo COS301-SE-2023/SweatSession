@@ -35,6 +35,7 @@ export class SetprofilePage implements OnInit {
 
   saveProfile() {
  
+    this.editMode = false;
     this.user.profile = this.ProfilePicture;
     this.modalController.dismiss('save');
     console.log('Saving profile:', this.user);
@@ -57,6 +58,13 @@ export class SetprofilePage implements OnInit {
     });
   }
 
+  editMode = false;
+
+  enableEditMode() {
+    console.log('Enabling edit mode');
+    this.editMode = true;
+  }
+  
   closePicturePopup() {
     this.modalController.dismiss('cancel');
   }
