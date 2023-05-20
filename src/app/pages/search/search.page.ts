@@ -56,15 +56,16 @@ export class SearchPage {
       distinctUntilChanged(),
       map(searchTerm => this.filterData(searchTerm))
     );
+    
   }
 
   constructor() 
   { 
-    this.filterData('');
+    this.data.filter(item => item.name.includes(''));
   }
 
   filterData(searchTerm: string): any[] {
-    if (!searchTerm) {
+    if (!searchTerm || searchTerm === ''|| searchTerm === null) {
       return this.data;
     }
     return this.data.filter(item => item.name.includes(searchTerm));
