@@ -1,7 +1,7 @@
 # SweatSession
 
 [![Code coverage][codecov-shield]](https://codecov.io/gh/COS301-SE-2023/SweatSession)
-
+[![System Status](https://img.shields.io/pingpong/status/sp_2b59949b563642c28c83a659aebcbdd0)](https://localhost.pingpong.host/)
 [![Issues closed][closedissues-shield]](https://github.com/COS301-SE-2023/SweatSession/issues?q=is%3Aissue+is%3Aclosed) <br />
 [![Commits][commits-shield]](https://github.com/COS301-SE-2023/SweatSession/issues)
 [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=COS301-SE-2023_SweatSession&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=COS301-SE-2023_SweatSession)
@@ -35,7 +35,7 @@ use the app, location-based services and more
 
 ## Technologies
 
-[![Angular][Angular.io]][Angular-url] [![Node][Node.js]][Node-url] [![TypeScript][typescript-badge]][typescript-url] [![JavaScript][javascript-badge]][javascript-url] [![Ionic][ionic-badge]][ionic-url] [![Firestore][firestore-badge]][firestore-url] [![Git][git-badge]][git-url] [![Jest][jest-badge]][jest-url] [![Cypress][cypress-badge]][cypress-url] [![GitHub Actions][github-actions-badge]][github-actions-url][![System Status](https://img.shields.io/pingpong/status/sp_2b59949b563642c28c83a659aebcbdd0)](https://localhost.pingpong.host/)
+[![Angular][Angular.io]][Angular-url] [![Node][Node.js]][Node-url] [![TypeScript][typescript-badge]][typescript-url] [![JavaScript][javascript-badge]][javascript-url] [![Ionic][ionic-badge]][ionic-url] [![Firestore][firestore-badge]][firestore-url] [![Git][git-badge]][git-url] [![Jest][jest-badge]][jest-url] [![Cypress][cypress-badge]][cypress-url] [![GitHub Actions][github-actions-badge]][github-actions-url]
 
 ### Members
 
