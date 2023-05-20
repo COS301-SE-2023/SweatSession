@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewChild  } from '@angular/core';
 import { profile } from 'console';
+import { IonContent, ModalController } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-setprofile',
@@ -14,7 +16,9 @@ export class SetprofilePage implements OnInit {
     email: 'TriumphSynapse@gmail.com',
     bio: 'Hii there, Im a Natty',
   };
+
   ProfilePicture = this.user.profile
+  modalMode: 'ios' | 'md' = 'ios'; // Set the desired modal mode (ios or md)
   // selectedPicture: string | null = null;
 
   onPictureChange(event: any) {
@@ -32,9 +36,31 @@ export class SetprofilePage implements OnInit {
   saveProfile() {
  
     this.user.profile = this.ProfilePicture;
+    this.modalController.dismiss('save');
     console.log('Saving profile:', this.user);
   }
-  constructor() { }
+
+  savePicture() {
+    // Perform save logic here
+    // this.oldProfilePicture = this.selectedPicture;
+    this.modalController.dismiss('save');
+  }
+
+  openPicturePopup() {
+    this.modalController.create({
+      component: 'editPictureModal',
+      componentProps: {
+        selectedPicture: this.ProfilePicture,
+      },
+    }).then((modal) => {
+      modal.present();
+    });
+  }
+
+  closePicturePopup() {
+    this.modalController.dismiss('cancel');
+  }
+  constructor(private modalController: ModalController) { }
 
   ngOnInit() {
   }
