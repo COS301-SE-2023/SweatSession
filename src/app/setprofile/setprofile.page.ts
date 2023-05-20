@@ -14,15 +14,15 @@ export class SetprofilePage implements OnInit {
     email: 'TriumphSynapse@gmail.com',
     bio: 'Hii there, Im a Natty',
   };
-  oldProfilePicture = this.user.profile
-  selectedPicture: string | null = null;
+  ProfilePicture = this.user.profile
+  // selectedPicture: string | null = null;
 
   onPictureChange(event: any) {
     const file = event.target.files[0];
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        this.selectedPicture = reader.result as string;
+        this.ProfilePicture = reader.result as string;
 
       };
       reader.readAsDataURL(file);
@@ -31,7 +31,7 @@ export class SetprofilePage implements OnInit {
 
   saveProfile() {
  
-    this.user.profile = this.selectedPicture;
+    this.user.profile = this.ProfilePicture;
     console.log('Saving profile:', this.user);
   }
   constructor() { }
