@@ -34,8 +34,7 @@ const routes: Routes = [
   {
     path: 'otheruser',
     loadChildren: () => import('./pages/otheruser/otheruser.module').then( m => m.OtheruserPageModule)
-  },
-
+  }
 ];
 @NgModule({
   imports: [
