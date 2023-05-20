@@ -5,16 +5,7 @@
 [![Issues closed][closedissues-shield]](https://github.com/COS301-SE-2023/SweatSession/issues?q=is%3Aissue+is%3Aclosed) <br />
 [![Commits][commits-shield]](https://github.com/COS301-SE-2023/SweatSession/issues)
 [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=COS301-SE-2023_SweatSession&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=COS301-SE-2023_SweatSession)
-{
-  "is": [ "Rod Vagg" ],
-  "email": "r@va.gg",
-  "txt": "https://r.va.gg",
-  "twitter": "@rvagg",
-  "github": "rvagg",
-  "linkedin": "ニャー",
-  "facebook": "Эдуард Хиль",
-  "with": "Protocol Labs"
-}
+
 
 <!-- TABLE OF CONTENTS -->
 <details>
