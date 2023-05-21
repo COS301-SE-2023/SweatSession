@@ -1,0 +1,104 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Schedules</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-menu contentId="main-content">
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Menu</ion-title>
+      </ion-toolbar>
+    </ion-header>
+  </ion-menu>
+
+  <div class="ion-page" id="main-content">
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Home</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <ion-tabs>
+      <ion-router-outlet></ion-router-outlet>
+      <ion-tab-bar slot="bottom">
+        <ion-tab-button tab="dashboard">
+          <ion-icon name="home-outline"></ion-icon>
+          Workout Plan
+        </ion-tab-button>
+        
+        <ion-tab-button tab="messages">
+          <ion-icon name="send-sharp"></ion-icon>
+          Messages
+        </ion-tab-button >
+
+        <ion-tab-button tab="search">
+          <ion-icon name="search"></ion-icon>
+          Search
+        </ion-tab-button>
+        <ion-tab-button tab="leaderboard">
+          <ion-icon name="bar-chart-outline"></ion-icon>
+          Boards
+        </ion-tab-button>
+        <ion-tab-button tab="userprofile">
+          <ion-icon name="person-outline"></ion-icon>
+          Profile
+        </ion-tab-button>
+      </ion-tab-bar>
+      
+    </ion-tabs>
+    <div class="workout-schedule">
+      <div class="blue-rectangle">
+        <div class="grey-rectangle">
+          <h1>
+            <input [(ngModel)]="pushDay" type="text" (ionChange)="onInputChange()" (input)="saveData()">
+          </h1>
+        </div>
+        <div class="grey-rectangle">
+          <h1>
+            <input [(ngModel)]="pullDay" type="text" (ionChange)="onInputChange()" (input)="saveData()">
+          </h1>
+        </div>
+        <div class="grey-rectangle">
+          <h1>
+            <input [(ngModel)]="legDay" type="text" (ionChange)="onInputChange()" (input)="saveData()">
+          </h1>
+        </div>
+        <div class="grey-rectangle">
+          <h1>
+            <input [(ngModel)]="pushDay2" type="text" (ionChange)="onInputChange()" (input)="saveData()">
+          </h1>
+        </div>
+        <div class="grey-rectangle">
+          <h1>
+            <input [(ngModel)]="pullDay2" type="text" (ionChange)="onInputChange()" (input)="saveData()">
+          </h1>
+        </div>
+        <div class="grey-rectangle">
+          <h1>
+            <input [(ngModel)]="legDay2" type="text" (ionChange)="onInputChange()" (input)="saveData()">
+          </h1>
+        </div>
+        <div class="grey-rectangle">
+          <h1>
+            <input [(ngModel)]="restDay" type="text" (ionChange)="onInputChange()" (input)="saveData()">
+          </h1>
+        </div>
+      </div>
+    </div>    
+  </div>
+</ion-content>

@@ -1,6 +1,9 @@
 import { Component, OnInit,ViewChild  } from '@angular/core';
 import { profile } from 'console';
 import { IonContent, ModalController } from '@ionic/angular';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -47,6 +50,10 @@ export class SetprofilePage implements OnInit {
     this.modalController.dismiss('save');
   }
 
+  getUserData(userId: string): Observable<any> {
+    return this.firestore.collection('users').doc(userId).valueChanges();
+  }
+  
   openPicturePopup() {
     this.modalController.create({
       component: 'editPictureModal',
@@ -68,9 +75,17 @@ export class SetprofilePage implements OnInit {
   closePicturePopup() {
     this.modalController.dismiss('cancel');
   }
-  constructor(private modalController: ModalController) { }
+  constructor(private modalController: ModalController,private firestore: AngularFirestore) { }
 
   ngOnInit() {
+    const userId = '123'; // Replace with the actual user ID
+    this.getUserData(userId).subscribe(userData => {
+      console.log('User Data:', userData);
+
+      this.user = userData;
+
+    });
   }
+  
 
 }
