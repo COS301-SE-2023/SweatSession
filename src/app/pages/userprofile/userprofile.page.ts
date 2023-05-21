@@ -17,15 +17,15 @@ export class UserprofilePage implements OnInit {
     this.Nav.navigateRoot('/home/leaderboard');
   }
 
-  Chats(){
-    this.Nav.navigateRoot('/home/chatbot');
+  Friends(){
+    this.Nav.navigateRoot('/friends');
   }
 
   Groups(){
     this.Nav.navigateRoot('/home/messages');
   }
   Schedule(){
-    this.Nav.navigateRoot('/home/notifications');
+    this.Nav.navigateRoot('/workout-scheduling');
   }
 
 }

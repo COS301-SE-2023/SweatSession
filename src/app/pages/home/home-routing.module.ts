@@ -34,11 +34,6 @@ const routes: Routes = [
         loadChildren: () => import('../notifications/notifications.module').then( m => m.NotificationsPageModule)
       },
       {
-        path: 'setprofile',
-        loadChildren: () => import('../setprofile/setprofile.module').then( m => m.SetprofilePageModule)
-      },
-     
-      {
         path: 'leaderboard',
         loadChildren: () => import('../leaderboard/leaderboard.module').then( m => m.LeaderboardPageModule)
       },
@@ -49,14 +44,6 @@ const routes: Routes = [
       {
         path: 'chatbot',
         loadChildren: () => import('../chatbot/chatbot.module').then( m => m.ChatbotPageModule)
-      },
-      {
-        path: 'userprofile',
-          loadChildren: () => import('../userprofile/userprofile.module').then( m => m.UserprofilePageModule)
-      },
-      {
-        path: 'workout-scheduling',
-        loadChildren: () => import('../workout-scheduling/workout-scheduling.module').then( m => m.WorkoutSchedulingPageModule)
       }
     ],
   },
