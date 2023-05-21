@@ -52,6 +52,22 @@ export class SetprofilePage implements OnInit {
 
 //   getUserData(userId: string): Observable<any> {
 //     return this.firestore.collection('users').doc(userId).valueChanges();
+//     profileService.getUserData(userId: string);
+
+/*    //in the service folder
+      getUserData(userId){
+        profileRepository.getUserData(userId);
+      }
+
+
+      //in the respository folder
+      getUserData(userId){
+        ///firebase guery here.......
+      }
+
+
+*/
+//     ...///////////....///////////...
 //   }
   
   openPicturePopup() {
