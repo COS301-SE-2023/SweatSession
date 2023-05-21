@@ -4,10 +4,11 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 import { ReactiveFormsModule } from '@angular/forms';
-import { RegisterPageRoutingModule } from './register-routing.module';
+//import { RegisterPageRoutingModule } from './register-routing.module';
 import { NgxsFormPluginModule } from '@ngxs/form-plugin';
-import { RegisterModule as RegisterStatesModule } from 'src/app/states/register';
-import { RegisterPage } from './register.page';
+import { AuthModule as AuthStatesModule } from 'src/app/states/auth';
+//import { AuthModule } from '@angular/fire/auth';
+//import { RegisterPage } from './register.page';
 import {NgxsModule} from '@ngxs/store';
 
 @NgModule({
@@ -15,12 +16,11 @@ import {NgxsModule} from '@ngxs/store';
     CommonModule,
     FormsModule,
     IonicModule,
-    RegisterPageRoutingModule,
     ReactiveFormsModule,
-    RegisterStatesModule,
+    AuthStatesModule,
     NgxsFormPluginModule,
-    //NgxsModule
-  ],
-  declarations: [RegisterPage]
+    NgxsModule,
+
+  ]
 })
-export class RegisterPageModule {}
+export class AuthModule {}
