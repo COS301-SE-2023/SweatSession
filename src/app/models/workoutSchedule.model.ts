@@ -4,9 +4,9 @@ export interface IWorkoutScheduleModel {
 }
 
 //request
-export interface IGetWorkoutSchedule {
+export interface IGetWorkoutSchedules {
     userId: string;
-    schedule: IWorkoutScheduleModel;
+    schedule: IWorkoutScheduleModel[];
 }
 
 export interface IAddWorkoutSchedule {

@@ -1,8 +1,8 @@
-import { IAddWorkoutSchedule, IGetWorkoutSchedule, IRemoveWorkoutSchedule, IUpdateWorkoutSchedule } from "../models";
+import { IAddWorkoutSchedule, IGetWorkoutSchedules, IRemoveWorkoutSchedule, IUpdateWorkoutSchedule } from "../models";
 
-export class GetWorkoutSchedule {
+export class GetWorkoutSchedules {
     static readonly type = '[workoutSchedule] get workout schedule';
-    constructor(payload: IGetWorkoutSchedule) {}
+    constructor(payload: IGetWorkoutSchedules) {}
 }
 
 export class AddWorkoutSchedule {

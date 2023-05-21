@@ -5,6 +5,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { WorkoutSchedulingPage } from './workout-scheduling.page';
 import { WorkoutSchedulingPageRoutingModule } from './workout-scheduling-routing.module';
+import { ScheduleComponent } from './schedule/schedule.component';
 
 @NgModule({
   imports: [
@@ -13,6 +14,6 @@ import { WorkoutSchedulingPageRoutingModule } from './workout-scheduling-routing
     IonicModule,
     WorkoutSchedulingPageRoutingModule
   ],
-  declarations: [WorkoutSchedulingPage]
+  declarations: [WorkoutSchedulingPage,ScheduleComponent]
 })
 export class WorkoutSchedulingPageModule {}

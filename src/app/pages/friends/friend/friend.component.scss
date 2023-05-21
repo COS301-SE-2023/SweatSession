@@ -1,0 +1,10 @@
+.friend {
+    ion-text {
+        margin: 20px;
+        font-size: 25px;
+    }
+}
+.friend:focus {
+    zoom: 0.8;
+    background-color: aqua;
+}

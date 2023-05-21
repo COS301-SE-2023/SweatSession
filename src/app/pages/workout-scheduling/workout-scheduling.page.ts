@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./workout-scheduling.page.scss'],
 })
 export class WorkoutSchedulingPage {
+  schedules= ["schedule1","schedule2","schedule3","schedule4"];
   pushDay: string = 'Push Day';
   pullDay: string = 'Pull Day';
   legDay: string = 'Leg Day';
@@ -30,6 +31,12 @@ export class WorkoutSchedulingPage {
     this.pullDay2 = localStorage.getItem('pullDay2') || 'Pull Day';
     this.legDay2 = localStorage.getItem('legDay2') || 'Leg Day';
     this.restDay = localStorage.getItem('restDay') || 'Rest Day';
+    //store.dispatch(new GetWorkoutSchedules(payload))
+  }
+
+  addSchedule(){
+    console.log("schedule added");
+    //store.dispatch(new AddWorkoutSchedule(payload));
   }
 
   saveData() {

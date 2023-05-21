@@ -39,3 +39,10 @@
     width: 100%;              /* Add this line */
     align-self: flex-start;   /* Add this line */
   }
+
+  .add-schedule-button:hover {
+    zoom: 1.2;
+   ion-icon {
+    color: aqua;
+   }
+}

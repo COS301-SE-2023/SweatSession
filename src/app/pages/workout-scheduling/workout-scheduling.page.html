@@ -1,10 +1,24 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Schedules</ion-title>
+    <ion-item>
+      <ion-icon name="arrow-back-outline" routerLink="/userprofile"></ion-icon>
+      <ion-title>Schedules</ion-title>
+      <ion-item slot="end"  class="add-schedule-button" click="addSchedule()">
+        <ion-icon name="add-outline"></ion-icon>
+        <ion-icon name="receipt-outline"></ion-icon>
+      </ion-item>
+    </ion-item>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
+  <ion-searchbar placeholder="find schedule"></ion-searchbar>
+  <workout-schedule *ngFor ="let schedule of schedules"
+    [title] = schedule
+  ></workout-schedule>
+</ion-content>
+
+<!-- <ion-content [fullscreen]="true">
   <ion-menu contentId="main-content">
     <ion-header>
       <ion-toolbar>
@@ -101,4 +115,4 @@
       </div>
     </div>    
   </div>
-</ion-content>
+</ion-content> -->
