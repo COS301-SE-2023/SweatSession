@@ -1,5 +1,5 @@
 import { Component, OnInit,ViewChild  } from '@angular/core';
-import { profile } from 'console';
+//import { profile } from 'console';
 import { IonContent, ModalController } from '@ionic/angular';
 
 
