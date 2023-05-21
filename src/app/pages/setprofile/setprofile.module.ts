@@ -14,6 +14,6 @@ import { SetprofilePage } from './setprofile.page';
     IonicModule,
     SetprofilePageRoutingModule
   ],
-  // declarations: [SetprofilePage]
+  declarations: [SetprofilePage]
 })
 export class SetprofilePageModule {}
