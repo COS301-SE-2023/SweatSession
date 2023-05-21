@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
-import { FormBuilder, Validators, AbstractControl, ValidatorFn, ValidationErrors } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms'; //, AbstractControl, ValidatorFn, ValidationErrors 
 import { Select, Store } from '@ngxs/store';
 //import { ReactiveFormsModule } from '@angular/forms';
 import {Register} from 'src/app/actions/register';
@@ -12,14 +12,14 @@ import {RegisterPageModule} from './register.module'
   styleUrls: ['./register.page.scss'],
 })
 export class RegisterPage implements OnInit {
-  registrationForm = this.regFormBuilber.group({
+  registrationForm = this.regFormBuilder.group({
     email: ['',[Validators.email],],
     password: ['', [Validators.minLength(6), Validators.maxLength(25)]],
     cPassword: ['', []],
   },{ });//add code to check if passwords are equal
   constructor(
     private Nav: NavController,
-    private readonly regFormBuilber: FormBuilder,
+    private readonly regFormBuilder: FormBuilder,
     private readonly store: Store
   ){}
 
