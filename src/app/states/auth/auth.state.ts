@@ -2,15 +2,17 @@ import { Injectable } from '@angular/core';
 import { User } from '@angular/fire/auth';
 import {
   getCurrentUserId,
-  Login,
+  LoginAuth,
   Logout,
   RegisterAuth,
   SetUser,
   SubscribeToAuthState,
 } from 'src/app/actions/auth';
-import { Navigate } from '@ngxs/router-plugin';
 import { Action, Selector, State, StateContext } from '@ngxs/store';
+import { Navigate } from '@ngxs/router-plugin';
+
 import { AuthApi } from './auth.api';
+
 import produce from 'immer';
 import { tap } from 'rxjs';
 
@@ -74,8 +76,9 @@ export class AuthState {
     }
   }
 
-  @Action(Login)
-  async login(context: StateContext<AuthenticationStateModel>, { email, password }: Login) {
+  @Action(LoginAuth)
+  async login(context: StateContext<AuthenticationStateModel>, { email, password }: LoginAuth) {
+    alert("In auth state login function");
     try {
       await this.authenticationApi.login(email, password);
       return context.dispatch(new Navigate(['home']));

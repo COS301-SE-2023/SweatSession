@@ -16,12 +16,12 @@ export class SetUser {
 
 
 
-export class Login {
+export class LoginAuth {
   static readonly type = '[Auth] Login';
   constructor(
     public readonly email: string,
     public readonly password: string
-  ) {}
+  ) {alert("In auth action register constuctor [Auth] login");}
 }
 
 export class RegisterAuth {

@@ -4,13 +4,16 @@ import {
   authState,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  getAuth
 } from '@angular/fire/auth';
 
 import { signOut } from '@firebase/auth';
+import { NavController } from '@ionic/angular';
+//import { getAuth } from 'firebase/auth';
 
 @Injectable()
 export class AuthApi {
-  constructor(private readonly authObject: Auth) {}
+  constructor(private readonly authObject: Auth, private Nav: NavController) {}
 
   auth$() {
     return authState(this.authObject);
@@ -21,7 +24,20 @@ export class AuthApi {
 
 
   async login(regEmail: string, regPassword: string) {
-    return await signInWithEmailAndPassword(this.authObject, regEmail, regPassword);
+    try {
+      alert("in auth api login function");
+      await signInWithEmailAndPassword(this.authObject, regEmail, regPassword);
+      //return await signInWithEmailAndPassword(this.authObject, regEmail, regPassword);
+      
+      this.Nav.navigateRoot('/home'); // this is so they are only directed to login when they enter a valid email and password combination
+      const auth = getAuth();
+      console.log(auth.currentUser?.uid);
+    }catch (error) {
+      // Handle the Firebase error
+      console.error('Firebase error:', error);
+      alert("Incorrect email password combination");
+      //return "";
+    }
   }
 
   async register(regEmail: string, regPassword: string) {

@@ -1,15 +1,14 @@
 import { Injectable } from '@angular/core';
-import { RegisterAuth as AuthActionRegister } from 'src/app/actions/auth';
-import { Register as RegisterAction} from 'src/app/actions/register';
+import { LoginAuth as AuthActionLogin } from 'src/app/actions/auth';
+import { Login as LoginAction} from 'src/app/actions/login';
 import { Action, State, StateContext, Store } from '@ngxs/store';
 import {AuthApi} from 'src/app/states/auth/auth.api';
 
-export interface RegisterStateModel {
-  registerForm: {
+export interface LoginStateModel {
+  loginForm: {
     model: {
       email: string | null;
       password: string | null;
-      cPassword: string | null;
     };
 
     modified: boolean; //reg form modified or not
@@ -18,14 +17,13 @@ export interface RegisterStateModel {
   };
 }
 
-@State<RegisterStateModel>({
-  name: 'register',
+@State<LoginStateModel>({
+  name: 'loginState',
   defaults: {
-    registerForm: {
+    loginForm: {
       model: {
         email: null,
         password: null,
-        cPassword: null,
       },
       modified: false,
       status: '',
@@ -35,10 +33,10 @@ export interface RegisterStateModel {
 })
 
 @Injectable()
-export class RegisterState {
+export class LoginState {
   constructor(private store: Store, private authApi: AuthApi) {}
-  @Action(RegisterAction)
-  async register(context: StateContext<RegisterStateModel>, action: RegisterAction) {//, email: string, password: string
+  @Action(LoginAction)
+  async login(context: StateContext<LoginStateModel>, action: LoginAction) {//, email: string, password: string
     try {
       const state = context.getState();
 
@@ -46,19 +44,19 @@ export class RegisterState {
       // const regPassword = state.registerForm.model.password;
       // alert(action.email);
       // alert(action.password);
-      // alert("register.state.ts");
+      // alert("login.state.ts");
       const { email, password } = action;
       // alert(email);
       // alert(password);
-      // alert(state.registerForm.model.email);
-      // alert(state.registerForm.model.password);
+      // alert(state.loginForm.model.email);
+      // alert(state.loginForm.model.password);
       //no need to get cPassword since it should be the same as password
 
       if (action.email && action.password) {
-        //return context.dispatch(new AuthActionRegister(email, password));
-        return this.authApi.register(email, password);
+        //return context.dispatch(new AuthActionLogin(email, password));
+        return this.authApi.login(email, password);
       }
-      return alert("Please set email and/or password");
+      //return alert("Please enter email and/or password");
     } catch (error) {
       return alert((error as Error).message);
     }
