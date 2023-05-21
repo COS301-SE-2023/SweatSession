@@ -1,16 +1,15 @@
 import { Injectable } from '@angular/core';
-import { FriendsRepository } from 'src/app/repository';
-import { IGetFriends, IAddFriend, IRemoveFriend } from 'src/app/models';
+import { IAddFriend, IGetFriends, IRemoveFriend } from '../models';
 
 @Injectable({
   providedIn: 'root'
 })
-export class FriendsService {
+export class FriendsRepository {
 
-  constructor(repository:FriendsRepository) { }
+  constructor() { }
 
   async getFriends(request: IGetFriends){
-
+    
   }
 
   async addFriend(request: IAddFriend){
@@ -21,4 +20,3 @@ export class FriendsService {
     
   }
 }
-  
