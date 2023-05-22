@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IAddWorkoutSchedule, IUpdateWorkoutSchedule, IGetWorkoutSchedule, IRemoveWorkoutSchedule } from '../models';
+import { IAddWorkoutSchedule, IUpdateWorkoutSchedule, IGetWorkoutSchedules, IRemoveWorkoutSchedule } from '../models';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +20,7 @@ export class WorkoutscheduleRepository {
 
   }
 
-  async getSchedule(request: IGetWorkoutSchedule) {
+  async getSchedule(request: IGetWorkoutSchedules) {
     
   }
 }

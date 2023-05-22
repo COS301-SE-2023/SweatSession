@@ -1,5 +1,9 @@
 import { Injectable } from '@angular/core';
-import { IAddWorkoutSchedule, IGetWorkoutSchedules, IRemoveWorkoutSchedule, IUpdateWorkoutSchedule } from 'src/app/models';
+import { IAddWorkoutSchedule,
+         IGetWorkoutSchedules,
+         IRemoveWorkoutSchedule,
+         IUpdateWorkoutSchedule }
+         from 'src/app/models';
 import { WorkoutscheduleRepository } from 'src/app/repository';
 
 @Injectable({

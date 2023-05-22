@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'user-friend',
@@ -8,8 +9,11 @@ import { Component, Input, OnInit } from '@angular/core';
 export class FriendComponent  implements OnInit {
   @Input() name!:string;
 
-  constructor() { }
+  constructor(private Nav: NavController) { }
 
   ngOnInit() {}
 
+  viewOtherUser(){
+    this.Nav.navigateRoot("/otheruser");
+  }
 }

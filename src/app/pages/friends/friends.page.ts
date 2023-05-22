@@ -10,7 +10,7 @@ export class FriendsPage implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    //store.dispatch(new GetFriendsAction(payload));
+    //store.dispatch(new GetFriendsAction());
   }
 
   addFriend() {
