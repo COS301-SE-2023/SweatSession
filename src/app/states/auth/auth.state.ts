@@ -78,7 +78,7 @@ export class AuthState {
 
   @Action(LoginAuth)
   async login(context: StateContext<AuthenticationStateModel>, { email, password }: LoginAuth) {
-    alert("In auth state login function");
+    //alert("In auth state login function");
     try {
       await this.authenticationApi.login(email, password);
       return context.dispatch(new Navigate(['home']));

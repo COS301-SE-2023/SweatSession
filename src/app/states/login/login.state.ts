@@ -58,7 +58,7 @@ export class LoginState {
       }
       //return alert("Please enter email and/or password");
     } catch (error) {
-      return alert((error as Error).message);
+      return (error as Error).message;//alert((error as Error).message);
     }
   }
 }

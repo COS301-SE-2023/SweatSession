@@ -25,7 +25,7 @@ export class AuthApi {
 
   async login(regEmail: string, regPassword: string) {
     try {
-      alert("in auth api login function");
+      //alert("in auth api login function");
       await signInWithEmailAndPassword(this.authObject, regEmail, regPassword);
       //return await signInWithEmailAndPassword(this.authObject, regEmail, regPassword);
       

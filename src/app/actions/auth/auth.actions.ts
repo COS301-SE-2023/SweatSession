@@ -21,7 +21,7 @@ export class LoginAuth {
   constructor(
     public readonly email: string,
     public readonly password: string
-  ) {alert("In auth action register constuctor [Auth] login");}
+  ) {}//alert("In auth action register constuctor [Auth] login");
 }
 
 export class RegisterAuth {
