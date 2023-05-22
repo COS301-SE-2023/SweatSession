@@ -21,7 +21,7 @@ import { time } from "console";
 export interface WorkoutSchedulingStateModel {
     schedules: IWorkoutScheduleModel[];
     validate: boolean;
-    schedule: IWorkoutScheduleModel;
+    schedule: IWorkoutScheduleModel | null;
 }
 
 @State<WorkoutSchedulingStateModel>({
@@ -41,7 +41,7 @@ export class WorkoutSchedulingState {
     ){}
 
     @Action(GetWorkoutSchedules)
-    async getWorkoutSchedules(ctx: StateContext) {
+    async getWorkoutSchedules(ctx: StateContext<WorkoutSchedulingStateModel>) {
         const request:IGetWorkoutSchedules={
             userId:"test id"
         }
@@ -53,7 +53,7 @@ export class WorkoutSchedulingState {
     }
 
     @Action(RemoveWorkoutSchedule)
-    async removeWorkoutSchedule(ctx: StateContext,{payload}: RemoveWorkoutSchedule) {
+    async removeWorkoutSchedule(ctx: StateContext<WorkoutSchedulingStateModel>,{payload}: RemoveWorkoutSchedule) {
         // request: IRemoveWorkoutSchedule = {
         //     userId: "test id";
         //     schedule: payload;
@@ -63,7 +63,7 @@ export class WorkoutSchedulingState {
     }
 
     @Action(AddWorkoutSchedule)
-    async addWorkoutSchedule(ctx: StateContext, {payload}: AddWorkoutSchedule) {
+    async addWorkoutSchedule(ctx: StateContext<WorkoutSchedulingStateModel>, {payload}: AddWorkoutSchedule) {
         const request: IAddWorkoutSchedule =payload;
         const response: IAddedWorkoutSchedule ={
             userId: payload.userId,
@@ -71,17 +71,17 @@ export class WorkoutSchedulingState {
             validate: true
         }//await this.service.addSchedule(request);
         ctx.setState({
-            ...ctx.getstate(),schedule:[response.schedule,ctx.getstate().schedules] //,validate: true
+            ...ctx.getState(),schedules:[response.schedule] //,validate: true
         })
     }
 
      @Action(UpdateWorkoutSchedule)
-    async updateWorkoutSchedule(ctx: StateContext, {payload}: UpdateWorkoutSchedule) {
+    async updateWorkoutSchedule(ctx: StateContext<WorkoutSchedulingStateModel>, {payload}: UpdateWorkoutSchedule) {
         //update state....
     }
 
     @Action(LoadSchedule)
-    async loadSchedule(ctx: StateContext, {payload}: LoadSchedule) {
+    async loadSchedule(ctx: StateContext<WorkoutSchedulingStateModel>, {payload}: LoadSchedule) {
         ctx.setState({
             ...ctx.getState(), schedule: payload
         })

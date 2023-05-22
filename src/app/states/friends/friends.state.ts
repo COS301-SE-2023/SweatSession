@@ -25,32 +25,32 @@ export class FriendsState {
     ){}
 
     @Action(GetFriendsAction)
-    async getFriends(ctx: StateContext) {
+    async getFriends(ctx: StateContext<FriendsStateModel>) {
         const request:IGetFriends={
             userId:"test id"
         }
 
         const response: IGotFriends = this.getMock() //await this.friendsService.getFriends(request);
-        ctx.setState({
+        ctx.patchState({
             ...ctx.getState(), friends: response.friends
         })
     }
 
     @Action(RemoveFriendAction)
-    async removeFriends(ctx: StateContext,{payload}: RemoveFriendAction) {
+    async removeFriends(ctx: StateContext<FriendsStateModel>,{payload}: RemoveFriendAction) {
         //remove friend
     }
 
     @Action(AddFriendAction)
-    async addFriend(ctx: StateContext, {payload}: AddFriendAction) {
+    async addFriend(ctx: StateContext<FriendsStateModel>, {payload}: AddFriendAction) {
         const request:IAddFriend=payload;
 
         const response: IAddedFriend = {
             validate: true,
             friend: payload.friend
         }//await this.friendsService.getFriends(request);
-        ctx.setState({
-            ...ctx.getState(), friends: [ctx.getState().friends,response.friend]
+        ctx.patchState({
+            ...ctx.getState(), friends: [response.friend]
         })
     }
 
