@@ -11,7 +11,7 @@ import { IProfileModel } from 'src/app/models';
 })
 export class SetprofilePage implements OnInit {
 
-  // userProfile: any = {
+  // user: any = {
   //   profile: 'https://i.pravatar.cc/150?img=68',
   //   name: 'Triumph Ndlovu',
   //   email: 'TriumphSynapse@gmail.com',
@@ -21,7 +21,6 @@ export class SetprofilePage implements OnInit {
 
   ProfilePicture: string = 'https://i.pravatar.cc/150?img=68';// for now
 
-  modalMode: 'ios' | 'md' = 'ios'; // Set the desired modal mode (ios or md)
   selectedPicture: string | null = null;
 
   onPictureChange(event: any) {

@@ -34,6 +34,12 @@ export class WorkoutSchedulingPage {
     //store.dispatch(new GetWorkoutSchedules(payload))
   }
 
+  //will be used to view the schedule
+  viewSchedule()
+  {
+    console.log("view schedule");
+  }
+
   addSchedule(){
     console.log("schedule added");
     //store.dispatch(new AddWorkoutSchedule(payload));
