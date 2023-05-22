@@ -14,7 +14,7 @@
 <ion-content [fullscreen]="true">
   <ion-searchbar placeholder="find schedule"></ion-searchbar>
   <workout-schedule *ngFor ="let schedule of schedules"
-    [title] = schedule
+    [name] = schedule
   ></workout-schedule>
 </ion-content>
 
