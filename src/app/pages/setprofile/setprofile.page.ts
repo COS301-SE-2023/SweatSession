@@ -1,10 +1,8 @@
 import { Component, OnInit,ViewChild  } from '@angular/core';
 import { profile } from 'console';
 import { IonContent, ModalController } from '@ionic/angular';
-//import { AngularFirestore } from '@angular/fire/compat/firestore';
-
-// import { Observable } from 'rxjs';
-
+import { ProfileService } from '../../services/profile/profile.service';
+import { IProfileModel } from 'src/app/models';
 
 @Component({
   selector: 'app-setprofile',
@@ -13,14 +11,16 @@ import { IonContent, ModalController } from '@ionic/angular';
 })
 export class SetprofilePage implements OnInit {
 
-  user: any = {
-    profile: 'https://i.pravatar.cc/150?img=68',
-    name: 'Triumph Ndlovu',
-    email: 'TriumphSynapse@gmail.com',
-    bio: 'Hii there, Im a Natty',
-  };
+  // userProfile: any = {
+  //   profile: 'https://i.pravatar.cc/150?img=68',
+  //   name: 'Triumph Ndlovu',
+  //   email: 'TriumphSynapse@gmail.com',
+  //   bio: 'Hii there, Im a Natty',
+  // };
+  user: IProfileModel = {userId: '', name: '', email: '', bio: '', profileURL: ''};
 
-  ProfilePicture = this.user.profile
+  ProfilePicture: string = 'https://i.pravatar.cc/150?img=68';// for now
+
   modalMode: 'ios' | 'md' = 'ios'; // Set the desired modal mode (ios or md)
   selectedPicture: string | null = null;
 
@@ -39,7 +39,7 @@ export class SetprofilePage implements OnInit {
   saveProfile() {
  
     this.editMode = false;
-    this.user.profile = this.ProfilePicture;
+    this.user.profileURL = this.ProfilePicture;
     this.modalController.dismiss('save');
     console.log('Saving profile:', this.user);
   }
@@ -49,26 +49,6 @@ export class SetprofilePage implements OnInit {
     // this.oldProfilePicture = this.selectedPicture;
     this.modalController.dismiss('save');
   }
-
-//   getUserData(userId: string): Observable<any> {
-//     return this.firestore.collection('users').doc(userId).valueChanges();
-//     profileService.getUserData(userId: string);
-
-/*    //in the service folder
-      getUserData(userId){
-        profileRepository.getUserData(userId);
-      }
-
-
-      //in the respository folder
-      getUserData(userId){
-        ///firebase guery here.......
-      }
-
-
-*/
-//     ...///////////....///////////...
-//   }
   
   openPicturePopup() {
     this.modalController.create({
@@ -91,7 +71,18 @@ export class SetprofilePage implements OnInit {
   closePicturePopup() {
     this.modalController.dismiss('cancel');
   }
-  constructor(private modalController: ModalController) { }
+  constructor(private modalController: ModalController, private ProfileService: ProfileService)
+  {
+    const userId = 'aIPDmFzhwkeIcMeWBwwb0IjWVDh1';
+
+    this.ProfileService.getUserProfile(userId)
+    .then((profile) => {
+      this.user = profile;
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+  }
 
   ngOnInit() {
     // const userId = '123'; // Replace with the actual user ID
