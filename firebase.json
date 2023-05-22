@@ -53,9 +53,6 @@
     "hosting": {
       "port": 5007
     },
-    "pubsub": {
-      "port": 5008
-    },
     "storage": {
       "port": 5006
     },

@@ -11,13 +11,9 @@ import { IProfileModel } from 'src/app/models';
 })
 export class SetprofilePage implements OnInit {
 
-  // user: any = {
-  //   profile: 'https://i.pravatar.cc/150?img=68',
-  //   name: 'Triumph Ndlovu',
-  //   email: 'TriumphSynapse@gmail.com',
-  //   bio: 'Hii there, Im a Natty',
-  // };
-  user: IProfileModel = {userId: '', name: '', email: '', bio: '', profileURL: ''};
+  
+  user: IProfileModel = {userId: '123', name: 'Triumph Ndlovu', email: 'TriumphSynapse@gmail.com', bio: 'Hii im a natty', profileURL: 'https://i.pravatar.cc/150?img=68', phoneNumber: '0123456789'};
+  
 
   ProfilePicture: string = 'https://i.pravatar.cc/150?img=68';// for now
 
@@ -72,7 +68,7 @@ export class SetprofilePage implements OnInit {
   }
   constructor(private modalController: ModalController, private ProfileService: ProfileService)
   {
-    const userId = 'aIPDmFzhwkeIcMeWBwwb0IjWVDh1';
+    const userId = '123';
 
     this.ProfileService.getUserProfile(userId)
     .then((profile) => {

@@ -5,6 +5,7 @@ export interface IProfileModel {
   email: string;
   bio: string;
   profileURL: string;
+  phoneNumber: string;
 }
 
 //requests
