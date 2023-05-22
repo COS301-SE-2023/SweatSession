@@ -1,6 +1,9 @@
+import { trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
+import { on } from 'events';
+import { start } from 'repl';
 import { of, Observable,Subject } from 'rxjs';
-import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, map, startWith } from 'rxjs/operators';
 
 
 
@@ -13,50 +16,64 @@ export class SearchPage {
 
   searchTerm: string | undefined;
   filteredData$: Observable<any[]> = of([]);
+  // unfilteredData$: any[] = [];
   private searchTerm$ = new Subject<string>();
   //will get this from the service
-
+  
   data: any[] = [
     {
       name: 'Virgin Active',
       description: 'A small Description of the Location',
-      image: 'https://source.unsplash.com/random/200x200?sig=1',
+      image: 'https://loremflickr.com/320/240/gym',
       location: 'Hatfield',
     },
     {
       name: 'Gym & Fitness Center',
       description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-      image: 'https://source.unsplash.com/random/200x200?sig=1',
+      image: 'https://loremflickr.com/320/240/gym',
       location: 'Pretoria',
     },
     {
       name: 'Fitness First',
       description: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem.',
-      image: 'https://source.unsplash.com/random/200x200?sig=1',
+      image: 'https://loremflickr.com/320/240/gym',
       location: 'Johannesburg',
     },
     {
       name: 'XYZ Gym',
       description: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi.',
-      image: 'https://source.unsplash.com/random/200x200?sig=1',
+      image: 'https://loremflickr.com/320/240/gym',
       location: 'Cape Town',
     },
     {
       name: 'Active Life Fitness',
       description: 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore.',
-      image: 'https://source.unsplash.com/random/200x200?sig=1',
+      image: 'https://loremflickr.com/320/240/gym',
       location: 'Durban',
     },
   ];
   
+  unfilteredData$ = this.data;
   
   ngOnInit() {
+
+    // this.loadData();
+    this.triggerfilter();  
+  }
+  
+  loadData() 
+  {
+    this.onSearchInput('');
+  }
+
+  triggerfilter()
+  {
     this.filteredData$ = this.searchTerm$.pipe(
+      startWith(''),
       debounceTime(300),
       distinctUntilChanged(),
       map(searchTerm => this.filterData(searchTerm))
-    );
-    
+      );
   }
 
   constructor() 
@@ -74,6 +91,7 @@ export class SearchPage {
 
   onSearchInput(event: any) {
     const searchTerm = event.target.value;
+    // this.searchTerm = searchTerm;
     this.searchTerm$.next(searchTerm);
   }
 }
