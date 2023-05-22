@@ -1,6 +1,7 @@
 export interface IFriendsModel {
     id: string;
     name: string;
+    profileUrl: string;
 }
 
 //requests
@@ -30,4 +31,5 @@ export interface IRemovedFriend {
 
 export interface IAddedFriend {
     validate: boolean;
+    friend: IFriendsModel;
 }
