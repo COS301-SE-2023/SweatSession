@@ -25,7 +25,7 @@
     "@angular/platform-browser-dynamic": "^16.0.0",
     "@angular/router": "^16.0.0",
     "@ionic/angular": "^7.0.0",
-    "firebase": "^9.21.0",
+    "firebase": "^9.22.0",
     "firebase-functions": "^4.3.1",
     "ionic-select-searchable": "^2.10.0",
     "ionicons": "^7.0.0",
