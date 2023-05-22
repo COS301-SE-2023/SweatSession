@@ -9,6 +9,31 @@ import { PopoutAddScheduleComponent } from './popout-add-schedule/popout-add-sch
 })
 export class WorkoutSchedulingPage {
   schedules= ["schedule1","schedule2","schedule3","schedule4"];
+  //@select(WorkoutSchedulingState.returnSchedules) schedules$: Observable<WorkoutSchedulingStateModel>;
+
+  constructor(private popoverController: PopoverController) { }
+
+  ngOnInit() {
+     //store.dispatch(new GetWorkoutSchedules(payload))
+  }
+
+  async addSchedule(){
+    const popover = await this.popoverController.create({
+          component: PopoutAddScheduleComponent,
+          translucent: true
+        });
+        console.log("save schedule");
+        return await popover.present();
+  }
+
+
+  /*onInputChange() {
+    console.log('Input fields changed');
+    console.log('pushDay:', this.pushDay);
+    console.log('pullDay:', this.pullDay);
+    console.log('legDay:', this.legDay);
+  }
+
   pushDay: string = 'Push Day';
   pullDay: string = 'Pull Day';
   legDay: string = 'Leg Day';
@@ -16,13 +41,6 @@ export class WorkoutSchedulingPage {
   pullDay2: string = 'Pull Day';
   legDay2: string = 'Leg Day';
   restDay: string = 'Rest Day';
-
-  onInputChange() {
-    console.log('Input fields changed');
-    console.log('pushDay:', this.pushDay);
-    console.log('pullDay:', this.pullDay);
-    console.log('legDay:', this.legDay);
-  }
 
   ngOnInit() {
     // Retrieve the values from local storage
@@ -36,14 +54,7 @@ export class WorkoutSchedulingPage {
     //store.dispatch(new GetWorkoutSchedules(payload))
   }
 
-  async addSchedule(){
-    const popover = await this.popoverController.create({
-          component: PopoutAddScheduleComponent,
-          translucent: true
-        });
-        console.log("save schedule");
-        return await popover.present();
-  }
+  
 
   saveData() {
     // Save the values to local storage
@@ -54,6 +65,5 @@ export class WorkoutSchedulingPage {
     localStorage.setItem('pullDay2', this.pullDay2);
     localStorage.setItem('legDay2', this.legDay2);
     localStorage.setItem('restDay', this.restDay);
-  }
-  constructor(private popoverController: PopoverController) { }
+  }*/
 }

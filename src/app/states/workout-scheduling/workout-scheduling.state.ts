@@ -1,3 +1,4 @@
+import { LoadSchedule } from './../../actions/workoutSchedule.action';
 import { Injectable } from "@angular/core";
 import { Action, State, StateContext, Store, Selector } from "@ngxs/store";
 //import { Navigate } from "@ngxs/router-plugin";
@@ -20,13 +21,15 @@ import { time } from "console";
 export interface WorkoutSchedulingStateModel {
     schedules: IWorkoutScheduleModel[];
     validate: boolean;
+    schedule: IWorkoutScheduleModel;
 }
 
 @State<WorkoutSchedulingStateModel>({
     name: "WorkoutSchedule",
     defaults: {
         schedules: [],
-        validate: false
+        validate: false,
+        schedule: null
     }
 })
 
@@ -77,9 +80,21 @@ export class WorkoutSchedulingState {
         //update state....
     }
 
+    @Action(LoadSchedule)
+    async loadSchedule(ctx: StateContext, {payload}: LoadSchedule) {
+        ctx.setState({
+            ...ctx.getState(), schedule: payload
+        })
+    }
+
     @Selector()
     static returnSchedules(state: WorkoutSchedulingStateModel){
         return state.schedules;
+    }
+
+    @Selector()
+    static returnSchedule(state: WorkoutSchedulingStateModel) {
+        return state.schedule;
     }
 
     getMock(request:IGetWorkoutSchedules){
