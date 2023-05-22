@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { PopoverController } from '@ionic/angular';
+import { PopoutAddScheduleComponent } from './popout-add-schedule/popout-add-schedule.component';
 
 @Component({
   selector: 'app-workout-scheduling',
@@ -34,15 +36,13 @@ export class WorkoutSchedulingPage {
     //store.dispatch(new GetWorkoutSchedules(payload))
   }
 
-  //will be used to view the schedule
-  viewSchedule()
-  {
-    console.log("view schedule");
-  }
-
-  addSchedule(){
-    console.log("schedule added");
-    //store.dispatch(new AddWorkoutSchedule(payload));
+  async addSchedule(){
+    const popover = await this.popoverController.create({
+          component: PopoutAddScheduleComponent,
+          translucent: true
+        });
+        console.log("save schedule");
+        return await popover.present();
   }
 
   saveData() {
@@ -55,5 +55,5 @@ export class WorkoutSchedulingPage {
     localStorage.setItem('legDay2', this.legDay2);
     localStorage.setItem('restDay', this.restDay);
   }
-  constructor() { }
+  constructor(private popoverController: PopoverController) { }
 }
