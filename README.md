@@ -72,7 +72,7 @@ I'm currently in my 3rd year of undergraduate studies at the University of Preto
 <table style="border: none;">
   <tr>
     <td style="vertical-align: top; width: 30%;">
-      <img src="![Picture of Shuaib](/SweatSession/assets/addPictureHere.jpg)" width="150" height="auto">
+      <img src="https://github.com/COS301-SE-2023/SweatSession/assets/113734523/d6250027-b625-45d5-add2-22faa2f22529" width="150" height="auto">
     </td>
     <td style="vertical-align: top; width: 70%;">
             <b>Shuaib Nuruddin</b><br>
