@@ -1,7 +1,7 @@
 import { Component, OnInit,ViewChild  } from '@angular/core';
 import { profile } from 'console';
 import { IonContent, ModalController } from '@ionic/angular';
-import { ProfileService } from '../../services/profile/profile.service';
+//import { ProfileService } from '../../services/profile/profile.service';
 import { IProfileModel } from 'src/app/models';
 
 @Component({
@@ -66,17 +66,17 @@ export class SetprofilePage implements OnInit {
   closePicturePopup() {
     this.modalController.dismiss('cancel');
   }
-  constructor(private modalController: ModalController, private ProfileService: ProfileService)
+  constructor(private modalController: ModalController)//, private ProfileService: ProfileService)
   {
-    const userId = '123';
+    // const userId = '123';
 
-    this.ProfileService.getUserProfile(userId)
-    .then((profile) => {
-      this.user = profile;
-    })
-    .catch((error) => {
-      console.error(error);
-    });
+    // this.ProfileService.getUserProfile(userId)
+    // .then((profile) => {
+    //   this.user = profile;
+    // })
+    // .catch((error) => {
+    //   console.error(error);
+    // });
   }
 
   ngOnInit() {
