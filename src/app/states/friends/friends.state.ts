@@ -31,7 +31,7 @@ export class FriendsState {
         }
 
         const response: IGotFriends = this.getMock() //await this.friendsService.getFriends(request);
-        ctx.setState({
+        ctx.patchState({
             ...ctx.getState(), friends: response.friends
         })
     }
