@@ -29,7 +29,7 @@ export class LoginPage implements OnInit {
   }
 
   userLogin(){
-    alert("in login.page.ts");
+    //alert("in login.page.ts");
     if (this.loginForm.valid) {
       const loginEmail = this.loginForm?.get('email')?.value;
       const loginPassword = this.loginForm?.get('password')?.value;
