@@ -35,7 +35,26 @@ const routes: Routes = [
     path: 'otheruser',
     loadChildren: () => import('./pages/otheruser/otheruser.module').then( m => m.OtheruserPageModule)
   },
-
+  {
+    path: 'friends',
+    loadChildren: () => import('./pages/friends/friends.module').then( m => m.FriendsPageModule)
+  },
+  {
+    path: 'groups',
+    loadChildren: () => import('./pages/groups/groups.module').then( m => m.GroupsPageModule)
+  },
+  {
+    path: 'workout-scheduling',
+    loadChildren: () => import('./pages/workout-scheduling/workout-scheduling.module').then( m => m.WorkoutSchedulingPageModule)
+  },
+  {
+    path: 'userprofile',
+      loadChildren: () => import('./pages/userprofile/userprofile.module').then( m => m.UserprofilePageModule)
+  },
+  {
+    path: 'setprofile',
+    loadChildren: () => import('./pages/setprofile/setprofile.module').then( m => m.SetprofilePageModule)
+  },
 ];
 @NgModule({
   imports: [

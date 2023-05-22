@@ -1,0 +1,20 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-item>
+      <ion-icon name="arrow-back-outline" routerLink="/userprofile"></ion-icon>
+      <ion-title>Friends</ion-title>
+      <ion-item class="addFriend-button" slot="end">
+        <ion-icon name="add-outline"></ion-icon>
+        <ion-icon name="people-outline"></ion-icon>
+      </ion-item>
+    </ion-item>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-searchbar placeholder="find friend"></ion-searchbar>
+  <user-friend *ngFor ="let friend of friends" 
+    [name] = "friend"
+  >
+  </user-friend>
+</ion-content>

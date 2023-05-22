@@ -1,7 +1,8 @@
 import { Component, OnInit,ViewChild  } from '@angular/core';
 //import { profile } from 'console';
 import { IonContent, ModalController } from '@ionic/angular';
-
+//import { ProfileService } from '../../services/profile/profile.service';
+import { IProfileModel } from 'src/app/models';
 
 @Component({
   selector: 'app-setprofile',
@@ -10,16 +11,13 @@ import { IonContent, ModalController } from '@ionic/angular';
 })
 export class SetprofilePage implements OnInit {
 
-  user: any = {
-    profile: 'https://i.pravatar.cc/150?img=68',
-    name: 'Triumph Ndlovu',
-    email: 'TriumphSynapse@gmail.com',
-    bio: 'Hii there, Im a Natty',
-  };
+  
+  user: IProfileModel = {userId: '123', name: 'Triumph Ndlovu', email: 'TriumphSynapse@gmail.com', bio: 'Hii im a natty', profileURL: 'https://i.pravatar.cc/150?img=68', phoneNumber: '0123456789'};
+  
 
-  ProfilePicture = this.user.profile
-  modalMode: 'ios' | 'md' = 'ios'; // Set the desired modal mode (ios or md)
-  // selectedPicture: string | null = null;
+  ProfilePicture: string = 'https://i.pravatar.cc/150?img=68';// for now
+
+  selectedPicture: string | null = null;
 
   onPictureChange(event: any) {
     const file = event.target.files[0];
@@ -35,7 +33,8 @@ export class SetprofilePage implements OnInit {
 
   saveProfile() {
  
-    this.user.profile = this.ProfilePicture;
+    this.editMode = false;
+    this.user.profileURL = this.ProfilePicture;
     this.modalController.dismiss('save');
     console.log('Saving profile:', this.user);
   }
@@ -45,7 +44,7 @@ export class SetprofilePage implements OnInit {
     // this.oldProfilePicture = this.selectedPicture;
     this.modalController.dismiss('save');
   }
-
+  
   openPicturePopup() {
     this.modalController.create({
       component: 'editPictureModal',
@@ -57,12 +56,38 @@ export class SetprofilePage implements OnInit {
     });
   }
 
+  editMode = false;
+
+  enableEditMode() {
+    console.log('Enabling edit mode');
+    this.editMode = true;
+  }
+  
   closePicturePopup() {
     this.modalController.dismiss('cancel');
   }
-  constructor(private modalController: ModalController) { }
+  constructor(private modalController: ModalController)//, private ProfileService: ProfileService)
+  {
+    // const userId = '123';
 
-  ngOnInit() {
+    // this.ProfileService.getUserProfile(userId)
+    // .then((profile) => {
+    //   this.user = profile;
+    // })
+    // .catch((error) => {
+    //   console.error(error);
+    // });
   }
 
-}
+  ngOnInit() {
+    // const userId = '123'; // Replace with the actual user ID
+    // this.getUserData(userId).subscribe(userData => {
+    //   console.log('User Data:', userData);
+
+    //   this.user = userData;
+
+    // });
+  }
+  
+
+ }
