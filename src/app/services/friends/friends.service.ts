@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FriendsRepository } from 'src/app/repository';
+import { FriendsRepository } from '../../repository';
 import { IGetFriends, IAddFriend, IRemoveFriend } from 'src/app/models';
 
 @Injectable({
