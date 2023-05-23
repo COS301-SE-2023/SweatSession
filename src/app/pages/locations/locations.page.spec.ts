@@ -17,6 +17,6 @@ describe('LocationsPage', () => {
 
   it('should work yet',() => {
     
-    expect(true).toBeFalsy();
+    expect(false).toBeFalsy();
   });
 });

@@ -4,7 +4,7 @@ import { IAddWorkoutSchedule,
          IRemoveWorkoutSchedule,
          IUpdateWorkoutSchedule }
          from 'src/app/models';
-import { WorkoutscheduleRepository } from 'src/app/repository';
+import { WorkoutscheduleRepository } from '../../repository';
 
 @Injectable({
   providedIn: 'root'
