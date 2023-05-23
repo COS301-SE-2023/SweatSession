@@ -1,0 +1,72 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-item>
+      <ion-icon name="arrow-back-outline" routerLink="/home/dashboard"></ion-icon>
+      <ion-title>Profile</ion-title>
+      <ion-item class="editProfile-button" slot="end">
+        <ion-title class="header">Edit</ion-title>
+      </ion-item>
+    </ion-item>
+  </ion-toolbar>
+</ion-header>
+   
+<ion-content> 
+
+ <p class="flex-center">   
+    
+    <ion-img src="assets/Asset 1.png" alt="logo-image" class="image"></ion-img>
+          
+ </p>
+
+  
+  <div class="flex-center"><h3>Alex Wassabi</h3></div>
+  <!-- <div class="flex-center" href = size = "small">Edit</div> -->
+  <p class="flex-center">
+    <ion-card-content class="card" >
+      <ion-item style="border-radius: 30px;"><ion-label>Hi , its Alex out here doing dope things <br> and enjoying a Healthy life</ion-label></ion-item>
+    </ion-card-content>
+  </p>
+
+
+
+    
+  <ion-row>
+    <ion-col size="6">
+      <ion-title class="title" style="white-space: small; margin-left: 40px"><b>24</b><br>Friends</ion-title>
+    </ion-col>
+    <ion-col size="6">
+      <ion-title class="title" style="white-space: small;"><b>12</b><br>Groups</ion-title>
+    </ion-col>
+  </ion-row>
+
+ <br>
+ <br>
+ <br>
+ 
+
+ 
+  
+    <div class="flex-center"> 
+      <ion-card class="card">
+      <ion-card-content>
+        <ion-button class="button"expand="block" (click)="Leaderboard()"><ion-icon name="bar-chart-outline" slot="start"></ion-icon>&nbsp;LeaderBoard &nbsp;<ion-icon name="chevron-forward-outline" slot="end"></ion-icon></ion-button>
+      </ion-card-content>
+      <ion-card-content>
+        <ion-button class="button"expand="block" routerLink="/friends"><ion-icon name="people-outline" slot="start"></ion-icon>&nbsp;Friends&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<ion-icon name="chevron-forward-outline" slot="end"></ion-icon></ion-button>
+      </ion-card-content>
+      <ion-card-content>
+        <ion-button class="button"expand="block" (click)="Groups()"><ion-icon name="megaphone-outline" slot="start"></ion-icon>&nbsp;Groups&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<ion-icon name="chevron-forward-outline" slot="end"></ion-icon></ion-button>
+      </ion-card-content>
+      <ion-card-content>
+        <ion-button class="button"expand="block" (click)="Schedule()"><ion-icon name="clipboard-outline" slot="start"></ion-icon>&nbsp;Schedule&nbsp;<ion-icon name="chevron-forward-outline" slot="end"></ion-icon></ion-button>
+      </ion-card-content>
+      <ion-card-content>
+        <ion-button class="button"expand="block" routerLink="/setprofile"><ion-icon name="create-outline" slot="start"></ion-icon>&nbsp;Edit&nbsp;<ion-icon name="chevron-forward-outline" slot="end"></ion-icon></ion-button>
+      </ion-card-content>
+      
+    </ion-card></div>
+    
+    
+  
+  
+</ion-content>

@@ -1,0 +1,62 @@
+<ion-content class="registrationContainer">
+  <ion-grid class="registrationGrid">
+    <!-- <ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>register</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
+    <ion-item class="logo-img">
+      <ion-img src="assets/Asset 1.png"></ion-img>
+    </ion-item>
+
+    <ion-text class="registrationHeader"> Register </ion-text>
+
+    <form [formGroup]="registrationForm"
+    ngxsForm="register.registrationForm"
+    (submit)="register()">
+      <ion-item class="emailSection">
+        <ion-img class="emailLogo" src="/assets/vector-icon.svg"></ion-img>
+        <ion-label>Email:</ion-label>
+        <!-- aria-label="Email" -->
+        <ion-input
+          type="email"
+          name="email"
+          formControlName="email"
+          required
+        ></ion-input>
+      </ion-item>
+
+      <ion-item class="passwordSection">
+        🔑
+        <ion-label>Password:</ion-label>
+        <!-- aria-label="Password" -->
+        <ion-input
+          type="password"
+          name="password"
+          minlength="6"
+          maxlength="25"
+          formControlName="password"
+          required
+        ></ion-input>
+      </ion-item>
+
+      <ion-item class="cPasswordSection">
+        🔑
+        <ion-label>Confirm Password:</ion-label>
+        <ion-input
+          type="password"
+          name="cPassword"
+          minlength="6"
+          maxlength="25"
+          formControlName="cPassword"
+          required
+        ></ion-input>
+      </ion-item>
+
+      <ion-button expand="block" type="submit" class="registerButton"
+        >Create Account</ion-button
+      >
+    </form>
+  </ion-grid>
+</ion-content>

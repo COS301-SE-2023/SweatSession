@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
@@ -37,6 +38,9 @@ import {
   provideStorage
 } from '@angular/fire/storage';
 
+//import {AuthState} from 'src/app/states/auth'
+//import {AuthModule} from 'src/app/pages/auth'
+
 // const FIREBASE_OPTIONS: FirebaseOptions = {
 //   apiKey: process.env['NX_FIREBASE_API_KEY'] || '',
 //   authDomain: process.env['NX_FIREBASE_AUTH_DOMAIN'] || '',
@@ -52,13 +56,17 @@ import {
   getFunctions,
   provideFunctions
 } from '@angular/fire/functions';
-
+import { NgxsModule } from '@ngxs/store';
+// import {AuthModule} from 'src/app/pages/auth';
 // const useEmulators = process.env['NX_FIREBASE_USE_EMULATORS'] || true;
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
+    FormsModule, 
     BrowserModule, 
+    //AuthModule,
+    NgxsModule.forRoot(),//[AuthState]
     IonicModule.forRoot(), 
     AppRoutingModule,
     provideRemoteConfig(() => getRemoteConfig()),
