@@ -1,0 +1,40 @@
+ion-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+ion-segment {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: transparent;
+}
+
+ion-icon {
+    width:25px;
+    height: 25px;
+}
+
+.clickable:hover {
+    zoom:1.05;
+    color:aqua;
+}
+
+.clickable {
+    margin-right: 15px;
+}
+
+.toolbar {
+    height:50px;
+    background-color: transparent;
+}
+
+ion-avatar {
+    height:35px;
+    width:35px;
+}
+
+.menu-label{
+    margin-left: 10px;
+}

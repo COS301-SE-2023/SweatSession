@@ -1,0 +1,9 @@
+{
+  "projects": {
+    "default": "sweatsession",
+    "production": "sweatsession",
+    "development": "sweatsession"
+  },
+  "targets": {},
+  "etags": {}
+}

@@ -1,0 +1,75 @@
+<ion-content>
+  <ion-card>
+    <ion-card>
+
+      <ion-card-header>
+        <ion-card-title>Edit Profile</ion-card-title>
+      </ion-card-header>
+      <div class="avatar-container" (click)="openPicturePopup()">
+        <ion-avatar  class="preview-container" *ngIf="ProfilePicture">
+          <img [src]="ProfilePicture" alt="Old Profile Picture">
+        </ion-avatar>
+      </div>
+      
+      <ion-card-content>
+        <ion-item>
+          <ion-label position="stacked"> Choose New Profile Picture </ion-label>
+          <input type="file" accept="image/*" (change)="onPictureChange($event)">
+        </ion-item>
+      </ion-card-content>
+
+       <!-- Edit Picture Popup -->
+       <ion-modal
+       cssClass="edit-picture-modal"
+       [mode]="modalMode"
+       [(ngModel)]="ProfilePicture"
+       (ionBackdropTap)="closePicturePopup()"
+     >
+       <ion-header>
+         <ion-toolbar>
+           <ion-title>Edit Picture</ion-title>
+           <ion-buttons slot="end">
+             <ion-button (click)="closePicturePopup()">Cancel</ion-button>
+           </ion-buttons>
+         </ion-toolbar>
+       </ion-header>
+       </ion-modal>
+
+       <ion-content>
+        <!-- Popup content -->
+        <h2>Edit Picture</h2>
+        <!-- Additional form or components for editing the picture -->
+        <!-- ... -->
+        <ion-button expand="block" (click)="savePicture()">Save</ion-button>
+      </ion-content>
+
+      <ion-item>
+        <ion-label position="stacked">Name</ion-label>
+        <ion-input type="text"  [(ngModel)]="user.name"></ion-input>
+      </ion-item>
+  
+      <ion-item>
+        <ion-label position="stacked">Email</ion-label>
+        <ion-input type="email"  [(ngModel)]="user.email"></ion-input>
+      </ion-item>
+  
+      <ion-item>
+        <ion-label position="stacked">Bio</ion-label>
+        <ion-textarea  [(ngModel)]="user.bio"></ion-textarea>
+      </ion-item>
+  
+      
+      <ion-item>
+        <ion-label position="stacked">Password</ion-label>
+        <ion-input type="password"  [(ngModel)]="user.password"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Confirm Password</ion-label>
+        <ion-input type="password"  [(ngModel)]="user.cPassword"></ion-input>
+      </ion-item>
+
+      <ion-button expand="block" (click)="saveProfile()">Save</ion-button>
+    
+  </ion-card>
+

@@ -52,7 +52,6 @@ import {
   getFunctions,
   provideFunctions
 } from '@angular/fire/functions';
-
 // const useEmulators = process.env['NX_FIREBASE_USE_EMULATORS'] || true;
 
 @NgModule({
