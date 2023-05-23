@@ -38,6 +38,9 @@ use the app, location-based services and more
 
 [![Angular][Angular.io]][Angular-url] [![Node][Node.js]][Node-url] [![TypeScript][typescript-badge]][typescript-url] [![JavaScript][javascript-badge]][javascript-url] [![Ionic][ionic-badge]][ionic-url] [![Firestore][firestore-badge]][firestore-url] [![Git][git-badge]][git-url] [![Jest][jest-badge]][jest-url] [![Cypress][cypress-badge]][cypress-url] [![GitHub Actions][github-actions-badge]][github-actions-url]
 
+[Demo 1 Video]()
+[Functional Requirements (SRS) documents](https://github.com/COS301-SE-2023/SweatSession/wiki)
+[GitHub Project Board](https://github.com/orgs/COS301-SE-2023/projects/36)
 ### Members
 
 <table style="border: none;">
