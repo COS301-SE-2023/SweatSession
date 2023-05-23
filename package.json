@@ -32,7 +32,10 @@
     "ng2-search-filter": "^0.5.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
-    "zone.js": "~0.13.0"
+    "zone.js": "~0.13.0",
+    "@ngxs/store": "^3.7.6",
+    "@ngxs/router-plugin": "^3.7.6",
+    "immer": "^9.0.19"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^16.0.0",
