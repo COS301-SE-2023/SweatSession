@@ -25,6 +25,16 @@
     
   }
 
+  .side-by-side {
+    display: flex;
+  }
+  
+  .side-by-side ion-title {
+    flex-basis: 50%;
+    text-align: center;
+  }
+  
+
 .flex-text{
     display: flex;
     justify-content: center;
