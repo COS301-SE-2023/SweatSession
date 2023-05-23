@@ -50,7 +50,7 @@ export class FriendsState {
             friend: payload.friend
         }//await this.friendsService.getFriends(request);
         ctx.patchState({
-            ...ctx.getState(), friends: [response.friend]
+            friends:[response.friend]
         })
     }
 

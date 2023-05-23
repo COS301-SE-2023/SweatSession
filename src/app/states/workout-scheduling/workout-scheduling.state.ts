@@ -70,8 +70,8 @@ export class WorkoutSchedulingState {
             schedule: payload.schedule,
             validate: true
         }//await this.service.addSchedule(request);
-        ctx.setState({
-            ...ctx.getState(),schedules:[response.schedule] //,validate: true
+        ctx.patchState({
+            
         })
     }
 
