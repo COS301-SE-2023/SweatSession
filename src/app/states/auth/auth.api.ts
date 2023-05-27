@@ -43,10 +43,22 @@ export class AuthApi {
   }
 
   async register(regEmail: string, regPassword: string) {
-    return await createUserWithEmailAndPassword(this.authObject, regEmail, regPassword);
+    try {
+      await createUserWithEmailAndPassword(this.authObject, regEmail, regPassword);
+      this.Nav.navigateRoot('/home'); // this is so they are only directed to login when they enter a valid email and password combination
+    }catch (error) {
+      // Handle the Firebase error
+      console.error('Firebase error:', error);
+      alert("Incorrect registration info.");
+      //return "Incorrect registration info.";
+      //return "";
+    }
   }
 
   async logout() {
+    // const auth = getAuth();
+    // console.log(auth.currentUser?.uid);
+    // alert("logout");
     return await signOut(this.authObject);
   }
 }
