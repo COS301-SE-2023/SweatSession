@@ -20,6 +20,10 @@ export class AuthApi {
   }
 
 
+  async getCurrentUserId(){
+    const auth = getAuth();
+    return(auth.currentUser?.uid);
+  }
 
 
 
@@ -30,8 +34,6 @@ export class AuthApi {
       //return await signInWithEmailAndPassword(this.authObject, regEmail, regPassword);
       
       this.Nav.navigateRoot('/home'); // this is so they are only directed to login when they enter a valid email and password combination
-      const auth = getAuth();
-      console.log(auth.currentUser?.uid);
     }catch (error) {
       // Handle the Firebase error
       console.error('Firebase error:', error);
