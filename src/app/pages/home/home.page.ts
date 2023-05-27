@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthApi } from 'src/app/states/auth/auth.api';
 
 
 @Component({
@@ -8,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomePage implements OnInit {
 
-  constructor() { }
+  constructor(
+    private authAPI: AuthApi
+  ) { }
  
   ngOnInit() {
+  }
+
+  userLogout(){
+    this.authAPI.logout();
   }
 
 
