@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavController } from '@ionic/angular';
 
 
 @Component({
@@ -8,11 +9,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomePage implements OnInit {
 
-  constructor() { }
+  constructor(private nav:NavController) { }
  
   ngOnInit() {
+    this.nav.navigateRoot("/home/dashboard");
   }
-
-
-
 }

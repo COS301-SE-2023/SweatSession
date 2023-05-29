@@ -46,12 +46,7 @@ const routes: Routes = [
         loadChildren: () => import('../chatbot/chatbot.module').then( m => m.ChatbotPageModule)
       }
     ],
-  },
-  {
-    path: '',
-    pathMatch: 'full',
-    redirectTo: 'home/dashboard',
-  },
+  }
 ];
 
 @NgModule({
