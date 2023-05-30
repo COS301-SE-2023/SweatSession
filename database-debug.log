@@ -1,2 +1,23 @@
-01:25:46.854 [NamespaceSystem-akka.actor.default-dispatcher-4] INFO akka.event.slf4j.Slf4jLogger - Slf4jLogger started
-01:25:47.825 [main] INFO com.firebase.server.forge.App$ - Listening at 127.0.0.1:5004
+20:38:09.610 [NamespaceSystem-akka.actor.default-dispatcher-5] INFO akka.event.slf4j.Slf4jLogger - Slf4jLogger started
+20:38:12.035 [main] INFO com.firebase.server.forge.App$ - Listening at 127.0.0.1:5004
+20:38:12.300 [main] ERROR com.firebase.server.forge.App$ - Error initializing Netty Listener
+java.net.BindException: Address already in use
+	at java.base/sun.nio.ch.Net.bind0(Native Method)
+	at java.base/sun.nio.ch.Net.bind(Net.java:555)
+	at java.base/sun.nio.ch.ServerSocketChannelImpl.netBind(ServerSocketChannelImpl.java:337)
+	at java.base/sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:294)
+	at io.netty.channel.socket.nio.NioServerSocketChannel.doBind(NioServerSocketChannel.java:128)
+	at io.netty.channel.AbstractChannel$AbstractUnsafe.bind(AbstractChannel.java:500)
+	at io.netty.channel.DefaultChannelPipeline$HeadContext.bind(DefaultChannelPipeline.java:1226)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeBind(AbstractChannelHandlerContext.java:495)
+	at io.netty.channel.AbstractChannelHandlerContext.bind(AbstractChannelHandlerContext.java:480)
+	at io.netty.channel.DefaultChannelPipeline.bind(DefaultChannelPipeline.java:973)
+	at io.netty.channel.AbstractChannel.bind(AbstractChannel.java:209)
+	at io.netty.bootstrap.AbstractBootstrap$2.run(AbstractBootstrap.java:355)
+	at io.netty.util.concurrent.SingleThreadEventExecutor.runAllTasks(SingleThreadEventExecutor.java:399)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:464)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$2.run(SingleThreadEventExecutor.java:131)
+	at io.netty.util.concurrent.DefaultThreadFactory$DefaultRunnableDecorator.run(DefaultThreadFactory.java:138)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+20:38:12.313 [Thread-0] INFO com.firebase.server.forge.App$ - Attempting graceful shutdown.
+20:38:12.357 [Thread-0] INFO com.firebase.server.forge.App$ - Graceful shutdown complete.
