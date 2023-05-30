@@ -13,8 +13,8 @@
     (ionInput)="onSearchInput($event)"
     color="light"
     animated
-  >
-</ion-searchbar>
+    >
+  </ion-searchbar>
 
   <ion-card *ngFor="let item of filteredData$ | async" >
     <img [src]="item.image" alt="Silhouette of mountains" />

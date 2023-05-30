@@ -1,0 +1,32 @@
+
+<ion-card>
+
+  <ion-item>
+    <ion-label position="stacked">Name</ion-label>
+    <ion-input type="text"  [(ngModel)]="user.name"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">Email</ion-label>
+    <ion-input type="email"  disabled = "true" [(ngModel)]="user.email"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">Bio</ion-label>
+    <ion-textarea  [(ngModel)]="user.bio"></ion-textarea>
+  </ion-item>
+
+  
+  <ion-item>
+    <ion-label position="stacked">Phone Number</ion-label>
+    <ion-input type="text"  [(ngModel)]="user.phoneNumber"></ion-input>
+  </ion-item>
+
+  <!-- <ion-item>
+    <ion-label position="stacked">Change Password</ion-label>
+    <ion-input type="password"  [(ngModel)]="user.cPassword"></ion-input>
+  </ion-item> -->
+
+  <!-- <ion-button expand="block" (click)="saveProfile()">Save</ion-button> -->
+
+</ion-card>

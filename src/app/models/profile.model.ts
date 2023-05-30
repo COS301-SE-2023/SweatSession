@@ -1,20 +1,20 @@
 
 export interface IProfileModel {
-  userId: string;
-  name: string;
-  email: string;
+  UserId: string;
   bio: string;
-  profileURL: string;
+  email: string;
+  name: string;
   phoneNumber: string;
+  profileURL: string;
 }
 
 //requests
 export interface IGetProfile {
-    userId: string;
+    UserId: string;
 }
 
 export interface IUpdateProfile {
-    userId: string;
+    UserId: string;
     profile: IProfileModel;
 }
 

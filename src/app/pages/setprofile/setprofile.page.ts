@@ -1,8 +1,8 @@
 import { Component, OnInit,ViewChild  } from '@angular/core';
 //import { profile } from 'console';
 import { IonContent, ModalController } from '@ionic/angular';
-//import { ProfileService } from '../../services/profile/profile.service';
-import { IProfileModel } from 'src/app/models';
+import { ProfileService } from '../../services/profile/profile.service';
+import { IProfileModel , IGetProfile} from 'src/app/models';
 
 @Component({
   selector: 'app-setprofile',
@@ -12,7 +12,7 @@ import { IProfileModel } from 'src/app/models';
 export class SetprofilePage implements OnInit {
 
   
-  user: IProfileModel = {userId: '123', name: 'Triumph Ndlovu', email: 'TriumphSynapse@gmail.com', bio: 'Hii im a natty', profileURL: 'https://i.pravatar.cc/150?img=68', phoneNumber: '0123456789'};
+  user: IProfileModel = {UserId: '123', name: 'Triumph Ndlovu', email: 'TriumphSynapse@gmail.com', bio: 'Hii im a natty', profileURL: 'https://i.pravatar.cc/150?img=68', phoneNumber: '0123456789'};
   
 
   ProfilePicture: string = 'https://i.pravatar.cc/150?img=68';// for now
@@ -66,7 +66,7 @@ export class SetprofilePage implements OnInit {
   closePicturePopup() {
     this.modalController.dismiss('cancel');
   }
-  constructor(private modalController: ModalController)//, private ProfileService: ProfileService)
+  constructor(private modalController: ModalController, private ProfileService: ProfileService)//, private ProfileService: ProfileService)
   {
     // const userId = '123';
 
@@ -80,13 +80,8 @@ export class SetprofilePage implements OnInit {
   }
 
   ngOnInit() {
-    // const userId = '123'; // Replace with the actual user ID
-    // this.getUserData(userId).subscribe(userData => {
-    //   console.log('User Data:', userData);
-
-    //   this.user = userData;
-
-    // });
+    // const userId = '123';
+    // this.user = this.ProfileService.getFormatedProfile(IGetProfile);
   }
   
 
