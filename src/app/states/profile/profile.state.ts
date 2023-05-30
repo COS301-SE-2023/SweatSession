@@ -76,3 +76,6 @@
 // On it's own
 
 // do you mind if I call you on whatsapp? so we can talk from there
+
+// git config --global user.email "you@example.com"
+//   git config --global user.name "Your Name"
