@@ -44,10 +44,6 @@ const routes: Routes = [
     loadChildren: () => import('./pages/groups/groups.module').then( m => m.GroupsPageModule)
   },
   {
-    path: 'workout-scheduling',
-    loadChildren: () => import('./pages/workout-scheduling/workout-scheduling.module').then( m => m.WorkoutSchedulingPageModule)
-  },
-  {
     path: 'userprofile',
       loadChildren: () => import('./pages/userprofile/userprofile.module').then( m => m.UserprofilePageModule)
   },

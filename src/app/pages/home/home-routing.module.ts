@@ -44,6 +44,14 @@ const routes: Routes = [
       {
         path: 'chatbot',
         loadChildren: () => import('../chatbot/chatbot.module').then( m => m.ChatbotPageModule)
+      },
+      {
+        path: 'workout-tracking',
+        loadChildren: () => import('../workout-tracking/workout-tracking.module').then( m => m.WorkoutTrackingPageModule)
+      },
+      {
+        path: 'workout-scheduling',
+        loadChildren: () => import('../workout-scheduling/workout-scheduling.module').then( m => m.WorkoutSchedulingPageModule)
       }
     ],
   },
