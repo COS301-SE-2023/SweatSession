@@ -1,48 +1,12 @@
-.workout-schedule {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+.add-schedule-button:hover {
+  zoom: 1.2;
+  ion-icon {
+  color: aqua;
   }
+}
 
-  .blue-rectangle {
-    background-color: #457B9D;
-    width: 60%;
-    height: 70%;
-    border-radius: 20px;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    overflow: auto;
-  }
-
-  .grey-rectangle {
-    background-color: #F1FAEE;
-    flex-basis: 80%;
-    height: 50px;
-    border-radius: 10px;
-    margin-bottom: 5%;
-    text-align: center;
-    position: relative;   /* Add this line */
-    z-index: 1;           /* Add this line */
-  }
-
-  .grey-rectangle input {
-    background-color: transparent; /* Remove the background color */
-    border: none; /* Remove the border */
-    outline: none; /* Remove the outline */
-    width: 100%; /* Ensure the input field takes up the full width */
-    height: 100%; /* Ensure the input field takes up the full height */
-  }
-  
-  input[type="text"] {
-    width: 100%;              /* Add this line */
-    align-self: flex-start;   /* Add this line */
-  }
-
-  .add-schedule-button:hover {
-    zoom: 1.2;
-   ion-icon {
-    color: aqua;
-   }
+#search-suggestions {
+  margin: 5px;
+  max-height: 200px;
+  overflow-y: scroll;
 }
