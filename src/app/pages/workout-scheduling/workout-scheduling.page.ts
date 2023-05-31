@@ -57,11 +57,10 @@ export class WorkoutSchedulingPage {
   async Loading() {
     const loader = await this.loadingCtrl.create({
       message: 'Loading...',
-      duration: 8000,
       translucent: true,
     });
     await loader.present();
-  } 
+  }
 
   onSearchInput(event:any) {
     const searchText = event.target.value;
@@ -81,6 +80,7 @@ export class WorkoutSchedulingPage {
     this.searchTerms.searchQuery = suggestion;
     this.searchTerms.initial = false;
     this.searchSchedule();
+    this.loadingCtrl.dismiss();
   }
  
 }
