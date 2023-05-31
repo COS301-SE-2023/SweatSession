@@ -7,10 +7,10 @@ import { IGetFriends, IAddFriend, IRemoveFriend } from 'src/app/models';
 })
 export class FriendsService {
 
-  constructor(repository:FriendsRepository) { }
+  constructor(private repository:FriendsRepository) { }
 
   async getFriends(request: IGetFriends){
-
+    return this.repository.getFriends(request);
   }
 
   async addFriend(request: IAddFriend){
