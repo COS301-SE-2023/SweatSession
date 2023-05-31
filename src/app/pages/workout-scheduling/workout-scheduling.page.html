@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-item>
-      <ion-icon name="arrow-back-outline" routerLink="/home/dashboard"></ion-icon>
+      <ion-icon name="arrow-back-outline" routerLink="/userprofile"></ion-icon>
       <ion-title>Schedules</ion-title>
       <ion-item slot="end"  class="add-schedule-button" (click)="addSchedule()">
         <ion-icon name="add-outline"></ion-icon>
@@ -23,149 +23,7 @@
       </ion-item>
     </ion-list>
   </div>
-  <workout-schedule *ngFor ="let schedule of schedules"
+  <workout-schedule *ngFor = "let schedule of schedules"
     [schedule] = schedule
   ></workout-schedule>
 </ion-content>
-
-
-<!-- @daniel check this out tell me what you think ;) -->
-
-<!-- <=========================uncomment from here========================> -->
-<!-- you can swipe the item both ways to edit or delete -->
-
-<!-- <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-item>
-      <ion-icon name="arrow-back-outline" routerLink="/userprofile"></ion-icon>
-      <ion-title>Schedules</ion-title>
-      <ion-item slot="end"  class="add-schedule-button" click="addSchedule()">
-        <ion-icon name="add-outline"></ion-icon>
-        <ion-icon name="receipt-outline"></ion-icon>
-      </ion-item>
-    </ion-item>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-searchbar placeholder="find schedule"></ion-searchbar>
-  <ion-item-sliding *ngFor ="let schedule of schedules">
-
-    <ion-item-options side="start">
-      <ion-item-option color="success">Edit</ion-item-option>
-    </ion-item-options>
-
-    <ion-item button>
-        <ion-icon name="receipt-outline"></ion-icon>
-        <ion-label >{{schedule}}</ion-label>
-    </ion-item>
-
-  <ion-item-options side="end">
-    <ion-item-option>Favorite</ion-item-option>
-    <ion-item-option color="danger">Delete</ion-item-option>
-  </ion-item-options>
-</ion-item-sliding>
-</ion-content>  -->
-
-<!-- <=========================TO HERE ========================>
-
-
-
- <ion-content [fullscreen]="true">
-  <ion-menu contentId="main-content">
-    <ion-header>
-      <ion-toolbar>
-        <ion-title>Menu</ion-title>
-      </ion-toolbar>
-    </ion-header>
-  </ion-menu>
-
-  <div class="ion-page" id="main-content">
-    <ion-header>
-      <ion-toolbar>
-        <ion-buttons slot="start">
-          <ion-menu-button></ion-menu-button>
-        </ion-buttons>
-        <ion-title>Home</ion-title>
-      </ion-toolbar>
-    </ion-header>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    <ion-tabs>
-      <ion-router-outlet></ion-router-outlet>
-      <ion-tab-bar slot="bottom">
-        <ion-tab-button tab="dashboard">
-          <ion-icon name="home-outline"></ion-icon>
-          Workout Plan
-        </ion-tab-button>
-        
-        <ion-tab-button tab="messages">
-          <ion-icon name="send-sharp"></ion-icon>
-          Messages
-        </ion-tab-button >
-
-        <ion-tab-button tab="search">
-          <ion-icon name="search"></ion-icon>
-          Search
-        </ion-tab-button>
-        <ion-tab-button tab="leaderboard">
-          <ion-icon name="bar-chart-outline"></ion-icon>
-          Boards
-        </ion-tab-button>
-        <ion-tab-button tab="userprofile">
-          <ion-icon name="person-outline"></ion-icon>
-          Profile
-        </ion-tab-button>
-      </ion-tab-bar>
-      
-    </ion-tabs>
-    <div class="workout-schedule">
-      <div class="blue-rectangle">
-        <div class="grey-rectangle">
-          <h1>
-            <input [(ngModel)]="pushDay" type="text" (ionChange)="onInputChange()" (input)="saveData()">
-          </h1>
-        </div>
-        <div class="grey-rectangle">
-          <h1>
-            <input [(ngModel)]="pullDay" type="text" (ionChange)="onInputChange()" (input)="saveData()">
-          </h1>
-        </div>
-        <div class="grey-rectangle">
-          <h1>
-            <input [(ngModel)]="legDay" type="text" (ionChange)="onInputChange()" (input)="saveData()">
-          </h1>
-        </div>
-        <div class="grey-rectangle">
-          <h1>
-            <input [(ngModel)]="pushDay2" type="text" (ionChange)="onInputChange()" (input)="saveData()">
-          </h1>
-        </div>
-        <div class="grey-rectangle">
-          <h1>
-            <input [(ngModel)]="pullDay2" type="text" (ionChange)="onInputChange()" (input)="saveData()">
-          </h1>
-        </div>
-        <div class="grey-rectangle">
-          <h1>
-            <input [(ngModel)]="legDay2" type="text" (ionChange)="onInputChange()" (input)="saveData()">
-          </h1>
-        </div>
-        <div class="grey-rectangle">
-          <h1>
-            <input [(ngModel)]="restDay" type="text" (ionChange)="onInputChange()" (input)="saveData()">
-          </h1>
-        </div>
-      </div>
-    </div>    
-  </div>
-</ion-content> -->
