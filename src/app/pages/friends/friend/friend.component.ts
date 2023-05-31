@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
+import { IFriendsModel } from 'src/app/models';
 
 @Component({
   selector: 'user-friend',
@@ -7,7 +8,7 @@ import { NavController } from '@ionic/angular';
   styleUrls: ['./friend.component.scss'],
 })
 export class FriendComponent  implements OnInit {
-  @Input() name!:string;
+  @Input() friend!:IFriendsModel;
 
   constructor(private Nav: NavController) { }
 

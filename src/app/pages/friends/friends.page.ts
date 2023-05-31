@@ -1,4 +1,9 @@
+import { IFriendsModel } from 'src/app/models';
 import { Component, OnInit } from '@angular/core';
+import { Select, Store } from '@ngxs/store';
+import { Observable } from 'rxjs';
+import { AddFriendAction, GetFriendsAction } from 'src/app/actions';
+import { FriendsState, FriendsStateModel } from 'src/app/states';
 
 @Component({
   selector: 'app-friends',
@@ -6,16 +11,26 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./friends.page.scss'],
 })
 export class FriendsPage implements OnInit {
-  friends=["friend1","friend2","friend3","friend4","friend5","friend6","friend7","friend8"];
-  //@select(FriendsState.returnFriends) friends$ : Observable<FriendsStateModel>;
-  constructor() { }
+  friends:IFriendsModel[]=[];
+  @Select(FriendsState.returnFriends) friends$! : Observable<IFriendsModel[]>;
+  constructor(private store: Store) { 
+    this.store.dispatch(new GetFriendsAction());
+    this.displayFriends();
+  }
 
   ngOnInit() {
-    //store.dispatch(new GetFriendsAction());
+    this.displayFriends();
   }
 
   addFriend() {
-    //store.dispatch(new AddFriendAction(payload));
+    //thsi.store.dispatch(new AddFriendAction(payload));
   }
 
+  displayFriends() {
+    this.store.dispatch(new GetFriendsAction());
+    this.friends$.subscribe((response)=>{
+      this.friends = response;
+      console.table(this.friends);
+    })
+  }
 }
