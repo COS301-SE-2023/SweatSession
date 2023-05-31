@@ -12,9 +12,19 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-searchbar placeholder="find schedule"></ion-searchbar>
+  <ion-searchbar placeholder="find schedule"
+    [(ngModel)] = "searchTerms.searchQuery"
+    (ionInput) = onSearchInput($event)
+  ></ion-searchbar>
+  <div id="search-suggestions">
+    <ion-list *ngIf="searchTerms.showSuggestions">
+      <ion-item *ngFor="let suggestion of searchTerms.filteredSuggestions" (click)="find(suggestion.name!)">
+        {{ suggestion.name }}
+      </ion-item>
+    </ion-list>
+  </div>
   <workout-schedule *ngFor ="let schedule of schedules"
-    [name] = schedule
+    [schedule] = schedule
   ></workout-schedule>
 </ion-content>
 
