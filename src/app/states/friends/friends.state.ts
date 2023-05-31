@@ -49,8 +49,8 @@ export class FriendsState {
             validate: true,
             friend: payload.friend
         }//await this.friendsService.getFriends(request);
-        ctx.patchState({
-            friends:[response.friend]
+        ctx.setState({
+            friends:[response.friend,...ctx.getState().friends]
         })
     }
 

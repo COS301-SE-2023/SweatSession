@@ -33,7 +33,9 @@ export interface WorkoutSchedulingStateModel {
     }
 })
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class WorkoutSchedulingState {
     constructor(
         private readonly service: WorkoutscheduleService,
@@ -46,7 +48,8 @@ export class WorkoutSchedulingState {
             userId:"test id"
         }
 
-       const response: IGotWorkoutSchedules =  this.getMock(request)//await this.service.getSchedules(request);
+       const response: IGotWorkoutSchedules = this.getMock(request)//await this.service.getSchedules(request);
+       console.table(response);
         ctx.setState({
             ...ctx.getState(), schedules: response.schedules
         })
@@ -64,14 +67,17 @@ export class WorkoutSchedulingState {
 
     @Action(AddWorkoutSchedule)
     async addWorkoutSchedule(ctx: StateContext<WorkoutSchedulingStateModel>, {payload}: AddWorkoutSchedule) {
-        const request: IAddWorkoutSchedule =payload;
+        const request: IAddWorkoutSchedule ={
+            userId: "test id",
+            schedule: payload
+        }
         const response: IAddedWorkoutSchedule ={
-            userId: payload.userId,
-            schedule: payload.schedule,
+            userId: "test id",
+            schedule: payload,
             validate: true
         }//await this.service.addSchedule(request);
         ctx.patchState({
-            
+            schedules: [response.schedule,...ctx.getState().schedules]
         })
     }
 
