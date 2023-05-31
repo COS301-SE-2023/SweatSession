@@ -48,7 +48,7 @@ export class WorkoutSchedulingState {
             userId:"test id"
         }
 
-       const response: IGotWorkoutSchedules = this.getMock(request)//await this.service.getSchedules(request);
+       const response: IGotWorkoutSchedules = /*this.getMock(request)*/await this.service.getSchedules(request);
        console.table(response);
         ctx.setState({
             ...ctx.getState(), schedules: response.schedules
@@ -101,56 +101,5 @@ export class WorkoutSchedulingState {
     @Selector()
     static returnSchedule(state: WorkoutSchedulingStateModel) {
         return state.schedule;
-    }
-
-    getMock(request:IGetWorkoutSchedules){
-        const results:IGotWorkoutSchedules = {
-            userId: request.userId,
-            schedules: [
-                {
-                    id: "ID 1",
-                    name:"Schedule 1",
-                    duration: 1,
-                    location: "zone fitness, menlyn",
-                    date: new Date(),
-                },
-                {
-                    id: "ID 2",
-                    name:"Schedule 2",
-                    duration: 1,
-                    location: "zone fitness, menlyn",
-                    date: new Date(),
-                },
-                {
-                    id: "ID 3",
-                    name:"Schedule 3",
-                    duration: 1,
-                    location: "zone fitness, menlyn",
-                    date: new Date(),
-                },
-                {
-                    id: "ID 4",
-                    name:"Schedule 4",
-                    duration: 1,
-                    location: "zone fitness, menlyn",
-                    date: new Date(),
-                },
-                {
-                    id: "ID 5",
-                    name:"Schedule 5",
-                    duration: 1,
-                    location: "zone fitness, menlyn",
-                    date: new Date(),
-                },
-                {
-                    id: "ID 6",
-                    name:"Schedule 6",
-                    duration: 1,
-                    location: "zone fitness, menlyn",
-                    date: new Date(),
-                }
-            ]
-        }
-        return results;
     }
 }
