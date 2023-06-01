@@ -1,13 +1,36 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>notifications</ion-title>
+    <ion-item color="medium">
+      <ion-icon name="arrow-back-outline" routerLink="/home/dashboard"></ion-icon>
+      <ion-title>Notifications</ion-title>
+    </ion-item>
   </ion-toolbar>
 </ion-header>
+<br>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">notifications</ion-title>
-    </ion-toolbar>
-  </ion-header>
+
+<ion-content class="main">
+  <ion-item lines="none">
+    <ion-title slot="start" style="display:inline-block"><b>Today</b></ion-title>
+    <ion-title slot="end" style="display:inline-block" ><ion-button fill="clear">Clear all</ion-button></ion-title>
+  </ion-item>
+    <br>
+    <br>
+    
+  
+  <ion-card class="Mcard" *ngFor="let notice of noticeList | async">
+    <ion-card-content style="display:flex ; align-items:center" >
+  <ion-avatar slot="start">
+    <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+  </ion-avatar>
+  <ion-label>{{notice.sendername}}</ion-label>
+</ion-card-content>
+</ion-card>
+<br>
+
+
+
+
+
+
 </ion-content>

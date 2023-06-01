@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
+
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -57,6 +58,8 @@ import {
   provideFunctions
 } from '@angular/fire/functions';
 import { NgxsModule } from '@ngxs/store';
+import { AngularFirestore, AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { AngularFireModule } from '@angular/fire/compat';
 // import {AuthModule} from 'src/app/pages/auth';
 // const useEmulators = process.env['NX_FIREBASE_USE_EMULATORS'] || true;
 
@@ -69,6 +72,8 @@ import { NgxsModule } from '@ngxs/store';
     NgxsModule.forRoot(),//[AuthState]
     IonicModule.forRoot(), 
     AppRoutingModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule ,
     provideRemoteConfig(() => getRemoteConfig()),
     provideAnalytics(() => getAnalytics()),
     provideAuth(() => {
@@ -117,7 +122,7 @@ import { NgxsModule } from '@ngxs/store';
     }),
 
   ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy } , AngularFirestore],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

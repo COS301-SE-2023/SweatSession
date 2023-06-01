@@ -1,0 +1,22 @@
+.main{
+    --background: none;
+    --background: url('/assets/Asset 2.png') no-repeat center/cover fixed;
+}
+
+.flex-center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: radius 50px;
+    background-color: cornflowerblue;
+}
+.Mcard{
+    border: radius 50px;
+    background-color:rgb(144,202,243 , 0.8)
+    
+}
+.flex-center2{
+    border: radius 50px;
+    background-color:lightgray ;
+    
+}
