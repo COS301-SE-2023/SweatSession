@@ -9,11 +9,13 @@ import {
 
 import { signOut } from '@firebase/auth';
 import { NavController } from '@ionic/angular';
+//import { RegisterRepository } from 'src/app/repository/register.repository';
+
 //import { getAuth } from 'firebase/auth';
 
 @Injectable()
 export class AuthApi {
-  constructor(private readonly authObject: Auth, private Nav: NavController) {}
+  constructor(private readonly authObject: Auth, private Nav: NavController) {}//, private repository: RegisterRepository         //, private service: RegisterService
 
   auth$() {
     return authState(this.authObject);
@@ -46,10 +48,12 @@ export class AuthApi {
     try {
       await createUserWithEmailAndPassword(this.authObject, regEmail, regPassword);
       this.Nav.navigateRoot('/home'); // this is so they are only directed to login when they enter a valid email and password combination
+      return true;
     }catch (error) {
       // Handle the Firebase error
       console.error('Firebase error:', error);
       alert("Incorrect registration info.");
+      return false;
       //return "Incorrect registration info.";
       //return "";
     }
