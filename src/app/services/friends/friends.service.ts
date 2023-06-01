@@ -10,7 +10,12 @@ export class FriendsService {
   constructor(private repository:FriendsRepository) { }
 
   async getFriends(request: IGetFriends){
-    return this.repository.getFriends(request);
+    // const data = (await this.repository.getFriends(request)).data;
+    // const response: IGotFriends={
+    //   friends: data
+    // }
+    // return response;
+    // //return this.repository.getFriends(request);
   }
 
   async addFriend(request: IAddFriend){

@@ -22,7 +22,7 @@ export interface IAddFriend {
 
 //response
 export interface IGotFriends {
-    friends: IFriendsModel[];
+    friends: IFriendsModel[] | undefined;
 }
 
 export interface IRemovedFriend {

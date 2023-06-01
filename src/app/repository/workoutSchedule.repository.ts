@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { IAddWorkoutSchedule, IUpdateWorkoutSchedule, IGetWorkoutSchedules, IRemoveWorkoutSchedule, IGotWorkoutSchedules } from '../models';
 import * as admin from 'firebase-admin';
+import { Firestore } from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -10,8 +11,6 @@ export class WorkoutscheduleRepository {
   constructor() { }
 
   async addSchedule(request: IAddWorkoutSchedule) {
-    
-
   }
 
   async removeSchedule(request: IRemoveWorkoutSchedule) {

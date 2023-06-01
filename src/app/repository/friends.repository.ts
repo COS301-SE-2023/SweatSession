@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
-import { IAddFriend, IGetFriends, IGotFriends, IRemoveFriend } from '../models';
-import * as admin from 'firebase-admin';
+import { IAddFriend,
+     IFriendsModel, 
+     IGetFriends, 
+     IGotFriends, 
+     IRemoveFriend } 
+     from '../models';
 
 @Injectable({
   providedIn: 'root'
@@ -12,16 +16,27 @@ export class FriendsRepository {
   async getFriends(request: IGetFriends){
     // return await admin
     //   .firestore()
-    //   .collection('profiles')
-    //   .withConverter<IGotFriends>({
+    //   .collection('friends')
+    //   .withConverter<IFriendsModel[]>({
     //     fromFirestore: (snapshot) => {
-    //       return snapshot.data() as IGotFriends;
+    //       return snapshot.data() as IFriendsModel[];
     //     },
-    //     toFirestore: (it: IGotFriends) => it,
+    //     toFirestore: (it: IFriendsModel[]) => it,
     //   })
     //   .doc(request.userId)
     //   .get();
-   return this.getMock();
+    //   .then(doc => {
+    //     if (doc.exists) {
+    //       const data = doc.data();
+    //       // Handle retrieved data
+    //     } else {
+    //       // Document doesn't exist
+    //     }
+    //   })
+    //   .catch(error => {
+    //     // Handle error
+    //   });
+    //    return this.getMock();
   }
 
   async addFriend(request: IAddFriend){
