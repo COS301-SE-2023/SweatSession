@@ -4,6 +4,6 @@ export interface ISearchTerms{
     searchQuery?: string;
     showSuggestions?: boolean;
     suggestions?: string[];
-    filteredSuggestions?: IWorkoutScheduleModel[];
+    filteredSuggestions?: any[];
     initial?: boolean;
 }

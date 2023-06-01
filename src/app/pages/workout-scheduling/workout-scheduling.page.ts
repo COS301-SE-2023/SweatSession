@@ -20,17 +20,21 @@ export class WorkoutSchedulingPage {
 
   constructor(private popoverController: PopoverController, 
       private store : Store, private loadingCtrl: LoadingController) { 
-        this.searchTerms= {
-          searchQuery:"",
-          showSuggestions:false,
-          suggestions:[],
-          filteredSuggestions:[],
-          initial:true,
-      }
+      this.initialiseSearchTerms();
   }
 
   ngOnInit() {
     this.displayWorkoutSchedule();
+  }
+
+  initialiseSearchTerms() {
+    this.searchTerms= {
+      searchQuery:"",
+      showSuggestions:false,
+      suggestions:[],
+      filteredSuggestions:[],
+      initial:true,
+    }
   }
 
   async addSchedule(){
