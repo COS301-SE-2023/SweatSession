@@ -36,7 +36,7 @@ export class FriendsRepository {
     //   .catch(error => {
     //     // Handle error
     //   });
-    //    return this.getMock();
+       return this.getMock();
   }
 
   async addFriend(request: IAddFriend){

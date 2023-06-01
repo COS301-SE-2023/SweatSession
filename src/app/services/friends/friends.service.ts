@@ -15,7 +15,7 @@ export class FriendsService {
     //   friends: data
     // }
     // return response;
-    // //return this.repository.getFriends(request);
+    return this.repository.getFriends(request);
   }
 
   async addFriend(request: IAddFriend){
