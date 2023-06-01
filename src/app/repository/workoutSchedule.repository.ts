@@ -1,14 +1,18 @@
 import { Injectable } from '@angular/core';
-import { IAddWorkoutSchedule, IUpdateWorkoutSchedule, IGetWorkoutSchedules, IRemoveWorkoutSchedule, IGotWorkoutSchedules } from '../models';
-import * as admin from 'firebase-admin';
-import { Firestore } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
+import { IAddWorkoutSchedule, 
+    IUpdateWorkoutSchedule, 
+    IGetWorkoutSchedules, 
+    IRemoveWorkoutSchedule, 
+    IGotWorkoutSchedules } 
+    from '../models';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WorkoutscheduleRepository {
 
-  constructor() { }
+  constructor(private firebase: AngularFirestore) { }
 
   async addSchedule(request: IAddWorkoutSchedule) {
   }

@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { IAddFriend,
      IFriendsModel, 
      IGetFriends, 
@@ -11,31 +12,17 @@ import { IAddFriend,
 })
 export class FriendsRepository {
 
-  constructor() { }
+  constructor(private firebase: AngularFirestore) { }
 
   async getFriends(request: IGetFriends){
-    // return await admin
-    //   .firestore()
-    //   .collection('friends')
-    //   .withConverter<IFriendsModel[]>({
-    //     fromFirestore: (snapshot) => {
-    //       return snapshot.data() as IFriendsModel[];
-    //     },
-    //     toFirestore: (it: IFriendsModel[]) => it,
-    //   })
-    //   .doc(request.userId)
-    //   .get();
-    //   .then(doc => {
-    //     if (doc.exists) {
-    //       const data = doc.data();
-    //       // Handle retrieved data
-    //     } else {
-    //       // Document doesn't exist
-    //     }
-    //   })
-    //   .catch(error => {
-    //     // Handle error
-    //   });
+    // const collectionRef: AngularFirestoreCollection<IProfileModel> = this.firestore.collection('profiles');
+    // collectionRef.add(newProfile)
+    //     .then((docRef) => {
+    //         console.log('Document created successfully with ID:', docRef.id);
+    //     })
+    //     .catch((error) => {
+    //         console.error('Error creating document:', error);
+    //     });
        return this.getMock();
   }
 
