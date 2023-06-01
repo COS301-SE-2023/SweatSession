@@ -10,18 +10,18 @@ export class FriendsRepository {
   constructor() { }
 
   async getFriends(request: IGetFriends){
-    return await admin
-      .firestore()
-      .collection('profiles')
-      .withConverter<IGotFriends>({
-        fromFirestore: (snapshot) => {
-          return snapshot.data() as IGotFriends;
-        },
-        toFirestore: (it: IGotFriends) => it,
-      })
-      .doc(request.userId)
-      .get();
-   // return this.getMock();
+    // return await admin
+    //   .firestore()
+    //   .collection('profiles')
+    //   .withConverter<IGotFriends>({
+    //     fromFirestore: (snapshot) => {
+    //       return snapshot.data() as IGotFriends;
+    //     },
+    //     toFirestore: (it: IGotFriends) => it,
+    //   })
+    //   .doc(request.userId)
+    //   .get();
+   return this.getMock();
   }
 
   async addFriend(request: IAddFriend){
