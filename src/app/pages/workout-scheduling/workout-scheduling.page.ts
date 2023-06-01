@@ -62,6 +62,7 @@ export class WorkoutSchedulingPage {
     const loader = await this.loadingCtrl.create({
       message: 'Loading...',
       translucent: true,
+      duration: 2000,
     });
     await loader.present();
   }
@@ -84,7 +85,6 @@ export class WorkoutSchedulingPage {
     this.searchTerms.searchQuery = suggestion;
     this.searchTerms.initial = false;
     this.searchSchedule();
-    this.loadingCtrl.dismiss();
   }
  
 }

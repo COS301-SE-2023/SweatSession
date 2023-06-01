@@ -4,6 +4,7 @@ import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { AddFriendAction, GetFriendsAction } from 'src/app/actions';
 import { FriendsState, FriendsStateModel } from 'src/app/states';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-friends',
@@ -14,7 +15,7 @@ export class FriendsPage implements OnInit {
   friends:IFriendsModel[]=[];
   @Select(FriendsState.returnFriends) friends$! : Observable<IFriendsModel[]>;
   searchTerms!: ISearchTerms;
-  constructor(private store: Store) { 
+  constructor(private store: Store, private loadingCtrl:LoadingController) { 
     this.store.dispatch(new GetFriendsAction());
     this.displayFriends();
     this.initialiseSearchTerms()
@@ -44,5 +45,38 @@ export class FriendsPage implements OnInit {
       this.friends = response;
       console.table(this.friends);
     })
+  }
+
+  searchSchedule() {
+    this.searchTerms.showSuggestions = false;
+  }
+
+  async Loading() {
+    const loader = await this.loadingCtrl.create({
+      message: 'Loading...',
+      translucent: true,
+      duration: 2000,
+    });
+    await loader.present();
+  }
+
+  onSearchInput(event:any) {
+    const searchText = event.target.value;
+    if (searchText) {
+      this.searchTerms.showSuggestions = true;
+      this.searchTerms.filteredSuggestions = this.friends.filter((suggestion) =>
+        suggestion.name!.toLowerCase().includes(this.searchTerms.searchQuery!.toLowerCase())
+      );
+    }else {
+      this.searchTerms.showSuggestions = false;
+    }
+  }
+
+  find(suggestion: string){
+    this.Loading();
+    console.log(suggestion);
+    this.searchTerms.searchQuery = suggestion;
+    this.searchTerms.initial = false;
+    this.searchSchedule();
   }
 }
