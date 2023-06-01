@@ -4,7 +4,7 @@ import { FormBuilder, Validators } from '@angular/forms'; //, AbstractControl, V
 import { Select, Store } from '@ngxs/store';
 //import { ReactiveFormsModule } from '@angular/forms';
 import {Register} from 'src/app/actions/register';
-import {RegisterPageModule} from './register.module'
+//import {RegisterPageModule} from './register.module'
 
 @Component({
   selector: 'app-register',
