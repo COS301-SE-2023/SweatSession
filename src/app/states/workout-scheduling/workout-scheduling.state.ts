@@ -77,7 +77,7 @@ export class WorkoutSchedulingState {
             validate: true
         }//await this.service.addSchedule(request);
         ctx.patchState({
-            schedules: [response.schedule,...ctx.getState().schedules]
+            schedules: [response.schedule!,...ctx.getState().schedules]
         })
     }
 

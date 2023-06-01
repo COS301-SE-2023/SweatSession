@@ -4,7 +4,8 @@ import { IAddWorkoutSchedule,
     IUpdateWorkoutSchedule, 
     IGetWorkoutSchedules, 
     IRemoveWorkoutSchedule, 
-    IGotWorkoutSchedules } 
+    IGotWorkoutSchedules, 
+    IAddedWorkoutSchedule} 
     from '../models';
 
 @Injectable({
@@ -14,7 +15,53 @@ export class WorkoutscheduleRepository {
 
   constructor(private firebase: AngularFirestore) { }
 
+    //How user schedules are store....
+   /**
+     * collection//workout schedule {
+     *  document//user id {
+     *      subcollection//schedule {
+     *          document//schedule is<IWorkoutSchedule> {
+     *              
+     *          }
+     *      }
+     *  }
+     * }
+     */
+
   async addSchedule(request: IAddWorkoutSchedule) {
+    try {
+        const docRef = await this.firebase
+          .collection("WorkoutSchedule")
+          .doc(request.userId)
+          .collection("userSchedules")
+          .add(request.schedule);
+      
+        const schedule = {
+          id: docRef.id,
+          ...request.schedule,
+        };
+      
+        console.log('Document added successfully with ID:', docRef.id);
+        alert('Document created successfully with ID:' + docRef.id);
+      
+        const response: IAddedWorkoutSchedule = {
+          userId: request.userId,
+          schedule: schedule,
+          validate: true,
+        };
+      
+        return response;
+    } catch (error) {
+        console.log('Error creating document:', error);
+        alert(error);
+      
+        const response: IAddedWorkoutSchedule = {
+          userId: request.userId,
+          validate: false,
+        };
+      
+        return response;
+    }
   }
 
   async removeSchedule(request: IRemoveWorkoutSchedule) {
