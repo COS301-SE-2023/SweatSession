@@ -14,11 +14,11 @@ export class FriendsService {
   }
 
   async addFriend(request: IAddFriend){
-
+    return this.repository.addFriend(request);
   }
 
   async removeFriend(request: IRemoveFriend){
-    
+    return this.repository.removeFriend(request);
   }
 }
   
