@@ -21,4 +21,3 @@ export class FriendsService {
     return this.repository.removeFriend(request);
   }
 }
-  
