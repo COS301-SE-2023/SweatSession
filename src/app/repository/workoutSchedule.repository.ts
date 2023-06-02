@@ -41,8 +41,8 @@ export class WorkoutscheduleRepository {
           ...request.schedule,
         };
       
-        console.log('Document added successfully with ID:', docRef.id);
-        alert('Document created successfully with ID:' + docRef.id);
+        console.log('Schedule added successfully with ID:', docRef.id);
+        alert('Schedule added successfully with ID:' + docRef.id);
       
         const response: IAddedWorkoutSchedule = {
           userId: request.userId,
@@ -52,7 +52,7 @@ export class WorkoutscheduleRepository {
       
         return response;
     } catch (error) {
-        console.log('Error creating document:', error);
+        console.log('Error adding schedule:', error);
         alert(error);
       
         const response: IAddedWorkoutSchedule = {
