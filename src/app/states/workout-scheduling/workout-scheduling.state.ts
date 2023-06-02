@@ -49,7 +49,7 @@ export class WorkoutSchedulingState {
             userId:"test id"
         }
 
-       const response: IGotWorkoutSchedules = /*this.getMock(request)*/await this.service.getSchedules(request);
+       const response: IGotWorkoutSchedules = await this.service.getSchedules(request);
        console.table(response);
         ctx.setState({
             ...ctx.getState(), schedules: response.schedules
@@ -60,7 +60,7 @@ export class WorkoutSchedulingState {
     async removeWorkoutSchedule(ctx: StateContext<WorkoutSchedulingStateModel>,{payload}: RemoveWorkoutSchedule) {
        const request: IRemoveWorkoutSchedule = {
             userId: "test id",
-            schedule: payload.schedule
+            schedule: payload
         }
         const response: IRemovedWorkoutSchedule = await this.service.removeSchedule(request);
         if(response.validate){
@@ -90,7 +90,7 @@ export class WorkoutSchedulingState {
 
      @Action(UpdateWorkoutSchedule)
     async updateWorkoutSchedule(ctx: StateContext<WorkoutSchedulingStateModel>, {payload}: UpdateWorkoutSchedule) {
-        //update state....
+       
     }
 
     @Action(LoadSchedule)

@@ -34,6 +34,6 @@ export class ScheduleComponent  implements OnInit {
   }
 
   removeSchedule() {
-    this.store.dispatch(new RemoveWorkoutSchedule({schedule:this.schedule}))
+    this.store.dispatch(new RemoveWorkoutSchedule(this.schedule))
   }
 }
