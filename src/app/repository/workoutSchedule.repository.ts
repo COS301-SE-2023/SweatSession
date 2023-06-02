@@ -77,9 +77,10 @@ export class WorkoutscheduleRepository {
           .delete()
           
         console.log('Schedule deleted successfully');
+        alert('Schedule removed successfully');
       
         const response: IRemovedWorkoutSchedule = {
-          userId: request.userId,
+          userId: request.userId!,
           validate: true,
         };
       
@@ -89,7 +90,7 @@ export class WorkoutscheduleRepository {
         alert(error);
       
         const response: IRemovedWorkoutSchedule = {
-          userId: request.userId,
+          userId: request.userId!,
           validate: false,
         };
       
@@ -137,12 +138,13 @@ export class WorkoutscheduleRepository {
           .collection("userSchedules")
           .get()
           .toPromise();
+
         const schedules: IWorkoutScheduleModel[] = [];
       
         snapshot!.forEach((doc) => {
           const schedule = {
             id: doc.id,
-            ...doc as IWorkoutScheduleModel,
+            ...doc.data() as IWorkoutScheduleModel,
           };
       
           schedules.push(schedule);

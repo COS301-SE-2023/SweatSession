@@ -6,7 +6,7 @@ import { IWorkoutScheduleModel } from 'src/app/models';
 import { Select, Store } from '@ngxs/store';
 import { WorkoutSchedulingState } from 'src/app/states';
 import { Observable } from 'rxjs';
-import { LoadSchedule } from 'src/app/actions';
+import { LoadSchedule, RemoveWorkoutSchedule } from 'src/app/actions';
 
 @Component({
   selector: 'workout-schedule',
@@ -31,5 +31,9 @@ export class ScheduleComponent  implements OnInit {
 
   loadSchedule() {
     this.store.dispatch(new LoadSchedule(this.schedule));
+  }
+
+  removeSchedule() {
+    this.store.dispatch(new RemoveWorkoutSchedule({schedule:this.schedule}))
   }
 }

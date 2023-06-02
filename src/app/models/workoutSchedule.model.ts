@@ -20,7 +20,7 @@ export interface IAddWorkoutSchedule {
 }
 
 export interface IRemoveWorkoutSchedule {
-    userId: string;
+    userId?: string;
     schedule: IWorkoutScheduleModel;
 }
 
@@ -43,6 +43,7 @@ export interface IAddedWorkoutSchedule {
 
 export interface IRemovedWorkoutSchedule {
     userId: string;
+    schedules?: IWorkoutScheduleModel[];
     validate: boolean;
 }
 

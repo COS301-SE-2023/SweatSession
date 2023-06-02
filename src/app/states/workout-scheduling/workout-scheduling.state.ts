@@ -13,6 +13,7 @@ import { IAddWorkoutSchedule,
         IGetWorkoutSchedules,
         IGotWorkoutSchedules,
         IRemoveWorkoutSchedule,
+        IRemovedWorkoutSchedule,
         IWorkoutScheduleModel } 
         from "src/app/models";
 import { WorkoutscheduleService } from "src/app/services";
@@ -57,12 +58,22 @@ export class WorkoutSchedulingState {
 
     @Action(RemoveWorkoutSchedule)
     async removeWorkoutSchedule(ctx: StateContext<WorkoutSchedulingStateModel>,{payload}: RemoveWorkoutSchedule) {
-        // request: IRemoveWorkoutSchedule = {
-        //     userId: "test id";
-        //     schedule: payload;
-        // }
-        // response: IRemoveWorkoutSchedule = await this.service.removeSchedule(request);
-        // remove workoutschedule
+       const request: IRemoveWorkoutSchedule = {
+            userId: "test id",
+            schedule: payload.schedule
+        }
+        const response: IRemovedWorkoutSchedule = await this.service.removeSchedule(request);
+        if(response.validate){
+            const schedules = ctx.getState().schedules.filter((schedule)=>{
+                if(schedule.id! === request.schedule.id!)
+                    return false;
+                else
+                    return true;
+            })
+            ctx.patchState({
+                schedules: schedules
+            })
+        }
     }
 
     @Action(AddWorkoutSchedule)
@@ -71,11 +82,12 @@ export class WorkoutSchedulingState {
             userId: "test id",
             schedule: payload
         }
-        const response: IAddedWorkoutSchedule ={
-            userId: "test id",
-            schedule: payload,
-            validate: true
-        }//await this.service.addSchedule(request);
+        // const response: IAddedWorkoutSchedule ={
+        //     userId: "test id",
+        //     schedule: payload,
+        //     validate: true
+        // }
+        const response = await this.service.addSchedule(request);
         ctx.patchState({
             schedules: [response.schedule!,...ctx.getState().schedules]
         })
