@@ -56,6 +56,7 @@ export class WorkoutSchedulingPage {
 
   searchSchedule() {
     this.searchTerms.showSuggestions = false;
+    this.schedules = this.searchTerms.filteredSuggestions!;
   }
 
   async Loading() {

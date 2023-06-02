@@ -48,6 +48,7 @@ export class FriendsPage implements OnInit {
 
   searchSchedule() {
     this.searchTerms.showSuggestions = false;
+    this.friends = this.searchTerms.filteredSuggestions!;
   }
 
   async Loading() {
