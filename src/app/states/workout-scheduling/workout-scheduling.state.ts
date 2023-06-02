@@ -82,11 +82,6 @@ export class WorkoutSchedulingState {
             userId: "test id",
             schedule: payload
         }
-        // const response: IAddedWorkoutSchedule ={
-        //     userId: "test id",
-        //     schedule: payload,
-        //     validate: true
-        // }
         const response = await this.service.addSchedule(request);
         ctx.patchState({
             schedules: [response.schedule!,...ctx.getState().schedules]

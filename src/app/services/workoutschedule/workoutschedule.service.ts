@@ -14,9 +14,6 @@ export class WorkoutscheduleService {
   constructor(private repository: WorkoutscheduleRepository) { }
 
   async addSchedule(request: IAddWorkoutSchedule) {
-    let schedule = request.schedule
-    const response = this.repository.addSchedule(request);
-
     return this.repository.addSchedule(request);
   }
 
