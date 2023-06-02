@@ -5,7 +5,10 @@ import { IAddWorkoutSchedule,
     IGetWorkoutSchedules, 
     IRemoveWorkoutSchedule, 
     IGotWorkoutSchedules, 
-    IAddedWorkoutSchedule} 
+    IAddedWorkoutSchedule,
+    IRemovedWorkoutSchedule,
+    IUpdatedWorkoutSchedule,
+    IWorkoutScheduleModel} 
     from '../models';
 
 @Injectable({
@@ -65,15 +68,108 @@ export class WorkoutscheduleRepository {
   }
 
   async removeSchedule(request: IRemoveWorkoutSchedule) {
+    try {
+        const docRef = await this.firebase
+          .collection("WorkoutSchedule")
+          .doc(request.userId)
+          .collection("userSchedules")
+          .doc(request.schedule.id)
+          .delete()
+          
+        console.log('Schedule deleted successfully');
+      
+        const response: IRemovedWorkoutSchedule = {
+          userId: request.userId,
+          validate: true,
+        };
+      
+        return response;
+    } catch (error) {
+        console.log('Error removing schedule:', error);
+        alert(error);
+      
+        const response: IRemovedWorkoutSchedule = {
+          userId: request.userId,
+          validate: false,
+        };
+      
+        return response;
+    }
 
   }
 
   async updateSchedule(request: IUpdateWorkoutSchedule) {
-
+    try {
+        const docRef = await this.firebase
+          .collection("WorkoutSchedule")
+          .doc(request.userId)
+          .collection("userSchedules")
+          .doc(request.schedule.id)
+          .update(request.schedule)
+          
+        console.log('Schedule updated successfully');
+      
+        const response: IUpdatedWorkoutSchedule = {
+          userId: request.userId,
+          schedule: request.schedule,
+          validate: true,
+        };
+      
+        return response;
+    } catch (error) {
+        console.log('Error updating schedule:', error);
+        alert(error);
+      
+        const response: IUpdatedWorkoutSchedule = {
+          userId: request.userId,
+          validate: false,
+        };
+      
+        return response;
+    }
   }
 
   async getSchedules(request: IGetWorkoutSchedules) {
-    return await this.getMock(request);
+    try {
+        const snapshot = await this.firebase
+          .collection("WorkoutSchedule")
+          .doc(request.userId)
+          .collection("userSchedules")
+          .get()
+          .toPromise();
+        const schedules: IWorkoutScheduleModel[] = [];
+      
+        snapshot!.forEach((doc) => {
+          const schedule = {
+            id: doc.id,
+            ...doc as IWorkoutScheduleModel,
+          };
+      
+          schedules.push(schedule);
+        });
+      
+        console.log('Schedules fetched successfully');
+        alert('Schedules fetched successfully');
+      
+        const response: IGotWorkoutSchedules = {
+          userId: request.userId,
+          schedules: schedules,
+        };
+      
+        return response;
+      } catch (error) {
+        console.log('Error fetching schedules:', error);
+        alert(error);
+      
+        const response: IGotWorkoutSchedules = {
+          userId: request.userId,
+          schedules: [],
+        };
+      
+        return response;
+      }
+      
+    //return await this.getMock(request);
   }
 
   getMock(request:IGetWorkoutSchedules){

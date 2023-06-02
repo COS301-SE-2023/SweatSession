@@ -41,13 +41,13 @@ export interface IAddedWorkoutSchedule {
     validate: boolean;
 }
 
-export interface IRemovedWorkout {
+export interface IRemovedWorkoutSchedule {
     userId: string;
     validate: boolean;
 }
 
 export interface IUpdatedWorkoutSchedule {
     userId: string;
-    schedule: IWorkoutScheduleModel;
-    validate: true;
+    schedule?: IWorkoutScheduleModel;
+    validate: boolean;
 }
