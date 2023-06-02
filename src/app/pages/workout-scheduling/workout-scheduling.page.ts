@@ -20,11 +20,12 @@ export class WorkoutSchedulingPage {
 
   constructor(private popoverController: PopoverController, 
       private store : Store, private loadingCtrl: LoadingController) { 
-      this.initialiseSearchTerms();
+     
   }
 
   ngOnInit() {
     this.displayWorkoutSchedule();
+    this.initialiseSearchTerms();
   }
 
   initialiseSearchTerms() {
@@ -59,13 +60,17 @@ export class WorkoutSchedulingPage {
     this.schedules = this.searchTerms.filteredSuggestions!;
   }
 
-  async Loading() {
+  async showLoader() {
     const loader = await this.loadingCtrl.create({
       message: 'Loading...',
       translucent: true,
-      duration: 2000,
+      duration: 3000
     });
-    await loader.present();
+    loader.present();
+  }
+
+  async dismissLoader() {
+    await this.loadingCtrl.dismiss();
   }
 
   onSearchInput(event:any) {
@@ -81,7 +86,6 @@ export class WorkoutSchedulingPage {
   }
 
   find(suggestion: string){
-    this.Loading();
     console.log(suggestion);
     this.searchTerms.searchQuery = suggestion;
     this.searchTerms.initial = false;

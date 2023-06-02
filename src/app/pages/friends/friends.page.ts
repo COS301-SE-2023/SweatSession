@@ -15,9 +15,7 @@ export class FriendsPage implements OnInit {
   friends:IFriendsModel[]=[];
   @Select(FriendsState.returnFriends) friends$! : Observable<IFriendsModel[]>;
   searchTerms!: ISearchTerms;
-  constructor(private store: Store, private loadingCtrl:LoadingController) { 
-    
-  }
+  constructor(private store: Store, private loadingCtrl:LoadingController) { }
 
   ngOnInit() {
     this.initialiseSearchTerms()
@@ -51,13 +49,17 @@ export class FriendsPage implements OnInit {
     this.friends = this.searchTerms.filteredSuggestions!;
   }
 
-  async Loading() {
+  async showLoader() {
     const loader = await this.loadingCtrl.create({
       message: 'Loading...',
       translucent: true,
-      duration: 2000,
+      duration: 3000
     });
-    await loader.present();
+    loader.present();
+  }
+
+  async dismissLoader() {
+    await this.loadingCtrl.dismiss();
   }
 
   onSearchInput(event:any) {
@@ -73,8 +75,6 @@ export class FriendsPage implements OnInit {
   }
 
   find(suggestion: string){
-    this.Loading();
-    console.log(suggestion);
     this.searchTerms.searchQuery = suggestion;
     this.searchTerms.initial = false;
     this.searchSchedule();
