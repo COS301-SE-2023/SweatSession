@@ -4,7 +4,7 @@ import { Action, State, StateContext, Store, Selector } from "@ngxs/store";
 import { Router } from "@angular/router";
 import { FriendsService } from "src/app/services";
 import { AddFriendAction, GetFriendsAction, RemoveFriendAction } from "src/app/actions";
-import { IAddFriend, IAddedFriend, IFriendsModel, IGetFriends, IGotFriends } from "src/app/models";
+import { IAddFriend, IAddedFriend, IFriendsModel, IGetFriends, IGotFriends, IRemoveFriend } from "src/app/models";
 
 export interface FriendsStateModel {
     friends: IFriendsModel[];
@@ -38,13 +38,31 @@ export class FriendsState {
 
     @Action(RemoveFriendAction)
     async removeFriends(ctx: StateContext<FriendsStateModel>,{payload}: RemoveFriendAction) {
-        //remove friend
+        const request:IRemoveFriend={
+            userId:"testId",
+            friend: payload
+        }
+
+        const response = await this.friendsService.removeFriend(request);
+        if(response.validate){
+            const friends = ctx.getState().friends.filter((schedule)=>{
+                if(schedule.id! === request.friend.id!)
+                    return false;
+                else
+                    return true;
+            })
+            ctx.patchState({
+                friends: friends
+            })
+        }
     }
 
     @Action(AddFriendAction)
     async addFriend(ctx: StateContext<FriendsStateModel>, {payload}: AddFriendAction) {
-        const request:IAddFriend=payload;
-
+        const request:IAddFriend={
+            userId:"testId",
+            friend: payload
+        }
         const response: IAddedFriend = await this.friendsService.getFriends(request);
         ctx.setState({
             friends:[response.friend!,...ctx.getState().friends]

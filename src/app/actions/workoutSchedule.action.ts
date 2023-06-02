@@ -1,6 +1,4 @@
-import { IAddWorkoutSchedule, 
-        IGetWorkoutSchedules,
-        IRemoveWorkoutSchedule,
+import { IRemoveWorkoutSchedule,
         IUpdateWorkoutSchedule,
         IWorkoutScheduleModel } 
         from "../models";
