@@ -30,7 +30,7 @@ export class FriendsState {
             userId:"test id"
         }
 
-        const response: IGotFriends = /*this.getMock()*/await this.friendsService.getFriends(request);
+        const response: IGotFriends = await this.friendsService.getFriends(request);
         ctx.patchState({
             ...ctx.getState(), friends: response.friends
         })
@@ -45,12 +45,9 @@ export class FriendsState {
     async addFriend(ctx: StateContext<FriendsStateModel>, {payload}: AddFriendAction) {
         const request:IAddFriend=payload;
 
-        const response: IAddedFriend = {
-            validate: true,
-            friend: payload.friend
-        }//await this.friendsService.getFriends(request);
+        const response: IAddedFriend = await this.friendsService.getFriends(request);
         ctx.setState({
-            friends:[response.friend,...ctx.getState().friends]
+            friends:[response.friend!,...ctx.getState().friends]
         })
     }
 

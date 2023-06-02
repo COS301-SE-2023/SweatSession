@@ -1,5 +1,5 @@
 export interface IFriendsModel {
-    id: string;
+    id?: string;
     name: string;
     profileUrl: string;
 }
@@ -22,14 +22,18 @@ export interface IAddFriend {
 
 //response
 export interface IGotFriends {
-    friends: IFriendsModel[] | undefined;
+    userId: string;
+    friends: IFriendsModel[];
+    validate: boolean;
 }
 
 export interface IRemovedFriend {
+    userId: string;
     validate: boolean;
 }
 
 export interface IAddedFriend {
+    userId: string;
     validate: boolean;
-    friend: IFriendsModel;
+    friend?: IFriendsModel;
 }

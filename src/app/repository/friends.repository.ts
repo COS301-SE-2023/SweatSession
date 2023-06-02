@@ -1,84 +1,120 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { IAddFriend,
+     IAddedFriend,
      IFriendsModel, 
      IGetFriends, 
      IGotFriends, 
-     IRemoveFriend } 
+     IRemoveFriend, 
+     IRemovedFriend} 
      from '../models';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FriendsRepository {
-
-  constructor(private firebase: AngularFirestore) { }
+    /**
+     * collection: friends{
+     *  document: userId {
+     *      collection: friends {
+     *          document: id { 
+     *              name: string,
+     *              profileUrl: string 
+     *          }
+     *      }
+     *  }
+     * }
+     * 
+     * 
+     */
+  constructor(private firestore: AngularFirestore) { }
 
   async getFriends(request: IGetFriends){
-    // const collectionRef: AngularFirestoreCollection<IProfileModel> = this.firestore.collection('profiles');
-    // collectionRef.add(newProfile)
-    //     .then((docRef) => {
-    //         console.log('Document created successfully with ID:', docRef.id);
-    //     })
-    //     .catch((error) => {
-    //         console.error('Error creating document:', error);
-    //     });
-       return this.getMock();
+    try {
+        const docRef = await this.firestore.collection("friends")
+                .doc(request.userId)
+                .collection("friends")
+                .get()
+                .toPromise();
+    
+        let friends: IFriendsModel[] = [];
+
+        docRef!.forEach((doc)=>{
+            const friend = {
+                id : doc.id,
+                ...doc.data() as IFriendsModel,
+            }
+            friends.push(friend);
+        })
+
+        const response: IGotFriends = {
+            userId: request.userId,
+            friends: friends,
+            validate: true
+        }
+        alert('Friends fetched successfully');
+        return response;
+
+    }catch(error){
+        alert("error: "+ error)
+        const response: IGotFriends = {
+            userId: request.userId,
+            friends: [],
+            validate: false
+        }
+
+        return response;
+    }
   }
 
   async addFriend(request: IAddFriend){
-
+    try {
+        const docRef = await this.firestore
+        .collection("friends")
+        .doc(request.userId)
+        .collection("userFriends")
+        .add(request.friend)
+        const friend: IFriendsModel ={
+            id: docRef.id,
+            ...request.friend
+        }
+        const response: IAddedFriend = {
+            userId: request.userId,
+            friend: friend,
+            validate: true
+    }
+    return response;
+    }catch(error) {
+        alert("error: "+ error);
+        const response: IAddedFriend = {
+            userId: request.userId,
+            validate: false,
+        }
+        return response;
+    }
   }
 
   async removeFriend(request: IRemoveFriend){
-    
-  }
+    try {
+        const docRef = await this.firestore
+        .collection("friends")
+        .doc(request.userId)
+        .collection("userFriends")
+        .doc(request.friend.id)
+        .delete()
 
-  getMock() : IGotFriends{
-    const results : IGotFriends = {
-        friends: [
-            {
-                id: "id 1",
-                name: "Testing 1",
-                profileUrl: ""
-            },
-            {
-                id: "id 2",
-                name: "Testing 2",
-                profileUrl: ""
-            },
-            {
-                id: "id 3",
-                name: "Testing 3",
-                profileUrl: ""
-            },
-            {
-                id: "id 4",
-                name: "Testing 4",
-                profileUrl: ""
-            },
-            {
-                id: "id 5",
-                name: "Testing 5",
-                profileUrl: ""
-            },
-            {
-                id: "id 6",
-                name: "Testing 6",
-                profileUrl: ""
-            },
-            {
-                id: "id 7",
-                name: "Testing 7",
-                profileUrl: ""
-            },
-            {
-                id: "id 8",
-                name: "Testing 8",
-                profileUrl: ""
-            }
-        ]
+        const response: IRemovedFriend = {
+            userId: request.userId,
+            validate: true
+        }
+        return response;
+    }catch(error) {
+        alert("error: "+ error);
+        const response: IRemovedFriend = {
+            userId: request.userId,
+            validate: false,
+        }
+        return response;
     }
-    return results;
-}
+  }
 }
