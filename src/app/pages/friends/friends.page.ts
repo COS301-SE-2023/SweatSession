@@ -16,12 +16,11 @@ export class FriendsPage implements OnInit {
   @Select(FriendsState.returnFriends) friends$! : Observable<IFriendsModel[]>;
   searchTerms!: ISearchTerms;
   constructor(private store: Store, private loadingCtrl:LoadingController) { 
-    this.store.dispatch(new GetFriendsAction());
-    this.displayFriends();
-    this.initialiseSearchTerms()
+    
   }
 
   ngOnInit() {
+    this.initialiseSearchTerms()
     this.displayFriends();
   }
 
