@@ -44,7 +44,7 @@ import { IProfileModel , IGetProfile, IGotProfile,} from 'src/app/models';
 @Injectable({
   providedIn: 'root'
 })
-export class ProfileService {
+export class SetProfileService {
 
   constructor(private repository: ProfileRepository) { }
 

@@ -1,33 +1,32 @@
-// import { Injectable } from '@angular/core';
-// import { IUpdateProfile, IGetProfile } from '../models';
-// import { IProfileModel } from '../models';
-// import { Store } from '@ngxs/store';
+import { Injectable } from '@angular/core';
+import 'firebase/firestore';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { IProfileModel, IGetProfile } from '../models';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { DocumentSnapshot } from 'firebase/firestore';
 
-// @Injectable({
-//   providedIn: 'root'
-// })
-// export class ProfileRepository {
+@Injectable({
+  providedIn: 'root'
+})
+export class ProfileRepository {
 
-//   constructor(private store: Store) { }
+  constructor(private firestore: AngularFirestore) {}
 
-//   async getProfile(request: IGetProfile)
-//   {
-//     //get the profile from the store
-
-
-//   }
-  
-//   async updateProfile(request: IUpdateProfile)
-//   {
-//     //get the profile from the store
-//   }
-//   // async updateProfile(profile: IProfile) {
-//   //   // Remove password field if present
-//   //   delete profile.accountDetails?.password;
-//   //   return await admin
-//   //     .firestore()
-//   //     .collection('profiles')
-//   //     .doc(profile.userId)
-//   //     .set(profile, { merge: true });
-//   // }
-// }
+   getProfile(request: IGetProfile): Observable<IProfileModel | undefined> {
+    return this.firestore
+      .collection('profiles')
+      .doc<IProfileModel>(request.userId)
+      .get()
+      .pipe(
+        map((snapshot: any) => {
+          const data = snapshot.data() as IProfileModel | undefined;
+          if (snapshot.exists && data) {
+            return data;
+          } else {
+            return undefined; // Profile does not exist
+          }
+        })
+      );
+  }
+}
