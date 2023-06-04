@@ -4,7 +4,7 @@ import { FormBuilder, Validators } from '@angular/forms'; //, AbstractControl, V
 import { Select, Store } from '@ngxs/store';
 //import { ReactiveFormsModule } from '@angular/forms';
 import {Register} from 'src/app/actions/register';
-import {RegisterPageModule} from './register.module'
+//import {RegisterPageModule} from './register.module'
 
 @Component({
   selector: 'app-register',
@@ -16,7 +16,7 @@ export class RegisterPage implements OnInit {
     email: ['',[Validators.email],],
     password: ['', [Validators.minLength(6), Validators.maxLength(25)]],
     cPassword: ['', []],
-  },{ });//add code to check if passwords are equal
+  },{ });
   constructor(
     private Nav: NavController,
     private readonly regFormBuilder: FormBuilder,
@@ -42,10 +42,17 @@ export class RegisterPage implements OnInit {
     if (this.registrationForm.valid) {
       const regEmail = this.registrationForm?.get('email')?.value;
       const regPassword = this.registrationForm?.get('password')?.value;
-      if (regEmail != null && regPassword!=null){
-        this.store.dispatch(new Register(regEmail,regPassword));
+      const cPassword = this.registrationForm?.get('cPassword')?.value;
+      if (regEmail != null && regPassword!=null && cPassword!=null){
+        if (regPassword!=cPassword){
+          alert("The password you have entered in the confirm password field does not match the password in the password field.");
+        }else{
+          this.store.dispatch(new Register(regEmail,regPassword));
+        }
       }
+    }else{
+      alert("Invalid Registration Information. Make sure that the password is at least 6 characters long and you have entered a valid email address");
     }
-    this.Nav.navigateRoot('/home');
+    //this.Nav.navigateRoot('/home');     //moved this to auth api
   }
 }

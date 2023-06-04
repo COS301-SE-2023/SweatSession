@@ -14,7 +14,7 @@
       </ion-label>
     </ion-item>
 
-    <ion-item class="clickable" routerLink="/logout">
+    <ion-item class="clickable" (click)="userLogout()" routerLink="/login">
       <ion-icon name="log-out-outline">
       </ion-icon>
       <ion-label class="menu-label">
