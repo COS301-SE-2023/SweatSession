@@ -10,4 +10,19 @@
       <ion-title size="large">workout_tracking</ion-title>
     </ion-toolbar>
   </ion-header>
+
+  <form [formGroup]="workoutForm">
+    <div formArrayName="exercises" *ngFor="let exercise of exercises.controls; index as i">
+      <div [formGroupName]="i">
+        <label>Name:</label>
+        <input formControlName="name" />
+        <label>Sets:</label>
+        <input formControlName="sets" />
+        <label>Weight (kg):</label>
+        <input formControlName="weight" />
+      </div>
+    </div>
+
+    <button type="button" (click)="addExercise()">Add Exercise</button>
+  </form>
 </ion-content>
