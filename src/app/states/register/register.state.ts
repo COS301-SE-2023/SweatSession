@@ -40,10 +40,12 @@ export interface RegisterStateModel {
   providedIn: 'root'
 })
 export class RegisterState {
-  constructor(private store: Store, private authApi: AuthApi, private service: RegisterService) {}   //, private service: RegisterService 
+  constructor(private store: Store, private authApi: AuthApi, private service: RegisterService) {alert("Register state Constructer")}   //, private service: RegisterService 
   @Action(RegisterAction)
   async register(context: StateContext<RegisterStateModel>, action: RegisterAction) {//, email: string, password: string
     try {
+
+      alert("register.state.ts");
       const state = context.getState();
 
       // const regEmail = state.registerForm.model.email;
@@ -67,6 +69,7 @@ export class RegisterState {
       }
       return alert("Please set email and/or password");
     } catch (error) {
+      
       return alert((error as Error).message);
     }
   }

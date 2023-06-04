@@ -12,8 +12,8 @@ import { IProfileModel } from 'src/app/models';
 export class SetprofilePage implements OnInit {
 
   
-  // user: IProfileModel = {userId: '123', name: 'Triumph Ndlovu', email: 'TriumphSynapse@gmail.com', bio: 'hiiiiiiiiiiiiiiiiiiii', profileURL: 'https://i.pravatar.cc/150?img=68', phoneNumber: '0123456789'};
-  user!: IProfileModel;
+  user: IProfileModel = {userId: '123', name: 'Triumph Ndlovu', email: 'TriumphSynapse@gmail.com', bio: 'hiiiiiiiiiiiiiiiiiiii', profileURL: 'https://i.pravatar.cc/150?img=68', phoneNumber: '0123456789'};
+  // user!: IProfileModel;
 
   ProfilePicture: string = 'https://i.pravatar.cc/150?img=68';// for now
 
@@ -68,11 +68,11 @@ export class SetprofilePage implements OnInit {
   }
   constructor(private modalController: ModalController, setprofileservices: SetProfileService)//, private ProfileService: ProfileService)
   {
-    const userId = '123';
+    // const userId = '123';
 
-    setprofileservices.getProfile(this.user).subscribe((profile) => {
-      this.user = profile.profile;
-    });
+    // setprofileservices.getProfile(this.user).subscribe((profile) => {
+    //   this.user = profile.profile;
+    // });
 
     // this.profileservices.getUserProfile(userId)
     // .then((profile) => {

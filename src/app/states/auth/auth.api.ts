@@ -12,6 +12,7 @@ import { NavController } from '@ionic/angular';
 //import { RegisterRepository } from 'src/app/repository/register.repository';
 
 //import { getAuth } from 'firebase/auth';
+// import { getAuth } from 'firebase/auth';
 
 @Injectable()
 export class AuthApi {
@@ -57,6 +58,8 @@ export class AuthApi {
       //return "Incorrect registration info.";
       //return "";
     }
+    // alert("in auth api register function");
+    // return await createUserWithEmailAndPassword(this.authObject, regEmail, regPassword);
   }
 
   async logout() {
