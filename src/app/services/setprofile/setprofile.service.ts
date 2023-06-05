@@ -40,6 +40,8 @@ import { ProfileRepository } from 'src/app/repository/profile.repository';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { IProfileModel , IGetProfile, IGotProfile,} from 'src/app/models';
+import { computeStackId } from '@ionic/angular/directives/navigation/stack-utils';
+
 
 @Injectable({
   providedIn: 'root'
@@ -62,22 +64,29 @@ export class SetProfileService {
               profileURL: profile.profileURL  
             }
           };
+
           return gotProfile;
         } else {
           const notFoundProfile: IGotProfile = {
             profile: {
-              userId: 'undefined',
-              bio: 'undefined',
-              email: 'undefined',
-              name: 'undefined',
-              phoneNumber: 'undefined',
-              profileURL: 'undefined'  
+              userId: 'undefinedID',
+              bio: 'undefinedbio',
+              email: 'undefinedemail',
+              name: 'undefinedname',
+              phoneNumber: 'undefinedphone',
+              profileURL: 'undefinedURL'  
             }
           };
           return notFoundProfile;
         }
       })
     );
+  }
+
+  updateProfile(prof: IGetProfile)
+  {
+    this.repository.updateProfile(prof);
+    
   }
 }
 

@@ -13,20 +13,25 @@ export class ProfileRepository {
 
   constructor(private firestore: AngularFirestore) {}
 
-   getProfile(request: IGetProfile): Observable<IProfileModel | undefined> {
+  getProfile(request: IGetProfile): Observable<IProfileModel | undefined> {
     return this.firestore
       .collection('profiles')
       .doc<IProfileModel>(request.userId)
-      .get()
+      .valueChanges()
       .pipe(
-        map((snapshot: any) => {
-          const data = snapshot.data() as IProfileModel | undefined;
-          if (snapshot.exists && data) {
+        map((data: IProfileModel | undefined) => {
+          if (data) {
             return data;
           } else {
-            return undefined; // Profile does not exist
+            throw new Error('Profile does not exist for UserID: ' + request.userId);
           }
         })
       );
+  }
+  updateProfile(request: IProfileModel): Promise<void> {
+    return this.firestore
+      .collection('profiles')
+      .doc<IProfileModel>(request.userId)
+      .set(request);
   }
 }

@@ -39,7 +39,6 @@ export class RegisterRepository {
             })
             .catch((error) => {
                 console.error('Error creating document:', error);
-                console.error('Error creating document:', error);
             });
         //return await getFirestore().collection('user').doc(newUser.id).create(newUser);
     }

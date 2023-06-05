@@ -66,7 +66,6 @@ export class AuthState {
     { email, password }: RegisterAuth
   ) {
     try {
-      alert("auth.state.ts");
       alert(email);
       alert(password);
       await this.authenticationApi.register(email, password);

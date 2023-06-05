@@ -6,6 +6,7 @@ import { IonicModule } from '@ionic/angular';
 import { SetprofilePageRoutingModule } from './setprofile-routing.module';
 
 import { SetprofilePage } from './setprofile.page';
+import { AuthApi } from 'src/app/states/auth/auth.api';
 
 @NgModule({
   imports: [
@@ -13,6 +14,9 @@ import { SetprofilePage } from './setprofile.page';
     FormsModule,
     IonicModule,
     SetprofilePageRoutingModule
+  ],
+  providers: [
+    AuthApi
   ],
   declarations: [SetprofilePage]
 })

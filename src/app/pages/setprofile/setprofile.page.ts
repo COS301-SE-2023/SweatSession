@@ -3,6 +3,9 @@ import { Component, OnInit,ViewChild  } from '@angular/core';
 import { IonContent, ModalController } from '@ionic/angular';
 import { SetProfileService } from '../../services/setprofile/setprofile.service';
 import { IProfileModel } from 'src/app/models';
+import { AuthState } from 'src/app/states/auth/auth.state';
+import {AuthenticationStateModel} from 'src/app/states/auth/auth.state';
+import { AuthApi } from 'src/app/states/auth/auth.api';
 
 @Component({
   selector: 'app-setprofile',
@@ -12,10 +15,10 @@ import { IProfileModel } from 'src/app/models';
 export class SetprofilePage implements OnInit {
 
   
-  user: IProfileModel = {userId: '123', name: 'Triumph Ndlovu', email: 'TriumphSynapse@gmail.com', bio: 'hiiiiiiiiiiiiiiiiiiii', profileURL: 'https://i.pravatar.cc/150?img=68', phoneNumber: '0123456789'};
-  // user!: IProfileModel;
+  // user: IProfileModel = {userId: '123', name: 'Triumph Ndlovu', email: 'TriumphSynapse@gmail.com', bio: 'hiiiiiiiiiiiiiiiiiiii', profileURL: 'https://i.pravatar.cc/150?img=68', phoneNumber: '0123456789'};
+  user! : IProfileModel;
 
-  ProfilePicture: string = 'https://i.pravatar.cc/150?img=68';// for now
+  ProfilePicture: string = 'https://i.pravatar.cc/150?img=68'; // for now
 
   selectedPicture: string | null = null;
 
@@ -35,6 +38,7 @@ export class SetprofilePage implements OnInit {
  
     this.editMode = false;
     this.user.profileURL = this.ProfilePicture;
+
     this.modalController.dismiss('save');
     console.log('Saving profile:', this.user);
   }
@@ -42,6 +46,9 @@ export class SetprofilePage implements OnInit {
   savePicture() {
     // Perform save logic here
     // this.oldProfilePicture = this.selectedPicture;
+    // SetProfileService.updateProfile(this.user).subscribe((profile) => {
+    //   this.user = profile.profile;
+    // });
     this.modalController.dismiss('save');
   }
   
@@ -57,6 +64,7 @@ export class SetprofilePage implements OnInit {
   }
 
   editMode = false;
+  isEditMode = false;
 
   enableEditMode() {
     console.log('Enabling edit mode');
@@ -66,21 +74,41 @@ export class SetprofilePage implements OnInit {
   closePicturePopup() {
     this.modalController.dismiss('cancel');
   }
-  constructor(private modalController: ModalController, setprofileservices: SetProfileService)//, private ProfileService: ProfileService)
-  {
-    // const userId = '123';
 
-    // setprofileservices.getProfile(this.user).subscribe((profile) => {
-    //   this.user = profile.profile;
-    // });
+  temp! : String;
+  constructor(private modalController: ModalController, setprofileservices: SetProfileService, authApi : AuthApi)//, private ProfileService: ProfileService)
+  {   
+      this.user = {userId: 'sdHzZS6WSslwe4xo51rK', name: 'Triumph Ndlovu', email: 'no email provided', bio: 'no bio provided', profileURL: 'https://i.pravatar.cc/150?img=68', phoneNumber: '0000000000'};
+      // this.user = {userId: 'abc', name: 'Triumph Ndlovu', email: 'no email provided', bio: 'no bio provided', profileURL: 'https://i.pravatar.cc/150?img=68', phoneNumber: '0000000000'};
+      
+       authApi.getCurrentUserId().then((collection: any) => {  
+        try
+        {
+          this.user.userId = collection.profile.userId;
+          alert('user id is: ' + collection);
+        }catch(e)
+        {
+          console.log("error: " + e);
+        }
+      });
 
-    // this.profileservices.getUserProfile(userId)
-    // .then((profile) => {
-    //   this.user = profile;
-    // })
-    // .catch((error) => {
-    //   console.error(error);
-    // });
+    setprofileservices.getProfile(this.user).subscribe((profile) => {
+      this.user = profile.profile;
+    });
+
+  }
+  
+  toggleEditMode() {
+    this.isEditMode = true;
+    console.log('Toggled Edit');
+  }
+
+  isAnyFieldEdited(): boolean {
+    return (
+      this.user.name !== this.user.name ||
+      this.user.bio !== this.user.bio ||
+      this.user.phoneNumber !== this.user.phoneNumber
+    );
   }
 
   ngOnInit() {
