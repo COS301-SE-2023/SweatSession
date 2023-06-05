@@ -17,9 +17,13 @@
   </ion-item>
   <ion-item id="userName">
       Joe Black
-      <ion-button slot="end">
+      <ion-button slot="end" *ngIf="friendshipStatus" (click)="removeFriend()">
         <ion-icon name="person-outline"></ion-icon>
-        friends
+        remove friend
+      </ion-button>
+      <ion-button slot="end" *ngIf="!friendshipStatus" (click)="addFriend()">
+        <ion-icon name="person-outline"></ion-icon>
+        add friend
       </ion-button>
   </ion-item>
   <ion-item id="userBio">
@@ -29,15 +33,15 @@
  <ion-card>
   <ion-item>
     <ion-icon name="barbell-outline"></ion-icon>
-    <ion-card-header>WorkoutSchedule</ion-card-header>
-    <ion-button slot="end" routerLink="/workout-scheduling">view</ion-button>
+    <ion-card-header>WorkoutSchedules</ion-card-header>
+    <ion-button slot="end" (click)="viewSchedules()">view</ion-button>
   </ion-item>
  </ion-card>
  <ion-card>
   <ion-item>
     <ion-icon name="people-outline"></ion-icon>
     <ion-card-header>30 Friends</ion-card-header>
-    <ion-button slot="end" routerLink="/friends">view</ion-button>
+    <ion-button slot="end" (click)="viewFriends()">view</ion-button>
   </ion-item>
  </ion-card>
 </ion-content>

@@ -1,7 +1,7 @@
 export interface IFriendsModel {
     id?: string;
-    name: string;
-    profileUrl: string;
+    name?: string;
+    profileUrl?: string;
 }
 
 //requests
