@@ -1,11 +1,13 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-icon name="arrow-back-outline" routerLink="/userprofile"></ion-icon>
+    <ion-item>
+      <ion-icon name="arrow-back-outline" routerLink="/userprofile"></ion-icon>
       <ion-title>Schedules</ion-title>
       <ion-item slot="end"  class="add-schedule-button" (click)="addSchedule()">
         <ion-icon name="add-outline"></ion-icon>
         <ion-icon name="receipt-outline"></ion-icon>
       </ion-item>
+    </ion-item>
   </ion-toolbar>
 </ion-header>
 
