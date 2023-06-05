@@ -62,7 +62,10 @@ export class RegisterState {
         //return context.dispatch(new AuthActionRegister(email, password));
         const regSuccessful = await this.authApi.register(email, password);
         if (regSuccessful){
-          this.service.register(email, password);
+          const currUserId = await this.authApi.getCurrentUserId();
+          if (currUserId!=null){
+            return this.service.register(currUserId, email);
+          }
         }
       }
       return alert("Please set email and/or password");

@@ -19,12 +19,13 @@ export class RegisterService {
       //     //created: Timestamp.now()
       //   }
       // }
-      alert("In register Service");
+      // alert("In register Service");
       const newUser:IUserModel = {
         id:currUserId,
         email: regEmail,
         created: Timestamp.now()
       }
+      console.log(newUser);
 
       const [dName] = regEmail.split("@"); //this is to get the part until the @
       const newProfile:IProfileModel = {
@@ -32,9 +33,10 @@ export class RegisterService {
         displayName:dName,
         email: regEmail
       }
+      console.log(newProfile);
       //this.repository.createUser(newUser);
       //this.repository.createProfile({});
-      alert("In register Service");
+      // alert("In register Service");
       this.repository.createUser(newUser);
       this.repository.createProfile(newProfile);
   }
