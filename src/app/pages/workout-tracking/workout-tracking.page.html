@@ -11,18 +11,20 @@
     </ion-toolbar>
   </ion-header>
 
-  <form [formGroup]="workoutForm">
-    <div formArrayName="exercises" *ngFor="let exercise of exercises.controls; index as i">
-      <div [formGroupName]="i">
-        <label>Name:</label>
-        <input formControlName="name" />
-        <label>Sets:</label>
-        <input formControlName="sets" />
-        <label>Weight (kg):</label>
-        <input formControlName="weight" />
-      </div>
-    </div>
+  <div class="grid-container">
+    <div class="form-container">
+      <form [formGroup]="workoutForm">
+        <div formArrayName="exercises" *ngFor="let exercise of exercises.controls; index as i">
+          <div class="exercise-number">Exercise {{ i + 1 }}</div>
+          <div [formGroupName]="i">
+            <input formControlName="name" placeholder="Name" />
+            <input formControlName="sets" placeholder="Sets" />
+            <input formControlName="weight" placeholder="Weight (kg)" />
+          </div>
+        </div>
 
-    <button type="button" (click)="addExercise()">Add Exercise</button>
-  </form>
+        <button type="button" (click)="addExercise()">Add Exercise</button>
+      </form>
+    </div>
+  </div>
 </ion-content>

@@ -1,0 +1,32 @@
+ion-content {
+  height: 100%;
+  position: relative; // Add position: relative to ion-content
+}
+
+.center-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%; 
+}
+
+.form-container {
+  background-color: #A8DADC;
+  border-radius: 25px;
+  padding: 20px;
+  width: 80%;
+  text-align: center;
+  margin: 0 auto; // Add margin: 0 auto to center the form-container horizontally
+}
+
+input {
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.exercise-number {
+  font-weight: bold;
+  margin-top: 10px;
+}
