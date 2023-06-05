@@ -30,12 +30,22 @@ export class RegisterRepository {
         // }
 
 
-        alert("In register repositry createUser");
-        const collectionRef: AngularFirestoreCollection<IUserModel> = this.firestore.collection('users');
-        collectionRef.add(newUser)
+        // alert("In register repositry createUser");
+        // const collectionRef: AngularFirestoreCollection<IUserModel> = this.firestore.collection('users');
+        // collectionRef.add(newUser)
+        //     .then((docRef) => {
+        //         console.log('Document created successfully with ID:', docRef.id);
+        //         alert('Document created successfully with ID:' + docRef.id);
+        //     })
+        //     .catch((error) => {
+        //         console.error('Error creating document:', error);
+        //         console.error('Error creating document:', error);
+        //     });
+        const userRef = this.firestore.collection('users').doc(newUser.id);
+        userRef.set(newUser)
             .then((docRef) => {
-                console.log('Document created successfully with ID:', docRef.id);
-                alert('Document created successfully with ID:' + docRef.id);
+                console.log('Document created successfully with ID:', docRef);
+                // alert('Document created successfully with ID:' + docRef);
             })
             .catch((error) => {
                 console.error('Error creating document:', error);
@@ -44,11 +54,20 @@ export class RegisterRepository {
     }
 
     async createProfile(newProfile: IProfileModel) {
-        alert("In register repositry createProfileFunc");
-        const collectionRef: AngularFirestoreCollection<IProfileModel> = this.firestore.collection('profiles');
-        collectionRef.add(newProfile)
+        // alert("In register repositry createProfileFunc");
+        // const collectionRef: AngularFirestoreCollection<IProfileModel> = this.firestore.collection('profiles');
+        // collectionRef.add(newProfile)
+        //     .then((docRef) => {
+        //         console.log('Document created successfully with ID:', docRef.id);
+        //     })
+        //     .catch((error) => {
+        //         console.error('Error creating document:', error);
+        //     });
+        const profileRef = this.firestore.collection('profiles').doc(newProfile.userId);
+        profileRef.set(newProfile)
             .then((docRef) => {
-                console.log('Document created successfully with ID:', docRef.id);
+                console.log('Document created successfully with ID:', docRef);
+                // alert('Document created successfully with ID:' + docRef);
             })
             .catch((error) => {
                 console.error('Error creating document:', error);
