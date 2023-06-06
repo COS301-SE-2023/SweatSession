@@ -56,7 +56,7 @@ export class OtheruserState {
 
         if(request.userId=="friend 2")
             profile.bio = "whats up..."
-        else if(request.userId=="freinds 3")
+        else if(request.userId=="friend 3")
             profile.bio = "life of getter...."
         return profile;
     }
