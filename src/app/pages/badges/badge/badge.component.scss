@@ -1,0 +1,46 @@
+.badge {
+    // --ion-background-color: #457B9D;
+    display: flex;
+    align-items: center;
+    border-radius: 20px;
+    margin-top: 10%;
+    // padding: 10px;
+}
+
+.badgeHeader {
+    font-size: x-large;
+    margin-bottom: 7px;
+    // margin-bottom: 100%;
+}
+
+.badgeDescription {
+    font-size: large;
+}
+
+ion-img {
+    width: 80px;
+}
+
+div {
+    color: white;
+}
+
+.received {
+    --ion-background-color: #457B9D;
+}
+
+.not-received {
+    --ion-background-color: #A8DADC;
+    opacity: 0.8;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.badgeDescription {
+    text-align: center;
+}

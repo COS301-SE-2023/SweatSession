@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { BadgesPageRoutingModule } from './badges-routing.module';
 
 import { BadgesPage } from './badges.page';
+import { BadgeComponent } from './badge/badge.component';
 
 @NgModule({
   imports: [
@@ -14,7 +15,8 @@ import { BadgesPage } from './badges.page';
     FormsModule,
     IonicModule,
     BadgesPageRoutingModule
+    //BadgesStatesModule,
   ],
-  declarations: [BadgesPage]
+  declarations: [BadgesPage, BadgeComponent]
 })
 export class BadgesPageModule {}
