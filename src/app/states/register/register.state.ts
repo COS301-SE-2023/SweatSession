@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
-import { RegisterAuth as AuthActionRegister } from 'src/app/actions/auth';
+//import { RegisterAuth as AuthActionRegister } from 'src/app/actions/auth';
 import { Register as RegisterAction} from 'src/app/actions/register';
 import { Action, State, StateContext, Store } from '@ngxs/store';
 import {AuthApi} from 'src/app/states/auth/auth.api';
+import { RegisterService } from 'src/app/services';
+// import {} from 'functions/src/';
 
 export interface RegisterStateModel {
   registerForm: {
@@ -34,9 +36,11 @@ export interface RegisterStateModel {
   },
 })
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class RegisterState {
-  constructor(private store: Store, private authApi: AuthApi) {}
+  constructor(private store: Store, private authApi: AuthApi, private service: RegisterService) {}   //, private service: RegisterService 
   @Action(RegisterAction)
   async register(context: StateContext<RegisterStateModel>, action: RegisterAction) {//, email: string, password: string
     try {
@@ -56,7 +60,13 @@ export class RegisterState {
 
       if (action.email && action.password) {
         //return context.dispatch(new AuthActionRegister(email, password));
-        return this.authApi.register(email, password);
+        const regSuccessful = await this.authApi.register(email, password);
+        if (regSuccessful){
+          const currUserId = await this.authApi.getCurrentUserId();
+          if (currUserId!=null){
+            return this.service.register(currUserId, email);
+          }
+        }
       }
       return alert("Please set email and/or password");
     } catch (error) {
