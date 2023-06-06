@@ -55,6 +55,10 @@ const routes: Routes = [
     path: 'setprofile',
     loadChildren: () => import('./pages/setprofile/setprofile.module').then( m => m.SetprofilePageModule)
   },
+  {
+    path: 'badges',
+    loadChildren: () => import('./pages/badges/badges.module').then( m => m.BadgesPageModule)
+  },
 ];
 @NgModule({
   imports: [
