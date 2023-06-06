@@ -7,13 +7,15 @@ import { SetprofilePageRoutingModule } from './setprofile-routing.module';
 
 import { SetprofilePage } from './setprofile.page';
 import { AuthApi } from 'src/app/states/auth/auth.api';
+import { SetprofileCComponent } from './setProfileC/setProfileC.component';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    SetprofilePageRoutingModule
+    SetprofilePageRoutingModule,
+    SetprofileCComponent,
   ],
   providers: [
     AuthApi

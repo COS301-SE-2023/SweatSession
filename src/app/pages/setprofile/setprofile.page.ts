@@ -2,10 +2,12 @@ import { Component, OnInit,ViewChild  } from '@angular/core';
 //import { profile } from 'console';
 import { IonContent, ModalController } from '@ionic/angular';
 import { SetProfileService } from '../../services/setprofile/setprofile.service';
-import { IProfileModel } from 'src/app/models';
+import { IProfileModel , IGetProfile , } from 'src/app/models';
 import { AuthState } from 'src/app/states/auth/auth.state';
 import {AuthenticationStateModel} from 'src/app/states/auth/auth.state';
 import { AuthApi } from 'src/app/states/auth/auth.api';
+import { Select, Store } from '@ngxs/store';
+import {GetProfileAction} from 'src/app/actions/profile.action';
 
 @Component({
   selector: 'app-setprofile',
@@ -17,6 +19,7 @@ export class SetprofilePage implements OnInit {
   
   // user: IProfileModel = {userId: '123', name: 'Triumph Ndlovu', email: 'TriumphSynapse@gmail.com', bio: 'hiiiiiiiiiiiiiiiiiiii', profileURL: 'https://i.pravatar.cc/150?img=68', phoneNumber: '0123456789'};
   user! : IProfileModel;
+  getUser : IGetProfile = {userId: 'na'};
 
   ProfilePicture: string = 'https://i.pravatar.cc/150?img=68'; // for now
 
@@ -76,28 +79,42 @@ export class SetprofilePage implements OnInit {
   }
 
   temp! : String;
-  constructor(private modalController: ModalController, setprofileservices: SetProfileService, authApi : AuthApi)//, private ProfileService: ProfileService)
+  constructor(
+    private modalController: ModalController, 
+    setprofileservices: SetProfileService, 
+    private authApi: AuthApi,
+    private readonly store: Store
+    )//, private ProfileService: ProfileService)
   {   
-      this.user = {userId: 'sdHzZS6WSslwe4xo51rK', name: 'Triumph Ndlovu', email: 'no email provided', bio: 'no bio provided', profileURL: 'https://i.pravatar.cc/150?img=68', phoneNumber: '0000000000'};
+      this.user = {userId: 'sdHzZS6WSslwe4xo51rK', name: 'no name provided', email: 'no email provided', bio: 'no bio provided', profileURL: 'https://i.pravatar.cc/150?img=68', phoneNumber: '0000000000'};
       // this.user = {userId: 'abc', name: 'Triumph Ndlovu', email: 'no email provided', bio: 'no bio provided', profileURL: 'https://i.pravatar.cc/150?img=68', phoneNumber: '0000000000'};
       
-       authApi.getCurrentUserId().then((collection: any) => {  
-        try
-        {
-          this.user.userId = collection.profile.userId;
-          alert('user id is: ' + collection);
-        }catch(e)
-        {
-          console.log("error: " + e);
-        }
+
+    
+      // tempUserID = authApi.getCurrentUserId();
+    
+      // this.getUser.userId =  this.tempUserID.toString();
+        
+      
+      // t = await this.getUserid();
+      
+      this.getUserid();
+      
+      setprofileservices.getProfile(this.getUser).subscribe((profile) => {
+        this.user = profile.profile;
       });
-
-    setprofileservices.getProfile(this.user).subscribe((profile) => {
-      this.user = profile.profile;
-    });
-
+      
+    }
+    
+    async getUserid() {
+      // this.store.dispatch(new GetProfileAction(this.getUser));
+      this.getUser.userId = await this.authApi.getCurrentUserId()
+      alert("We got User ==> " + this.getUser.userId);
+   
   }
+
   
+
   toggleEditMode() {
     this.isEditMode = true;
     console.log('Toggled Edit');

@@ -83,11 +83,11 @@ export class SetProfileService {
     );
   }
 
-  updateProfile(prof: IGetProfile)
-  {
-    this.repository.updateProfile(prof);
+  // updateProfile(prof: IGetProfile)
+  // {
+  //   this.repository.updateProfile(prof);
     
-  }
+  // }
 }
 
 

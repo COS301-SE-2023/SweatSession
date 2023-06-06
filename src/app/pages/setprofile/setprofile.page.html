@@ -1,4 +1,4 @@
-<ion-header [translucent]="true">
+ <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-item>
       <ion-icon name="arrow-back-outline" routerLink="/userprofile"></ion-icon>
@@ -9,6 +9,13 @@
 
 
 <ion-content>
+  <app-setprofile-c> 
+
+  </app-setprofile-c>
+  
+</ion-content>
+
+<!-- <ion-content>
     <ion-card>
 
       <ion-card-header>
@@ -27,11 +34,11 @@
       <ion-card>
         <ion-button fill = "clear" (click)="toggleEditMode()">
           Edit
-        </ion-button>
+        </ion-button> --> -->
         
         <!-- <ion-button slot="end" fill="clear" (click)="">Edit</ion-button> -->
-      <ion-item>
-        <ion-label position="stacked">Name</ion-label>
+      <!-- <ion-item> -->
+        <!-- <ion-label position="stacked">Name</ion-label>
         <ion-input type="text" [(ngModel)]="user.name" [disabled]="!isEditMode"></ion-input>
       </ion-item>
 
@@ -48,16 +55,16 @@
       <ion-item>
         <ion-label position="stacked">Email</ion-label>
         <ion-input type="email"  disabled = "true" [(ngModel)]="user.email"></ion-input>
-      </ion-item>
+      </ion-item> -->
     
       <!-- <ion-item>
         <ion-label position="stacked">Change Password</ion-label>
         <ion-input type="password"  [(ngModel)]="user.cPassword"></ion-input>
       </ion-item> -->
     
-      <ion-button expand="block" (click)="saveProfile()" [disabled]="!isEditMode">Save</ion-button>
+      <!-- <ion-button expand="block" (click)="saveProfile()" [disabled]="!isEditMode">Save</ion-button>
     
-    </ion-card>
+    </ion-card> -->
 
     
 
@@ -78,4 +85,4 @@
     
   </ion-card> -->
 
-</ion-content>
+<!-- </ion-content> -->

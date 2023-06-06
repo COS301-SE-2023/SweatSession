@@ -21,7 +21,7 @@ export interface IUserModel {
 }
 
 export interface IGetProfile {
-    userId: string;
+    userId: string | undefined;
 }
 
 export interface IUpdateProfile {
