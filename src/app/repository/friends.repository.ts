@@ -52,7 +52,7 @@ export class FriendsRepository {
             friends: friends,
             validate: true
         }
-        alert('Friends fetched successfully');
+        // alert('Friends fetched successfully');
         return response;
 
     }catch(error){
@@ -75,7 +75,7 @@ export class FriendsRepository {
         .collection("userFriends")
         .add(request.friend)
         const friend: IFriendsModel ={
-            id: docRef.id,
+            userId: docRef.id,
             ...request.friend
         }
         const response: IAddedFriend = {
@@ -100,7 +100,7 @@ export class FriendsRepository {
         .collection("friends")
         .doc(request.userId)
         .collection("userFriends")
-        .doc(request.friend.id)
+        .doc(request.friend.userId)
         .delete()
 
         const response: IRemovedFriend = {

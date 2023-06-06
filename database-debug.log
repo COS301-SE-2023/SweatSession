@@ -1,7 +1,4 @@
-21:35:22.159 [NamespaceSystem-akka.actor.default-dispatcher-4] INFO akka.event.slf4j.Slf4jLogger - Slf4jLogger started
-21:35:22.356 [main] INFO com.firebase.server.forge.App$ - Listening at 127.0.0.1:5004
-21:35:39.085 [NamespaceSystem-akka.actor.default-dispatcher-4] INFO com.firebase.core.namespace.NamespaceActor - sweatsession-default-rtdb successfully activated FBKV (SurveyIdle(0)) wait: 138ms, init: 0ms
-21:35:39.185 [NamespaceSystem-blocking-namespace-operation-dispatcher-6] INFO com.firebase.core.namespace.StateManager - Namespace sweatsession-default-rtdb status Active to Active
-22:14:15.611 [NamespaceSystem-blocking-namespace-operation-dispatcher-11] INFO com.firebase.core.namespace.StateManager - Namespace sweatsession-default-rtdb status Active to Active
-22:14:15.617 [NamespaceSystem-blocking-namespace-operation-dispatcher-11] INFO com.firebase.core.namespace.StateManager - Namespace sweatsession-default-rtdb status Active to Active
-22:20:22.305 [NamespaceSystem-blocking-namespace-operation-dispatcher-14] INFO com.firebase.core.namespace.StateManager - Namespace sweatsession-default-rtdb status Active to Active
+17:54:22.067 [NamespaceSystem-akka.actor.default-dispatcher-4] INFO akka.event.slf4j.Slf4jLogger - Slf4jLogger started
+17:54:22.273 [main] INFO com.firebase.server.forge.App$ - Listening at 127.0.0.1:5004
+17:54:38.186 [NamespaceSystem-akka.actor.default-dispatcher-4] INFO com.firebase.core.namespace.NamespaceActor - sweatsession-default-rtdb successfully activated FBKV (SurveyIdle(0)) wait: 136ms, init: 0ms
+17:54:38.275 [NamespaceSystem-blocking-namespace-operation-dispatcher-6] INFO com.firebase.core.namespace.StateManager - Namespace sweatsession-default-rtdb status Active to Active

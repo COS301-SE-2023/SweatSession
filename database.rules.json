@@ -1,6 +1,6 @@
 {
   "rules": {
-    ".read": "now < 1685743200000",  // 2023-6-3
-    ".write": "now < 1685743200000",  // 2023-6-3
+    ".read": "auth != null",
+    ".write": "auth != null"
   }
 }

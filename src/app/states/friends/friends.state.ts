@@ -30,7 +30,7 @@ export class FriendsState {
             userId:"test id"
         }
 
-        const response: IGotFriends = await this.friendsService.getFriends(request);
+        const response: IGotFriends = this.getMock(request)//await this.friendsService.getFriends(request);
         ctx.patchState({
             ...ctx.getState(), friends: response.friends
         })
@@ -43,10 +43,10 @@ export class FriendsState {
             friend: payload
         }
 
-        const response = await this.friendsService.removeFriend(request);
-        if(response.validate){
+        //const response = await this.friendsService.removeFriend(request);
+        if(true/*response.validate*/){
             const friends = ctx.getState().friends.filter((schedule)=>{
-                if(schedule.id! === request.friend.id!)
+                if(schedule.userId! === request.friend.userId!)
                     return false;
                 else
                     return true;
@@ -72,5 +72,29 @@ export class FriendsState {
     @Selector()
     static returnFriends(state: FriendsStateModel){
         return state.friends;
+    }
+
+    getMock(request:IGetFriends){
+      let friends: IGotFriends = {
+            userId: request.userId,
+            friends:[{
+                userId: "friend 1",
+                name: "John",
+                profileURL: "assets/sweatsessionlogotransparent1.png" ,
+            },
+            {
+                userId: "friend 2",
+                name: "Johnny",
+                profileURL: "assets/sweatsessionlogotransparent1.png" ,
+            },
+            {
+                userId: "friend 3",
+                name: "Themba",
+                profileURL: "assets/sweatsessionlogotransparent1.png" ,
+            }],
+            validate: true,
+        }
+
+        return friends;
     }
 }

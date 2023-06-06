@@ -44,8 +44,8 @@ export class WorkoutscheduleRepository {
           ...request.schedule,
         };
       
-        console.log('Schedule added successfully with ID:', docRef.id);
-        alert('Schedule added successfully with ID:' + docRef.id);
+        // console.log('Schedule added successfully with ID:', docRef.id);
+        // alert('Schedule added successfully with ID:' + docRef.id);
       
         const response: IAddedWorkoutSchedule = {
           userId: request.userId,

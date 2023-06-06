@@ -1,11 +1,11 @@
 
 export interface IProfileModel {
   userId: string;
-  name: string;
-  email: string;
-  bio: string;
-  profileURL: string;
-  phoneNumber: string;
+  name?: string;
+  email?: string;
+  bio?: string;
+  profileURL?: string;
+  phoneNumber?: string;
 }
 
 //requests
