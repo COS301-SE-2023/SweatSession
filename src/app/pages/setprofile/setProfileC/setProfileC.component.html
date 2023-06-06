@@ -1,6 +1,4 @@
 
-
-<ion-content>
     <ion-card>
 
       <ion-card-header>
@@ -17,44 +15,44 @@
       </ion-card>
       
       <ion-card>
+
         <ion-button fill = "clear" (click)="toggleEditMode()">
           Edit
         </ion-button>
         
-        <!-- <ion-button slot="end" fill="clear" (click)="">Edit</ion-button> -->
-      <ion-item>
-        <ion-label position="stacked">Name</ion-label>
-        <ion-input type="text" [(ngModel)]="user.name" [disabled]="!isEditMode"></ion-input>
-      </ion-item>
+        <ion-list>
+          <ion-item>
+            <ion-input label="Display Name" labelPlacement="stacked" formControlName= "displayName" placeholder="Enter text"></ion-input>
+          </ion-item>
+        
+          <ion-item>
+            <ion-input label="Name" labelPlacement="stacked" formControlName= "name"  placeholder="Enter text"></ion-input>
+          </ion-item>
+        
+          <ion-item>
+            <ion-input label="Bio" labelPlacement="stacked" type = "text" formControlName= "bio" placeholder="Enter text"></ion-input>
+          </ion-item>
 
-      <ion-item>
-        <ion-label position="stacked">Bio</ion-label>
-        <ion-textarea  [(ngModel)]="user.bio"></ion-textarea>
-      </ion-item>
+          <ion-item>
+            <ion-input label="Email" labelPlacement="stacked" type = "email" formControlName= "bio" placeholder="Enter text"></ion-input>
+          </ion-item>
+        
+          <ion-item>
+            <ion-input label="Phone Number" labelPlacement="stacked" type = "text" formControlName= "phoneNumber" placeholder="Enter text"></ion-input>
+          </ion-item>
 
-      <ion-item>
-        <ion-label position="stacked">Phone Number</ion-label>
-        <ion-input type="text"  [(ngModel)]="user.phoneNumber"></ion-input>
-      </ion-item>
+          <ion-item>
+            <ion-input label="Height" labelPlacement="stacked" type = "number" formControlName= "height" placeholder="Enter text"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-input label="Weight" labelPlacement="stacked" type = "number" formControlName= "weight" placeholder="Enter text"></ion-input>
+          </ion-item>
+        </ion-list>
     
-      <ion-item>
-        <ion-label position="stacked">Email</ion-label>
-        <ion-input type="email"  disabled = "true" [(ngModel)]="user.email"></ion-input>
-      </ion-item>
-    
-      <!-- <ion-item>
-        <ion-label position="stacked">Change Password</ion-label>
-        <ion-input type="password"  [(ngModel)]="user.cPassword"></ion-input>
-      </ion-item> -->
-    
-      <ion-button expand="block" (click)="saveProfile()"  >Save</ion-button>
-    
-    </ion-card>
+      </ion-card>
 
-
-</ion-content>
-
-
+      <ion-button expand="block" (click)="saveProfile()"> Save </ion-button>
 
 
 

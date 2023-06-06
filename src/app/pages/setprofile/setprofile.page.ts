@@ -85,8 +85,8 @@ export class SetprofilePage implements OnInit {
     private authApi: AuthApi,
     private readonly store: Store
     )//, private ProfileService: ProfileService)
-  {   
-      this.user = {userId: 'sdHzZS6WSslwe4xo51rK', name: 'no name provided', email: 'no email provided', bio: 'no bio provided', profileURL: 'https://i.pravatar.cc/150?img=68', phoneNumber: '0000000000'};
+    {   
+      // this.user = {userId: 'sdHzZS6WSslwe4xo51rK', name: 'no name provided', email: 'no email provided', bio: 'no bio provided', profileURL: 'https://i.pravatar.cc/150?img=68', phoneNumber: '0000000000'};
       // this.user = {userId: 'abc', name: 'Triumph Ndlovu', email: 'no email provided', bio: 'no bio provided', profileURL: 'https://i.pravatar.cc/150?img=68', phoneNumber: '0000000000'};
       
 
@@ -107,11 +107,11 @@ export class SetprofilePage implements OnInit {
     }
     
     async getUserid() {
-      // this.store.dispatch(new GetProfileAction(this.getUser));
-      this.getUser.userId = await this.authApi.getCurrentUserId()
+
+      this.getUser.userId = await this.authApi.getCurrentUserId();
       alert("We got User ==> " + this.getUser.userId);
    
-  }
+    }
 
   
 

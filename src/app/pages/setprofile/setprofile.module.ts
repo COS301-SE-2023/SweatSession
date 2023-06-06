@@ -15,11 +15,11 @@ import { SetprofileCComponent } from './setProfileC/setProfileC.component';
     FormsModule,
     IonicModule,
     SetprofilePageRoutingModule,
-    SetprofileCComponent,
+    
   ],
   providers: [
     AuthApi
   ],
-  declarations: [SetprofilePage]
+  declarations: [SetprofilePage,SetprofileCComponent]
 })
 export class SetprofilePageModule {}

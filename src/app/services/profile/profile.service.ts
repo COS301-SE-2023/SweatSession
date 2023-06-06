@@ -48,6 +48,10 @@ export class ProfileService {
 
   constructor(private repository: ProfileRepository) { }
 
+  addProfile(profile: IProfileModel): Observable<any> { 
+    return this.repository.addProfile(profile);
+  }
+
   getProfile(prof: IGetProfile): Observable<IGotProfile> {
     return this.repository.getProfile(prof).pipe(
       map((profile: IProfileModel | undefined) => {

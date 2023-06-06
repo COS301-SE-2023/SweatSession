@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import 'firebase/firestore';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, from } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 import { IProfileModel, IGetProfile } from '../models';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { DocumentSnapshot } from 'firebase/firestore';
@@ -28,6 +28,23 @@ export class ProfileRepository {
         })
       );
   }
+
+  
+
+  addProfile(profile: IProfileModel): Observable<IProfileModel | undefined> {
+    return from(
+      this.firestore
+        .collection('profiles')
+        .doc<IProfileModel>(profile.userId)
+        .set(profile)
+    ).pipe(
+      map(() => profile),
+      catchError(async () => undefined)
+    );
+  }
+
+  
+
   updateProfile(request: IProfileModel): Promise<void> {
     return this.firestore
       .collection('profiles')
