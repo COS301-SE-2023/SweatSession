@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { collectionData, collection, addDoc, Firestore } from '@angular/fire/firestore';
+import { collectionData, collection, addDoc, Firestore, deleteDoc, doc } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { Notice } from 'src/app/models/notice.model';
 
@@ -19,6 +19,10 @@ export class NoticeService {
     });
   }
 
+  deleteNotices(id :string): Promise<void> {
+    const noticeDocRef = doc(this.firestore, `Notifications/${id}`);
+    return deleteDoc(noticeDocRef);
+  }
   
 
 }

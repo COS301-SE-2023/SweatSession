@@ -21,21 +21,20 @@
   <ion-card class="Mcard" *ngFor="let notice of noticeList">
     <ion-card-content style="display:flex ; align-items:center" >
   <ion-avatar slot="start">
-    <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+    <img alt="Silhouette of a person's head" src="https://i.pravatar.cc/300" />
   </ion-avatar>
   <ion-label><b>&nbsp;{{notice.sendername}}</b></ion-label>
   <ion-label>&nbsp;{{notice.message}}</ion-label>
 </ion-card-content>
-<ion-footer slot="end">
-  {{notice.sentdate}}
-</ion-footer>
+<ion-label>{{"&nbsp;".repeat(90)}}{{notice.sentdate}}</ion-label>
+
 </ion-card>
 </div>
 <br>
 
 <ion-card *ngIf="noticeamount == 0" class="flex-center">
-<ion-button (click)="presentAlert()">No Notifications!</ion-button>
-</ion-card>
+  <ion-button (click)="presentAlert()">No Notifications!</ion-button>
+  </ion-card>
 
 
 

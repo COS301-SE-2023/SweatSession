@@ -1,6 +1,6 @@
 export class Notice{
     id?: string;
-    sentdate?: Date;
+    sentdate?: string;
     sendername?: string;
     message?: string;
 }
