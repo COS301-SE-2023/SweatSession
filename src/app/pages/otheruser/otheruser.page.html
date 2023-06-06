@@ -12,11 +12,11 @@
  <ion-card class="otheruser-profile">
   <ion-item>
     <ion-avatar>
-      <img src="assets/sweatsessionlogotransparent1.png"/>
+      <img src="{{user.profileURL}}"/>
     </ion-avatar>
   </ion-item>
   <ion-item id="userName">
-      Joe Black
+      {{user.name}}
       <ion-button slot="end" *ngIf="friendshipStatus" (click)="removeFriend()">
         <ion-icon name="person-outline"></ion-icon>
         remove friend
@@ -27,7 +27,7 @@
       </ion-button>
   </ion-item>
   <ion-item id="userBio">
-  ......bio......
+    {{user.bio}}
   </ion-item>
  </ion-card>
  <ion-card>

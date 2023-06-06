@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngxs/store';
+import { Select, Store } from '@ngxs/store';
+import { Observable } from 'rxjs';
+import { LoadOtherUserProfile } from 'src/app/actions';
+import { IProfileModel } from 'src/app/models';
+import { OtheruserState } from 'src/app/states';
 
 @Component({
   selector: 'app-otheruser',
@@ -8,9 +12,14 @@ import { Store } from '@ngxs/store';
 })
 export class OtheruserPage implements OnInit {
   friendshipStatus: boolean = false;
-  constructor(store: Store) { }
+  user!: IProfileModel;
+  @Select(OtheruserState.getOtherUser) user$!: Observable<IProfileModel>;
+  constructor(private store: Store) {
+    this.displayUserInfo();
+  }
 
   ngOnInit() {
+    this.displayUserInfo();
   }
 
   removeFriend() {
@@ -31,6 +40,13 @@ export class OtheruserPage implements OnInit {
   viewFriends() {
     //this.store.dispatch(new GetFriendsAction())
     console.log("view friends")
+  }
+
+  displayUserInfo() {
+    this.store.dispatch(new LoadOtherUserProfile());
+    this.user$.subscribe((response)=>{
+      this.user = response;
+    })
   }
 
 }

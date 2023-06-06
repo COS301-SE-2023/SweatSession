@@ -19,7 +19,6 @@ export class FriendComponent  implements OnInit {
 
   viewOtherUser(){
     this.store.dispatch(new StageOtheruserInfo(this.friend))
-    this.Nav.navigateRoot("/otheruser");
   }
 
   removeFriend() {
