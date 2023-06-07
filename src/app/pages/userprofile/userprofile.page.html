@@ -12,19 +12,26 @@
    
 <ion-content> 
 
- <p class="flex-center">   
-    
-    <ion-img src="assets/Asset 1.png" alt="logo-image" class="image"></ion-img>
-          
- </p>
+  <div class="flex-center image-container">   
+    <ion-img src={{ProfilePicture$}} alt="logo-image" class="image rounded-circle"></ion-img>
+</div>
 
   
-  <div class="flex-center"><h3>Alex Wassabi</h3></div>
+  <div class="flex-center">
+    <ion-label class="label">{{displayName$}}</ion-label>
+  </div>
+
   <!-- <div class="flex-center" href = size = "small">Edit</div> -->
   <p class="flex-center">
-    <ion-card-content class="card" >
-      <ion-item style="border-radius: 30px;"><ion-label>Hi , its Alex out here doing dope things <br> and enjoying a Healthy life</ion-label></ion-item>
-    </ion-card-content>
+    <ion-card class="ion-text-center">
+      <ion-card-header>
+            <ion-card-subtitle>Bio</ion-card-subtitle>
+          </ion-card-header>
+    
+          <ion-card-content>
+            {{myBio$}}
+          </ion-card-content>
+      </ion-card>
   </p>
 
 
@@ -32,10 +39,10 @@
     
   <ion-row>
     <ion-col size="6">
-      <ion-title class="title" style="white-space: small; margin-left: 40px"><b>24</b><br>Friends</ion-title>
+      <ion-title class="title" style="white-space: small; margin-left: 40px">{{friends$}}<br>Friends</ion-title>
     </ion-col>
     <ion-col size="6">
-      <ion-title class="title" style="white-space: small;"><b>12</b><br>Groups</ion-title>
+      <ion-title class="title" style="white-space: small;">{{groups$}}<br>Groups</ion-title>
     </ion-col>
   </ion-row>
 

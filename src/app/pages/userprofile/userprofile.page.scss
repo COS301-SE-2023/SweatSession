@@ -44,13 +44,18 @@
 
 }
 
-.image{
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-    border-radius: 50%;
-    width: 200px;
-    height: 200px;
+.image-container
+{
+    border-top: 90px;
 }
+
+.rounded-circle {
+    border-radius: 50%;
+    overflow: hidden;
+    height: 200px;
+    width: 200px;
+  }
+
 .button{
     --background: lightgrey;
     --color:black ;
@@ -77,3 +82,13 @@ ion-item{
 // ion-toolbar{
 //     --background:lightgrey;
 // }
+
+
+ion-card {
+    margin-bottom: 10px;
+    margin-top: 10px;
+    width: 80%;
+    margin-left: 0;
+    margin-right: 0;
+    background-color: #90CAF3;
+  }

@@ -4,13 +4,25 @@
       <ion-card-header>
         <ion-card-title>Edit Profile</ion-card-title>
       </ion-card-header>
-       <div class="avatar-container" (click)="openPicturePopup()">
-        <ion-avatar  class="preview-container" *ngIf="getDp()">
-          <img [src]="getDp()" alt="Old Profile Picture">
-        </ion-avatar>
-      </div>
 
-        <ion-input type="file" accept="image/*" (change)="onPictureChange($event)"></ion-input>
+
+
+        <div class="user-thumb user-thumb--edit">
+          <div class="custom-file">
+            <input class="custom-file__input" id="photo" accept="image/*" (change)="onPictureChange($event)" type="file">
+            <label class="custom-file__label" for="photo">
+              <img alt="" class="thumb--lg rounded-circle" [src]="getDp()">
+            </label>
+          </div>
+        </div>
+
+
+        <!-- <div class="avatar-container" (click)="openPicturePopup()">
+          <ion-avatar  class="preview-container" *ngIf="getDp()">
+            <img [src]="getDp()" alt="Old Profile Picture">
+          </ion-avatar>
+        </div>
+        <ion-input type="file" accept="image/*" (change)="onPictureChange($event)"></ion-input> -->
 
       </ion-card>
       

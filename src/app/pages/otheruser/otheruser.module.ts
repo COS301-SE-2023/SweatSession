@@ -15,6 +15,6 @@ import { OtheruserPage } from './otheruser.page';
     IonicModule,
     OtheruserPageRoutingModule
   ],
-  declarations: [OtheruserPage]
+  declarations: [OtheruserPage],
 })
 export class OtheruserPageModule {}

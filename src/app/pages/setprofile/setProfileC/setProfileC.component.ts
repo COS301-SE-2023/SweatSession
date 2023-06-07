@@ -61,6 +61,7 @@ export class SetprofileCComponent  implements OnInit {
         weight: this.profileForm.value.weight ?? "",
       }
       this.setprofileservices.updateProfile(this.UpadateP);
+      this.DetailsSaved();
     }
 
   openPicturePopup()
@@ -81,6 +82,7 @@ export class SetprofileCComponent  implements OnInit {
   }
 
   isEditMode = false;
+
   toggleEditMode() {
     this.isEditMode = true;
     // console.log('Toggled Edit');
@@ -97,14 +99,18 @@ export class SetprofileCComponent  implements OnInit {
       };
       reader.readAsDataURL(file);
     }
+    this.saveProfile();
   }
 
+  DetailsSaved()
+  {
+    this.isEditMode = false;
+
+  }
   ngOnInit()
   {
     this.getUserid().then((id) => {
       this.getUser.userId = id;
-    
-
     this.setprofileservices.getProfile(this.getUser).subscribe((profile) => {
         // this.user = profile.profile.
         this.profileForm.patchValue(
@@ -125,7 +131,7 @@ export class SetprofileCComponent  implements OnInit {
 
           if(profile.profile.profileURL == "")
           {
-            this.profileForm.patchValue( {profileURL: '../../../../assets/img/ProfileSE.png'} );
+            this.profileForm.patchValue( {profileURL: '../../../../assets/img/ProfileSE.png'});
           }
            
       });
