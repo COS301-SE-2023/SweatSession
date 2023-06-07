@@ -13,7 +13,9 @@ import { NavController } from '@ionic/angular';
 
 //import { getAuth } from 'firebase/auth';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class AuthApi {
   constructor(private readonly authObject: Auth, private Nav: NavController) {}//, private repository: RegisterRepository         //, private service: RegisterService
 
