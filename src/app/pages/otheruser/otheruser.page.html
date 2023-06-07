@@ -44,4 +44,20 @@
     <ion-button slot="end" (click)="viewFriends()">view</ion-button>
   </ion-item>
  </ion-card>
+
+ <div class="container">
+  <div class="content" [ngClass]="{ 'active': isSlideActive }">
+    <ion-card *ngFor = "let friend of friends">
+      <ion-item class="friend">
+        <ion-avatar>
+          <img src="assets/sweatsessionlogotransparent1.png"/>
+        </ion-avatar>
+        <ion-text>
+          {{friend.name}}
+        </ion-text>
+      </ion-item>
+    </ion-card>
+    
+  </div>
+</div>
 </ion-content>

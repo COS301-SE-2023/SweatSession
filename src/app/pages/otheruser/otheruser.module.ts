@@ -15,8 +15,8 @@ import { OtheruserStateModule } from 'src/app/states';
     FormsModule,
     IonicModule,
     OtheruserPageRoutingModule,
-    OtheruserStateModule
+    OtheruserStateModule,
   ],
-  declarations: [OtheruserPage]
+  declarations: [OtheruserPage],
 })
 export class OtheruserPageModule {}

@@ -11,8 +11,10 @@ import { OtherUserStateModel, OtheruserState } from 'src/app/states';
   styleUrls: ['./otheruser.page.scss'],
 })
 export class OtheruserPage implements OnInit {
+  isSlideActive = false;
   otherUserInfo!: OtherUserStateModel;
   user!: IProfileModel;
+  friends: IFriendsModel[] =[];
   @Select(OtheruserState.getOtherUser) user$!: Observable<OtherUserStateModel>;
   constructor(private store: Store) {
     this.displayUserInfo();
@@ -40,6 +42,7 @@ export class OtheruserPage implements OnInit {
   viewFriends() {
     //this.store.dispatch(new GetFriendsAction())
     console.log("view friends")
+    this.isSlideActive = !this.isSlideActive;
   }
 
   displayUserInfo() {
@@ -47,6 +50,7 @@ export class OtheruserPage implements OnInit {
     this.user$.subscribe((response)=>{
       this.otherUserInfo = response;
       this.user = response.otheruser as IProfileModel;
+      this.friends = response.friends;
       //this.store.dispatch(new getFriendshipStatus)
     })
   }
