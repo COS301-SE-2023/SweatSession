@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import {NoticeService } from 'src/app/services/notifications/notice.service';
 import { Notice } from 'src/app/models/notice.model';
-import { AlertController } from '@ionic/angular';
+import { AlertController, NavController } from '@ionic/angular';
+import { HomePage } from '../home/home.page';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-notifications',
@@ -17,12 +19,13 @@ export class NotificationsPage implements OnInit {
 
   noticeamount : number ;
   noticeList: Notice[];
+  sendamount: string ;
 
   
   //noticeList: Observable<Notice[]> = this.noticeService.getNotices();
  
 
-  constructor(private noticeService: NoticeService , private alertController: AlertController) { 
+  constructor(private noticeService: NoticeService , private alertController: AlertController , public nav: NavController) { 
     
   }
  
@@ -59,6 +62,11 @@ export class NotificationsPage implements OnInit {
     }
     this.noticeList = [] ;
   }
+  
+  pushToNextScreenWithParams(pageUrl: any, params: any) {
+    this.nav.navigateForward(pageUrl, { state: params });
+  }
+  
   
 
 
