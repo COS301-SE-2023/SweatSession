@@ -58,4 +58,6 @@ export class BadgesRepository {
     //         });
     //     //preturn await admin.firestore().collection('profiles').doc(newProfile.userId).create(newProfile);
     // }
+
+    
 }

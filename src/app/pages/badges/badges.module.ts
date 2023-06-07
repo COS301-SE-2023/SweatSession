@@ -8,15 +8,18 @@ import { BadgesPageRoutingModule } from './badges-routing.module';
 
 import { BadgesPage } from './badges.page';
 import { BadgeComponent } from './badge/badge.component';
+import { BadgesApi } from 'src/app/states/badges/badges.api';
+import { AuthApi } from 'src/app/states/auth/auth.api';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    BadgesPageRoutingModule
+    BadgesPageRoutingModule,
     //BadgesStatesModule,
   ],
-  declarations: [BadgesPage, BadgeComponent]
+  declarations: [BadgesPage, BadgeComponent],
+  providers: [BadgesApi, AuthApi]
 })
 export class BadgesPageModule {}
