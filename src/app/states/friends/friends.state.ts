@@ -4,7 +4,7 @@ import { Action, State, StateContext, Store, Selector } from "@ngxs/store";
 import { Router } from "@angular/router";
 import { FriendsService } from "src/app/services";
 import { AddFriendAction, GetFriendsAction, RemoveFriendAction } from "src/app/actions";
-import { IAddFriend, IAddedFriend, IFriendsModel, IGetFriends, IGotFriends } from "src/app/models";
+import { IAddFriend, IAddedFriend, IFriendsModel, IGetFriends, IGotFriends, IRemoveFriend } from "src/app/models";
 
 export interface FriendsStateModel {
     friends: IFriendsModel[];
@@ -30,7 +30,7 @@ export class FriendsState {
             userId:"test id"
         }
 
-        const response: IGotFriends = this.getMock() //await this.friendsService.getFriends(request);
+        const response: IGotFriends = this.getMock(request)//await this.friendsService.getFriends(request);
         ctx.patchState({
             ...ctx.getState(), friends: response.friends
         })
@@ -38,19 +38,34 @@ export class FriendsState {
 
     @Action(RemoveFriendAction)
     async removeFriends(ctx: StateContext<FriendsStateModel>,{payload}: RemoveFriendAction) {
-        //remove friend
+        const request:IRemoveFriend={
+            userId:"testId",
+            friend: payload
+        }
+
+        //const response = await this.friendsService.removeFriend(request);
+        if(true/*response.validate*/){
+            const friends = ctx.getState().friends.filter((schedule)=>{
+                if(schedule.userId! === request.friend.userId!)
+                    return false;
+                else
+                    return true;
+            })
+            ctx.patchState({
+                friends: friends
+            })
+        }
     }
 
     @Action(AddFriendAction)
     async addFriend(ctx: StateContext<FriendsStateModel>, {payload}: AddFriendAction) {
-        const request:IAddFriend=payload;
-
-        const response: IAddedFriend = {
-            validate: true,
-            friend: payload.friend
-        }//await this.friendsService.getFriends(request);
-        ctx.patchState({
-            friends:[response.friend]
+        const request:IAddFriend={
+            userId:"testId",
+            friend: payload
+        }
+        const response: IAddedFriend = await this.friendsService.getFriends(request);
+        ctx.setState({
+            friends:[response.friend!,...ctx.getState().friends]
         })
     }
 
@@ -59,51 +74,27 @@ export class FriendsState {
         return state.friends;
     }
 
-    getMock() : IGotFriends{
-        const results : IGotFriends = {
-            friends: [
-                {
-                    id: "id 1",
-                    name: "Testing 1",
-                    profileUrl: ""
-                },
-                {
-                    id: "id 2",
-                    name: "Testing 2",
-                    profileUrl: ""
-                },
-                {
-                    id: "id 3",
-                    name: "Testing 3",
-                    profileUrl: ""
-                },
-                {
-                    id: "id 4",
-                    name: "Testing 4",
-                    profileUrl: ""
-                },
-                {
-                    id: "id 5",
-                    name: "Testing 5",
-                    profileUrl: ""
-                },
-                {
-                    id: "id 6",
-                    name: "Testing 6",
-                    profileUrl: ""
-                },
-                {
-                    id: "id 7",
-                    name: "Testing 7",
-                    profileUrl: ""
-                },
-                {
-                    id: "id 8",
-                    name: "Testing 8",
-                    profileUrl: ""
-                }
-            ]
+    getMock(request:IGetFriends){
+      let friends: IGotFriends = {
+            userId: request.userId,
+            friends:[{
+                userId: "friend 1",
+                name: "John",
+                profileURL: "assets/sweatsessionlogotransparent1.png" ,
+            },
+            {
+                userId: "friend 2",
+                name: "Johnny",
+                profileURL: "assets/sweatsessionlogotransparent1.png" ,
+            },
+            {
+                userId: "friend 3",
+                name: "Themba",
+                profileURL: "assets/sweatsessionlogotransparent1.png" ,
+            }],
+            validate: true,
         }
-        return results;
+
+        return friends;
     }
 }

@@ -59,6 +59,7 @@ import {
   provideFunctions
 } from '@angular/fire/functions';
 import { NgxsModule } from '@ngxs/store';
+import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
 // import {AuthModule} from 'src/app/pages/auth';
 // const useEmulators = process.env['NX_FIREBASE_USE_EMULATORS'] || true;
 
@@ -70,6 +71,7 @@ import { NgxsModule } from '@ngxs/store';
     //AuthModule,
     NgxsModule.forRoot(),//[AuthState]
     IonicModule.forRoot(), 
+    NgxsRouterPluginModule.forRoot(),
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule ,

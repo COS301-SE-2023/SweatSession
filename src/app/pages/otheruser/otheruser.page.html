@@ -12,32 +12,52 @@
  <ion-card class="otheruser-profile">
   <ion-item>
     <ion-avatar>
-      <img src="assets/sweatsessionlogotransparent1.png"/>
+      <img src="{{user!.profileURL}}"/>
     </ion-avatar>
   </ion-item>
   <ion-item id="userName">
-      Joe Black
-      <ion-button slot="end">
+      {{user!.name}}
+      <ion-button slot="end" *ngIf="otherUserInfo.friendshipStatus" (click)="removeFriend()">
         <ion-icon name="person-outline"></ion-icon>
-        friends
+        remove friend
+      </ion-button>
+      <ion-button slot="end" *ngIf="!otherUserInfo.friendshipStatus" (click)="addFriend()">
+        <ion-icon name="person-outline"></ion-icon>
+        add friend
       </ion-button>
   </ion-item>
   <ion-item id="userBio">
-  ......bio......
+    {{user!.bio}}
   </ion-item>
  </ion-card>
  <ion-card>
   <ion-item>
     <ion-icon name="barbell-outline"></ion-icon>
-    <ion-card-header>WorkoutSchedule</ion-card-header>
-    <ion-button slot="end" routerLink="/workout-scheduling">view</ion-button>
+    <ion-card-header>{{otherUserInfo.workoutSchedule!.length}} WorkoutSchedules</ion-card-header>
+    <ion-button slot="end" (click)="viewSchedules()">view</ion-button>
   </ion-item>
  </ion-card>
  <ion-card>
   <ion-item>
     <ion-icon name="people-outline"></ion-icon>
-    <ion-card-header>30 Friends</ion-card-header>
-    <ion-button slot="end" routerLink="/friends">view</ion-button>
+    <ion-card-header>{{otherUserInfo.friends!.length}} Friends</ion-card-header>
+    <ion-button slot="end" (click)="viewFriends()">view</ion-button>
   </ion-item>
  </ion-card>
+
+ <div class="container">
+  <div class="content" [ngClass]="{ 'active': isSlideActive }">
+    <ion-card *ngFor = "let friend of friends">
+      <ion-item class="friend">
+        <ion-avatar>
+          <img src="assets/sweatsessionlogotransparent1.png"/>
+        </ion-avatar>
+        <ion-text>
+          {{friend.name}}
+        </ion-text>
+      </ion-item>
+    </ion-card>
+    
+  </div>
+</div>
 </ion-content>

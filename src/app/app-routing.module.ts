@@ -5,7 +5,8 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () => import('./pages/splash/splash.module').then( m => m.SplashPageModule)
+    pathMatch: 'full',
+    redirectTo: 'splash'
   },
   {
     path: 'home',

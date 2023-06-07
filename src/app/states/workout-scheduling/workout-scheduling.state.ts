@@ -13,6 +13,7 @@ import { IAddWorkoutSchedule,
         IGetWorkoutSchedules,
         IGotWorkoutSchedules,
         IRemoveWorkoutSchedule,
+        IRemovedWorkoutSchedule,
         IWorkoutScheduleModel } 
         from "src/app/models";
 import { WorkoutscheduleService } from "src/app/services";
@@ -33,7 +34,9 @@ export interface WorkoutSchedulingStateModel {
     }
 })
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class WorkoutSchedulingState {
     constructor(
         private readonly service: WorkoutscheduleService,
@@ -46,7 +49,8 @@ export class WorkoutSchedulingState {
             userId:"test id"
         }
 
-       const response: IGotWorkoutSchedules =  this.getMock(request)//await this.service.getSchedules(request);
+       const response: IGotWorkoutSchedules = await this.service.getSchedules(request);
+       console.table(response);
         ctx.setState({
             ...ctx.getState(), schedules: response.schedules
         })
@@ -54,30 +58,39 @@ export class WorkoutSchedulingState {
 
     @Action(RemoveWorkoutSchedule)
     async removeWorkoutSchedule(ctx: StateContext<WorkoutSchedulingStateModel>,{payload}: RemoveWorkoutSchedule) {
-        // request: IRemoveWorkoutSchedule = {
-        //     userId: "test id";
-        //     schedule: payload;
-        // }
-        // response: IRemoveWorkoutSchedule = await this.service.removeSchedule(request);
-        // remove workoutschedule
+       const request: IRemoveWorkoutSchedule = {
+            userId: "test id",
+            schedule: payload
+        }
+        const response: IRemovedWorkoutSchedule = await this.service.removeSchedule(request);
+        if(response.validate){
+            const schedules = ctx.getState().schedules.filter((schedule)=>{
+                if(schedule.id! === request.schedule.id!)
+                    return false;
+                else
+                    return true;
+            })
+            ctx.patchState({
+                schedules: schedules
+            })
+        }
     }
 
     @Action(AddWorkoutSchedule)
     async addWorkoutSchedule(ctx: StateContext<WorkoutSchedulingStateModel>, {payload}: AddWorkoutSchedule) {
-        const request: IAddWorkoutSchedule =payload;
-        const response: IAddedWorkoutSchedule ={
-            userId: payload.userId,
-            schedule: payload.schedule,
-            validate: true
-        }//await this.service.addSchedule(request);
+        const request: IAddWorkoutSchedule ={
+            userId: "test id",
+            schedule: payload
+        }
+        const response = await this.service.addSchedule(request);
         ctx.patchState({
-            
+            schedules: [response.schedule!,...ctx.getState().schedules]
         })
     }
 
      @Action(UpdateWorkoutSchedule)
     async updateWorkoutSchedule(ctx: StateContext<WorkoutSchedulingStateModel>, {payload}: UpdateWorkoutSchedule) {
-        //update state....
+       
     }
 
     @Action(LoadSchedule)
@@ -95,56 +108,5 @@ export class WorkoutSchedulingState {
     @Selector()
     static returnSchedule(state: WorkoutSchedulingStateModel) {
         return state.schedule;
-    }
-
-    getMock(request:IGetWorkoutSchedules){
-        const results:IGotWorkoutSchedules = {
-            userId: request.userId,
-            schedules: [
-                {
-                    id: "ID 1",
-                    name:"Schedule 1",
-                    duration: 1,
-                    location: "zone fitness, menlyn",
-                    date: new Date(),
-                },
-                {
-                    id: "ID 2",
-                    name:"Schedule 2",
-                    duration: 1,
-                    location: "zone fitness, menlyn",
-                    date: new Date(),
-                },
-                {
-                    id: "ID 3",
-                    name:"Schedule 3",
-                    duration: 1,
-                    location: "zone fitness, menlyn",
-                    date: new Date(),
-                },
-                {
-                    id: "ID 4",
-                    name:"Schedule 4",
-                    duration: 1,
-                    location: "zone fitness, menlyn",
-                    date: new Date(),
-                },
-                {
-                    id: "ID 5",
-                    name:"Schedule 5",
-                    duration: 1,
-                    location: "zone fitness, menlyn",
-                    date: new Date(),
-                },
-                {
-                    id: "ID 6",
-                    name:"Schedule 6",
-                    duration: 1,
-                    location: "zone fitness, menlyn",
-                    date: new Date(),
-                }
-            ]
-        }
-        return results;
     }
 }

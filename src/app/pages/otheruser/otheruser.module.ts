@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { OtheruserPageRoutingModule } from './otheruser-routing.module';
 
 import { OtheruserPage } from './otheruser.page';
+import { OtheruserStateModule } from 'src/app/states';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    OtheruserPageRoutingModule
+    OtheruserPageRoutingModule,
+    OtheruserStateModule,
   ],
   declarations: [OtheruserPage],
 })

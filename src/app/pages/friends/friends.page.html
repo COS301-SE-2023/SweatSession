@@ -5,16 +5,28 @@
       <ion-title>Friends</ion-title>
       <ion-item class="addFriend-button" slot="end">
         <ion-icon name="add-outline"></ion-icon>
-        <ion-icon name="people-outline"></ion-icon>
+        <ion-icon name="people-outline" routerLink="/home/search"></ion-icon>
       </ion-item>
     </ion-item>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-searchbar placeholder="find friend"></ion-searchbar>
+  <div class="search">
+    <ion-searchbar placeholder="find a friend"
+      [(ngModel)] = "searchTerms.searchQuery"
+      (ionInput) = onSearchInput($event)
+    ></ion-searchbar>
+    <div id="search-suggestions">
+      <ion-list *ngIf="searchTerms.showSuggestions">
+        <ion-item *ngFor="let suggestion of searchTerms.filteredSuggestions" (click)="find(suggestion.name!)">
+          {{ suggestion.name }}
+        </ion-item>
+      </ion-list>
+    </div>
+  </div>
   <user-friend *ngFor ="let friend of friends" 
-    [name] = "friend"
+    [friend] = "friend"
   >
   </user-friend>
 </ion-content>

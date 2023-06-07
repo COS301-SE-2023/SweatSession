@@ -4,13 +4,6 @@ ion-toolbar {
     align-items: center;
 }
 
-ion-segment {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: transparent;
-}
-
 ion-icon {
     width:25px;
     height: 25px;
@@ -38,4 +31,16 @@ ion-avatar {
 
 .menu-label{
     margin-left: 10px;
+}
+
+ion-item {
+    width: 100%;
+    background-color: aqua;
+}
+
+ion-title {
+    text-align: center;
+    ion-chip {
+        background-color: transparent;
+    }
 }

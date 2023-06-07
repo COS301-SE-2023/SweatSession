@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavController } from '@ionic/angular';
 import { AuthApi } from 'src/app/states/auth/auth.api';
 import { SetProfileService } from 'src/app/services';
 import { IGetFriends, IGetProfile } from 'src/app/models';
@@ -36,7 +37,4 @@ export class HomePage implements OnInit {
   userLogout(){
     this.authAPI.logout();
   }
-
-
-
 }
