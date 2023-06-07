@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { LoadOtherUserProfile } from 'src/app/actions';
-import { IProfileModel } from 'src/app/models';
-import { OtheruserState } from 'src/app/states';
+import { IFriendsModel, IProfileModel, IWorkoutScheduleModel } from 'src/app/models';
+import { OtherUserStateModel, OtheruserState } from 'src/app/states';
 
 @Component({
   selector: 'app-otheruser',
@@ -11,9 +11,9 @@ import { OtheruserState } from 'src/app/states';
   styleUrls: ['./otheruser.page.scss'],
 })
 export class OtheruserPage implements OnInit {
-  friendshipStatus: boolean = false;
+  otherUserInfo!: OtherUserStateModel;
   user!: IProfileModel;
-  @Select(OtheruserState.getOtherUser) user$!: Observable<IProfileModel>;
+  @Select(OtheruserState.getOtherUser) user$!: Observable<OtherUserStateModel>;
   constructor(private store: Store) {
     this.displayUserInfo();
   }
@@ -23,12 +23,12 @@ export class OtheruserPage implements OnInit {
   }
 
   removeFriend() {
-    this.friendshipStatus = false;
+    this.otherUserInfo.friendshipStatus = false;
     //this.store.dispatch(new RemoveFriendAction())
   }
 
   addFriend() {
-    this.friendshipStatus = true;
+    this.otherUserInfo.friendshipStatus = true;
     //this.store.dispatch(new AddFriendAction())
   }
 
@@ -45,7 +45,9 @@ export class OtheruserPage implements OnInit {
   displayUserInfo() {
     this.store.dispatch(new LoadOtherUserProfile());
     this.user$.subscribe((response)=>{
-      this.user = response;
+      this.otherUserInfo = response;
+      this.user = response.otheruser as IProfileModel;
+      //this.store.dispatch(new getFriendshipStatus)
     })
   }
 
