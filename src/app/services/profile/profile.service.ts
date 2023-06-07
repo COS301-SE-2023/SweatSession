@@ -59,10 +59,13 @@ export class ProfileService {
           const gotProfile: IGotProfile = {
             profile: {
               userId: profile.userId,
+              displayName: profile.displayName,
+              name: profile.name,
               bio: profile.bio,
               email: profile.email,
-              name: profile.name,
               phoneNumber: profile.phoneNumber,
+              height: profile.height,
+              weight: profile.weight,
               profileURL: profile.profileURL  
             }
           };
@@ -71,10 +74,13 @@ export class ProfileService {
           const notFoundProfile: IGotProfile = {
             profile: {
               userId: 'undefined',
+              displayName: 'undefined',
+              name: 'undefined',
               bio: 'undefined',
               email: 'undefined',
-              name: 'undefined',
               phoneNumber: 'undefined',
+              height: '0',
+              weight: '0',
               profileURL: 'undefined'  
             }
           };

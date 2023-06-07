@@ -43,7 +43,7 @@ export class RegisterPage implements OnInit {
       const regEmail = this.registrationForm?.get('email')?.value;
       const regPassword = this.registrationForm?.get('password')?.value;
       if (regEmail != null && regPassword!=null){
-        alert("Registering with email: " + regEmail + " and password: " + regPassword);
+        // alert("Registering with email: " + regEmail + " and password: " + regPassword);
         this.store.dispatch(new Register(regEmail,regPassword));
       }
     }else{

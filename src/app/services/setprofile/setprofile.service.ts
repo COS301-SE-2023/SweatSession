@@ -39,8 +39,10 @@ import { firestore } from 'firebase-functions/v1';
 import { ProfileRepository } from 'src/app/repository/profile.repository';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { IProfileModel , IGetProfile, IGotProfile,} from 'src/app/models';
+import { IProfileModel , IGetProfile, IGotProfile, IUpdateProfile,} from 'src/app/models';
 import { computeStackId } from '@ionic/angular/directives/navigation/stack-utils';
+import { AuthApi } from 'src/app/states/auth/auth.api';
+import { getCurrentUserId } from 'src/app/actions';
 
 
 @Injectable({
@@ -57,11 +59,15 @@ export class SetProfileService {
           const gotProfile: IGotProfile = {
             profile: {
               userId: profile.userId,
-              bio: profile.bio,
-              email: profile.email,
               name: profile.name,
+              displayName: profile.displayName,
+              email: profile.email,
+              bio: profile.bio,
               phoneNumber: profile.phoneNumber,
-              profileURL: profile.profileURL  
+              profileURL: profile.profileURL,
+              height: profile.height,
+              weight: profile.weight,
+
             }
           };
 
@@ -74,7 +80,10 @@ export class SetProfileService {
               email: 'undefinedemail',
               name: 'undefinedname',
               phoneNumber: 'undefinedphone',
-              profileURL: 'undefinedURL'  
+              profileURL: 'undefinedURL' ,
+              height: 'undefinedheight',
+              weight: 'undefinedweight',
+              displayName: 'undefineddisplayName',
             }
           };
           return notFoundProfile;
@@ -83,11 +92,16 @@ export class SetProfileService {
     );
   }
 
-  // updateProfile(prof: IGetProfile)
-  // {
-  //   this.repository.updateProfile(prof);
-    
-  // }
+  updateProfile(IupdateP: IProfileModel)
+  {
+    this.repository.updateProfile(IupdateP).then((res) => {
+      console.log('Update Successful');
+    }
+    ).catch((error) => {
+      console.log('Update Failed');
+    }
+    );
+  }
 }
 
 

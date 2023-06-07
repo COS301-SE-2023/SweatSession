@@ -45,7 +45,7 @@ export class SetprofileCComponent  implements OnInit {
                   });
                 }
               })
-            ).toPromise();;
+            ).toPromise();
         
           if(response)
           {

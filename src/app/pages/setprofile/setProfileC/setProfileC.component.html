@@ -5,8 +5,8 @@
         <ion-card-title>Edit Profile</ion-card-title>
       </ion-card-header>
        <div class="avatar-container" (click)="openPicturePopup()">
-        <ion-avatar  class="preview-container" *ngIf="ProfilePicture">
-          <img [src]="ProfilePicture" alt="Old Profile Picture">
+        <ion-avatar  class="preview-container" *ngIf="getDp()">
+          <img [src]="getDp()" alt="Old Profile Picture">
         </ion-avatar>
       </div>
 
@@ -14,47 +14,53 @@
 
       </ion-card>
       
-      <ion-card>
-
-        <ion-button fill = "clear" (click)="toggleEditMode()">
-          Edit
-        </ion-button>
-        
-        <ion-list>
-          <ion-item>
-            <ion-input label="Display Name" labelPlacement="stacked" formControlName= "displayName" placeholder="Enter text"></ion-input>
-          </ion-item>
-        
-          <ion-item>
-            <ion-input label="Name" labelPlacement="stacked" formControlName= "name"  placeholder="Enter text"></ion-input>
-          </ion-item>
-        
-          <ion-item>
-            <ion-input label="Bio" labelPlacement="stacked" type = "text" formControlName= "bio" placeholder="Enter text"></ion-input>
-          </ion-item>
-
-          <ion-item>
-            <ion-input label="Email" labelPlacement="stacked" type = "email" formControlName= "bio" placeholder="Enter text"></ion-input>
-          </ion-item>
-        
-          <ion-item>
-            <ion-input label="Phone Number" labelPlacement="stacked" type = "text" formControlName= "phoneNumber" placeholder="Enter text"></ion-input>
-          </ion-item>
-
-          <ion-item>
-            <ion-input label="Height" labelPlacement="stacked" type = "number" formControlName= "height" placeholder="Enter text"></ion-input>
-          </ion-item>
-
-          <ion-item>
-            <ion-input label="Weight" labelPlacement="stacked" type = "number" formControlName= "weight" placeholder="Enter text"></ion-input>
-          </ion-item>
-        </ion-list>
+      
     
-      </ion-card>
+    <ion-card>
+  
+      <ion-button fill = "clear" (click)="toggleEditMode()">
+        Edit
+      </ion-button>
+      
+      
+      <ion-list>
+          <form [formGroup]="profileForm">
+          <ion-item [disabled] = "!isEditMode">
+            <ion-input label="Display Name"  labelPlacement="stacked" type = "text" formControlName= "displayName" placeholder="Enter Display Name"></ion-input>
+          </ion-item>
+        
+          <ion-item [disabled] = "!isEditMode">
+            <ion-input label="Name"  labelPlacement="stacked" type = "text" formControlName= "name"  placeholder="Enter Name"></ion-input>
+          </ion-item>
+        
+          <ion-item [disabled] = "!isEditMode">
+            <ion-input label="Bio"  labelPlacement="stacked" type = "text" formControlName= "bio" placeholder="Enter Bio"></ion-input>
+          </ion-item>
 
-      <ion-button expand="block" (click)="saveProfile()"> Save </ion-button>
+          <ion-item [disabled] = "!isEditMode">
+            <ion-input label="Email"  labelPlacement="stacked" type = "email" formControlName= "email" placeholder="Enter Email"></ion-input>
+          </ion-item>
+        
+          <ion-item [disabled] = "!isEditMode">
+            <ion-input label="Phone Number" labelPlacement="stacked" type = "text" formControlName= "phoneNumber" placeholder="Enter Phone Number"></ion-input>
+          </ion-item>
+
+          <ion-item [disabled] = "!isEditMode">
+            <ion-input label="Height (Cm)"  labelPlacement="stacked" type = "Number" formControlName= "height" placeholder="Enter Height in Cm"></ion-input>
+          </ion-item>
+
+          <ion-item [disabled] = "!isEditMode">
+            <ion-input label="Weight (Kg)"  labelPlacement="stacked" type = "Number" formControlName= "weight" placeholder="Enter Weight in Kg"></ion-input>
+          </ion-item>
+          
+          <ion-button expand="block" (click)="saveProfile()" [disabled] = "!isEditMode"> Save </ion-button>
+          
+        </form>
+        </ion-list>
 
 
+      
+    </ion-card>
 
 
 

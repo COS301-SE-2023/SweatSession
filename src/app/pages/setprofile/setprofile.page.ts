@@ -98,20 +98,19 @@ export class SetprofilePage implements OnInit {
       
       // t = await this.getUserid();
       
-      this.getUserid();
+      // this.getUserid();
       
-      setprofileservices.getProfile(this.getUser).subscribe((profile) => {
-        this.user = profile.profile;
-      });
+      // setprofileservices.getProfile(this.getUser).subscribe((profile) => {
+      //   this.user = profile.profile;
+      // });
       
     }
     
-    async getUserid() {
+    //  getUserid() {
 
-      this.getUser.userId = await this.authApi.getCurrentUserId();
-      alert("We got User ==> " + this.getUser.userId);
-   
-    }
+    //   this.getUser.userId = await this.authApi.getCurrentUserId() ?? 'na';
+    //   // alert("We got User ==> " + this.getUser.userId);
+    // }
 
   
 

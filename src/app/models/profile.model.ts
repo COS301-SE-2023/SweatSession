@@ -3,13 +3,13 @@ import { Timestamp } from "@angular/fire/firestore";
 export interface IProfileModel {
     userId: string;
     name?: string;
-    displayName?: string | null | undefined;
+    displayName?: string;
     email?: string;
     bio?: string;
     profileURL?: string;
     phoneNumber?: string;
-    height?: Number;
-    weight?: Number;
+    height?: string;
+    weight?: string;
 }
 
 //requests
@@ -21,7 +21,7 @@ export interface IUserModel {
 }
 
 export interface IGetProfile {
-    userId: string | undefined;
+    userId?: string;
 }
 
 export interface IUpdateProfile {
