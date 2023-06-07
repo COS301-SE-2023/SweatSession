@@ -1,12 +1,14 @@
 
-    <ion-card>
+<ion-card>
+      <ion-toast trigger="open-toast" color = "success" position = "top" message="Saved Successfully" [duration]="3000" icon="shield-checkmark-outline"></ion-toast>
+      <ion-toast trigger="SDP" color = "success" position = "top" message="Profile Successfully Saved" [duration]="3000" icon="shield-checkmark-outline"></ion-toast>
 
       <ion-card-header>
         <ion-card-title>Edit Profile</ion-card-title>
       </ion-card-header>
 
 
-
+<!-- 
         <div class="user-thumb user-thumb--edit">
           <div class="custom-file">
             <input class="custom-file__input" id="photo" accept="image/*" (change)="onPictureChange($event)" type="file">
@@ -14,15 +16,15 @@
               <img alt="" class="thumb--lg rounded-circle" [src]="getDp()">
             </label>
           </div>
-        </div>
+        </div> -->
 
 
-        <!-- <div class="avatar-container" (click)="openPicturePopup()">
+        <div class="avatar-container"  (click)="openPicturePopup()">
           <ion-avatar  class="preview-container" *ngIf="getDp()">
-            <img [src]="getDp()" alt="Old Profile Picture">
+            <img [src]="getDp()" id="SDP" alt="Profile Picture">
           </ion-avatar>
         </div>
-        <ion-input type="file" accept="image/*" (change)="onPictureChange($event)"></ion-input> -->
+        <ion-input  type="file" accept="image/*" (change)="onPictureChange($event)"></ion-input>
 
       </ion-card>
       
@@ -65,8 +67,7 @@
             <ion-input label="Weight (Kg)"  labelPlacement="stacked" type = "Number" formControlName= "weight" placeholder="Enter Weight in Kg"></ion-input>
           </ion-item>
           
-          <ion-button expand="block" (click)="saveProfile()" [disabled] = "!isEditMode"> Save </ion-button>
-          
+          <ion-button id="open-toast" expand="block" (click)="saveProfile()" [disabled] = "!isEditMode"> Save </ion-button>
         </form>
         </ion-list>
 

@@ -85,7 +85,6 @@ export class SetprofileCComponent  implements OnInit {
 
   toggleEditMode() {
     this.isEditMode = true;
-    // console.log('Toggled Edit');
   }
 
   onPictureChange(event: any) {
