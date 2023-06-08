@@ -26,8 +26,13 @@ export class WorkoutTrackingPage implements OnInit {
       this.formBuilder.group({
         name: '',
         sets: '',
+        reps: '',
         weight: ''
       })
     );
   }
+  deleteExercise(index: number) {
+    this.exercises.removeAt(index);
+  }
+  
 }
