@@ -1,3 +1,8 @@
-<p>
-  schedules works!
-</p>
+<div class = "outer-container">
+  <div class="body-content">
+    <ion-card *ngFor = "let schedule of schedules">
+      <ion-icon name = "receipt-outline" slot = "start"></ion-icon>
+      <ion-card-header>{{schedule.name}}</ion-card-header>
+    </ion-card>
+  </div>
+</div>

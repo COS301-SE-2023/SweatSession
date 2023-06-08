@@ -74,6 +74,7 @@ export class FriendsRepository {
         .doc(request.userId)
         .collection("userFriends")
         .add(request.friend)
+
         const friend: IFriendsModel ={
             userId: docRef.id,
             ...request.friend
@@ -96,6 +97,7 @@ export class FriendsRepository {
 
   async removeFriend(request: IRemoveFriend){
     try {
+        //remove from own document
         const docRef = await this.firestore
         .collection("friends")
         .doc(request.userId)
@@ -103,6 +105,15 @@ export class FriendsRepository {
         .doc(request.friend.userId)
         .delete()
 
+        // //remove from friend document
+        // const docRefFriend = await this.firestore
+        // .collection("friends")
+        // .doc(request.friend.userId)
+        // .collection("userFriends")
+        // .doc(request.userId)
+        // .delete()
+
+        //response
         const response: IRemovedFriend = {
             userId: request.userId,
             validate: true

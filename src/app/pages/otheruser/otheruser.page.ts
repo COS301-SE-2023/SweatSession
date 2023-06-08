@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
-import { LoadOtherUserProfile } from 'src/app/actions';
+import { AddFriendAction, LoadOtherUserProfile, RemoveFriendAction } from 'src/app/actions';
 import { IFriendsModel, IProfileModel, IWorkoutScheduleModel } from 'src/app/models';
 import { OtherUserStateModel, OtheruserState } from 'src/app/states';
 
@@ -11,10 +11,12 @@ import { OtherUserStateModel, OtheruserState } from 'src/app/states';
   styleUrls: ['./otheruser.page.scss'],
 })
 export class OtheruserPage implements OnInit {
-  isSlideActive = false;
+  isFriendsSlideActive = false;
+  isScheduleSlideActive = false;
   otherUserInfo!: OtherUserStateModel;
   user!: IProfileModel;
   friends: IFriendsModel[] =[];
+  schedules: IWorkoutScheduleModel[] = [];
   @Select(OtheruserState.getOtherUser) user$!: Observable<OtherUserStateModel>;
   constructor(private store: Store) {
     this.displayUserInfo();
@@ -26,23 +28,24 @@ export class OtheruserPage implements OnInit {
 
   removeFriend() {
     this.otherUserInfo.friendshipStatus = false;
-    //this.store.dispatch(new RemoveFriendAction())
+    this.store.dispatch(new RemoveFriendAction(this.friendModel()))
   }
 
   addFriend() {
     this.otherUserInfo.friendshipStatus = true;
-    //this.store.dispatch(new AddFriendAction())
+    this.store.dispatch(new AddFriendAction(this.friendModel()))
   }
 
   viewSchedules() {
     //this.store.dispatch(new GetWorkoutSchedule())
     console.log("view schedules")
+    this.isScheduleSlideActive = !this.isScheduleSlideActive;
   }
 
   viewFriends() {
     //this.store.dispatch(new GetFriendsAction())
     console.log("view friends")
-    this.isSlideActive = !this.isSlideActive;
+    this.isFriendsSlideActive = !this.isFriendsSlideActive;
   }
 
   displayUserInfo() {
@@ -51,8 +54,16 @@ export class OtheruserPage implements OnInit {
       this.otherUserInfo = response;
       this.user = response.otheruser as IProfileModel;
       this.friends = response.friends;
-      //this.store.dispatch(new getFriendshipStatus)
+      this.schedules = response.workoutSchedule;
     })
   }
 
+  friendModel() {
+    let model = {
+      userId: this.user.userId,
+      profileURL: this.user.profileURL,
+      name: this.user.name
+    }
+    return model;
+  }
 }

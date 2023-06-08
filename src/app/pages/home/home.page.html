@@ -14,6 +14,7 @@
       </ion-label>
       <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
     </ion-item>
+   
 
     <ion-item class="clickable" (click)="userLogout()" routerLink="/login">
       <ion-icon name="log-out-outline">
@@ -25,6 +26,7 @@
     </ion-item>
   </ion-content>
 </ion-menu>
+
 
 
 <ion-header>
@@ -44,15 +46,16 @@
               routerLink="/workout-scheduling"
               class="clickable" slot="end">
     </ion-icon>
+    <ion-badge color="success" slot="end">{{noticeamount}}</ion-badge>
     <ion-icon name="notifications-outline" 
-              routerLink="/home/notifications"
+              routerLink="/notifications"
               class="clickable" slot="end">
     </ion-icon>
   </ion-toolbar>
 </ion-header>
 
 <ion-content id="main-content">
-  <ion-router-outlet></ion-router-outlet>
+  <ion-router-outlet> </ion-router-outlet>
 </ion-content>
   
 <ion-tabs>

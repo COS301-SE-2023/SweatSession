@@ -1,3 +1,12 @@
-<p>
-  friends works!
-</p>
+<div class = "outer-container">
+  <div class="body-content">
+    <ion-card *ngFor = "let friend of friends">
+      <ion-item>
+        <ion-avatar>
+          <img src = "assets/sweatsessionlogotransparent1.png" alt="image here">
+        </ion-avatar>
+        <ion-text>{{friend.name}}</ion-text>
+      </ion-item>
+    </ion-card>
+  </div>
+</div>
