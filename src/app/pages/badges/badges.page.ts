@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { map, Observable, of } from 'rxjs';
 import { IBadges } from 'src/app/models/badges.model';
 import { AuthApi } from 'src/app/states/auth/auth.api';
 // import { BadgesApi } from 'src/app/states/badges/badges.api';
@@ -14,31 +14,44 @@ import { BadgesState } from 'src/app/states/badges/badges.state';
   styleUrls: ['./badges.page.scss'],
 })
 export class BadgesPage implements OnInit {
-  @Select(BadgesState.receivedBadges)
-  badges$!: Observable<IBadges | null>;
+
+  @Select(BadgesState.currBadges)
+  receivedBadges$!: Observable<IBadges | null>;
+
   badges=[{
       header:"Starter's Success",
-      description:"Congratulations! You have completed your first workout plan",
-      received:true
+      receivedDescription:"Congratulations! You have completed your first workout plan",
+      notReceivedDescription:"Complete a workout plan to earn this badge",
+      received:false
     },{
       header:"Socialite",
-      description:"Congratulations! You have made 5 workout partners",
-      received:true
+      receivedDescription:"Congratulations! You have made 5 workout partners",
+      notReceivedDescription:"Make 5 friends to earn this badge",
+      received:false
     },{
       header:"Record Breaker",
-      description:"Congratulations! You have reached a new personal best for bench presses",
-      received:true
+      receivedDescription:"Congratulations! You have reached a new personal best for bench presses",
+      notReceivedDescription:"Reach a new personal best for bench presses to earn this badge",
+      received:false
     },{
       header:"Workout Warrior",
-      description:"Attend 20 workout sessions to get this badge",
+      receivedDescription:"Congratulations! You have attended 20 workout sessions",
+      notReceivedDescription:"Attend 20 workout sessions to earn this badge",
       received:false
     },{
       header:"Dynamic Duo",
-      description:"Complete 50 workout sessions with a friend",
+      receivedDescription:"Congratulations! You have completed 50 workout sessions with a friend",
+      notReceivedDescription:"Complete 50 workout sessions with a friend to earn this badge",
       received:false
     },{
       header:"Push-Up Pro",
-      description:"Do 100 push-ups in a day",
+      receivedDescription:"Congratulations! You did 100 push-ups in a day",
+      notReceivedDescription:"Do 100 push-ups in a day to earn this badge",
+      received:false
+    },{
+      header:"Active Adventurer",
+      receivedDescription:"Congratulations! You did a workout session at 5 gyms",
+      notReceivedDescription:"Do a workout session at 5 gyms to earn this badge",
       received:false
     }
   ];
@@ -51,14 +64,22 @@ export class BadgesPage implements OnInit {
 
   ngOnInit() {
     this.store.dispatch(new SubscribeToBadges());
-    // this.badgesApi.badges$().subscribe((response:IBadges)=>{
-    //   this.badges1=response;
-    //   alert(this.badges1);
-    // });
-    
-    // this.badgesService.badges$().subscribe((response:IBadges)=>{
-    //   this.badges1=response;
-    //   alert(this.badges1);
-    // });
+    this.receivedBadges$.pipe(
+      // Use the map operator to transform the observable value
+      map((badges: IBadges | null) => {
+        if (badges) {
+          return badges.receivedBadges;
+        } else {
+          return []; // Return an empty array if badges is null
+        }
+      })
+    ).subscribe((receivedBadges: Number[]) => {
+      // Iterate through the receivedBadges array
+      receivedBadges.forEach((badgeNumber: Number) => {
+        this.badges[badgeNumber.valueOf()].received=true;
+        console.log(badgeNumber);
+        // Perform any other operations with each badge number
+      });
+    });
   }
 }

@@ -6,15 +6,11 @@
 </ion-header>
 
 <ion-content class="badgesContainer">
-  <!-- <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">badges</ion-title>
-    </ion-toolbar>
-  </ion-header> -->
   <ion-grid class="loginGrid">
     <badge *ngFor ="let badge of badges" 
     [name] = "badge.header"
-    [description] = "badge.description"
+    [receivedDescription] = "badge.receivedDescription"
+    [notReceivedDescription] = "badge.notReceivedDescription"
     [received] = "badge.received"
   ></badge>
   </ion-grid>

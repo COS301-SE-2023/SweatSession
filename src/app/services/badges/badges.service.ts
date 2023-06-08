@@ -22,17 +22,12 @@ export class BadgesService {
   badges$() {
     const auth = getAuth();
     const currUserId = auth.currentUser?.uid;
-    // this.authApi.getCurrentUserId().then((id: string | undefined) => {
-    //   if (id) {
-    //     // Use the id here
-    //     currUserId = id;
-    //   }
-    // });
+    alert("In badges$");
     alert(currUserId);
     const docRef = doc(
       this.firestore,
-      `badges/${currUserId}`   //check how it is modelled in firebase
-    ).withConverter<IBadges>({       //convert our firestore data into INotificationBox type
+      `badges/${currUserId}`
+    ).withConverter<IBadges>({ 
       fromFirestore: (snapshot) => {
         return (snapshot.data() as IBadges);
       },
@@ -40,73 +35,4 @@ export class BadgesService {
     });
     return docData(docRef, { idField: 'id' });
   }
-
-  // badges$(): Observable<IBadges> {
-  //   return from(this.authApi.getCurrentUserId()).pipe(
-  //     switchMap((id: string | undefined) => {
-  //       if (id) {
-  //         const docRef = doc(this.firestore, `badges/${id}`).withConverter<IBadges>({
-  //           fromFirestore: (snapshot) => {
-  //             return snapshot.data() as IBadges;
-  //           },
-  //           toFirestore: (it: IBadges) => it,
-  //         });
-  //         return docData(docRef, { idField: 'id' });
-  //       } else {
-  //         throw new Error('Unable to retrieve current user ID.');
-  //       }
-  //     })
-  //   );
-  // }
-  
-
-  // async getId() {
-  //   const id = await this.authApi.getCurrentUserId();
-  //   if (id) {
-  //     // Use the id here
-  //     console.log(id);
-  //   }
-  // }
-  // badges$(id: string) {
-  //   const docRef = doc(
-  //     this.firestore,
-  //     `badges/${id}`   //check how it is modelled in firebase
-  //   ).withConverter<IBadges>({       //convert our firestore data into INotificationBox type
-  //     fromFirestore: (snapshot) => {
-  //       return snapshot.data() as IBadges;
-  //     },
-  //     toFirestore: (it: IBadges) => it,
-  //   });
-  //   return docData(docRef, { idField: 'id' });
-  // }
-
-  //   async register(currUserId:string, regEmail:string){
-  //       // if (currUserId){
-  //       //   const newUser:IUserModel = {
-  //       //     id:currUserId,
-  //       //     email: regEmail,
-  //       //     //created: Timestamp.now()
-  //       //   }
-  //       // }
-  //       // alert("In register Service");
-  //       const newUser:IUserModel = {
-  //         id:currUserId,
-  //         email: regEmail,
-  //         created: Timestamp.now()
-  //       }
-  //       console.log(newUser);
-
-  //       const [dName] = regEmail.split("@"); //this is to get the part until the @
-  //       const newProfile:IProfileModel = {
-  //         userId:currUserId,
-  //         displayName:dName,
-  //         email: regEmail
-  //       }
-  //       console.log(newProfile);
-  //       //this.repository.createUser(newUser);
-  //       //this.repository.createProfile({});
-  //       // alert("In register Service");
-  //       this.repository.createUser(newUser);
-  //       this.repository.createProfile(newProfile);
-  //   }
 }
