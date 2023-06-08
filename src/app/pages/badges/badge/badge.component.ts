@@ -7,7 +7,8 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class BadgeComponent  implements OnInit {
   @Input() name!:string;
-  @Input() description!:string;
+  @Input() receivedDescription!:string;
+  @Input() notReceivedDescription!:string;
   @Input() received!:boolean;
 
   constructor() { }
