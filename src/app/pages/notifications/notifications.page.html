@@ -23,8 +23,12 @@
   <ion-avatar slot="start">
     <img alt="Silhouette of a person's head" src="https://i.pravatar.cc/300" />
   </ion-avatar>
-  <ion-label><b>&nbsp;{{notice.sendername}}</b></ion-label>
-  <ion-label>&nbsp;{{notice.message}}</ion-label>
+  <ion-grid>
+    <ion-row>
+  <ion-label class="Bcard"><b>&nbsp;&nbsp;{{notice.sendername}}</b></ion-label>
+   </ion-row>  
+  <ion-label class="Bcard">&nbsp;&nbsp;{{notice.message}}</ion-label>
+</ion-grid>
 </ion-card-content>
 <ion-label>{{"&nbsp;".repeat(90)}}{{notice.sentdate}}</ion-label>
 
