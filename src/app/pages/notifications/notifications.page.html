@@ -1,13 +1,46 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>notifications</ion-title>
+    <ion-item color="medium">
+      <ion-icon name="arrow-back-outline" routerLink="/home/dashboard"></ion-icon>
+      <ion-title>Notifications</ion-title>
+    </ion-item>
   </ion-toolbar>
 </ion-header>
+<br>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">notifications</ion-title>
-    </ion-toolbar>
-  </ion-header>
+
+<ion-content class="main">
+  <ion-item lines="none">
+    <ion-title slot="start" style="display:inline-block"><b>Today</b></ion-title>
+    <ion-title slot="end" style="display:inline-block" ><ion-button fill="clear" (click)="clearNotifications()">Clear all</ion-button></ion-title>
+  </ion-item>
+    <br>
+    <br>
+    
+  <div *ngIf="noticeamount > 0" >
+  <ion-card class="Mcard" *ngFor="let notice of noticeList">
+    <ion-card-content style="display:flex ; align-items:center" >
+  <ion-avatar slot="start">
+    <img alt="Silhouette of a person's head" src="https://i.pravatar.cc/300" />
+  </ion-avatar>
+  <ion-grid>
+    <ion-row>
+  <ion-label class="Bcard"><b>&nbsp;&nbsp;{{notice.sendername}}</b></ion-label>
+   </ion-row>  
+  <ion-label class="Bcard">&nbsp;&nbsp;{{notice.message}}</ion-label>
+</ion-grid>
+</ion-card-content>
+<ion-label>{{"&nbsp;".repeat(90)}}{{notice.sentdate}}</ion-label>
+
+</ion-card>
+</div>
+<br>
+
+<ion-card *ngIf="noticeamount == 0" class="flex-center">
+  <ion-button (click)="presentAlert()">No Notifications!</ion-button>
+  </ion-card>
+
+
+
+
 </ion-content>
