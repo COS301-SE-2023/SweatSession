@@ -13,6 +13,7 @@
         Settings
       </ion-label>
     </ion-item>
+   
 
     <ion-item class="clickable" routerLink="/logout">
       <ion-icon name="log-out-outline">
@@ -23,6 +24,7 @@
     </ion-item>
   </ion-content>
 </ion-menu>
+
 
 
 <ion-header>
@@ -42,7 +44,7 @@
               routerLink="/workout-scheduling"
               class="clickable" slot="end">
     </ion-icon>
-    <ion-badge color="success" slot="end">80</ion-badge>
+    <ion-badge color="success" slot="end">{{noticeamount}}</ion-badge>
     <ion-icon name="notifications-outline" 
               routerLink="/notifications"
               class="clickable" slot="end">
@@ -51,7 +53,7 @@
 </ion-header>
 
 <ion-content id="main-content">
-  <ion-router-outlet></ion-router-outlet>
+  <ion-router-outlet> </ion-router-outlet>
 </ion-content>
   
 <ion-tabs>

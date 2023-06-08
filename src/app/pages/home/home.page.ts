@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { NoticehomeService } from 'src/app/services/notifications/noticehome.service';
+
 
 
 @Component({
@@ -9,11 +12,26 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class HomePage implements OnInit {
 
-  constructor(public router: Router){
+  noticeamount : number ;
+  sub : Subscription ;
+
+  constructor(private noticehomeService: NoticehomeService){
   }
  
   ngOnInit() {
+    
   }
+
+  ngAfterContentInit() {
+    this.sub = this.noticehomeService.send_data.subscribe(
+      data => {
+        console.log(data)
+        this.noticeamount = data
+      }
+    )
+  }
+
+  
 
 
 
