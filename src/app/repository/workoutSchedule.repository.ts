@@ -150,8 +150,8 @@ export class WorkoutscheduleRepository {
           schedules.push(schedule);
         });
       
-        console.log('Schedules fetched successfully');
-        alert('Schedules fetched successfully');
+        // console.log('Schedules fetched successfully');
+        // alert('Schedules fetched successfully');
       
         const response: IGotWorkoutSchedules = {
           userId: request.userId,

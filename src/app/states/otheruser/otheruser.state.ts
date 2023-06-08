@@ -52,7 +52,7 @@ export class OtheruserState {
             ...state, otheruser: this.getMock(request) as IProfileModel,
             friends: this.getFriends(request).friends,
             workoutSchedule: this.getSchedules(request).schedules,
-            friendshipStatus: this.getFriends(request).friends.includes({userId: "test id"})
+            friendshipStatus: this.getFriends(request).friends.some(({userId})=> userId = "test id")
         })
     }
 

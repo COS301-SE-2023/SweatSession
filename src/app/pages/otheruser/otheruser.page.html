@@ -1,8 +1,20 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-item>
+    <ion-item *ngIf = "!isFriendsSlideActive && !isScheduleSlideActive">
       <ion-icon name="arrow-back-outline" routerLink="/friends"></ion-icon>
-      <ion-title>otheruser</ion-title>
+      <ion-title>{{user!.name}}</ion-title>
+      <ion-icon name="ellipsis-vertical-outline"></ion-icon>
+    </ion-item>
+
+    <ion-item *ngIf = "isScheduleSlideActive">
+      <ion-icon name="arrow-back-outline" (click) ="viewSchedules()"></ion-icon>
+      <ion-title>{{user!.name}}'s WorkoutSchedules</ion-title>
+      <ion-icon name="ellipsis-vertical-outline"></ion-icon>
+    </ion-item>
+
+    <ion-item *ngIf = "isFriendsSlideActive">
+      <ion-icon name="arrow-back-outline" (click)="viewFriends()"></ion-icon>
+      <ion-title>{{user!.name}}'s Sweat buddies</ion-title>
       <ion-icon name="ellipsis-vertical-outline"></ion-icon>
     </ion-item>
   </ion-toolbar>
@@ -45,19 +57,12 @@
   </ion-item>
  </ion-card>
 
- <div class="container">
-  <div class="content" [ngClass]="{ 'active': isSlideActive }">
-    <ion-card *ngFor = "let friend of friends">
-      <ion-item class="friend">
-        <ion-avatar>
-          <img src="assets/sweatsessionlogotransparent1.png"/>
-        </ion-avatar>
-        <ion-text>
-          {{friend.name}}
-        </ion-text>
-      </ion-item>
-    </ion-card>
-    
-  </div>
+<div class="content" *ngIf = "isFriendsSlideActive">
+  <otheruser-friends [friends] = "friends"></otheruser-friends>
 </div>
+
+<div class="content" *ngIf = "isScheduleSlideActive">
+  <otheruser-schedules [schedules] = "schedules"></otheruser-schedules>
+</div>
+
 </ion-content>
