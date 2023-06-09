@@ -28,7 +28,7 @@ export interface OtherUserStateModel {
 
 @Injectable()
 export class OtheruserState {
-    constructor(private friendService: FriendsService, private workoutScheduleService: WorkoutscheduleRepository) {}
+    constructor(private nav:NavController, private friendService: FriendsService, private workoutScheduleService: WorkoutscheduleRepository) {}
 
     @Action(StageOtheruserInfo)
     stageOtheruserInfo(ctx: StateContext<OtherUserStateModel>, {payload}: StageOtheruserInfo) {
@@ -37,14 +37,15 @@ export class OtheruserState {
             ...state, otheruser: payload
         })
         localStorage.setItem("user",JSON.stringify(payload));
-       return ctx.dispatch(new Navigate(['otheruser']));
+        this.nav.navigateRoot("otheruser");
+       //return ctx.dispatch(new Navigate(['otheruser']));
     }
 
     @Action(LoadOtherUserProfile)
     loadOtheruserProfile(ctx: StateContext<OtherUserStateModel>) {
         const request = JSON.parse(localStorage.getItem("user")!);
-        const schedulesResponse = this.getSchedules(request);
-        const friendsResponse = this.getFriends(request);
+        const schedulesResponse = this.getSchedules(request); //this.workoutScheduleService.getSchedules(request)
+        const friendsResponse = this.getFriends(request); //this.friendService.getFriends(request);
         //const response = await this.otheruserService.getProfile();
 
         const state = ctx.getState();
@@ -134,42 +135,42 @@ export class OtheruserState {
                 {
                     userId: "userId 1",
                     name: "Testing 1",
-                    profileURL: ""
+                    profileURL: "assets/sweatsessionlogotransparent1.png"
                 },
                 {
                     userId: "userId 2",
                     name: "Testing 2",
-                    profileURL: ""
+                    profileURL: "assets/sweatsessionlogotransparent1.png"
                 },
                 {
                     userId: "userId 3",
                     name: "Testing 3",
-                    profileURL: ""
+                    profileURL: "assets/sweatsessionlogotransparent1.png"
                 },
                 {
                     userId: "userId 4",
                     name: "Testing 4",
-                    profileURL: ""
+                    profileURL: "assets/sweatsessionlogotransparent1.png"
                 },
                 {
                     userId: "userId 5",
                     name: "Testing 5",
-                    profileURL: ""
+                    profileURL: "assets/sweatsessionlogotransparent1.png"
                 },
                 {
                     userId: "userId 6",
                     name: "Testing 6",
-                    profileURL: ""
+                    profileURL: "assets/sweatsessionlogotransparent1.png"
                 },
                 {
                     userId: "userId 7",
                     name: "Testing 7",
-                    profileURL: ""
+                    profileURL: "assets/sweatsessionlogotransparent1.png"
                 },
                 {
                     userId: "test id",
                     name: "Testing 8",
-                    profileURL: ""
+                    profileURL: "assets/sweatsessionlogotransparent1.png"
                 }
             ],
             validate: true

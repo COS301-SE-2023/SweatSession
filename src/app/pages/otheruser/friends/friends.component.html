@@ -3,9 +3,10 @@
     <ion-card *ngFor = "let friend of friends">
       <ion-item>
         <ion-avatar>
-          <img src = "assets/sweatsessionlogotransparent1.png" alt="image here">
+          <img src = "{{friend.profileURL}}" alt="image here" />
         </ion-avatar>
         <ion-text>{{friend.name}}</ion-text>
+        <ion-icon name="chevron-forward-outline" slot = "end" (click)="viewOtherUser(friend)"></ion-icon>
       </ion-item>
     </ion-card>
   </div>

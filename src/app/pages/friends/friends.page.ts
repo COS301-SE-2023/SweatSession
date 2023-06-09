@@ -1,3 +1,4 @@
+import { NavController } from '@ionic/angular';
 import { IFriendsModel, ISearchTerms } from 'src/app/models';
 import { Component, OnInit } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
@@ -15,7 +16,7 @@ export class FriendsPage implements OnInit {
   friends:IFriendsModel[]=[];
   @Select(FriendsState.returnFriends) friends$! : Observable<IFriendsModel[]>;
   searchTerms!: ISearchTerms;
-  constructor(private store: Store, private loadingCtrl:LoadingController) { }
+  constructor(private store: Store, private loadingCtrl:LoadingController, private nav:NavController) { }
 
   ngOnInit() {
     this.initialiseSearchTerms()
@@ -24,6 +25,7 @@ export class FriendsPage implements OnInit {
 
   addFriend() {
     //thsi.store.dispatch(new AddFriendAction(payload));
+    this.nav.navigateRoot("home/search")
   }
 
   initialiseSearchTerms() {

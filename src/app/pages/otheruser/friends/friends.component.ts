@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Store } from '@ngxs/store';
+import { StageOtheruserInfo } from 'src/app/actions';
 import { IFriendsModel } from 'src/app/models';
 
 @Component({
@@ -8,8 +10,11 @@ import { IFriendsModel } from 'src/app/models';
 })
 export class FriendsComponent  implements OnInit {
   @Input() friends!: IFriendsModel[];
-  constructor() { }
+  constructor(private store:Store) { }
 
   ngOnInit() {}
 
+  viewOtherUser(friend: IFriendsModel){
+    this.store.dispatch(new StageOtheruserInfo(friend))
+  }
 }
