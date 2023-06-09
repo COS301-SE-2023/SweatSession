@@ -29,6 +29,11 @@ export class BadgesPage implements OnInit {
       notReceivedDescription:"Make 5 friends to earn this badge",
       received:false
     },{
+      header: "Stretching Star",
+      receivedDescription: "Congratulations! You have incorporated stretching exercises into your workout plan",
+      notReceivedDescription: "Incorporate stretching exercises into your workout plan",
+      received: false
+    },{
       header:"Record Breaker",
       receivedDescription:"Congratulations! You have reached a new personal best for bench presses",
       notReceivedDescription:"Reach a new personal best for bench presses to earn this badge",
