@@ -37,7 +37,9 @@ export class HomePage implements OnInit {
     )
   }
 
-  
+  goToSettings() {
+    this.nav.navigateRoot("/settings");
+  }
 
 
 
