@@ -9,6 +9,7 @@ import {
 
 import { signOut } from '@firebase/auth';
 import { NavController } from '@ionic/angular';
+// import { AuthState } from 'src/app/states/auth';
 //import { RegisterRepository } from 'src/app/repository/register.repository';
 
 //import { getAuth } from 'firebase/auth';
@@ -35,6 +36,7 @@ export class AuthApi {
     try {
       //alert("in auth api login function");
       await signInWithEmailAndPassword(this.authObject, regEmail, regPassword);
+      // AuthState.currUserId=await this.getCurrentUserId();
       //return await signInWithEmailAndPassword(this.authObject, regEmail, regPassword);
       
       this.Nav.navigateRoot('/home'); // this is so they are only directed to login when they enter a valid email and password combination
@@ -49,6 +51,7 @@ export class AuthApi {
   async register(regEmail: string, regPassword: string) {
     try {
       await createUserWithEmailAndPassword(this.authObject, regEmail, regPassword);
+      // AuthState.currUserId=null;
       this.Nav.navigateRoot('/home'); // this is so they are only directed to login when they enter a valid email and password combination
       return true;
     }catch (error) {
@@ -65,6 +68,7 @@ export class AuthApi {
     // const auth = getAuth();
     // console.log(auth.currentUser?.uid);
     // alert("logout");
+    sessionStorage.removeItem('currUserId');
     return await signOut(this.authObject);
   }
 }
