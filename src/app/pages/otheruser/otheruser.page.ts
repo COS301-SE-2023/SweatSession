@@ -24,6 +24,8 @@ export class OtheruserPage implements OnInit {
 
   ngOnInit() {
     this.displayUserInfo();
+    this.isFriendsSlideActive = false;
+    this.isScheduleSlideActive = false;
   }
 
   removeFriend() {
@@ -40,12 +42,14 @@ export class OtheruserPage implements OnInit {
     //this.store.dispatch(new GetWorkoutSchedule())
     console.log("view schedules")
     this.isScheduleSlideActive = !this.isScheduleSlideActive;
+    console.log(this.isScheduleSlideActive);
   }
 
   viewFriends() {
     //this.store.dispatch(new GetFriendsAction())
     console.log("view friends")
     this.isFriendsSlideActive = !this.isFriendsSlideActive;
+    console.log(this.isFriendsSlideActive);
   }
 
   displayUserInfo() {
