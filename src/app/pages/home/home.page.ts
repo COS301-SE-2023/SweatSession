@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { NoticehomeService } from 'src/app/services/notifications/noticehome.service';
 
+import { AuthApi } from 'src/app/states/auth/auth.api';
 
 
 @Component({
@@ -14,9 +15,7 @@ export class HomePage implements OnInit {
 
   noticeamount : number ;
   sub : Subscription ;
-
-  constructor(private noticehomeService: NoticehomeService){
-  }
+  constructor(private noticehomeService: NoticehomeService , private authAPI: AuthApi) { }
  
   ngOnInit() {
     
@@ -31,7 +30,11 @@ export class HomePage implements OnInit {
     )
   }
 
-  
+  userLogout(){
+    this.authAPI.logout();
+  }
+
+
 
 
 
