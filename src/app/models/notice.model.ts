@@ -3,4 +3,5 @@ export class Notice{
     sentdate?: string;
     sendername?: string;
     message?: string;
+    userid?: string;
 }
