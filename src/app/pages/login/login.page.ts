@@ -6,7 +6,7 @@ import {Login} from 'src/app/actions/login';
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
-  styleUrls: ['./login.page.scss'],
+  styleUrls: ['./login.page.scss','../register/register.page.scss'],
 })
 export class LoginPage implements OnInit {
 

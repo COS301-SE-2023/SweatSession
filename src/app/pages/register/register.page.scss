@@ -1,6 +1,6 @@
-.registrationContainer {
+.outerContainer {
   --ion-background-color: #F1FAEE;
- // --background: url('/assets/Asset 1.png') no-repeat center/cover fixed;
+  // --background: url('/assets/Asset 1.png') no-repeat center/cover fixed;
  animation: fadeIn 5s;
 }
 
@@ -9,16 +9,30 @@ ion-card {
   padding: 20px;
 }
 
+img {
+  height: 18px;
+  width: 40px;
+  background-color: aqua;
+  border-radius: 50%;
+  border:1px solid lightcoral;
+}
+
+ion-card-title {
+  font-weight: bold;
+  font-style: italic;
+  color: lightcoral;
+  text-shadow: #a9cfe0 2px 2px;
+  margin-bottom: 40px;
+}
+
 ion-card-subtitle {
   margin: 20px;
 }
 
 ion-card-header {
   color: #000;
-  font-size: 30px;
   font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
     'Liberation Sans', sans-serif;
-    font-weight: bolder;
 }
 
 .signIn-buttons {
