@@ -6,6 +6,7 @@ import { Notice } from 'src/app/models/notice.model';
 import { AlertController, NavController } from '@ionic/angular';
 import { HomePage } from '../home/home.page';
 import { Router } from '@angular/router';
+import { getAuth } from 'firebase/auth';
 
 @Component({
   selector: 'app-notifications',
@@ -21,6 +22,7 @@ export class NotificationsPage implements OnInit {
   noticeamount : number ;
   noticeList: Notice[];
   sendamount: string ;
+  
 
   
   //noticeList: Observable<Notice[]> = this.noticeService.getNotices();
@@ -34,7 +36,7 @@ export class NotificationsPage implements OnInit {
     this.getNotifications() ;
       
   }
-
+   
   getNotifications(){
     this.noticeService.getNotices().subscribe((notices: Notice[]) => {
       this.noticeList = notices;
@@ -42,6 +44,7 @@ export class NotificationsPage implements OnInit {
       this.noticeamount = this.noticeList.length ;
       console.log(this.noticeamount);
       this.sendNotifications(this.noticeamount);
+
     });  
 
   }
@@ -52,6 +55,7 @@ export class NotificationsPage implements OnInit {
       message: 'You have no new notifications!',
       buttons: ['OK']
     });
+    this.createNotifications("Luqmaan" , "12:02 " , "Liked your post");
 
     await alert.present();
   }
@@ -68,6 +72,10 @@ export class NotificationsPage implements OnInit {
   sendNotifications(num :number){
     this.noticeamount = num ;
     this.noticehomeService.send_data.next(this.noticeamount);
+  }
+
+  createNotifications(sendername: string , sentdate: string , message: string){
+    this.noticeService.createNotices(sendername , sentdate , message);
   }
 
   

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { collectionData, collection, addDoc, Firestore, deleteDoc, doc } from '@angular/fire/firestore';
+import { collectionData, collection, addDoc, Firestore, deleteDoc, doc, setDoc } from '@angular/fire/firestore';
+import { getAuth } from 'firebase/auth';
 import { Observable } from 'rxjs';
 import { Notice } from 'src/app/models/notice.model';
 
@@ -9,6 +10,9 @@ import { Notice } from 'src/app/models/notice.model';
 
 
 export class NoticeService {
+
+   auth = getAuth();
+   currUserId = this.auth.currentUser?.uid;
 
   constructor(private readonly firestore: Firestore) { }
 
@@ -22,6 +26,18 @@ export class NoticeService {
   deleteNotices(id :string): Promise<void> {
     const noticeDocRef = doc(this.firestore, `Notifications/${id}`);
     return deleteDoc(noticeDocRef);
+  }
+
+  async createNotices(SenderName: string , SentDate: string , Message: string){
+    
+    await setDoc(doc(this.firestore , 'Notifications', ""+this.currUserId), {
+      userid: this.currUserId , 
+      sendername: SenderName , 
+      sentdate: SentDate , 
+      message: Message
+    });
+
+
   }
   
 
