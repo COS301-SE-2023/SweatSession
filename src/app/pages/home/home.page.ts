@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { NoticehomeService } from 'src/app/services/notifications/noticehome.service';
+
 import { AuthApi } from 'src/app/states/auth/auth.api';
 
 
@@ -9,16 +13,28 @@ import { AuthApi } from 'src/app/states/auth/auth.api';
 })
 export class HomePage implements OnInit {
 
-  constructor(
-    private authAPI: AuthApi
-  ) { }
+  noticeamount : number ;
+  sub : Subscription ;
+  constructor(private noticehomeService: NoticehomeService , private authAPI: AuthApi) { }
  
   ngOnInit() {
+    
+  }
+
+  ngAfterContentInit() {
+    this.sub = this.noticehomeService.send_data.subscribe(
+      data => {
+        console.log(data)
+        this.noticeamount = data
+      }
+    )
   }
 
   userLogout(){
     this.authAPI.logout();
   }
+
+
 
 
 
