@@ -37,8 +37,8 @@ export class OtheruserState {
             ...state, otheruser: payload
         })
         localStorage.setItem("user",JSON.stringify(payload));
-        this.nav.navigateRoot("otheruser");
-       //return ctx.dispatch(new Navigate(['otheruser']));
+        //this.nav.navigateRoot("otheruser");
+       return ctx.dispatch(new Navigate(['otheruser']));
     }
 
     @Action(LoadOtherUserProfile)
@@ -53,7 +53,7 @@ export class OtheruserState {
             ...state, otheruser: this.getMock(request) as IProfileModel,
             friends: this.getFriends(request).friends,
             workoutSchedule: this.getSchedules(request).schedules,
-            friendshipStatus: this.getFriends(request).friends.some(({userId})=> userId = "test id")
+            friendshipStatus: this.getFriends(request).friends.some(({userId})=> userId == "xxxxx")
         })
     }
 

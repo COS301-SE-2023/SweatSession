@@ -34,8 +34,13 @@ export class OtheruserPage implements OnInit {
   }
 
   addFriend() {
+   if(this.user!=null) {
     this.otherUserInfo.friendshipStatus = true;
     this.store.dispatch(new AddFriendAction(this.friendModel()))
+    alert(this.user.userId,)
+   } else(
+    alert("User is null.....")
+   )
   }
 
   viewSchedules() {

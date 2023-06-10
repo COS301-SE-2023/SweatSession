@@ -33,7 +33,7 @@ export class FriendsRepository {
     try {
         const docRef = await this.firestore.collection("friends")
                 .doc(request.userId)
-                .collection("friends")
+                .collection("userFriends")
                 .get()
                 .toPromise();
     
@@ -83,8 +83,8 @@ export class FriendsRepository {
             userId: request.userId,
             friend: friend,
             validate: true
-    }
-    return response;
+        }
+        return response;
     }catch(error) {
         alert("error: "+ error);
         const response: IAddedFriend = {
