@@ -1,3 +1,4 @@
+import { AuthApi } from 'src/app/states/auth/auth.api';
 import { Injectable } from "@angular/core";
 import { Action, State, StateContext, Store, Selector } from "@ngxs/store";
 import { Navigate } from "@ngxs/router-plugin";
@@ -28,10 +29,13 @@ export interface OtherUserStateModel {
 
 @Injectable()
 export class OtheruserState {
-    constructor(private nav:NavController, private friendService: FriendsService, private workoutScheduleService: WorkoutscheduleRepository) {}
+    constructor(private nav:NavController, 
+        private readonly friendService: FriendsService, 
+        private readonly workoutScheduleService: WorkoutscheduleRepository,
+        private readonly authApi:AuthApi) {}
 
     @Action(StageOtheruserInfo)
-    stageOtheruserInfo(ctx: StateContext<OtherUserStateModel>, {payload}: StageOtheruserInfo) {
+    async stageOtheruserInfo(ctx: StateContext<OtherUserStateModel>, {payload}: StageOtheruserInfo) {
         const state = ctx.getState();
         ctx.setState({
             ...state, otheruser: payload
@@ -42,19 +46,22 @@ export class OtheruserState {
     }
 
     @Action(LoadOtherUserProfile)
-    loadOtheruserProfile(ctx: StateContext<OtherUserStateModel>) {
-        const request = JSON.parse(localStorage.getItem("user")!);
-        const schedulesResponse = this.getSchedules(request); //this.workoutScheduleService.getSchedules(request)
-        const friendsResponse = this.getFriends(request); //this.friendService.getFriends(request);
-        //const response = await this.otheruserService.getProfile();
+    async loadOtheruserProfile(ctx: StateContext<OtherUserStateModel>) {
+        const currentUserId = await this.authApi.getCurrentUserId();
+        if(currentUserId!=null) {
+            const request = JSON.parse(localStorage.getItem("user")!);
+            const schedulesResponse = this.getSchedules(request); //this.workoutScheduleService.getSchedules(request)
+            const friendsResponse = this.getFriends(request); //this.friendService.getFriends(request);
+            //const response = await this.otheruserService.getProfile();
 
-        const state = ctx.getState();
-        ctx.setState({
-            ...state, otheruser: this.getMock(request) as IProfileModel,
-            friends: this.getFriends(request).friends,
-            workoutSchedule: this.getSchedules(request).schedules,
-            friendshipStatus: this.getFriends(request).friends.some(({userId})=> userId == "xxxxx")
-        })
+            const state = ctx.getState();
+            ctx.setState({
+                ...state, otheruser: this.getMock(request) as IProfileModel,
+                friends: this.getFriends(request).friends,
+                workoutSchedule: this.getSchedules(request).schedules,
+                friendshipStatus: this.getFriends(request).friends.some(({userId})=> userId == currentUserId)
+            })
+        }
     }
 
     @Selector()
