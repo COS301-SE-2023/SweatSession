@@ -49,6 +49,10 @@ const routes: Routes = [
       loadChildren: () => import('./pages/userprofile/userprofile.module').then( m => m.UserprofilePageModule)
   },
   {
+    path: 'workout-scheduling',
+      loadChildren: () => import('./pages/workout-scheduling/workout-scheduling.module').then( m => m.WorkoutSchedulingPageModule)
+  },
+  {
     path: 'setprofile',
     loadChildren: () => import('./pages/setprofile/setprofile.module').then( m => m.SetprofilePageModule)
   },

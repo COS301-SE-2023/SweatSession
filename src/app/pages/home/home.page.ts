@@ -34,7 +34,7 @@ export class HomePage implements OnInit {
         this.ProfilePicture$ = profile.profile.profileURL;
       });
     });
-    
+    this.nav.navigateRoot("/home/dashboard");
   }
 
   userLogout(){
