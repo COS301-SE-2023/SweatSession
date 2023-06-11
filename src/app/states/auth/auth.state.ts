@@ -30,7 +30,7 @@ export interface AuthenticationStateModel {
 })
 @Injectable()
 export class AuthState {
-  // public static currUserId: string|null|undefined;a
+  public static currUserId: string|null|undefined;
   constructor(private readonly authenticationApi: AuthApi) {}
 
   @Selector()
@@ -83,13 +83,13 @@ export class AuthState {
       await this.authenticationApi.login(email, password);
       return context.dispatch(new Navigate(['home']));
     } catch (err) {
-      return context.dispatch(new Navigate(['/login'])); //maybe we should change it to register
+      return context.dispatch(new Navigate(['login'])); //maybe we should change it to register
     }
   }
 
   @Action(Logout)
   async logout(context: StateContext<AuthenticationStateModel>) {
     await this.authenticationApi.logout();
-    return context.dispatch(new Navigate(['/login']));
+    context.dispatch(new Navigate(['login']));
   }
 }

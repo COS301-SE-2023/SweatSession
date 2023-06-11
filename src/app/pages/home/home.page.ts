@@ -1,3 +1,4 @@
+import { Store } from '@ngxs/store';
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { AuthApi } from 'src/app/states/auth/auth.api';
@@ -6,6 +7,7 @@ import { Subscription } from 'rxjs';
 import { NoticehomeService } from 'src/app/services/notifications/noticehome.service';
 import { SetProfileService } from 'src/app/services';
 import { IGetFriends, IGetProfile } from 'src/app/models';
+import { Logout } from 'src/app/actions';
 
 
 @Component({
@@ -23,7 +25,8 @@ export class HomePage implements OnInit {
 
   constructor(private nav:NavController,private noticehomeService: NoticehomeService ,
     private authAPI: AuthApi,
-    private setpr: SetProfileService) { }
+    private setpr: SetProfileService,
+    private store: Store) { }
 
   ngOnInit() 
   {
@@ -38,7 +41,7 @@ export class HomePage implements OnInit {
   }
 
   userLogout(){
-    this.authAPI.logout();
+    this.store.dispatch(new Logout());
   }
 
   ngAfterContentInit() {

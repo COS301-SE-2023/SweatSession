@@ -7,3 +7,4 @@ export * from "./otheruser/otheruser.state";
 export * from "./otheruser/otheruser.module";
 export * from "./register/register.state";
 export * from "./register/register.module";
+export * from "./auth";
