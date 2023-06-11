@@ -5,8 +5,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { NoticehomeService } from 'src/app/services/notifications/noticehome.service';
 
-
-
 @Component({
   selector: 'app-home',
   templateUrl: './home.page.html',
@@ -14,8 +12,9 @@ import { NoticehomeService } from 'src/app/services/notifications/noticehome.ser
 })
 export class HomePage implements OnInit {
 
-  constructor(private nav:NavController, private authAPI: AuthApi,
-    private noticehomeService: NoticehomeService) { }
+  noticeamount : number ;
+  sub : Subscription ;
+  constructor(private nav:NavController,private noticehomeService: NoticehomeService , private authAPI: AuthApi) { }
  
   ngOnInit() {
     this.nav.navigateRoot("/home/dashboard");
@@ -24,9 +23,6 @@ export class HomePage implements OnInit {
   userLogout(){
     this.authAPI.logout();
   }
-  noticeamount : number ;
-  sub : Subscription ;
-
 
   ngAfterContentInit() {
     this.sub = this.noticehomeService.send_data.subscribe(
