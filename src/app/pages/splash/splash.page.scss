@@ -22,7 +22,7 @@ ion-card {
 
 ion-content {
   overflow: hidden;
-  --ion-background: rgba(#F1FAEE,0.8);
+  --ion-background-color: #F1FAEE;//rgba($color: #F1FAEE,  $alpha: 1);
 }
 
 ion-button {
