@@ -49,19 +49,19 @@ export class WorkoutSchedulingState {
     async getWorkoutSchedules(ctx: StateContext<WorkoutSchedulingStateModel>) {
         const currentUserId = await this.authApi.getCurrentUserId();
        if(currentUserId!=null) {
-        const request:IGetWorkoutSchedules={
-            userId: currentUserId
-        }
+            const request:IGetWorkoutSchedules={
+                userId: currentUserId
+            }
 
-       const response: IGotWorkoutSchedules = await this.service.getSchedules(request);
-       console.table(response);
-        ctx.setState({
-            ...ctx.getState(), schedules: response.schedules
-        })
-    }else {
-        alert("Sorry, You are no logged in");
-        ctx.dispatch(new Navigate(['login']));
-    }
+        const response: IGotWorkoutSchedules = await this.service.getSchedules(request);
+        console.table(response);
+            ctx.setState({
+                ...ctx.getState(), schedules: response.schedules
+            })
+        }else {
+            alert("Sorry, You are no logged in");
+            ctx.dispatch(new Navigate(['login']));
+        }
     }
 
     @Action(RemoveWorkoutSchedule)
