@@ -12,3 +12,6 @@ export * from "./otheruser/otheruser.service";
 export * from "./workoutschedule/workoutschedule.service";
 // export * from "./workoutschedule/workoutschedule.service.spec";
 export * from "./registration/register.service";
+export * from "./workoutschedule/workoutschedule.service.spec";
+export * from "./exercise/exercise.service";
+export * from "./exercise/exercise.service.spec";
