@@ -41,7 +41,6 @@ export class FriendsRepository {
 
         docRef!.forEach((doc)=>{
             const friend = {
-                id : doc.id,
                 ...doc.data() as IFriendsModel,
             }
             friends.push(friend);
@@ -73,10 +72,11 @@ export class FriendsRepository {
         .collection("friends")
         .doc(request.userId)
         .collection("userFriends")
-        .add(request.friend)
+        .doc(request.friend.userId)
+        .set(request.friend)
+
 
         const friend: IFriendsModel ={
-            userId: docRef.id,
             ...request.friend
         }
         const response: IAddedFriend = {
