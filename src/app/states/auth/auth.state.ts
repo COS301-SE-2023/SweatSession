@@ -30,6 +30,7 @@ export interface AuthenticationStateModel {
 })
 @Injectable()
 export class AuthState {
+  // public static currUserId: string|null|undefined;a
   constructor(private readonly authenticationApi: AuthApi) {}
 
   @Selector()

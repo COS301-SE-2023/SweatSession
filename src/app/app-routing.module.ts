@@ -60,6 +60,10 @@ const routes: Routes = [
     path: 'notifications',
     loadChildren: () => import('./pages/notifications/notifications.module').then( m => m.NotificationsPageModule)
   },
+  {
+    path: 'badges',
+    loadChildren: () => import('./pages/badges/badges.module').then( m => m.BadgesPageModule)
+  },
 ];
 @NgModule({
   imports: [

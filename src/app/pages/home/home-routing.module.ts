@@ -44,6 +44,10 @@ const routes: Routes = [
       {
         path: 'chatbot',
         loadChildren: () => import('../chatbot/chatbot.module').then( m => m.ChatbotPageModule)
+      },
+      {
+        path: 'badges',
+        loadChildren: () => import('../badges/badges.module').then( m => m.BadgesPageModule)
       }
     ],
   }
