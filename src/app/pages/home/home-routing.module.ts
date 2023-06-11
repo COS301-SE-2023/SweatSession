@@ -29,10 +29,6 @@ const routes: Routes = [
         path: 'profile',
         loadChildren: () => import('../leaderboard/leaderboard.module').then((m) => m.LeaderboardPageModule),
       },
-      /*{
-        path: 'notifications',
-        loadChildren: () => import('../notifications/notifications.module').then( m => m.NotificationsPageModule)
-      },*/
       {
         path: 'leaderboard',
         loadChildren: () => import('../leaderboard/leaderboard.module').then( m => m.LeaderboardPageModule)
