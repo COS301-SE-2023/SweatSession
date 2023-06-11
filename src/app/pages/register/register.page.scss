@@ -1,7 +1,6 @@
 .outerContainer {
-  --ion-background-color: #F1FAEE;
- animation: fadeIn 5s;
- overflow: auto;
+  position: relative;
+  background-color: rgba(#F1FAEE,0.8);
 }
 
 ion-card {
@@ -13,7 +12,8 @@ ion-card {
   background-color: rgba($color: #a9cfe0, $alpha: 0.8);
   height: 100vh;
   width: 100vw;
- animation: fadeIn 5s;
+  animation: fadeIn 5s;
+  overflow: auto;
 }
 
 img {
@@ -82,17 +82,19 @@ ion-button {
 
 .background-cover {
   position: absolute;
+  top: 0px;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
   height: 100%;
   z-index: -1;
-  //background-color: rgb(212, 147, 147);
 }
 
 ion-img {
-  opacity: 0.2;
+  opacity: 0.5;
+  overflow: hidden;
+  position: fixed;
 }
 
 @keyframes fadeIn {
