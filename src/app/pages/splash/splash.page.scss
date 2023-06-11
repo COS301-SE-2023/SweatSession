@@ -5,18 +5,42 @@ ion-card {
   align-items: center;
   justify-content: center;
   border-radius: 0px;
+  background-color: rgba($color: #a9cfe0, $alpha: 0.8);
   border: 2px solid rgb(9, 50, 66);
   overflow-y:auto;
   .inner-wrapper {
-    max-width: 800px;
+    max-width: 500px;
     margin: 20px;
-    .logo-container {
-      background-color: aqua;
+    ion-card-title {
+      font-weight: bolder;
     }
   }
+  color:  rgba(#584d4e,0.5);
+  font-weight: bold;
+  font-style:initial;
 }
 
 ion-content {
   overflow: hidden;
+  --ion-background: rgba(#F1FAEE,0.8);
+}
+
+ion-button {
+  --background: #A8DADC;
+  --background-hover: #9ce0be;
+  --background-activated: #88f4be;
+  --background-focused: #88f4be;
+
+  --color: #000;
+
+  --border-radius: 10px;
+  --border-color: #E63946;
+  --border-style: solid;
+  --border-width: 3px;
+  
+
+  --ripple-color: deeppink;
+
+  --margin: 20px;
 }
 
