@@ -1,39 +1,39 @@
 <ion-content [fullscreen]="true" class="outerContainer">
-  <ion-grid class="loginGrid">
-    <ion-row>
-      <ion-card>
-        
-        <ion-card-title>
-          Sweat<img src="/assets/Asset 2.png" />Session
-        </ion-card-title>
-        <h5>sign in</h5>
-        <ion-text>please sign in to your account</ion-text>
-  
-        <form [formGroup]="loginForm"
-        ngxsForm="login.loginForm"
-        (submit)="userLogin()">
-          <ion-item class="input-item">
-            <ion-label position="floating">
-              <ion-icon src="/assets/vector-icon.svg"></ion-icon>
-              Email
-            </ion-label>
-            <ion-input type="email" placeholder="Enter your email"  formControlName="email" required></ion-input>
-          </ion-item>
-  
-          <ion-item class="input-item">
-            <ion-label position="floating"> 🔑Password</ion-label>
-            <ion-input type="password" placeholder="Enter your password"  formControlName="password" required></ion-input>
-          </ion-item>
-  
-          <ion-button id="loginButton" expand="block" type="submit">
-             Login
-          </ion-button>
-        </form>
-        
-          <ion-card-subtitle routerLink="/register">Don't have an account?</ion-card-subtitle>
-          <ion-card-subtitle>Forgot password?</ion-card-subtitle>
-      </ion-card>
-  
-    </ion-row>
-  </ion-grid>
+  <div class="background-cover">
+    <ion-img src="/assets/Asset 1.png"></ion-img>
+  </div>
+  <ion-card>
+    
+    <div class="inner-container">
+      <ion-card-title>
+        Sweat<img src="/assets/Asset 2.png" />Session
+      </ion-card-title>
+      <h5>sign in</h5>
+      <ion-text>please sign in to your account</ion-text>
+
+      <form [formGroup]="loginForm"
+      ngxsForm="login.loginForm"
+      (submit)="userLogin()">
+        <ion-item class="input-item">
+          <ion-label position="floating">
+            <ion-icon src="/assets/vector-icon.svg"></ion-icon>
+            Email
+          </ion-label>
+          <ion-input type="email" placeholder="Enter your email"  formControlName="email" required></ion-input>
+        </ion-item>
+
+        <ion-item class="input-item">
+          <ion-label position="floating"> 🔑Password</ion-label>
+          <ion-input type="password" placeholder="Enter your password"  formControlName="password" required></ion-input>
+        </ion-item>
+
+        <ion-button id="loginButton" expand="block" type="submit">
+            Login
+        </ion-button>
+      </form>
+      
+        <h5 routerLink="/register">Don't have an account?</h5>
+        <h5>Forgot password?</h5>
+    </div>
+  </ion-card>
 </ion-content>
