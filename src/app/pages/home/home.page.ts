@@ -4,6 +4,9 @@ import { AuthApi } from 'src/app/states/auth/auth.api';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { NoticehomeService } from 'src/app/services/notifications/noticehome.service';
+import { SetProfileService } from 'src/app/services';
+import { IGetFriends, IGetProfile } from 'src/app/models';
+
 
 @Component({
   selector: 'app-home',
@@ -14,10 +17,24 @@ export class HomePage implements OnInit {
 
   noticeamount : number ;
   sub : Subscription ;
-  constructor(private nav:NavController,private noticehomeService: NoticehomeService , private authAPI: AuthApi) { }
- 
-  ngOnInit() {
-    this.nav.navigateRoot("/home/dashboard");
+  DisplayName$? = "na";
+  ProfilePicture$? = "na";
+  getU : IGetProfile = {userId: 'na'};
+
+  constructor(private nav:NavController,private noticehomeService: NoticehomeService ,
+    private authAPI: AuthApi,
+    private setpr: SetProfileService) { }
+
+  ngOnInit() 
+  {
+    this.authAPI.getCurrentUserId().then((id) => {
+      this.getU.userId = id;
+      this.setpr.getProfile(this.getU).subscribe((profile) => {
+        this.DisplayName$ = profile.profile.displayName;
+        this.ProfilePicture$ = profile.profile.profileURL;
+      });
+    });
+    
   }
 
   userLogout(){

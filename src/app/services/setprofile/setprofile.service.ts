@@ -39,18 +39,18 @@ import { firestore } from 'firebase-functions/v1';
 import { ProfileRepository } from 'src/app/repository/profile.repository';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { IProfileModel , IGetProfile, IGotProfile,} from 'src/app/models';
+import { IProfileModel , IGetProfile, IGotProfile, IUpdateProfile,} from 'src/app/models';
+import { computeStackId } from '@ionic/angular/directives/navigation/stack-utils';
+import { AuthApi } from 'src/app/states/auth/auth.api';
+import { getCurrentUserId } from 'src/app/actions';
+
 
 @Injectable({
   providedIn: 'root'
 })
-export class ProfileService {
+export class SetProfileService {
 
   constructor(private repository: ProfileRepository) { }
-
-  addProfile(profile: IProfileModel): Observable<any> { 
-    return this.repository.addProfile(profile);
-  }
 
   getProfile(prof: IGetProfile): Observable<IGotProfile> {
     return this.repository.getProfile(prof).pipe(
@@ -59,34 +59,47 @@ export class ProfileService {
           const gotProfile: IGotProfile = {
             profile: {
               userId: profile.userId,
-              displayName: profile.displayName,
               name: profile.name,
-              bio: profile.bio,
+              displayName: profile.displayName,
               email: profile.email,
+              bio: profile.bio,
               phoneNumber: profile.phoneNumber,
+              profileURL: profile.profileURL,
               height: profile.height,
               weight: profile.weight,
-              profileURL: profile.profileURL  
+
             }
           };
+
           return gotProfile;
         } else {
           const notFoundProfile: IGotProfile = {
             profile: {
-              userId: 'undefined',
-              displayName: 'undefined',
-              name: 'undefined',
-              bio: 'undefined',
-              email: 'undefined',
-              phoneNumber: 'undefined',
-              height: '0',
-              weight: '0',
-              profileURL: 'undefined'  
+              userId: 'undefinedID',
+              bio: 'undefinedbio',
+              email: 'undefinedemail',
+              name: 'undefinedname',
+              phoneNumber: 'undefinedphone',
+              profileURL: 'undefinedURL' ,
+              height: 'undefinedheight',
+              weight: 'undefinedweight',
+              displayName: 'undefineddisplayName',
             }
           };
           return notFoundProfile;
         }
       })
+    );
+  }
+
+  updateProfile(IupdateP: IProfileModel)
+  {
+    this.repository.updateProfile(IupdateP).then((res) => {
+      console.log('Update Successful');
+    }
+    ).catch((error) => {
+      console.log('Update Failed');
+    }
     );
   }
 }

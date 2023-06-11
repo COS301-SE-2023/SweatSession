@@ -30,8 +30,14 @@ export class RegisterService {
       const [dName] = regEmail.split("@"); //this is to get the part until the @
       const newProfile:IProfileModel = {
         userId:currUserId,
+        name: regEmail,
         displayName:dName,
-        email: regEmail
+        email: regEmail,
+        bio: "Hi there, I am new to Sweat Session!",
+        profileURL: "https://i.pravatar.cc/150?img=20",//will add some default schelotte
+        phoneNumber: "0000000000",
+        height: '0',
+        weight: '0',
       }
       console.log(newProfile);
       //this.repository.createUser(newUser);
