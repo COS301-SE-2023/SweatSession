@@ -1,21 +1,130 @@
-.pointsContainer{
+:root {
+    --custom-red: #FF0000; /* Replace with your desired shade of red */
+  }
+
+.pointsContainer {
     --ion-background-color: #F1FAEE;
 }
 
-.userPointsSection {
-    --ion-background-color: #1D3557;
+ion-item.userPointsSection::part(native) {
+    --background: #1D3557;
+    --border-radius: 15px;
     color: white;
+    margin: 0 auto;
+    width: calc(100% - 30px);
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.userPointsContent {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
     border-radius: 15px;
 }
 
-.userPointsNumber{
-    font-size: 50px;
+.userPointsNumber {
+    font-size: 40px;
 }
 
-.userPointsNumberValue{
-    font-size: 50px;
+.userPointsNumberValue {
+    font-size: 40px;
 }
 
-ion-img{
-    width: 60px;
+.userPointsImg {
+    width: 50px;
+}
+
+ion-item.workoutPlanPointsSection::part(native) {
+    --background: #1D3557;
+    --border-radius: 15px;
+    color: white;
+    margin: 0 auto;
+    width: calc(100% - 30px);
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.pointsHeader {
+    font-size: 25px;
+//   margin-right: 5px;
+}
+
+.progressText {
+    font-size: 25px;
+    margin-bottom: 0;
+    // margin-left: 30%;
+  }
+
+.progressHeader,
+.pointsLabelHeader {
+    font-size: 25px;
+    margin-right: auto;
+}
+
+.progressHeader {
+    margin-right: 30%;
+    margin-left: 10%;
+}
+
+ion-button {
+    width: 100%;
+    margin-bottom: 10px;
+
+    --background: #457B9D;
+  --background-hover: #457B9D;
+  --color: white;
+  font-size: 25px;
+  height: 50px;
+  --border-radius: 15px;
+}
+
+.progressContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    // margin: 0 auto;
+    margin-right: auto;
+}
+
+.custom-progress-bar {
+    --background: #E63946;
+    --progress-background: #A8DADC;
+  width: 100%;
+  height: 20px;
+  border-radius: 10px;
+}
+
+.workoutPlanPoints{
+    font-size: 25px;
+}
+
+.workoutPlanPointsContent {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    justify-content: space-between;
+}
+
+.wpPointsSection{
+    width: 100%;
+    --background: #1D3557;
+    --border-color: #1D3557;
+    color: white;
+}
+
+.wpNumberValue {
+    font-size: 25px;
+}
+
+.userPointsNumberValue {
+    font-size: 40px;
+}
+
+.wpPointsImg {
+    width: 30px;
 }

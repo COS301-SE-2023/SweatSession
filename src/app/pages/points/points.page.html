@@ -8,9 +8,28 @@
 <ion-content class="pointsContainer">
   <ion-grid class="pointsGrid">
     <ion-item class="userPointsSection">
-      <ion-title class="userPointsNumber">Points: </ion-title>
-      <ion-text class="userPointsNumberValue"></ion-text>
-      <ion-img src="assets/sweatSessionPoint.png"></ion-img>
+      <ion-text class="userPointsNumber">Points:</ion-text>
+      <span class="userPointsContent">
+        <ion-text class="userPointsNumberValue">5</ion-text>
+        <ion-img src="assets/sweatSessionPoint.png" class = "userPointsImg"></ion-img>
+      </span>
+    </ion-item>
+
+    <ion-item class="workoutPlanPointsSection">
+      <h2 class="pointsHeader" style="margin:None">Complete Your Workout Plan</h2>
+      <div class="progressContainer">
+        <ion-text class="progressHeader">Progress: </ion-text>
+        <ion-text class="progressText">0/1</ion-text>
+      </div>
+      <ion-progress-bar value="0.0" class="custom-progress-bar" style="--ion-color-primary: var(--custom-red);"></ion-progress-bar>
+      <ion-item class="wpPointsSection">
+      <ion-text class="workoutPlanPoints">Points:</ion-text>
+      <span class="workoutPlanPointsContent">
+        <ion-text class="wpNumberValue">5</ion-text>
+        <ion-img src="assets/sweatSessionPoint.png" class = "wpPointsImg"></ion-img>
+      </span>
+    </ion-item>
+    <ion-button routerLink="/plans">View Workout Plan</ion-button>
     </ion-item>
   </ion-grid>
 </ion-content>
