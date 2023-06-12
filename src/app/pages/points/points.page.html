@@ -5,12 +5,12 @@
   </ion-item>
 </ion-header>
 
-<ion-content class="pointsContainer">
+<ion-content class="pointsContainer" *ngIf="points$ | async as points">
   <ion-grid class="pointsGrid">
     <ion-item class="userPointsSection">
       <ion-text class="userPointsNumber">Points:</ion-text>
       <span class="userPointsContent">
-        <ion-text class="userPointsNumberValue">5</ion-text>
+        <ion-text class="userPointsNumberValue">{{ points.userPoints }}</ion-text>
         <ion-img src="assets/sweatSessionPoint.png" class = "userPointsImg"></ion-img>
       </span>
     </ion-item>

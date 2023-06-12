@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
+import { Select, Store } from '@ngxs/store';
+import { Observable } from 'rxjs';
+import { SubscribeToPoints } from 'src/app/actions/points.actions';
+import { IPoints } from 'src/app/models/points.model';
+import { PointsState } from 'src/app/states/points/points.state';
 
 @Component({
   selector: 'app-points',
@@ -8,10 +13,13 @@ import { AlertController } from '@ionic/angular';
 })
 export class PointsPage implements OnInit {
 
-  constructor(private alertController: AlertController) { }
+  @Select(PointsState.points)
+  points$!: Observable<IPoints | null>;
+  
+  constructor(private alertController: AlertController, private store: Store) { }
 
   ngOnInit() {
-
+    this.store.dispatch(new SubscribeToPoints());
   }
 
   async showWorkoutPlanPopup() {
