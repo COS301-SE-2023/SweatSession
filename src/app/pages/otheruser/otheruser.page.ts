@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { AddFriendAction, LoadOtherUserProfile, RemoveFriendAction, RemoveUser } from 'src/app/actions';
 import { IFriendsModel, IProfileModel, IWorkoutScheduleModel } from 'src/app/models';
 import { OtherUserStateModel, OtheruserState } from 'src/app/states';
+import {NoticeService } from 'src/app/services/notifications/notice.service';
+import { getAuth } from 'firebase/auth';
 
 @Component({
   selector: 'app-otheruser',
@@ -18,7 +20,11 @@ export class OtheruserPage implements OnInit {
   friends: IFriendsModel[] =[];
   schedules: IWorkoutScheduleModel[] = [];
   @Select(OtheruserState.getOtherUser) user$!: Observable<OtherUserStateModel>;
-  constructor(private store: Store) {
+  auth = getAuth();
+  currUserId = this.auth.currentUser?.uid;
+  date : string ;
+  
+  constructor(private store: Store , private noticeService: NoticeService ) {
     this.displayUserInfo();
   }
 
@@ -31,6 +37,8 @@ export class OtheruserPage implements OnInit {
   removeFriend() {
     this.otherUserInfo.friendshipStatus = false;
     this.store.dispatch(new RemoveFriendAction(this.friendModel()))
+    this.date = new Date().toTimeString() ;
+    this.createNotifications("My name" , this.date , "Removed you as a Friend!")  ;
   }
 
   addFriend() {
@@ -41,6 +49,8 @@ export class OtheruserPage implements OnInit {
    } else(
     alert("User is null.....")
    )
+   this.date = new Date().toTimeString() ;
+   this.createNotifications("My name" , this.date , "Requested to friend you!")  ;
   }
 
   viewSchedules() {
@@ -79,4 +89,12 @@ export class OtheruserPage implements OnInit {
   backtoPreviousPage() {
     this.store.dispatch(new RemoveUser());
   }
+
+  createNotifications(sendername: string , sentdate: string , message: string){
+    this.noticeService.createNotices(sendername , sentdate , message , this.currUserId!);
+  }
+
+
+
+
 }
