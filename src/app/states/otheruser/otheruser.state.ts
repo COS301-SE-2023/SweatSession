@@ -4,7 +4,7 @@ import { Action, State, StateContext, Store, Selector } from "@ngxs/store";
 import { Navigate } from "@ngxs/router-plugin";
 import { Router } from "@angular/router";
 import { IFriendsModel, IGetFriends, IGetWorkoutSchedules, IGotFriends, IGotWorkoutSchedules, IProfileModel, IWorkoutScheduleModel } from "src/app/models";
-import { LoadOtherUserProfile, StageOtheruserInfo } from "src/app/actions";
+import { LoadOtherUserProfile, RemoveUser, StageOtheruserInfo } from "src/app/actions";
 import { NavController } from "@ionic/angular";
 import { FriendsService } from "src/app/services";
 import { WorkoutscheduleRepository } from "src/app/repository";
@@ -32,7 +32,8 @@ export class OtheruserState {
     constructor(private nav:NavController, 
         private readonly friendService: FriendsService, 
         private readonly workoutScheduleService: WorkoutscheduleRepository,
-        private readonly authApi:AuthApi) {}
+        private readonly authApi: AuthApi,
+        private readonly store: Store) {}
 
     @Action(StageOtheruserInfo)
     async stageOtheruserInfo(ctx: StateContext<OtherUserStateModel>, {payload}: StageOtheruserInfo) {
@@ -62,6 +63,12 @@ export class OtheruserState {
                 friendshipStatus: this.getFriends(request).friends.some(({userId})=> userId == currentUserId)
             })
         }
+    }
+
+    @Action(RemoveUser)
+    async removeUser() {
+        localStorage.removeItem("user");
+        this.store.dispatch(new Navigate(["friends"]))
     }
 
     @Selector()

@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-item *ngIf = "!isFriendsSlideActive && !isScheduleSlideActive">
-      <ion-icon name="arrow-back-outline" routerLink="/friends"></ion-icon>
+      <ion-icon name="arrow-back-outline" (click)="backtoPreviousPage()"></ion-icon>
       <ion-title>{{user!.name}}</ion-title>
     </ion-item>
 

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
-import { AddFriendAction, LoadOtherUserProfile, RemoveFriendAction } from 'src/app/actions';
+import { AddFriendAction, LoadOtherUserProfile, RemoveFriendAction, RemoveUser } from 'src/app/actions';
 import { IFriendsModel, IProfileModel, IWorkoutScheduleModel } from 'src/app/models';
 import { OtherUserStateModel, OtheruserState } from 'src/app/states';
 
@@ -74,5 +74,9 @@ export class OtheruserPage implements OnInit {
       name: this.user.name
     }
     return model;
+  }
+
+  backtoPreviousPage() {
+    this.store.dispatch(new RemoveUser());
   }
 }
