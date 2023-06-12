@@ -1,7 +1,10 @@
 import { Injectable } from "@angular/core";
-import { State, Store, Selector, Action } from "@ngxs/store";
+import { State, Store, Selector, Action, StateContext } from "@ngxs/store";
+import produce from "immer";
+import { SetPoints, SubscribeToPoints } from "src/app/actions/points.actions";
 import { IPoints } from "src/app/models/points.model";
 import { PointsApi } from "./points.api";
+import { Observable, tap } from 'rxjs';
 
 
 export interface PointsStateModel {
@@ -27,24 +30,24 @@ export interface PointsStateModel {
         return state.points;
     }
   
-    // @Action(SubscribeToBadges)
-    // public subscribeToBadgesState(context: StateContext<BadgesStateModel>) {
-    //   return this.badgesApi.badges$().pipe(
-    //     tap((currBadges: IBadges) => {
-    //       console.log("IN subscribeToBadges");
-    //       console.log(currBadges);
-    //       context.dispatch(new SetBadges(currBadges));
-    //     })
-    //   );
-    // }
+    @Action(SubscribeToPoints)
+    public subscribeToPointsState(context: StateContext<PointsStateModel>) {
+      return this.pointsApi.points$().pipe(
+        tap((points: IPoints) => {
+          console.log("IN subscribeToPoints");
+          console.log(points);
+          context.dispatch(new SetPoints(points));
+        })
+      );
+    }
   
-    // @Action(SetBadges)
-    // async setBadges(context: StateContext<BadgesStateModel>, { badges }: SetBadges) {
-    //   return context.setState(
-    //     produce((repr) => {
-    //       repr.currBadges = badges;
-    //     })
-    //   );
-    // }
+    @Action(SetPoints)
+    async setPoints(context: StateContext<PointsStateModel>, { points }: SetPoints) {
+      return context.setState(
+        produce((repr) => {
+          repr.points = points;
+        })
+      );
+    }
   }
   
