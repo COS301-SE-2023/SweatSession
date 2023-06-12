@@ -7,6 +7,8 @@ import { IonicModule } from '@ionic/angular';
 import { UserprofilePageRoutingModule } from './userprofile-routing.module';
 
 import { UserprofilePage } from './userprofile.page';
+import { Auth } from '@angular/fire/auth';
+import { AuthApi } from 'src/app/states/auth/auth.api';
 
 @NgModule({
   imports: [
@@ -15,6 +17,7 @@ import { UserprofilePage } from './userprofile.page';
     IonicModule,
     UserprofilePageRoutingModule
   ],
-  declarations: [UserprofilePage]
+  declarations: [UserprofilePage],
+  providers: [AuthApi]
 })
 export class UserprofilePageModule {}

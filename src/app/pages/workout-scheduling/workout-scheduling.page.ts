@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { PopoverController } from '@ionic/angular';
+import { PopoverController, LoadingController } from '@ionic/angular';
 import { PopoutAddScheduleComponent } from './popout-add-schedule/popout-add-schedule.component';
+import { Select, Store } from '@ngxs/store';
+import { WorkoutSchedulingState } from 'src/app/states';
+import { Observable } from 'rxjs';
+import { ISearchTerms, IWorkoutScheduleModel } from 'src/app/models';
+import { GetWorkoutSchedules } from 'src/app/actions';
 
 @Component({
   selector: 'app-workout-scheduling',
@@ -8,13 +13,29 @@ import { PopoutAddScheduleComponent } from './popout-add-schedule/popout-add-sch
   styleUrls: ['./workout-scheduling.page.scss'],
 })
 export class WorkoutSchedulingPage {
-  schedules= ["schedule1","schedule2","schedule3","schedule4"];
-  //@select(WorkoutSchedulingState.returnSchedules) schedules$: Observable<WorkoutSchedulingStateModel>;
+  searchTerms!: ISearchTerms;
+  schedules: IWorkoutScheduleModel[]=[];
+ 
+  @Select(WorkoutSchedulingState.returnSchedules) schedules$!: Observable<IWorkoutScheduleModel[]>;
 
-  constructor(private popoverController: PopoverController) { }
+  constructor(private popoverController: PopoverController, 
+      private store : Store, private loadingCtrl: LoadingController) { 
+     
+  }
 
   ngOnInit() {
-     //store.dispatch(new GetWorkoutSchedules(payload))
+    this.displayWorkoutSchedule();
+    this.initialiseSearchTerms();
+  }
+
+  initialiseSearchTerms() {
+    this.searchTerms= {
+      searchQuery:"",
+      showSuggestions:false,
+      suggestions:[],
+      filteredSuggestions:[],
+      initial:true,
+    }
   }
 
   async addSchedule(){
@@ -26,44 +47,49 @@ export class WorkoutSchedulingPage {
         return await popover.present();
   }
 
-
-  /*onInputChange() {
-    console.log('Input fields changed');
-    console.log('pushDay:', this.pushDay);
-    console.log('pullDay:', this.pullDay);
-    console.log('legDay:', this.legDay);
+  displayWorkoutSchedule(){
+    this.store.dispatch(new GetWorkoutSchedules())
+    this.schedules$.subscribe((response)=>{
+      this.schedules = response;
+      console.table(this.schedules);
+    });
   }
 
-  pushDay: string = 'Push Day';
-  pullDay: string = 'Pull Day';
-  legDay: string = 'Leg Day';
-  pushDay2: string = 'Push Day';
-  pullDay2: string = 'Pull Day';
-  legDay2: string = 'Leg Day';
-  restDay: string = 'Rest Day';
-
-  ngOnInit() {
-    // Retrieve the values from local storage
-    this.pushDay = localStorage.getItem('pushDay') || 'Push Day';
-    this.pullDay = localStorage.getItem('pullDay') || 'Pull Day';
-    this.legDay = localStorage.getItem('legDay') || 'Leg Day';
-    this.pushDay2 = localStorage.getItem('pushDay2') || 'Push Day';
-    this.pullDay2 = localStorage.getItem('pullDay2') || 'Pull Day';
-    this.legDay2 = localStorage.getItem('legDay2') || 'Leg Day';
-    this.restDay = localStorage.getItem('restDay') || 'Rest Day';
-    //store.dispatch(new GetWorkoutSchedules(payload))
+  searchSchedule() {
+    this.searchTerms.showSuggestions = false;
+    this.schedules = this.searchTerms.filteredSuggestions!;
   }
 
-  
+  async showLoader() {
+    const loader = await this.loadingCtrl.create({
+      message: 'Loading...',
+      translucent: true,
+      duration: 3000
+    });
+    loader.present();
+  }
 
-  saveData() {
-    // Save the values to local storage
-    localStorage.setItem('pushDay', this.pushDay);
-    localStorage.setItem('pullDay', this.pullDay);
-    localStorage.setItem('legDay', this.legDay);
-    localStorage.setItem('pushDay2', this.pushDay2);
-    localStorage.setItem('pullDay2', this.pullDay2);
-    localStorage.setItem('legDay2', this.legDay2);
-    localStorage.setItem('restDay', this.restDay);
-  }*/
+  async dismissLoader() {
+    await this.loadingCtrl.dismiss();
+  }
+
+  onSearchInput(event:any) {
+    const searchText = event.target.value;
+    if (searchText) {
+      this.searchTerms.showSuggestions = true;
+      this.searchTerms.filteredSuggestions = this.schedules.filter((suggestion) =>
+        suggestion.name!.toLowerCase().includes(this.searchTerms.searchQuery!.toLowerCase())
+      );
+    }else {
+      this.searchTerms.showSuggestions = false;
+    }
+  }
+
+  find(suggestion: string){
+    console.log(suggestion);
+    this.searchTerms.searchQuery = suggestion;
+    this.searchTerms.initial = false;
+    this.searchSchedule();
+  }
+ 
 }

@@ -6,7 +6,17 @@ import { OtheruserPage } from './otheruser.page';
 const routes: Routes = [
   {
     path: '',
-    component: OtheruserPage
+    component: OtheruserPage,
+    children: [
+      {
+        path: "OtheruserFriends",
+        loadChildren: () => import("./friends/friends-routing.module").then((m)=> m.FriendsComponentRoutingModule)
+      },
+      {
+        path: "OtheruserFriends",
+        loadChildren: () => import("./friends/friends-routing.module").then((m)=> m.FriendsComponentRoutingModule)
+      }
+    ]
   }
 ];
 

@@ -1,5 +1,6 @@
-<ion-content>
+<ion-content [fullscreen]="true">
   <ion-card class="full-screen-card">
+   <div class="inner-wrapper">
     <div class="logo-container">
       <img class="logo-img" src="assets/sweatsessionlogotransparent1.png" alt="logo">
     </div>
@@ -13,8 +14,9 @@
       more random text to describe the app to the user and welcome them to our Cool app.
     </ion-card-content>
     
-    <ion-button size="large" class="getSButton" expand="block" fill="outline" routerLink="/register">
+    <ion-button size="large" class="getSButton" expand="block" fill="outline" routerLink="/login">
       Get started
     </ion-button>
+   </div>
   </ion-card>
 </ion-content>

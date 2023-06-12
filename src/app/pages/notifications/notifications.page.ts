@@ -4,9 +4,9 @@ import {NoticeService } from 'src/app/services/notifications/notice.service';
 import { NoticehomeService } from 'src/app/services/notifications/noticehome.service';
 import { Notice } from 'src/app/models/notice.model';
 import { AlertController, NavController } from '@ionic/angular';
-import { HomePage } from '../home/home.page';
-import { Router } from '@angular/router';
-import { getAuth } from 'firebase/auth';
+// import { HomePage } from '../home/home.page';
+// import { Router } from '@angular/router';
+// import { getAuth } from 'firebase/auth';
 
 @Component({
   selector: 'app-notifications',

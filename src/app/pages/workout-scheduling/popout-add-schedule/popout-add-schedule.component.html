@@ -9,7 +9,7 @@
           <ion-col>
             <ion-item>
               <ion-label position="floating">Time</ion-label>
-              <ion-input type="time"></ion-input>
+              <ion-input type="time" [(ngModel)]="schedule.time"></ion-input>
             </ion-item>
           </ion-col>
         </ion-row>
@@ -17,7 +17,7 @@
           <ion-col>
             <ion-item>
               <ion-label position="floating">Date</ion-label>
-              <ion-input type="date"></ion-input>
+              <ion-input type="date" [(ngModel)]="schedule.date"></ion-input>
             </ion-item>
           </ion-col>
         </ion-row>
@@ -25,7 +25,7 @@
           <ion-col>
             <ion-item>
               <ion-label position="floating">Location</ion-label>
-              <ion-input type="text"></ion-input>
+              <ion-input type="text" [(ngModel)]="schedule.location"></ion-input>
             </ion-item>
           </ion-col>
         </ion-row>
@@ -33,7 +33,7 @@
           <ion-col>
             <ion-item>
               <ion-label position="floating">duration</ion-label>
-              <ion-input type="number"></ion-input>
+              <ion-input type="number" [(ngModel)]="schedule.duration"></ion-input>
             </ion-item>
           </ion-col>
         </ion-row>
@@ -41,7 +41,7 @@
           <ion-col>
             <ion-item>
               <ion-label position="floating">Workout name</ion-label>
-              <ion-input type="text"></ion-input>
+              <ion-input type="text" [(ngModel)]="schedule.name"></ion-input>
             </ion-item>
           </ion-col>
         </ion-row>

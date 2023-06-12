@@ -2,7 +2,7 @@ import { Time } from "@angular/common";
 
 export interface IWorkoutScheduleModel {
     id?: string;
-    name?:string;
+    name?: string;
     duration?: number;
     location?: string;
     date?: Date;
@@ -36,18 +36,19 @@ export interface IGotWorkoutSchedules {
 }
 
 export interface IAddedWorkoutSchedule {
-    userId: string;
-    schedule: IWorkoutScheduleModel;
+    userId?: string;
+    schedule?: IWorkoutScheduleModel;
     validate: boolean;
 }
 
-export interface IRemovedWorkout {
+export interface IRemovedWorkoutSchedule {
     userId: string;
+    schedules?: IWorkoutScheduleModel[];
     validate: boolean;
 }
 
 export interface IUpdatedWorkoutSchedule {
     userId: string;
-    schedule: IWorkoutScheduleModel;
-    validate: true;
+    schedule?: IWorkoutScheduleModel;
+    validate: boolean;
 }

@@ -1,9 +1,13 @@
+import { Store } from '@ngxs/store';
 import { Component, OnInit } from '@angular/core';
+import { NavController } from '@ionic/angular';
+import { AuthApi } from 'src/app/states/auth/auth.api';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { NoticehomeService } from 'src/app/services/notifications/noticehome.service';
-
-import { AuthApi } from 'src/app/states/auth/auth.api';
+import { SetProfileService } from 'src/app/services';
+import { IGetFriends, IGetProfile } from 'src/app/models';
+import { Logout } from 'src/app/actions';
 
 
 @Component({
@@ -15,10 +19,29 @@ export class HomePage implements OnInit {
 
   noticeamount : number ;
   sub : Subscription ;
-  constructor(private noticehomeService: NoticehomeService , private authAPI: AuthApi) { }
- 
-  ngOnInit() {
-    
+  DisplayName$? = "na";
+  ProfilePicture$? = "na";
+  getU : IGetProfile = {userId: 'na'};
+
+  constructor(private nav:NavController,private noticehomeService: NoticehomeService ,
+    private authAPI: AuthApi,
+    private setpr: SetProfileService,
+    private store: Store) { }
+
+  ngOnInit() 
+  {
+    this.authAPI.getCurrentUserId().then((id) => {
+      this.getU.userId = id;
+      this.setpr.getProfile(this.getU).subscribe((profile) => {
+        this.DisplayName$ = profile.profile.displayName;
+        this.ProfilePicture$ = profile.profile.profileURL;
+      });
+    });
+    this.nav.navigateRoot("/home/dashboard");
+  }
+
+  userLogout(){
+    this.store.dispatch(new Logout());
   }
 
   ngAfterContentInit() {
@@ -30,11 +53,9 @@ export class HomePage implements OnInit {
     )
   }
 
-  userLogout(){
-    this.authAPI.logout();
+  goToSettings() {
+    this.nav.navigateRoot("/settings");
   }
-
-
 
 
 

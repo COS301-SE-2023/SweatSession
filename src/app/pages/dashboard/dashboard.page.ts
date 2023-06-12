@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+//import { HomePage } from '../home/home.page';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,7 +10,9 @@ export class DashboardPage implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
+  ngOnInit()
+  {
+    //HomePage.prototype.ngOnInit();
   }
 
 }

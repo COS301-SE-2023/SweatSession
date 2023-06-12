@@ -1,0 +1,13 @@
+<div class = "outer-container">
+  <div class="body-content">
+    <ion-card *ngFor = "let schedule of schedules">
+      <ion-item>
+        <ion-icon name="receipt-outline"></ion-icon>
+        <ion-text>
+          {{schedule.name}}
+        </ion-text>
+        <ion-button slot="end" (click)="viewSchedule(schedule)">view</ion-button>
+      </ion-item>
+    </ion-card>
+  </div>
+</div>

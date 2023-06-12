@@ -2,10 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-
-
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {
@@ -38,8 +35,6 @@ import {
   getStorage,
   provideStorage
 } from '@angular/fire/storage';
-
-
 //import {AuthState} from 'src/app/states/auth'
 //import {AuthModule} from 'src/app/pages/auth'
 
@@ -59,6 +54,7 @@ import {
   provideFunctions
 } from '@angular/fire/functions';
 import { NgxsModule } from '@ngxs/store';
+import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
 import { AngularFirestore, AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireModule } from '@angular/fire/compat';
 // import {AuthModule} from 'src/app/pages/auth';
@@ -69,9 +65,12 @@ import { AngularFireModule } from '@angular/fire/compat';
   imports: [
     FormsModule, 
     BrowserModule, 
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
     //AuthModule,
     NgxsModule.forRoot(),//[AuthState]
     IonicModule.forRoot(), 
+    NgxsRouterPluginModule.forRoot(),
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule ,
@@ -123,7 +122,7 @@ import { AngularFireModule } from '@angular/fire/compat';
     }),
 
   ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy } , AngularFirestore],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, AngularFirestore],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

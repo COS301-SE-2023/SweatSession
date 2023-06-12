@@ -7,14 +7,22 @@ import { IonicModule } from '@ionic/angular';
 import { OtheruserPageRoutingModule } from './otheruser-routing.module';
 
 import { OtheruserPage } from './otheruser.page';
+import { OtheruserStateModule } from 'src/app/states';
+import { FriendsComponent } from './friends/friends.component';
+import { SchedulesComponent } from './schedules/schedules.component';
+import { PopupScheduleModule } from "../workout-scheduling/popout-schedule/popout-schedule.module";
+import { WorkoutSchedulingStateModule } from 'src/app/states';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    OtheruserPageRoutingModule
+    OtheruserPageRoutingModule,
+    OtheruserStateModule,
+    PopupScheduleModule,
+    WorkoutSchedulingStateModule
   ],
-  declarations: [OtheruserPage]
+  declarations: [OtheruserPage, FriendsComponent, SchedulesComponent],
 })
 export class OtheruserPageModule {}

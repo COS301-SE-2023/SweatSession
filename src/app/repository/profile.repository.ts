@@ -1,33 +1,90 @@
-// import { Injectable } from '@angular/core';
-// import { IUpdateProfile, IGetProfile } from '../models';
-// import { IProfileModel } from '../models';
-// import { Store } from '@ngxs/store';
+import { Injectable } from '@angular/core';
+import 'firebase/firestore';
+import { Observable, from } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
+import { IProfileModel, IGetProfile } from '../models';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { DocumentSnapshot } from 'firebase/firestore';
 
-// @Injectable({
-//   providedIn: 'root'
-// })
-// export class ProfileRepository {
+@Injectable({
+  providedIn: 'root'
+})
+export class ProfileRepository {
 
-//   constructor(private store: Store) { }
+  constructor(private firestore: AngularFirestore) {}
 
-//   async getProfile(request: IGetProfile)
-//   {
-//     //get the profile from the store
+  getProfile(request: IGetProfile): Observable<IProfileModel | undefined> {
 
+  // temp : string = request.userId;
+  // alert("getProfile" + request.userId + "================");
+  return this.firestore
+  .collection('profiles')
+  .doc<string>(request.userId)
+  // .doc('izwEZ4i1DvbBuOT8aszFAiotOrW2')
+  .get()
+  .pipe(
+    map((snapshot) => {
 
-//   }
+      // if(snapshot.exists) {
+      //   alert("==============snapshot exists================");
+      // }
+
+      const data = snapshot.data() as IProfileModel | undefined;
+      const id = snapshot.id;
+      
+      console.log(id);
+      
+      if (data) {
+        return { id, ...data };
+      } else {
+        console.log(data);
+        throw new Error('Profile does not exist for UserID: ' + request.userId);
+      }
+    })
+  );
   
-//   async updateProfile(request: IUpdateProfile)
-//   {
-//     //get the profile from the store
-//   }
-//   // async updateProfile(profile: IProfile) {
-//   //   // Remove password field if present
-//   //   delete profile.accountDetails?.password;
-//   //   return await admin
-//   //     .firestore()
-//   //     .collection('profiles')
-//   //     .doc(profile.userId)
-//   //     .set(profile, { merge: true });
-//   // }
-// }
+
+  // getProfile(request: IGetProfile): Observable<IProfileModel | undefined> {
+    
+  //   return this.firestore
+  //     .collection('profiles')
+  //     .doc<IProfileModel>(request.userId)
+  //     .valueChanges()
+  //     .pipe(
+  //       map((data: IProfileModel | undefined) => {
+
+  //         console.log(data);
+          
+  //         if (data) {
+  //           return data;
+  //         } else {
+  //           console.log(data);
+  //           throw new Error('Profile does not exist for UserID: ' + request.userId);
+  //         }
+  //       })
+  //     );
+  }
+
+  
+
+  addProfile(profile: IProfileModel): Observable<IProfileModel | undefined> {
+    return from(
+      this.firestore
+        .collection('profiles')
+        .doc<IProfileModel>(profile.userId)
+        .set(profile)
+    ).pipe(
+      map(() => profile),
+      catchError(async () => undefined)
+    );
+  }
+
+  
+
+  updateProfile(request: IProfileModel): Promise<void> {
+    return this.firestore
+      .collection('profiles')
+      .doc<IProfileModel>(request.userId)
+      .set(request);
+  }
+}

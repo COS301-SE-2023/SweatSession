@@ -29,10 +29,6 @@ const routes: Routes = [
         path: 'profile',
         loadChildren: () => import('../leaderboard/leaderboard.module').then((m) => m.LeaderboardPageModule),
       },
-      /*{
-        path: 'notifications',
-        loadChildren: () => import('../notifications/notifications.module').then( m => m.NotificationsPageModule)
-      },*/
       {
         path: 'leaderboard',
         loadChildren: () => import('../leaderboard/leaderboard.module').then( m => m.LeaderboardPageModule)
@@ -44,14 +40,13 @@ const routes: Routes = [
       {
         path: 'chatbot',
         loadChildren: () => import('../chatbot/chatbot.module').then( m => m.ChatbotPageModule)
+      },
+      {
+        path: 'workout-tracking',
+        loadChildren: () => import('../workout-tracking/workout-tracking.module').then( m => m.WorkoutTrackingPageModule)
       }
     ],
-  },
-  {
-    path: '',
-    pathMatch: 'full',
-    redirectTo: 'home/dashboard',
-  },
+  }
 ];
 
 @NgModule({

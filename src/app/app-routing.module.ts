@@ -5,7 +5,8 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () => import('./pages/splash/splash.module').then( m => m.SplashPageModule)
+    pathMatch: 'full',
+    redirectTo: 'splash'
   },
   {
     path: 'home',
@@ -44,12 +45,12 @@ const routes: Routes = [
     loadChildren: () => import('./pages/groups/groups.module').then( m => m.GroupsPageModule)
   },
   {
-    path: 'workout-scheduling',
-    loadChildren: () => import('./pages/workout-scheduling/workout-scheduling.module').then( m => m.WorkoutSchedulingPageModule)
-  },
-  {
     path: 'userprofile',
       loadChildren: () => import('./pages/userprofile/userprofile.module').then( m => m.UserprofilePageModule)
+  },
+  {
+    path: 'workout-scheduling',
+      loadChildren: () => import('./pages/workout-scheduling/workout-scheduling.module').then( m => m.WorkoutSchedulingPageModule)
   },
   {
     path: 'setprofile',
@@ -58,6 +59,10 @@ const routes: Routes = [
   {
     path: 'notifications',
     loadChildren: () => import('./pages/notifications/notifications.module').then( m => m.NotificationsPageModule)
+  },
+  {
+    path: 'badges',
+    loadChildren: () => import('./pages/badges/badges.module').then( m => m.BadgesPageModule)
   },
 ];
 @NgModule({

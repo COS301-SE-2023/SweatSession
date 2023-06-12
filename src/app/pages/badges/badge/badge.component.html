@@ -1,0 +1,15 @@
+<ion-card class="badge" [ngClass]="{'received': received, 'not-received': !received}">
+  <ion-item>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="auto">
+          <ion-img src="assets/badge0.png"></ion-img>
+        </ion-col>
+        <ion-col class="content">
+          <div class="badgeHeader">{{name}}</div>
+          <div class="badgeDescription">{{ received ? receivedDescription : notReceivedDescription }}</div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-item>
+</ion-card>
