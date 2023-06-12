@@ -13,7 +13,10 @@
       <ion-item line="none" 
         *ngFor="let suggestion of searchTerms.filteredSuggestions" 
         (click)="find(suggestion)">
-        {{ suggestion.name }}
+        {{ suggestion.displayName }}
+      </ion-item>
+      <ion-item *ngIf="searchTerms.filteredSuggestions!.length==0">
+        <ion-text>user not found</ion-text>
       </ion-item>
     </ion-list>
   </div>
