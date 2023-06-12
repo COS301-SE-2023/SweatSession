@@ -19,7 +19,7 @@
     ></ion-searchbar>
     <div id="search-suggestions">
       <ion-list *ngIf="searchTerms.showSuggestions">
-        <ion-item *ngFor="let suggestion of searchTerms.filteredSuggestions" (click)="find(suggestion.name!)">
+        <ion-item line="none" *ngFor="let suggestion of searchTerms.filteredSuggestions" (click)="find(suggestion.name!)">
           {{ suggestion.name }}
         </ion-item>
       </ion-list>
