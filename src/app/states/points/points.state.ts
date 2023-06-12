@@ -1,10 +1,11 @@
 import { Injectable } from "@angular/core";
 import { State, Store, Selector, Action } from "@ngxs/store";
+import { IPoints } from "src/app/models/points.model";
 import { PointsApi } from "./points.api";
 
 
 export interface PointsStateModel {
-    // points: IPoints | null | undefined;
+    points: IPoints | null | undefined;
 }
 @State<PointsStateModel>({
     name: 'points',
@@ -18,12 +19,12 @@ export interface PointsStateModel {
   
     @Selector()
     static userPoints(state: PointsStateModel) {
-    //   return state.points?.;
+        return state.points?.userPoints;
     }
   
     @Selector()
     static points(state: PointsStateModel) {
-    //   return state.points;
+        return state.points;
     }
   
     // @Action(SubscribeToBadges)
