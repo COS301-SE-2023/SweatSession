@@ -1,0 +1,24 @@
+<div class="content-container">
+  <ion-searchbar
+      placeholder="Search for users"
+      [(ngModel)] = "searchTerms.searchQuery"
+      (ionInput) = onSearchInput($event)
+      color="light"
+      animated
+      >
+  </ion-searchbar>
+  
+  <div class="search-suggestions" *ngIf="searchTerms.showSuggestions">
+    <ion-list >
+      <ion-item line="none" 
+        *ngFor="let suggestion of searchTerms.filteredSuggestions" 
+        (click)="find(suggestion)">
+        {{ suggestion.name }}
+      </ion-item>
+    </ion-list>
+  </div>
+</div>
+
+<div class="content-container">
+  
+</div>

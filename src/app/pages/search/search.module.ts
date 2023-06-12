@@ -8,6 +8,9 @@ import { IonicModule, ToastController } from '@ionic/angular';
 import { SearchPageRoutingModule } from './search-routing.module';
 
 import { SearchPage } from './search.page';
+import { UsersearchComponent } from './usersearch/usersearch.component';
+import { GymsearchComponent } from './gymsearch/gymsearch.component';
+import { ProfileStateModule } from 'src/app/states';
 
 
 @NgModule({
@@ -15,16 +18,9 @@ import { SearchPage } from './search.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    SearchPageRoutingModule
+    SearchPageRoutingModule,
+    ProfileStateModule
   ],
-  declarations: [SearchPage]
+  declarations: [SearchPage, UsersearchComponent, GymsearchComponent]
 })
-export class SearchPageModule 
-{
- 
-
-  constructor( )
-  {
-
-  }
-}
+export class SearchPageModule {}
