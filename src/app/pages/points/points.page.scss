@@ -79,7 +79,7 @@ ion-button {
   --background-hover: #457B9D;
   --color: white;
   font-size: 25px;
-  height: 50px;
+  height: 40px;
   --border-radius: 15px;
 }
 
@@ -127,4 +127,16 @@ ion-button {
 
 .wpPointsImg {
     width: 30px;
+}
+
+ion-item.workoutSessionPointsSection::part(native) {
+    --background: #1D3557;
+    --border-radius: 15px;
+    color: white;
+    margin: 0 auto;
+    width: calc(100% - 30px);
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
 }
