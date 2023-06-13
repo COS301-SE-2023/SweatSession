@@ -24,7 +24,6 @@ export class FriendsPage implements OnInit {
   }
 
   addFriend() {
-    //thsi.store.dispatch(new AddFriendAction(payload));
     this.nav.navigateRoot("home/search")
   }
 
