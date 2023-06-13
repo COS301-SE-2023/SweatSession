@@ -88,21 +88,4 @@ export class ProfileRepository {
       .set(request);
   }
 
-  async getProfiles() {
-    const collectionRef = await this.firestore
-    .collection("profiles")
-    .get()
-    .toPromise();
-
-
-    let profiles: IProfileModel[] = [];
-
-    collectionRef!.forEach((doc)=>{
-      const profile = {
-        ...doc.data() as IProfileModel
-      }
-      profiles.push(profile);
-    })
-    return profiles;
-  }
 }

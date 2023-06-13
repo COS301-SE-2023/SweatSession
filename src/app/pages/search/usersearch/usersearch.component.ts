@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { StageOtheruserInfo } from 'src/app/actions';
 import { GetUsersAction } from 'src/app/actions/profile.action';
 import { IProfileModel, ISearchTerms } from 'src/app/models';
-import { ProfileState } from 'src/app/states';
+import { OtheruserState } from 'src/app/states';
 
 @Component({
   selector: 'usersearch',
@@ -15,7 +15,7 @@ export class UsersearchComponent  implements OnInit {
 
   searchTerms!: ISearchTerms;
   users: IProfileModel[] = [];
-  @Select(ProfileState.returnProfiles) users$!: Observable<IProfileModel[]>;
+  @Select(OtheruserState.returnProfiles) users$!: Observable<IProfileModel[]>;
   constructor(private store:Store) {
     this.initialiseSearchTerms();
   }

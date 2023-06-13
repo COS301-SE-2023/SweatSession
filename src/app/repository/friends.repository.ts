@@ -75,6 +75,16 @@ export class FriendsRepository {
         .doc(request.friend.userId)
         .set(request.friend)
 
+        const friendDocRef = await this.firestore
+        .collection("friends")
+        .doc(request.friend.userId)
+        .collection("userFriends")
+        .doc(request.userId)
+        .set({userId: request.userId,
+            name: "you",
+            profileUrl: "assets/sweatsessionlogotransparent1.png"
+        })
+
 
         const friend: IFriendsModel ={
             ...request.friend
@@ -105,13 +115,13 @@ export class FriendsRepository {
         .doc(request.friend.userId)
         .delete()
 
-        // //remove from friend document
-        // const docRefFriend = await this.firestore
-        // .collection("friends")
-        // .doc(request.friend.userId)
-        // .collection("userFriends")
-        // .doc(request.userId)
-        // .delete()
+        //remove from friend document
+        const docRefFriend = await this.firestore
+        .collection("friends")
+        .doc(request.friend.userId)
+        .collection("userFriends")
+        .doc(request.userId)
+        .delete()
 
         //response
         const response: IRemovedFriend = {
