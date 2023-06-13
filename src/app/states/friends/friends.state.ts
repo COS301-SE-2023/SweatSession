@@ -6,6 +6,7 @@ import { FriendsService } from "src/app/services";
 import { AddFriendAction, GetFriendsAction, RemoveFriendAction } from "src/app/actions";
 import { IAddFriend, IAddedFriend, IFriendsModel, IGetFriends, IGotFriends, IRemoveFriend } from "src/app/models";
 import { AuthApi } from '../auth/auth.api';
+import { catchError, of, tap } from "rxjs";
 
 export interface FriendsStateModel {
     friends: IFriendsModel[];
@@ -36,13 +37,22 @@ export class FriendsState {
                 userId: currentUserId
             }
 
-            const response: IGotFriends = await this.friendsService.getFriends(request);
-            ctx.setState({
-                ...ctx.getState(), friends: response.friends
-            })
+            return (await this.friendsService.getFriends(request)).pipe(
+                tap((response: IGotFriends)=>{
+                    ctx.setState({
+                        ...ctx.getState(), friends: response.friends
+                    })
+                }),
+                catchError((error) => {
+                    ctx.setState({
+                        friends: []
+                    })
+                    return of(error);
+                })
+            );
+           
         }else {
-            alert("Sorry, You are no logged in");
-            ctx.dispatch(new Navigate(['login']));
+           return ctx.dispatch(new Navigate(['home/dashboard']));
         }
     }
 
@@ -68,8 +78,7 @@ export class FriendsState {
                 })
             }
         }else {
-            alert("Sorry, You are no logged in");
-            ctx.dispatch(new Navigate(['login']));
+            ctx.dispatch(new Navigate(['home/dashboard']));
         }
     }
 
@@ -86,37 +95,12 @@ export class FriendsState {
                 friends:[response.friend!,...ctx.getState().friends]
             })
         }else {
-            alert("Sorry, You are no logged in");
-            ctx.dispatch(new Navigate(['login']));
+            ctx.dispatch(new Navigate(['home/dashboard']));
         }
     }
 
     @Selector()
     static returnFriends(state: FriendsStateModel){
         return state.friends;
-    }
-
-    getMock(request:IGetFriends){
-      let friends: IGotFriends = {
-            userId: request.userId,
-            friends:[{
-                userId: "friend 1",
-                name: "John",
-                profileURL: "assets/sweatsessionlogotransparent1.png" ,
-            },
-            {
-                userId: "friend 2",
-                name: "Johnny",
-                profileURL: "assets/sweatsessionlogotransparent1.png" ,
-            },
-            {
-                userId: "friend 3",
-                name: "Themba",
-                profileURL: "assets/sweatsessionlogotransparent1.png" ,
-            }],
-            validate: true,
-        }
-
-        return friends;
     }
 }

@@ -21,3 +21,8 @@
     transition: bottom 2s;
     overflow-y:auto;
 }
+
+ion-item{
+    --highlight-height: 0;
+    --inner-border-width: 0;
+}

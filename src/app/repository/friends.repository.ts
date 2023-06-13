@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
+import { AngularFirestore} from '@angular/fire/compat/firestore';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { IAddFriend,
      IAddedFriend,
      IFriendsModel, 
@@ -29,42 +31,32 @@ export class FriendsRepository {
      */
   constructor(private firestore: AngularFirestore) { }
 
-  async getFriends(request: IGetFriends){
-    try {
-        const docRef = await this.firestore.collection("friends")
-                .doc(request.userId)
-                .collection("userFriends")
-                .get()
-                .toPromise();
-    
-        let friends: IFriendsModel[] = [];
+  getFriends(request: IGetFriends): Observable<IGotFriends> {
+    const friendsCollection = this.firestore.collection<IFriendsModel>(
+      `friends/${request.userId}/userFriends`
+    );
+  
+    return friendsCollection.snapshotChanges().pipe(
+      map((snapshot) => {
+        const friends: IFriendsModel[] = [];
+  
+        snapshot.forEach((doc) => {
+          const friend = {
+            ...doc.payload.doc.data(),
 
-        docRef!.forEach((doc)=>{
-            const friend = {
-                ...doc.data() as IFriendsModel,
-            }
-            friends.push(friend);
-        })
-
-        const response: IGotFriends = {
-            userId: request.userId,
-            friends: friends,
-            validate: true
-        }
-        // alert('Friends fetched successfully');
-        return response;
-
-    }catch(error){
-        alert("error: "+ error)
-        const response: IGotFriends = {
-            userId: request.userId,
-            friends: [],
-            validate: false
-        }
-
-        return response;
-    }
+          };
+          friends.push(friend);
+        });
+  
+        return {
+          userId: request.userId,
+          friends: friends,
+          validate: true,
+        };
+      })
+    );
   }
+
 
   async addFriend(request: IAddFriend){
     try {
