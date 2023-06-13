@@ -19,7 +19,7 @@ import { IAddWorkoutSchedule,
 import { WorkoutscheduleService } from "src/app/services";
 import { time } from "console";
 import { AuthApi } from '../auth/auth.api';
-import { catchError, of } from 'rxjs';
+import { catchError, of, tap } from 'rxjs';
 
 export interface WorkoutSchedulingStateModel {
     schedules: IWorkoutScheduleModel[];
@@ -54,7 +54,7 @@ export class WorkoutSchedulingState {
                 userId: currentUserId
             }
 
-        return await this.service.getSchedules(request).pipe(
+        return (await this.service.getSchedules(request)).pipe(
             tap((response: IGotWorkoutSchedules)=>{
                 ctx.setState({
                     ...ctx.getState(), schedules: response.schedules
@@ -65,11 +65,10 @@ export class WorkoutSchedulingState {
                     ...ctx.getState(),schedules: []
                 })
                 return of(error);
-            })
-        // }else {
-        //     alert("Sorry, You are no logged in");
-        //     ctx.dispatch(new Navigate(['login']));
-        // }
+            }))
+        }else {
+            return ctx.dispatch(new Navigate(['home/dashboard']));
+        }
     }
 
     @Action(RemoveWorkoutSchedule)
