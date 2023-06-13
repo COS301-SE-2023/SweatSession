@@ -45,7 +45,8 @@ export class OtheruserState {
         ctx.setState({
             ...state, otheruser: payload
         })
-        localStorage.setItem("user",JSON.stringify(payload));
+        const currentUserId = await this.authApi.getCurrentUserId();
+        localStorage.setItem(currentUserId!,JSON.stringify(payload));
        return ctx.dispatch(new Navigate(['otheruser']));
     }
 
@@ -53,7 +54,7 @@ export class OtheruserState {
     async loadOtheruserProfile(ctx: StateContext<OtherUserStateModel>) {
         const currentUserId = await this.authApi.getCurrentUserId();
         if(currentUserId!=null) {
-            const request = JSON.parse(localStorage.getItem("user")!);
+            const request = JSON.parse(localStorage.getItem(currentUserId)!);
             const schedulesResponse = await this.workoutScheduleService.getSchedules(request)
             const friendsResponse = await this.friendService.getFriends(request);
             const otheruserProfile = await this.otheruserService.getProfile({userId:request.userId});
@@ -70,7 +71,8 @@ export class OtheruserState {
 
     @Action(RemoveUser)
     async removeUser() {
-        localStorage.removeItem("user");
+        const currentUserId = await this.authApi.getCurrentUserId();
+        localStorage.removeItem(currentUserId!);
         this.store.dispatch(new Navigate(["friends"]))
     }
 
