@@ -61,3 +61,6 @@ pubsub-debug.log
 
 #text
 *.txt
+
+#examples
+/src/app/examples

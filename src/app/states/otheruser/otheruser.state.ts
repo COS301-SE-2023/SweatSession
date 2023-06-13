@@ -45,32 +45,32 @@ export class OtheruserState {
         ctx.setState({
             ...state, otheruser: payload
         })
-        localStorage.setItem("user",JSON.stringify(payload));
+        sessionStorage.setItem("user",JSON.stringify(payload));
        return ctx.dispatch(new Navigate(['otheruser']));
     }
 
     @Action(LoadOtherUserProfile)
     async loadOtheruserProfile(ctx: StateContext<OtherUserStateModel>) {
         const currentUserId = await this.authApi.getCurrentUserId();
-        if(currentUserId!=null) {
-            const request = JSON.parse(localStorage.getItem("user")!);
-            const schedulesResponse = await this.workoutScheduleService.getSchedules(request)
-            const friendsResponse = await this.friendService.getFriends(request);
-            const otheruserProfile = await this.otheruserService.getProfile({userId:request.userId});
+        // if(currentUserId!=null) {
+        //     const request = JSON.parse(sessionStorage.getItem("user")!);
+        //     const schedulesResponse = await this.workoutScheduleService.getSchedules(request)
+        //     const friendsResponse = await this.friendService.getFriends(request);
+        //     const otheruserProfile = await this.otheruserService.getProfile({userId:request.userId});
 
-            const state = ctx.getState();
-            ctx.setState({
-                ...state, otheruser: otheruserProfile,
-                friends: friendsResponse.friends,
-                workoutSchedule: schedulesResponse.schedules,
-                friendshipStatus: friendsResponse.friends.some(({userId})=> userId == currentUserId)
-            })
-        }
+        //     const state = ctx.getState();
+        //     ctx.setState({
+        //         ...state, otheruser: otheruserProfile,
+        //         friends: friendsResponse.friends,
+        //         workoutSchedule: schedulesResponse.schedules,
+        //         friendshipStatus: friendsResponse.friends.some(({userId})=> userId == currentUserId)
+        //     })
+        // }
     }
 
     @Action(RemoveUser)
     async removeUser() {
-        localStorage.removeItem("user");
+        sessionStorage.removeItem("user");
         this.store.dispatch(new Navigate(["friends"]))
     }
 
