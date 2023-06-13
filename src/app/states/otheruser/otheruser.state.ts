@@ -6,14 +6,16 @@ import { Router } from "@angular/router";
 import { IFriendsModel, IGetFriends, IGetWorkoutSchedules, IGotFriends, IGotWorkoutSchedules, IProfileModel, IWorkoutScheduleModel } from "src/app/models";
 import { LoadOtherUserProfile, RemoveUser, StageOtheruserInfo } from "src/app/actions";
 import { NavController } from "@ionic/angular";
-import { FriendsService } from "src/app/services";
+import { FriendsService, OtheruserService} from "src/app/services";
 import { WorkoutscheduleRepository } from "src/app/repository";
+import { GetUsersAction } from 'src/app/actions/profile.action';
 
 export interface OtherUserStateModel {
     otheruser: IProfileModel | IFriendsModel | null;
     friendshipStatus: boolean;
     friends: IFriendsModel[];
     workoutSchedule: IWorkoutScheduleModel[];
+    profiles?: IProfileModel[];
 }
 
 
@@ -23,7 +25,8 @@ export interface OtherUserStateModel {
         otheruser:null,
         friendshipStatus: true,
         friends: [],
-        workoutSchedule: []
+        workoutSchedule: [],
+        profiles: []
     },
 })
 
@@ -32,6 +35,7 @@ export class OtheruserState {
     constructor(private nav:NavController, 
         private readonly friendService: FriendsService, 
         private readonly workoutScheduleService: WorkoutscheduleRepository,
+        private readonly otheruserService: OtheruserService,
         private readonly authApi: AuthApi,
         private readonly store: Store) {}
 
@@ -42,7 +46,6 @@ export class OtheruserState {
             ...state, otheruser: payload
         })
         localStorage.setItem("user",JSON.stringify(payload));
-        //this.nav.navigateRoot("otheruser");
        return ctx.dispatch(new Navigate(['otheruser']));
     }
 
@@ -51,16 +54,16 @@ export class OtheruserState {
         const currentUserId = await this.authApi.getCurrentUserId();
         if(currentUserId!=null) {
             const request = JSON.parse(localStorage.getItem("user")!);
-            const schedulesResponse = this.getSchedules(request); //this.workoutScheduleService.getSchedules(request)
-            const friendsResponse = this.getFriends(request); //this.friendService.getFriends(request);
-            //const response = await this.otheruserService.getProfile();
+            const schedulesResponse = await this.workoutScheduleService.getSchedules(request)
+            const friendsResponse = await this.friendService.getFriends(request);
+            const otheruserProfile = await this.otheruserService.getProfile({userId:request.userId});
 
             const state = ctx.getState();
             ctx.setState({
-                ...state, otheruser: this.getMock(request) as IProfileModel,
-                friends: this.getFriends(request).friends,
-                workoutSchedule: this.getSchedules(request).schedules,
-                friendshipStatus: this.getFriends(request).friends.some(({userId})=> userId == currentUserId)
+                ...state, otheruser: otheruserProfile,
+                friends: friendsResponse.friends,
+                workoutSchedule: schedulesResponse.schedules,
+                friendshipStatus: friendsResponse.friends.some(({userId})=> userId == currentUserId)
             })
         }
     }
@@ -71,10 +74,25 @@ export class OtheruserState {
         this.store.dispatch(new Navigate(["friends"]))
     }
 
+    @Action(GetUsersAction)
+    async getProfiles(ctx: StateContext<OtherUserStateModel>) {
+      const response: IProfileModel[] = await this.otheruserService.getProfiles();
+      ctx.setState({
+        ...ctx.getState(),
+        profiles: response
+      })
+    }
+
     @Selector()
     static getOtherUser(state: OtherUserStateModel) {
         return state;
     }
+
+    @Selector()
+    static returnProfiles(state: OtherUserStateModel){
+      return state.profiles;
+    }
+
 
     getMock(request:IFriendsModel) {
         const profile: IProfileModel = {

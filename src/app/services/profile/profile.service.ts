@@ -57,9 +57,6 @@ export class ProfileService {
     );
   }
 
-  async getProfiles() {
-    return this.repository.getProfiles();
-  }
 }
 
 

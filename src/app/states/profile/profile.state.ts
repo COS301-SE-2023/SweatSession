@@ -2,20 +2,18 @@ import { Injectable, OnInit } from "@angular/core";
 import { Action, State, StateContext, Store, Selector } from "@ngxs/store";
 import { Router } from "@angular/router";
 import { ProfileService } from "src/app/services";
-import { GetProfileAction, GetUsersAction } from "src/app/actions/profile.action";
+import { GetProfileAction } from "src/app/actions/profile.action";
 import { IGetProfile,IGotProfile, IProfileModel } from "src/app/models";
 import { tap } from "rxjs/operators";
 
 export class ProfileStateModel {
     profile?: IProfileModel[];
-    profiles?: IProfileModel[];
 }
 
 @State<ProfileStateModel>({
     name: "profile",
     defaults: {
         profile: undefined,
-        profiles: []
     }
 })
 
@@ -59,22 +57,6 @@ export class ProfileState{
             profile:undefined
         })
       }
-    }
-
-
-    //get an array of user profiles....
-    @Action(GetUsersAction)
-    async getProfiles(ctx: StateContext<ProfileStateModel>) {
-      const response: IProfileModel[] = await this.profileService.getProfiles();
-      ctx.setState({
-        ...ctx.getState(),
-        profiles: response
-      })
-    }
-
-    @Selector()
-    static returnProfiles(state: ProfileStateModel){
-      return state.profiles;
     }
 
     @Selector()
