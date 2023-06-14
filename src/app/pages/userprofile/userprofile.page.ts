@@ -5,6 +5,7 @@ import { Store } from '@ngxs/store';
 import { IGetProfile } from 'src/app/models';
 import { SetProfileService } from 'src/app/services';
 import { AuthApi } from 'src/app/states/auth/auth.api';
+import { NavigationService } from 'src/app/services';
 
 @Component({
   selector: 'app-userprofile',
@@ -18,7 +19,8 @@ export class UserprofilePage implements OnInit {
     private store: Store,
     private modalController: ModalController,
     private setprofileservices: SetProfileService, 
-    private authApi: AuthApi,) { }
+    private authApi: AuthApi,
+    private navigation: NavigationService) { }
 
   ProfilePicture$? = './assets/img/ProfileSE.png';
   displayName$? = 'na';
@@ -69,4 +71,7 @@ export class UserprofilePage implements OnInit {
     this.Nav.navigateRoot('/workout-scheduling');
   }
 
+  back() {
+    this.navigation.back();
+  }
 }

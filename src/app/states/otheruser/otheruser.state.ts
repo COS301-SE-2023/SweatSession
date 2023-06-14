@@ -10,6 +10,7 @@ import { FriendsService, OtheruserService,  WorkoutscheduleService } from "src/a
 import { WorkoutscheduleRepository } from "src/app/repository";
 import { GetUsersAction } from 'src/app/actions/profile.action';
 import { catchError, of, tap } from 'rxjs';
+import { NavigationService } from 'src/app/services';
 
 export interface OtherUserStateModel {
     otheruser: IProfileModel | IFriendsModel | null;
@@ -39,7 +40,9 @@ export class OtheruserState {
         private readonly workoutScheduleService: WorkoutscheduleService,
         private readonly otheruserService: OtheruserService,
         private readonly authApi: AuthApi,
-        private readonly store: Store) {}
+        private readonly store: Store,
+        private readonly navigation: NavigationService) {}
+        
 
     @Action(StageOtheruserInfo)
     async stageOtheruserInfo(ctx: StateContext<OtherUserStateModel>, {payload}: StageOtheruserInfo) {
@@ -110,7 +113,7 @@ export class OtheruserState {
     @Action(RemoveUser)
     async removeUser() {
         sessionStorage.removeItem("otheruser");
-        this.store.dispatch(new Navigate(["friends"]))
+        this.navigation.back();
     }
 
     @Action(GetUsersAction)

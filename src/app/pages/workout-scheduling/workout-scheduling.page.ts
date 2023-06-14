@@ -6,6 +6,7 @@ import { WorkoutSchedulingState } from 'src/app/states';
 import { Observable } from 'rxjs';
 import { ISearchTerms, IWorkoutScheduleModel } from 'src/app/models';
 import { GetWorkoutSchedules } from 'src/app/actions';
+import { NavigationService } from 'src/app/services';
 
 @Component({
   selector: 'app-workout-scheduling',
@@ -19,9 +20,9 @@ export class WorkoutSchedulingPage {
   @Select(WorkoutSchedulingState.returnSchedules) schedules$!: Observable<IWorkoutScheduleModel[]>;
 
   constructor(private popoverController: PopoverController, 
-      private store : Store, private loadingCtrl: LoadingController) { 
-     
-  }
+      private store : Store, 
+      private loadingCtrl: LoadingController,
+      private navigation: NavigationService) {}
 
   ngOnInit() {
     this.displayWorkoutSchedule();
@@ -91,5 +92,8 @@ export class WorkoutSchedulingPage {
     this.searchTerms.initial = false;
     this.searchSchedule();
   }
- 
+
+  back() {
+    this.navigation.back();
+  }
 }

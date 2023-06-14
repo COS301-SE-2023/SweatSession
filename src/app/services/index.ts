@@ -6,3 +6,4 @@ export * from "./workoutschedule/workoutschedule.service";
 export * from "./registration/register.service";
 export * from "./exercise/exercise.service";
 export * from "./otheruser/otheruser.service";
+export * from "./navigation/navigation.service";

@@ -11,7 +11,7 @@ import { map } from 'rxjs/operators';
     constructor(private firestore: AngularFirestore) { }
 
     async getProfiles() {
-      const collectionRef = await this.firestore.collection("profiles")
+      const collectionRef = this.firestore.collection("profiles")
       
       return collectionRef.snapshotChanges().pipe(
         map((snapshot)=>{
@@ -29,7 +29,7 @@ import { map } from 'rxjs/operators';
     }
 
     async getProfile(request: IProfileModel) {
-        const docRef = await this.firestore
+        const docRef = this.firestore
             .collection<IProfileModel>("profiles")
             .doc(request.userId);
 
