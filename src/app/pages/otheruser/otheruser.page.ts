@@ -4,7 +4,7 @@ import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { AddFriendAction, GetOtheruserFriends, GetOtheruserSchedules, LoadOtherUserProfile, RemoveFriendAction, RemoveUser } from 'src/app/actions';
 import { IFriendsModel, IProfileModel, IWorkoutScheduleModel } from 'src/app/models';
-import { OtherUserStateModel, OtheruserState } from 'src/app/states';
+import { OtheruserState } from 'src/app/states';
 
 @Component({
   selector: 'app-otheruser',

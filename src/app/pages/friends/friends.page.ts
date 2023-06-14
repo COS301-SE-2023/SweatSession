@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { AddFriendAction, GetFriendsAction } from 'src/app/actions';
 import { FriendsState, FriendsStateModel } from 'src/app/states';
 import { LoadingController } from '@ionic/angular';
+import { NavigationService } from 'src/app/services';
 
 @Component({
   selector: 'app-friends',
@@ -16,7 +17,10 @@ export class FriendsPage implements OnInit {
   friends:IFriendsModel[]=[];
   @Select(FriendsState.returnFriends) friends$! : Observable<IFriendsModel[]>;
   searchTerms!: ISearchTerms;
-  constructor(private store: Store, private loadingCtrl:LoadingController, private nav:NavController) { }
+  constructor(private store: Store, 
+    private loadingCtrl:LoadingController, 
+    private nav:NavController,
+    private navigation: NavigationService) { }
 
   ngOnInit() {
     this.initialiseSearchTerms()
@@ -79,5 +83,9 @@ export class FriendsPage implements OnInit {
     this.searchTerms.searchQuery = suggestion;
     this.searchTerms.initial = false;
     this.searchSchedule();
+  }
+
+  back() {
+    this.navigation.back();
   }
 }

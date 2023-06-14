@@ -59,6 +59,9 @@ import { AngularFirestore, AngularFirestoreModule } from '@angular/fire/compat/f
 import { AngularFireModule } from '@angular/fire/compat';
 // import {AuthModule} from 'src/app/pages/auth';
 // const useEmulators = process.env['NX_FIREBASE_USE_EMULATORS'] || true;
+import { BackButtonDirective } from './directives/backbutton.directive';
+import { NavigationService } from "./services";
+ 
 
 @NgModule({
   declarations: [AppComponent],
