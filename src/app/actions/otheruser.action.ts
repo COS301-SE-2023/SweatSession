@@ -5,6 +5,16 @@ export class LoadOtherUserProfile {
     constructor() {}
 }
 
+export class GetOtheruserFriends {
+    static readonly type = "[otheruser] get friends for another user";
+    constructor() {}
+}
+
+export class GetOtheruserSchedules {
+    static readonly type = "[otheruser] get workout schedules for another user";
+    constructor() {}
+}
+
 export class StageOtheruserInfo {
     static readonly type = "[otheruser] get otheruser profile info";
     constructor(public payload: IProfileModel | IFriendsModel) {}

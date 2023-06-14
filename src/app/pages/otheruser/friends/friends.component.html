@@ -1,13 +1,16 @@
-<div class = "outer-container">
-  <div class="body-content">
-    <ion-card *ngFor = "let friend of friends">
-      <ion-item>
-        <ion-avatar>
-          <img src = "{{friend.profileURL}}" alt="image here" />
-        </ion-avatar>
-        <ion-text>{{friend.name}}</ion-text>
-        <ion-icon name="chevron-forward-outline" slot = "end" (click)="viewOtherUser(friend)"></ion-icon>
-      </ion-item>
-    </ion-card>
+<ion-content>
+  <div class = "outer-container">
+    <div class="body-content">
+      <ion-card *ngFor = "let friend of friends">
+        <ion-item>
+          <ion-avatar>
+            <img src = "{{friend.profileURL}}" alt="image here" />
+          </ion-avatar>
+          <ion-text>{{friend.name}}</ion-text>
+          <ion-icon name="chevron-forward-outline" slot = "end" (click)="viewOtherUser(friend)"></ion-icon>
+        </ion-item>
+      </ion-card>
+    </div>
   </div>
-</div>
+  
+</ion-content>

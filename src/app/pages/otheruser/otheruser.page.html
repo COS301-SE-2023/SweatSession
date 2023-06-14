@@ -26,11 +26,11 @@
   </ion-item>
   <ion-item id="userName">
       {{user!.name}}
-      <ion-button slot="end" *ngIf="otherUserInfo.friendshipStatus" (click)="removeFriend()">
+      <ion-button slot="end" *ngIf="friendshipStatus" (click)="removeFriend()">
         <ion-icon name="person-outline"></ion-icon>
         remove friend
       </ion-button>
-      <ion-button slot="end" *ngIf="!otherUserInfo.friendshipStatus" (click)="addFriend()">
+      <ion-button slot="end" *ngIf="!friendshipStatus" (click)="addFriend()">
         <ion-icon name="person-outline"></ion-icon>
         add friend
       </ion-button>
@@ -42,24 +42,16 @@
  <ion-card>
   <ion-item>
     <ion-icon name="barbell-outline"></ion-icon>
-    <ion-card-header>{{otherUserInfo.workoutSchedule!.length}} WorkoutSchedules</ion-card-header>
+    <ion-card-header>{{workoutSchedules!.length}} WorkoutSchedules</ion-card-header>
     <ion-button slot="end" (click)="viewSchedules()">view</ion-button>
   </ion-item>
  </ion-card>
  <ion-card>
   <ion-item>
     <ion-icon name="people-outline"></ion-icon>
-    <ion-card-header>{{otherUserInfo.friends!.length}} Friends</ion-card-header>
+    <ion-card-header>{{friends!.length}} Friends</ion-card-header>
     <ion-button slot="end" (click)="viewFriends()">view</ion-button>
   </ion-item>
  </ion-card>
-
-<div class="content" *ngIf = "isFriendsSlideActive">
-  <otheruser-friends [friends] = "friends"></otheruser-friends>
-</div>
-
-<div class="content" *ngIf = "isScheduleSlideActive">
-  <otheruser-schedules [schedules] = "schedules"></otheruser-schedules>
-</div>
 
 </ion-content>
