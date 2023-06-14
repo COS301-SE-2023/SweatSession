@@ -52,15 +52,19 @@ export class OtheruserState {
 
     @Action(LoadOtherUserProfile)
     async loadOtheruserProfile(ctx: StateContext<OtherUserStateModel>) {
-        this.request = JSON.parse(sessionStorage.getItem("otheruser")!);
-       return (await this.otheruserService.getProfile({userId:this.request.userId})).pipe(
-        tap((response)=> {
-            ctx.patchState({
-                otheruser: response,
+        this.request = await JSON.parse(sessionStorage.getItem("otheruser")!);
+      if(this.request){
+        return (await this.otheruserService.getProfile({userId:this.request.userId})).pipe(
+            tap((response)=> {
+                ctx.patchState({
+                    otheruser: response,
+                })
+                return ctx.dispatch(new GetOtheruserFriends());
             })
-            return ctx.dispatch(new GetOtheruserFriends());
-        })
-       );
+           );
+      }else{
+        return ctx.dispatch(new Navigate(["home"]));
+      }
     }
 
     @Action(GetOtheruserFriends)
@@ -85,6 +89,7 @@ export class OtheruserState {
 
     @Action(GetOtheruserSchedules)
     async getWorkoutSchedules(ctx: StateContext<OtherUserStateModel>) {
+        this.request = await JSON.parse(sessionStorage.getItem("otheruser")!);
         return (await this.workoutScheduleService.getSchedules(this.request)).pipe(
             tap((response)=>{
                 ctx.patchState({
@@ -104,9 +109,7 @@ export class OtheruserState {
 
     @Action(RemoveUser)
     async removeUser() {
-        const currentUserId = await this.authApi.getCurrentUserId();
-        localStorage.removeItem(currentUserId!);
-        sessionStorage.removeItem("user");
+        sessionStorage.removeItem("otheruser");
         this.store.dispatch(new Navigate(["friends"]))
     }
 

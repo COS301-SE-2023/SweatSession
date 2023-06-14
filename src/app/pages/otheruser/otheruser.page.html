@@ -1,4 +1,4 @@
-<ion-header [translucent]="true">
+<ion-header [translucent]="true" *ngIf="user!=null">
   <ion-toolbar>
     <ion-item *ngIf = "!isFriendsSlideActive && !isScheduleSlideActive">
       <ion-icon name="arrow-back-outline" (click)="backtoPreviousPage()"></ion-icon>
@@ -6,18 +6,18 @@
     </ion-item>
 
     <ion-item *ngIf = "isScheduleSlideActive">
-      <ion-icon name="arrow-back-outline" (click) ="viewSchedules()"></ion-icon>
+      <ion-icon name="arrow-back-outline" (click) ="backToOtheruserPage()"></ion-icon>
       <ion-title>{{user!.name}}'s WorkoutSchedules</ion-title>
     </ion-item>
 
     <ion-item *ngIf = "isFriendsSlideActive">
-      <ion-icon name="arrow-back-outline" (click)="viewFriends()"></ion-icon>
+      <ion-icon name="arrow-back-outline" (click)="backToOtheruserPage()"></ion-icon>
       <ion-title>{{user!.name}}'s Sweat buddies</ion-title>
     </ion-item>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" *ngIf="user!=null">
  <ion-card class="otheruser-profile">
   <ion-item>
     <ion-avatar>

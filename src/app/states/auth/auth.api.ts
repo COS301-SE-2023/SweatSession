@@ -33,17 +33,14 @@ export class AuthApi {
 
   async login(regEmail: string, regPassword: string) {
     try {
-      //alert("in auth api login function");
       await signInWithEmailAndPassword(this.authObject, regEmail, regPassword);
       // AuthState.currUserId=await this.getCurrentUserId();
       //return await signInWithEmailAndPassword(this.authObject, regEmail, regPassword);
       
       this.Nav.navigateRoot('/home'); // this is so they are only directed to login when they enter a valid email and password combination
     }catch (error) {
-      // Handle the Firebase error
       console.error('Firebase error:', error);
       alert("Incorrect email password combination");
-      //return "";
     }
   }
 

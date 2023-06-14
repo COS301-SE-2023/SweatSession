@@ -29,18 +29,14 @@ export class LoginPage implements OnInit {
   }
 
   userLogin(){
-    //alert("in login.page.ts");
     if (this.loginForm.valid) {
       const loginEmail = this.loginForm?.get('email')?.value;
       const loginPassword = this.loginForm?.get('password')?.value;
 
       if (loginEmail != null && loginPassword!=null){
-        // alert(loginEmail);
-        // alert(loginPassword);
         this.store.dispatch(new Login(loginEmail,loginPassword));
       }
     }
-    //this.Nav.navigateRoot('/home');
   }
 
   ngOnInit() {

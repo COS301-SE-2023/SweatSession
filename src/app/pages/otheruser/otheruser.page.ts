@@ -24,11 +24,6 @@ export class OtheruserPage implements OnInit {
   @Select(OtheruserState.returnOtherUserFriends) friends$!: Observable<IFriendsModel[]>;
   @Select(OtheruserState.returnOtherUserSchedules) schedules$!: Observable<IWorkoutScheduleModel[]>;
   @Select(OtheruserState.returnFriendshipStatus) friendshipStatus$!: Observable<boolean>;
-  
-
-  /**  this.friends = response;
-      this.workoutSchedules = response; */
-
 
   constructor(private store: Store, private nav: NavController) {
     this.displayUserInfo();
@@ -39,17 +34,15 @@ export class OtheruserPage implements OnInit {
   }
 
   removeFriend() {
-    //this.friendshipStatus = false;
     this.store.dispatch(new RemoveFriendAction(this.friendModel()))
   }
 
   addFriend() {
    if(this.user!=null) {
-    //this.friendshipStatus = true;
     this.store.dispatch(new AddFriendAction(this.friendModel()))
-    alert(this.user.userId,)
+    console.log(this.user.userId,)
    } else(
-    alert("User is null.....")
+    console.log("User is null.....")
    )
   }
 
@@ -107,5 +100,11 @@ export class OtheruserPage implements OnInit {
 
   backtoPreviousPage() {
     this.store.dispatch(new RemoveUser());
+  }
+
+  backToOtheruserPage() {
+    this.isScheduleSlideActive = false;
+    this.isFriendsSlideActive = false;
+    this.nav.navigateBack("/otheruser");
   }
 }

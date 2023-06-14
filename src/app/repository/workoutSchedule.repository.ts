@@ -132,7 +132,7 @@ export class WorkoutscheduleRepository {
   }
 
   getSchedules(request: IGetWorkoutSchedules): Observable<IGotWorkoutSchedules> {
-    //try {
+    // try {
       
       const friendsCollection = this.firestore.collection<IWorkoutScheduleModel>(
       `WorkoutSchedule/${request.userId}/userSchedules`
@@ -166,7 +166,7 @@ export class WorkoutscheduleRepository {
     //     schedules: [],
     //   };
     
-    //   return response;
+    //   // return response;
     // }
   }
 }
