@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { IProfileModel } from '../models';
+import { map } from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'
@@ -10,35 +11,37 @@ import { IProfileModel } from '../models';
     constructor(private firestore: AngularFirestore) { }
 
     async getProfiles() {
-        const collectionRef = await this.firestore
-        .collection("profiles")
-        .get()
-        .toPromise();
-    
-    
-        let profiles: IProfileModel[] = [];
-    
-        collectionRef!.forEach((doc)=>{
-          const profile = {
-            ...doc.data() as IProfileModel
-          }
-          profiles.push(profile);
+      const collectionRef = await this.firestore.collection("profiles")
+      
+      return collectionRef.snapshotChanges().pipe(
+        map((snapshot)=>{
+          let profiles: IProfileModel[] = [];
+  
+          snapshot.forEach((doc)=>{
+            const profile = {
+              ...doc.payload.doc.data() as IProfileModel
+            }
+            profiles.push(profile);
+          })
+          return profiles;
         })
-        return profiles;
+      )
     }
 
     async getProfile(request: IProfileModel) {
         const docRef = await this.firestore
-            .collection("profiles")
-            .doc(request.userId)
-            .get()
-            .toPromise();
+            .collection<IProfileModel>("profiles")
+            .doc(request.userId);
 
-        const otheruser: IProfileModel = {
-            ...docRef!.data() as IProfileModel
-        }
-
-        return otheruser;
+        return docRef.snapshotChanges().pipe(
+          map((snapshot) =>{
+            const otheruser: IProfileModel = {
+              ...snapshot.payload.data() as IProfileModel
+            }
+  
+            return otheruser;
+          })
+        )
     }
 
 }
