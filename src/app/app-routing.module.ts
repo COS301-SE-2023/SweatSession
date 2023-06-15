@@ -75,7 +75,11 @@ const routes: Routes = [
     path: "otheruserSchedules",
     component: SchedulesComponent,
     pathMatch: 'full'
-  }
+  },
+  {
+    path: 'points',
+    loadChildren: () => import('./pages/points/points.module').then( m => m.PointsPageModule)
+  },
 ];
 @NgModule({
   imports: [
