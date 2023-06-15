@@ -140,3 +140,8 @@ ion-item.workoutSessionPointsSection::part(native) {
     flex-direction: column;
     text-align: center;
 }
+
+ion-item{
+    --highlight-height: 0;
+    --inner-border-width: 0;
+}

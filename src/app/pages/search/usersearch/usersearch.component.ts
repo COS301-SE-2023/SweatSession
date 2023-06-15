@@ -24,7 +24,6 @@ export class UsersearchComponent  implements OnInit {
   
   onSearchInput(event:any) {
     const searchText = event.target.value;
-    console.log(searchText)
     if (searchText) {
       this.loadUsers();
       this.searchTerms.showSuggestions = true;
@@ -58,7 +57,6 @@ export class UsersearchComponent  implements OnInit {
     this.store.dispatch(new GetUsersAction());
     this.users$.subscribe((response)=>{
       this.users = response;
-      console.table(this.users);
     })
   }
 }
