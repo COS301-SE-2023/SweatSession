@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { FriendsComponent } from './pages/otheruser/friends/friends.component';
+import { SchedulesComponent } from './pages/otheruser/schedules/schedules.component';
 
 
 const routes: Routes = [
@@ -64,6 +66,16 @@ const routes: Routes = [
     path: 'badges',
     loadChildren: () => import('./pages/badges/badges.module').then( m => m.BadgesPageModule)
   },
+  {
+    path: "otheruserFriends",
+    component: FriendsComponent,
+    pathMatch: 'full'
+  },
+  {
+    path: "otheruserSchedules",
+    component: SchedulesComponent,
+    pathMatch: 'full'
+  }
 ];
 @NgModule({
   imports: [

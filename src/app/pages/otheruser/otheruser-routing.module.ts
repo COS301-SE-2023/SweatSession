@@ -9,18 +9,18 @@ const routes: Routes = [
   {
     path: '',
     component: OtheruserPage,
-    children: [
-      {
-        path: "OtheruserFriends",
-        component: FriendsComponent,
-        pathMatch: 'full'
-      },
-      {
-        path: "OtheruserSchedules",
-        component: SchedulesComponent,
-        pathMatch: 'full'
-      }
-    ]
+    // children: [
+    //   {
+    //     path: "OtheruserFriends",
+    //     component: FriendsComponent,
+    //     pathMatch: 'full'
+    //   },
+    //   {
+    //     path: "OtheruserSchedules",
+    //     component: SchedulesComponent,
+    //     pathMatch: 'full'
+    //   }
+    // ]
   }
 ];
 
