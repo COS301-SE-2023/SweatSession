@@ -45,7 +45,6 @@ export class FriendsPage implements OnInit {
     this.store.dispatch(new GetFriendsAction());
     this.friends$.subscribe((response)=>{
       this.friends = response;
-      console.table(this.friends);
     })
   }
 

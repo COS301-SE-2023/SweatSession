@@ -90,12 +90,18 @@ export class FriendsState {
                 userId: currentUserId,
                 friend: payload
             }
-            const response: IAddedFriend = await this.friendsService.addFriend(request);
-            ctx.setState({
-                friends:[response.friend!,...ctx.getState().friends]
-            })
+            return (await this.friendsService.addFriend(request)).pipe(
+                tap((response)=>{
+                ctx.patchState({
+                    friends:[response.friend!,...ctx.getState().friends]
+                }),
+                catchError((error)=>{
+                    return of(error);
+                })
+            }))
+            
         }else {
-            ctx.dispatch(new Navigate(['home/dashboard']));
+            return ctx.dispatch(new Navigate(['home/dashboard']));
         }
     }
 
