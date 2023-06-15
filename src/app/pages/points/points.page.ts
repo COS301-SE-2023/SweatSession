@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { SubscribeToPoints } from 'src/app/actions/points.actions';
 import { IPoints } from 'src/app/models/points.model';
 import { PointsState } from 'src/app/states/points/points.state';
+import { NavigationService } from 'src/app/services';
 
 @Component({
   selector: 'app-points',
@@ -16,7 +17,7 @@ export class PointsPage implements OnInit {
   @Select(PointsState.points)
   points$!: Observable<IPoints | null>;
   
-  constructor(private alertController: AlertController, private store: Store) { }
+  constructor(private alertController: AlertController, private store: Store, private navigation: NavigationService) { }
 
   ngOnInit() {
     this.store.dispatch(new SubscribeToPoints());
@@ -50,5 +51,9 @@ export class PointsPage implements OnInit {
     });
 
     await alert.present();
+  }
+
+  back() {
+    this.navigation.back();
   }
 }
