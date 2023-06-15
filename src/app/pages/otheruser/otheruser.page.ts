@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { AddFriendAction, GetOtheruserFriends, GetOtheruserSchedules, LoadOtherUserProfile, RemoveFriendAction, RemoveUser } from 'src/app/actions';
 import { IFriendsModel, IProfileModel, IWorkoutScheduleModel } from 'src/app/models';
 import { OtheruserState } from 'src/app/states';
+import { NavigationService } from 'src/app/services';
 
 @Component({
   selector: 'app-otheruser',
@@ -12,8 +13,6 @@ import { OtheruserState } from 'src/app/states';
   styleUrls: ['./otheruser.page.scss'],
 })
 export class OtheruserPage implements OnInit {
-  isFriendsSlideActive = false;
-  isScheduleSlideActive = false;
   friendshipStatus: boolean;
  
   user!: IProfileModel;
@@ -47,15 +46,11 @@ export class OtheruserPage implements OnInit {
   }
 
   viewSchedules() {
-    this.isScheduleSlideActive =true;
-    this.isFriendsSlideActive  =false;
-    this.nav.navigateRoot("/otheruser/OtheruserFriends");
+    this.nav.navigateRoot("otheruserSchedules");
   }
 
   viewFriends() {
-    this.isFriendsSlideActive  =true;
-    this.isScheduleSlideActive =false;
-    this.nav.navigateRoot("/otheruser/OtheruserSchedules");
+    this.nav.navigateRoot("/otheruserFriends");
   }
 
   displayUserInfo() {
@@ -102,9 +97,4 @@ export class OtheruserPage implements OnInit {
     this.store.dispatch(new RemoveUser());
   }
 
-  backToOtheruserPage() {
-    this.isScheduleSlideActive = false;
-    this.isFriendsSlideActive = false;
-    this.nav.navigateBack("/otheruser");
-  }
 }

@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
-    <ion-item backButton>
-      <ion-icon name="arrow-back-outline"></ion-icon>
+    <ion-item>
+      <ion-icon name="arrow-back-outline" (click) ="back()"></ion-icon>
       <ion-title>Profile</ion-title>
       <ion-icon name="create-outline" routerLink="/setprofile" slot="end">
         <ion-label>Edit</ion-label>

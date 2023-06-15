@@ -140,5 +140,8 @@ export class SetprofilePage implements OnInit {
     // });
   }
   
+  back() {
+    this.navigation.back();
+  }
 
  }
