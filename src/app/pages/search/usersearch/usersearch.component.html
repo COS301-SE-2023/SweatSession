@@ -13,6 +13,9 @@
       <ion-item lines="none" 
         *ngFor="let suggestion of searchTerms.filteredSuggestions" 
         (click)="find(suggestion)">
+        <ion-avatar>
+          <ion-img src ="{{suggestion.profileURL}}"></ion-img>
+        </ion-avatar>
         {{ suggestion.displayName }}
       </ion-item>
       <ion-item lines="none" *ngIf="searchTerms.filteredSuggestions!.length==0">
