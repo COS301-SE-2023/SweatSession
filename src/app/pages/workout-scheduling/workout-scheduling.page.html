@@ -12,6 +12,11 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
+  <ion-segment value="1">
+    <ion-segment-button value="1">upcoming</ion-segment-button>
+    <ion-segment-button value="2">completed</ion-segment-button>
+    <ion-segment-button value="3">uncompleted</ion-segment-button>
+  </ion-segment>
   <div class="search">
     <ion-searchbar placeholder="find schedule"
       [(ngModel)] = "searchTerms.searchQuery"
