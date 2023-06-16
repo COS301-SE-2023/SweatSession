@@ -20,19 +20,15 @@ export class OtheruserPage implements OnInit {
   user!: IProfileModel;
   friends: IFriendsModel[] =[];
   workoutSchedules: IWorkoutScheduleModel[] = [];
+  auth = getAuth();
+  currUserId = this.auth.currentUser?.uid;
+  date : string ;
 
   @Select(OtheruserState.returnOtherUserProfile) user$!: Observable<IProfileModel>;
   @Select(OtheruserState.returnOtherUserFriends) friends$!: Observable<IFriendsModel[]>;
   @Select(OtheruserState.returnOtherUserSchedules) schedules$!: Observable<IWorkoutScheduleModel[]>;
   @Select(OtheruserState.returnFriendshipStatus) friendshipStatus$!: Observable<boolean>;
 
-  constructor(private store: Store, private nav: NavController) {
-  schedules: IWorkoutScheduleModel[] = [];
-  @Select(OtheruserState.getOtherUser) user$!: Observable<OtherUserStateModel>;
-  auth = getAuth();
-  currUserId = this.auth.currentUser?.uid;
-  date : string ;
-  
   constructor(private store: Store , private noticeService: NoticeService , private nav: NavController ) {
     this.displayUserInfo();
   }
@@ -113,9 +109,4 @@ export class OtheruserPage implements OnInit {
   createNotifications(sendername: string , sentdate: string , message: string){
     this.noticeService.createNotices(sendername , sentdate , message , this.currUserId!);
   }
-
-
-
-
-
 }
