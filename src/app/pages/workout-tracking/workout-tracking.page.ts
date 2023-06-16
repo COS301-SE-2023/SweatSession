@@ -17,7 +17,6 @@ export class WorkoutTrackingPage implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private exerciseService: ExerciseService,
-    private navigation: NavigationService
   ) {
     this.workoutForm = this.formBuilder.group({
       exercises: this.formBuilder.array([])
@@ -57,9 +56,5 @@ export class WorkoutTrackingPage implements OnInit {
         console.log(`Exercise ${index + 1} added successfully.`);
       });
     });
-  }
-
-  back() {
-    this.navigation.back();
   }
 }

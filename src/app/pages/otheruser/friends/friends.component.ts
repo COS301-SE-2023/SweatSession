@@ -4,7 +4,6 @@ import { GetOtheruserFriends, StageOtheruserInfo } from 'src/app/actions';
 import { IFriendsModel } from 'src/app/models';
 import { OtheruserState } from 'src/app/states';
 import { Observable } from 'rxjs';
-import { NavigationService } from 'src/app/services';
 
 @Component({
   selector: 'otheruser-friends',
@@ -15,7 +14,7 @@ export class FriendsComponent  implements OnInit {
   friends!: IFriendsModel[];
   @Select(OtheruserState.returnOtherUserFriends) friends$!: Observable<IFriendsModel[]>;
  
-  constructor(private store:Store, private navigation: NavigationService) { }
+  constructor(private store:Store) { }
 
   ngOnInit() {
     this.displayFriends();
@@ -30,9 +29,5 @@ export class FriendsComponent  implements OnInit {
     this.friends$.subscribe((response)=> {
       this.friends = response;
     })
-  }
-
-  back() {
-    this.navigation.back();
   }
 }

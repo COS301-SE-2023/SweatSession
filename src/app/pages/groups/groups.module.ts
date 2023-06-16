@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { GroupsPageRoutingModule } from './groups-routing.module';
 
 import { GroupsPage } from './groups.page';
+import { BackButtonDirectiveModule } from 'src/app/directives';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    GroupsPageRoutingModule
+    GroupsPageRoutingModule,
+    BackButtonDirectiveModule
   ],
   declarations: [GroupsPage]
 })

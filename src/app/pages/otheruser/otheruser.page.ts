@@ -7,7 +7,6 @@ import { IFriendsModel, IProfileModel, IWorkoutScheduleModel } from 'src/app/mod
 import { OtherUserStateModel, OtheruserState } from 'src/app/states';
 import {NoticeService } from 'src/app/services/notifications/notice.service';
 import { getAuth } from 'firebase/auth';
-import { NavigationService } from 'src/app/services';
 
 @Component({
   selector: 'app-otheruser',
@@ -90,8 +89,6 @@ export class OtheruserPage implements OnInit {
       this.workoutSchedules = response;
     })
   }
-
-
 
   friendModel() {
     let model = {
