@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 
 import { ExerciseService } from '../../services/exercise/exercise.service';
 import { Exercise } from '../../models/exercise.model';
+import { NavigationService } from 'src/app/services';
+
 
 @Component({
   selector: 'app-workout-tracking',
@@ -14,7 +16,8 @@ export class WorkoutTrackingPage implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private exerciseService: ExerciseService
+    private exerciseService: ExerciseService,
+    private navigation: NavigationService
   ) {
     this.workoutForm = this.formBuilder.group({
       exercises: this.formBuilder.array([])
@@ -55,5 +58,8 @@ export class WorkoutTrackingPage implements OnInit {
       });
     });
   }
-  
+
+  back() {
+    this.navigation.back();
+  }
 }

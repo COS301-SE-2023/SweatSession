@@ -17,6 +17,7 @@ export class FriendsPage implements OnInit {
   friends:IFriendsModel[]=[];
   @Select(FriendsState.returnFriends) friends$! : Observable<IFriendsModel[]>;
   searchTerms!: ISearchTerms;
+  
   constructor(private store: Store, 
     private loadingCtrl:LoadingController, 
     private nav:NavController,
