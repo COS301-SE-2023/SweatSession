@@ -1,13 +1,26 @@
-<div class = "outer-container">
-  <div class="body-content">
-    <ion-card *ngFor = "let schedule of schedules">
+<ng-container>
+  <ion-header>
+    <ion-toolbar>
       <ion-item>
-        <ion-icon name="receipt-outline"></ion-icon>
-        <ion-text>
-          {{schedule.name}}
-        </ion-text>
-        <ion-button slot="end" (click)="viewSchedule(schedule)">view</ion-button>
+        <ion-icon name="arrow-back-outline" (click) ="back()"></ion-icon>
+        <ion-title>WorkoutSchedules</ion-title>
       </ion-item>
-    </ion-card>
-  </div>
-</div>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content>
+    <div class = "outer-container">
+      <div class="body-content">
+        <ion-card *ngFor = "let schedule of schedules">
+          <ion-item>
+            <ion-icon name="receipt-outline"></ion-icon>
+            <ion-text>
+              {{schedule.name}}
+            </ion-text>
+            <ion-button slot="end" (click)="viewSchedule(schedule)">view</ion-button>
+          </ion-item>
+        </ion-card>
+      </div>
+    </div>
+  </ion-content>
+</ng-container>

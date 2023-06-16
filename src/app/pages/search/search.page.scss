@@ -1,3 +1,11 @@
-body {
-    overflow: hidden;
-  }
+.outer-container {
+  height: 100vh;
+}
+
+.inner-container {
+  padding-top: 50px;
+}
+
+ion-segment {
+  border-radius: 0px;
+}

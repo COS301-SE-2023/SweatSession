@@ -4,16 +4,20 @@ import { Action, State, StateContext, Store, Selector } from "@ngxs/store";
 import { Navigate } from "@ngxs/router-plugin";
 import { Router } from "@angular/router";
 import { IFriendsModel, IGetFriends, IGetWorkoutSchedules, IGotFriends, IGotWorkoutSchedules, IProfileModel, IWorkoutScheduleModel } from "src/app/models";
-import { LoadOtherUserProfile, RemoveUser, StageOtheruserInfo } from "src/app/actions";
+import { GetOtheruserFriends, GetOtheruserSchedules, LoadOtherUserProfile, RemoveUser, StageOtheruserInfo } from "src/app/actions";
 import { NavController } from "@ionic/angular";
-import { FriendsService } from "src/app/services";
+import { FriendsService, OtheruserService,  WorkoutscheduleService } from "src/app/services";
 import { WorkoutscheduleRepository } from "src/app/repository";
+import { GetUsersAction } from 'src/app/actions/profile.action';
+import { catchError, of, tap } from 'rxjs';
+import { NavigationService } from 'src/app/services';
 
 export interface OtherUserStateModel {
     otheruser: IProfileModel | IFriendsModel | null;
     friendshipStatus: boolean;
     friends: IFriendsModel[];
-    workoutSchedule: IWorkoutScheduleModel[];
+    workoutSchedules: IWorkoutScheduleModel[];
+    profiles?: IProfileModel[];
 }
 
 
@@ -21,174 +25,131 @@ export interface OtherUserStateModel {
     name: "otheruser",
     defaults: {
         otheruser:null,
-        friendshipStatus: true,
+        friendshipStatus: false,
         friends: [],
-        workoutSchedule: []
+        workoutSchedules: [],
+        profiles: []
     },
 })
 
 @Injectable()
 export class OtheruserState {
+    request:any;
     constructor(private nav:NavController, 
         private readonly friendService: FriendsService, 
-        private readonly workoutScheduleService: WorkoutscheduleRepository,
+        private readonly workoutScheduleService: WorkoutscheduleService,
+        private readonly otheruserService: OtheruserService,
         private readonly authApi: AuthApi,
-        private readonly store: Store) {}
+        private readonly store: Store,
+        private readonly navigation: NavigationService) {}
+        
 
     @Action(StageOtheruserInfo)
     async stageOtheruserInfo(ctx: StateContext<OtherUserStateModel>, {payload}: StageOtheruserInfo) {
-        const state = ctx.getState();
-        ctx.setState({
-            ...state, otheruser: payload
+        ctx.patchState({
+            otheruser: payload
         })
-        localStorage.setItem("user",JSON.stringify(payload));
-        //this.nav.navigateRoot("otheruser");
+        sessionStorage.setItem("otheruser",JSON.stringify(payload));
        return ctx.dispatch(new Navigate(['otheruser']));
     }
 
     @Action(LoadOtherUserProfile)
     async loadOtheruserProfile(ctx: StateContext<OtherUserStateModel>) {
-        const currentUserId = await this.authApi.getCurrentUserId();
-        if(currentUserId!=null) {
-            const request = JSON.parse(localStorage.getItem("user")!);
-            const schedulesResponse = this.getSchedules(request); //this.workoutScheduleService.getSchedules(request)
-            const friendsResponse = this.getFriends(request); //this.friendService.getFriends(request);
-            //const response = await this.otheruserService.getProfile();
-
-            const state = ctx.getState();
-            ctx.setState({
-                ...state, otheruser: this.getMock(request) as IProfileModel,
-                friends: this.getFriends(request).friends,
-                workoutSchedule: this.getSchedules(request).schedules,
-                friendshipStatus: this.getFriends(request).friends.some(({userId})=> userId == currentUserId)
+        this.request = await JSON.parse(sessionStorage.getItem("otheruser")!);
+      if(this.request){
+        return (await this.otheruserService.getProfile({userId:this.request.userId})).pipe(
+            tap((response)=> {
+                ctx.patchState({
+                    otheruser: response,
+                })
+                return ctx.dispatch(new GetOtheruserFriends());
             })
-        }
+           );
+      }else{
+        return ctx.dispatch(new Navigate(["home"]));
+      }
     }
+
+    @Action(GetOtheruserFriends)
+    async getFriends(ctx: StateContext<OtherUserStateModel>) {
+        const currentUserId = await this.authApi.getCurrentUserId();
+        return (await this.friendService.getFriends(this.request)).pipe(
+            tap((response) => {
+                ctx.patchState({
+                   friends: response.friends,
+                   friendshipStatus: response.friends.some(({userId})=> userId == currentUserId)
+                })
+            }),
+            catchError((error) => {
+                ctx.patchState({
+                    friends: []
+
+                })
+                return of(error)
+            })
+        )
+    }
+
+    @Action(GetOtheruserSchedules)
+    async getWorkoutSchedules(ctx: StateContext<OtherUserStateModel>) {
+        this.request = await JSON.parse(sessionStorage.getItem("otheruser")!);
+        return (await this.workoutScheduleService.getSchedules(this.request)).pipe(
+            tap((response)=>{
+                ctx.patchState({
+                    workoutSchedules: response.schedules
+                })
+            }),
+            catchError((error) => {
+                ctx.patchState({
+                    workoutSchedules: []
+                })
+                return of(error);
+            })
+        )
+    }
+
+
 
     @Action(RemoveUser)
     async removeUser() {
-        localStorage.removeItem("user");
-        this.store.dispatch(new Navigate(["friends"]))
+        sessionStorage.removeItem("otheruser");
+        this.navigation.back();
+    }
+
+    @Action(GetUsersAction)
+    async getProfiles(ctx: StateContext<OtherUserStateModel>) {
+      return (await this.otheruserService.getProfiles()).pipe(
+        tap((response)=>{
+            ctx.setState({
+                ...ctx.getState(),
+                profiles: response
+              })
+        })
+      );
     }
 
     @Selector()
-    static getOtherUser(state: OtherUserStateModel) {
-        return state;
+    static returnOtherUserProfile(state: OtherUserStateModel) {
+        return state.otheruser;
     }
 
-    getMock(request:IFriendsModel) {
-        const profile: IProfileModel = {
-            userId: request.userId!,
-            name: request.name,
-            profileURL: request.profileURL,
-            bio: "hello life",
-        }
-
-        if(request.userId=="friend 2")
-            profile.bio = "whats up..."
-        else if(request.userId=="friend 3")
-            profile.bio = "life of getter...."
-        return profile;
+    @Selector()
+    static returnOtherUserFriends(state: OtherUserStateModel) {
+        return state.friends;
     }
 
-    getSchedules(request:IGetWorkoutSchedules){
-        const results:IGotWorkoutSchedules = {
-            userId: request.userId,
-            schedules: [
-                {
-                    id: "ID 1",
-                    name:"Schedule 1",
-                    duration: 1,
-                    location: "zone fitness, menlyn",
-                    date: new Date(),
-                },
-                {
-                    id: "ID 2",
-                    name:"Schedule 2",
-                    duration: 1,
-                    location: "zone fitness, menlyn",
-                    date: new Date(),
-                },
-                {
-                    id: "ID 3",
-                    name:"Schedule 3",
-                    duration: 1,
-                    location: "zone fitness, menlyn",
-                    date: new Date(),
-                },
-                {
-                    id: "ID 4",
-                    name:"Schedule 4",
-                    duration: 1,
-                    location: "zone fitness, menlyn",
-                    date: new Date(),
-                },
-                {
-                    id: "ID 5",
-                    name:"Schedule 5",
-                    duration: 1,
-                    location: "zone fitness, menlyn",
-                    date: new Date(),
-                },
-                {
-                    id: "ID 6",
-                    name:"Schedule 6",
-                    duration: 1,
-                    location: "zone fitness, menlyn",
-                    date: new Date(),
-                }
-            ]
-        }
-        return results;
+    @Selector()
+    static returnOtherUserSchedules(state: OtherUserStateModel) {
+        return state.workoutSchedules;
     }
 
-    getFriends(request: IGetFriends) : IGotFriends{
-        const results : IGotFriends = {
-            userId: request.userId,
-            friends: [
-                {
-                    userId: "userId 1",
-                    name: "Testing 1",
-                    profileURL: "assets/sweatsessionlogotransparent1.png"
-                },
-                {
-                    userId: "userId 2",
-                    name: "Testing 2",
-                    profileURL: "assets/sweatsessionlogotransparent1.png"
-                },
-                {
-                    userId: "userId 3",
-                    name: "Testing 3",
-                    profileURL: "assets/sweatsessionlogotransparent1.png"
-                },
-                {
-                    userId: "userId 4",
-                    name: "Testing 4",
-                    profileURL: "assets/sweatsessionlogotransparent1.png"
-                },
-                {
-                    userId: "userId 5",
-                    name: "Testing 5",
-                    profileURL: "assets/sweatsessionlogotransparent1.png"
-                },
-                {
-                    userId: "userId 6",
-                    name: "Testing 6",
-                    profileURL: "assets/sweatsessionlogotransparent1.png"
-                },
-                {
-                    userId: "userId 7",
-                    name: "Testing 7",
-                    profileURL: "assets/sweatsessionlogotransparent1.png"
-                },
-                {
-                    userId: "test id",
-                    name: "Testing 8",
-                    profileURL: "assets/sweatsessionlogotransparent1.png"
-                }
-            ],
-            validate: true
-        }
-        return results;
+    @Selector()
+    static returnProfiles(state: OtherUserStateModel){
+      return state.profiles;
+    }
+
+    @Selector()
+    static returnFriendshipStatus(state: OtherUserStateModel){
+      return state.friendshipStatus;
     }
 }

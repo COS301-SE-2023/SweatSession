@@ -87,4 +87,5 @@ export class ProfileRepository {
       .doc<IProfileModel>(request.userId)
       .set(request);
   }
+
 }

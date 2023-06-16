@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
-    <ion-item>
-      <ion-icon name="arrow-back-outline" routerLink="/home/dashboard"></ion-icon>
+    <ion-item lines="none">
+      <ion-icon name="arrow-back-outline" (click) ="back()"></ion-icon>
       <ion-title>Profile</ion-title>
       <ion-icon name="create-outline" routerLink="/setprofile" slot="end">
         <ion-label>Edit</ion-label>
@@ -69,6 +69,9 @@
       </ion-card-content>
       <ion-card-content>
         <ion-button class="button"expand="block" routerLink="/badges"><ion-icon name="medal" slot="start"></ion-icon>&nbsp;Badges&nbsp;<ion-icon name="chevron-forward-outline" slot="end"></ion-icon></ion-button>
+      </ion-card-content>
+      <ion-card-content>
+        <ion-button class="button"expand="block" routerLink="/points"><ion-icon name="star-outline" slot="start"></ion-icon>&nbsp;Points&nbsp;<ion-icon name="chevron-forward-outline" slot="end"></ion-icon></ion-button>
       </ion-card-content>
       <ion-card-content>
         <ion-button class="button"expand="block" routerLink="/setprofile"><ion-icon name="create-outline" slot="start"></ion-icon>&nbsp;Edit&nbsp;<ion-icon name="chevron-forward-outline" slot="end"></ion-icon></ion-button>

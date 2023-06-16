@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-item>
-      <ion-icon name="arrow-back-outline" routerLink="/userprofile"></ion-icon>
+      <ion-icon name="arrow-back-outline" (click) ="back()"></ion-icon>
       <ion-title>Friends</ion-title>
       <ion-item class="addFriend-button" slot="end" (click)="addFriend()">
         <ion-icon name="add-outline"></ion-icon>

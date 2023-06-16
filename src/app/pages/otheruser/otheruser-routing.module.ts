@@ -2,21 +2,25 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { OtheruserPage } from './otheruser.page';
+import { FriendsComponent } from './friends/friends.component';
+import { SchedulesComponent } from './schedules/schedules.component';
 
 const routes: Routes = [
   {
     path: '',
     component: OtheruserPage,
-    children: [
-      {
-        path: "OtheruserFriends",
-        loadChildren: () => import("./friends/friends-routing.module").then((m)=> m.FriendsComponentRoutingModule)
-      },
-      {
-        path: "OtheruserFriends",
-        loadChildren: () => import("./friends/friends-routing.module").then((m)=> m.FriendsComponentRoutingModule)
-      }
-    ]
+    // children: [
+    //   {
+    //     path: "OtheruserFriends",
+    //     component: FriendsComponent,
+    //     pathMatch: 'full'
+    //   },
+    //   {
+    //     path: "OtheruserSchedules",
+    //     component: SchedulesComponent,
+    //     pathMatch: 'full'
+    //   }
+    // ]
   }
 ];
 

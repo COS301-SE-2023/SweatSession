@@ -4,14 +4,14 @@ import {IProfileModel, IUserModel} from 'src/app/models/profile.model';
 // import { Timestamp } from 'firebase-admin/firestore';
 import { Timestamp } from '@angular/fire/firestore';
 import { BadgesRepository } from 'src/app/repository';
+import { PointsRepository } from 'src/app/repository/points.repository';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RegisterService {
 
-  constructor(private registerRepository: RegisterRepository, private badgesRepository: BadgesRepository) { }
-
+  constructor(private repository: RegisterRepository, private pointsRepository: PointsRepository, private badgesRepository: BadgesRepository) { }
   async register(currUserId:string, regEmail:string){
       // if (currUserId){
       //   const newUser:IUserModel = {
@@ -44,8 +44,9 @@ export class RegisterService {
       //this.repository.createUser(newUser);
       //this.repository.createProfile({});
       // alert("In register Service");
-      this.registerRepository.createUser(newUser);
-      this.registerRepository.createProfile(newProfile);
       this.badgesRepository.createBadgesDocument(currUserId);
+      this.repository.createUser(newUser);
+      this.repository.createProfile(newProfile);
+      this.pointsRepository.createPointsDocument(currUserId);
   }
 }

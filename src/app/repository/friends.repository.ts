@@ -1,13 +1,17 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
+import { AngularFirestore} from '@angular/fire/compat/firestore';
+import { Observable } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
 import { IAddFriend,
      IAddedFriend,
      IFriendsModel, 
      IGetFriends, 
      IGotFriends, 
+     IProfileModel, 
      IRemoveFriend, 
      IRemovedFriend} 
      from '../models';
+import { OtheruserRepository } from './otheruser.repository';
 
 @Injectable({
   providedIn: 'root'
@@ -27,57 +31,54 @@ export class FriendsRepository {
      * 
      * 
      */
-  constructor(private firestore: AngularFirestore) { }
+  constructor(private firestore: AngularFirestore, private repository: OtheruserRepository) { }
 
-  async getFriends(request: IGetFriends){
-    try {
-        const docRef = await this.firestore.collection("friends")
-                .doc(request.userId)
-                .collection("userFriends")
-                .get()
-                .toPromise();
-    
-        let friends: IFriendsModel[] = [];
+  getFriends(request: IGetFriends): Observable<IGotFriends> {
+    const friendsCollection = this.firestore.collection<IFriendsModel>(
+      `friends/${request.userId}/userFriends`
+    );
+  
+    return friendsCollection.snapshotChanges().pipe(
+      map((snapshot) => {
+        const friends: IFriendsModel[] = [];
+  
+        snapshot.forEach((doc) => {
+          const friend = {
+            ...doc.payload.doc.data(),
 
-        docRef!.forEach((doc)=>{
-            const friend = {
-                ...doc.data() as IFriendsModel,
-            }
-            friends.push(friend);
-        })
-
-        const response: IGotFriends = {
-            userId: request.userId,
-            friends: friends,
-            validate: true
-        }
-        // alert('Friends fetched successfully');
-        return response;
-
-    }catch(error){
-        alert("error: "+ error)
-        const response: IGotFriends = {
-            userId: request.userId,
-            friends: [],
-            validate: false
-        }
-
-        return response;
-    }
+          };
+          friends.push(friend);
+        });
+  
+        return {
+          userId: request.userId,
+          friends: friends,
+          validate: true,
+        };
+      })
+    );
   }
 
+
   async addFriend(request: IAddFriend){
-    try {
-        const docRef = await this.firestore
+    return (await this.repository.getProfile(request)).pipe(
+      map((res)=>{
+        const docRef = this.firestore
         .collection("friends")
         .doc(request.userId)
         .collection("userFriends")
         .doc(request.friend.userId)
         .set(request.friend)
 
+        const friendDocRef = this.firestore
+        .collection("friends")
+        .doc(request.friend.userId)
+        .collection("userFriends")
+        .doc(request.userId)
+        .set(res)
 
         const friend: IFriendsModel ={
-            ...request.friend
+          ...request.friend
         }
         const response: IAddedFriend = {
             userId: request.userId,
@@ -85,14 +86,8 @@ export class FriendsRepository {
             validate: true
         }
         return response;
-    }catch(error) {
-        alert("error: "+ error);
-        const response: IAddedFriend = {
-            userId: request.userId,
-            validate: false,
-        }
-        return response;
-    }
+        })
+    );
   }
 
   async removeFriend(request: IRemoveFriend){
@@ -105,13 +100,13 @@ export class FriendsRepository {
         .doc(request.friend.userId)
         .delete()
 
-        // //remove from friend document
-        // const docRefFriend = await this.firestore
-        // .collection("friends")
-        // .doc(request.friend.userId)
-        // .collection("userFriends")
-        // .doc(request.userId)
-        // .delete()
+        //remove from friend document
+        const docRefFriend = await this.firestore
+        .collection("friends")
+        .doc(request.friend.userId)
+        .collection("userFriends")
+        .doc(request.userId)
+        .delete()
 
         //response
         const response: IRemovedFriend = {

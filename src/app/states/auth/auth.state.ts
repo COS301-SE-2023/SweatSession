@@ -78,12 +78,11 @@ export class AuthState {
 
   @Action(LoginAuth)
   async login(context: StateContext<AuthenticationStateModel>, { email, password }: LoginAuth) {
-    //alert("In auth state login function");
     try {
       await this.authenticationApi.login(email, password);
       return context.dispatch(new Navigate(['home']));
     } catch (err) {
-      return context.dispatch(new Navigate(['login'])); //maybe we should change it to register
+      return context.dispatch(new Navigate(['login']));
     }
   }
 

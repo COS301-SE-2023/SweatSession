@@ -1,7 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Store } from '@ngxs/store';
-import { StageOtheruserInfo } from 'src/app/actions';
+import { Select, Store } from '@ngxs/store';
+import { GetOtheruserFriends, StageOtheruserInfo } from 'src/app/actions';
 import { IFriendsModel } from 'src/app/models';
+import { OtheruserState } from 'src/app/states';
+import { Observable } from 'rxjs';
+import { NavigationService } from 'src/app/services';
 
 @Component({
   selector: 'otheruser-friends',
@@ -9,12 +12,27 @@ import { IFriendsModel } from 'src/app/models';
   styleUrls: ['./friends.component.scss'],
 })
 export class FriendsComponent  implements OnInit {
-  @Input() friends!: IFriendsModel[];
-  constructor(private store:Store) { }
+  friends!: IFriendsModel[];
+  @Select(OtheruserState.returnOtherUserFriends) friends$!: Observable<IFriendsModel[]>;
+ 
+  constructor(private store:Store, private navigation: NavigationService) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.displayFriends();
+  }
 
   viewOtherUser(friend: IFriendsModel){
     this.store.dispatch(new StageOtheruserInfo(friend))
+  }
+
+  displayFriends() {
+    this.store.dispatch(new GetOtheruserFriends())
+    this.friends$.subscribe((response)=> {
+      this.friends = response;
+    })
+  }
+
+  back() {
+    this.navigation.back();
   }
 }

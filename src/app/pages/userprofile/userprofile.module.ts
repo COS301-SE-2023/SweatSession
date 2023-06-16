@@ -9,13 +9,15 @@ import { UserprofilePageRoutingModule } from './userprofile-routing.module';
 import { UserprofilePage } from './userprofile.page';
 import { Auth } from '@angular/fire/auth';
 import { AuthApi } from 'src/app/states/auth/auth.api';
+import { BackButtonDirectiveModule } from 'src/app/directives';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    UserprofilePageRoutingModule
+    UserprofilePageRoutingModule,
+    BackButtonDirectiveModule
   ],
   declarations: [UserprofilePage],
   providers: [AuthApi]
