@@ -12,7 +12,7 @@ import { Notice } from 'src/app/models/notice.model';
 export class NoticeService {
 
    auth = getAuth();
-   currUserId = this.auth.currentUser?.uid;
+   currUserId = this.auth.currentUser?.displayName;
 
   constructor(private readonly firestore: Firestore) { }
 
@@ -28,10 +28,10 @@ export class NoticeService {
     return deleteDoc(noticeDocRef);
   }
 
-  async createNotices(SenderName: string , SentDate: string , Message: string){
+  async createNotices(SenderName: string , SentDate: string , Message: string , UserId: string){
     
-    await setDoc(doc(this.firestore , 'Notifications', ""+this.currUserId), {
-      userid: this.currUserId , 
+    await addDoc(collection(this.firestore , 'Notifications'), {
+      userid: UserId , 
       sendername: SenderName , 
       sentdate: SentDate , 
       message: Message
