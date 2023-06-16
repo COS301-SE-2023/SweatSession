@@ -4,7 +4,9 @@ import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { AddFriendAction, GetOtheruserFriends, GetOtheruserSchedules, LoadOtherUserProfile, RemoveFriendAction, RemoveUser } from 'src/app/actions';
 import { IFriendsModel, IProfileModel, IWorkoutScheduleModel } from 'src/app/models';
-import { OtheruserState } from 'src/app/states';
+import { OtherUserStateModel, OtheruserState } from 'src/app/states';
+import {NoticeService } from 'src/app/services/notifications/notice.service';
+import { getAuth } from 'firebase/auth';
 import { NavigationService } from 'src/app/services';
 
 @Component({
@@ -25,6 +27,13 @@ export class OtheruserPage implements OnInit {
   @Select(OtheruserState.returnFriendshipStatus) friendshipStatus$!: Observable<boolean>;
 
   constructor(private store: Store, private nav: NavController) {
+  schedules: IWorkoutScheduleModel[] = [];
+  @Select(OtheruserState.getOtherUser) user$!: Observable<OtherUserStateModel>;
+  auth = getAuth();
+  currUserId = this.auth.currentUser?.uid;
+  date : string ;
+  
+  constructor(private store: Store , private noticeService: NoticeService , private nav: NavController ) {
     this.displayUserInfo();
   }
 
@@ -34,6 +43,8 @@ export class OtheruserPage implements OnInit {
 
   removeFriend() {
     this.store.dispatch(new RemoveFriendAction(this.friendModel()))
+    this.date = new Date().toTimeString() ;
+    this.createNotifications("My name" , this.date , "Removed you as a Friend!")  ;
   }
 
   addFriend() {
@@ -43,6 +54,8 @@ export class OtheruserPage implements OnInit {
    } else(
     console.log("User is null.....")
    )
+   this.date = new Date().toTimeString() ;
+   this.createNotifications("My name" , this.date , "Requested to friend you!")  ;
   }
 
   viewSchedules() {
@@ -96,5 +109,13 @@ export class OtheruserPage implements OnInit {
   backtoPreviousPage() {
     this.store.dispatch(new RemoveUser());
   }
+
+  createNotifications(sendername: string , sentdate: string , message: string){
+    this.noticeService.createNotices(sendername , sentdate , message , this.currUserId!);
+  }
+
+
+
+
 
 }
