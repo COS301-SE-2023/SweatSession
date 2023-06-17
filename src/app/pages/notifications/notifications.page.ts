@@ -24,6 +24,7 @@ export class NotificationsPage implements OnInit {
 
   noticeamount : number ;
   noticeList: Notice[];
+  noticeList2: Notice[] = [];
   sendamount: string ;
   auth = getAuth();
   currUserId = this.auth.currentUser?.uid;
@@ -48,9 +49,13 @@ export class NotificationsPage implements OnInit {
   getNotifications(){
     this.noticeService.getNotices().subscribe((notices: Notice[]) => {
       this.noticeList = notices;
-      console.log('Number of notices:', this.noticeList.length);
-      this.noticeamount = this.noticeList.length ;
-      console.log(this.noticeamount);
+      for(let i = 0 ; i<this.noticeList.length ; i++){
+        if(this.noticeList[i].userid == this.currUserId){
+          this.noticeList2.push(this.noticeList[i]) ;
+        }
+      }
+      this.noticeamount = this.noticeList2.length ;
+      console.log('Number of notices:' ,this.noticeamount);
       this.sendNotifications(this.noticeamount);
       
 
@@ -64,18 +69,18 @@ export class NotificationsPage implements OnInit {
       message: 'You have no new notifications!',
       buttons: ['OK']
     });
-    this.createNotifications("Luqmaan" , "12:01" , "Liked your post");
+    
 
     await alert.present();
   }
 
   clearNotifications(){
 
-    for(let i = 0 ; i<this.noticeList.length ; i++){
-      this.noticeService.deleteNotices(this.noticeList[i].id!);
-      console.log(this.noticeList[i].id)
+    for(let i = 0 ; i<this.noticeList2.length ; i++){
+      this.noticeService.deleteNotices(this.noticeList2[i].id!);
+      console.log(this.noticeList2[i].id)
     }
-    this.noticeList = [] ;
+    this.noticeList2 = [] ;
   }
 
   sendNotifications(num :number){

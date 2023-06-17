@@ -146,7 +146,7 @@ export class OtheruserPage implements OnInit {
   }
 
   createNotifications(sendername: string , sentdate: string , message: string){
-    this.noticeService.createNotices(sendername , sentdate , message , this.currUserId!);
+    this.noticeService.createNotices(sendername , sentdate , message , this.user.userId);
   }
 
 
