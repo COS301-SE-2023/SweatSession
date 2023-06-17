@@ -19,19 +19,19 @@ const routes: Routes = [
   },
   {
     path: 'home',
-  canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
     data: { authGuardPipe: redirectLoggedOut },
     loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule)
   },
   {
     path: 'login',
-  canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
     data: { authGuardPipe: redirectLoggedIn },
     loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
   },
   {
     path: 'register',
-  canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
     data: { authGuardPipe: redirectLoggedIn },
     loadChildren: () => import('./pages/register/register.module').then( m => m.RegisterPageModule)
   },
@@ -108,12 +108,16 @@ const routes: Routes = [
   {
     path: "otheruserFriends",
     component: FriendsComponent,
-    pathMatch: 'full'
+    pathMatch: 'full',
+    canActivate: [AuthGuard],
+    data: { authGuardPipe: redirectLoggedOut },
   },
   {
     path: "otheruserSchedules",
     component: SchedulesComponent,
-    pathMatch: 'full'
+    pathMatch: 'full',
+    canActivate: [AuthGuard],
+    data: { authGuardPipe: redirectLoggedOut },
   },
   {
     path: 'points',
