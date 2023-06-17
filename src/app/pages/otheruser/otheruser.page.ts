@@ -5,10 +5,12 @@ import { Observable } from 'rxjs';
 import {GetUsersAction} from 'src/app/actions/profile.action'
 import { AddFriendAction, GetOtheruserFriends, GetOtheruserSchedules, LoadOtherUserProfile, RemoveFriendAction, RemoveUser } from 'src/app/actions';
 import { IFriendsModel, IProfileModel, IWorkoutScheduleModel , IGotProfile } from 'src/app/models';
+import { Profile } from 'src/app/models/notice.model';
 import { OtherUserStateModel, OtheruserState } from 'src/app/states';
 import {NoticeService } from 'src/app/services/notifications/notice.service';
 import { getAuth } from 'firebase/auth';
 import { NavigationService } from 'src/app/services';
+import { DocumentSnapshot } from 'firebase/firestore';
 
 @Component({
   selector: 'app-otheruser',
@@ -21,9 +23,10 @@ export class OtheruserPage implements OnInit {
   friendshipStatus: boolean;
  
   user!: IProfileModel;
-  curruser!: IProfileModel;
+  currusername: string;
   friends: IFriendsModel[] =[];
   workoutSchedules: IWorkoutScheduleModel[] = [];
+  profileList: Profile[];
 
  
 
@@ -52,7 +55,7 @@ export class OtheruserPage implements OnInit {
 
   ngOnInit() {
     this.displayUserInfo();
-    this.displayCurrentUser();
+    this.displayCurrentUser(this.currUserId!);
   }
 
   removeFriend() {
@@ -60,7 +63,7 @@ export class OtheruserPage implements OnInit {
     this.date = new Date().toTimeString() ;
     console.log(this.date.split(':' , 2));
     this.shortdate = this.date.split(':' , 2);
-    this.createNotifications(this.user.name! , this.shortdate[0] + ':' + this.shortdate[1] , "Removed you as a Friend!")  ;
+    this.createNotifications(this.currusername , this.shortdate[0] + ':' + this.shortdate[1] , "Removed you as a Friend!")  ;
   }
 
   addFriend() {
@@ -72,7 +75,7 @@ export class OtheruserPage implements OnInit {
    )
    this.date = new Date().toTimeString() ;
    this.shortdate = this.date.split(':' , 2);
-   this.createNotifications(this.user.name! , this.shortdate[0] + ':' + this.shortdate[1] , "Requested to friend you!")  ;
+   this.createNotifications(this.currusername , this.shortdate[0] + ':' + this.shortdate[1] , "Requested to friend you!")  ;
   }
 
   viewSchedules() {
@@ -83,9 +86,20 @@ export class OtheruserPage implements OnInit {
     this.nav.navigateRoot("/otheruserFriends");
   }
 
-  displayCurrentUser(){
-    
-  }
+  displayCurrentUser(id:string){
+    this.noticeService.getTheNoticeProfile().subscribe((profiles: Profile[]) => {
+    this.profileList = profiles;
+    console.log('Number of PROFILES:', this.profileList.length);
+    for(let i = 0 ; i<this.profileList.length ; i++){
+      if(this.profileList[i].id == this.currUserId ){
+        this.currusername = this.profileList[i].displayName! ;
+        console.log(this.currusername);
+      }
+    }
+
+      
+  });
+}
 
   displayUserInfo() {
     this.store.dispatch(new LoadOtherUserProfile());
