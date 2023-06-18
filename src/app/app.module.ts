@@ -5,6 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import * as admin from 'firebase-admin';
+
 import {
   initializeFirestore,
   provideFirestore,
@@ -73,7 +75,6 @@ import { AngularFireModule } from '@angular/fire/compat';
     IonicModule.forRoot(), 
     NgxsRouterPluginModule.forRoot(),
     AppRoutingModule,
-    AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule ,
     provideRemoteConfig(() => getRemoteConfig()),
     provideAnalytics(() => getAnalytics()),
