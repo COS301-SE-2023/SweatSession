@@ -1,11 +1,11 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-item>
-      <ion-icon name="arrow-back-outline" routerLink="/userprofile"></ion-icon>
+      <backbutton></backbutton>
       <ion-title>Friends</ion-title>
-      <ion-item class="addFriend-button" slot="end">
+      <ion-item class="addFriend-button" slot="end" (click)="addFriend()">
         <ion-icon name="add-outline"></ion-icon>
-        <ion-icon name="people-outline" routerLink="/home/search"></ion-icon>
+        <ion-icon name="people-outline"></ion-icon>
       </ion-item>
     </ion-item>
   </ion-toolbar>

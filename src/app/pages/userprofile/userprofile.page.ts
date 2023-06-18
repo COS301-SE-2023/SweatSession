@@ -71,5 +71,4 @@ export class UserprofilePage implements OnInit {
   Schedule(){
     this.Nav.navigateRoot('/workout-scheduling');
   }
-
 }

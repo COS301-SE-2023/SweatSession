@@ -1,7 +1,7 @@
 import { LoadSchedule } from './../../actions/workoutSchedule.action';
 import { Injectable } from "@angular/core";
 import { Action, State, StateContext, Store, Selector } from "@ngxs/store";
-//import { Navigate } from "@ngxs/router-plugin";
+import { Navigate } from "@ngxs/router-plugin";
 import { Router } from "@angular/router";
 import { AddWorkoutSchedule, 
         GetWorkoutSchedules,
@@ -18,6 +18,8 @@ import { IAddWorkoutSchedule,
         from "src/app/models";
 import { WorkoutscheduleService } from "src/app/services";
 import { time } from "console";
+import { AuthApi } from '../auth/auth.api';
+import { catchError, of, tap } from 'rxjs';
 
 export interface WorkoutSchedulingStateModel {
     schedules: IWorkoutScheduleModel[];
@@ -40,52 +42,77 @@ export interface WorkoutSchedulingStateModel {
 export class WorkoutSchedulingState {
     constructor(
         private readonly service: WorkoutscheduleService,
-        private readonly store: Store
+        private readonly store: Store,
+        private readonly authApi: AuthApi
     ){}
 
     @Action(GetWorkoutSchedules)
     async getWorkoutSchedules(ctx: StateContext<WorkoutSchedulingStateModel>) {
-        const request:IGetWorkoutSchedules={
-            userId:"test id"
-        }
+        const currentUserId = await this.authApi.getCurrentUserId();
+       if(currentUserId!=null) {
+            const request:IGetWorkoutSchedules={
+                userId: currentUserId
+            }
 
-       const response: IGotWorkoutSchedules = await this.service.getSchedules(request);
-       console.table(response);
-        ctx.setState({
-            ...ctx.getState(), schedules: response.schedules
-        })
+        return (await this.service.getSchedules(request)).pipe(
+            tap((response: IGotWorkoutSchedules)=>{
+                ctx.setState({
+                    ...ctx.getState(), schedules: response.schedules
+                })
+            }),
+            catchError((error) => {
+                ctx.setState({
+                    ...ctx.getState(),schedules: []
+                })
+                return of(error);
+            }))
+        }else {
+            return ctx.dispatch(new Navigate(['home/dashboard']));
+        }
     }
 
     @Action(RemoveWorkoutSchedule)
     async removeWorkoutSchedule(ctx: StateContext<WorkoutSchedulingStateModel>,{payload}: RemoveWorkoutSchedule) {
-       const request: IRemoveWorkoutSchedule = {
-            userId: "test id",
-            schedule: payload
-        }
-        const response: IRemovedWorkoutSchedule = await this.service.removeSchedule(request);
-        if(response.validate){
-            const schedules = ctx.getState().schedules.filter((schedule)=>{
-                if(schedule.id! === request.schedule.id!)
-                    return false;
-                else
-                    return true;
-            })
-            ctx.patchState({
-                schedules: schedules
-            })
+        const currentUserId = await this.authApi.getCurrentUserId();
+        if(currentUserId!=null) {
+            const request: IRemoveWorkoutSchedule = {
+                userId: currentUserId,
+                schedule: payload
+            }
+            const response: IRemovedWorkoutSchedule = await this.service.removeSchedule(request);
+            if(response.validate){
+                const schedules = ctx.getState().schedules.filter((schedule)=>{
+                    if(schedule.id! === request.schedule.id!)
+                        return false;
+                    else
+                        return true;
+                })
+                ctx.patchState({
+                    schedules: schedules
+                })
+            }else {
+                alert("Sorry, You are no logged in");
+                ctx.dispatch(new Navigate(['login']));
+            }
         }
     }
 
     @Action(AddWorkoutSchedule)
     async addWorkoutSchedule(ctx: StateContext<WorkoutSchedulingStateModel>, {payload}: AddWorkoutSchedule) {
-        const request: IAddWorkoutSchedule ={
-            userId: "test id",
-            schedule: payload
+        const currentUserId = await this.authApi.getCurrentUserId();
+        if(currentUserId!=null) {
+            const request: IAddWorkoutSchedule ={
+                userId: currentUserId,
+                schedule: payload
+            }
+            const response = await this.service.addSchedule(request);
+            ctx.patchState({
+                schedules: [response.schedule!,...ctx.getState().schedules]
+            })
+        }else {
+            alert("Sorry, You are no logged in");
+            ctx.dispatch(new Navigate(['login']));
         }
-        const response = await this.service.addSchedule(request);
-        ctx.patchState({
-            schedules: [response.schedule!,...ctx.getState().schedules]
-        })
     }
 
      @Action(UpdateWorkoutSchedule)

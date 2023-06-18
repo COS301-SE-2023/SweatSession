@@ -1,9 +1,9 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-item>
-      <ion-icon name="arrow-back-outline" routerLink="/userprofile"></ion-icon>
+    <ion-item lines="none">
+      <backbutton></backbutton>
       <ion-title>Schedules</ion-title>
-      <ion-item slot="end"  class="add-schedule-button" (click)="addSchedule()">
+      <ion-item lines="none"slot="end"  class="add-schedule-button" (click)="addSchedule()">
         <ion-icon name="add-outline"></ion-icon>
         <ion-icon name="receipt-outline"></ion-icon>
       </ion-item>
@@ -12,6 +12,11 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
+  <ion-segment value="1">
+    <ion-segment-button value="1">upcoming</ion-segment-button>
+    <ion-segment-button value="2">completed</ion-segment-button>
+    <ion-segment-button value="3">uncompleted</ion-segment-button>
+  </ion-segment>
   <div class="search">
     <ion-searchbar placeholder="find schedule"
       [(ngModel)] = "searchTerms.searchQuery"
@@ -19,7 +24,7 @@
     ></ion-searchbar>
     <div id="search-suggestions">
       <ion-list *ngIf="searchTerms.showSuggestions">
-        <ion-item *ngFor="let suggestion of searchTerms.filteredSuggestions" (click)="find(suggestion.name!)">
+        <ion-item line="none" *ngFor="let suggestion of searchTerms.filteredSuggestions" (click)="find(suggestion.name!)">
           {{ suggestion.name }}
         </ion-item>
       </ion-list>

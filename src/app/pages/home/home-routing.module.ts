@@ -30,10 +30,6 @@ const routes: Routes = [
         loadChildren: () => import('../leaderboard/leaderboard.module').then((m) => m.LeaderboardPageModule),
       },
       {
-        path: 'notifications',
-        loadChildren: () => import('../notifications/notifications.module').then( m => m.NotificationsPageModule)
-      },
-      {
         path: 'leaderboard',
         loadChildren: () => import('../leaderboard/leaderboard.module').then( m => m.LeaderboardPageModule)
       },
@@ -44,6 +40,10 @@ const routes: Routes = [
       {
         path: 'chatbot',
         loadChildren: () => import('../chatbot/chatbot.module').then( m => m.ChatbotPageModule)
+      },
+      {
+        path: 'points',
+        loadChildren: () => import('../points/points.module').then( m => m.PointsPageModule)
       }
     ],
   }

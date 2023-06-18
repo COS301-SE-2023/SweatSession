@@ -1,0 +1,17 @@
+<ion-header [translucent]="true">
+  <ion-item style="display: flex; align-items: center;">
+    <backbutton></backbutton>
+    <ion-title style="margin-left: 1rem;">Badges</ion-title>
+  </ion-item>
+</ion-header>
+
+<ion-content class="badgesContainer">
+  <ion-grid class="loginGrid">
+    <badge *ngFor ="let badge of badges" 
+    [name] = "badge.header"
+    [receivedDescription] = "badge.receivedDescription"
+    [notReceivedDescription] = "badge.notReceivedDescription"
+    [received] = "badge.received"
+  ></badge>
+  </ion-grid>
+</ion-content>

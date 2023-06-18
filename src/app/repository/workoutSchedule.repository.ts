@@ -10,13 +10,14 @@ import { IAddWorkoutSchedule,
     IUpdatedWorkoutSchedule,
     IWorkoutScheduleModel} 
     from '../models';
+import { Observable, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WorkoutscheduleRepository {
 
-  constructor(private firebase: AngularFirestore) { }
+  constructor(private firestore: AngularFirestore) { }
 
     //How user schedules are store....
    /**
@@ -33,7 +34,7 @@ export class WorkoutscheduleRepository {
 
   async addSchedule(request: IAddWorkoutSchedule) {
     try {
-        const docRef = await this.firebase
+        const docRef = await this.firestore
           .collection("WorkoutSchedule")
           .doc(request.userId)
           .collection("userSchedules")
@@ -69,7 +70,7 @@ export class WorkoutscheduleRepository {
 
   async removeSchedule(request: IRemoveWorkoutSchedule) {
     try {
-        const docRef = await this.firebase
+        const docRef = await this.firestore
           .collection("WorkoutSchedule")
           .doc(request.userId)
           .collection("userSchedules")
@@ -101,7 +102,7 @@ export class WorkoutscheduleRepository {
 
   async updateSchedule(request: IUpdateWorkoutSchedule) {
     try {
-        const docRef = await this.firebase
+        const docRef = await this.firestore
           .collection("WorkoutSchedule")
           .doc(request.userId)
           .collection("userSchedules")
@@ -130,98 +131,42 @@ export class WorkoutscheduleRepository {
     }
   }
 
-  async getSchedules(request: IGetWorkoutSchedules) {
-    try {
-        const snapshot = await this.firebase
-          .collection("WorkoutSchedule")
-          .doc(request.userId)
-          .collection("userSchedules")
-          .get()
-          .toPromise();
-
+  getSchedules(request: IGetWorkoutSchedules): Observable<IGotWorkoutSchedules> {
+    // try {
+      
+      const friendsCollection = this.firestore.collection<IWorkoutScheduleModel>(
+      `WorkoutSchedule/${request.userId}/userSchedules`
+      );
+  
+    return friendsCollection.snapshotChanges().pipe(
+      map((snapshot) => {
         const schedules: IWorkoutScheduleModel[] = [];
       
-        snapshot!.forEach((doc) => {
+        snapshot.forEach(async (doc) => {
           const schedule = {
-            id: doc.id,
-            ...doc.data() as IWorkoutScheduleModel,
+            ...doc.payload.doc.data() as IWorkoutScheduleModel,
+            id: doc.payload.doc.id,
           };
       
           schedules.push(schedule);
         });
       
-        console.log('Schedules fetched successfully');
-        alert('Schedules fetched successfully');
-      
-        const response: IGotWorkoutSchedules = {
+        return  {
           userId: request.userId,
           schedules: schedules,
         };
       
-        return response;
-      } catch (error) {
-        console.log('Error fetching schedules:', error);
-        alert(error);
-      
-        const response: IGotWorkoutSchedules = {
-          userId: request.userId,
-          schedules: [],
-        };
-      
-        return response;
-      }
-      
-    //return await this.getMock(request);
+      }))
+    // }catch (error) {
+    //   console.log('Error fetching schedules:', error);
+    //   alert(error);
+    
+    //   const response: IGotWorkoutSchedules = {
+    //     userId: request.userId,
+    //     schedules: [],
+    //   };
+    
+    //   // return response;
+    // }
   }
-
-  getMock(request:IGetWorkoutSchedules){
-    const results:IGotWorkoutSchedules = {
-        userId: request.userId,
-        schedules: [
-            {
-                id: "ID 1",
-                name:"Schedule 1",
-                duration: 1,
-                location: "zone fitness, menlyn",
-                date: new Date(),
-            },
-            {
-                id: "ID 2",
-                name:"Schedule 2",
-                duration: 1,
-                location: "zone fitness, menlyn",
-                date: new Date(),
-            },
-            {
-                id: "ID 3",
-                name:"Schedule 3",
-                duration: 1,
-                location: "zone fitness, menlyn",
-                date: new Date(),
-            },
-            {
-                id: "ID 4",
-                name:"Schedule 4",
-                duration: 1,
-                location: "zone fitness, menlyn",
-                date: new Date(),
-            },
-            {
-                id: "ID 5",
-                name:"Schedule 5",
-                duration: 1,
-                location: "zone fitness, menlyn",
-                date: new Date(),
-            },
-            {
-                id: "ID 6",
-                name:"Schedule 6",
-                duration: 1,
-                location: "zone fitness, menlyn",
-                date: new Date(),
-            }
-        ]
-    }
-    return results;
-}
 }

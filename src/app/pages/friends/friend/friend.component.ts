@@ -18,7 +18,7 @@ export class FriendComponent  implements OnInit {
   ngOnInit() {}
 
   viewOtherUser(){
-    this.store.dispatch(new StageOtheruserInfo(this.friend))
+    this.store.dispatch(new StageOtheruserInfo(this.friend));
   }
 
   removeFriend() {

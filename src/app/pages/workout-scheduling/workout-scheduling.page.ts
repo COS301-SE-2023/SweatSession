@@ -19,9 +19,8 @@ export class WorkoutSchedulingPage {
   @Select(WorkoutSchedulingState.returnSchedules) schedules$!: Observable<IWorkoutScheduleModel[]>;
 
   constructor(private popoverController: PopoverController, 
-      private store : Store, private loadingCtrl: LoadingController) { 
-     
-  }
+      private store : Store, 
+      private loadingCtrl: LoadingController) {}
 
   ngOnInit() {
     this.displayWorkoutSchedule();
@@ -91,5 +90,4 @@ export class WorkoutSchedulingPage {
     this.searchTerms.initial = false;
     this.searchSchedule();
   }
- 
 }

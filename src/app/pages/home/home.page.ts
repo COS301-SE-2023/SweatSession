@@ -1,8 +1,13 @@
+import { Store } from '@ngxs/store';
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { AuthApi } from 'src/app/states/auth/auth.api';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { NoticehomeService } from 'src/app/services/notifications/noticehome.service';
 import { SetProfileService } from 'src/app/services';
 import { IGetFriends, IGetProfile } from 'src/app/models';
+import { Logout } from 'src/app/actions';
 
 
 @Component({
@@ -12,15 +17,16 @@ import { IGetFriends, IGetProfile } from 'src/app/models';
 })
 export class HomePage implements OnInit {
 
+  noticeamount : number ;
+  sub : Subscription ;
   DisplayName$? = "na";
   ProfilePicture$? = "na";
+  getU : IGetProfile = {userId: 'na'};
 
-  constructor(
+  constructor(private nav:NavController,private noticehomeService: NoticehomeService ,
     private authAPI: AuthApi,
     private setpr: SetProfileService,
-  ) { }
- 
-  getU : IGetProfile = {userId: 'na'};
+    private store: Store) { }
 
   ngOnInit() 
   {
@@ -31,10 +37,23 @@ export class HomePage implements OnInit {
         this.ProfilePicture$ = profile.profile.profileURL;
       });
     });
-    
+    this.nav.navigateRoot("/home/dashboard");
   }
 
   userLogout(){
-    this.authAPI.logout();
+    this.store.dispatch(new Logout());
+  }
+
+  ngAfterContentInit() {
+    this.sub = this.noticehomeService.send_data.subscribe(
+      data => {
+        console.log(data)
+        this.noticeamount = data
+      }
+    )
+  }
+
+  goToSettings() {
+    this.nav.navigateRoot("/settings");
   }
 }
