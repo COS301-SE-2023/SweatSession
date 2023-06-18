@@ -85,6 +85,9 @@ export class SetprofileCComponent  implements OnInit {
 
   toggleEditMode() {
     this.isEditMode = true;
+    //refresh page
+    this.ngOnInit();
+
   }
 
   onPictureChange(event: any) {
@@ -104,7 +107,7 @@ export class SetprofileCComponent  implements OnInit {
   DetailsSaved()
   {
     this.isEditMode = false;
-
+    this.ngOnInit();
   }
   ngOnInit()
   {
@@ -130,7 +133,7 @@ export class SetprofileCComponent  implements OnInit {
 
           if(profile.profile.profileURL == "")
           {
-            this.profileForm.patchValue( {profileURL: '../../../../assets/img/ProfileSE.png'});
+            this.profileForm.patchValue( {profileURL: 'src/assets/ProfileSE.jpg'});
           }
            
       });

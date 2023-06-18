@@ -63,7 +63,7 @@ export class UserprofilePage implements OnInit {
   }
 
   Groups(){
-    this.Nav.navigateRoot('/home/messages');
+    this.Nav.navigateRoot('/groups');
   }
   Schedule(){
     this.Nav.navigateRoot('/workout-scheduling');

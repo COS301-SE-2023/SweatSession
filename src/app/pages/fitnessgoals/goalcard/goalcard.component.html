@@ -1,0 +1,29 @@
+<ion-card>
+  <ion-item-sliding>
+
+    <ion-card>
+      <ion-card-title>{{goal.name}}</ion-card-title>
+      <ion-card-subtitle>Description of the Goal</ion-card-subtitle>
+
+<!--      <p>-->
+<!--        <ngb-progressbar type="warning" [value]="75" [striped]="true" [animated]="true"><i>50%</i></ngb-progressbar>-->
+<!--      </p>-->
+
+      <ion-item>
+        <ion-button slot="end" (click)="viewGoal()">view</ion-button>
+      </ion-item>
+
+    </ion-card>
+
+
+
+    <ion-item-options side="start">
+      <ion-item-option color="success">Edit</ion-item-option>
+    </ion-item-options>
+
+    <ion-item-options side="end">
+      <ion-item-option>Favorite</ion-item-option>
+      <ion-item-option color="danger" (click)="removeGoal()">Delete</ion-item-option>
+    </ion-item-options>
+  </ion-item-sliding>
+</ion-card>
