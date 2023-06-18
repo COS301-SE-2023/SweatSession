@@ -1,29 +1,130 @@
-<ion-card>
-  <ion-item-sliding>
+<ion-list>
+    <ion-item-sliding *ngFor="let goal of Goals">
+        <ion-card>
+        <ion-item>
+            <ion-grid>
+                <ion-row>
+                    <ion-col>
+                        <ion-card-title class="ion-text-wrap ion-text-uppercase ion-text-sm">{{ goal.name }}</ion-card-title>
+                    </ion-col>
+                </ion-row>
+                <ion-row class = "CoverPhoto" (mouseover)="isHover = true" (mouseout)="isHover = false">
+                    <ion-img [src]="goal.coverPicture" [class]="isHover ? 'normal' : 'dark'"></ion-img>
+                </ion-row>
+                <ion-row>
+                    <ion-col>
+                        <ion-badge color="primary">600</ion-badge>
+                    </ion-col>
+                    <ion-col>
+                        <ion-label>Days Left</ion-label>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col>
+                            <ion-label>Progress</ion-label>
+                            <ion-progress-bar value="0.5"></ion-progress-bar>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col>
+                        <ion-card-subtitle class="ion-text-wrap ion-text-sm">{{ goal.description }}</ion-card-subtitle>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col class="ion-text-end">
+                        <ion-button (click)="viewGoal()">View</ion-button>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-item>
 
-    <ion-card>
-      <ion-card-title>{{goal.name}}</ion-card-title>
-      <ion-card-subtitle>Description of the Goal</ion-card-subtitle>
+        <ion-item-options side="start">
+            <ion-item-option color="success">Edit</ion-item-option>
+        </ion-item-options>
 
-<!--      <p>-->
-<!--        <ngb-progressbar type="warning" [value]="75" [striped]="true" [animated]="true"><i>50%</i></ngb-progressbar>-->
-<!--      </p>-->
+        <ion-item-options side="end">
+            <ion-item-option>Favorite</ion-item-option>
+            <ion-item-option color="danger" (click)="removeGoal()">Delete</ion-item-option>
+        </ion-item-options>
+        </ion-card>
+    </ion-item-sliding>
+</ion-list>
 
-      <ion-item>
-        <ion-button slot="end" (click)="viewGoal()">view</ion-button>
-      </ion-item>
+<ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button >
+        <ion-icon name="add" ></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="top">
+        <ion-fab-button>
+            <ion-icon id="open-modal" name="add-circle-outline" (click)="addGoal()"></ion-icon>
+        </ion-fab-button>
+    </ion-fab-list>
+</ion-fab>
 
-    </ion-card>
 
 
 
-    <ion-item-options side="start">
-      <ion-item-option color="success">Edit</ion-item-option>
-    </ion-item-options>
+        <ion-modal #modal trigger="open-modal" [presentingElement]="presentingElement">
+            <ng-template>
+                <ion-header>
+                    <ion-toolbar>
+                        <ion-title>Set Fitness Goal</ion-title>
+                        <ion-buttons slot="end">
+                            <ion-button (click)="modal.dismiss()">Close</ion-button>
+                        </ion-buttons>
+                    </ion-toolbar>
+                </ion-header>
 
-    <ion-item-options side="end">
-      <ion-item-option>Favorite</ion-item-option>
-      <ion-item-option color="danger" (click)="removeGoal()">Delete</ion-item-option>
-    </ion-item-options>
-  </ion-item-sliding>
-</ion-card>
+
+                    <form [formGroup]="goalForm" (ngSubmit)="onSubmit()" class="ion-padding" >
+                        <ion-item>
+
+                            <ion-col size="12" size-sm>
+
+                                <ion-row>
+                                    <img [src]="getDp()"  alt="Profile Picture">
+                                </ion-row>
+
+                                <ion-row>
+                                    <input  type="file" id = "fileInput" accept="image/*" (change)="onFileSelected($event)" style="display: none">
+                                    <ion-button  fill="outline" expand="block" size="small" (click)="selectFile()" >Attach Cover Photo</ion-button>
+                                </ion-row>
+
+                            </ion-col>
+
+                        </ion-item>
+
+                        <ion-item>
+                            <ion-label position="floating">Goal Name</ion-label>
+                            <ion-input type="text" formControlName="name"></ion-input>
+                        </ion-item>
+                        <ion-item>
+                            <ion-label position="floating">Goal Description</ion-label>
+                            <ion-input type="text" formControlName="description"></ion-input>
+                        </ion-item>
+                        <ion-item>
+                            <ion-label position="stacked">Start</ion-label>
+                            <ion-input type="date" formControlName="startDate"></ion-input>
+                        </ion-item>
+                        <ion-item>
+                            <ion-label position="stacked">End</ion-label>
+                            <ion-input type="date" formControlName="endDate"></ion-input>
+                        </ion-item>
+
+
+
+                        <ion-row>
+                            <ion-col>
+                                <ion-button fill="outline" expand="block" size="small" (click)="modal.dismiss()">Cancel</ion-button>
+                            </ion-col>
+                            <ion-col>
+                                <ion-button fill="outline" expand="block" size="small" type="submit" [disabled]="!goalForm.valid">Save Goal</ion-button>
+                            </ion-col>
+                        </ion-row>
+                    </form>
+
+            </ng-template>
+        </ion-modal>
+
+
+

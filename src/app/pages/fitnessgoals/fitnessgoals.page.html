@@ -3,15 +3,18 @@
     <ion-item>
       <ion-icon name="arrow-back-outline" routerLink="/userprofile"></ion-icon>
       <ion-title>Goals</ion-title>
-      <ion-item slot="end"  class="add-schedule-button" (click)="addGoal()">
-        <ion-icon name="add-outline"></ion-icon>
-        <ion-icon name="receipt-outline"></ion-icon>
-      </ion-item>
+
     </ion-item>
   </ion-toolbar>
 </ion-header>
 
+<ion-content>
+ <ion-label>
+    <h1>Your Set Goals:</h1>
+ </ion-label>
 
-<app-goalcard>
+  <app-goalcard>
 
-</app-goalcard>
+  </app-goalcard>
+
+</ion-content>

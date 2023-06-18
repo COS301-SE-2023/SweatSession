@@ -12,7 +12,6 @@ export class DashboardPage implements OnInit {
 
   ngOnInit()
   {
-    HomePage.prototype.ngOnInit();
   }
 
 }

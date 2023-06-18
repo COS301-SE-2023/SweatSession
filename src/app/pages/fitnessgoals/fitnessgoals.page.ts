@@ -12,7 +12,5 @@ export class FitnessgoalsPage implements OnInit {
   ngOnInit() {
   }
 
-    addGoal() {
 
-    }
 }
