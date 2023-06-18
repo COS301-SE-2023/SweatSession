@@ -42,7 +42,7 @@ export class FriendsRepository {
       map((snapshot) => {
         const friends: IFriendsModel[] = [];
   
-        snapshot.forEach((doc) => {
+        snapshot.forEach(async (doc) => {
           const friend = {
             ...doc.payload.doc.data(),
 

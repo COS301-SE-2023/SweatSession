@@ -142,7 +142,7 @@ export class WorkoutscheduleRepository {
       map((snapshot) => {
         const schedules: IWorkoutScheduleModel[] = [];
       
-        snapshot.forEach((doc) => {
+        snapshot.forEach(async (doc) => {
           const schedule = {
             ...doc.payload.doc.data() as IWorkoutScheduleModel,
             id: doc.payload.doc.id,
