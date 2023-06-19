@@ -1,0 +1,16 @@
+<div class="search">
+  <ion-searchbar placeholder="find schedule"
+    [(ngModel)] = "searchTerms.searchQuery"
+    (ionInput) = onSearchInput($event)
+  ></ion-searchbar>
+  <div id="search-suggestions">
+    <ion-list *ngIf="searchTerms.showSuggestions">
+      <ion-item lines="none" *ngFor="let suggestion of searchTerms.filteredSuggestions" (click)="find(suggestion.name!)">
+        {{ suggestion.name }}
+      </ion-item>
+      <ion-item lines="none" *ngIf="searchTerms.filteredSuggestions!.length==0">
+        <ion-text>user not found</ion-text>
+      </ion-item>
+    </ion-list>
+  </div>
+</div>
