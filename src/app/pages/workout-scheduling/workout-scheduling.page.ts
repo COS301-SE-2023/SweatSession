@@ -13,8 +13,13 @@ import { GetWorkoutSchedules } from 'src/app/actions';
   styleUrls: ['./workout-scheduling.page.scss'],
 })
 export class WorkoutSchedulingPage {
-  searchTerms!: ISearchTerms;
+  //data containers
   schedules: IWorkoutScheduleModel[]=[];
+  completedSchedules: IWorkoutScheduleModel[]=[];
+  uncompletedSchedules: IWorkoutScheduleModel[]=[];
+  inSessionSchedules: IWorkoutScheduleModel[]=[];
+
+  selectedSegment: string = '0';
  
   @Select(WorkoutSchedulingState.returnSchedules) schedules$!: Observable<IWorkoutScheduleModel[]>;
 
@@ -24,17 +29,6 @@ export class WorkoutSchedulingPage {
 
   ngOnInit() {
     this.displayWorkoutSchedule();
-    this.initialiseSearchTerms();
-  }
-
-  initialiseSearchTerms() {
-    this.searchTerms= {
-      searchQuery:"",
-      showSuggestions:false,
-      suggestions:[],
-      filteredSuggestions:[],
-      initial:true,
-    }
   }
 
   async addSchedule(){
@@ -50,44 +44,25 @@ export class WorkoutSchedulingPage {
     this.store.dispatch(new GetWorkoutSchedules())
     this.schedules$.subscribe((response)=>{
       this.schedules = response;
-      console.table(this.schedules);
+      this.filterSchedules();
     });
   }
 
-  searchSchedule() {
-    this.searchTerms.showSuggestions = false;
-    this.schedules = this.searchTerms.filteredSuggestions!;
+  filterSchedules() {
+   this.completedSchedules = this.schedules.filter((schedule)=>
+      schedule.status! === "completed"
+    )
+
+    this.uncompletedSchedules = this.schedules.filter((schedule)=>
+      schedule.status!.match('uncompleted')
+    )
+
+    this.inSessionSchedules = this.schedules.filter((schedule)=>
+      schedule.status!.match("inSession")
+    )
   }
 
-  async showLoader() {
-    const loader = await this.loadingCtrl.create({
-      message: 'Loading...',
-      translucent: true,
-      duration: 3000
-    });
-    loader.present();
-  }
-
-  async dismissLoader() {
-    await this.loadingCtrl.dismiss();
-  }
-
-  onSearchInput(event:any) {
-    const searchText = event.target.value;
-    if (searchText) {
-      this.searchTerms.showSuggestions = true;
-      this.searchTerms.filteredSuggestions = this.schedules.filter((suggestion) =>
-        suggestion.name!.toLowerCase().includes(this.searchTerms.searchQuery!.toLowerCase())
-      );
-    }else {
-      this.searchTerms.showSuggestions = false;
-    }
-  }
-
-  find(suggestion: string){
-    console.log(suggestion);
-    this.searchTerms.searchQuery = suggestion;
-    this.searchTerms.initial = false;
-    this.searchSchedule();
+  onSegmentChange(event: any) {
+    this.selectedSegment = event.detail.value;
   }
 }

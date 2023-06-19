@@ -12,25 +12,30 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-segment value="1">
-    <ion-segment-button value="1">upcoming</ion-segment-button>
+  <ion-segment (ionChange)="onSegmentChange($event)" value="0" [scrollable]="true">
+    <ion-segment-button value="0">All</ion-segment-button>
+    <ion-segment-button value="1">in Session</ion-segment-button>
     <ion-segment-button value="2">completed</ion-segment-button>
     <ion-segment-button value="3">uncompleted</ion-segment-button>
   </ion-segment>
-  <div class="search">
-    <ion-searchbar placeholder="find schedule"
-      [(ngModel)] = "searchTerms.searchQuery"
-      (ionInput) = onSearchInput($event)
-    ></ion-searchbar>
-    <div id="search-suggestions">
-      <ion-list *ngIf="searchTerms.showSuggestions">
-        <ion-item line="none" *ngFor="let suggestion of searchTerms.filteredSuggestions" (click)="find(suggestion.name!)">
-          {{ suggestion.name }}
-        </ion-item>
-      </ion-list>
-    </div>
-  </div>
-  <workout-schedule *ngFor = "let schedule of schedules"
-    [schedule] = schedule
+
+  <workout-schedule id="0" [hidden]="selectedSegment !== '0'"
+  [categoryName]="''"  
+  [schedules] = "schedules"
+  ></workout-schedule>
+
+  <workout-schedule id="1" [hidden]="selectedSegment !== '1'"
+  [categoryName]="'in session'"  
+  [schedules] = "inSessionSchedules"
+  ></workout-schedule>
+
+  <workout-schedule id="2" [hidden]="selectedSegment !== '2'"
+  [categoryName]="'completed'"  
+  [schedules] = "completedSchedules"
+  ></workout-schedule>
+
+  <workout-schedule id="3" [hidden]="selectedSegment !== '3'"
+  [categoryName]="'uncompleted'"  
+  [schedules] = "uncompletedSchedules"
   ></workout-schedule>
 </ion-content>

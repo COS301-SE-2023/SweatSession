@@ -10,6 +10,7 @@ import { PopoutAddScheduleComponent } from "./popout-add-schedule/popout-add-sch
 import { WorkoutSchedulingStateModule } from 'src/app/states';
 import { BackButtonDirectiveModule } from 'src/app/directives';
 import { BackbuttonComponent } from 'src/app/directives/backbutton/backbutton.component';
+import { SearchComponentModule } from '../search/search/search.module';
 
 @NgModule({
   imports: [
@@ -19,7 +20,8 @@ import { BackbuttonComponent } from 'src/app/directives/backbutton/backbutton.co
     WorkoutSchedulingPageRoutingModule,
     WorkoutSchedulingStateModule,
     PopupScheduleModule,
-    BackButtonDirectiveModule
+    BackButtonDirectiveModule,
+    SearchComponentModule
   ],
   declarations: [WorkoutSchedulingPage, ScheduleComponent, PopoutAddScheduleComponent],
 })

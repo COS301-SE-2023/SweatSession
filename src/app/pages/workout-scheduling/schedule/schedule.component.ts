@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { PopoverController } from '@ionic/angular';
+import { AlertController, PopoverController } from '@ionic/angular';
 import { PopoutScheduleComponent } from '../popout-schedule/popout-schedule.component';
 import { Time } from '@angular/common';
 import { IWorkoutScheduleModel } from 'src/app/models';
@@ -14,14 +14,15 @@ import { LoadSchedule, RemoveWorkoutSchedule } from 'src/app/actions';
   styleUrls: ['./schedule.component.scss'],
 })
 export class ScheduleComponent  implements OnInit {
-  @Input() schedule!: IWorkoutScheduleModel;
+  @Input() schedules: IWorkoutScheduleModel[]=[];
+  @Input() categoryName:string;
   @Select(WorkoutSchedulingState.returnSchedule) schedule$!: Observable<IWorkoutScheduleModel>; 
-  constructor(private popoverController: PopoverController, private store:Store) { }
+  constructor(private popoverController: PopoverController, private store:Store, private alertController: AlertController,) { }
 
   ngOnInit() {}
 
-  async viewSchedule(){
-    this.loadSchedule();
+  async viewSchedule(schedule: IWorkoutScheduleModel) {
+    this.loadSchedule(schedule);
     const popover = await this.popoverController.create({
       component: PopoutScheduleComponent,
       translucent: true
@@ -29,11 +30,11 @@ export class ScheduleComponent  implements OnInit {
     return await popover.present();
   }
 
-  loadSchedule() {
-    this.store.dispatch(new LoadSchedule(this.schedule));
+  loadSchedule(schedule: IWorkoutScheduleModel) {
+    this.store.dispatch(new LoadSchedule(schedule));
   }
 
-  removeSchedule() {
-    this.store.dispatch(new RemoveWorkoutSchedule(this.schedule))
+  removeSchedule(schedule: IWorkoutScheduleModel) {
+    this.store.dispatch(new RemoveWorkoutSchedule(schedule))
   }
 }
