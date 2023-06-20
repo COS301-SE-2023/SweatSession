@@ -94,6 +94,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/setprofile/setprofile.module').then( m => m.SetprofilePageModule)
   },
   {
+    path: 'fitnessgoals',
+    loadChildren: () => import('./pages/fitnessgoals/fitnessgoals.module').then( m => m.FitnessgoalsPageModule)
+  },
+  {
     path: 'notifications',
     canActivate: [AuthGuard],
     data: { authGuardPipe: redirectLoggedOut },

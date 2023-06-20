@@ -8,6 +8,7 @@ import { SetProfileService } from 'src/app/services';
 import { AuthApi } from 'src/app/states/auth/auth.api';
 import { getCurrentUserId } from 'src/app/actions';
 
+
 @Component({
   selector: 'app-setprofile-c',
   templateUrl: './setProfileC.component.html',
@@ -34,6 +35,7 @@ export class SetprofileCComponent  implements OnInit {
 
   getUser : IGetProfile = {userId: 'na'};
   UpadateP? : IProfileModel;
+  file: File | null = null;
   constructor
   (
     private store: Store,
@@ -62,6 +64,7 @@ export class SetprofileCComponent  implements OnInit {
       }
       this.setprofileservices.updateProfile(this.UpadateP);
       this.DetailsSaved();
+
     }
 
   openPicturePopup()
@@ -69,7 +72,7 @@ export class SetprofileCComponent  implements OnInit {
     // this.modalController.create({
     //   component: 'editPictureModal',
     //   componentProps: {
-    //     selectedPicture: this.ProfilePicture,
+    //     selectedPicture: this.profileForm.get('profileURL')?.value as string,
     //   },
     // }).then((modal) => {
     //   modal.present();
@@ -85,26 +88,36 @@ export class SetprofileCComponent  implements OnInit {
 
   toggleEditMode() {
     this.isEditMode = true;
+    //refresh page
+    this.ngOnInit();
+
   }
 
-  onPictureChange(event: any) {
-    const file = event.target.files[0];
-    if (file) {
+  SaveFile() {
+    if (this.file) {
       const reader = new FileReader();
       reader.onloadend = () => {
         this.profileForm.patchValue({ profileURL: reader.result as string});
         // this. = reader.result as string;
 
       };
-      reader.readAsDataURL(file);
+      reader.readAsDataURL(this.file);
     }
-    this.saveProfile();
+
+    console.log(this.profileForm.value.profileURL);
   }
 
+
+  onFileSelected(event: any) {
+    this.file = event.target.files[0];
+    this.SaveFile();
+
+  }
   DetailsSaved()
   {
     this.isEditMode = false;
-
+    this.file = null;
+    this.ngOnInit();
   }
   ngOnInit()
   {
@@ -125,17 +138,26 @@ export class SetprofileCComponent  implements OnInit {
             weight: (profile.profile.weight)?.toString(),
           },
 
-          
           );
 
           if(profile.profile.profileURL == "")
           {
-            this.profileForm.patchValue( {profileURL: '../../../../assets/img/ProfileSE.png'});
+            this.profileForm.patchValue( {profileURL: 'src/assets/ProfileSE.jpg'});
           }
            
       });
 
     });
   }
+
+  takePicture() {
+    document.getElementById('photoInput')?.click();
+  }
+
+  selectFile()
+  {
+    document.getElementById('fileInput')?.click();
+  }
+
 
 }

@@ -1,30 +1,34 @@
 
 <ion-card>
-      <ion-toast trigger="open-toast" color = "success" position = "top" message="Saved Successfully" [duration]="3000" icon="shield-checkmark-outline"></ion-toast>
-      <ion-toast trigger="SDP" color = "success" position = "top" message="Profile Successfully Saved" [duration]="3000" icon="shield-checkmark-outline"></ion-toast>
-
-      <ion-card-header>
-        <ion-card-title>Edit Profile</ion-card-title>
-      </ion-card-header>
+      <ion-toast trigger="open-toast" color = "success" position = "top" message= "Profile Picture Saved" [duration]="3000" icon="shield-checkmark-outline"></ion-toast>
+      <ion-toast trigger="SDP" color = "success" position = "top" message="Personal Info Saved" [duration]="3000" icon="shield-checkmark-outline"></ion-toast>
 
 
-<!-- 
-        <div class="user-thumb user-thumb--edit">
-          <div class="custom-file">
-            <input class="custom-file__input" id="photo" accept="image/*" (change)="onPictureChange($event)" type="file">
-            <label class="custom-file__label" for="photo">
-              <img alt="" class="thumb--lg rounded-circle" [src]="getDp()">
-            </label>
-          </div>
-        </div> -->
+        <ion-row>
+            <ion-col size="6" offset="3">
+                <div class="avatar-container" >
+                    <ion-avatar  class="preview-container" *ngIf="getDp()">
+                        <img [src]="getDp()"  alt="Profile Picture">
+                    </ion-avatar>
+                </div>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col >
+                <input  type="file" id = "fileInput" accept="image/*" (change)="onFileSelected($event)" style="display: none">
+                <ion-button fill="outline" expand="block" size="small" (click)="selectFile()" >Change Picture</ion-button>
+            </ion-col>
+            <ion-col >
+                <input type="file" id = "photoInput" accept="image/*" capture="environment" (change)="onFileSelected($event)" style="display: none">
+                <ion-button fill="outline" expand="block" size="small"  (click)="takePicture()">Take Picture</ion-button>
+            </ion-col>
+        </ion-row>
+    <ion-row>
+        <ion-col class="ion-text-center">
+            <ion-button fill="outline" id="SDP" expand="block" size="small" (click)="saveProfile()" [disabled]="!file">Save Picture</ion-button>
+        </ion-col>
+    </ion-row>
 
-
-        <div class="avatar-container"  (click)="openPicturePopup()">
-          <ion-avatar  class="preview-container" *ngIf="getDp()">
-            <img [src]="getDp()" id="SDP" alt="Profile Picture">
-          </ion-avatar>
-        </div>
-        <ion-input  type="file" accept="image/*" (change)="onPictureChange($event)"></ion-input>
 
       </ion-card>
       
@@ -33,7 +37,7 @@
     <ion-card>
   
       <ion-button fill = "clear" (click)="toggleEditMode()">
-        Edit
+        Edit Profile Info
       </ion-button>
       
       
@@ -75,80 +79,3 @@
       
     </ion-card>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- 
-  <ion-content>
-      <ion-card>
-  
-        <ion-card-header>
-          <ion-card-title>Edit Profile</ion-card-title>
-        </ion-card-header>
-         <div class="avatar-container" (click)="openPicturePopup()">
-          <ion-avatar  class="preview-container" *ngIf="ProfilePicture">
-            <img [src]="ProfilePicture" alt="Old Profile Picture">
-          </ion-avatar>
-        </div>
-  
-          <ion-input type="file" accept="image/*" (change)="onPictureChange($event)"></ion-input>
-  
-        </ion-card>
-        
-        <ion-card>
-          <ion-button fill = "clear" (click)="toggleEditMode()">
-            Edit
-          </ion-button>
-          
-           <ion-button slot="end" fill="clear" (click)="">Edit</ion-button> -->
-        <!-- <ion-item>
-          <ion-label position="stacked">Name</ion-label>
-          <ion-input type="text" [(ngModel)]="user.name" [disabled]="!isEditMode"></ion-input>
-        </ion-item>
-  
-        <ion-item>
-          <ion-label position="stacked">Bio</ion-label>
-          <ion-textarea  [(ngModel)]="user.bio"></ion-textarea>
-        </ion-item>
-  
-        <ion-item>
-          <ion-label position="stacked">Phone Number</ion-label>
-          <ion-input type="text"  [(ngModel)]="user.phoneNumber"></ion-input>
-        </ion-item>
-      
-        <ion-item>
-          <ion-label position="stacked">Email</ion-label>
-          <ion-input type="email"  disabled = "true" [(ngModel)]="user.email"></ion-input>
-        </ion-item> -->
-      
-        <!-- <ion-item>
-          <ion-label position="stacked">Change Password</ion-label>
-          <ion-input type="password"  [(ngModel)]="user.cPassword"></ion-input>
-        </ion-item> -->
-      
-        <!-- <ion-button expand="block" (click)="saveProfile()" [disabled]="!isEditMode">Save</ion-button>
-      
-      </ion-card>
-  
-  
-  </ion-content> -->

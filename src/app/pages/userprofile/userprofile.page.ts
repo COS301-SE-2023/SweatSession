@@ -13,12 +13,17 @@ import { AuthApi } from 'src/app/states/auth/auth.api';
 })
 export class UserprofilePage implements OnInit {
 
-  constructor(
+  constructor
+  (
     private Nav: NavController,
     private store: Store,
     private modalController: ModalController,
     private setprofileservices: SetProfileService, 
-    private authApi: AuthApi) { }
+    private authApi: AuthApi,
+  )
+  {
+    this.ngOnInit();
+  }
 
   ProfilePicture$? = './assets/img/ProfileSE.png';
   displayName$? = 'na';
@@ -34,8 +39,6 @@ export class UserprofilePage implements OnInit {
   {
     this.getUserid().then((id) => {
       this.getUser.userId = id;
-    
-
     this.setprofileservices.getProfile(this.getUser).subscribe((profile) => {
         
           this.ProfilePicture$ = profile.profile.profileURL;
@@ -46,7 +49,7 @@ export class UserprofilePage implements OnInit {
 
           if(profile.profile.profileURL == "")
           {
-            this.ProfilePicture$ =  '../../../assets/img/ProfileSE.png';
+            this.ProfilePicture$ =  'src/assets/img/ProfileSE.png';
           }
            
       });
