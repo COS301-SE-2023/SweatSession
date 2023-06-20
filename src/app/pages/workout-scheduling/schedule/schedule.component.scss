@@ -5,4 +5,23 @@ ion-text {
 ion-item{
     --highlight-height: 0;
     --inner-border-width: 0;
+    --background: #457B9D;
 }
+
+ion-card {
+    opacity: 0.8;
+}
+
+ion-button {
+    --background: #A8DADC;
+    --background-hover: #9ce0be;
+    --background-activated: #88f4be;
+    --background-focused: #88f4be;
+  
+    --color: #000;
+  
+    --border-color: #E63946;
+    --border-style: solid;
+  
+    --ripple-color: deeppink;
+  }

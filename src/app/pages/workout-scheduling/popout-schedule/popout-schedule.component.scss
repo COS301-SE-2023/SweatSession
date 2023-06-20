@@ -5,3 +5,17 @@ ion-card {
         margin: 15px;
     }
 }
+
+ion-button {
+    --background: #A8DADC;
+    --background-hover: #9ce0be;
+    --background-activated: #88f4be;
+    --background-focused: #88f4be;
+  
+    --color: #000;
+  
+    --border-color: #E63946;
+    --border-style: solid;
+  
+    --ripple-color: deeppink;
+  }

@@ -1,6 +1,6 @@
 <search [data]="schedules"></search>
 
-<ion-card *ngFor="let schedule of schedules">
+<ion-card *ngFor="let schedule of schedules" class="schedules">
   <ion-item-sliding>
     <ion-item>
       <ion-icon name="receipt-outline"></ion-icon>
@@ -21,6 +21,13 @@
   </ion-item-sliding>
 </ion-card>
 
-<div *ngIf="schedules.length <= 0">
-  <ion-text>You have 0 {{categoryName}} schedules</ion-text>
+<div [hidden]="schedules.length > 0">
+  <ion-card>
+    <ion-item>
+      <ion-icon name="receipt-outline"></ion-icon>
+      <ion-text>
+        You have 0 {{categoryName}} schedules
+      </ion-text>
+    </ion-item>
+  </ion-card>
 </div>
