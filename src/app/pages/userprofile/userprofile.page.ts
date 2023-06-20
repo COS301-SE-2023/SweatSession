@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { IonicModule, ModalController } from '@ionic/angular';
 import { NavController } from '@ionic/angular';
-import { Store } from '@ngxs/store';
+import { Select, Store } from '@ngxs/store';
+import { Observable, tap } from 'rxjs';
+import { GetFriendsAction } from 'src/app/actions';
 import { IGetProfile } from 'src/app/models';
 import { SetProfileService } from 'src/app/services';
+import { FriendsState } from 'src/app/states';
 import { AuthApi } from 'src/app/states/auth/auth.api';
 
 @Component({
@@ -12,31 +15,27 @@ import { AuthApi } from 'src/app/states/auth/auth.api';
   styleUrls: ['./userprofile.page.scss'],
 })
 export class UserprofilePage implements OnInit {
+  @Select(FriendsState.returnFriendsSize) friendsSize$! : Observable<number>;
+  ProfilePicture$? = './assets/img/ProfileSE.png';
+  displayName$? = 'na';
+  myBio$? = 'na';
+  friendsSize = 0;
+  groups$ = 0;
+  getUser : IGetProfile = {userId: 'na'};
 
-  constructor
-  (
+  constructor(
     private Nav: NavController,
     private store: Store,
     private modalController: ModalController,
     private setprofileservices: SetProfileService, 
-    private authApi: AuthApi,
-  )
-  {
-    this.ngOnInit();
-  }
+    private authApi: AuthApi,) {}
 
-  ProfilePicture$? = './assets/img/ProfileSE.png';
-  displayName$? = 'na';
-  myBio$? = 'na';
-  friends$ = 0;
-  groups$ = 0;
-  getUser : IGetProfile = {userId: 'na'};
   getUserid() {
     return  this.authApi.getCurrentUserId();
   }
 
-  ngOnInit()
-  {
+  ngOnInit() {
+    this.displayFriendsSize();
     this.getUserid().then((id) => {
       this.getUser.userId = id;
     this.setprofileservices.getProfile(this.getUser).subscribe((profile) => {
@@ -57,18 +56,27 @@ export class UserprofilePage implements OnInit {
     });
   }
 
-  Leaderboard(){
+  Leaderboard() {
     this.Nav.navigateRoot('/home/leaderboard');
   }
 
-  Friends(){
+  Friends() {
     this.Nav.navigateRoot('/friends');
   }
 
-  Groups(){
+  Groups() {
     this.Nav.navigateRoot('/groups');
   }
-  Schedule(){
+
+  Schedule() {
     this.Nav.navigateRoot('/workout-scheduling');
+  }
+
+  displayFriendsSize() {
+    this.store.dispatch(new GetFriendsAction())
+    this.friendsSize$.subscribe((response)=>{
+      this.friendsSize = response;
+      console.log("number of friends: " +response);
+    })
   }
 }
