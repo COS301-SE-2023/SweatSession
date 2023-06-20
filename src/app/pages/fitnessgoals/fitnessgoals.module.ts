@@ -8,6 +8,7 @@ import { FitnessgoalsPageRoutingModule } from './fitnessgoals-routing.module';
 
 import { FitnessgoalsPage } from './fitnessgoals.page';
 import {GoalcardComponent} from "./goalcard/goalcard.component";
+import { BackButtonDirectiveModule } from 'src/app/directives';
 
 @NgModule({
     imports: [
@@ -15,7 +16,8 @@ import {GoalcardComponent} from "./goalcard/goalcard.component";
         FormsModule,
         IonicModule,
         FitnessgoalsPageRoutingModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        BackButtonDirectiveModule
     ],
   declarations: [FitnessgoalsPage,GoalcardComponent ]
 })
