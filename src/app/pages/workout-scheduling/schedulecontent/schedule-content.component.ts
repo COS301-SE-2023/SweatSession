@@ -55,4 +55,21 @@ export class ScheduleContentComponent  implements OnInit {
     }
     return "schedule overdue";
   }
+
+  // fraction(schedule: IWorkoutScheduleModel) {
+  //   console.table(schedule);
+  //   console.log(schedule.createdAt);
+  //   const now = new Date();
+  //   console.log(now);
+  //   // if (false) {
+  //   //   const currentTime = new Date().getTime();
+  //   //   const timeDiff = schedule.createdAt.getTime() - currentTime;
+  //   //   const targetTime = new Date(`${schedule.date}T${schedule.time}`).getTime();
+  //   //   const createdTime = schedule.createdAt!.getTime();
+  //   //   const diff = targetTime - createdTime;
+  //   //   console.log(timeDiff/diff)
+  //   //   return timeDiff/diff;
+  //   // }
+  //   return 0.5;
+  // }
 }
