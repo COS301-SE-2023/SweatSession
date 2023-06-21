@@ -5,12 +5,12 @@ import { IonicModule } from '@ionic/angular';
 import { WorkoutSchedulingPage } from './workout-scheduling.page';
 import { WorkoutSchedulingPageRoutingModule } from './workout-scheduling-routing.module';
 import { ScheduleComponent } from './schedule/schedule.component';
-import { PopupScheduleModule } from './popout-schedule/popout-schedule.module';
-import { PopoutAddScheduleComponent } from "./popout-add-schedule/popout-add-schedule.component";
+import { ScheduleContentModule } from './schedulecontent/schedule-content.module';
+import { AddScheduleComponent } from "./add-schedule/popout-add-schedule.component";
 import { WorkoutSchedulingStateModule } from 'src/app/states';
 import { BackButtonDirectiveModule } from 'src/app/directives';
-import { BackbuttonComponent } from 'src/app/directives/backbutton/backbutton.component';
 import { SearchComponentModule } from '../search/search/search.module';
+import { ScheduleContentComponent } from './schedulecontent/schedule-content.component';
 
 @NgModule({
   imports: [
@@ -19,10 +19,10 @@ import { SearchComponentModule } from '../search/search/search.module';
     IonicModule,
     WorkoutSchedulingPageRoutingModule,
     WorkoutSchedulingStateModule,
-    PopupScheduleModule,
+    ScheduleContentModule,
     BackButtonDirectiveModule,
-    SearchComponentModule
+    SearchComponentModule,
   ],
-  declarations: [WorkoutSchedulingPage, ScheduleComponent, PopoutAddScheduleComponent],
+  declarations: [WorkoutSchedulingPage, ScheduleComponent, AddScheduleComponent],
 })
 export class WorkoutSchedulingPageModule {}

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { PopoverController, LoadingController } from '@ionic/angular';
-import { PopoutAddScheduleComponent } from './popout-add-schedule/popout-add-schedule.component';
+import { PopoverController, LoadingController, NavController } from '@ionic/angular';
+// import { PopoutAddScheduleComponent } from './popout-add-schedule/popout-add-schedule.component';
 import { Select, Store } from '@ngxs/store';
 import { WorkoutSchedulingState } from 'src/app/states';
 import { Observable } from 'rxjs';
@@ -25,19 +25,20 @@ export class WorkoutSchedulingPage {
 
   constructor(private popoverController: PopoverController, 
       private store : Store, 
-      private loadingCtrl: LoadingController) {}
+      private loadingCtrl: LoadingController,
+      private nav: NavController) {}
 
   ngOnInit() {
     this.displayWorkoutSchedule();
   }
 
   async addSchedule(){
-    const popover = await this.popoverController.create({
-          component: PopoutAddScheduleComponent,
-          translucent: true
-        });
-        console.log("save schedule");
-        return await popover.present();
+    // const popover = await this.popoverController.create({
+    //       component: PopoutAddScheduleComponent,
+    //       translucent: true
+    //     });
+    //     return await popover.present();
+    this.nav.navigateRoot("/addSchedule")
   }
 
   displayWorkoutSchedule(){

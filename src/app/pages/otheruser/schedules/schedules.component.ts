@@ -3,7 +3,7 @@ import { PopoverController } from '@ionic/angular';
 import { Select, Store } from '@ngxs/store';
 import { GetOtheruserSchedules, LoadSchedule } from 'src/app/actions';
 import { IWorkoutScheduleModel } from 'src/app/models';
-import { PopoutScheduleComponent } from '../../workout-scheduling/popout-schedule/popout-schedule.component';
+import { ScheduleContentComponent } from '../../workout-scheduling/schedulecontent/schedule-content.component';
 import { OtheruserState } from 'src/app/states';
 import { Observable } from 'rxjs';
 
@@ -14,6 +14,7 @@ import { Observable } from 'rxjs';
 })
 export class SchedulesComponent  implements OnInit {
   schedules: IWorkoutScheduleModel[] = [];
+  isSlideShow = false;
   @Select(OtheruserState.returnOtherUserSchedules) schedules$!: Observable<IWorkoutScheduleModel[]>;
 
   constructor(private popoverController: PopoverController, private store:Store) { }
@@ -23,12 +24,7 @@ export class SchedulesComponent  implements OnInit {
   }
 
   async viewSchedule(schedule: IWorkoutScheduleModel){
-    this.loadSchedule(schedule);
-    const popover = await this.popoverController.create({
-      component: PopoutScheduleComponent,
-      translucent: true
-    });
-    return await popover.present();
+    this.isSlideShow=!this.isSlideShow;
   }
 
   loadSchedule(schedule: IWorkoutScheduleModel) {

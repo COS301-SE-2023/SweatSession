@@ -20,5 +20,14 @@ ion-content {
 }
 
 ion-item, ion-toolbar {
-  --background: transparent;
+  --background: rgba($color: white, $alpha: 0.1);
+}
+
+ion-fab-button  {
+  --background: #A8DADC;
+  --background-hover: #9ce0be;
+  --background-activated: #88f4be;
+  --background-focused: #88f4be;
+  --color: white;
+  --ripple-color: deeppink;
 }
