@@ -1,0 +1,13 @@
+ion-text {
+    margin: 20px;
+}
+
+ion-item{
+    --highlight-height: 0;
+    --inner-border-width: 0;
+    --background: #457B9D;
+}
+
+ion-card, ion-item {
+    opacity: 0.9;
+}
