@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
-import { RemoveWorkoutSchedule } from 'src/app/actions';
+import { RemoveWorkoutSchedule, UpdateWorkoutSchedule } from 'src/app/actions';
 import { IWorkoutScheduleModel } from 'src/app/models';
 import { WorkoutSchedulingState } from 'src/app/states';
 
@@ -14,14 +14,11 @@ import { WorkoutSchedulingState } from 'src/app/states';
 export class ScheduleContentComponent  implements OnInit {
   @Input() schedule!: IWorkoutScheduleModel;
   isSlideShow = false;
+  isEditSlide = false;
   @Select(WorkoutSchedulingState.returnSchedule) schedule$!: Observable<IWorkoutScheduleModel>;
   constructor(private store: Store, private nav:NavController) { }
 
   ngOnInit() {}
-
-  // closePopup() {
-
-  // }
 
   displaySchedule() {
     this.schedule$.subscribe((response)=>{
@@ -39,6 +36,10 @@ export class ScheduleContentComponent  implements OnInit {
 
   viewExercises () {
     this.nav.navigateRoot("/workout-tracking");
+  }
+
+  toggleEditSlide() {
+    this.isEditSlide = !this.isEditSlide;
   }
 
   timeLeft() {

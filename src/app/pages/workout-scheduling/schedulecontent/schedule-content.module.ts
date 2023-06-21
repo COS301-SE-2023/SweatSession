@@ -4,15 +4,16 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { WorkoutSchedulingStateModule } from 'src/app/states';
 import { ScheduleContentComponent } from './schedule-content.component';
+import { EditScheduleComponent } from '../edit-schedule/edit-schedule.component';
 
 @NgModule({
     imports: [
       CommonModule,
       FormsModule,
       IonicModule,
-      WorkoutSchedulingStateModule
+      WorkoutSchedulingStateModule,
     ],
-    declarations: [ ScheduleContentComponent],
+    declarations: [ ScheduleContentComponent,EditScheduleComponent],
     exports: [ ScheduleContentComponent]
 })
 export class ScheduleContentModule {}

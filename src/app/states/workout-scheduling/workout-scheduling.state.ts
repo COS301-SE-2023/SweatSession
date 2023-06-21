@@ -14,6 +14,8 @@ import { IAddWorkoutSchedule,
         IGotWorkoutSchedules,
         IRemoveWorkoutSchedule,
         IRemovedWorkoutSchedule,
+        IUpdateWorkoutSchedule,
+        IUpdatedWorkoutSchedule,
         IWorkoutScheduleModel } 
         from "src/app/models";
 import { NavigationService, WorkoutscheduleService } from "src/app/services";
@@ -119,7 +121,19 @@ export class WorkoutSchedulingState {
 
      @Action(UpdateWorkoutSchedule)
     async updateWorkoutSchedule(ctx: StateContext<WorkoutSchedulingStateModel>, {payload}: UpdateWorkoutSchedule) {
-       
+        const currentUserId = await this.authApi.getCurrentUserId();
+        if(currentUserId!=null) {
+            const request: IUpdateWorkoutSchedule={
+                userId: currentUserId,
+                schedule: payload
+            }
+            const response =await this.service.updateSchedule(request);
+            ctx.patchState({
+                schedules: [response.schedule!,...ctx.getState().schedules]
+            })
+        }else {
+            alert("failed to update");
+        }
     }
 
     @Action(LoadSchedule)

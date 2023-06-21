@@ -107,13 +107,25 @@ export class WorkoutscheduleRepository {
           .doc(request.userId)
           .collection("userSchedules")
           .doc(request.schedule.id)
-          .update(request.schedule)
           
-        console.log('Schedule updated successfully');
+          await docRef.update({
+            name: request.schedule.name,
+            location: request.schedule.location,
+            duration: request.schedule.duration,
+            time: request.schedule.time,
+            date: request.schedule.date
+          })
+          
+        // console.log('Schedule updated successfully');
+        // alert(request.schedule.id);
+
+        const schedule = {
+          ...request.schedule,
+        };
       
         const response: IUpdatedWorkoutSchedule = {
           userId: request.userId,
-          schedule: request.schedule,
+          schedule: schedule,
           validate: true,
         };
       

@@ -10,7 +10,7 @@
         </ion-item>
     
         <ion-item-options side="start">
-          <ion-item-option color="success">Edit</ion-item-option>
+          <ion-item-option color="success" (click)="toggleEditSlide()">Edit</ion-item-option>
         </ion-item-options>
     
         <ion-item-options side="end">
@@ -27,6 +27,11 @@
             <ion-icon name="timer-outline"></ion-icon><ion-text class="schedule-value">{{schedule.duration}} minutes</ion-text><br><br>
         </ion-card-content>
     </div>
+
+    <ion-card-content *ngIf="isEditSlide">
+      <edit-schedule [schedule]="schedule"></edit-schedule>
+    </ion-card-content>
+
     <div class="info">
       <ion-label>{{timeLeft()}}</ion-label>
       <ion-progress-bar value="0.5"></ion-progress-bar>
