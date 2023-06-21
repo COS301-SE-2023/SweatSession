@@ -77,8 +77,8 @@ export class WorkoutscheduleRepository {
           .doc(request.schedule.id)
           .delete()
           
-        console.log('Schedule deleted successfully');
-        alert('Schedule removed successfully');
+        // console.log('Schedule deleted successfully');
+        // alert('Schedule removed successfully');
       
         const response: IRemovedWorkoutSchedule = {
           userId: request.userId!,
