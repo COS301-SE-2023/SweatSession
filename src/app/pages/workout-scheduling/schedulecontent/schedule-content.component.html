@@ -5,7 +5,8 @@
           <ion-text>
             {{schedule.name}}
           </ion-text>
-          <ion-button slot="end" (click)="viewSchedule()">view</ion-button>
+          <ion-button slot="end" (click)="viewSchedule()" *ngIf="!isSlideShow">view</ion-button>
+          <ion-button slot="end" (click)="viewSchedule()" *ngIf="isSlideShow">close</ion-button>
         </ion-item>
     
         <ion-item-options side="start">
