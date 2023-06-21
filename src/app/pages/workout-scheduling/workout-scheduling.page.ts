@@ -22,6 +22,7 @@ export class WorkoutSchedulingPage {
   selectedSegment: string = '0';
  
   @Select(WorkoutSchedulingState.returnSchedules) schedules$!: Observable<IWorkoutScheduleModel[]>;
+  isAddSlide = false;
 
   constructor(private popoverController: PopoverController, 
       private store : Store, 
@@ -33,12 +34,7 @@ export class WorkoutSchedulingPage {
   }
 
   async addSchedule(){
-    // const popover = await this.popoverController.create({
-    //       component: PopoutAddScheduleComponent,
-    //       translucent: true
-    //     });
-    //     return await popover.present();
-    this.nav.navigateRoot("/addSchedule")
+    this.isAddSlide=!this.isAddSlide;
   }
 
   displayWorkoutSchedule(){

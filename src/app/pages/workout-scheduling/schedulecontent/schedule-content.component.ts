@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { PopoverController } from '@ionic/angular';
+import { NavController } from '@ionic/angular';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { RemoveWorkoutSchedule } from 'src/app/actions';
@@ -15,7 +15,7 @@ export class ScheduleContentComponent  implements OnInit {
   @Input() schedule!: IWorkoutScheduleModel;
   isSlideShow = false;
   @Select(WorkoutSchedulingState.returnSchedule) schedule$!: Observable<IWorkoutScheduleModel>;
-  constructor(private popoverController: PopoverController, private store: Store) { }
+  constructor(private store: Store, private nav:NavController) { }
 
   ngOnInit() {}
 
@@ -35,6 +35,10 @@ export class ScheduleContentComponent  implements OnInit {
 
   removeSchedule() {
     this.store.dispatch(new RemoveWorkoutSchedule(this.schedule))
+  }
+
+  viewExercises () {
+    this.nav.navigateRoot("/workout-tracking");
   }
 
   timeLeft() {

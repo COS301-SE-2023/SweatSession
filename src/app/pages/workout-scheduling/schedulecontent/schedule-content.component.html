@@ -14,7 +14,7 @@
         </ion-item-options>
     
         <ion-item-options side="end">
-          <ion-item-option>Favorite</ion-item-option>
+          <ion-item-option (click)="viewExercises()">Exercises</ion-item-option>
           <ion-item-option color="danger" (click)="removeSchedule()">Delete</ion-item-option>
         </ion-item-options>
     </ion-item-sliding>
@@ -28,8 +28,8 @@
         </ion-card-content>
     </div>
     <div class="info">
-        <ion-label>{{timeLeft()}}</ion-label>
-        <ion-progress-bar value="0.5"></ion-progress-bar>
+      <ion-label>{{timeLeft()}}</ion-label>
+      <ion-progress-bar value="0.5"></ion-progress-bar>
     </div>
 </ion-card>
     

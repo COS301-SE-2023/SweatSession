@@ -43,7 +43,7 @@ export class WorkoutSchedulingState {
     constructor(
         private readonly service: WorkoutscheduleService,
         private readonly store: Store,
-        private readonly authApi: AuthApi
+        private readonly authApi: AuthApi,
     ){}
 
     @Action(GetWorkoutSchedules)
