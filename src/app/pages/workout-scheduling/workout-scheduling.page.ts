@@ -34,7 +34,7 @@ export class WorkoutSchedulingPage {
   }
 
   async addSchedule(){
-    this.isAddSlide=!this.isAddSlide;
+   this.nav.navigateRoot("/addSchedule")
   }
 
   displayWorkoutSchedule(){

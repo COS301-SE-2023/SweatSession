@@ -130,6 +130,13 @@ const routes: Routes = [
     data: { authGuardPipe: redirectLoggedOut },
     loadChildren: () => import('./pages/points/points.module').then( m => m.PointsPageModule)
   },
+  {
+    path: "addSchedule",
+    component: AddScheduleComponent,
+    pathMatch: 'full',
+    canActivate: [AuthGuard],
+    data: { authGuardPipe: redirectLoggedOut },
+  },
 ];
 @NgModule({
   imports: [

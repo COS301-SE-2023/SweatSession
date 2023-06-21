@@ -16,7 +16,7 @@ import { IAddWorkoutSchedule,
         IRemovedWorkoutSchedule,
         IWorkoutScheduleModel } 
         from "src/app/models";
-import { WorkoutscheduleService } from "src/app/services";
+import { NavigationService, WorkoutscheduleService } from "src/app/services";
 import { time } from "console";
 import { AuthApi } from '../auth/auth.api';
 import { catchError, of, tap } from 'rxjs';
@@ -44,6 +44,7 @@ export class WorkoutSchedulingState {
         private readonly service: WorkoutscheduleService,
         private readonly store: Store,
         private readonly authApi: AuthApi,
+        private readonly navigation: NavigationService
     ){}
 
     @Action(GetWorkoutSchedules)
@@ -109,6 +110,7 @@ export class WorkoutSchedulingState {
             ctx.patchState({
                 schedules: [response.schedule!,...ctx.getState().schedules]
             })
+            this.navigation.back();
         }else {
             alert("Sorry, You are no logged in");
             ctx.dispatch(new Navigate(['login']));
