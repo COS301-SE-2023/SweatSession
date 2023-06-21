@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AlertController, PopoverController } from '@ionic/angular';
-import { PopoutScheduleComponent } from '../popout-schedule/popout-schedule.component';
 import { Time } from '@angular/common';
 import { IWorkoutScheduleModel } from 'src/app/models';
 import { Select, Store } from '@ngxs/store';
@@ -16,25 +15,29 @@ import { LoadSchedule, RemoveWorkoutSchedule } from 'src/app/actions';
 export class ScheduleComponent  implements OnInit {
   @Input() schedules: IWorkoutScheduleModel[]=[];
   @Input() categoryName:string;
-  @Select(WorkoutSchedulingState.returnSchedule) schedule$!: Observable<IWorkoutScheduleModel>; 
   constructor(private popoverController: PopoverController, private store:Store, private alertController: AlertController,) { }
 
   ngOnInit() {}
-
-  async viewSchedule(schedule: IWorkoutScheduleModel) {
-    this.loadSchedule(schedule);
-    const popover = await this.popoverController.create({
-      component: PopoutScheduleComponent,
-      translucent: true
-    });
-    return await popover.present();
-  }
 
   loadSchedule(schedule: IWorkoutScheduleModel) {
     this.store.dispatch(new LoadSchedule(schedule));
   }
 
-  removeSchedule(schedule: IWorkoutScheduleModel) {
-    this.store.dispatch(new RemoveWorkoutSchedule(schedule))
-  }
+
+  // fraction(schedule: IWorkoutScheduleModel) {
+  //   console.table(schedule);
+  //   console.log(schedule.createdAt);
+  //   const now = new Date();
+  //   console.log(now);
+  //   // if (false) {
+  //   //   const currentTime = new Date().getTime();
+  //   //   const timeDiff = schedule.createdAt.getTime() - currentTime;
+  //   //   const targetTime = new Date(`${schedule.date}T${schedule.time}`).getTime();
+  //   //   const createdTime = schedule.createdAt!.getTime();
+  //   //   const diff = targetTime - createdTime;
+  //   //   console.log(timeDiff/diff)
+  //   //   return timeDiff/diff;
+  //   // }
+  //   return 0.5;
+  // }
 }
