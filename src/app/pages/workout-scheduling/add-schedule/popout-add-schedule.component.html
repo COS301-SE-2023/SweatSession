@@ -1,8 +1,13 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-item lines="none">
+      <backbutton></backbutton>
+    <ion-title>Add workout-schedule</ion-title>
+    </ion-item>
+  </ion-toolbar>
+</ion-header>
 <ion-content>
   <ion-card>
-    <ion-card-header>
-      <ion-card-title>Add workout-schedule</ion-card-title>
-    </ion-card-header>
     <ion-card-content>
       <ion-grid>
         <ion-row>
@@ -48,7 +53,6 @@
       </ion-grid>
     </ion-card-content>
     <ion-button expand="full" (click)="addSchedule()" [disabled]="!isValidInput()">Save</ion-button>
-    <ion-button expand="full" (click)="closePopup()">cancel</ion-button>
   </ion-card>
 </ion-content>
 
