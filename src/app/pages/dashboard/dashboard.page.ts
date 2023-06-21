@@ -10,8 +10,7 @@ export class DashboardPage implements OnInit {
 
   constructor() { }
 
-  ngOnInit()
-  {
+  ngOnInit(){
     //HomePage.prototype.ngOnInit();
   }
 
