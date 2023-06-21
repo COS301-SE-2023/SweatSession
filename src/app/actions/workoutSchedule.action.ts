@@ -20,7 +20,7 @@ export class RemoveWorkoutSchedule {
 
 export class UpdateWorkoutSchedule {
     static readonly type = '[workoutSchedule] add workout schedule';
-    constructor(public payload: IUpdateWorkoutSchedule) {}
+    constructor(public payload: IWorkoutScheduleModel) {}
 }
 
 export class LoadSchedule {
