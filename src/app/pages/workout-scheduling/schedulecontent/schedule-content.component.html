@@ -1,0 +1,34 @@
+<ion-card>
+    <ion-item-sliding>
+        <ion-item>
+          <ion-icon name="receipt-outline"></ion-icon>
+          <ion-text>
+            {{schedule.name}}
+          </ion-text>
+          <ion-button slot="end" (click)="viewSchedule()">view</ion-button>
+        </ion-item>
+    
+        <ion-item-options side="start">
+          <ion-item-option color="success">Edit</ion-item-option>
+        </ion-item-options>
+    
+        <ion-item-options side="end">
+          <ion-item-option>Favorite</ion-item-option>
+          <ion-item-option color="danger" (click)="removeSchedule()">Delete</ion-item-option>
+        </ion-item-options>
+    </ion-item-sliding>
+    <div class="content" *ngIf="isSlideShow">
+        <ion-card-content>
+            <ion-icon name="barbell-outline"></ion-icon><ion-text class="schedule-value">{{schedule.name}}</ion-text><br>
+            <ion-icon name="calendar-outline"></ion-icon><ion-text class="schedule-value">{{schedule.date}}</ion-text><br>
+            <ion-icon name="time-outline"></ion-icon><ion-text class="schedule-value">{{schedule.time}}</ion-text><br>
+            <ion-icon name="location-outline"></ion-icon><ion-text class="schedule-value">{{schedule.location}}</ion-text><br>
+            <ion-icon name="timer-outline"></ion-icon><ion-text class="schedule-value">{{schedule.duration}} minutes</ion-text><br><br>
+        </ion-card-content>
+    </div>
+    <div class="info">
+        <ion-label>{{timeLeft()}}</ion-label>
+        <ion-progress-bar value="0.5"></ion-progress-bar>
+    </div>
+</ion-card>
+    
