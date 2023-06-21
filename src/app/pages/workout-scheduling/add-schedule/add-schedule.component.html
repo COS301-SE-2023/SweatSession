@@ -1,0 +1,52 @@
+<div class="outerContainer">
+  <ion-content>
+    <ion-card>
+      <ion-card-content>
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                <ion-label position="floating">Time</ion-label>
+                <ion-input type="time" [(ngModel)]="schedule.time" [min]="getMinTime()"></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                <ion-label position="floating">Date</ion-label>
+                <ion-input type="date" [(ngModel)]="schedule.date" [min]="getMinDate()"></ion-input>
+              </ion-item>
+            </ion-col>          
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                <ion-label position="floating">Location</ion-label>
+                <ion-input type="text" [(ngModel)]="schedule.location"></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                <ion-label position="floating">duration(min)</ion-label>
+                <ion-input type="number" [(ngModel)]="schedule.duration" [min]="10"></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                <ion-label position="floating">Workout name</ion-label>
+                <ion-input type="text" [(ngModel)]="schedule.name"></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+      <ion-button expand="block" (click)="addSchedule()" [disabled]="!isValidInput()">Save</ion-button>
+    </ion-card>
+  </ion-content>
+</div>
+

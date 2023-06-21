@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import {AddScheduleComponent } from './popout-add-schedule.component';
+import {AddScheduleComponent } from './add-schedule.component';
 
 const routes: Routes = [
   {
@@ -14,4 +14,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class WorkoutSchedulingPageRoutingModule {}
+export class AddSchedulePageRoutingModule {}
