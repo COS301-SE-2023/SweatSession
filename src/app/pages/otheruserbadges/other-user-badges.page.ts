@@ -3,9 +3,9 @@ import { map, Observable, of } from 'rxjs';
 import { IBadges } from 'src/app/models/badges.model';
 import { AuthApi } from 'src/app/states/auth/auth.api';
 import { BadgesService } from 'src/app/services/badges/badges.service';
-import { SubscribeToBadges } from 'src/app/actions/badges.actions';
+import { SubscribeToOtherUserBadges } from 'src/app/actions/otheruserbadges.actions';
 import { Select, Store } from '@ngxs/store';
-import { BadgesState } from 'src/app/states/badges/badges.state';
+import { OtherUserBadgesState } from 'src/app/states/otheruserbadges/otheruserbadges.state';
 
 @Component({
   selector: 'app-otherbadges',
@@ -14,7 +14,7 @@ import { BadgesState } from 'src/app/states/badges/badges.state';
 })
 export class OtherUserBadgesPage implements OnInit {
 
-  @Select(BadgesState.currBadges)
+  @Select(OtherUserBadgesState.currBadges)
   receivedBadges$!: Observable<IBadges | null>;
 
   badges=[{
@@ -67,7 +67,7 @@ export class OtherUserBadgesPage implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.store.dispatch(new SubscribeToBadges());
+    this.store.dispatch(new SubscribeToOtherUserBadges());
     this.receivedBadges$.pipe(
       // Use the map operator to transform the observable value
       map((badges: IBadges | null) => {

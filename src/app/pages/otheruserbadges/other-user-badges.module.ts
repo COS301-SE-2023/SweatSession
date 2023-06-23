@@ -8,8 +8,8 @@ import { OtherUserBadgesPageRoutingModule } from './other-user-badges-routing.mo
 
 import { OtherUserBadgesPage } from './other-user-badges.page';
 import { BadgeComponent } from './badge/badge.component';
-import { BadgesModule as BadgesStatesModule } from 'src/app/states/badges';
-import { BadgesApi } from 'src/app/states/badges/badges.api';
+import { OtherUserBadgesModule as OtherUserBadgesStatesModule } from 'src/app/states/otheruserbadges';
+import { OtherUserBadgesApi } from 'src/app/states/otheruserbadges/otheruserbadges.api';
 import { AuthApi } from 'src/app/states/auth/auth.api';
 
 @NgModule({
@@ -17,8 +17,10 @@ import { AuthApi } from 'src/app/states/auth/auth.api';
     CommonModule,
     FormsModule,
     IonicModule,
-    OtherUserBadgesPageRoutingModule
+    OtherUserBadgesPageRoutingModule,
+    OtherUserBadgesStatesModule
   ],
-  declarations: [OtherUserBadgesPage, BadgeComponent]
+  declarations: [OtherUserBadgesPage, BadgeComponent],
+  providers: [OtherUserBadgesApi, AuthApi]
 })
 export class OtherUserBadgesPageModule {}

@@ -5,13 +5,10 @@ import { IBadges } from 'src/app/models/badges.model';
 // import { BadgesRepository } from 'src/app/repository/badges.repository'
 
 import { NavController } from '@ionic/angular';
-import { AuthApi } from '../auth/auth.api';
-import { getAuth } from '@angular/fire/auth';
-
 @Injectable()
 export class OtherUserBadgesApi {
   currUserId: string | undefined | null;
-  constructor(private Nav: NavController, private firestore: Firestore, private authApi: AuthApi) {}//, private readonly authObject: Auth, 
+  constructor(private Nav: NavController, private firestore: Firestore) {}//, private readonly authObject: Auth, 
 
   otheruserbadges$(id: string) {
     const docRef = doc(

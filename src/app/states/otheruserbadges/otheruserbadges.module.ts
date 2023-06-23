@@ -12,4 +12,4 @@ import { OtherUserBadgesState } from './otheruserbadges.state';
   imports: [CommonModule, NgxsModule.forFeature([OtherUserBadgesState])],
   providers: [OtherUserBadgesApi]
 })
-export class BadgesModule {}
+export class OtherUserBadgesModule {}
