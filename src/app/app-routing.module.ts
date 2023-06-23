@@ -59,6 +59,10 @@ const routes: Routes = [
     path: 'badges',
     loadChildren: () => import('./pages/badges/badges.module').then( m => m.BadgesPageModule)
   },
+  {
+    path: 'other-user-badges',
+    loadChildren: () => import('./pages/otheruserbadges/other-user-badges/other-user-badges.module').then( m => m.OtherUserBadgesPageModule)
+  },
 ];
 @NgModule({
   imports: [
