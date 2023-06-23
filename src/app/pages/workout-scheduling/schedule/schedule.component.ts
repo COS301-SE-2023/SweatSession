@@ -6,6 +6,7 @@ import { IWorkoutScheduleModel } from 'src/app/models';
 import { Select, Store } from '@ngxs/store';
 import { WorkoutSchedulingState } from 'src/app/states';
 import { Observable } from 'rxjs';
+import { NavController } from '@ionic/angular';
 import { LoadSchedule, RemoveWorkoutSchedule } from 'src/app/actions';
 
 @Component({
@@ -17,9 +18,13 @@ export class ScheduleComponent  implements OnInit {
   @Input() schedules: IWorkoutScheduleModel[]=[];
   @Input() categoryName:string;
   @Select(WorkoutSchedulingState.returnSchedule) schedule$!: Observable<IWorkoutScheduleModel>; 
-  constructor(private popoverController: PopoverController, private store:Store, private alertController: AlertController,) { }
+  constructor(private popoverController: PopoverController, private store:Store, private alertController: AlertController, private navCtrl: NavController) { }
 
   ngOnInit() {}
+
+  addWorkout(schedule: IWorkoutScheduleModel) {
+    this.navCtrl.navigateForward('/workout-tracking', { state: { schedule } });
+  }
 
   async viewSchedule(schedule: IWorkoutScheduleModel) {
     this.loadSchedule(schedule);
