@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { NavController, ActionSheetController } from '@ionic/angular';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { RemoveWorkoutSchedule, UpdateWorkoutSchedule } from 'src/app/actions';
@@ -15,16 +15,10 @@ export class ScheduleContentComponent  implements OnInit {
   @Input() schedule!: IWorkoutScheduleModel;
   isSlideShow = false;
   isEditSlide = false;
-  @Select(WorkoutSchedulingState.returnSchedule) schedule$!: Observable<IWorkoutScheduleModel>;
-  constructor(private store: Store, private nav:NavController) { }
+
+  constructor(private store: Store, private nav:NavController, private actionSheetCtrl: ActionSheetController) { }
 
   ngOnInit() {}
-
-  displaySchedule() {
-    this.schedule$.subscribe((response)=>{
-      this.schedule=response;
-    })
-  }
 
   async viewSchedule() {
     this.isSlideShow=!this.isSlideShow;
@@ -59,6 +53,28 @@ export class ScheduleContentComponent  implements OnInit {
       return `your have ${daysLeft} days lefts`;
     }
     return "schedule overdue";
+  }
+
+  async presentActionSheet() {
+    const actionSheet = await this.actionSheetCtrl.create({
+      header: `Are you sure you want to delete ${this.schedule.name}?`,
+      buttons: [
+        {
+          text: 'Delete',
+          role: 'destructive',
+          handler: ()=>this.removeSchedule()
+        },
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          data: {
+            action: 'cancel',
+          },
+        },
+      ],
+    });
+
+    await actionSheet.present();
   }
 
   // fraction(schedule: IWorkoutScheduleModel) {

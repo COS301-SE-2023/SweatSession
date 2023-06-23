@@ -119,7 +119,7 @@ export class WorkoutSchedulingState {
         }
     }
 
-     @Action(UpdateWorkoutSchedule)
+    @Action(UpdateWorkoutSchedule)
     async updateWorkoutSchedule(ctx: StateContext<WorkoutSchedulingStateModel>, {payload}: UpdateWorkoutSchedule) {
         const currentUserId = await this.authApi.getCurrentUserId();
         if(currentUserId!=null) {
