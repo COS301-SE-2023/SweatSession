@@ -1,26 +1,37 @@
   <ion-item>
-   <ion-label position="floating"><ion-icon name="barbell-outline"></ion-icon></ion-label>
-    <ion-input type="text" value="{{schedule.name}}" [(ngModel)]="schedule.name"></ion-input><br>
+    <ion-label position="floating">
+      <ion-icon name="barbell-outline"></ion-icon>
+      name
+    </ion-label>
+    <ion-input type="text" value="{{schedule.name}}" [(ngModel)]="schedule.name" (ionChange)="checkChange()"></ion-input>
   </ion-item>
 
   <ion-item>
-   <ion-label position="floating"><ion-icon name="calendar-outline"></ion-icon></ion-label>
-    <ion-input type ="date" value="{{schedule.date}}" [(ngModel)]="schedule.date"></ion-input><br>
+    <ion-label position="floating">
+      <ion-icon name="calendar-outline"></ion-icon> date
+    </ion-label>
+    <ion-input type ="date" value="{{schedule.date}}" [(ngModel)]="schedule.date" (ionChange)="checkChange()"></ion-input>
   </ion-item>
 
   <ion-item>
-   <ion-label position="floating"><ion-icon name="time-outline"></ion-icon></ion-label>
-    <ion-input type = "time"value="{{schedule.time}}" [(ngModel)]="schedule.time"></ion-input><br>
+    <ion-label position="floating">
+      <ion-icon name="time-outline"></ion-icon> time
+    </ion-label>
+    <ion-input type = "time"value="{{schedule.time}}" [(ngModel)]="schedule.time" (ionChange)="checkChange()"></ion-input>
   </ion-item>
 
   <ion-item>
-   <ion-label position="floating"><ion-icon name="location-outline"></ion-icon></ion-label>
-  <ion-input type = "text" value="{{schedule.location}}" [(ngModel)]="schedule.location"></ion-input><br>
+    <ion-label position="floating">
+      <ion-icon name="location-outline"></ion-icon> location
+    </ion-label>
+  <ion-input type = "text" value="{{schedule.location}}" [(ngModel)]="schedule.location" (ionChange)="checkChange()"></ion-input>
   </ion-item>
 
   <ion-item>
-   <ion-label position="floating"><ion-icon name="timer-outline"></ion-icon></ion-label>
-    <ion-input type = "number" value="{{schedule.duration}}" [(ngModel)]="schedule.duration"></ion-input><br><br>
+    <ion-label position="floating">
+      <ion-icon name="timer-outline"></ion-icon> duration
+    </ion-label>
+    <ion-input type = "number" value="{{schedule.duration}}" [(ngModel)]="schedule.duration" (ionChange)="checkChange()"></ion-input>
   </ion-item>
 
-  <ion-button expand="block" (click) = "editSchedule()">Save</ion-button>
+  <ion-button expand="block" (click) = "editSchedule()" [disabled]="!isChange">Save</ion-button>

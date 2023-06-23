@@ -10,12 +10,13 @@
         </ion-item>
     
         <ion-item-options side="start">
-          <ion-item-option color="success" (click)="toggleEditSlide()">Edit</ion-item-option>
+          <ion-item-option color="success" (click)="toggleEditSlide()" *ngIf="!isEditSlide"> Edit </ion-item-option>
+          <ion-item-option color="success" (click)="toggleEditSlide()" *ngIf="isEditSlide">cancel</ion-item-option>
         </ion-item-options>
     
         <ion-item-options side="end">
           <ion-item-option (click)="viewExercises()">Exercises</ion-item-option>
-          <ion-item-option color="danger" (click)="removeSchedule()">Delete</ion-item-option>
+          <ion-item-option color="danger" (click)="presentActionSheet()">Delete</ion-item-option>
         </ion-item-options>
     </ion-item-sliding>
     <div class="content" *ngIf="isSlideShow">
@@ -24,7 +25,7 @@
             <ion-icon name="calendar-outline"></ion-icon><ion-text class="schedule-value">{{schedule.date}}</ion-text><br>
             <ion-icon name="time-outline"></ion-icon><ion-text class="schedule-value">{{schedule.time}}</ion-text><br>
             <ion-icon name="location-outline"></ion-icon><ion-text class="schedule-value">{{schedule.location}}</ion-text><br>
-            <ion-icon name="timer-outline"></ion-icon><ion-text class="schedule-value">{{schedule.duration}} minutes</ion-text><br><br>
+            <ion-icon name="timer-outline"></ion-icon><ion-text class="schedule-value">{{schedule.duration}} minutes</ion-text><br>
         </ion-card-content>
     </div>
 

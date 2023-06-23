@@ -10,9 +10,14 @@ import { IWorkoutScheduleModel } from 'src/app/models';
 })
 export class EditScheduleComponent  implements OnInit {
   @Input() schedule:IWorkoutScheduleModel;
+  isChange = false;
   constructor(private store:Store) { }
 
   ngOnInit() {}
+
+  checkChange() {
+    this.isChange = true;
+  }
 
   editSchedule() {
     this.store.dispatch(new UpdateWorkoutSchedule(this.schedule))
