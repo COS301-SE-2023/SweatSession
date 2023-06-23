@@ -8,6 +8,9 @@ import { OtherUserBadgesPageRoutingModule } from './other-user-badges-routing.mo
 
 import { OtherUserBadgesPage } from './other-user-badges.page';
 import { BadgeComponent } from './badge/badge.component';
+import { BadgesModule as BadgesStatesModule } from 'src/app/states/badges';
+import { BadgesApi } from 'src/app/states/badges/badges.api';
+import { AuthApi } from 'src/app/states/auth/auth.api';
 
 @NgModule({
   imports: [
