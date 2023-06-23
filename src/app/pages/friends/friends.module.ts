@@ -10,6 +10,7 @@ import { FriendsPage } from './friends.page';
 import { FriendComponent } from './friend/friend.component';
 import { FriendsStateModule } from 'src/app/states';
 import { BackButtonDirectiveModule } from 'src/app/directives';
+import { SearchComponentModule } from '../search/search/search.module';
 
 @NgModule({
   imports: [
@@ -18,7 +19,8 @@ import { BackButtonDirectiveModule } from 'src/app/directives';
     IonicModule,
     FriendsPageRoutingModule,
     FriendsStateModule,
-    BackButtonDirectiveModule
+    BackButtonDirectiveModule,
+    SearchComponentModule 
   ],
   declarations: [FriendsPage,FriendComponent]
 })

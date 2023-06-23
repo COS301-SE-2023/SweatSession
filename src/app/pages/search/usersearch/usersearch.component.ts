@@ -15,12 +15,13 @@ export class UsersearchComponent  implements OnInit {
 
   searchTerms!: ISearchTerms;
   users: IProfileModel[] = [];
+  showNoResults = false;
   @Select(OtheruserState.returnProfiles) users$!: Observable<IProfileModel[]>;
   constructor(private store:Store) {
     this.initialiseSearchTerms();
   }
 
-  ngOnInit() {}
+  ngOnInit() {this.loadUsers();}
   
   onSearchInput(event:any) {
     const searchText = event.target.value;
@@ -30,8 +31,12 @@ export class UsersearchComponent  implements OnInit {
       this.searchTerms.filteredSuggestions = this.users.filter((suggestion) =>
         suggestion.displayName!.toLowerCase().includes(searchText.toLowerCase())
       );
+      if(this.searchTerms.filteredSuggestions!.length==0) {
+        this.showNoResults = true;
+      }
     }else {
       this.searchTerms.showSuggestions = false;
+      this.showNoResults = false;
     }
   }
 

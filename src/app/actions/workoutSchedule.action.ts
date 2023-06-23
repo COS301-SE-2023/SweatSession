@@ -19,7 +19,7 @@ export class RemoveWorkoutSchedule {
 }
 
 export class UpdateWorkoutSchedule {
-    static readonly type = '[workoutSchedule] add workout schedule';
+    static readonly type = '[workoutSchedule] update workout schedule';
     constructor(public payload: IWorkoutScheduleModel) {}
 }
 
