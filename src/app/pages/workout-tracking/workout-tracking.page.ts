@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
+import { AbstractControl } from '@angular/forms';
 
 import { ExerciseService } from '../../services/exercise/exercise.service';
 import { Exercise } from '../../models/exercise.model';
@@ -43,18 +44,20 @@ export class WorkoutTrackingPage implements OnInit {
     this.exercises.removeAt(index);
   }
 
-  saveExercises() {
-    this.exercises.controls.forEach((exerciseControl, index) => {
+  saveExercises(scheduleId: string) {
+    this.exercises.controls.forEach((exerciseControl: AbstractControl, index: number) => {
       const exercise: Exercise = {
+        scheduleId: scheduleId,
         name: exerciseControl.get('name')?.value ?? "",
         sets: exerciseControl.get('sets')?.value ?? 0,
         reps: exerciseControl.get('reps')?.value ?? 0,
         weight: exerciseControl.get('weight')?.value ?? 0,
       };
-
+  
       this.exerciseService.addExercise(exercise).then(() => {
         console.log(`Exercise ${index + 1} added successfully.`);
       });
     });
   }
+  
 }
