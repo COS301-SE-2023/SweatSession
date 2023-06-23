@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { OtherUserBadgesPageRoutingModule } from './other-user-badges-routing.module';
 
 import { OtherUserBadgesPage } from './other-user-badges.page';
+import { BadgeComponent } from './badge/badge.component';
 
 @NgModule({
   imports: [
@@ -15,6 +16,6 @@ import { OtherUserBadgesPage } from './other-user-badges.page';
     IonicModule,
     OtherUserBadgesPageRoutingModule
   ],
-  declarations: [OtherUserBadgesPage]
+  declarations: [OtherUserBadgesPage, BadgeComponent]
 })
 export class OtherUserBadgesPageModule {}

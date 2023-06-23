@@ -51,7 +51,7 @@ const routes: Routes = [
       },
       {
         path: 'otheruserbadges',
-        loadChildren: () => import('../otheruserbadges/other-user-badges/other-user-badges.module').then( m => m.OtherUserBadgesPageModule)
+        loadChildren: () => import('../otheruserbadges/other-user-badges.module').then( m => m.OtherUserBadgesPageModule)
       }
     ],
   },
