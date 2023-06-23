@@ -7,3 +7,14 @@ ion-avatar {
 ion-item:hover {
     background-color: whitesmoke;
 }
+
+ion-item{
+    // --highlight-height: 0;
+    // --inner-border-width: 0;
+    --background: #457B9D;
+    margin: 2px;
+}
+
+ion-card, ion-item {
+    opacity: 0.9;
+}

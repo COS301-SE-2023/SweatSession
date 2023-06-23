@@ -10,9 +10,10 @@ import { OtheruserPage } from './otheruser.page';
 import { OtheruserStateModule } from 'src/app/states';
 import { FriendsComponent } from './friends/friends.component';
 import { SchedulesComponent } from './schedules/schedules.component';
-import { ScheduleContentModule } from "../workout-scheduling/schedulecontent/schedule-content.module";
+//import { ScheduleContentModule } from "../workout-scheduling/schedulecontent/schedule-content.module";
 import { WorkoutSchedulingStateModule } from 'src/app/states';
 import { BackButtonDirectiveModule } from 'src/app/directives';
+import { WorkoutSchedulingPageModule } from '../workout-scheduling/workout-scheduling.module';
 
 @NgModule({
   imports: [
@@ -21,7 +22,8 @@ import { BackButtonDirectiveModule } from 'src/app/directives';
     IonicModule,
     OtheruserPageRoutingModule,
     OtheruserStateModule,
-    ScheduleContentModule,
+    ///ScheduleContentModule,
+    WorkoutSchedulingPageModule,
     WorkoutSchedulingStateModule,
     BackButtonDirectiveModule
   ],
