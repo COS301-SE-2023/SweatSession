@@ -40,8 +40,6 @@
     </ion-card>
   </p>
 
-
-
     
   <ion-row>
     <ion-col size="6" routerLink="/friends">
@@ -57,39 +55,17 @@
 
     <div class="flex-center"> 
       <ion-card class="card">
+        <ion-card-content>
+          <ion-button class="button" expand="block" routerLink="/fitnessgoals"><ion-icon name="american-football-outline" slot = "start"></ion-icon>Goals<ion-icon name="chevron-forward-outline" slot="end"></ion-icon></ion-button>
+        </ion-card-content>
+
+        <ion-card-content>
+          <ion-button class="button" expand="block" (click)="Schedule()"><ion-icon name="clipboard-outline" slot="start"></ion-icon>&nbsp;Schedule&nbsp;<ion-icon name="chevron-forward-outline" slot="end"></ion-icon></ion-button>
+        </ion-card-content>
+
       <ion-card-content>
         <ion-button class="button" expand="block" (click)="Leaderboard()"><ion-icon name="bar-chart-outline" slot="start"></ion-icon>&nbsp;LeaderBoard &nbsp;<ion-icon name="chevron-forward-outline" slot="end"></ion-icon></ion-button>
       </ion-card-content>
-      <ion-card-content>
-        <ion-button class="button" expand="block" routerLink="/fitnessgoals"><ion-icon name="american-football-outline" slot = "start"></ion-icon>Goals<ion-icon name="chevron-forward-outline" slot="end"></ion-icon></ion-button>
-      </ion-card-content>
-      <ion-card-content>
-        <ion-button class="button" expand="block" (click)="Schedule()"><ion-icon name="clipboard-outline" slot="start"></ion-icon>&nbsp;Schedule&nbsp;<ion-icon name="chevron-forward-outline" slot="end"></ion-icon></ion-button>
-      </ion-card-content>
 
-<!--        <ion-card-content>-->
-<!--          <ion-button class="button" expand="block" (click)="Groups()"><ion-icon name="megaphone-outline" slot="start"></ion-icon>&nbsp;Groups&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<ion-icon name="chevron-forward-outline" slot="end"></ion-icon></ion-button>-->
-<!--        </ion-card-content>-->
-      <!-- <ion-card-content>
-        <ion-button class="button"expand="block" routerLink="/friends"><ion-icon name="people-outline" slot="start"></ion-icon>&nbsp;Friends&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<ion-icon name="chevron-forward-outline" slot="end"></ion-icon></ion-button>
-      </ion-card-content>
-      <ion-card-content>
-        <ion-button class="button"expand="block" (click)="Groups()"><ion-icon name="megaphone-outline" slot="start"></ion-icon>&nbsp;Groups&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<ion-icon name="chevron-forward-outline" slot="end"></ion-icon></ion-button>
-      </ion-card-content>
-      <ion-card-content>
-        <ion-button class="button"expand="block" routerLink="/badges"><ion-icon name="medal" slot="start"></ion-icon>&nbsp;Badges&nbsp;<ion-icon name="chevron-forward-outline" slot="end"></ion-icon></ion-button>
-      </ion-card-content>
-      <ion-card-content>
-        <ion-button class="button"expand="block" routerLink="/points"><ion-icon name="star-outline" slot="start"></ion-icon>&nbsp;Points&nbsp;<ion-icon name="chevron-forward-outline" slot="end"></ion-icon></ion-button>
-      </ion-card-content>
-      <ion-card-content>
-        <ion-button class="button"expand="block" routerLink="/setprofile"><ion-icon name="create-outline" slot="start"></ion-icon>&nbsp;Edit&nbsp;<ion-icon name="chevron-forward-outline" slot="end"></ion-icon></ion-button>
-      </ion-card-content>
-      
-    </ion-card>
-  </div>
-    
-    
-  
-  
-</ion-content>
+      </ion-card>
+    </div>

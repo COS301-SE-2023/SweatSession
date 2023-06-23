@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FitnessgoalState} from "../../states";
 
 @Component({
   selector: 'app-fitnessgoals',

@@ -3,11 +3,13 @@ import { CommonModule } from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
-
+import {NgxsModule} from "@ngxs/store";
+import {FitnessgoalState} from "../../states";
 import { FitnessgoalsPageRoutingModule } from './fitnessgoals-routing.module';
 
 import { FitnessgoalsPage } from './fitnessgoals.page';
 import {GoalcardComponent} from "./goalcard/goalcard.component";
+import {BackButtonDirectiveModule} from "../../directives";
 
 @NgModule({
     imports: [
@@ -15,7 +17,10 @@ import {GoalcardComponent} from "./goalcard/goalcard.component";
         FormsModule,
         IonicModule,
         FitnessgoalsPageRoutingModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        BackButtonDirectiveModule,
+        // [FitnessgoalState],
+        NgxsModule.forFeature([FitnessgoalState])
     ],
   declarations: [FitnessgoalsPage,GoalcardComponent ]
 })

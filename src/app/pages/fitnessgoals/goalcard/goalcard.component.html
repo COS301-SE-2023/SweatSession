@@ -1,5 +1,5 @@
 <ion-list>
-    <ion-item-sliding *ngFor="let goal of Goals">
+    <ion-item-sliding *ngFor="let goal of goals.goals  ">
         <ion-card>
         <ion-item>
             <ion-grid>
@@ -13,7 +13,7 @@
                 </ion-row>
                 <ion-row>
                     <ion-col>
-                        <ion-badge color="primary">600</ion-badge>
+                        <ion-badge color="primary">{{goal.days_left}}</ion-badge>
                     </ion-col>
                     <ion-col>
                         <ion-label>Days Left</ion-label>
@@ -22,7 +22,7 @@
                 <ion-row>
                     <ion-col>
                             <ion-label>Progress</ion-label>
-                            <ion-progress-bar value="0.5"></ion-progress-bar>
+                            <ion-progress-bar value = "{{calculate_Progress()}}" ></ion-progress-bar>
                     </ion-col>
                 </ion-row>
                 <ion-row>
