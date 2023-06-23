@@ -20,7 +20,7 @@ import { SearchComponentModule } from '../search/search/search.module';
     FriendsPageRoutingModule,
     FriendsStateModule,
     BackButtonDirectiveModule,
-    SearchComponentModule 
+    SearchComponentModule,
   ],
   declarations: [FriendsPage,FriendComponent]
 })
