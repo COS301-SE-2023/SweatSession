@@ -8,11 +8,12 @@ import { OtherUserBadgesApi } from './otheruserbadges.api';
 import produce from 'immer';
 import { Observable, tap } from 'rxjs';
 import { IBadges } from 'src/app/models/badges.model';
-import { SetOtherUserBadges, SubscribeToOtherUserBadges } from 'src/app/actions/otheruserbadges.actions';
+import { SetOtherUserBadges, SubscribeToOtherUserBadges, SetOtherUserBadgesName } from 'src/app/actions/otheruserbadges.actions';
 
 export interface OtherUserBadgesStateModel {
   //currUser: User | null;
   currBadges: IBadges | null | undefined;
+  name: String | null | undefined;
 }
 
 
@@ -20,7 +21,8 @@ export interface OtherUserBadgesStateModel {
 @State<OtherUserBadgesStateModel>({
   name: 'otheruserbadges',
   defaults: {
-    currBadges: null
+    currBadges: null,
+    name: null
   }
 })
 @Injectable()
@@ -49,10 +51,19 @@ export class OtherUserBadgesState {
   }
 
   @Action(SetOtherUserBadges)
-  async setSubscribeToOtherUserBadges(context: StateContext<OtherUserBadgesStateModel>, { otherUserBadges }: SetOtherUserBadges) {
+  async setOtherUserBadges(context: StateContext<OtherUserBadgesStateModel>, { otherUserBadges }: SetOtherUserBadges) {
     return context.setState(
       produce((repr) => {
         repr.currBadges = otherUserBadges;
+      })
+    );
+  }
+
+  @Action(SetOtherUserBadgesName)
+  async setOtherUserBadgesName(context: StateContext<OtherUserBadgesStateModel>, { otherUserBadgesName }: SetOtherUserBadgesName) {
+    return context.setState(
+      produce((repr) => {
+        repr.name = otherUserBadgesName;
       })
     );
   }

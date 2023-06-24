@@ -16,7 +16,7 @@ export class OtherUserBadgesPage implements OnInit {
 
   @Select(OtherUserBadgesState.currBadges)
   receivedBadges$!: Observable<IBadges | null>;
-
+  usersName = "fgh";
   badges=[{
       header:"Starter's Success",
       receivedDescription:"Congratulations! You have completed your first workout plan",
