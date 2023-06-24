@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
-import { StageOtheruserInfo } from 'src/app/actions';
-import { GetUsersAction } from 'src/app/actions/profile.action';
+import { StageOtheruserInfo, SubscribeToAuthState, GetUsersAction} from 'src/app/actions';
 import { IProfileModel, ISearchTerms } from 'src/app/models';
-import { OtheruserState } from 'src/app/states';
+import { OtheruserState, AuthState } from 'src/app/states';
 
 @Component({
   selector: 'usersearch',
@@ -15,12 +14,15 @@ export class UsersearchComponent  implements OnInit {
 
   searchTerms!: ISearchTerms;
   users: IProfileModel[] = [];
+  showNoResults = false;
+  userId:string;
   @Select(OtheruserState.returnProfiles) users$!: Observable<IProfileModel[]>;
+  @Select(AuthState.getCurrUserId) userId$!: Observable<string>;
   constructor(private store:Store) {
     this.initialiseSearchTerms();
   }
 
-  ngOnInit() {}
+  ngOnInit() {this.loadUsers();}
   
   onSearchInput(event:any) {
     const searchText = event.target.value;
@@ -29,9 +31,14 @@ export class UsersearchComponent  implements OnInit {
       this.searchTerms.showSuggestions = true;
       this.searchTerms.filteredSuggestions = this.users.filter((suggestion) =>
         suggestion.displayName!.toLowerCase().includes(searchText.toLowerCase())
+        && suggestion.userId!==this.userId
       );
+      if(this.searchTerms.filteredSuggestions!.length==0) {
+        this.showNoResults = true;
+      }
     }else {
       this.searchTerms.showSuggestions = false;
+      this.showNoResults = false;
     }
   }
 
@@ -55,6 +62,11 @@ export class UsersearchComponent  implements OnInit {
 
   loadUsers() {
     this.store.dispatch(new GetUsersAction());
+    this.store.dispatch(new SubscribeToAuthState())
+
+    this.userId$.subscribe((response)=>{
+      this.userId = response;
+    }) 
     this.users$.subscribe((response)=>{
       this.users = response;
     })

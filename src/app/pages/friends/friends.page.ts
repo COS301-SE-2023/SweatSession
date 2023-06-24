@@ -3,8 +3,8 @@ import { IFriendsModel, ISearchTerms } from 'src/app/models';
 import { Component, OnInit } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
-import { AddFriendAction, GetFriendsAction } from 'src/app/actions';
-import { FriendsState, FriendsStateModel } from 'src/app/states';
+import { GetFriendsAction} from 'src/app/actions';
+import { FriendsState} from 'src/app/states';
 import { LoadingController } from '@ionic/angular';
 
 @Component({

@@ -7,6 +7,7 @@ import {
   redirectLoggedInTo,
   redirectUnauthorizedTo
 } from '@angular/fire/auth-guard';
+import { AddScheduleComponent } from './pages/workout-scheduling/add-schedule/add-schedule.component';
 
 const redirectLoggedOut = () => redirectUnauthorizedTo(['login']);
 const redirectLoggedIn = () => redirectLoggedInTo(['home']);
@@ -128,12 +129,28 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     data: { authGuardPipe: redirectLoggedOut },
     loadChildren: () => import('./pages/points/points.module').then( m => m.PointsPageModule)
+<<<<<<< HEAD
   },{
+=======
+  },
+  {
+    path: "addSchedule",
+    component: AddScheduleComponent,
+    pathMatch: 'full',
+    canActivate: [AuthGuard],
+    data: { authGuardPipe: redirectLoggedOut },
+  },
+  {
+>>>>>>> scheduling/Friends-services
     path: 'otheruserbadges',
     canActivate: [AuthGuard],
     data: { authGuardPipe: redirectLoggedOut },
     loadChildren: () => import('./pages/otheruserbadges/other-user-badges.module').then( m => m.OtherUserBadgesPageModule)
+<<<<<<< HEAD
   }
+=======
+  },
+>>>>>>> scheduling/Friends-services
 ];
 @NgModule({
   imports: [

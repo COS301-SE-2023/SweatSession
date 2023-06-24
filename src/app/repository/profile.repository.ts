@@ -32,7 +32,7 @@ export class ProfileRepository {
       const data = snapshot.data() as IProfileModel | undefined;
       const id = snapshot.id;
       
-      console.log(id);
+      // console.log(id);
       
       if (data) {
         return { id, ...data };

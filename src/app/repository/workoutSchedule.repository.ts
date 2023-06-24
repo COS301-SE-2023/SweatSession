@@ -45,9 +45,6 @@ export class WorkoutscheduleRepository {
           ...request.schedule,
         };
       
-        // console.log('Schedule added successfully with ID:', docRef.id);
-        // alert('Schedule added successfully with ID:' + docRef.id);
-      
         const response: IAddedWorkoutSchedule = {
           userId: request.userId,
           schedule: schedule,
@@ -56,8 +53,7 @@ export class WorkoutscheduleRepository {
       
         return response;
     } catch (error) {
-        console.log('Error adding schedule:', error);
-        alert(error);
+        alert('Error adding schedule:'+error);
       
         const response: IAddedWorkoutSchedule = {
           userId: request.userId,
@@ -77,8 +73,8 @@ export class WorkoutscheduleRepository {
           .doc(request.schedule.id)
           .delete()
           
-        console.log('Schedule deleted successfully');
-        alert('Schedule removed successfully');
+        // console.log('Schedule deleted successfully');
+        // alert('Schedule removed successfully');
       
         const response: IRemovedWorkoutSchedule = {
           userId: request.userId!,
@@ -107,13 +103,25 @@ export class WorkoutscheduleRepository {
           .doc(request.userId)
           .collection("userSchedules")
           .doc(request.schedule.id)
-          .update(request.schedule)
           
-        console.log('Schedule updated successfully');
+          await docRef.update({
+            name: request.schedule.name,
+            location: request.schedule.location,
+            duration: request.schedule.duration,
+            time: request.schedule.time,
+            date: request.schedule.date
+          })
+          
+        // console.log('Schedule updated successfully');
+        // alert(request.schedule.id);
+
+        const schedule = {
+          ...request.schedule,
+        };
       
         const response: IUpdatedWorkoutSchedule = {
           userId: request.userId,
-          schedule: request.schedule,
+          schedule: schedule,
           validate: true,
         };
       

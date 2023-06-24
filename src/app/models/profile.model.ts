@@ -1,7 +1,7 @@
 import { Timestamp } from "@angular/fire/firestore";
 
 export interface IProfileModel {
-    userId: string;
+    userId?: string;
     name?: string;
     displayName?: string;
     email?: string;
