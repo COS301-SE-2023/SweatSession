@@ -11,7 +11,7 @@ import {from} from "rxjs";
 })
 export class goalsRepository {
 
-    constructor(private firestore: AngularFirestore,getCurrentUserId:getCurrentUserId) { }
+    constructor(private firestore: AngularFirestore) { }
 
     async creategoalsDocument(currUserId: string) {
 
@@ -33,14 +33,33 @@ export class goalsRepository {
         //preturn await admin.firestore().collection('profiles').doc(newProfile.userId).create(newProfile);
     }
 
-    async addGoal(request: IAddGOAL) {
-            return (
-                await this.firestore
-                    .collection('fitnessgoals')
-                    .doc(request.userId)
-                    .collection('goals')
-                    .add(request.goal)
-            )
+    // async addGoal(request: IAddGOAL) {
+    //     return (
+    //         await this.firestore
+    //             .collection('fitnessgoals')
+    //             .doc(request.userId)
+    //             .collection('goals')
+    //             .add(request.goal)
+    //     )
+    // }
+     addGoal(request: IAddGOAL) {
+        alert("addGoal" + request.userId + "in repository ================");
+        return from (
+             this.firestore
+                .collection('fitnessgoals')
+                .doc(request.userId)
+                .collection('goals')
+                .add(request.goal)
+        )
+    }
+
+    getGoals(userId: string) {
+        return this.firestore
+            .collection('fitnessgoals')
+            .doc(userId)
+            .collection('goals')
+            .valueChanges({ idField: 'id' });
+    }
 
         //     const goal: IGOAL = {
         //         id: request.userId,
@@ -64,6 +83,6 @@ export class goalsRepository {
         //
         //     return response;
         // }
-    }
+    // }
 
 }

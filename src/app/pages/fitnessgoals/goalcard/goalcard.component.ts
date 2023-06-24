@@ -4,10 +4,9 @@ import { IGOALS } from 'src/app/models/fitnessgoals.model';
 import {FormControl, FormGroup} from "@angular/forms";
 import {Selector, Store} from "@ngxs/store";
 import {AddGoalAction} from "../../../actions/fitnessgoals/fitnessgoals.action";
-import {FitnessgoalState} from "../../../states/fitnessgoal/fitnessgoal.state";
-import {toNumbers} from "@angular/compiler-cli/src/version_helpers";
-import {Observable} from "rxjs";
-import { goalsRepository } from 'src/app/repository';
+import {FitnessgoalService} from "../../../services/fitnessgoal/goal.service";
+import {getCurrentUserId} from "../../../actions";
+import {AuthApi} from "../../../states/auth/auth.api";
 
 @Component({
   selector: 'app-goalcard',
@@ -37,34 +36,17 @@ export class GoalcardComponent  implements OnInit {
     });
 
     goals: IGOALS = {
-        goals: [
-            {
-                            id: "1",
-                            name: "Lose Weight",
-                            description: "Lose 10 pounds in 2 months",
-                            coverPicture: "https://loremflickr.com/320/240",
-                            start: "2020-01-01",
-                            end: "2020-03-01",
-                            progress: 0.5,
-                            days_left: 60,
-            },
-            {
-                            id: "2",
-                            name: "Gain Weight",
-                            description: "Gain 10 pounds in 2 months",
-                            coverPicture: "https://loremflickr.com/320/240/gym",
-                            start: "2020-01-01",
-                            end: "2020-03-01",
-                            progress: 0.5,
-                            days_left: 60,
-            }
-    ]
+        goals: []
     }
 
-  constructor(private store:Store) { }
+  constructor(private store:Store,
+              private fitnessgaolservive:FitnessgoalService,
+              private authApi: AuthApi,
+              )
+              { }
 
   ngOnInit() {
-
+    this.retrievegoals();
   }
 
   viewSchedule() {
@@ -117,22 +99,43 @@ export class GoalcardComponent  implements OnInit {
     }
     onSubmit() {
         // set fields
+       this.authApi.getCurrentUserId().then((id) => {
 
-        const new_goal:IGOAL = {
-            id : "0",
-            name : this.goalForm.value.name ?? "",
-            description : this.goalForm.value.description ?? "",
-            coverPicture : this.goalForm.value.coverPicture ?? "",
-            start : this.goalForm.value.start ?? "",
-            end : this.goalForm.value.end ?? "",
-            progress : this.goalForm.value.progress ?? 0, //TODO: will need to fix these
-            days_left : this.goalForm.value.days_left ?? 0,
-        }
+           const new_goal:IGOAL = {
+               id : id,
+               name : this.goalForm.value.name ?? "",
+               description : this.goalForm.value.description ?? "",
+               coverPicture : this.goalForm.value.coverPicture ?? "",
+               start : this.goalForm.value.start ?? "",
+               end : this.goalForm.value.end ?? "",
+               progress : this.goalForm.value.progress ?? 0, //TODO: will need to fix these
+               days_left : this.goalForm.value.days_left ?? 0,
+           }
 
-        this.store.dispatch(new AddGoalAction(new_goal));
-        console.log(this.goalForm.value);
+           const iaddgoal : IAddGOAL = {
+               userId : id,
+               goal : new_goal
+            }
+           this.fitnessgaolservive.addGoal(iaddgoal);
+           // console.log(this.goalForm.value);
+
+       });
+
+
+
+
     }
-    protected readonly AudioBuffer = AudioBuffer;
+
+    private retrievegoals() {
+        this.authApi.getCurrentUserId().then((id) => {
+            if (typeof id === "string") {
+                this.fitnessgaolservive.getGoals(id).subscribe((goals) => {
+                    this.goals.goals = goals;
+                });
+            }
+        }
+        );
+    }
 }
 
 
