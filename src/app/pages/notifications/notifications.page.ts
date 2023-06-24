@@ -83,6 +83,18 @@ export class NotificationsPage implements OnInit {
     this.noticeList2 = [] ;
   }
 
+  clearNotification(id :string){
+    this.noticeService.deleteNotices(id);
+    console.log("seen part" + id);
+    for(let i = 0 ; i<this.noticeList2.length ; i++){
+      if (id == this.noticeList2[i].id){
+        this.noticeList2.splice(i , 1) ;
+      }
+    }
+
+
+  }
+
   sendNotifications(num :number){
     this.noticeamount = num ;
     this.noticehomeService.send_data.next(this.noticeamount);
