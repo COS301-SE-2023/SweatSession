@@ -37,4 +37,17 @@ export class BadgesApi {
     });
     return docData(docRef, { idField: 'id' });
   }
+
+  otheruserbadges$(id: string) {
+    const docRef = doc(
+      this.firestore,
+      `badges/${id}`
+    ).withConverter<IBadges>({       //convert our firestore data into the IBadges type
+      fromFirestore: (snapshot) => {
+        return (snapshot.data() as IBadges);
+      },
+      toFirestore: (it: IBadges) => it,
+    });
+    return docData(docRef, { idField: 'id' });
+  }
 }

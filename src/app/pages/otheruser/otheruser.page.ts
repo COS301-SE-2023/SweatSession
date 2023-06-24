@@ -35,9 +35,21 @@ export class OtheruserPage implements OnInit {
 
   constructor(private store: Store , private noticeService: NoticeService , private nav: NavController, pointsApi: PointsApi ) {
     this.displayUserInfo();
-    alert(this.user.userId);
-    this.points$ = pointsApi.otherUserPoints$(this.user.userId);
-    console.log(this.points$);
+    const id = this.user?.userId;
+    if (id !== undefined) {
+      sessionStorage.setItem('otherUserId', this.user?.userId);
+      this.points$ = pointsApi.otherUserPoints$(id);
+      // this.badges$ = pointsApi.otherUserPoints$(id);
+    } else {
+      const otherUserId = sessionStorage.getItem('otherUserId');
+      if (otherUserId !== null) {
+        this.points$ = pointsApi.otherUserPoints$(otherUserId);
+        // this.badges$ = pointsApi.otherUserPoints$(otherUserId);
+      } else {
+        // Handle the case when `otherUserId` is `null`
+        // For example, set `this.points$` to a default value or show an error message
+      }
+    }
   }
 
   ngOnInit() {
