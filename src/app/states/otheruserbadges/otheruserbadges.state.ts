@@ -8,12 +8,13 @@ import { OtherUserBadgesApi } from './otheruserbadges.api';
 import produce from 'immer';
 import { Observable, tap } from 'rxjs';
 import { IBadges } from 'src/app/models/badges.model';
-import { SetOtherUserBadges, SubscribeToOtherUserBadges, SetOtherUserBadgesName } from 'src/app/actions/otheruserbadges.actions';
+import { SetOtherUserBadges, SubscribeToOtherUserBadges, SetOtherUserBadgesName, SetOtherUserBadgesId } from 'src/app/actions/otheruserbadges.actions';
 
 export interface OtherUserBadgesStateModel {
   //currUser: User | null;
   currBadges: IBadges | null | undefined;
   usersName: String | null | undefined;
+  usersId: String | null | undefined;
 }
 
 
@@ -22,7 +23,8 @@ export interface OtherUserBadgesStateModel {
   name: 'otheruserbadges',
   defaults: {
     currBadges: null,
-    usersName: null
+    usersName: null,
+    usersId: null
   }
 })
 @Injectable()
@@ -47,15 +49,27 @@ export class OtherUserBadgesState {
     return state.usersName;
   }
 
+  @Selector()
+  static usersId(state: OtherUserBadgesStateModel) {
+    if (state.usersId==undefined){
+      return sessionStorage.getItem('otherUserBadgesId');
+    }
+    return state.usersId;
+  }
+
   @Action(SubscribeToOtherUserBadges)
   public subscribeToOtherUserBadgesState(context: StateContext<OtherUserBadgesStateModel>) {
-    return this.otherUserBadgesApi.otheruserbadges$("FAsfcbCr1PZxDrvFrg2LSFFYu942").pipe(
-      tap((currBadges: IBadges) => {
-        console.log("IN SubscribeToOtherUserBadges");
-        console.log(currBadges);
-        context.dispatch(new SetOtherUserBadges(currBadges));
-      })
-    );
+    const userId = sessionStorage.getItem('otherUserBadgesId');
+    if (userId!=undefined){
+      return this.otherUserBadgesApi.otheruserbadges$(userId).pipe(
+        tap((currBadges: IBadges) => {
+          console.log("IN SubscribeToOtherUserBadges");
+          console.log(currBadges);
+          context.dispatch(new SetOtherUserBadges(currBadges));
+        })
+      );
+    }
+    return null;
   }
 
   @Action(SetOtherUserBadges)
@@ -75,7 +89,21 @@ export class OtherUserBadgesState {
         if (otherUserBadgesName!=undefined){
           sessionStorage.setItem('otherUserBadgesName', otherUserBadgesName.toString());
         }else{
-          repr.usersName = otherUserBadgesName = sessionStorage.getItem('otherUserBadgesName');
+          repr.usersName = sessionStorage.getItem('otherUserBadgesName');
+        }
+      })
+    );
+  }
+
+  @Action(SetOtherUserBadgesId)
+  async setOtherUserBadgesId(context: StateContext<OtherUserBadgesStateModel>, { otherUserBadgesId }: SetOtherUserBadgesId) {
+    return context.setState(
+      produce((repr) => {
+        repr.usersId = otherUserBadgesId;
+        if (otherUserBadgesId!=undefined){
+          sessionStorage.setItem('otherUserBadgesId', otherUserBadgesId.toString());
+        }else{
+          repr.usersName = sessionStorage.getItem('otherUserBadgesId');
         }
       })
     );

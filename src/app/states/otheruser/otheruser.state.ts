@@ -114,6 +114,7 @@ export class OtheruserState {
     async removeUser() {
         sessionStorage.removeItem("otheruser");
         sessionStorage.removeItem("otherUserBadgesName");
+        sessionStorage.removeItem("otherUserBadgesId");
         this.navigation.back();
     }
 

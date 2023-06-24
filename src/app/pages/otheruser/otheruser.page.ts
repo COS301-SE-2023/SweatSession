@@ -7,7 +7,7 @@ import { IFriendsModel, IProfileModel, IWorkoutScheduleModel } from 'src/app/mod
 import { OtherUserStateModel, OtheruserState } from 'src/app/states';
 import {NoticeService } from 'src/app/services/notifications/notice.service';
 import { getAuth } from 'firebase/auth';
-import { SetOtherUserBadgesName } from 'src/app/actions/otheruserbadges.actions';
+import { SetOtherUserBadgesId, SetOtherUserBadgesName } from 'src/app/actions/otheruserbadges.actions';
 
 @Component({
   selector: 'app-otheruser',
@@ -64,6 +64,7 @@ export class OtheruserPage implements OnInit {
 
   viewOtherUserBadges() {
     this.store.dispatch(new SetOtherUserBadgesName(this.user!.displayName));
+    this.store.dispatch(new SetOtherUserBadgesId(this.user!.userId));
     this.nav.navigateRoot("/otheruserbadges");
   }
 
