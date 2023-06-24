@@ -9,12 +9,10 @@ ion-item:hover {
 }
 
 ion-item{
-    // --highlight-height: 0;
-    // --inner-border-width: 0;
-    --background: #457B9D;
     margin: 2px;
 }
 
 ion-card, ion-item {
+    --background: #457B9D;
     opacity: 0.9;
 }
