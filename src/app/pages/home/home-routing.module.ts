@@ -48,7 +48,8 @@ const routes: Routes = [
       {
         path: 'points',
         loadChildren: () => import('../points/points.module').then( m => m.PointsPageModule)
-      },{
+      },
+      {
         path: 'otheruserbadges',
         loadChildren: () => import('../otheruserbadges/other-user-badges.module').then( m => m.OtherUserBadgesPageModule)
       }

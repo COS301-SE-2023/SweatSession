@@ -61,6 +61,10 @@ export class OtheruserPage implements OnInit {
     this.nav.navigateRoot("/otheruserFriends");
   }
 
+  viewOtherUserBadges() {
+    this.nav.navigateRoot("/otheruserbadges");
+  }
+
   displayUserInfo() {
     this.store.dispatch(new LoadOtherUserProfile());
     this.user$.subscribe((response)=>{
