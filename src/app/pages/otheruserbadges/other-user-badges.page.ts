@@ -16,7 +16,8 @@ export class OtherUserBadgesPage implements OnInit {
 
   @Select(OtherUserBadgesState.currBadges)
   receivedBadges$!: Observable<IBadges | null>;
-  usersName = "fgh";
+  @Select(OtherUserBadgesState.usersName)
+  name$!: Observable<String | null>;
   badges=[{
       header:"Starter's Success",
       receivedDescription:"Congratulations! You have completed your first workout plan",
@@ -85,5 +86,8 @@ export class OtherUserBadgesPage implements OnInit {
         // Perform any other operations with each badge number
       });
     });
+    // this.name$.pipe(
+
+    // )
   }
 }

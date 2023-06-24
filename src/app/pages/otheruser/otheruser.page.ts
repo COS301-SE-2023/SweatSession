@@ -63,7 +63,7 @@ export class OtheruserPage implements OnInit {
   }
 
   viewOtherUserBadges() {
-    this.store.dispatch(new SetOtherUserBadgesName(this.user!.name));
+    this.store.dispatch(new SetOtherUserBadgesName(this.user!.displayName));
     this.nav.navigateRoot("/otheruserbadges");
   }
 

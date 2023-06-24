@@ -13,7 +13,7 @@ import { SetOtherUserBadges, SubscribeToOtherUserBadges, SetOtherUserBadgesName 
 export interface OtherUserBadgesStateModel {
   //currUser: User | null;
   currBadges: IBadges | null | undefined;
-  name: String | null | undefined;
+  usersName: String | null | undefined;
 }
 
 
@@ -22,7 +22,7 @@ export interface OtherUserBadgesStateModel {
   name: 'otheruserbadges',
   defaults: {
     currBadges: null,
-    name: null
+    usersName: null
   }
 })
 @Injectable()
@@ -37,6 +37,14 @@ export class OtherUserBadgesState {
   @Selector()
   static currBadges(state: OtherUserBadgesStateModel) {
     return state.currBadges;
+  }
+
+  @Selector()
+  static usersName(state: OtherUserBadgesStateModel) {
+    if (state.usersName==undefined){
+      return sessionStorage.getItem('otherUserBadgesName');
+    }
+    return state.usersName;
   }
 
   @Action(SubscribeToOtherUserBadges)
@@ -63,7 +71,12 @@ export class OtherUserBadgesState {
   async setOtherUserBadgesName(context: StateContext<OtherUserBadgesStateModel>, { otherUserBadgesName }: SetOtherUserBadgesName) {
     return context.setState(
       produce((repr) => {
-        repr.name = otherUserBadgesName;
+        repr.usersName = otherUserBadgesName;
+        if (otherUserBadgesName!=undefined){
+          sessionStorage.setItem('otherUserBadgesName', otherUserBadgesName.toString());
+        }else{
+          repr.usersName = otherUserBadgesName = sessionStorage.getItem('otherUserBadgesName');
+        }
       })
     );
   }
