@@ -137,6 +137,12 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     data: { authGuardPipe: redirectLoggedOut },
   },
+  {
+    path: 'otheruserbadges',
+    canActivate: [AuthGuard],
+    data: { authGuardPipe: redirectLoggedOut },
+    loadChildren: () => import('./pages/otheruserbadges/other-user-badges.module').then( m => m.OtherUserBadgesPageModule)
+  },
 ];
 @NgModule({
   imports: [
