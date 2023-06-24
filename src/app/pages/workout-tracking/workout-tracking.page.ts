@@ -5,6 +5,11 @@ import { AbstractControl } from '@angular/forms';
 import { ExerciseService } from '../../services/exercise/exercise.service';
 import { Exercise } from '../../models/exercise.model';
 import { NavigationService } from 'src/app/services';
+import { NavController } from '@ionic/angular';
+import { Router } from '@angular/router';
+
+
+
 
 
 @Component({
@@ -13,15 +18,27 @@ import { NavigationService } from 'src/app/services';
   styleUrls: ['./workout-tracking.page.scss']
 })
 export class WorkoutTrackingPage implements OnInit {
+  scheduleId: string;
   workoutForm: FormGroup;
 
   constructor(
     private formBuilder: FormBuilder,
     private exerciseService: ExerciseService,
+    private navCtrl: NavController,
+    private router: Router
   ) {
     this.workoutForm = this.formBuilder.group({
       exercises: this.formBuilder.array([])
     });
+  
+    const navigation = this.router.getCurrentNavigation();
+    const state = navigation?.extras.state;
+  
+    if (state?.['schedule']) {
+      this.scheduleId = state['schedule'].id;
+    } else {
+      console.error('No schedule passed to workout-tracking page');
+    }
   }
 
   ngOnInit(): void {}
@@ -44,10 +61,10 @@ export class WorkoutTrackingPage implements OnInit {
     this.exercises.removeAt(index);
   }
 
-  saveExercises(scheduleId: string) {
+  saveExercises() {
     this.exercises.controls.forEach((exerciseControl: AbstractControl, index: number) => {
       const exercise: Exercise = {
-        scheduleId: scheduleId,
+        scheduleId: this.scheduleId,
         name: exerciseControl.get('name')?.value ?? "",
         sets: exerciseControl.get('sets')?.value ?? 0,
         reps: exerciseControl.get('reps')?.value ?? 0,

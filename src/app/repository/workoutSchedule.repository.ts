@@ -32,6 +32,29 @@ export class WorkoutscheduleRepository {
      * }
      */
 
+   getScheduleById(userId: string, scheduleId: string): Observable<IWorkoutScheduleModel | null> {
+    const scheduleDoc = this.firestore
+      .collection('WorkoutSchedule')
+      .doc(userId)
+      .collection('userSchedules')
+      .doc<IWorkoutScheduleModel>(scheduleId);
+  
+    return scheduleDoc.snapshotChanges().pipe(
+      map((doc) => {
+        if (doc.payload.exists) {
+          const schedule = {
+            ...doc.payload.data() as IWorkoutScheduleModel,
+            id: doc.payload.id,
+          };
+          return schedule;
+        } else {
+          return null;
+        }
+      })
+    );
+  }
+  
+
   async addSchedule(request: IAddWorkoutSchedule) {
     try {
         const docRef = await this.firestore
