@@ -58,7 +58,7 @@
   <ion-item>
     <ion-icon name="medal"></ion-icon>
     <!-- {{friends!.length}}  -->
-    <ion-card-header>Badges</ion-card-header>
+    <ion-card-header *ngIf="badges$ | async as badges">{{badges.receivedBadges.length}} Badges</ion-card-header>
     <ion-button slot="end" (click)="viewOtherUserBadges()">view</ion-button>
   </ion-item>
  </ion-card>

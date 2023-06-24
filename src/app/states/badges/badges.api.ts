@@ -9,7 +9,9 @@ import { AuthApi } from '../auth/auth.api';
 import { getAuth } from '@angular/fire/auth';
 // import { AuthState } from 'src/app/states/auth';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class BadgesApi {
   currUserId: string | undefined | null;
   constructor(private Nav: NavController, private firestore: Firestore, private authApi: AuthApi) {}//, private readonly authObject: Auth, 

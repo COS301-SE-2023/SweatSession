@@ -10,6 +10,8 @@ import { getAuth } from 'firebase/auth';
 import { SetOtherUserBadgesId, SetOtherUserBadgesName } from 'src/app/actions/otheruserbadges.actions';
 import { PointsApi } from 'src/app/states/points/points.api';
 import { IPoints } from 'src/app/models/points.model';
+import { IBadges } from 'src/app/models/badges.model';
+import { BadgesApi } from 'src/app/states/badges/badges.api';
 
 @Component({
   selector: 'app-otheruser',
@@ -26,6 +28,7 @@ export class OtheruserPage implements OnInit {
   currUserId = this.auth.currentUser?.uid;
   date : string ;
   points$: Observable<IPoints>;
+  badges$: Observable<IBadges>;
 
   @Select(OtheruserState.returnOtherUserProfile) user$!: Observable<IProfileModel>;
   @Select(OtheruserState.returnOtherUserFriends) friends$!: Observable<IFriendsModel[]>;
@@ -33,18 +36,18 @@ export class OtheruserPage implements OnInit {
   @Select(OtheruserState.returnFriendshipStatus) friendshipStatus$!: Observable<boolean>;
   // @Select(PointsState.points) points$!: Observable<Number>;
 
-  constructor(private store: Store , private noticeService: NoticeService , private nav: NavController, pointsApi: PointsApi ) {
+  constructor(private store: Store , private noticeService: NoticeService , private nav: NavController, pointsApi: PointsApi, badgesApi: BadgesApi ) {
     this.displayUserInfo();
     const id = this.user?.userId;
     if (id !== undefined) {
       sessionStorage.setItem('otherUserId', this.user?.userId);
       this.points$ = pointsApi.otherUserPoints$(id);
-      // this.badges$ = pointsApi.otherUserPoints$(id);
+      this.badges$ = badgesApi.otheruserbadges$(id);
     } else {
       const otherUserId = sessionStorage.getItem('otherUserId');
       if (otherUserId !== null) {
         this.points$ = pointsApi.otherUserPoints$(otherUserId);
-        // this.badges$ = pointsApi.otherUserPoints$(otherUserId);
+        this.badges$ = badgesApi.otheruserbadges$(otherUserId);
       } else {
         // Handle the case when `otherUserId` is `null`
         // For example, set `this.points$` to a default value or show an error message
