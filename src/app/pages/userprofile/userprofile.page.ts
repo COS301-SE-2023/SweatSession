@@ -25,7 +25,7 @@ export class UserprofilePage implements OnInit {
     this.ngOnInit();
   }
 
-  ProfilePicture$? = './assets/img/ProfileSE.png';
+  ProfilePicture$? = '/assets/ProfileSE.jpg';
   displayName$? = 'na';
   myBio$? = 'na';
   friends$ = 0;
@@ -47,9 +47,9 @@ export class UserprofilePage implements OnInit {
           // this.friends$ = profile.profile.friends.length;
           // this.groups$ = profile.profile.groups.length;
 
-          if(profile.profile.profileURL == "")
+          if(profile.profile.profileURL == "" || profile.profile.profileURL == undefined)
           {
-            this.ProfilePicture$ =  'src/assets/img/ProfileSE.png';
+            this.ProfilePicture$ =  '/assets/ProfileSE.jpg';
           }
            
       });
