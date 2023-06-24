@@ -8,6 +8,8 @@ import { OtherUserStateModel, OtheruserState } from 'src/app/states';
 import {NoticeService } from 'src/app/services/notifications/notice.service';
 import { getAuth } from 'firebase/auth';
 import { SetOtherUserBadgesId, SetOtherUserBadgesName } from 'src/app/actions/otheruserbadges.actions';
+import { PointsApi } from 'src/app/states/points/points.api';
+import { IPoints } from 'src/app/models/points.model';
 
 @Component({
   selector: 'app-otheruser',
@@ -23,14 +25,19 @@ export class OtheruserPage implements OnInit {
   auth = getAuth();
   currUserId = this.auth.currentUser?.uid;
   date : string ;
+  points$: Observable<IPoints>;
 
   @Select(OtheruserState.returnOtherUserProfile) user$!: Observable<IProfileModel>;
   @Select(OtheruserState.returnOtherUserFriends) friends$!: Observable<IFriendsModel[]>;
   @Select(OtheruserState.returnOtherUserSchedules) schedules$!: Observable<IWorkoutScheduleModel[]>;
   @Select(OtheruserState.returnFriendshipStatus) friendshipStatus$!: Observable<boolean>;
+  // @Select(PointsState.points) points$!: Observable<Number>;
 
-  constructor(private store: Store , private noticeService: NoticeService , private nav: NavController ) {
+  constructor(private store: Store , private noticeService: NoticeService , private nav: NavController, pointsApi: PointsApi ) {
     this.displayUserInfo();
+    alert(this.user.userId);
+    this.points$ = pointsApi.otherUserPoints$(this.user.userId);
+    console.log(this.points$);
   }
 
   ngOnInit() {
