@@ -30,6 +30,10 @@
   <ion-label class="Bcard">&nbsp;&nbsp;{{notice.message}}</ion-label>
 </ion-grid>
 </ion-card-content>
+<div *ngIf="notice.message == 'Removed you as a Friend!'">
+<ion-button size="small" >Accept</ion-button>
+<ion-button size="small" >Reject</ion-button>
+</div>
 <ion-label>{{"&nbsp;".repeat(90)}}{{notice.sentdate}}</ion-label>
 
 </ion-card>
