@@ -11,7 +11,7 @@ export class FitnessgoalService{
     constructor(private repository:goalsRepository) { }
 
 
-    getGoals(userId: string) {
+    getGoals(userId: string | undefined) {
         return this.repository.getGoals(userId);
     }
 

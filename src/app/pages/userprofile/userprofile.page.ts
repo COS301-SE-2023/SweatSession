@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { IonicModule, ModalController } from '@ionic/angular';
 import { NavController } from '@ionic/angular';
-import { Store } from '@ngxs/store';
-import { IGetProfile } from 'src/app/models';
-import { SetProfileService } from 'src/app/services';
+import {Select, Store} from '@ngxs/store';
+import {IFriendsModel, IGetProfile} from 'src/app/models';
+import { SetProfileService, FriendsService } from 'src/app/services';
 import { AuthApi } from 'src/app/states/auth/auth.api';
+import {FriendsState} from "../../states";
+import {Observable} from "rxjs";
+import {GetFriendsAction} from "../../actions";
 
 @Component({
   selector: 'app-userprofile',
@@ -12,13 +15,15 @@ import { AuthApi } from 'src/app/states/auth/auth.api';
   styleUrls: ['./userprofile.page.scss'],
 })
 export class UserprofilePage implements OnInit {
-
+  friends:IFriendsModel[]=[];
+  @Select(FriendsState.returnFriends) friends2$! : Observable<IFriendsModel[]>;
   constructor
   (
     private Nav: NavController,
     private store: Store,
     private modalController: ModalController,
-    private setprofileservices: SetProfileService, 
+    private setprofileservices: SetProfileService,
+    private FriendsService: FriendsService,
     private authApi: AuthApi,
   )
   {
@@ -28,9 +33,9 @@ export class UserprofilePage implements OnInit {
   ProfilePicture$? = './assets/img/ProfileSE.png';
   displayName$? = 'na';
   myBio$? = 'na';
-  friends$ = 0;
   groups$ = 0;
   getUser : IGetProfile = {userId: 'na'};
+  friends$ = 0;
   getUserid() {
     return  this.authApi.getCurrentUserId();
   }
@@ -44,7 +49,14 @@ export class UserprofilePage implements OnInit {
           this.ProfilePicture$ = profile.profile.profileURL;
           this.displayName$ = profile.profile.displayName;
           this.myBio$ = profile.profile.bio;
-          // this.friends$ = profile.profile.friends.length;
+
+          //getting friends
+          this.store.dispatch(new GetFriendsAction());
+          this.friends2$.subscribe((response)=>{
+            this.friends$ = [response].length;
+            console.log(this.friends);
+          })
+          //getting groups
           // this.groups$ = profile.profile.groups.length;
 
           if(profile.profile.profileURL == "")

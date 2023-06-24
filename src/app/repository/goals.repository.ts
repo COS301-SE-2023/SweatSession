@@ -53,7 +53,7 @@ export class goalsRepository {
         )
     }
 
-    getGoals(userId: string) {
+    getGoals(userId: string | undefined) {
         return this.firestore
             .collection('fitnessgoals')
             .doc(userId)
