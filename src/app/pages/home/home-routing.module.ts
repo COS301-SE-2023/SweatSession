@@ -40,7 +40,6 @@ const routes: Routes = [
       {
         path: 'chatbot',
         loadChildren: () => import('../chatbot/chatbot.module').then( m => m.ChatbotPageModule)
-<<<<<<< HEAD
       },
       {
         path: 'badges',
@@ -53,8 +52,6 @@ const routes: Routes = [
       {
         path: 'otheruserbadges',
         loadChildren: () => import('../otheruserbadges/other-user-badges.module').then( m => m.OtherUserBadgesPageModule)
-=======
->>>>>>> scheduling/Friends-services
       }
     ],
   }

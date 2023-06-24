@@ -40,7 +40,7 @@ export class OtheruserPage implements OnInit {
     this.displayUserInfo();
     const id = this.user?.userId;
     if (id !== undefined) {
-      sessionStorage.setItem('otherUserId', this.user?.userId);
+      sessionStorage.setItem('otherUserId', id);
       this.points$ = pointsApi.otherUserPoints$(id);
       this.badges$ = badgesApi.otheruserbadges$(id);
     } else {

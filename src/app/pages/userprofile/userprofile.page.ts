@@ -16,9 +16,10 @@ import { AuthApi } from 'src/app/states/auth/auth.api';
 })
 export class UserprofilePage implements OnInit {
   @Select(FriendsState.returnFriendsSize) friendsSize$! : Observable<number>;
-  ProfilePicture$? = './assets/img/ProfileSE.png';
+  ProfilePicture$? = '/assets/ProfileSE.jpg';
   displayName$? = 'na';
   myBio$? = 'na';
+  friends$ = 0;
   friendsSize = 0;
   groups$ = 0;
   getUser : IGetProfile = {userId: 'na'};
@@ -30,15 +31,6 @@ export class UserprofilePage implements OnInit {
     private setprofileservices: SetProfileService, 
     private authApi: AuthApi,) {}
 
-<<<<<<< HEAD
-  ProfilePicture$? = '/assets/ProfileSE.jpg';
-  displayName$? = 'na';
-  myBio$? = 'na';
-  friends$ = 0;
-  groups$ = 0;
-  getUser : IGetProfile = {userId: 'na'};
-=======
->>>>>>> scheduling/Friends-services
   getUserid() {
     return  this.authApi.getCurrentUserId();
   }
