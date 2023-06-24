@@ -42,13 +42,9 @@ export class RegisterPage implements OnInit {
     if (this.registrationForm.valid) {
       const regEmail = this.registrationForm?.get('email')?.value;
       const regPassword = this.registrationForm?.get('password')?.value;
-      const cPassword = this.registrationForm?.get('cPassword')?.value;
-      if (regEmail != null && regPassword!=null && cPassword!=null){
-        if (regPassword!=cPassword){
-          alert("The password you have entered in the confirm password field does not match the password in the password field.");
-        }else{
-          this.store.dispatch(new Register(regEmail,regPassword));
-        }
+      if (regEmail != null && regPassword!=null){
+        // alert("Registering with email: " + regEmail + " and password: " + regPassword);
+        this.store.dispatch(new Register(regEmail,regPassword));
       }
     }else{
       alert("Invalid Registration Information. Make sure that the password is at least 6 characters long and you have entered a valid email address");

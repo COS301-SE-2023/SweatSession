@@ -1,0 +1,21 @@
+.outer-container {
+    height: 100vh;
+    background-color: aqua;
+}
+
+.inner-container {
+    padding-top: 50px;
+    height: 100%;
+    background-color: aqua;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+
+    div {
+        width: max-content;
+        font-size: xx-large;
+        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        color:aqua;
+        text-shadow: 0px 2px 10px;
+    }
+}

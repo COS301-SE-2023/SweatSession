@@ -1,7 +1,8 @@
-<ion-content>
+<ion-content [fullscreen]="true">
   <ion-card class="full-screen-card">
+   <div class="inner-wrapper">
     <div class="logo-container">
-      <img class="logo-img" src="assets/sweatsessionlogotransparent1.png" alt="logo">
+      <img class="logo-img" ngSrc="assets/sweatsessionlogotransparent1.png" alt="logo" height="586" width="638">
     </div>
     <ion-card-header>
       <ion-card-title>About</ion-card-title>
@@ -13,8 +14,16 @@
       more random text to describe the app to the user and welcome them to our Cool app.
     </ion-card-content>
     
-    <ion-button size="large" class="getSButton" expand="block" fill="outline" routerLink="/register">
-      Get started
-    </ion-button>
+<!--    <ion-button size="large" class="getSButton"  fill="outline" routerLink="/login">-->
+<!--      Get started-->
+<!--    </ion-button>-->
+       <button class="learn-more getSButton" routerLink="/login"> <!-- TODO: fix the animation-->
+          <span class="circle" aria-hidden="true">
+          <span class="icon arrow"></span>
+          </span>
+           <span class="button-text">Get Started</span>
+       </button>
+
+   </div>
   </ion-card>
 </ion-content>

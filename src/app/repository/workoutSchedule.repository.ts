@@ -1,26 +1,172 @@
 import { Injectable } from '@angular/core';
-import { IAddWorkoutSchedule, IUpdateWorkoutSchedule, IGetWorkoutSchedules, IRemoveWorkoutSchedule } from '../models';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
+import { IAddWorkoutSchedule, 
+    IUpdateWorkoutSchedule, 
+    IGetWorkoutSchedules, 
+    IRemoveWorkoutSchedule, 
+    IGotWorkoutSchedules, 
+    IAddedWorkoutSchedule,
+    IRemovedWorkoutSchedule,
+    IUpdatedWorkoutSchedule,
+    IWorkoutScheduleModel} 
+    from '../models';
+import { Observable, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WorkoutscheduleRepository {
 
-  constructor() { }
+  constructor(private firestore: AngularFirestore) { }
+
+    //How user schedules are store....
+   /**
+     * collection//workout schedule {
+     *  document//user id {
+     *      subcollection//schedule {
+     *          document//schedule is<IWorkoutSchedule> {
+     *              
+     *          }
+     *      }
+     *  }
+     * }
+     */
 
   async addSchedule(request: IAddWorkoutSchedule) {
-
+    try {
+        const docRef = await this.firestore
+          .collection("WorkoutSchedule")
+          .doc(request.userId)
+          .collection("userSchedules")
+          .add(request.schedule);
+      
+        const schedule = {
+          id: docRef.id,
+          ...request.schedule,
+        };
+      
+        // console.log('Schedule added successfully with ID:', docRef.id);
+        // alert('Schedule added successfully with ID:' + docRef.id);
+      
+        const response: IAddedWorkoutSchedule = {
+          userId: request.userId,
+          schedule: schedule,
+          validate: true,
+        };
+      
+        return response;
+    } catch (error) {
+        console.log('Error adding schedule:', error);
+        alert(error);
+      
+        const response: IAddedWorkoutSchedule = {
+          userId: request.userId,
+          validate: false,
+        };
+      
+        return response;
+    }
   }
 
   async removeSchedule(request: IRemoveWorkoutSchedule) {
+    try {
+        const docRef = await this.firestore
+          .collection("WorkoutSchedule")
+          .doc(request.userId)
+          .collection("userSchedules")
+          .doc(request.schedule.id)
+          .delete()
+          
+        console.log('Schedule deleted successfully');
+        alert('Schedule removed successfully');
+      
+        const response: IRemovedWorkoutSchedule = {
+          userId: request.userId!,
+          validate: true,
+        };
+      
+        return response;
+    } catch (error) {
+        console.log('Error removing schedule:', error);
+        alert(error);
+      
+        const response: IRemovedWorkoutSchedule = {
+          userId: request.userId!,
+          validate: false,
+        };
+      
+        return response;
+    }
 
   }
 
-  async editSchedule(request: IUpdateWorkoutSchedule) {
-
+  async updateSchedule(request: IUpdateWorkoutSchedule) {
+    try {
+        const docRef = await this.firestore
+          .collection("WorkoutSchedule")
+          .doc(request.userId)
+          .collection("userSchedules")
+          .doc(request.schedule.id)
+          .update(request.schedule)
+          
+        console.log('Schedule updated successfully');
+      
+        const response: IUpdatedWorkoutSchedule = {
+          userId: request.userId,
+          schedule: request.schedule,
+          validate: true,
+        };
+      
+        return response;
+    } catch (error) {
+        console.log('Error updating schedule:', error);
+        alert(error);
+      
+        const response: IUpdatedWorkoutSchedule = {
+          userId: request.userId,
+          validate: false,
+        };
+      
+        return response;
+    }
   }
 
-  async getSchedule(request: IGetWorkoutSchedules) {
+  getSchedules(request: IGetWorkoutSchedules): Observable<IGotWorkoutSchedules> {
+    // try {
+      
+      const friendsCollection = this.firestore.collection<IWorkoutScheduleModel>(
+      `WorkoutSchedule/${request.userId}/userSchedules`
+      );
+  
+    return friendsCollection.snapshotChanges().pipe(
+      map((snapshot) => {
+        const schedules: IWorkoutScheduleModel[] = [];
+      
+        snapshot.forEach(async (doc) => {
+          const schedule = {
+            ...doc.payload.doc.data() as IWorkoutScheduleModel,
+            id: doc.payload.doc.id,
+          };
+      
+          schedules.push(schedule);
+        });
+      
+        return  {
+          userId: request.userId,
+          schedules: schedules,
+        };
+      
+      }))
+    // }catch (error) {
+    //   console.log('Error fetching schedules:', error);
+    //   alert(error);
     
+    //   const response: IGotWorkoutSchedules = {
+    //     userId: request.userId,
+    //     schedules: [],
+    //   };
+    
+    //   // return response;
+    // }
   }
 }

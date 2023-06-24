@@ -2,11 +2,11 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import * as admin from 'firebase-admin';
+
 import {
   initializeFirestore,
   provideFirestore,
@@ -37,9 +37,6 @@ import {
   getStorage,
   provideStorage
 } from '@angular/fire/storage';
-import { AngularFirestore, AngularFirestoreModule } from '@angular/fire/compat/firestore';
-import { AngularFireModule } from '@angular/fire/compat';
-
 //import {AuthState} from 'src/app/states/auth'
 //import {AuthModule} from 'src/app/pages/auth'
 
@@ -59,19 +56,25 @@ import {
   provideFunctions
 } from '@angular/fire/functions';
 import { NgxsModule } from '@ngxs/store';
+import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
+import { AngularFirestore, AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { AngularFireModule } from '@angular/fire/compat';
 // import {AuthModule} from 'src/app/pages/auth';
 // const useEmulators = process.env['NX_FIREBASE_USE_EMULATORS'] || true;
+ 
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
     FormsModule, 
     BrowserModule, 
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
     //AuthModule,
     NgxsModule.forRoot(),//[AuthState]
     IonicModule.forRoot(), 
+    NgxsRouterPluginModule.forRoot(),
     AppRoutingModule,
-    AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule ,
     provideRemoteConfig(() => getRemoteConfig()),
     provideAnalytics(() => getAnalytics()),

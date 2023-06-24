@@ -1,0 +1,30 @@
+<div class="content-container">
+  <ion-searchbar
+      placeholder="Search for users"
+      [(ngModel)] = "searchTerms.searchQuery"
+      (ionInput) = onSearchInput($event)
+      color="light"
+      animated
+      >
+  </ion-searchbar>
+  
+  <div class="search-suggestions" *ngIf="searchTerms.showSuggestions">
+    <ion-list >
+      <ion-item lines="none" 
+        *ngFor="let suggestion of searchTerms.filteredSuggestions" 
+        (click)="find(suggestion)">
+        <ion-avatar>
+          <ion-img src ="{{suggestion.profileURL}}"></ion-img>
+        </ion-avatar>
+        {{ suggestion.displayName }}
+      </ion-item>
+      <ion-item lines="none" *ngIf="searchTerms.filteredSuggestions!.length==0">
+        <ion-text>user not found</ion-text>
+      </ion-item>
+    </ion-list>
+  </div>
+</div>
+
+<div class="content-container">
+  
+</div>

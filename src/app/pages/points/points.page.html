@@ -1,0 +1,72 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-item lines="none">
+      <backbutton></backbutton>
+      <ion-title style="margin-left: 0rem;">Points</ion-title>
+    </ion-item>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="pointsContainer" *ngIf="points$ | async as points">
+  <ion-grid class="pointsGrid">
+    <ion-item class="userPointsSection">
+      <ion-text class="userPointsNumber">Points:</ion-text>
+      <span class="userPointsContent">
+        <ion-text class="userPointsNumberValue">{{ points.userPoints }}</ion-text>
+        <ion-img src="assets/sweatSessionPoint.png" class = "userPointsImg"></ion-img>
+      </span>
+    </ion-item>
+
+    <ion-item class="workoutPlanPointsSection">
+      <h2 class="pointsHeader" style="margin:None">Complete Your Workout Plan</h2>
+      <div class="progressContainer">
+        <ion-text class="progressHeader">Progress: </ion-text>
+        <ion-text class="progressText">0/1</ion-text>
+      </div>
+      <ion-progress-bar value="0.0" class="custom-progress-bar" style="--ion-color-primary: var(--custom-red);"></ion-progress-bar>
+      <ion-item class="wpPointsSection">
+      <ion-text class="workoutPlanPoints">Points:</ion-text>
+      <span class="workoutPlanPointsContent">
+        <ion-text class="wpNumberValue">50</ion-text>
+        <ion-img src="assets/sweatSessionPoint.png" class = "wpPointsImg"></ion-img>
+      </span>
+    </ion-item>
+    <ion-button routerLink="/plans">View Workout Plan</ion-button>
+    </ion-item>
+
+
+    <ion-item class="workoutSessionPointsSection">
+      <h2 class="pointsHeader" style="margin:None">Attend 3 Workout Sessions</h2>
+      <div class="progressContainer">
+        <ion-text class="progressHeader">Progress: </ion-text>
+        <ion-text class="progressText">1/3</ion-text>
+      </div>
+      <ion-progress-bar value="0.3333" class="custom-progress-bar" style="--ion-color-primary: var(--custom-red);"></ion-progress-bar>
+      <ion-item class="wpPointsSection">
+      <ion-text class="workoutPlanPoints">Points:</ion-text>
+      <span class="workoutPlanPointsContent">
+        <ion-text class="wpNumberValue">75</ion-text>
+        <ion-img src="assets/sweatSessionPoint.png" class = "wpPointsImg"></ion-img>
+      </span>
+    </ion-item>
+    <ion-button routerLink="/sessions">View Gym Schedule</ion-button>
+    </ion-item>
+
+    <ion-item class="workoutSessionPointsSection">
+      <h2 class="pointsHeader" style="margin:None">Complete a fitness goal</h2>
+      <div class="progressContainer">
+        <ion-text class="progressHeader">Progress: </ion-text>
+        <ion-text class="progressText">0/1</ion-text>
+      </div>
+      <ion-progress-bar value="0.0" class="custom-progress-bar" style="--ion-color-primary: var(--custom-red);"></ion-progress-bar>
+      <ion-item class="wpPointsSection">
+      <ion-text class="workoutPlanPoints">Points:</ion-text>
+      <span class="workoutPlanPointsContent">
+        <ion-text class="wpNumberValue">100</ion-text>
+        <ion-img src="assets/sweatSessionPoint.png" class = "wpPointsImg"></ion-img>
+      </span>
+    </ion-item>
+    <ion-button routerLink="/goals">View Fitness Goals</ion-button>
+    </ion-item>
+  </ion-grid>
+</ion-content>

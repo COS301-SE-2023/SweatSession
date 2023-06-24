@@ -1,17 +1,18 @@
-import { Timestamp } from 'firebase-admin/firestore';
+import { Timestamp } from "@angular/fire/firestore";
 
 export interface IProfileModel {
     userId: string;
     name?: string;
-    displayName?: string | null | undefined;
+    displayName?: string;
     email?: string;
     bio?: string;
     profileURL?: string;
     phoneNumber?: string;
-    height?: Number;
-    weight?: Number;
+    height?: string;
+    weight?: string;
 }
 
+//requests
 export interface IUserModel {
     id: string;
     email?: string | null | undefined;
@@ -19,9 +20,8 @@ export interface IUserModel {
     created?: Timestamp | null | undefined;
 }
 
-//requests
 export interface IGetProfile {
-    userId: string;
+    userId?: string;
 }
 
 export interface IUpdateProfile {

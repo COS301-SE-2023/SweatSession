@@ -30,10 +30,6 @@ const routes: Routes = [
         loadChildren: () => import('../leaderboard/leaderboard.module').then((m) => m.LeaderboardPageModule),
       },
       {
-        path: 'notifications',
-        loadChildren: () => import('../notifications/notifications.module').then( m => m.NotificationsPageModule)
-      },
-      {
         path: 'leaderboard',
         loadChildren: () => import('../leaderboard/leaderboard.module').then( m => m.LeaderboardPageModule)
       },
@@ -50,16 +46,14 @@ const routes: Routes = [
         loadChildren: () => import('../badges/badges.module').then( m => m.BadgesPageModule)
       },
       {
+        path: 'points',
+        loadChildren: () => import('../points/points.module').then( m => m.PointsPageModule)
+      },{
         path: 'otheruserbadges',
         loadChildren: () => import('../otheruserbadges/other-user-badges.module').then( m => m.OtherUserBadgesPageModule)
       }
     ],
-  },
-  {
-    path: '',
-    pathMatch: 'full',
-    redirectTo: 'home/dashboard',
-  },
+  }
 ];
 
 @NgModule({

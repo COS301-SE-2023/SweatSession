@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { NavigationService } from 'src/app/services';
+
 
 @Component({
   selector: 'app-settings',
@@ -11,5 +13,4 @@ export class SettingsPage implements OnInit {
 
   ngOnInit() {
   }
-
 }

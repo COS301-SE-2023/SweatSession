@@ -1,62 +1,73 @@
-<ion-content class="registrationContainer">
-  <ion-grid class="registrationGrid">
-    <!-- <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>register</ion-title>
-  </ion-toolbar>
-</ion-header> -->
-
-    <ion-item class="logo-img">
-      <ion-img src="assets/Asset 1.png"></ion-img>
-    </ion-item>
-
-    <ion-text class="registrationHeader"> Register </ion-text>
-
-    <form [formGroup]="registrationForm"
-    ngxsForm="register.registrationForm"
-    (submit)="register()">
-      <ion-item class="emailSection">
-        <ion-img class="emailLogo" src="/assets/vector-icon.svg"></ion-img>
-        <ion-label>Email:</ion-label>
-        <!-- aria-label="Email" -->
-        <ion-input
-          type="email"
-          name="email"
-          formControlName="email"
-          required
-        ></ion-input>
-      </ion-item>
-
-      <ion-item class="passwordSection">
-        🔑
-        <ion-label>Password:</ion-label>
-        <!-- aria-label="Password" -->
-        <ion-input
-          type="password"
-          name="password"
-          minlength="6"
-          maxlength="25"
-          formControlName="password"
-          required
-        ></ion-input>
-      </ion-item>
-
-      <ion-item class="cPasswordSection">
-        🔑
-        <ion-label>Confirm Password:</ion-label>
-        <ion-input
-          type="password"
-          name="cPassword"
-          minlength="6"
-          maxlength="25"
-          formControlName="cPassword"
-          required
-        ></ion-input>
-      </ion-item>
-
-      <ion-button expand="block" type="submit" class="registerButton"
-        >Create Account</ion-button
-      >
-    </form>
-  </ion-grid>
-</ion-content>
+<div class="outerContainer">
+  <div class="background-cover">
+    <ion-img src="/assets/Asset 1.png"></ion-img>
+  </div>
+  <ion-card>
+    <div class="inner-container">
+      <ion-card-title>
+        Sweat<img src="/assets/Asset 2.png" />Session
+      </ion-card-title>
+      <h5>Sign up</h5>
+      <ion-text>Please register an account</ion-text>
+      <form [formGroup]="registrationForm"
+      ngxsForm="register.registrationForm"
+      (submit)="register()">
+        <ion-item class="input-item">
+          <ion-label position="floating">
+            <ion-icon src="/assets/vector-icon.svg"></ion-icon>  Email
+          </ion-label>
+          <ion-input
+            type="email"
+            name="email"
+            formControlName="email"
+            required
+          ></ion-input>
+        </ion-item>
+  
+        <ion-item class="input-item">
+          <ion-label position="floating">
+            🔑 Password
+          </ion-label>
+          <ion-input
+            type="password"
+            name="password"
+            minlength="6"
+            maxlength="25"
+            formControlName="password"
+            required
+          ></ion-input>
+        </ion-item>
+  
+        <ion-item class="input-item">
+          <ion-label position="floating">
+            🔑 Confirm Password
+          </ion-label>
+          <ion-input
+            type="password"
+            name="cPassword"
+            minlength="6"
+            maxlength="25"
+            formControlName="cPassword"
+            required
+          ></ion-input>
+        </ion-item>
+  
+        <ion-button 
+          expand="block" 
+          type="submit" 
+          class="registerButton"
+        >Create Account</ion-button>
+      </form>
+      
+      <ion-card-subtitle>
+        Already have an account?
+        <hr>
+      </ion-card-subtitle>
+      <ion-button class="signIn-buttons" expand="block" >
+        <ion-icon name="logo-google"></ion-icon>
+        <ion-text>continue with google</ion-text>
+      </ion-button>
+      <ion-button class="signIn-buttons" expand="block" routerLink="/login">Sign in</ion-button>
+    </div>
+    </ion-card>
+</div>

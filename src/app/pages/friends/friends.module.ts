@@ -8,13 +8,17 @@ import { FriendsPageRoutingModule } from './friends-routing.module';
 
 import { FriendsPage } from './friends.page';
 import { FriendComponent } from './friend/friend.component';
+import { FriendsStateModule } from 'src/app/states';
+import { BackButtonDirectiveModule } from 'src/app/directives';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    FriendsPageRoutingModule
+    FriendsPageRoutingModule,
+    FriendsStateModule,
+    BackButtonDirectiveModule
   ],
   declarations: [FriendsPage,FriendComponent]
 })
