@@ -13,6 +13,7 @@ export interface IWorkoutScheduleModel {
     notifyAt?: Date;
     notified?: boolean;
     completeAt?: Date;
+    workoutAdded?: boolean;
 }
 
 //request

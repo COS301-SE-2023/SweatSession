@@ -19,7 +19,7 @@ export class ProfileRepository {
   // alert("getProfile" + request.userId + "================");
   return this.firestore
   .collection('profiles')
-  .doc<string>(request.userId)
+  .doc(request.userId)
   // .doc('izwEZ4i1DvbBuOT8aszFAiotOrW2')
   .get()
   .pipe(
