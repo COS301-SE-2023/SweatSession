@@ -75,7 +75,7 @@ export class OtheruserPage implements OnInit {
    )
    this.date = new Date().toTimeString() ;
    this.shortdate = this.date.split(':' , 2);
-   this.createNotifications(this.currusername , this.shortdate[0] + ':' + this.shortdate[1] , "Requested to friend you!")  ;
+   this.createNotifications(this.currusername , this.shortdate[0] + ':' + this.shortdate[1] , "Sent you a Friend Request!")  ;
   }
 
   viewSchedules() {

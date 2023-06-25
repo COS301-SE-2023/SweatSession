@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
-    <ion-item color="medium">
-      <ion-icon name="arrow-back-outline" (click)="back()"></ion-icon>
+    <ion-item >
+      <ion-icon  name="arrow-back-outline" (click)="back()"></ion-icon>
       <ion-title>Notifications</ion-title>
     </ion-item>
   </ion-toolbar>
@@ -10,16 +10,15 @@
 
 
 <ion-content class="main">
-  <ion-item lines="none">
-    <ion-title slot="start" style="display:inline-block"><b>Today</b></ion-title>
-    <ion-title slot="end" style="display:inline-block" ><ion-button fill="clear" (click)="clearNotifications()">Clear all</ion-button></ion-title>
-  </ion-item>
-    <br>
-    <br>
+ 
+    
+    <ion-title *ngIf="noticeamount > 0" style="display:inline-block" ><ion-button  size="default" color="light" (click)="clearNotifications()">Clear all</ion-button></ion-title>
+     <br><br>
+    
     
   <div *ngIf="noticeamount > 0" >
   <ion-card class="Mcard" *ngFor="let notice of noticeList2">
-    <div>{{"&nbsp;".repeat(89)}}<ion-button fill="clear" size="small" (click)="clearNotification(notice.id!)"><ion-icon name="close-circle-outline" size="small"></ion-icon></ion-button></div>
+    <div>{{"&nbsp;".repeat(83)}}<ion-button fill="clear" size="small" (click)="clearNotification(notice.id!)"><ion-icon name="close-circle-outline" class="ion-icon1" ></ion-icon></ion-button></div>
     <ion-card-content style="display:flex ; align-items:center" >
   <ion-avatar slot="start">
     <img alt="Silhouette of a person's head" src="https://i.pravatar.cc/300" />
@@ -31,11 +30,11 @@
   <ion-label class="Bcard">&nbsp;&nbsp;{{notice.message}}</ion-label>
 </ion-grid>
 </ion-card-content>
-<div *ngIf="notice.message == 'Removed you as a Friend!'">
-<ion-button size="small" >Accept</ion-button>
-<ion-button size="small" >Reject</ion-button>
+<div class="flex-center3" *ngIf="notice.message == 'Sent you a Friend Request!'">
+<ion-button size="small" (click)="clearNotification(notice.id!)">Accept</ion-button>
+<ion-button size="small" (click)="clearNotification(notice.id!)">Reject</ion-button>
 </div>
-<ion-label>{{"&nbsp;".repeat(90)}}{{notice.sentdate}}</ion-label>
+<ion-label>{{"&nbsp;".repeat(87)}}{{notice.sentdate}}</ion-label>
 
 </ion-card>
 </div>
