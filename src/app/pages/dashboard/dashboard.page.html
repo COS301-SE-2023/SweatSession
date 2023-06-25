@@ -2,20 +2,84 @@
   <ion-content>
     <div class="inner-container">
       <!-- *ngIf="(profile$ | async) as profile; else noProfile" -->
-      <ng-template #noProfile>
-        <ion-grid>
-          <ion-row>
-            <ion-col>
-              <ion-skeleton-text>
-                dsjkfldkflsdflksd
-                dfjksdljfkdsljflk
-                dsjlfkdsklfdslkf
-                fjsdklfdsklfdklsf
-              </ion-skeleton-text>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </ng-template>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="12">
+            <ion-card>
+              <ion-card-title> 
+                <ion-icon name="receipt-outline"></ion-icon> Schedules
+              </ion-card-title>
+              <ion-skeleton-text [animated]="true" *ngIf="load"></ion-skeleton-text>
+              <ion-card-content *ngIf="!load">
+                <swiper-container effect="flip">
+                  <swiper-slide>
+                    <div class="slide">
+                      {{upcoming}} scheduled sessions<br>
+                    </div>
+                  </swiper-slide>
+                  <swiper-slide>
+                    <div class="slide">
+                      {{completed}} completed workout sessions
+                    </div>
+                  </swiper-slide>
+                  <swiper-slide>
+                    <div class="slide">
+                      {{inSession}} in session sessions
+                    </div>
+                  </swiper-slide>
+                </swiper-container>
+                <ion-button routerLink="/workout-scheduling" slot="end">view</ion-button>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="12">
+            <ion-card>
+              <ion-card-title> 
+                <ion-icon name="american-football-outline"></ion-icon> Goals
+              </ion-card-title>
+               <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="6">
+            <div class="inline-container">
+              <ion-card>
+                <ion-card-title> 
+                  <ion-icon name="bar-chart-outline"></ion-icon> Position
+                </ion-card-title>
+                 <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+              </ion-card>
+              <ion-card>
+                <ion-card-title> 
+                  <ion-icon name="star-outline"></ion-icon> Points
+                </ion-card-title>
+                 <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+              </ion-card>
+            </div>
+          </ion-col>
+          <ion-col size="6">
+            <ion-card>
+              <ion-card-title> 
+                <ion-icon name="star-outline"></ion-icon> Point
+              </ion-card-title>
+               <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="12">
+            <ion-card>
+              <ion-card-title> 
+                <ion-icon name="medal"></ion-icon> Badges
+              </ion-card-title>
+               <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
    </div>
   </ion-content>
 </div>
