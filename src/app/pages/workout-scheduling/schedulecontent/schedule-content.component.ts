@@ -101,11 +101,6 @@ export class ScheduleContentComponent  implements OnInit {
   // }
   
 
-  ngOnDestroy() {
-    this.firestoreSubscription.unsubscribe();
-  }
-  
-
   addWorkout(schedule: IWorkoutScheduleModel) {
     this.navCtrl.navigateForward('/workout-tracking', { state: { schedule } });
     schedule.workoutAdded = true;
