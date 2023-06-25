@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { collectionData, collection, addDoc, Firestore, deleteDoc, doc, setDoc } from '@angular/fire/firestore';
+import { collectionData, collection, addDoc, Firestore, deleteDoc, doc, setDoc, getDoc, where, query } from '@angular/fire/firestore';
 import { getAuth } from 'firebase/auth';
 import { Observable } from 'rxjs';
-import { Notice } from 'src/app/models/notice.model';
+import { Notice, Profile } from 'src/app/models/notice.model';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +22,13 @@ export class NoticeService {
       idField: 'id',
     });
   }
+
+  getTheNoticeProfile():Observable<Profile[]>{
+    return collectionData<Profile>(collection(this.firestore, "profiles"), {
+    idField: 'id',
+   });
+    
+}
 
   deleteNotices(id :string): Promise<void> {
     const noticeDocRef = doc(this.firestore, `Notifications/${id}`);

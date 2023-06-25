@@ -18,7 +18,8 @@
     <br>
     
   <div *ngIf="noticeamount > 0" >
-  <ion-card class="Mcard" *ngFor="let notice of noticeList">
+  <ion-card class="Mcard" *ngFor="let notice of noticeList2">
+    <div>{{"&nbsp;".repeat(89)}}<ion-button fill="clear" size="small" (click)="clearNotification(notice.id!)"><ion-icon name="close-circle-outline" size="small"></ion-icon></ion-button></div>
     <ion-card-content style="display:flex ; align-items:center" >
   <ion-avatar slot="start">
     <img alt="Silhouette of a person's head" src="https://i.pravatar.cc/300" />
@@ -30,6 +31,10 @@
   <ion-label class="Bcard">&nbsp;&nbsp;{{notice.message}}</ion-label>
 </ion-grid>
 </ion-card-content>
+<div *ngIf="notice.message == 'Removed you as a Friend!'">
+<ion-button size="small" >Accept</ion-button>
+<ion-button size="small" >Reject</ion-button>
+</div>
 <ion-label>{{"&nbsp;".repeat(90)}}{{notice.sentdate}}</ion-label>
 
 </ion-card>
