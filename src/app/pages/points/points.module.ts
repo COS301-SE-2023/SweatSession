@@ -9,6 +9,7 @@ import { PointsModule as PointsStatesModule } from 'src/app/states/points';
 import { PointsPage } from './points.page';
 import { PointsApi } from 'src/app/states/points/points.api';
 import { AuthApi } from 'src/app/states/auth/auth.api';
+import { BackButtonDirectiveModule } from 'src/app/directives';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { AuthApi } from 'src/app/states/auth/auth.api';
     FormsModule,
     IonicModule,
     PointsPageRoutingModule,
-    PointsStatesModule
+    PointsStatesModule,
+    BackButtonDirectiveModule
   ],
   declarations: [PointsPage],
   providers: [PointsApi, AuthApi]

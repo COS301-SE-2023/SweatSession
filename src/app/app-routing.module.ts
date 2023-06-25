@@ -7,6 +7,7 @@ import {
   redirectLoggedInTo,
   redirectUnauthorizedTo
 } from '@angular/fire/auth-guard';
+import { AddScheduleComponent } from './pages/workout-scheduling/add-schedule/add-schedule.component';
 
 const redirectLoggedOut = () => redirectUnauthorizedTo(['login']);
 const redirectLoggedIn = () => redirectLoggedInTo(['home']);
@@ -21,100 +22,127 @@ const routes: Routes = [
     path: 'home',
     canActivate: [AuthGuard],
     data: { authGuardPipe: redirectLoggedOut },
-    loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule)
+    loadChildren: () => import('./pages/home/home.module').then(m => m.HomePageModule)
   },
   {
     path: 'login',
     canActivate: [AuthGuard],
     data: { authGuardPipe: redirectLoggedIn },
-    loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
+    loadChildren: () => import('./pages/login/login.module').then(m => m.LoginPageModule)
   },
   {
     path: 'register',
     canActivate: [AuthGuard],
     data: { authGuardPipe: redirectLoggedIn },
-    loadChildren: () => import('./pages/register/register.module').then( m => m.RegisterPageModule)
+    loadChildren: () => import('./pages/register/register.module').then(m => m.RegisterPageModule)
   },
   {
     path: 'splash',
-     canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
     data: { authGuardPipe: redirectLoggedOut },
-    loadChildren: () => import('./pages/splash/splash.module').then( m => m.SplashPageModule)
+    loadChildren: () => import('./pages/splash/splash.module').then(m => m.SplashPageModule)
   },
   {
     path: 'settings',
-     canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
     data: { authGuardPipe: redirectLoggedOut },
-    loadChildren: () => import('./pages/settings/settings.module').then( m => m.SettingsPageModule)
+    loadChildren: () => import('./pages/settings/settings.module').then(m => m.SettingsPageModule)
   },
   {
     path: 'logout',
-    loadChildren: () => import('./pages/logout/logout.module').then( m => m.LogoutPageModule)
+    loadChildren: () => import('./pages/logout/logout.module').then(m => m.LogoutPageModule)
   },
   {
     path: 'otheruser',
-     canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
     data: { authGuardPipe: redirectLoggedOut },
-    loadChildren: () => import('./pages/otheruser/otheruser.module').then( m => m.OtheruserPageModule)
+    loadChildren: () => import('./pages/otheruser/otheruser.module').then(m => m.OtheruserPageModule)
   },
   {
     path: 'friends',
-     canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
     data: { authGuardPipe: redirectLoggedOut },
-    loadChildren: () => import('./pages/friends/friends.module').then( m => m.FriendsPageModule)
+    loadChildren: () => import('./pages/friends/friends.module').then(m => m.FriendsPageModule)
   },
   {
     path: 'groups',
-     canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
     data: { authGuardPipe: redirectLoggedOut },
-    loadChildren: () => import('./pages/groups/groups.module').then( m => m.GroupsPageModule)
+    loadChildren: () => import('./pages/groups/groups.module').then(m => m.GroupsPageModule)
   },
   {
     path: 'userprofile',
-     canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
     data: { authGuardPipe: redirectLoggedOut },
-      loadChildren: () => import('./pages/userprofile/userprofile.module').then( m => m.UserprofilePageModule)
+    loadChildren: () => import('./pages/userprofile/userprofile.module').then(m => m.UserprofilePageModule)
   },
   {
     path: 'workout-scheduling',
-     canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
     data: { authGuardPipe: redirectLoggedOut },
-      loadChildren: () => import('./pages/workout-scheduling/workout-scheduling.module').then( m => m.WorkoutSchedulingPageModule)
+    loadChildren: () => import('./pages/workout-scheduling/workout-scheduling.module').then(m => m.WorkoutSchedulingPageModule)
+  },
+  {
+    path: 'workout-tracking',
+    canActivate: [AuthGuard],
+    data: { authGuardPipe: redirectLoggedOut },
+    loadChildren: () => import('./pages/workout-tracking/workout-tracking.module').then(m => m.WorkoutTrackingPageModule)
   },
   {
     path: 'setprofile',
-     canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
     data: { authGuardPipe: redirectLoggedOut },
-    loadChildren: () => import('./pages/setprofile/setprofile.module').then( m => m.SetprofilePageModule)
+    loadChildren: () => import('./pages/setprofile/setprofile.module').then(m => m.SetprofilePageModule)
+  },
+  {
+    path: 'fitnessgoals',
+    loadChildren: () => import('./pages/fitnessgoals/fitnessgoals.module').then(m => m.FitnessgoalsPageModule)
   },
   {
     path: 'notifications',
-     canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
     data: { authGuardPipe: redirectLoggedOut },
-    loadChildren: () => import('./pages/notifications/notifications.module').then( m => m.NotificationsPageModule)
+    loadChildren: () => import('./pages/notifications/notifications.module').then(m => m.NotificationsPageModule)
   },
   {
     path: 'badges',
-     canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
     data: { authGuardPipe: redirectLoggedOut },
-    loadChildren: () => import('./pages/badges/badges.module').then( m => m.BadgesPageModule)
+    loadChildren: () => import('./pages/badges/badges.module').then(m => m.BadgesPageModule)
   },
   {
     path: "otheruserFriends",
     component: FriendsComponent,
-    pathMatch: 'full'
+    pathMatch: 'full',
+    canActivate: [AuthGuard],
+    data: { authGuardPipe: redirectLoggedOut },
   },
   {
     path: "otheruserSchedules",
     component: SchedulesComponent,
-    pathMatch: 'full'
+    pathMatch: 'full',
+    canActivate: [AuthGuard],
+    data: { authGuardPipe: redirectLoggedOut },
   },
   {
     path: 'points',
-     canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
     data: { authGuardPipe: redirectLoggedOut },
-    loadChildren: () => import('./pages/points/points.module').then( m => m.PointsPageModule)
+    loadChildren: () => import('./pages/points/points.module').then(m => m.PointsPageModule)
   },
+  {
+    path: "addSchedule",
+    component: AddScheduleComponent,
+    pathMatch: 'full',
+    canActivate: [AuthGuard],
+    data: { authGuardPipe: redirectLoggedOut },
+  },
+  {
+    path: 'otheruserbadges',
+    canActivate: [AuthGuard],
+    data: { authGuardPipe: redirectLoggedOut },
+    loadChildren: () => import('./pages/otheruserbadges/other-user-badges.module').then(m => m.OtherUserBadgesPageModule)
+  }
 ];
 @NgModule({
   imports: [
@@ -122,4 +150,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

@@ -5,6 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import * as admin from 'firebase-admin';
+
 import {
   initializeFirestore,
   provideFirestore,
@@ -59,7 +61,6 @@ import { AngularFirestore, AngularFirestoreModule } from '@angular/fire/compat/f
 import { AngularFireModule } from '@angular/fire/compat';
 // import {AuthModule} from 'src/app/pages/auth';
 // const useEmulators = process.env['NX_FIREBASE_USE_EMULATORS'] || true;
-import { BackButtonDirectiveModule } from './directives';
  
 
 @NgModule({
@@ -74,9 +75,7 @@ import { BackButtonDirectiveModule } from './directives';
     IonicModule.forRoot(), 
     NgxsRouterPluginModule.forRoot(),
     AppRoutingModule,
-    AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule ,
-    BackButtonDirectiveModule,
     provideRemoteConfig(() => getRemoteConfig()),
     provideAnalytics(() => getAnalytics()),
     provideAuth(() => {

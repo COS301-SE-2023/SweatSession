@@ -1,0 +1,27 @@
+ion-card {
+   width: inherit;
+   height: 100%;
+   margin: 0 auto;
+}
+
+ion-content {
+   --background: url('/assets/Asset 2.png') no-repeat center/cover fixed; // #1D3557;
+ }
+
+ion-card, ion-item {
+   opacity: 0.9;
+}
+
+ion-button {
+   --background: #A8DADC;
+   --background-hover: #9ce0be;
+   --background-activated: #88f4be;
+   --background-focused: #88f4be;
+ 
+   --color: #000;
+ 
+   --border-color: #E63946;
+   --border-style: solid;
+   --ripple-color: deeppink;
+   margin: 15px;
+ }

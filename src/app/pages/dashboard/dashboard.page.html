@@ -1,9 +1,21 @@
 <div class="outer-container">
   <ion-content>
     <div class="inner-container">
-      <div class="message">
-        Page under construction :)
-      </div>
+      <!-- *ngIf="(profile$ | async) as profile; else noProfile" -->
+      <ng-template #noProfile>
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <ion-skeleton-text>
+                dsjkfldkflsdflksd
+                dfjksdljfkdsljflk
+                dsjlfkdsklfdslkf
+                fjsdklfdsklfdklsf
+              </ion-skeleton-text>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ng-template>
    </div>
   </ion-content>
 </div>

@@ -1,8 +1,10 @@
 <ion-header [translucent]="true">
-  <ion-item style="display: flex; align-items: center;">
-    <ion-icon name="arrow-back-outline" (click) ="back()" style="font-size: 2rem;"></ion-icon>
-    <ion-title style="margin-left: 0rem;">Points</ion-title>
-  </ion-item>
+  <ion-toolbar>
+    <ion-item lines="none">
+      <backbutton></backbutton>
+      <ion-title style="margin-left: 0rem;">Points</ion-title>
+    </ion-item>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content class="pointsContainer" *ngIf="points$ | async as points">

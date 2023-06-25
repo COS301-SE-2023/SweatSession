@@ -1,15 +1,20 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-item lines="none">
+      <backbutton></backbutton>
+    <ion-title>Add workout-schedule</ion-title>
+    </ion-item>
+  </ion-toolbar>
+</ion-header>
 <ion-content>
   <ion-card>
-    <ion-card-header>
-      <ion-card-title>Add workout-schedule</ion-card-title>
-    </ion-card-header>
     <ion-card-content>
       <ion-grid>
         <ion-row>
           <ion-col>
             <ion-item>
               <ion-label position="floating">Time</ion-label>
-              <ion-input type="time" [(ngModel)]="schedule.time"></ion-input>
+              <ion-input type="time" [(ngModel)]="schedule.time" [min]="getMinTime()"></ion-input>
             </ion-item>
           </ion-col>
         </ion-row>
@@ -17,9 +22,9 @@
           <ion-col>
             <ion-item>
               <ion-label position="floating">Date</ion-label>
-              <ion-input type="date" [(ngModel)]="schedule.date"></ion-input>
+              <ion-input type="date" [(ngModel)]="schedule.date" [min]="getMinDate()"></ion-input>
             </ion-item>
-          </ion-col>
+          </ion-col>          
         </ion-row>
         <ion-row>
           <ion-col>
@@ -32,8 +37,8 @@
         <ion-row>
           <ion-col>
             <ion-item>
-              <ion-label position="floating">duration</ion-label>
-              <ion-input type="number" [(ngModel)]="schedule.duration"></ion-input>
+              <ion-label position="floating">duration(min)</ion-label>
+              <ion-input type="number" [(ngModel)]="schedule.duration" [min]="10"></ion-input>
             </ion-item>
           </ion-col>
         </ion-row>
@@ -47,8 +52,7 @@
         </ion-row>
       </ion-grid>
     </ion-card-content>
-    <ion-button expand="full" (click)="addSchedule()">Save</ion-button>
-    <ion-button expand="full" (click)="closePopup()">cancel</ion-button>
+    <ion-button expand="block" (click)="addSchedule()" [disabled]="!isValidInput()">Save</ion-button>
   </ion-card>
 </ion-content>
 

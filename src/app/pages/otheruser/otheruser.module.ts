@@ -7,11 +7,13 @@ import { IonicModule } from '@ionic/angular';
 import { OtheruserPageRoutingModule } from './otheruser-routing.module';
 
 import { OtheruserPage } from './otheruser.page';
-import { OtheruserStateModule } from 'src/app/states';
+import { AuthModule, OtheruserStateModule } from 'src/app/states';
 import { FriendsComponent } from './friends/friends.component';
 import { SchedulesComponent } from './schedules/schedules.component';
-import { PopupScheduleModule } from "../workout-scheduling/popout-schedule/popout-schedule.module";
+//import { ScheduleContentModule } from "../workout-scheduling/schedulecontent/schedule-content.module";
 import { WorkoutSchedulingStateModule } from 'src/app/states';
+import { BackButtonDirectiveModule } from 'src/app/directives';
+import { WorkoutSchedulingPageModule } from '../workout-scheduling/workout-scheduling.module';
 
 @NgModule({
   imports: [
@@ -20,8 +22,10 @@ import { WorkoutSchedulingStateModule } from 'src/app/states';
     IonicModule,
     OtheruserPageRoutingModule,
     OtheruserStateModule,
-    PopupScheduleModule,
-    WorkoutSchedulingStateModule
+    WorkoutSchedulingPageModule,
+    WorkoutSchedulingStateModule,
+    BackButtonDirectiveModule,
+    AuthModule
   ],
   declarations: [OtheruserPage, FriendsComponent, SchedulesComponent],
 })

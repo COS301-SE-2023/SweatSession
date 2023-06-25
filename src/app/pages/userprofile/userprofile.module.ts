@@ -10,6 +10,7 @@ import { UserprofilePage } from './userprofile.page';
 import { Auth } from '@angular/fire/auth';
 import { AuthApi } from 'src/app/states/auth/auth.api';
 import { BackButtonDirectiveModule } from 'src/app/directives';
+import { FriendsStateModule } from 'src/app/states';
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import { BackButtonDirectiveModule } from 'src/app/directives';
     FormsModule,
     IonicModule,
     UserprofilePageRoutingModule,
-    BackButtonDirectiveModule
+    BackButtonDirectiveModule,
+    FriendsStateModule,
   ],
   declarations: [UserprofilePage],
   providers: [AuthApi]

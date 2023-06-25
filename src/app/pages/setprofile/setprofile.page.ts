@@ -8,7 +8,6 @@ import {AuthenticationStateModel} from 'src/app/states/auth/auth.state';
 import { AuthApi } from 'src/app/states/auth/auth.api';
 import { Select, Store } from '@ngxs/store';
 import {GetProfileAction} from 'src/app/actions/profile.action';
-import { NavigationService } from 'src/app/services';
 
 @Component({
   selector: 'app-setprofile',
@@ -84,9 +83,7 @@ export class SetprofilePage implements OnInit {
     private modalController: ModalController, 
     setprofileservices: SetProfileService, 
     private authApi: AuthApi,
-    private readonly store: Store,
-    private navigation: NavigationService
-    )//, private ProfileService: ProfileService)
+    private readonly store: Store)//, private ProfileService: ProfileService)
     {   
       // this.user = {userId: 'sdHzZS6WSslwe4xo51rK', name: 'no name provided', email: 'no email provided', bio: 'no bio provided', profileURL: 'https://i.pravatar.cc/150?img=68', phoneNumber: '0000000000'};
       // this.user = {userId: 'abc', name: 'Triumph Ndlovu', email: 'no email provided', bio: 'no bio provided', profileURL: 'https://i.pravatar.cc/150?img=68', phoneNumber: '0000000000'};
@@ -139,9 +136,4 @@ export class SetprofilePage implements OnInit {
 
     // });
   }
-  
-  back() {
-    this.navigation.back();
-  }
-
  }

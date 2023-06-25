@@ -10,7 +10,7 @@ import { SearchPageRoutingModule } from './search-routing.module';
 import { SearchPage } from './search.page';
 import { UsersearchComponent } from './usersearch/usersearch.component';
 import { GymsearchComponent } from './gymsearch/gymsearch.component';
-import { OtheruserStateModule } from 'src/app/states';
+import { OtheruserStateModule, AuthModule } from 'src/app/states';
 
 
 @NgModule({
@@ -19,7 +19,8 @@ import { OtheruserStateModule } from 'src/app/states';
     FormsModule,
     IonicModule,
     SearchPageRoutingModule,
-    OtheruserStateModule
+    OtheruserStateModule,
+    AuthModule
   ],
   declarations: [SearchPage, UsersearchComponent, GymsearchComponent]
 })

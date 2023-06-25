@@ -1,14 +1,14 @@
 <ng-container>
-  <ion-header>
+  <ion-header [translucent]="true">
     <ion-toolbar>
       <ion-item>
-        <ion-icon name="arrow-back-outline" (click) ="back()"></ion-icon>
+        <backbutton></backbutton>
         <ion-title>WorkoutSchedules</ion-title>
       </ion-item>
     </ion-toolbar>
   </ion-header>
   
-  <ion-content>
+  <ion-content [fullscreen]="true">
     <div class = "outer-container">
       <div class="body-content">
         <ion-card *ngFor = "let schedule of schedules">
@@ -19,6 +19,13 @@
             </ion-text>
             <ion-button slot="end" (click)="viewSchedule(schedule)">view</ion-button>
           </ion-item>
+          <ion-card-content  *ngIf="isSlideShow">
+            <ion-icon name="barbell-outline"></ion-icon><ion-text class="schedule-value">{{schedule.name}}</ion-text><br>
+            <ion-icon name="calendar-outline"></ion-icon><ion-text class="schedule-value">{{schedule.date}}</ion-text><br>
+            <ion-icon name="time-outline"></ion-icon><ion-text class="schedule-value">{{schedule.time}}</ion-text><br>
+            <ion-icon name="location-outline"></ion-icon><ion-text class="schedule-value">{{schedule.location}}</ion-text><br>
+            <ion-icon name="timer-outline"></ion-icon><ion-text class="schedule-value">{{schedule.duration}} minutes</ion-text><br><br>
+        </ion-card-content>
         </ion-card>
       </div>
     </div>

@@ -10,6 +10,7 @@ import { BadgesPage } from './badges.page';
 import { BadgeComponent } from './badge/badge.component';
 import { BadgesApi } from 'src/app/states/badges/badges.api';
 import { AuthApi } from 'src/app/states/auth/auth.api';
+import { BackButtonDirectiveModule } from 'src/app/directives';
 
 @NgModule({
   imports: [
@@ -18,6 +19,7 @@ import { AuthApi } from 'src/app/states/auth/auth.api';
     IonicModule,
     BadgesPageRoutingModule,
     BadgesStatesModule,
+    BackButtonDirectiveModule
   ],
   declarations: [BadgesPage, BadgeComponent],
   providers: [BadgesApi, AuthApi]

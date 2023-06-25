@@ -9,12 +9,8 @@ import { NavigationService } from 'src/app/services';
 })
 export class SettingsPage implements OnInit {
 
-  constructor(private navigation: NavigationService) { }
+  constructor() { }
 
   ngOnInit() {
-  }
-
-  back() {
-    this.navigation.back();
   }
 }

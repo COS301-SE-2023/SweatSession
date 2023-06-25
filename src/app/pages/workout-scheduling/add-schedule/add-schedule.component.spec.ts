@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { PopoutAddScheduleComponent } from './popout-add-schedule.component';
+import { AddScheduleComponent } from './add-schedule.component';
 
-describe('PopoutAddScheduleComponent', () => {
-  let component: PopoutAddScheduleComponent;
-  let fixture: ComponentFixture<PopoutAddScheduleComponent>;
+describe('AddScheduleComponent', () => {
+  let component: AddScheduleComponent;
+  let fixture: ComponentFixture<AddScheduleComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ PopoutAddScheduleComponent ],
+      declarations: [ AddScheduleComponent ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(PopoutAddScheduleComponent);
+    fixture = TestBed.createComponent(AddScheduleComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

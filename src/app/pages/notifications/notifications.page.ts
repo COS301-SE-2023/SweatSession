@@ -5,7 +5,6 @@ import { NoticehomeService } from 'src/app/services/notifications/noticehome.ser
 import { Notice } from 'src/app/models/notice.model';
 import { AlertController, NavController } from '@ionic/angular';
 import { Location } from "@angular/common";
-import { NavigationService } from 'src/app/services';
 import { getAuth } from 'firebase/auth';
 // import { HomePage } from '../home/home.page';
 // import { Router } from '@angular/router';
@@ -36,8 +35,7 @@ export class NotificationsPage implements OnInit {
   constructor(private noticeService: NoticeService , 
     private alertController: AlertController,
     public nav: NavController,
-    private noticehomeService: NoticehomeService,
-    private navigation: NavigationService ) { 
+    private noticehomeService: NoticehomeService) { 
     
   }
  
@@ -102,9 +100,5 @@ export class NotificationsPage implements OnInit {
 
   createNotifications(sendername: string , sentdate: string , message: string){
     this.noticeService.createNotices(sendername , sentdate , message , this.currUserId!);
-  }
-
-  back() {
-    this.navigation.back();
   }
 }

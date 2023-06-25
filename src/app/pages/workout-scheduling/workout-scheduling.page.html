@@ -1,31 +1,43 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-item lines="none">
-      <ion-icon name="arrow-back-outline" (click)="back()"></ion-icon>
+      <backbutton></backbutton>
       <ion-title>Schedules</ion-title>
-      <ion-item lines="none"slot="end"  class="add-schedule-button" (click)="addSchedule()">
-        <ion-icon name="add-outline"></ion-icon>
-        <ion-icon name="receipt-outline"></ion-icon>
-      </ion-item>
     </ion-item>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <div class="search">
-    <ion-searchbar placeholder="find schedule"
-      [(ngModel)] = "searchTerms.searchQuery"
-      (ionInput) = onSearchInput($event)
-    ></ion-searchbar>
-    <div id="search-suggestions">
-      <ion-list *ngIf="searchTerms.showSuggestions">
-        <ion-item line="none" *ngFor="let suggestion of searchTerms.filteredSuggestions" (click)="find(suggestion.name!)">
-          {{ suggestion.name }}
-        </ion-item>
-      </ion-list>
-    </div>
-  </div>
-  <workout-schedule *ngFor = "let schedule of schedules"
-    [schedule] = schedule
+  <ion-segment (ionChange)="onSegmentChange($event)" value="0" [scrollable]="true">
+    <ion-segment-button value="0">All</ion-segment-button>
+    <ion-segment-button value="1">in Session</ion-segment-button>
+    <ion-segment-button value="2">completed</ion-segment-button>
+    <ion-segment-button value="3">uncompleted</ion-segment-button>
+  </ion-segment>
+
+  <workout-schedule id="0" [hidden]="selectedSegment !== '0'"
+  [categoryName]="''"  
+  [schedules] = "schedules"
   ></workout-schedule>
+
+  <workout-schedule id="1" [hidden]="selectedSegment !== '1'"
+  [categoryName]="'in session'"  
+  [schedules] = "inSessionSchedules"
+  ></workout-schedule>
+
+  <workout-schedule id="2" [hidden]="selectedSegment !== '2'"
+  [categoryName]="'completed'"  
+  [schedules] = "completedSchedules"
+  ></workout-schedule>
+
+  <workout-schedule id="3" [hidden]="selectedSegment !== '3'"
+  [categoryName]="'uncompleted'"  
+  [schedules] = "uncompletedSchedules"
+  ></workout-schedule>
+
+  <ion-fab slot="fixed" vertical="bottom" horizontal="center">
+    <ion-fab-button (click)="addSchedule()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>
