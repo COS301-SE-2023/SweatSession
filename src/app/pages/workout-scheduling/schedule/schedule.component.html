@@ -7,8 +7,13 @@
       <ion-text>
         {{schedule.name}}
       </ion-text>
-      <ion-button slot="end" (click)="viewSchedule(schedule)">view</ion-button>
-      <ion-button slot="end" (click)="addWorkout(schedule)">Add Workout</ion-button>
+      <ion-button slot="end" (click)="viewSchedule(schedule)">View Schedule</ion-button>
+      <ion-button
+        slot="end"
+        (click)="schedule.workoutAdded ? viewWorkout(schedule) : addWorkout(schedule)"
+      >
+        {{ schedule.workoutAdded ? 'View Workout' : 'Add Workout' }}
+      </ion-button>
     </ion-item>
 
     <ion-item-options side="start">

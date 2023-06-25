@@ -5,6 +5,7 @@ import { Navigate } from "@ngxs/router-plugin";
 import { Router } from "@angular/router";
 import { AddWorkoutSchedule, 
         GetWorkoutSchedules,
+        UpdateWorkoutAdded,
         RemoveWorkoutSchedule,
         UpdateWorkoutSchedule } 
         from "src/app/actions";
@@ -45,6 +46,16 @@ export class WorkoutSchedulingState {
         private readonly store: Store,
         private readonly authApi: AuthApi
     ){}
+
+    @Action(UpdateWorkoutAdded)
+  updateWorkoutAdded(ctx: StateContext<IWorkoutScheduleModel[]>, action: UpdateWorkoutAdded) {
+    const state = ctx.getState();
+    const index = state.findIndex((schedule) => schedule.id === action.payload.id);
+    if (index !== -1) {
+      const updatedSchedule = { ...state[index], workoutAdded: action.payload.workoutAdded };
+      ctx.setState([...state.slice(0, index), updatedSchedule, ...state.slice(index + 1)]);
+    }
+  }
 
     @Action(GetWorkoutSchedules)
     async getWorkoutSchedules(ctx: StateContext<WorkoutSchedulingStateModel>) {
