@@ -1,17 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
+import {GetUsersAction} from 'src/app/actions/profile.action'
 import { AddFriendAction, GetOtheruserFriends, GetOtheruserSchedules, LoadOtherUserProfile, RemoveFriendAction, RemoveUser } from 'src/app/actions';
-import { IFriendsModel, IProfileModel, IWorkoutScheduleModel } from 'src/app/models';
+import { IFriendsModel, IProfileModel, IWorkoutScheduleModel , IGotProfile } from 'src/app/models';
+import { Profile } from 'src/app/models/notice.model';
 import { OtherUserStateModel, OtheruserState } from 'src/app/states';
 import {NoticeService } from 'src/app/services/notifications/notice.service';
 import { getAuth } from 'firebase/auth';
+import { NavigationService } from 'src/app/services';
 import { SetOtherUserBadgesId, SetOtherUserBadgesName } from 'src/app/actions/otheruserbadges.actions';
 import { PointsApi } from 'src/app/states/points/points.api';
 import { IPoints } from 'src/app/models/points.model';
 import { IBadges } from 'src/app/models/badges.model';
 import { BadgesApi } from 'src/app/states/badges/badges.api';
+import { DocumentSnapshot } from 'firebase/firestore';
 
 @Component({
   selector: 'app-otheruser',
@@ -19,24 +23,40 @@ import { BadgesApi } from 'src/app/states/badges/badges.api';
   styleUrls: ['./otheruser.page.scss'],
 })
 export class OtheruserPage implements OnInit {
+
+
   friendshipStatus: boolean;
  
   user!: IProfileModel;
+  currusername: string;
   friends: IFriendsModel[] =[];
   workoutSchedules: IWorkoutScheduleModel[] = [];
-  auth = getAuth();
-  currUserId = this.auth.currentUser?.uid;
-  date : string ;
+  
   points$: Observable<IPoints>;
   badges$: Observable<IBadges>;
+  profileList: Profile[];
+
+ 
 
   @Select(OtheruserState.returnOtherUserProfile) user$!: Observable<IProfileModel>;
+  @Select(OtheruserState.returnOtherUserProfile) curruser$!: Observable<IProfileModel>;
   @Select(OtheruserState.returnOtherUserFriends) friends$!: Observable<IFriendsModel[]>;
   @Select(OtheruserState.returnOtherUserSchedules) schedules$!: Observable<IWorkoutScheduleModel[]>;
   @Select(OtheruserState.returnFriendshipStatus) friendshipStatus$!: Observable<boolean>;
-  // @Select(PointsState.points) points$!: Observable<Number>;
 
-  constructor(private store: Store , private noticeService: NoticeService , private nav: NavController, pointsApi: PointsApi, badgesApi: BadgesApi ) {
+  schedules: IWorkoutScheduleModel[] = [];
+
+  auth = getAuth();
+  currUserId = this.auth.currentUser?.uid;
+  date : string ;
+  shortdate : string[] ;
+  
+
+  
+ 
+  
+  constructor(private store: Store , private noticeService: NoticeService , private nav: NavController , pointsApi: PointsApi, badgesApi: BadgesApi) {
+   
     this.displayUserInfo();
     const id = this.user?.userId;
     if (id !== undefined) {
@@ -53,16 +73,20 @@ export class OtheruserPage implements OnInit {
         // For example, set `this.points$` to a default value or show an error message
       }
     }
+    
   }
 
   ngOnInit() {
     this.displayUserInfo();
+    this.displayCurrentUser(this.currUserId!);
   }
 
   removeFriend() {
     this.store.dispatch(new RemoveFriendAction(this.friendModel()))
     this.date = new Date().toTimeString() ;
-    this.createNotifications("My name" , this.date , "Removed you as a Friend!")  ;
+    console.log(this.date.split(':' , 2));
+    this.shortdate = this.date.split(':' , 2);
+    this.createNotifications(this.currusername , this.shortdate[0] + ':' + this.shortdate[1] , "Removed you as a Friend!")  ;
   }
 
   addFriend() {
@@ -73,7 +97,8 @@ export class OtheruserPage implements OnInit {
     console.log("User is null.....")
    )
    this.date = new Date().toTimeString() ;
-   this.createNotifications("My name" , this.date , "Requested to friend you!")  ;
+   this.shortdate = this.date.split(':' , 2);
+   this.createNotifications(this.currusername , this.shortdate[0] + ':' + this.shortdate[1] , "Sent you a Friend Request!")  ;
   }
 
   viewSchedules() {
@@ -89,6 +114,22 @@ export class OtheruserPage implements OnInit {
     this.store.dispatch(new SetOtherUserBadgesId(this.user!.userId));
     this.nav.navigateRoot("/otheruserbadges");
   }
+
+  displayCurrentUser(id:string){
+    this.noticeService.getTheNoticeProfile().subscribe((profiles: Profile[]) => {
+    this.profileList = profiles;
+    console.log('Number of PROFILES:', this.profileList.length);
+    for(let i = 0 ; i<this.profileList.length ; i++){
+      if(this.profileList[i].id == this.currUserId ){
+        this.currusername = this.profileList[i].displayName! ;
+        console.log(this.currusername);
+      }
+    }
+
+      
+  });
+}
+
 
   displayUserInfo() {
     this.store.dispatch(new LoadOtherUserProfile());
@@ -133,6 +174,6 @@ export class OtheruserPage implements OnInit {
   }
 
   createNotifications(sendername: string , sentdate: string , message: string){
-    this.noticeService.createNotices(sendername , sentdate , message , this.currUserId!);
+    this.noticeService.createNotices(sendername , sentdate , message , this.user.userId);
   }
 }
