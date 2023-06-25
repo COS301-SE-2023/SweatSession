@@ -19,6 +19,7 @@ export class ExerciseService {
   async addExerciseWithUniqueId(exercise: Exercise): Promise<Exercise> {
     const uniqueId = this.firestore.createId();
     exercise.id = uniqueId;
+    console.log('Adding exercise:', exercise);
     await this.firestore.collection('exercises').doc(uniqueId).set(exercise);
     return exercise;
   }
@@ -35,6 +36,12 @@ export class ExerciseService {
   }
 
   updateExercise(exerciseId: string, exercise: Exercise) {
+    console.log('Updating exercise:', exerciseId, exercise);
     return this.firestore.collection('exercises').doc(exerciseId).update(exercise);
   }  
+
+  async deleteExerciseFromDatabase(exerciseId: string) {
+    console.log('Deleting exercise:', exerciseId);
+    await this.firestore.collection('exercises').doc(exerciseId).delete();
+  }
 }

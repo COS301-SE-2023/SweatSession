@@ -1,15 +1,12 @@
   import { Component, OnInit } from '@angular/core';
   import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
   import { AbstractControl } from '@angular/forms';
-
+  import { take } from 'rxjs/operators';
   import { ExerciseService } from '../../services/exercise/exercise.service';
   import { Exercise } from '../../models/exercise.model';
   import { NavigationService } from 'src/app/services';
   import { NavController } from '@ionic/angular';
   import { Router } from '@angular/router';
-
-
-
 
 
   @Component({
@@ -21,6 +18,7 @@
     scheduleId: string;
     workoutForm: FormGroup;
     exercisesArray: Exercise[] = [];
+    deletedExercises: string[] = [];
 
     constructor(
       private formBuilder: FormBuilder,
@@ -43,11 +41,12 @@
     }
 
     ngOnInit(): void {
-        this.exerciseService.getExerciseByScheduleId(this.scheduleId).subscribe((exercises) => {
+        this.exerciseService.getExerciseByScheduleId(this.scheduleId).pipe(take(1)).subscribe((exercises) => {
           this.exercisesArray = exercises.map((exercise) => ({
             ...exercise,
             id: exercise.id,
           }));
+          console.log('Fetched exercises:', this.exercisesArray);
           this.populateFormWithExercises();
         });
       }
@@ -82,27 +81,32 @@
     
     
     deleteExercise(index: number) {
+      const exercise = this.exercisesArray[index];
+      if (exercise.id) {
+        this.deletedExercises.push(exercise.id);
+      }
       this.exercises.removeAt(index);
     }
     private async saveExercise(exerciseData: Exercise, index: number) {
       let exercise = this.exercisesArray[index];
     
       if (exercise) {
-        // Update existing exercise
         Object.assign(exercise, exerciseData);
         if (exercise.id) {
           await this.exerciseService.updateExercise(exercise.id, exercise);
           console.log(`Exercise ${index + 1} updated successfully.`);
         }
       } else {
-        // Add new exercise
         const newExercise = await this.exerciseService.addExerciseWithUniqueId(exerciseData);
         console.log(`Exercise ${index + 1} added successfully.`);
         this.exercisesArray.push(newExercise);
       }
     }
 
-    async saveExercises() {
+    async saveExercises() { 
+      console.log('Initial exercisesArray:', this.exercisesArray);
+      console.log('Form exercises:', this.exercises.controls);
+      console.log('Deleted exercises:', this.deletedExercises);   
       const promises = this.exercises.controls.map((exerciseControl: AbstractControl, index: number) => {
         const exerciseData = {
           scheduleId: this.scheduleId,
@@ -116,8 +120,18 @@
       });
     
       await Promise.all(promises);
+    
+      const deletePromises = this.deletedExercises.map(async (exerciseId) => {
+        await this.exerciseService.deleteExerciseFromDatabase(exerciseId);
+        console.log(`Exercise with ID ${exerciseId} deleted successfully.`);
+      });
+    
+      await Promise.all(deletePromises);
+      this.deletedExercises = [];
+    
       console.log('All exercises saved.');
     }
+    
     
     
   }
