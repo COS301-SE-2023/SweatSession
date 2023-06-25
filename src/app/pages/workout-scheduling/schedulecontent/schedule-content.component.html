@@ -7,6 +7,11 @@
           </ion-text>
           <ion-button slot="end" (click)="viewSchedule()" *ngIf="!isSlideShow">view</ion-button>
           <ion-button slot="end" (click)="viewSchedule()" *ngIf="isSlideShow">close</ion-button>
+          <ion-button slot="end"
+            (click)="schedule.workoutAdded ? viewWorkout(schedule) : addWorkout(schedule)"
+          >
+        {{ schedule.workoutAdded ? 'View Workout' : 'Add Workout' }}
+      </ion-button>
         </ion-item>
     
         <ion-item-options side="start">
