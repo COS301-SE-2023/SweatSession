@@ -3,7 +3,8 @@ import { CommonModule } from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
-
+import {NgxsModule} from "@ngxs/store";
+import {FitnessgoalState} from "../../states";
 import { FitnessgoalsPageRoutingModule } from './fitnessgoals-routing.module';
 
 import { FitnessgoalsPage } from './fitnessgoals.page';

@@ -5,3 +5,4 @@ export * from './auth';
 export * from './login';
 export * from './otheruser.action';
 export * from './profile.action';
+export * from './fitnessgoals';

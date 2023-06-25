@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IonicModule, ModalController } from '@ionic/angular';
+import { ModalController } from '@ionic/angular';
 import { NavController } from '@ionic/angular';
 import { Select, Store } from '@ngxs/store';
 import { Observable, tap } from 'rxjs';
@@ -26,7 +26,6 @@ export class UserprofilePage implements OnInit {
   constructor(
     private Nav: NavController,
     private store: Store,
-    private modalController: ModalController,
     private setprofileservices: SetProfileService, 
     private authApi: AuthApi,) {}
 
@@ -43,7 +42,7 @@ export class UserprofilePage implements OnInit {
           this.ProfilePicture$ = profile.profile.profileURL;
           this.displayName$ = profile.profile.displayName;
           this.myBio$ = profile.profile.bio;
-          // this.friends$ = profile.profile.friends.length;
+          //getting groups
           // this.groups$ = profile.profile.groups.length;
 
           if(profile.profile.profileURL == "")
