@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { IonicModule, ModalController } from '@ionic/angular';
 import { NavController } from '@ionic/angular';
-import { Store } from '@ngxs/store';
+import { Select, Store } from '@ngxs/store';
+import { Observable, tap } from 'rxjs';
+import { GetFriendsAction } from 'src/app/actions';
 import { IGetProfile } from 'src/app/models';
 import { SetProfileService } from 'src/app/services';
+import { FriendsState } from 'src/app/states';
 import { AuthApi } from 'src/app/states/auth/auth.api';
-import { NavigationService } from 'src/app/services';
 
 @Component({
   selector: 'app-userprofile',
@@ -13,31 +15,30 @@ import { NavigationService } from 'src/app/services';
   styleUrls: ['./userprofile.page.scss'],
 })
 export class UserprofilePage implements OnInit {
+  @Select(FriendsState.returnFriendsSize) friendsSize$! : Observable<number>;
+  ProfilePicture$? = '/assets/ProfileSE.jpg';
+  displayName$? = 'na';
+  myBio$? = 'na';
+  friends$ = 0;
+  friendsSize = 0;
+  groups$ = 0;
+  getUser : IGetProfile = {userId: 'na'};
 
   constructor(
     private Nav: NavController,
     private store: Store,
     private modalController: ModalController,
     private setprofileservices: SetProfileService, 
-    private authApi: AuthApi,
-    private navigation: NavigationService) { }
+    private authApi: AuthApi,) {}
 
-  ProfilePicture$? = './assets/img/ProfileSE.png';
-  displayName$? = 'na';
-  myBio$? = 'na';
-  friends$ = 0;
-  groups$ = 0;
-  getUser : IGetProfile = {userId: 'na'};
   getUserid() {
     return  this.authApi.getCurrentUserId();
   }
 
-  ngOnInit()
-  {
+  ngOnInit() {
+    this.displayFriendsSize();
     this.getUserid().then((id) => {
       this.getUser.userId = id;
-    
-
     this.setprofileservices.getProfile(this.getUser).subscribe((profile) => {
         
           this.ProfilePicture$ = profile.profile.profileURL;
@@ -46,32 +47,36 @@ export class UserprofilePage implements OnInit {
           // this.friends$ = profile.profile.friends.length;
           // this.groups$ = profile.profile.groups.length;
 
-          if(profile.profile.profileURL == "")
+          if(profile.profile.profileURL == "" || profile.profile.profileURL == undefined)
           {
-            this.ProfilePicture$ =  '../../../assets/img/ProfileSE.png';
+            this.ProfilePicture$ =  '/assets/ProfileSE.jpg';
           }
            
       });
-
     });
   }
 
-  Leaderboard(){
+  Leaderboard() {
     this.Nav.navigateRoot('/home/leaderboard');
   }
 
-  Friends(){
+  Friends() {
     this.Nav.navigateRoot('/friends');
   }
 
-  Groups(){
-    this.Nav.navigateRoot('/home/messages');
+  Groups() {
+    this.Nav.navigateRoot('/groups');
   }
-  Schedule(){
+
+  Schedule() {
     this.Nav.navigateRoot('/workout-scheduling');
   }
 
-  back() {
-    this.navigation.back();
+  displayFriendsSize() {
+    this.store.dispatch(new GetFriendsAction())
+    this.friendsSize$.subscribe((response)=>{
+      this.friendsSize = response;
+      console.log("number of friends: " +response);
+    })
   }
 }

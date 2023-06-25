@@ -5,4 +5,13 @@ ion-text {
 ion-item{
     --highlight-height: 0;
     --inner-border-width: 0;
+    --background: #457B9D;
+}
+
+ion-card, ion-item {
+    opacity: 0.9;
+}
+
+ion-content {
+    --background: url('/assets/Asset 2.png') no-repeat center/cover fixed; // #1D3557;
 }

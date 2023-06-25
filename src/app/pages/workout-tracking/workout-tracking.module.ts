@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { WorkoutTrackingPageRoutingModule } from './workout-tracking-routing.module';
 
 import { WorkoutTrackingPage } from './workout-tracking.page';
+import { BackButtonDirectiveModule } from 'src/app/directives';
 
 @NgModule({
   imports: [
@@ -14,7 +15,8 @@ import { WorkoutTrackingPage } from './workout-tracking.page';
     FormsModule,
     ReactiveFormsModule,
     IonicModule,
-    WorkoutTrackingPageRoutingModule
+    WorkoutTrackingPageRoutingModule,
+    BackButtonDirectiveModule
   ],
   declarations: [WorkoutTrackingPage]
 })

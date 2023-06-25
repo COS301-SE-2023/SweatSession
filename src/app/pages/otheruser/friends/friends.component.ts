@@ -1,10 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
-import { GetOtheruserFriends, StageOtheruserInfo } from 'src/app/actions';
+import { GetOtheruserFriends, StageOtheruserInfo, SubscribeToAuthState } from 'src/app/actions';
 import { IFriendsModel } from 'src/app/models';
-import { OtheruserState } from 'src/app/states';
+import { AuthState, OtheruserState } from 'src/app/states';
 import { Observable } from 'rxjs';
-import { NavigationService } from 'src/app/services';
 
 @Component({
   selector: 'otheruser-friends',
@@ -14,8 +13,10 @@ import { NavigationService } from 'src/app/services';
 export class FriendsComponent  implements OnInit {
   friends!: IFriendsModel[];
   @Select(OtheruserState.returnOtherUserFriends) friends$!: Observable<IFriendsModel[]>;
+  @Select(AuthState.getCurrUserId) userId$!: Observable<string>;
+  userId:string;
  
-  constructor(private store:Store, private navigation: NavigationService) { }
+  constructor(private store:Store) { }
 
   ngOnInit() {
     this.displayFriends();
@@ -27,12 +28,20 @@ export class FriendsComponent  implements OnInit {
 
   displayFriends() {
     this.store.dispatch(new GetOtheruserFriends())
+    this.store.dispatch(new SubscribeToAuthState())
     this.friends$.subscribe((response)=> {
       this.friends = response;
     })
+
+    this.userId$.subscribe((response)=>{
+      this.userId = response;
+    })
   }
 
-  back() {
-    this.navigation.back();
+  isCurrentUser(friend:IFriendsModel) {
+    if(this.userId && friend.userId){
+      return this.userId === friend.userId;
+    }
+    return false;
   }
 }

@@ -49,5 +49,16 @@ export interface PointsStateModel {
         })
       );
     }
+
+    // @Action(GetOtherUserPoints)
+    // public getOtherUserPoints(context: StateContext<PointsStateModel>) {
+    //   return this.pointsApi.otherUserPoints$().pipe(
+    //     tap((points: IPoints) => {
+    //       console.log("IN subscribeToPoints");
+    //       console.log(points);
+    //       context.dispatch(new SetPoints(points));
+    //     })
+    //   );
+    // }
   }
   

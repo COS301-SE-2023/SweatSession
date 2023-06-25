@@ -10,12 +10,14 @@ import { catchError, of, tap } from "rxjs";
 
 export interface FriendsStateModel {
     friends: IFriendsModel[];
+    length: number;
 }
 
 @State<FriendsStateModel>({
     name: "friends",
     defaults: {
-        friends: []
+        friends: [],
+        length: 0
     }
 })
 
@@ -40,12 +42,15 @@ export class FriendsState {
             return (await this.friendsService.getFriends(request)).pipe(
                 tap((response: IGotFriends)=>{
                     ctx.setState({
-                        ...ctx.getState(), friends: response.friends
+                        ...ctx.getState(), friends: response.friends,
+                        length: response.friends.length
                     })
                 }),
                 catchError((error) => {
+                    alert(error)
                     ctx.setState({
-                        friends: []
+                        friends: [],
+                        length: 0
                     })
                     return of(error);
                 })
@@ -108,5 +113,10 @@ export class FriendsState {
     @Selector()
     static returnFriends(state: FriendsStateModel){
         return state.friends;
+    }
+
+    @Selector() 
+    static returnFriendsSize(state: FriendsStateModel){
+        return state.length;
     }
 }

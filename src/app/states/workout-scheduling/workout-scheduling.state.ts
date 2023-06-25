@@ -14,9 +14,11 @@ import { IAddWorkoutSchedule,
         IGotWorkoutSchedules,
         IRemoveWorkoutSchedule,
         IRemovedWorkoutSchedule,
+        IUpdateWorkoutSchedule,
+        IUpdatedWorkoutSchedule,
         IWorkoutScheduleModel } 
         from "src/app/models";
-import { WorkoutscheduleService } from "src/app/services";
+import { NavigationService, WorkoutscheduleService } from "src/app/services";
 import { time } from "console";
 import { AuthApi } from '../auth/auth.api';
 import { catchError, of, tap } from 'rxjs';
@@ -43,7 +45,8 @@ export class WorkoutSchedulingState {
     constructor(
         private readonly service: WorkoutscheduleService,
         private readonly store: Store,
-        private readonly authApi: AuthApi
+        private readonly authApi: AuthApi,
+        private readonly navigation: NavigationService
     ){}
 
     @Action(GetWorkoutSchedules)
@@ -109,15 +112,28 @@ export class WorkoutSchedulingState {
             ctx.patchState({
                 schedules: [response.schedule!,...ctx.getState().schedules]
             })
+            this.navigation.back();
         }else {
             alert("Sorry, You are no logged in");
             ctx.dispatch(new Navigate(['login']));
         }
     }
 
-     @Action(UpdateWorkoutSchedule)
+    @Action(UpdateWorkoutSchedule)
     async updateWorkoutSchedule(ctx: StateContext<WorkoutSchedulingStateModel>, {payload}: UpdateWorkoutSchedule) {
-       
+        const currentUserId = await this.authApi.getCurrentUserId();
+        if(currentUserId!=null) {
+            const request: IUpdateWorkoutSchedule={
+                userId: currentUserId,
+                schedule: payload
+            }
+            const response =await this.service.updateSchedule(request);
+            ctx.patchState({
+                schedules: [response.schedule!,...ctx.getState().schedules]
+            })
+        }else {
+            alert("failed to update");
+        }
     }
 
     @Action(LoadSchedule)

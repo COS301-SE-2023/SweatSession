@@ -57,4 +57,20 @@ export class HomePage implements OnInit {
   goToSettings() {
     this.nav.navigateRoot("/settings");
   }
+
+  // async displayProfile() {
+  //   // this.userId$.subscribe(async (response)=>{
+  //   //   if(response) {
+  //   //     this.userId = response;
+  //   //     this.store.dispatch(new GetProfileAction({userId: this.userId}))
+  //   //     this.profile$.subscribe(async (response)=>{
+  //   //       if(response) {
+  //   //         this.profile = await response;
+  //   //         this.show = true;
+  //   //         this.nav.navigateRoot("/home/dashboard");
+  //   //       }
+  //   //     })
+  //   //   }
+  //   // })
+  // }
 }

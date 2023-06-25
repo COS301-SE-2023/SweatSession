@@ -42,7 +42,7 @@ export class FriendsRepository {
       map((snapshot) => {
         const friends: IFriendsModel[] = [];
   
-        snapshot.forEach((doc) => {
+        snapshot.forEach(async (doc) => {
           const friend = {
             ...doc.payload.doc.data(),
 
@@ -85,6 +85,15 @@ export class FriendsRepository {
             friend: friend,
             validate: true
         }
+
+        const myFriends = this.firestore
+        .collection("friends")
+        .doc(request.userId)
+        .collection("userFriends");
+
+        // friendsCount$: Observable<number | undefined> = myFriends.valueChanges().pipe(
+        //   map((friends: any[]) => friends.length)
+        // );
         return response;
         })
     );

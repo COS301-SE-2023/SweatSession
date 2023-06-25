@@ -7,5 +7,9 @@
 }
 
 ion-segment {
-  border-radius: 0px;
+  border-radius: 15px;
+}
+
+ion-content {
+  --background: url('/assets/Asset 2.png') no-repeat center/cover fixed; // #1D3557;
 }

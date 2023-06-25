@@ -8,6 +8,7 @@ import { SetprofilePageRoutingModule } from './setprofile-routing.module';
 import { SetprofilePage } from './setprofile.page';
 import { AuthApi } from 'src/app/states/auth/auth.api';
 import { SetprofileCComponent } from './setProfileC/setProfileC.component';
+import { BackButtonDirectiveModule } from 'src/app/directives';
 
 @NgModule({
   imports: [
@@ -16,7 +17,7 @@ import { SetprofileCComponent } from './setProfileC/setProfileC.component';
     IonicModule,
     SetprofilePageRoutingModule,
     ReactiveFormsModule,
-    
+    BackButtonDirectiveModule
   ],
   providers: [
     AuthApi

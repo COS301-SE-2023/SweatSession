@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { PopoverController, LoadingController } from '@ionic/angular';
-import { PopoutAddScheduleComponent } from './popout-add-schedule/popout-add-schedule.component';
+import { PopoverController, LoadingController, NavController } from '@ionic/angular';
+// import { PopoutAddScheduleComponent } from './popout-add-schedule/popout-add-schedule.component';
 import { Select, Store } from '@ngxs/store';
 import { WorkoutSchedulingState } from 'src/app/states';
 import { Observable } from 'rxjs';
 import { ISearchTerms, IWorkoutScheduleModel } from 'src/app/models';
 import { GetWorkoutSchedules } from 'src/app/actions';
-import { NavigationService } from 'src/app/services';
 
 @Component({
   selector: 'app-workout-scheduling',
@@ -14,86 +13,53 @@ import { NavigationService } from 'src/app/services';
   styleUrls: ['./workout-scheduling.page.scss'],
 })
 export class WorkoutSchedulingPage {
-  searchTerms!: ISearchTerms;
+  //data containers
   schedules: IWorkoutScheduleModel[]=[];
+  completedSchedules: IWorkoutScheduleModel[]=[];
+  uncompletedSchedules: IWorkoutScheduleModel[]=[];
+  inSessionSchedules: IWorkoutScheduleModel[]=[];
+
+  selectedSegment: string = '0';
  
   @Select(WorkoutSchedulingState.returnSchedules) schedules$!: Observable<IWorkoutScheduleModel[]>;
+  isAddSlide = false;
 
   constructor(private popoverController: PopoverController, 
       private store : Store, 
       private loadingCtrl: LoadingController,
-      private navigation: NavigationService) {}
+      private nav: NavController) {}
 
   ngOnInit() {
     this.displayWorkoutSchedule();
-    this.initialiseSearchTerms();
-  }
-
-  initialiseSearchTerms() {
-    this.searchTerms= {
-      searchQuery:"",
-      showSuggestions:false,
-      suggestions:[],
-      filteredSuggestions:[],
-      initial:true,
-    }
   }
 
   async addSchedule(){
-    const popover = await this.popoverController.create({
-          component: PopoutAddScheduleComponent,
-          translucent: true
-        });
-        console.log("save schedule");
-        return await popover.present();
+   this.nav.navigateRoot("/addSchedule")
   }
 
   displayWorkoutSchedule(){
     this.store.dispatch(new GetWorkoutSchedules())
     this.schedules$.subscribe((response)=>{
       this.schedules = response;
-      console.table(this.schedules);
+      this.filterSchedules();
     });
   }
 
-  searchSchedule() {
-    this.searchTerms.showSuggestions = false;
-    this.schedules = this.searchTerms.filteredSuggestions!;
+  filterSchedules() {
+   this.completedSchedules = this.schedules.filter((schedule)=>
+      schedule.status! === "completed"
+    )
+
+    this.uncompletedSchedules = this.schedules.filter((schedule)=>
+      schedule.status!.match('uncompleted')
+    )
+
+    this.inSessionSchedules = this.schedules.filter((schedule)=>
+      schedule.status!.match("inSession")
+    )
   }
 
-  async showLoader() {
-    const loader = await this.loadingCtrl.create({
-      message: 'Loading...',
-      translucent: true,
-      duration: 3000
-    });
-    loader.present();
-  }
-
-  async dismissLoader() {
-    await this.loadingCtrl.dismiss();
-  }
-
-  onSearchInput(event:any) {
-    const searchText = event.target.value;
-    if (searchText) {
-      this.searchTerms.showSuggestions = true;
-      this.searchTerms.filteredSuggestions = this.schedules.filter((suggestion) =>
-        suggestion.name!.toLowerCase().includes(this.searchTerms.searchQuery!.toLowerCase())
-      );
-    }else {
-      this.searchTerms.showSuggestions = false;
-    }
-  }
-
-  find(suggestion: string){
-    console.log(suggestion);
-    this.searchTerms.searchQuery = suggestion;
-    this.searchTerms.initial = false;
-    this.searchSchedule();
-  }
-
-  back() {
-    this.navigation.back();
+  onSegmentChange(event: any) {
+    this.selectedSegment = event.detail.value;
   }
 }

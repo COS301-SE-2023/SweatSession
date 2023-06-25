@@ -9,7 +9,9 @@ import { AuthApi } from '../auth/auth.api';
 import { getAuth } from '@angular/fire/auth';
 // import { AuthState } from 'src/app/states/auth';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class BadgesApi {
   currUserId: string | undefined | null;
   constructor(private Nav: NavController, private firestore: Firestore, private authApi: AuthApi) {}//, private readonly authObject: Auth, 
@@ -29,6 +31,19 @@ export class BadgesApi {
     const docRef = doc(
       this.firestore,
       `badges/${this.currUserId}`
+    ).withConverter<IBadges>({       //convert our firestore data into the IBadges type
+      fromFirestore: (snapshot) => {
+        return (snapshot.data() as IBadges);
+      },
+      toFirestore: (it: IBadges) => it,
+    });
+    return docData(docRef, { idField: 'id' });
+  }
+
+  otheruserbadges$(id: string) {
+    const docRef = doc(
+      this.firestore,
+      `badges/${id}`
     ).withConverter<IBadges>({       //convert our firestore data into the IBadges type
       fromFirestore: (snapshot) => {
         return (snapshot.data() as IBadges);

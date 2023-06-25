@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { BackButtonDirective } from './backbutton.directive';
 import { IonicModule } from '@ionic/angular';
+import { BackbuttonComponent } from './backbutton/backbutton.component';
 
 @NgModule({
   imports: [
@@ -10,6 +11,7 @@ import { IonicModule } from '@ionic/angular';
     FormsModule,
     IonicModule,
   ],
-  declarations: [BackButtonDirective]
+  declarations: [BackbuttonComponent],
+  exports: [BackbuttonComponent]
 })
 export class BackButtonDirectiveModule {}

@@ -1,14 +1,14 @@
 <ng-container>
-  <ion-header>
+  <ion-header [translucent]="true">
     <ion-toolbar>
       <ion-item>
-        <ion-icon name="arrow-back-outline" (click) ="back()"></ion-icon>
+        <backbutton></backbutton>
         <ion-title>Friends</ion-title>
       </ion-item>
     </ion-toolbar>
   </ion-header>
   
-  <ion-content>
+  <ion-content [fullscreen]="true">
     <div class = "outer-container">
       <div class="body-content">
         <ion-card *ngFor = "let friend of friends">
@@ -17,10 +17,11 @@
               <img src = "{{friend.profileURL}}" alt="image here" />
             </ion-avatar>
             <ion-text>{{friend.name}}</ion-text>
-            <ion-icon name="chevron-forward-outline" slot = "end" (click)="viewOtherUser(friend)"></ion-icon>
+            <ion-icon name="chevron-forward-outline" slot = "end"  *ngIf="!isCurrentUser(friend)" (click)="viewOtherUser(friend)"></ion-icon>
+            <ion-text slot="end" *ngIf="isCurrentUser(friend)">you</ion-text>
           </ion-item>
         </ion-card>
       </div>
     </div>
-  </ion-content>
+  </ion-content>                
 </ng-container>

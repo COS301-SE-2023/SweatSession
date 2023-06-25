@@ -69,6 +69,9 @@ export class AuthApi {
     // console.log(auth.currentUser?.uid);
     // alert("logout");
     sessionStorage.removeItem('currUserId');
+    sessionStorage.removeItem("otheruser");
+    sessionStorage.removeItem("otherUserBadgesName");
+    sessionStorage.removeItem("otherUserBadgesId");
     return await signOut(this.authObject);
   }
 }

@@ -7,7 +7,9 @@ import { NavController } from '@ionic/angular';
 import { AuthApi } from '../auth/auth.api';
 import { getAuth } from '@angular/fire/auth';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class PointsApi {
   currUserId: string | undefined | null;
   constructor(private Nav: NavController, private firestore: Firestore, private authApi: AuthApi) {}
@@ -25,6 +27,19 @@ export class PointsApi {
     const docRef = doc(
       this.firestore,
       `points/${this.currUserId}`
+    ).withConverter<IPoints>({       //convert our firestore data into the IPoints type
+      fromFirestore: (snapshot) => {
+        return (snapshot.data() as IPoints);
+      },
+      toFirestore: (it: IPoints) => it,
+    });
+    return docData(docRef, { idField: 'id' });
+  }
+
+  otherUserPoints$(id: string) {
+    const docRef = doc(
+      this.firestore,
+      `points/${id}`
     ).withConverter<IPoints>({       //convert our firestore data into the IPoints type
       fromFirestore: (snapshot) => {
         return (snapshot.data() as IPoints);

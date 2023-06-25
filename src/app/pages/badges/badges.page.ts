@@ -7,7 +7,6 @@ import { BadgesService } from 'src/app/services/badges/badges.service';
 import { SubscribeToBadges } from 'src/app/actions/badges.actions';
 import { Select, Store } from '@ngxs/store';
 import { BadgesState } from 'src/app/states/badges/badges.state';
-import { NavigationService } from 'src/app/services';
 
 @Component({
   selector: 'app-badges',
@@ -65,8 +64,7 @@ export class BadgesPage implements OnInit {
     // private badgesApi: BadgesApi,
     private authApi: AuthApi,
     private badgesService: BadgesService,
-    private store: Store,
-    private navigation: NavigationService
+    private store: Store
   ) {}
 
   ngOnInit() {
@@ -88,9 +86,5 @@ export class BadgesPage implements OnInit {
         // Perform any other operations with each badge number
       });
     });
-  }
-
-  back() {
-    this.navigation.back();
   }
 }
