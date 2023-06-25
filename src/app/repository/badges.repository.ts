@@ -2,6 +2,7 @@
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { IBadges } from 'src/app/models/badges.model';
 import { Injectable } from '@angular/core';
+import firebase from 'firebase/compat/app';
 
 
 @Injectable({
@@ -37,27 +38,12 @@ export class BadgesRepository {
             });
         //preturn await admin.firestore().collection('profiles').doc(newProfile.userId).create(newProfile);
     }
-    // async createProfile(newProfile: IProfileModel) {
-    //     // alert("In register repositry createProfileFunc");
-    //     // const collectionRef: AngularFirestoreCollection<IProfileModel> = this.firestore.collection('profiles');
-    //     // collectionRef.add(newProfile)
-    //     //     .then((docRef) => {
-    //     //         console.log('Document created successfully with ID:', docRef.id);
-    //     //     })
-    //     //     .catch((error) => {
-    //     //         console.error('Error creating document:', error);
-    //     //     });
-    //     const profileRef = this.firestore.collection('profiles').doc(newProfile.userId);
-    //     profileRef.set(newProfile)
-    //         .then((docRef) => {
-    //             console.log('Document created successfully with ID:', docRef);
-    //             // alert('Document created successfully with ID:' + docRef);
-    //         })
-    //         .catch((error) => {
-    //             console.error('Error creating document:', error);
-    //         });
-    //     //preturn await admin.firestore().collection('profiles').doc(newProfile.userId).create(newProfile);
-    // }
+    async socialiteBadge(currUserId: string) {
+        const badgeDocRef = this.firestore.collection('badges').doc(currUserId);
+        const fieldValue = firebase.firestore.FieldValue;
 
-    
+        return badgeDocRef.update({
+            receivedBadges: fieldValue.arrayUnion(1)
+        });
+    }
 }

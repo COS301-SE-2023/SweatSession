@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore} from '@angular/fire/compat/firestore';
+import { AngularFirestore, QuerySnapshot} from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { IAddFriend,
@@ -11,12 +11,14 @@ import { IAddFriend,
      IRemoveFriend, 
      IRemovedFriend} 
      from '../models';
+import { BadgesRepository } from './badges.repository';
 import { OtheruserRepository } from './otheruser.repository';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FriendsRepository {
+  // friendsCount$: Observable<number | undefined>;
     /**
      * collection: friends{
      *  document: userId {
@@ -31,7 +33,7 @@ export class FriendsRepository {
      * 
      * 
      */
-  constructor(private firestore: AngularFirestore, private repository: OtheruserRepository) { }
+  constructor(private firestore: AngularFirestore, private repository: OtheruserRepository, private badgesRepository: BadgesRepository) { }
 
   getFriends(request: IGetFriends): Observable<IGotFriends> {
     const friendsCollection = this.firestore.collection<IFriendsModel>(
@@ -91,9 +93,23 @@ export class FriendsRepository {
         .doc(request.userId)
         .collection("userFriends");
 
-        // friendsCount$: Observable<number | undefined> = myFriends.valueChanges().pipe(
+        // this.friendsCount$ = myFriends.valueChanges().pipe(
         //   map((friends: any[]) => friends.length)
         // );
+        const friendsCountRef = this.firestore
+        .collection("friends")
+        .doc(request.userId)
+        .collection("userFriends");
+        
+        const friendsCountSnapshot$: Observable<QuerySnapshot<any>> = friendsCountRef.get();
+
+        friendsCountSnapshot$.subscribe((friendsCountSnapshot: QuerySnapshot<any>) => {
+          const friendsCount: number = friendsCountSnapshot.size;
+    
+          if (friendsCount == 5){
+            this.badgesRepository.socialiteBadge(request.userId);
+          }
+        });
         return response;
         })
     );
