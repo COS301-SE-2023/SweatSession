@@ -20,42 +20,42 @@ export class OtherUserBadgesPage implements OnInit {
   name$!: Observable<String | null>;
   badges=[{
       header:"Starter's Success",
-      receivedDescription:"Congratulations! You have completed your first workout plan",
+      receivedDescription:"First workout plan completed.",
       notReceivedDescription:"Complete a workout plan to earn this badge",
       received:false
     },{
       header:"Socialite",
-      receivedDescription:"Congratulations! You have made 5 workout partners",
+      receivedDescription:"Made 5 workout partners.",
       notReceivedDescription:"Make 5 friends to earn this badge",
       received:false
     },{
       header: "Stretching Star",
-      receivedDescription: "Congratulations! You have incorporated stretching exercises into your workout plan",
+      receivedDescription: "Stretching exercises incorporated into workout plan.",
       notReceivedDescription: "Incorporate stretching exercises into your workout plan",
       received: false
     },{
       header:"Record Breaker",
-      receivedDescription:"Congratulations! You have reached a new personal best for bench presses",
+      receivedDescription:"New personal best reached for bench presses.",
       notReceivedDescription:"Reach a new personal best for bench presses to earn this badge",
       received:false
     },{
       header:"Workout Warrior",
-      receivedDescription:"Congratulations! You have attended 20 workout sessions",
+      receivedDescription:"20 workout sessions attended.",
       notReceivedDescription:"Attend 20 workout sessions to earn this badge",
       received:false
     },{
       header:"Dynamic Duo",
-      receivedDescription:"Congratulations! You have completed 50 workout sessions with a friend",
+      receivedDescription:"50 workout sessions completed with a friend.",
       notReceivedDescription:"Complete 50 workout sessions with a friend to earn this badge",
       received:false
     },{
       header:"Push-Up Pro",
-      receivedDescription:"Congratulations! You did 100 push-ups in a day",
-      notReceivedDescription:"Do 100 push-ups in a day to earn this badge",
+      receivedDescription:"100 push-ups done in a day",
+      notReceivedDescription:"Do 100 push-ups in a day to earn this badge.",
       received:false
     },{
       header:"Active Adventurer",
-      receivedDescription:"Congratulations! You did a workout session at 5 gyms",
+      receivedDescription:"Workout sessions done at 5 different gyms.",
       notReceivedDescription:"Do a workout session at 5 gyms to earn this badge",
       received:false
     }
