@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
 import {NoticeService } from 'src/app/services/notifications/notice.service';
 import { NoticehomeService } from 'src/app/services/notifications/noticehome.service';
 import { Notice } from 'src/app/models/notice.model';
 import { AlertController, NavController } from '@ionic/angular';
-import { Location } from "@angular/common";
 import { getAuth } from 'firebase/auth';
 // import { HomePage } from '../home/home.page';
 // import { Router } from '@angular/router';
@@ -98,7 +96,12 @@ export class NotificationsPage implements OnInit {
     this.noticehomeService.send_data.next(this.noticeamount);
   }
 
+
   createNotifications(sendername: string , sentdate: string , message: string){
     this.noticeService.createNotices(sendername , sentdate , message , this.currUserId!);
+  }
+
+  back(){
+    this.nav.navigateRoot("/userprofile");
   }
 }

@@ -7,7 +7,7 @@ import { AddFriendAction, GetOtheruserFriends, GetOtheruserSchedules, LoadOtherU
 import { IFriendsModel, IProfileModel, IWorkoutScheduleModel , IGotProfile } from 'src/app/models';
 import { Profile } from 'src/app/models/notice.model';
 import { OtherUserStateModel, OtheruserState } from 'src/app/states';
-import {NoticeService } from 'src/app/services/notifications/notice.service';
+import { NoticeService } from 'src/app/services/notifications/notice.service';
 import { getAuth } from 'firebase/auth';
 import { NavigationService } from 'src/app/services';
 import { SetOtherUserBadgesId, SetOtherUserBadgesName } from 'src/app/actions/otheruserbadges.actions';
@@ -174,6 +174,6 @@ export class OtheruserPage implements OnInit {
   }
 
   createNotifications(sendername: string , sentdate: string , message: string){
-    this.noticeService.createNotices(sendername , sentdate , message , this.user.userId);
+    this.noticeService.createNotices(sendername , sentdate , message , this.user.userId!);
   }
 }
