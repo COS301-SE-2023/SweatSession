@@ -10,14 +10,11 @@ import { ISearchTerms } from 'src/app/models';
 })
 export class SearchPage {
   isUserSlide = false;
+  selectedSegment: string = 'user';
   
   constructor() {}
 
-  userSlide() {
-    this.isUserSlide = true;
-  }
-
-  gymSlide() {
-    this.isUserSlide = false;
+  onSegmentChange(event: any) {
+    this.selectedSegment = event.detail.value;
   }
 }
