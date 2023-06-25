@@ -37,6 +37,10 @@ export class OtheruserPage implements OnInit {
   profileList: Profile[];
 
  
+  auth = getAuth();
+  currUserId = this.auth.currentUser?.uid;
+  date : string ;
+  shortdate : string[] ;
 
   @Select(OtheruserState.returnOtherUserProfile) user$!: Observable<IProfileModel>;
   @Select(OtheruserState.returnOtherUserProfile) curruser$!: Observable<IProfileModel>;
@@ -45,11 +49,6 @@ export class OtheruserPage implements OnInit {
   @Select(OtheruserState.returnFriendshipStatus) friendshipStatus$!: Observable<boolean>;
 
   schedules: IWorkoutScheduleModel[] = [];
-
-  auth = getAuth();
-  currUserId = this.auth.currentUser?.uid;
-  date : string ;
-  shortdate : string[] ;
   
 
   

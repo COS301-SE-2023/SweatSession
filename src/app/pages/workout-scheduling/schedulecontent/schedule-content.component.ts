@@ -1,8 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { NavController, ActionSheetController } from '@ionic/angular';
 import { Select, Store } from '@ngxs/store';
-import { Observable } from 'rxjs';
-import { RemoveWorkoutSchedule, UpdateWorkoutSchedule } from 'src/app/actions';
+import { Observable, Subscription } from 'rxjs';
+import { RemoveWorkoutSchedule, UpdateWorkoutAdded, UpdateWorkoutSchedule } from 'src/app/actions';
 import { IWorkoutScheduleModel } from 'src/app/models';
 import { WorkoutSchedulingState } from 'src/app/states';
 
@@ -12,13 +13,18 @@ import { WorkoutSchedulingState } from 'src/app/states';
   styleUrls: ['./schedule-content.component.scss'],
 })
 export class ScheduleContentComponent  implements OnInit {
+  private firestoreSubscription: Subscription;
   @Input() schedule!: IWorkoutScheduleModel;
   isSlideShow = false;
   isEditSlide = false;
 
-  constructor(private store: Store, private nav:NavController, private actionSheetCtrl: ActionSheetController) { }
+  constructor(private store: Store, private nav:NavController, 
+    private actionSheetCtrl: ActionSheetController, 
+    private firestore: AngularFirestore, 
+    private navCtrl: NavController) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
   async viewSchedule() {
     this.isSlideShow=!this.isSlideShow;
@@ -93,4 +99,25 @@ export class ScheduleContentComponent  implements OnInit {
   //   // }
   //   return 0.5;
   // }
+  
+
+  addWorkout(schedule: IWorkoutScheduleModel) {
+    this.navCtrl.navigateForward('/workout-tracking', { state: { schedule } });
+    schedule.workoutAdded = true;
+    if (schedule.id) {
+      const scheduleId: string = schedule.id;
+      const scheduleRef = this.firestore.collection('schedules').doc(scheduleId);
+      scheduleRef.update({ workoutAdded: true }).then(() => {
+        this.store.dispatch(new UpdateWorkoutAdded({ id: scheduleId, workoutAdded: true }));
+      }).catch((error) => {
+        console.log('Error updating workoutAdded property:', error);
+      });
+    } else {
+      console.log('Error: schedule.id is undefined');
+    }
+  }
+  
+  viewWorkout(schedule: IWorkoutScheduleModel) {
+    this.navCtrl.navigateForward('/workout-tracking', { state: { schedule } });
+  }
 }
