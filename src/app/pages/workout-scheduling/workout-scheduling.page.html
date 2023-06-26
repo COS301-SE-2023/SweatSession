@@ -1,7 +1,8 @@
 <ion-header [translucent]="true">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet">
   <ion-toolbar>
     <ion-item lines="none">
-      <backbutton></backbutton>
+      <backbutton class="larger-back-button"></backbutton>
       <ion-title>Schedules</ion-title>
     </ion-item>
   </ion-toolbar>
@@ -10,9 +11,9 @@
 <ion-content [fullscreen]="true">
   <ion-segment (ionChange)="onSegmentChange($event)" value="0" [scrollable]="true">
     <ion-segment-button value="0">All</ion-segment-button>
-    <ion-segment-button value="1">in Session</ion-segment-button>
-    <ion-segment-button value="2">completed</ion-segment-button>
-    <ion-segment-button value="3">uncompleted</ion-segment-button>
+    <ion-segment-button value="1">In Session</ion-segment-button>
+    <ion-segment-button value="2">Completed</ion-segment-button>
+    <ion-segment-button value="3">Uncompleted</ion-segment-button>
   </ion-segment>
 
   <workout-schedule id="0" [hidden]="selectedSegment !== '0'"

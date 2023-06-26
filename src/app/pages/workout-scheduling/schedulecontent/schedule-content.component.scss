@@ -5,11 +5,19 @@ ion-text {
 ion-item{
     --highlight-height: 0;
     --inner-border-width: 0;
-    --background: #457B9D;
+    --background: #A8DADC;
+    border-radius: 12px;
 }
 
+#viewer {
+    ion-button {
+      --background: #E63946;
+      --color: black;
+    }
+  }
+
 ion-card, ion-item {
-    opacity: 0.9;
+    opacity: 1;
 }
 
 ion-button {

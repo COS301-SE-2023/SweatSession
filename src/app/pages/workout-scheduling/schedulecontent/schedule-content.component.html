@@ -1,21 +1,25 @@
 <ion-card>
     <ion-item-sliding>
-        <ion-item>
+        <ion-item id="viewer">
           <ion-icon name="receipt-outline"></ion-icon>
           <ion-text>
             {{schedule.name}}
           </ion-text>
-          <ion-button slot="end" (click)="viewSchedule()" *ngIf="!isSlideShow">view</ion-button>
-          <ion-button slot="end" (click)="viewSchedule()" *ngIf="isSlideShow">close</ion-button>
+          <ion-button slot="end" (click)="viewSchedule()" *ngIf="!isSlideShow">View</ion-button>
+          <ion-button slot="end" (click)="viewSchedule()" *ngIf="isSlideShow">Close</ion-button>
         </ion-item>
     
         <ion-item-options side="start">
           <ion-item-option color="success" (click)="toggleEditSlide()" *ngIf="!isEditSlide"> Edit </ion-item-option>
-          <ion-item-option color="success" (click)="toggleEditSlide()" *ngIf="isEditSlide">cancel</ion-item-option>
+          <ion-item-option color="success" (click)="toggleEditSlide()" *ngIf="isEditSlide"> Exit</ion-item-option>
         </ion-item-options>
     
         <ion-item-options side="end">
-          <ion-item-option (click)="viewExercises()">Exercises</ion-item-option>
+          <ion-item-option
+          (click)="schedule.workoutAdded ? viewWorkout(schedule) : addWorkout(schedule)"
+        >
+          {{ schedule.workoutAdded ? 'View Workout' : 'Add Workout' }}
+        </ion-item-option>
           <ion-item-option color="danger" (click)="presentActionSheet()">Delete</ion-item-option>
         </ion-item-options>
     </ion-item-sliding>

@@ -37,19 +37,6 @@ import {
   getStorage,
   provideStorage
 } from '@angular/fire/storage';
-//import {AuthState} from 'src/app/states/auth'
-//import {AuthModule} from 'src/app/pages/auth'
-
-// const FIREBASE_OPTIONS: FirebaseOptions = {
-//   apiKey: process.env['NX_FIREBASE_API_KEY'] || '',
-//   authDomain: process.env['NX_FIREBASE_AUTH_DOMAIN'] || '',
-//   databaseURL: process.env['NX_FIREBASE_DATABASE_URL'] || '',
-//   projectId: process.env['NX_FIREBASE_PROJECT_ID'] || '',
-//   storageBucket: process.env['NX_FIREBASE_STORAGE_BUCKET'] || '',
-//   messagingSenderId: process.env['NX_FIREBASE_MESSAGING_SENDER_ID'] || '',
-//   appId:  process.env['NX_FIREBASE_APP_ID'] || '',
-//   measurementId: process.env['NX_FIREBASE_MEASUREMENT_ID'] || ''
-// };
 import {
   connectFunctionsEmulator,
   getFunctions,
@@ -59,8 +46,7 @@ import { NgxsModule } from '@ngxs/store';
 import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
 import { AngularFirestore, AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireModule } from '@angular/fire/compat';
-// import {AuthModule} from 'src/app/pages/auth';
-// const useEmulators = process.env['NX_FIREBASE_USE_EMULATORS'] || true;
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
  
 
 @NgModule({
@@ -70,12 +56,11 @@ import { AngularFireModule } from '@angular/fire/compat';
     BrowserModule, 
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
-    //AuthModule,
-    NgxsModule.forRoot(),//[AuthState]
+    NgxsModule.forRoot(),
     IonicModule.forRoot(), 
     NgxsRouterPluginModule.forRoot(),
     AppRoutingModule,
-    AngularFirestoreModule ,
+    AngularFirestoreModule,
     provideRemoteConfig(() => getRemoteConfig()),
     provideAnalytics(() => getAnalytics()),
     provideAuth(() => {
@@ -124,6 +109,7 @@ import { AngularFireModule } from '@angular/fire/compat';
     }),
 
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, AngularFirestore],
   bootstrap: [AppComponent],
 })

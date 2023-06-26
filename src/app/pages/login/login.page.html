@@ -1,15 +1,13 @@
-<div class="outerContainer">
-  <div class="background-cover">
-    <ion-img src="/assets/Asset 1.png"></ion-img>
-  </div>
-  <ion-card>
+<div class="outerContainer" style="background-color: #A8DADC;">
+  <ion-card style="background-color: #A8DADC;">
     
-    <div class="inner-container">
-      <ion-card-title>
-        Sweat<img src="/assets/Asset 2.png" />Session
-      </ion-card-title>
-      <h5>sign in</h5>
-      <ion-text>please sign in to your account</ion-text>
+    <div class="inner-container" style="background-color: white;">
+      <img src="/assets/Asset 1.png" />
+
+      <div class="text-container">
+        <h5>Sign In</h5>
+        <ion-text>Please sign in to your account</ion-text>
+      </div>
 
       <form [formGroup]="loginForm"
       ngxsForm="login.loginForm"
@@ -31,9 +29,14 @@
             Login
         </ion-button>
       </form>
+
+      <ion-button class="loginButton" expand="block" >
+        <ion-icon name="logo-google" style="padding-right:5%;"></ion-icon>
+        <ion-text>Continue with Google</ion-text>
+      </ion-button>
       
-        <h5 routerLink="/register">Don't have an account?</h5>
-        <h5>Forgot password?</h5>
+      <h5 routerLink="/register">Don't have an account?</h5>
+      <h5>Forgot password?</h5>
     </div>
   </ion-card>
 </div>

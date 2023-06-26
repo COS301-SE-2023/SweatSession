@@ -9,7 +9,7 @@
     "start:windows": "start cmd /k \"firebase emulators:start\" ",
     "start:imported": "firebase emulators:exec --import .emulators --project=demo-project --ui 'ng serve'",
     "start:windows:imported": "start cmd /k \"firebase emulators:start --import .emulators\" & start cmd /k \"ng serve\"",
-    "stop": "lsof -t -i :5001 -i:5002 -i:5003 -i:5004 -i:5005 -i:5006 -i:5007 -i:5008 -i:5009 -i:4200 | xargs kill -9",
+    "stop": "lsof -t -i :5001 -i:5002 -i:5003 -i:5004 -i:5005 -i:5006 -i:5007 -i:5008 -i:5009 -i :4001 -i:4200 | xargs kill -9",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "jest",
@@ -45,6 +45,7 @@
     "ionicons": "^7.0.0",
     "ng2-search-filter": "^0.5.1",
     "rxjs": "~7.8.0",
+    "swiper": "^9.4.1",
     "tslib": "^2.3.0",
     "zone.js": "~0.13.0"
   },

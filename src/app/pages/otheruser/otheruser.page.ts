@@ -37,6 +37,7 @@ export class OtheruserPage implements OnInit {
   profileList: Profile[];
 
  
+>>>>>>>>> Temporary merge branch 2
 
   @Select(OtheruserState.returnOtherUserProfile) user$!: Observable<IProfileModel>;
   @Select(OtheruserState.returnOtherUserProfile) curruser$!: Observable<IProfileModel>;

@@ -6,6 +6,8 @@ import { WorkoutSchedulingState } from 'src/app/states';
 import { Observable } from 'rxjs';
 import { ISearchTerms, IWorkoutScheduleModel } from 'src/app/models';
 import { GetWorkoutSchedules } from 'src/app/actions';
+import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-workout-scheduling',
@@ -26,8 +28,15 @@ export class WorkoutSchedulingPage {
 
   constructor(private popoverController: PopoverController, 
       private store : Store, 
-      private loadingCtrl: LoadingController,
-      private nav: NavController) {}
+      private nav: NavController,
+      private route: ActivatedRoute,
+      private router: Router) {
+      this.route.queryParams.subscribe(() => {
+        if (this.router.getCurrentNavigation()?.extras?.state) {
+          this.schedules$ = this.router.getCurrentNavigation()?.extras.state?.['schedules'];
+        }
+      });
+  }
 
   ngOnInit() {
     this.displayWorkoutSchedule();
