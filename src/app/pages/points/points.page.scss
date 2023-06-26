@@ -1,14 +1,30 @@
 :root {
     --custom-red: #FF0000; /* Replace with your desired shade of red */
-  }
+}
+
+ion-header{
+    ion-item{
+        --background: #E63946;
+        ion-title{
+            --background: #E63946;
+        }
+    }
+    --background: #E63946;
+}
+
+.larger-back-button {
+    --padding-start: 12px; 
+    --padding-end: 12px; 
+    font-size: 24px; 
+}
 
 .pointsContainer {
-    --ion-background-color: #F1FAEE;
+    --ion-background-color: white;
 }
 
 ion-item.userPointsSection::part(native) {
     --background: #1D3557;
-    --border-radius: 15px;
+    --border-radius: 12px;
     color: white;
     margin: 0 auto;
     width: calc(100% - 30px);
@@ -22,11 +38,12 @@ ion-item.userPointsSection::part(native) {
     display: flex;
     align-items: center;
     margin-left: auto;
-    border-radius: 15px;
+    border-radius: 12px;
 }
 
 .userPointsNumber {
     font-size: 40px;
+    padding-bottom: 12px;
 }
 
 .userPointsNumberValue {
@@ -39,7 +56,7 @@ ion-item.userPointsSection::part(native) {
 
 ion-item.workoutPlanPointsSection::part(native) {
     --background: #1D3557;
-    --border-radius: 15px;
+    --border-radius: 12px;
     color: white;
     margin: 0 auto;
     width: calc(100% - 30px);
@@ -80,7 +97,7 @@ ion-button {
   --color: white;
   font-size: 25px;
   height: 40px;
-  --border-radius: 15px;
+  --border-radius: 12px;
 }
 
 .progressContainer {
@@ -89,6 +106,7 @@ ion-button {
     justify-content: space-between;
     // margin: 0 auto;
     margin-right: auto;
+    margin-bottom: 12px;
 }
 
 .custom-progress-bar {
@@ -96,7 +114,7 @@ ion-button {
     --progress-background: #A8DADC;
   width: 100%;
   height: 20px;
-  border-radius: 10px;
+  border-radius: 12px;
 }
 
 .workoutPlanPoints{
@@ -131,7 +149,7 @@ ion-button {
 
 ion-item.workoutSessionPointsSection::part(native) {
     --background: #1D3557;
-    --border-radius: 15px;
+    --border-radius: 12px;
     color: white;
     margin: 0 auto;
     width: calc(100% - 30px);
@@ -144,4 +162,8 @@ ion-item.workoutSessionPointsSection::part(native) {
 ion-item{
     --highlight-height: 0;
     --inner-border-width: 0;
+}
+
+* {
+    font-family: 'Montserrat', sans-serif;
 }
