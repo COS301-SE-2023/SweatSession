@@ -31,7 +31,7 @@
 </ion-grid>
 </ion-card-content>
 <div class="flex-center3" *ngIf="notice.message == 'Sent you a Friend Request!'">
-<ion-button size="small" (click)="clearNotification(notice.id!)">Accept</ion-button>
+<ion-button size="small" (click)="addFriend(notice)">Accept</ion-button>
 <ion-button size="small" (click)="clearNotification(notice.id!); rejectFriendRequest(notice.senderid! , notice.senttoid!);">Reject</ion-button>
 </div>
 <ion-label>{{"&nbsp;".repeat(87)}}{{notice.sentdate}}</ion-label>

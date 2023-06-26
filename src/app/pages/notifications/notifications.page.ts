@@ -4,6 +4,9 @@ import { NoticehomeService } from 'src/app/services/notifications/noticehome.ser
 import { Notice } from 'src/app/models/notice.model';
 import { AlertController, NavController } from '@ionic/angular';
 import { getAuth } from 'firebase/auth';
+import { IFriendsModel } from 'src/app/models';
+import { AddFriendAction } from 'src/app/actions';
+import { Store } from '@ngxs/store';
 // import { HomePage } from '../home/home.page';
 // import { Router } from '@angular/router';
 // import { getAuth } from 'firebase/auth';
@@ -25,6 +28,7 @@ export class NotificationsPage implements OnInit {
   sendamount: string ;
   auth = getAuth();
   currUserId = this.auth.currentUser?.uid;
+ 
   
   
   //noticeList: Observable<Notice[]> = this.noticeService.getNotices();
@@ -33,7 +37,8 @@ export class NotificationsPage implements OnInit {
   constructor(private noticeService: NoticeService , 
     private alertController: AlertController,
     public nav: NavController,
-    private noticehomeService: NoticehomeService) { 
+    private noticehomeService: NoticehomeService,
+    private store: Store) { 
     
   }
  
@@ -99,4 +104,15 @@ export class NotificationsPage implements OnInit {
     this.noticeamount = num ;
     this.noticehomeService.send_data.next(this.noticeamount);
   }
+
+  addFriend(notice: Notice) {
+    const friend: IFriendsModel = {
+      userId: notice.senderid,
+      name: notice.sendername,
+      profileURL: notice.profileurl,
+    }
+    this.store.dispatch(new AddFriendAction(friend))
+    this.clearNotification(notice.id!);
+  }
+
 }

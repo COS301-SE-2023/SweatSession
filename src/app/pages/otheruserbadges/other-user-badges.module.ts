@@ -11,6 +11,7 @@ import { BadgeComponent } from './badge/badge.component';
 import { OtherUserBadgesModule as OtherUserBadgesStatesModule } from 'src/app/states/otheruserbadges';
 import { OtherUserBadgesApi } from 'src/app/states/otheruserbadges/otheruserbadges.api';
 import { AuthApi } from 'src/app/states/auth/auth.api';
+import { BackButtonDirectiveModule } from 'src/app/directives';
 
 @NgModule({
   imports: [
@@ -18,7 +19,8 @@ import { AuthApi } from 'src/app/states/auth/auth.api';
     FormsModule,
     IonicModule,
     OtherUserBadgesPageRoutingModule,
-    OtherUserBadgesStatesModule
+    OtherUserBadgesStatesModule,
+    BackButtonDirectiveModule,
   ],
   declarations: [OtherUserBadgesPage, BadgeComponent],
   providers: [OtherUserBadgesApi, AuthApi]

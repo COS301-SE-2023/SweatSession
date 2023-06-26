@@ -8,6 +8,7 @@ import { NotificationsPageRoutingModule } from './notifications-routing.module';
 
 import { NotificationsPage } from './notifications.page';
 import { BackButtonDirectiveModule } from 'src/app/directives';
+import { OtheruserStateModule } from 'src/app/states';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { BackButtonDirectiveModule } from 'src/app/directives';
     FormsModule,
     IonicModule,
     NotificationsPageRoutingModule,
-    BackButtonDirectiveModule
+    BackButtonDirectiveModule,
+    OtheruserStateModule,
   ],
   declarations: [NotificationsPage]
 })

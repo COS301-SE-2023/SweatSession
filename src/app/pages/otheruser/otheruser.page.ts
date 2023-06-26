@@ -24,9 +24,7 @@ import { DocumentSnapshot } from 'firebase/firestore';
 })
 export class OtheruserPage implements OnInit {
 
-
   friendshipStatus: boolean;
- 
   user!: IProfileModel;
   currusername: string;
   profileurl: string;
@@ -37,7 +35,6 @@ export class OtheruserPage implements OnInit {
   badges$: Observable<IBadges>;
   profileList: Profile[];
 
- 
   auth = getAuth();
   currUserId = this.auth.currentUser?.uid;
   date : string ;
@@ -49,12 +46,6 @@ export class OtheruserPage implements OnInit {
   @Select(OtheruserState.returnOtherUserSchedules) schedules$!: Observable<IWorkoutScheduleModel[]>;
   @Select(OtheruserState.returnFriendshipStatus) friendshipStatus$!: Observable<boolean>;
 
-  schedules: IWorkoutScheduleModel[] = [];
-  
-
-  
- 
-  
   constructor(private store: Store , private noticeService: NoticeService , private nav: NavController , pointsApi: PointsApi, badgesApi: BadgesApi) {
    
     this.displayUserInfo();
@@ -90,12 +81,12 @@ export class OtheruserPage implements OnInit {
   }
 
   addFriend() {
-   if(this.user!=null) {
-    this.store.dispatch(new AddFriendAction(this.friendModel()))
-    console.log(this.user.userId,)
-   } else(
-    console.log("User is null.....")
-   )
+  //  if(this.user!=null) {
+  //   this.store.dispatch(new AddFriendAction(this.friendModel()))
+  //   console.log(this.user.userId,)
+  //  } else(
+  //   console.log("User is null.....")
+  //  )
    this.date = new Date().toTimeString() ;
    this.shortdate = this.date.split(':' , 2);
    this.createNotifications(this.currusername , this.shortdate[0] + ':' + this.shortdate[1] , "Sent you a Friend Request!")  ;
