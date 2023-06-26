@@ -101,4 +101,8 @@ export class NotificationsPage implements OnInit {
   createNotifications(sendername: string , sentdate: string , message: string){
     this.noticeService.createNotices(sendername , sentdate , message , this.currUserId!);
   }
+
+  back(){
+    this.nav.navigateRoot("/userprofile");
+  }
 }

@@ -16,9 +16,10 @@ import { AuthApi } from 'src/app/states/auth/auth.api';
 })
 export class UserprofilePage implements OnInit {
   @Select(FriendsState.returnFriendsSize) friendsSize$! : Observable<number>;
-  ProfilePicture$? = './assets/img/ProfileSE.png';
+  ProfilePicture$? = '/assets/ProfileSE.jpg';
   displayName$? = 'na';
   myBio$? = 'na';
+  friends$ = 0;
   friendsSize = 0;
   groups$ = 0;
   getUser : IGetProfile = {userId: 'na'};
@@ -45,13 +46,12 @@ export class UserprofilePage implements OnInit {
           //getting groups
           // this.groups$ = profile.profile.groups.length;
 
-          if(profile.profile.profileURL == "")
+          if(profile.profile.profileURL == "" || profile.profile.profileURL == undefined)
           {
-            this.ProfilePicture$ =  'src/assets/img/ProfileSE.png';
+            this.ProfilePicture$ =  '/assets/ProfileSE.jpg';
           }
            
       });
-
     });
   }
 
