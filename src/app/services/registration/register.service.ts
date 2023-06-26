@@ -39,7 +39,7 @@ export class RegisterService {
         displayName:dName,
         email: regEmail,
         bio: "Hi there, I am new to Sweat Session!",
-        profileURL: "https://i.pravatar.cc/150?img=20",//will add some default schelotte
+        profileURL: "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png",//will add some default schelotte
         phoneNumber: "0000000000",
         height: '0',
         weight: '0',
