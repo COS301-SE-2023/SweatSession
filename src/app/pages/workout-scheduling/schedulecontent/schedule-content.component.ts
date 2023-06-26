@@ -53,12 +53,12 @@ export class ScheduleContentComponent  implements OnInit {
       const minutes = Math.floor(timeDiff / (1000 * 60));
       if(daysLeft<1){
         if(hoursLeft<1)
-          return `you have ${minutes} minutes left`;
-        return `you have ${hoursLeft} hours left`;
+          return `You have ${minutes} minutes left`;
+        return `You have ${hoursLeft} hours left`;
       }
-      return `your have ${daysLeft} days lefts`;
+      return `You have ${daysLeft} days left`;
     }
-    return "schedule overdue";
+    return "Schedule overdue";
   }
 
   async presentActionSheet() {
