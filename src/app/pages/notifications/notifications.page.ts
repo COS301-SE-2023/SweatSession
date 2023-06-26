@@ -99,13 +99,4 @@ export class NotificationsPage implements OnInit {
     this.noticeamount = num ;
     this.noticehomeService.send_data.next(this.noticeamount);
   }
-
-
-  back(){
-    this.nav.navigateRoot("/userprofile");
-  }
-
-  back(){
-    this.nav.navigateRoot("/userprofile");
-  }
 }
