@@ -1,44 +1,48 @@
 <ion-card>
-    <ion-item-sliding>
-        <ion-item>
-          <ion-icon name="receipt-outline"></ion-icon>
-          <ion-text>
-            {{schedule.name}}
-          </ion-text>
-          <ion-button slot="end" (click)="viewSchedule()" *ngIf="!isSlideShow">view</ion-button>
-          <ion-button slot="end" (click)="viewSchedule()" *ngIf="isSlideShow">close</ion-button>
-        </ion-item>
-    
-        <ion-item-options side="start">
-          <ion-item-option color="success" (click)="toggleEditSlide()">{{ isEditSlide ? "Cancel" : "Edit" }}</ion-item-option>
-        </ion-item-options>
-    
-        <ion-item-options side="end">
-          <ion-item-option
-          (click)="schedule.workoutAdded ? viewWorkout(schedule) : addWorkout(schedule)"
-        >
-          {{ schedule.workoutAdded ? 'View Workout' : 'Add Workout' }}
-        </ion-item-option>
-          <ion-item-option color="danger" (click)="presentActionSheet()">Delete</ion-item-option>
-        </ion-item-options>
-    </ion-item-sliding>
-    <div class="content" *ngIf="isSlideShow">
-        <ion-card-content>
-            <ion-icon name="barbell-outline"></ion-icon><ion-text class="schedule-value">{{schedule.name}}</ion-text><br>
-            <ion-icon name="calendar-outline"></ion-icon><ion-text class="schedule-value">{{schedule.date}}</ion-text><br>
-            <ion-icon name="time-outline"></ion-icon><ion-text class="schedule-value">{{schedule.time}}</ion-text><br>
-            <ion-icon name="location-outline"></ion-icon><ion-text class="schedule-value">{{schedule.location}}</ion-text><br>
-            <ion-icon name="timer-outline"></ion-icon><ion-text class="schedule-value">{{schedule.duration}} minutes</ion-text><br>
-        </ion-card-content>
-    </div>
+  <ion-item-sliding>
+      <ion-item>
+        <ion-icon name="receipt-outline"></ion-icon>
+        <ion-text>
+          {{schedule.name}}
+        </ion-text>
+        <ion-button slot="end" (click)="join()" *ngIf="inSession()" [disabled]="joined()">{{ joined() ? "Joined" : "Join" }}</ion-button>
+        <ion-button slot="end" (click)="viewSchedule()" *ngIf="!isSlideShow">View</ion-button>
+        <ion-button slot="end" (click)="viewSchedule()" *ngIf="isSlideShow">Close</ion-button>
+      </ion-item>
+  
+      <ion-item-options side="start" *ngIf="!isCompleted()">
+        <ion-item-option color="success" (click)="toggleEditSlide()">{{ isEditSlide ? "Cancel" : "Edit" }}</ion-item-option>
+      </ion-item-options>
+  
+      <ion-item-options side="end">
+        <ion-item-option
+        (click)="schedule.workoutAdded ? viewWorkout(schedule) : addWorkout(schedule)"
+        *ngIf="!isCompleted()"
+      >
+        {{ schedule.workoutAdded ? 'View Workout' : 'Add Workout' }}
+      </ion-item-option>
+        <ion-item-option color="danger" (click)="presentActionSheet()">Delete</ion-item-option>
+      </ion-item-options>
+  </ion-item-sliding>
+  <div class="content" *ngIf="isSlideShow">
+      <ion-card-content>
+          <ion-icon name="barbell-outline"></ion-icon><ion-text class="schedule-value">{{schedule.name}}</ion-text><br>
+          <ion-icon name="calendar-outline"></ion-icon><ion-text class="schedule-value">{{schedule.date}}</ion-text><br>
+          <ion-icon name="time-outline"></ion-icon><ion-text class="schedule-value">{{schedule.time}}</ion-text><br>
+          <ion-icon name="location-outline"></ion-icon><ion-text class="schedule-value">{{schedule.location}}</ion-text><br>
+          <ion-icon name="timer-outline"></ion-icon><ion-text class="schedule-value">{{schedule.duration}} minutes</ion-text><br>
+      </ion-card-content>
+  </div>
 
-    <ion-card-content *ngIf="isEditSlide">
-      <edit-schedule [schedule]="schedule"></edit-schedule>
-    </ion-card-content>
+  <ion-card-content *ngIf="isEditSlide">
+    <edit-schedule [schedule]="schedule"></edit-schedule>
+  </ion-card-content>
 
-    <div class="info">
+  <div class="info">
+    <ion-item class="progress-label">
       <ion-label>{{timeLeft()}}</ion-label>
-      <ion-progress-bar value="0.5"></ion-progress-bar>
-    </div>
+      <ion-icon name="checkmark-done-outline" slot="end" [ngClass]="{'active': joined(), 'inactive': !joined()}"></ion-icon>
+    </ion-item>
+    <ion-progress-bar [value]="ratio"></ion-progress-bar>
+  </div>
 </ion-card>
-    

@@ -1,4 +1,5 @@
 import { Time } from "@angular/common";
+import { Timestamp } from "firebase/firestore";
 
 export type STATUS = "completed" | "uncompleted" | "inSession";
 export interface IWorkoutScheduleModel {
@@ -9,11 +10,12 @@ export interface IWorkoutScheduleModel {
     status?: STATUS;
     time?: Time;
     date?: Date;
-    createdAt?: Date;
-    notifyAt?: Date;
+    createdAt?: Timestamp;
+    notifyAt?: Timestamp;
     notified?: boolean;
-    completeAt?: Date;
+    completeAt?: Timestamp;
     workoutAdded?: boolean;
+    joined?: boolean;
 }
 
 //request
