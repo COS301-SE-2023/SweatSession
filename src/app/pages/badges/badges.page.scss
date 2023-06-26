@@ -1,12 +1,28 @@
 .badgesContainer{
-    --ion-background-color: #F1FAEE;
+    --ion-background-color: white;
 }
 
 ion-icon{
     // --ion-width: 30px;
 }
 
+ion-header{
+    ion-item{
+        --background: #E63946;
+        ion-title{
+            --background: #E63946;
+        }
+    }
+    --background: #E63946;
+}
+
 ion-item{
     --highlight-height: 0;
     --inner-border-width: 0;
+}
+
+.larger-back-button {
+    --padding-start: 12px; 
+    --padding-end: 12px; 
+    font-size: 24px; 
 }

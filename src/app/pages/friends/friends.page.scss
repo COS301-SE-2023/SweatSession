@@ -5,13 +5,26 @@
    }
 }
 
+ion-header{
+    ion-toolbar{
+        --background: #E63946;
+    }    
+    ion-item{
+        --background: #E63946;
+        ion-title{
+            --background: #E63946;
+        }
+    }
+    --background: #E63946;
+}
+
 ion-item{
     --highlight-height: 0;
     --inner-border-width: 0;
 }
 
 ion-content {
-    --background: url('/assets/Asset 2.png') no-repeat center/cover fixed; // #1D3557;
+    --background: url('/assets/Asset 2.png') no-repeat center/contain fixed; // #1D3557;
 }
 
 ion-item, ion-toolbar {

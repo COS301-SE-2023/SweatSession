@@ -2,19 +2,20 @@
     // --ion-background-color: #457B9D;
     display: flex;
     align-items: center;
-    border-radius: 20px;
+    border-radius: 12px;
     margin-top: 10%;
     // padding: 10px;
 }
 
 .badgeHeader {
     font-size: x-large;
+    font-weight: bold;
     margin-bottom: 7px;
     // margin-bottom: 100%;
 }
 
 .badgeDescription {
-    font-size: large;
+    font-size: medium;
 }
 
 ion-img {
@@ -39,7 +40,7 @@ div {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    font-weight: 700;
+    font-weight: 500;
 }
 
 .badgeDescription {

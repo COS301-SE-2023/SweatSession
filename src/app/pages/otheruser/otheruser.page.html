@@ -1,46 +1,49 @@
 <ion-header [translucent]="true" *ngIf="user!=null">
   <ion-toolbar>
     <ion-item>
-      <backbutton></backbutton>
+      <backbutton class="larger-back-button"></backbutton>
       <ion-title>{{user!.name}}</ion-title>
     </ion-item>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true" *ngIf="user!=null">
- <ion-card class="otheruser-profile">
-  <ion-item>
-    <ion-avatar>
-      <img src="{{user!.profileURL}}"/>
-    </ion-avatar>
-  </ion-item>
-  <ion-item id="userName">
-      {{user!.name}}
-      <ion-button slot="end" *ngIf="friendshipStatus" (click)="removeFriend()">
-        <ion-icon name="person-outline"></ion-icon>
-        remove friend
-      </ion-button>
-      <ion-button slot="end" *ngIf="!friendshipStatus" (click)="addFriend()">
-        <ion-icon name="person-outline"></ion-icon>
-        add friend
-      </ion-button>
-  </ion-item>
-  <ion-item id="userBio">
-    {{user!.bio}}
-  </ion-item>
- </ion-card>
+  <ion-card class="otheruser-profile">
+    <ion-item>
+      <ion-avatar>
+        <img src="{{user!.profileURL}}"/>
+      </ion-avatar>
+    </ion-item>
+    <ion-item id="userName">
+        {{user!.name}}
+    </ion-item>
+    <ion-item>
+        <ion-button *ngIf="friendshipStatus" (click)="removeFriend()">
+          <ion-icon name="person-outline" style="padding-right: 5px;"></ion-icon>
+          Remove friend
+        </ion-button>
+        <ion-button *ngIf="!friendshipStatus" (click)="addFriend()">
+          <ion-icon name="person-outline" style="padding-right: 5px;"></ion-icon>
+          Add friend
+        </ion-button>
+    </ion-item>
+    <ion-item id="userBio">
+      {{user!.bio}}
+    </ion-item>
+   </ion-card>
+  
  <ion-card>
-  <ion-item>
+  <ion-item style="box-shadow: 3px 3px 5px #1D3557;">
     <ion-icon name="barbell-outline"></ion-icon>
     <ion-card-header>{{workoutSchedules!.length}} WorkoutSchedules</ion-card-header>
-    <ion-button slot="end" (click)="viewSchedules()">view</ion-button>
+    <ion-button slot="end" (click)="viewSchedules()">View</ion-button>
   </ion-item>
  </ion-card>
  <ion-card>
-  <ion-item>
+  <ion-item style="box-shadow: 3px 3px 5px #1D3557;">
     <ion-icon name="people-outline"></ion-icon>
     <ion-card-header>{{friends!.length}} Friends</ion-card-header>
-    <ion-button slot="end" (click)="viewFriends()">view</ion-button>
+    <ion-button slot="end" (click)="viewFriends()">View</ion-button>
   </ion-item>
  </ion-card>
  <ion-card>

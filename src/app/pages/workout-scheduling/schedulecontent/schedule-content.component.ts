@@ -59,8 +59,8 @@ export class ScheduleContentComponent  implements OnInit {
       const minutes = Math.floor(timeDiff / (1000 * 60));
       if(daysLeft<1){
         if(hoursLeft<1)
-          return `you have ${minutes} minutes left`;
-        return `you have ${hoursLeft} hours left`;
+          return `You have ${minutes} minutes left`;
+        return `You have ${hoursLeft} hours left`;
       }
       else if(daysLeft==1) {
         return `your have ${daysLeft} day left`;
@@ -71,7 +71,7 @@ export class ScheduleContentComponent  implements OnInit {
     if(this.inSession()) {
       return "Session started";
     }
-    return "schedule overdue";
+    return "Schedule overdue";
   }
 
   inSession() {

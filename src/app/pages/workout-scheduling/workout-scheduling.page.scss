@@ -15,8 +15,30 @@ ion-segment {
   border-radius: 0px;
 }
 
+.larger-back-button {
+  --padding-start: 12px; 
+  --padding-end: 12px; 
+  font-size: 24px; 
+}
+
+ion-toolbar{
+  --background: #E63946
+}
+
+ion-segment-button{
+  opacity: 1;
+}
+
+ion-toolbar ion-item{
+  --background: #E63946
+}
+
+* {
+  font-family: 'Montserrat', sans-serif;
+}
+
 ion-content {
-  --background: url('/assets/Asset 2.png') no-repeat center/cover fixed; // #1D3557;
+  --background: url('/assets/Asset 2.png') no-repeat center/contain fixed; // #1D3557;
 }
 
 ion-item, ion-toolbar {

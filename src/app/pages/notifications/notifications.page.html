@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
-    <ion-item lines="none">
-      <backbutton></backbutton>
+    <ion-item>
+      <backbutton class="larger-back-button"></backbutton>
       <ion-title>Notifications</ion-title>
     </ion-item>
   </ion-toolbar>
@@ -10,15 +10,15 @@
 
 
 <ion-content class="main">
- 
-    
-    <ion-title *ngIf="noticeamount > 0" style="display:inline-block" ><ion-button  size="default" color="light" (click)="clearNotifications()">Clear all</ion-button></ion-title>
-     <br><br>
-    
+  <ion-item lines="none">
+    <ion-title slot="end" style="display:inline-block; background: none; " ><ion-button fill="clear" (click)="clearNotifications()">Clear All</ion-button></ion-title>
+  </ion-item>
+    <br>
+    <br>
     
   <div *ngIf="noticeamount > 0" >
   <ion-card class="Mcard" *ngFor="let notice of noticeList2">
-    <div>{{"&nbsp;".repeat(83)}}<ion-button fill="clear" size="small" (click)="clearNotification(notice.id!)"><ion-icon name="close-circle-outline" class="ion-icon1" ></ion-icon></ion-button></div>
+    <div>{{"&nbsp;".repeat(89)}}<ion-button fill="clear" size="small" (click)="clearNotification(notice.id!)" style="color: black;"><ion-icon name="close-circle-outline" size="small"></ion-icon></ion-button></div>
     <ion-card-content style="display:flex ; align-items:center" >
   <ion-avatar slot="start">
     <img alt="Silhouette of a person's head" src="https://i.pravatar.cc/300" />
