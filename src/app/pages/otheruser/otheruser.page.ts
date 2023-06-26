@@ -29,6 +29,7 @@ export class OtheruserPage implements OnInit {
  
   user!: IProfileModel;
   currusername: string;
+  profileurl: string;
   friends: IFriendsModel[] =[];
   workoutSchedules: IWorkoutScheduleModel[] = [];
   
@@ -123,6 +124,7 @@ export class OtheruserPage implements OnInit {
     for(let i = 0 ; i<this.profileList.length ; i++){
       if(this.profileList[i].id == this.currUserId ){
         this.currusername = this.profileList[i].displayName! ;
+        this.profileurl = this.profileList[i].profileURL! ;
         console.log(this.currusername);
       }
     }
@@ -175,6 +177,6 @@ export class OtheruserPage implements OnInit {
   }
 
   createNotifications(sendername: string , sentdate: string , message: string){
-    this.noticeService.createNotices(sendername , sentdate , message , this.user.userId!);
+    this.noticeService.createNotices(sendername , sentdate , message , this.user.userId! , this.currUserId! , this.profileurl);
   }
 }

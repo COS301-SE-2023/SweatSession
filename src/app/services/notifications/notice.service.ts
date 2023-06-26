@@ -35,11 +35,18 @@ export class NoticeService {
     return deleteDoc(noticeDocRef);
   }
 
-  async createNotices(SenderName: string , SentDate: string , Message: string , UserId: string){
+  rejectFriend(senderid: string , senttoid: string){
+    const friendRef = doc(this.firestore, "friends", senderid, "userFriends", senttoid);
+    return deleteDoc(friendRef);
+  }
+
+  async createNotices(SenderName: string , SentDate: string , Message: string , UserId: string , SenderId: string , ProfileUrl: string){
     
     await addDoc(collection(this.firestore , 'Notifications'), {
-      userid: UserId , 
-      sendername: SenderName , 
+      senttoid: UserId ,
+      senderid: SenderId , 
+      sendername: SenderName ,
+      profileurl: ProfileUrl , 
       sentdate: SentDate , 
       message: Message
     });
