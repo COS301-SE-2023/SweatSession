@@ -9,6 +9,7 @@ import { ISearchTerms } from 'src/app/models';
 export class SearchComponent  implements OnInit {
   searchTerms!: ISearchTerms;
   @Input() data: any[]=[];
+  @Input() placeholder: string;
 
   constructor() { }
 

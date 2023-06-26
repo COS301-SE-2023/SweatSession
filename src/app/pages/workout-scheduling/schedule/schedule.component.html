@@ -1,4 +1,4 @@
-<search class="custom-search" [data]="schedules">Find schedule</search>
+<search class="custom-search" [data]="schedules" [placeholder]="'find schedule'">Find schedule</search>
 
 <div *ngFor="let schedule of schedules" class="schedules">
   <schedule-content [schedule]="schedule"></schedule-content>

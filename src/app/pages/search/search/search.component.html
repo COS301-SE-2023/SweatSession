@@ -1,5 +1,5 @@
 <div class="search">
-  <ion-searchbar placeholder="find schedule"
+  <ion-searchbar [placeholder]="placeholder"
     [(ngModel)] = "searchTerms.searchQuery"
     (ionInput) = onSearchInput($event)
     color="light"
