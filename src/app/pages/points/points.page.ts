@@ -25,6 +25,11 @@ export class PointsPage implements OnInit {
     this.store.dispatch(new SubscribeToPoints());
   }
 
+  // get progressValue(): number {
+  //   const workoutSessionsAttended = (await this.workoutSessionsAttended$.toPromise()) || 0;
+  //   return workoutSessionsAttended / 3;
+  // }
+
   async showWorkoutPlanPopup() {
     const alert = await this.alertController.create({
       header: 'Congratulations!',

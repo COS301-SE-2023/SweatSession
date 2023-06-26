@@ -31,9 +31,32 @@ export class PointsRepository {
         alert("in workoutSessionPoints");
         const pointsDocRef = this.firestore.collection('points').doc(currUserId);
         const fieldValue = firebase.firestore.FieldValue;
-
-        return pointsDocRef.update({
-            userPoints: fieldValue.increment(75)
-        });
-    }
+    
+        const docSnapshot = await pointsDocRef.get().toPromise(); // Convert Observable to Promise
+    
+        if (docSnapshot && docSnapshot.exists) {
+            const data = docSnapshot.data() as { [key: string]: any }; // Typecast data as an object with any keys
+            const currentWorkoutSessionsAttended = data?.['workoutSessionsAttended'] || 0;
+            const newWorkoutSessionsAttended = currentWorkoutSessionsAttended + 1;
+    
+            let updatedFields = {};
+    
+            if (newWorkoutSessionsAttended % 3 === 0) {
+                updatedFields = {
+                    userPoints: fieldValue.increment(75),
+                    workoutSessionsAttended: fieldValue.increment(1)
+                };
+            } else {
+                updatedFields = {
+                    workoutSessionsAttended: fieldValue.increment(1)
+                };
+            }
+    
+            return pointsDocRef.update(updatedFields);
+        } else {
+            // Handle the case when the document does not exist
+            console.log("Document does not exist");
+            return null;
+        }
+    }        
 }
