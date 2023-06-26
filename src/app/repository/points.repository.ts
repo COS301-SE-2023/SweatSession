@@ -28,7 +28,6 @@ export class PointsRepository {
     }
 
     async workoutSessionPoints(currUserId: string) {
-        alert("in workoutSessionPoints");
         const pointsDocRef = this.firestore.collection('points').doc(currUserId);
         const fieldValue = firebase.firestore.FieldValue;
     
@@ -58,5 +57,14 @@ export class PointsRepository {
             console.log("Document does not exist");
             return null;
         }
-    }        
+    }
+    
+    async fitnessGoalsPoints(currUserId: string) {
+        const pointsDocRef = this.firestore.collection('points').doc(currUserId);
+        const fieldValue = firebase.firestore.FieldValue;
+
+        return pointsDocRef.update({
+            userPoints: fieldValue.increment(100)
+        });
+    }
 }
