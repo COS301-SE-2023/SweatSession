@@ -24,4 +24,12 @@ ion-button {
     --border-style: solid;
   
     --ripple-color: deeppink;
-  }
+}
+
+ion-icon:active {
+    color: green;
+}
+
+ion-icon:inactive {
+    color: grey;
+}
