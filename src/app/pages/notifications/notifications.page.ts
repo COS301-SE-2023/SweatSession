@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
 import {NoticeService } from 'src/app/services/notifications/notice.service';
 import { NoticehomeService } from 'src/app/services/notifications/noticehome.service';
 import { Notice } from 'src/app/models/notice.model';
 import { AlertController, NavController } from '@ionic/angular';
-import { Location } from "@angular/common";
 import { getAuth } from 'firebase/auth';
 // import { HomePage } from '../home/home.page';
 // import { Router } from '@angular/router';
@@ -48,7 +46,7 @@ export class NotificationsPage implements OnInit {
     this.noticeService.getNotices().subscribe((notices: Notice[]) => {
       this.noticeList = notices;
       for(let i = 0 ; i<this.noticeList.length ; i++){
-        if(this.noticeList[i].userid == this.currUserId){
+        if(this.noticeList[i].senttoid == this.currUserId){
           this.noticeList2.push(this.noticeList[i]) ;
         }
       }
@@ -89,7 +87,11 @@ export class NotificationsPage implements OnInit {
         this.noticeList2.splice(i , 1) ;
       }
     }
+  }
 
+  rejectFriendRequest(senderid: string , senttoid: string){
+    this.noticeService.rejectFriend(senderid , senttoid) ;
+    console.log('reject working');
 
   }
 
@@ -98,8 +100,9 @@ export class NotificationsPage implements OnInit {
     this.noticehomeService.send_data.next(this.noticeamount);
   }
 
-  createNotifications(sendername: string , sentdate: string , message: string){
-    this.noticeService.createNotices(sendername , sentdate , message , this.currUserId!);
+
+  back(){
+    this.nav.navigateRoot("/userprofile");
   }
 
   back(){

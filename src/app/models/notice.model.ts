@@ -3,7 +3,9 @@ export class Notice{
     sentdate?: string;
     sendername?: string;
     message?: string;
-    userid?: string;
+    senttoid?: string;
+    senderid?: string;
+    profileurl?: string;
 }
 
 export class Profile{
