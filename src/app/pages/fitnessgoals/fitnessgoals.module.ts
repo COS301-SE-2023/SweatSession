@@ -9,7 +9,6 @@ import { FitnessgoalsPageRoutingModule } from './fitnessgoals-routing.module';
 
 import { FitnessgoalsPage } from './fitnessgoals.page';
 import {GoalcardComponent} from "./goalcard/goalcard.component";
-
 import { BackButtonDirectiveModule } from 'src/app/directives';
 
 @NgModule({
@@ -19,9 +18,7 @@ import { BackButtonDirectiveModule } from 'src/app/directives';
         IonicModule,
         FitnessgoalsPageRoutingModule,
         ReactiveFormsModule,
-        BackButtonDirectiveModule,
-        // [FitnessgoalState],
-        NgxsModule.forFeature([FitnessgoalState])//might remove
+        BackButtonDirectiveModule
     ],
   declarations: [FitnessgoalsPage,GoalcardComponent ]
 })

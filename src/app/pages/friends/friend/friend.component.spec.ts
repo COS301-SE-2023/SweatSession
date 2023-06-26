@@ -1,8 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
-
 import { FriendComponent } from './friend.component';
-
 describe('FriendComponent', () => {
   let component: FriendComponent;
   let fixture: ComponentFixture<FriendComponent>;

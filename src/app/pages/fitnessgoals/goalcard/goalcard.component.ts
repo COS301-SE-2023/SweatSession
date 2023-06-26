@@ -4,11 +4,8 @@ import { IGOALS } from 'src/app/models/fitnessgoals.model';
 import {FormControl, FormGroup} from "@angular/forms";
 import {Selector, Store} from "@ngxs/store";
 import {AddGoalAction} from "../../../actions/fitnessgoals/fitnessgoals.action";
-import {FitnessgoalState} from "../../../states/fitnessgoal/fitnessgoal.state";
-import {toNumbers} from "@angular/compiler-cli/src/version_helpers";
-import {Observable} from "rxjs";
-import { goalsRepository } from 'src/app/repository';
-
+import {FitnessgoalService} from "../../../services/fitnessgoal/goal.service";
+import {AuthApi} from "../../../states/auth/auth.api";
 @Component({
   selector: 'app-goalcard',
   templateUrl: './goalcard.component.html',
@@ -37,62 +34,53 @@ export class GoalcardComponent  implements OnInit {
     });
 
     goals: IGOALS = {
-        goals: [
-            {
-                            id: "1",
-                            name: "Lose Weight",
-                            description: "Lose 10 pounds in 2 months",
-                            coverPicture: "https://loremflickr.com/320/240",
-                            start: "2020-01-01",
-                            end: "2020-03-01",
-                            progress: 0.5,
-                            days_left: 60,
-            },
-            {
-                            id: "2",
-                            name: "Gain Weight",
-                            description: "Gain 10 pounds in 2 months",
-                            coverPicture: "https://loremflickr.com/320/240/gym",
-                            start: "2020-01-01",
-                            end: "2020-03-01",
-                            progress: 0.5,
-                            days_left: 60,
-            }
-    ]
+        goals: []
+    }
+    currentUserId: string | undefined = undefined;
+
+    constructor(private store: Store,
+                private fitnessgaolservive: FitnessgoalService,
+                private authApi: AuthApi,
+    ) {
+        this.retrievegoals();
     }
 
-  constructor(private store:Store) { }
+    getGoalss() {
+        this.retrievegoals();
+        return this.goals.goals;
+    }
 
-  ngOnInit() {
+    ngOnInit() {
+        this.retrievegoals();
+    }
 
-  }
+    viewSchedule() {
 
-  viewSchedule() {
+    }
 
-  }
+    viewGoal() {
 
-  viewGoal() {
+    }
 
-  }
+    removeGoal() {
 
-  removeGoal() {
+    }
 
-  }
-  calculate_Progress()
-  {
+    calculate_Progress() {
         return 0.5;
-  }
-  addGoal() {
+    }
 
-      //success toast
-      // close the modal
-    console.log("Add Goal");
-  }
+    addGoal() {
 
-    selectFile()
-    {
+        //success toast
+        // close the modal
+        console.log("Add Goal");
+    }
+
+    selectFile() {
         document.getElementById('fileInput')?.click();
     }
+
     getDp() {
         return this.goalForm.value.coverPicture;
     }
@@ -100,39 +88,92 @@ export class GoalcardComponent  implements OnInit {
     onFileSelected(event: any) {
         this.file = event.target.files[0];
         this.SaveFile();
-
     }
+
     SaveFile() {
         if (this.file) {
             const reader = new FileReader();
             reader.onloadend = () => {
-                this.goalForm.patchValue({ coverPicture: reader.result as string});
+                this.goalForm.patchValue({coverPicture: reader.result as string});
                 // this. = reader.result as string;
 
             };
             reader.readAsDataURL(this.file);
         }
-
         console.log(this.goalForm.value.coverPicture);
     }
+
     onSubmit() {
-        // set fields
 
-        const new_goal:IGOAL = {
-            id : "0",
-            name : this.goalForm.value.name ?? "",
-            description : this.goalForm.value.description ?? "",
-            coverPicture : this.goalForm.value.coverPicture ?? "",
-            start : this.goalForm.value.start ?? "",
-            end : this.goalForm.value.end ?? "",
-            progress : this.goalForm.value.progress ?? 0, //TODO: will need to fix these
-            days_left : this.goalForm.value.days_left ?? 0,
-        }
+            const id = this.getUserIDD();
+            const new_goal: IGOAL = {
+                id: id,
+                name: this.goalForm.value.name ?? "",
+                description: this.goalForm.value.description ?? "",
+                coverPicture: this.goalForm.value.coverPicture ?? "",
+                start: this.goalForm.value.start ?? "",
+                end: this.goalForm.value.end ?? "",
+                progress: this.goalForm.value.progress ?? 0, //TODO: will need to fix these
+                days_left: this.goalForm.value.days_left ?? 0,
+            }
 
-        this.store.dispatch(new AddGoalAction(new_goal));
-        console.log(this.goalForm.value);
+            const iaddgoal: IAddGOAL = {
+                userId: id,
+                goal: new_goal
+            }
+            this.fitnessgaolservive.addGoal(iaddgoal);
+            this.retrievegoals();
+
     }
-    protected readonly AudioBuffer = AudioBuffer;
+
+
+     async retrievegoals() {
+
+        const userIder = this.getUserIDD();
+        this.fitnessgaolservive.getGoals(userIder).subscribe((goals) => {
+
+            for (let goal of goals) {
+
+
+                //today's date
+                let today = new Date();
+                //end date
+                let end = new Date(goal["end"]);
+                //calculate days left
+                let days_left = Math.floor((end.getTime() - today.getTime()) / (1000 * 3600 * 24));
+
+                if(days_left < 0){
+                    days_left = 0;
+                }
+                goal["days_left"] = days_left;
+
+                let start = new Date(goal["start"]);
+                let progress = ( days_left / Math.floor((end.getTime() - start.getTime())) );
+                goal["progress"] = progress;
+            }
+
+            this.goals.goals = goals;
+        });
+    }
+
+    getUserIDD()
+    {
+        this.authApi.getCurrentUserId().then((currentUserId) => {
+
+            this.currentUserId = currentUserId;
+
+            if (this.currentUserId != undefined)
+            {
+                sessionStorage.setItem("currentUserId", this.currentUserId ?? "");
+            }
+            else
+            {
+                this.currentUserId = sessionStorage.getItem("currentUserId") ?? "";
+            }
+        });
+
+        return this.currentUserId;
+    }
 }
 
 

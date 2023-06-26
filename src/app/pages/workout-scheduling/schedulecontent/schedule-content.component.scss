@@ -2,7 +2,7 @@ ion-text {
     margin: 20px;
 }
 
-ion-item{
+ion-item:not(.progress-label){
     --highlight-height: 0;
     --inner-border-width: 0;
     --background: #457B9D;
@@ -24,4 +24,12 @@ ion-button {
     --border-style: solid;
   
     --ripple-color: deeppink;
-  }
+}
+
+ion-icon.active {
+    color: blue;
+}
+
+ion-icon.inactive {
+    color: grey;
+}

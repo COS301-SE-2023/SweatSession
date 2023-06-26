@@ -10,11 +10,14 @@ export class FitnessgoalService{
 
     constructor(private repository:goalsRepository) { }
 
-    @Selector()
-    async addGoal(request: IAddGOAL) : Promise<any>{
-        alert('addGoal in Service');
-        return this.repository.addGoal(request);
 
+    getGoals(userId: string | undefined) {
+        return this.repository.getGoals(userId);
+    }
+
+     addGoal(request: IAddGOAL){
+        alert('addGoal in Service');
+        this.repository.addGoal(request);
     }
 
 }

@@ -20,6 +20,7 @@ export class ScheduleContentComponent  implements OnInit {
   @Input() schedule!: IWorkoutScheduleModel;
   isSlideShow = false;
   isEditSlide = false;
+  ratio:Number = 1;
 
   constructor(private store: Store, private nav:NavController, 
     private actionSheetCtrl: ActionSheetController, 
@@ -28,10 +29,15 @@ export class ScheduleContentComponent  implements OnInit {
     private pointsRepository: PointsRepository) { }
 
   ngOnInit() {
+    if(!this.isCompleted()) {
+      this. fraction();
+      this.counter();
+    }
   }
 
   async viewSchedule() {
     this.isSlideShow=!this.isSlideShow;
+    this.fraction();
   }
 
   removeSchedule() {
@@ -77,9 +83,33 @@ export class ScheduleContentComponent  implements OnInit {
         }
         return `you have ${hoursLeft} hours left`;
       }
-      return `your have ${daysLeft} days lefts`;
+      else if(daysLeft==1) {
+        return `your have ${daysLeft} day left`;
+      }
+      return `your have ${daysLeft} days left`;
+    }
+
+    if(this.inSession()) {
+      return "Session started";
     }
     return "Gym Session Has Begun"; // add code so that it changes to Gym Session Has Begun once the time gym session is over
+  }
+
+  inSession() {
+    const completeAt = this.schedule.completeAt!.toDate().getTime();
+    const scheduledTime = new Date(`${this.schedule.date}T${this.schedule.time}`).getTime();
+    const now = new Date().getTime();
+    
+    if(now >= scheduledTime && now < completeAt) {
+      return true;
+    }
+    return false;
+  }
+
+  isCompleted() {
+    if(this.schedule.status == "completed")
+      return true;
+    return false;
   }
 
   async presentActionSheet() {
@@ -104,22 +134,33 @@ export class ScheduleContentComponent  implements OnInit {
     await actionSheet.present();
   }
 
-  // fraction(schedule: IWorkoutScheduleModel) {
-  //   console.table(schedule);
-  //   console.log(schedule.createdAt);
-  //   const now = new Date();
-  //   console.log(now);
-  //   // if (false) {
-  //   //   const currentTime = new Date().getTime();
-  //   //   const timeDiff = schedule.createdAt.getTime() - currentTime;
-  //   //   const targetTime = new Date(`${schedule.date}T${schedule.time}`).getTime();
-  //   //   const createdTime = schedule.createdAt!.getTime();
-  //   //   const diff = targetTime - createdTime;
-  //   //   console.log(timeDiff/diff)
-  //   //   return timeDiff/diff;
-  //   // }
-  //   return 0.5;
-  // }
+  fraction() {
+    const createdAt = this.schedule.createdAt!.toDate()
+    const currentTime = new Date().getTime();
+    const timeDiff =  currentTime-createdAt.getTime();
+    const targetTime = new Date(`${this.schedule.date}T${this.schedule.time}`).getTime();
+    const createdTime = createdAt.getTime();
+    const diff = targetTime - createdTime;
+    if(timeDiff/diff > 1){
+      this.ratio = 1;
+      if(this.inSession()) {
+        if(this.schedule.status != "inSession") {
+          this.schedule.status = "inSession";
+          this.store.dispatch(new UpdateWorkoutSchedule(this.schedule));
+        }
+      }else if(this.schedule.status != "completed") {
+        this.schedule.status = "completed";
+        this.store.dispatch(new UpdateWorkoutSchedule(this.schedule))
+      }
+    }
+    this.ratio = timeDiff/diff;
+  }
+
+  counter() {
+    setInterval(()=>{
+      this.fraction()
+    },1000*60)
+  }
   
 
   addWorkout(schedule: IWorkoutScheduleModel) {
@@ -140,5 +181,14 @@ export class ScheduleContentComponent  implements OnInit {
   
   viewWorkout(schedule: IWorkoutScheduleModel) {
     this.navCtrl.navigateForward('/workout-tracking', { state: { schedule } });
+  }
+
+  join() {
+    this.schedule.joined = true;
+    this.store.dispatch(new UpdateWorkoutSchedule(this.schedule))
+  }
+
+  joined() {
+    return  this.schedule.joined;
   }
 }

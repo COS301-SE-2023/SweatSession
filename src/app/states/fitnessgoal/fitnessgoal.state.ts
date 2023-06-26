@@ -25,12 +25,7 @@ export interface FitnessgoalStateModel {
     }
 })
 
-@Injectable(
-    {
-        providedIn: 'root'
-    }
-)
-
+@Injectable()
 export class FitnessgoalState {
     constructor(
         private readonly store: Store,
@@ -43,26 +38,26 @@ export class FitnessgoalState {
     @Action(AddGoalAction)
     async addGoal(ctx: StateContext<FitnessgoalStateModel>, { payload }: AddGoalAction) {
         alert('addGoal in State');
-        const currentUserId = await this.authApi.getCurrentUserId();
-
-        if(currentUserId!=null) {
-            const request: IAddGOAL = {
-                userId: currentUserId,
-                goal: payload
-            }
-
-            const response = await this.fitnessgoalService.addGoal(request);
-            ctx.patchState({
-                fitnessgoal: response.goal!, ...ctx.getState().fitnessgoal
-            })
-            return ctx.dispatch(new Navigate(['fitnessgoal']));
-        }else {
-            alert('Please Login to add Goal');
-            return ctx.dispatch(new Navigate(['login']));
-        }
-
-
-
+        // const currentUserId = await this.authApi.getCurrentUserId();
+        //
+        // if(currentUserId!=null) {
+        //     const request: IAddGOAL = {
+        //         userId: currentUserId,
+        //         goal: payload
+        //     }
+        //
+        //     const response = await this.fitnessgoalService.addGoal(request);
+        //     ctx.patchState({
+        //         fitnessgoal: response.goal!, ...ctx.getState().fitnessgoal
+        //     })
+        //     return ctx.dispatch(new Navigate(['fitnessgoal']));
+        // }else {
+        //     alert('Please Login to add Goal');
+        //     return ctx.dispatch(new Navigate(['login']));
+        // }
+        //
+        //
+        //
         }
 
 }

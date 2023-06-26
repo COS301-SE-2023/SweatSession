@@ -1,5 +1,5 @@
 <ion-list>
-    <ion-item-sliding *ngFor="let goal of goals.goals  ">
+    <ion-item-sliding *ngFor="let goal of goals.goals ">
         <ion-card>
         <ion-item>
             <ion-grid>
@@ -22,7 +22,7 @@
                 <ion-row>
                     <ion-col>
                             <ion-label>Progress</ion-label>
-                            <ion-progress-bar value = "{{calculate_Progress()}}" ></ion-progress-bar>
+                            <ion-progress-bar value = "{{goal.progress}}" ></ion-progress-bar>
                     </ion-col>
                 </ion-row>
                 <ion-row>
@@ -104,18 +104,18 @@
                         </ion-item>
                         <ion-item>
                             <ion-label position="stacked">Start</ion-label>
-                            <ion-input type="date" formControlName="startDate"></ion-input>
+                            <ion-input type="date" formControlName="start"></ion-input>
                         </ion-item>
                         <ion-item>
                             <ion-label position="stacked">End</ion-label>
-                            <ion-input type="date" formControlName="endDate"></ion-input>
+                            <ion-input type="date" formControlName="end"></ion-input>
                         </ion-item>
 
 
 
                         <ion-row>
                             <ion-col>
-                                <ion-button fill="outline" expand="block" size="small" (click)="modal.dismiss()">Cancel</ion-button>
+                                <ion-button fill="outline" expand="block" size="small" (click)="modal.dismiss()" (click) = "retrievegoals()" >Cancel</ion-button>
                             </ion-col>
                             <ion-col>
                                 <ion-button fill="outline" expand="block" size="small" type="submit" [disabled]="!goalForm.valid">Save Goal</ion-button>

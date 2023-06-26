@@ -1,17 +1,17 @@
 <div class="outer-container">
   <ion-content>
     <div class="inner-container">
-      <ion-segment value="gym">
-        <ion-segment-button (click) = "gymSlide()" value="gym">
-          <ion-label>Gym</ion-label>
-        </ion-segment-button>
-        <ion-segment-button (click) = "userSlide()" value="user">
+      <ion-segment (ionChange)="onSegmentChange($event)" value="user">
+        <ion-segment-button value="user">
           <ion-label>user</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="gym">
+          <ion-label>Gym</ion-label>
         </ion-segment-button>
       </ion-segment>
 
-      <gymsearch *ngIf="!isUserSlide"></gymsearch>
-      <usersearch *ngIf="isUserSlide"></usersearch>
+      <gymsearch [hidden]="selectedSegment !=='gym'"></gymsearch>
+      <usersearch [hidden]="selectedSegment !=='user'"></usersearch>
     </div>
   </ion-content>
 </div>

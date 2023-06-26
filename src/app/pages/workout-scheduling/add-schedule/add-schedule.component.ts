@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PopoverController } from '@ionic/angular';
 import { Store } from '@ngxs/store';
+import { Timestamp } from 'firebase/firestore';
 import { AddWorkoutSchedule } from 'src/app/actions';
 import { IWorkoutScheduleModel } from 'src/app/models';
 
@@ -50,13 +51,16 @@ export class AddScheduleComponent  implements OnInit {
   }
 
   setFields() {
-    this.schedule.createdAt = new Date();
+    this.schedule.createdAt = Timestamp.fromDate(new Date());
     this.schedule.notified = false;
-    this.schedule.completeAt =new Date(`${this.schedule.date!}T${this.schedule.time!}`);
-    this.schedule.completeAt.setMinutes(this.schedule.completeAt.getMinutes()+this.schedule.duration!);
-    this.schedule.notifyAt = this.schedule.completeAt;
-    this.schedule.notifyAt.setMinutes(this.schedule.notifyAt.getMinutes()-5);
+    let completeAt = new Date(`${this.schedule.date!}T${this.schedule.time!}`);
+    completeAt.setMinutes(completeAt.getMinutes()+this.schedule.duration!);
+    this.schedule.completeAt = Timestamp.fromDate(completeAt);
+    let notifyAt = completeAt;
+    notifyAt.setMinutes(notifyAt.getMinutes()-5);
+    this.schedule.notifyAt = Timestamp.fromDate(notifyAt);
     this.schedule.status = "uncompleted";
+    this.schedule.joined = false;
   }
 
   isValidInput() {

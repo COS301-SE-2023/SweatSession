@@ -5,7 +5,6 @@ import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { GetFriendsAction} from 'src/app/actions';
 import { FriendsState} from 'src/app/states';
-import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-friends',
@@ -17,8 +16,7 @@ export class FriendsPage implements OnInit {
   @Select(FriendsState.returnFriends) friends$! : Observable<IFriendsModel[]>;
   searchTerms!: ISearchTerms;
   
-  constructor(private store: Store, 
-    private loadingCtrl:LoadingController, 
+  constructor(private store: Store,
     private nav:NavController) { }
 
   ngOnInit() {
@@ -52,18 +50,18 @@ export class FriendsPage implements OnInit {
     this.friends = this.searchTerms.filteredSuggestions!;
   }
 
-  async showLoader() {
-    const loader = await this.loadingCtrl.create({
-      message: 'Loading...',
-      translucent: true,
-      duration: 3000
-    });
-    loader.present();
-  }
+  // async showLoader() {
+  //   const loader = await this.loadingCtrl.create({
+  //     message: 'Loading...',
+  //     translucent: true,
+  //     duration: 3000
+  //   });
+  //   loader.present();
+  // }
 
-  async dismissLoader() {
-    await this.loadingCtrl.dismiss();
-  }
+  // async dismissLoader() {
+  //   await this.loadingCtrl.dismiss();
+  // }
 
   onSearchInput(event:any) {
     const searchText = event.target.value;
