@@ -9,7 +9,7 @@ import { ISearchTerms } from 'src/app/models';
   styleUrls: ['./search.page.scss'],
 })
 export class SearchPage {
-  isUserSlide = false;
+  isUserSlide = true;
   
   constructor() {}
 
