@@ -12,9 +12,14 @@
 ion-item{
     --highlight-height: 0;
     --inner-border-width: 0;
+    border-radius: 12px;
     --background: #A8DADC;
 }
 
+*{
+    font-family: 'Montserrat', 'sans-serrif';
+}
+
 ion-card, ion-item {
-    opacity: 0.9;
+    opacity: 1;
 }
