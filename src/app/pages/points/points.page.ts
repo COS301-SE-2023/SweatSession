@@ -16,6 +16,9 @@ export class PointsPage implements OnInit {
   @Select(PointsState.points)
   points$!: Observable<IPoints | null>;
   
+  @Select(PointsState.workoutSessionsAttended)
+  workoutSessionsAttended$!: Observable<Number | null>;
+  
   constructor(private alertController: AlertController, private store: Store) { }
 
   ngOnInit() {

@@ -29,6 +29,11 @@ export interface PointsStateModel {
     static points(state: PointsStateModel) {
         return state.points;
     }
+
+    @Selector()
+    static workoutSessionsAttended(state: PointsStateModel) {
+      return Number(state.points?.workoutSessionsAttended)%3
+    }
   
     @Action(SubscribeToPoints)
     public subscribeToPointsState(context: StateContext<PointsStateModel>) {
