@@ -12,7 +12,7 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <search [data]="friends"></search>
+  <search [data]="friends">Find friends</search>
   <user-friend *ngFor ="let friend of friends" 
     [friend] = "friend"
   >
