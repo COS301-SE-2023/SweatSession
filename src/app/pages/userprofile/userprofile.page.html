@@ -1,9 +1,9 @@
 <ion-header>
   <ion-toolbar>
     <ion-item lines="none">
-      <backbutton></backbutton>
+      <backbutton class="larger-back-button"></backbutton>
       <ion-title>Profile</ion-title>
-      <ion-icon name="create-outline" routerLink="/setprofile" slot="end">
+      <ion-icon name="create-outline" routerLink="/setprofile" style="filter: none;" slot="end">
         <ion-label>Edit</ion-label>
       </ion-icon>
 
@@ -24,7 +24,7 @@
 
   
   <div class="flex-center">
-    <ion-label class="label">{{displayName$}}</ion-label>
+    <ion-label class="label" style="padding-top: 2%; font-weight: bold; font-size: 1.5rem;">{{displayName$}}</ion-label>
   </div>
 
   <!-- <div class="flex-center" href = size = "small">Edit</div> -->
