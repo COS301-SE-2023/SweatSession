@@ -2,12 +2,13 @@ ion-toolbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    --background: #E63946;
 }
 
 ion-icon {
     width:25px;
     height: 25px;
-}
+}   
 
 .clickable:hover {
     zoom:1.05;
@@ -43,4 +44,8 @@ ion-title {
     ion-chip {
         background-color: transparent;
     }
+}
+
+ion-menu-button {
+    color: black;
 }
