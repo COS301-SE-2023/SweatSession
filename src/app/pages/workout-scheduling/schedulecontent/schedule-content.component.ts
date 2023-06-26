@@ -5,7 +5,9 @@ import { Select, Store } from '@ngxs/store';
 import { Observable, Subscription } from 'rxjs';
 import { RemoveWorkoutSchedule, UpdateWorkoutAdded, UpdateWorkoutSchedule } from 'src/app/actions';
 import { IWorkoutScheduleModel } from 'src/app/models';
+import { PointsRepository } from 'src/app/repository/points.repository';
 import { WorkoutSchedulingState } from 'src/app/states';
+import { getAuth } from '@angular/fire/auth';
 
 @Component({
   selector: 'schedule-content',
@@ -13,6 +15,7 @@ import { WorkoutSchedulingState } from 'src/app/states';
   styleUrls: ['./schedule-content.component.scss'],
 })
 export class ScheduleContentComponent  implements OnInit {
+  currUserId: string | undefined | null;
   private firestoreSubscription: Subscription;
   @Input() schedule!: IWorkoutScheduleModel;
   isSlideShow = false;
@@ -21,7 +24,8 @@ export class ScheduleContentComponent  implements OnInit {
   constructor(private store: Store, private nav:NavController, 
     private actionSheetCtrl: ActionSheetController, 
     private firestore: AngularFirestore, 
-    private navCtrl: NavController) { }
+    private navCtrl: NavController,
+    private pointsRepository: PointsRepository) { }
 
   ngOnInit() {
   }
@@ -51,14 +55,31 @@ export class ScheduleContentComponent  implements OnInit {
       const hoursLeft = Math.floor(timeDiff / (1000 * 60 * 60));
       const daysLeft = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
       const minutes = Math.floor(timeDiff / (1000 * 60));
+      const seconds = Math.floor(timeDiff / (1000));
       if(daysLeft<1){
-        if(hoursLeft<1)
+        if(hoursLeft<1){
+          if (minutes<1){
+            if (seconds==0){
+              const auth = getAuth();
+              this.currUserId = auth.currentUser?.uid;
+              if (this.currUserId!=undefined){
+                sessionStorage.setItem('currUserId', this.currUserId);
+              }else{
+                this.currUserId = sessionStorage.getItem('currUserId');
+              }
+              if (this.currUserId!=undefined){
+                this.pointsRepository.workoutSessionPoints(this.currUserId);
+              }
+            }
+            // return `you have ${seconds} seconds left`;
+          }
           return `you have ${minutes} minutes left`;
+        }
         return `you have ${hoursLeft} hours left`;
       }
       return `your have ${daysLeft} days lefts`;
     }
-    return "schedule overdue";
+    return "Gym Session Has Begun"; // add code so that it changes to Gym Session Has Begun once the time gym session is over
   }
 
   async presentActionSheet() {

@@ -2,6 +2,8 @@
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { IPoints } from 'src/app/models/points.model';
 import { Injectable } from '@angular/core';
+import firebase from 'firebase/compat/app';
+
 
 
 @Injectable({
@@ -23,5 +25,15 @@ export class PointsRepository {
             .catch((error) => {
                 console.error('Error creating document:', error);
             });
+    }
+
+    async workoutSessionPoints(currUserId: string) {
+        alert("in workoutSessionPoints");
+        const pointsDocRef = this.firestore.collection('points').doc(currUserId);
+        const fieldValue = firebase.firestore.FieldValue;
+
+        return pointsDocRef.update({
+            userPoints: fieldValue.increment(75)
+        });
     }
 }
