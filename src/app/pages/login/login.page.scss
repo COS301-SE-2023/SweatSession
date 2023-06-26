@@ -1,0 +1,51 @@
+.logo {
+    display: block;
+    max-width: 70%;
+    height: auto;
+    margin: 0 auto;
+    text-align: center;
+    border: none;
+  }
+  
+* {
+    font-family: 'Montserrat', sans-serif;
+}
+  
+.inner-container {
+    text-align: center;
+    padding: 16px; 
+    width: 85%;
+    border-radius: 12px;
+}
+
+ion-card {
+    margin: 16px;
+    border-radius: 12px;
+}
+
+ion-content {
+    background-color: white; 
+}
+
+#loginButton {
+    --background: #E63946;
+    border-radius: 12px;
+    ion-text {
+        --background: #E63946;
+    }
+}
+
+img[src="/assets/Asset 1.png"] {
+    width: 50%;
+    height: auto;
+    background: transparent;
+    border-radius: 0;
+    border: none; 
+    outline: none; 
+    outline-color: transparent; 
+}
+
+.loginButton {
+    --background: #E63946;
+    border: none;
+}
