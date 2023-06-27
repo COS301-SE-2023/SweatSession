@@ -4,7 +4,6 @@
   import { take } from 'rxjs/operators';
   import { ExerciseService } from '../../services/exercise/exercise.service';
   import { Exercise } from '../../models/exercise.model';
-  import { NavigationService } from 'src/app/services';
   import { NavController } from '@ionic/angular';
   import { Router } from '@angular/router';
 
