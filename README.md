@@ -41,6 +41,8 @@ use the app, location-based services and more
 [Demo 1 Video]()
 [Functional Requirements (SRS) documents](https://github.com/COS301-SE-2023/SweatSession/wiki)
 [GitHub Project Board](https://github.com/orgs/COS301-SE-2023/projects/36)
+
+[DEMO 2 SRS Documents](https://github.com/COS301-SE-2023/SweatSession/wiki/SRS_Demo2)
 ### Members
 
 <table style="border: none;">
