@@ -10,15 +10,15 @@
 
 
 <ion-content class="main">
-  <ion-item lines="none">
-    <ion-title slot="end" style="display:inline-block; background: none; " ><ion-button fill="clear" (click)="clearNotifications()">Clear All</ion-button></ion-title>
-  </ion-item>
+  
+    <ion-title *ngIf="noticeamount > 0" style="display:inline-block;  " class="flex-center3" ><ion-button size="default" color="light" (click)="clearNotifications()">Clear All</ion-button></ion-title>
+  
     <br>
     <br>
     
   <div *ngIf="noticeamount > 0" >
   <ion-card class="Mcard" *ngFor="let notice of noticeList2">
-    <div>{{"&nbsp;".repeat(89)}}<ion-button fill="clear" size="small" (click)="clearNotification(notice.id!)" style="color: black;"><ion-icon name="close-circle-outline" size="small"></ion-icon></ion-button></div>
+    <div>{{"&nbsp;".repeat(85)}}<ion-button fill="clear" size="small" (click)="clearNotification(notice.id!)" style="color: black;"><ion-icon name="close-circle-outline" size="small"></ion-icon></ion-button></div>
     <ion-card-content style="display:flex ; align-items:center" >
   <ion-avatar slot="start">
     <img alt="Silhouette of a person's head" src={{notice.profileurl}} />
