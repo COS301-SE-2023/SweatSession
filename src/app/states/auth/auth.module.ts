@@ -4,8 +4,9 @@ import { NgxsModule } from '@ngxs/store';
 import { AuthState } from './auth.state';
 import { AuthApi } from './auth.api';
 
+
 @NgModule({
-  imports: [CommonModule, NgxsModule.forFeature([AuthState]), AuthModule],
-  providers: [AuthApi],
+  imports: [CommonModule, NgxsModule.forFeature([AuthState])],
+  providers: [AuthApi]
 })
 export class AuthModule {}

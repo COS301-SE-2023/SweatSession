@@ -1,13 +1,13 @@
-import { IAddFriend, IRemoveFriend } from "../models";
+import { IFriendsModel} from "../models";
 
 export class AddFriendAction {
     static readonly type = "[friends] Add Friend";
-    constructor(public payload:IAddFriend){}
+    constructor(public payload:IFriendsModel){}
 }
 
 export class RemoveFriendAction {
     static readonly type = "[friends] Remove Friend";
-    constructor(public payload:IRemoveFriend){}
+    constructor(public payload:IFriendsModel){}
 }
 
 export class GetFriendsAction {

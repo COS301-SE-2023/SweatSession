@@ -1,3 +1,18 @@
 ion-text {
     margin: 20px;
 }
+
+ion-item{
+    --highlight-height: 0;
+    --inner-border-width: 0;
+    --background: #A8DADC;
+}
+
+ion-card, ion-item {
+    opacity: 1;
+}
+
+.custom-search {
+    border-radius: 12px;
+    margin-bottom: 0;
+}

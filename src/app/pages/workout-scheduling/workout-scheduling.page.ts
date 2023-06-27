@@ -1,6 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { PopoverController } from '@ionic/angular';
-import { PopoutAddScheduleComponent } from './popout-add-schedule/popout-add-schedule.component';
+import { PopoverController, LoadingController, NavController } from '@ionic/angular';
+// import { PopoutAddScheduleComponent } from './popout-add-schedule/popout-add-schedule.component';
+import { Select, Store } from '@ngxs/store';
+import { WorkoutSchedulingState } from 'src/app/states';
+import { Observable } from 'rxjs';
+import { ISearchTerms, IWorkoutScheduleModel } from 'src/app/models';
+import { GetWorkoutSchedules } from 'src/app/actions';
+import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-workout-scheduling',
@@ -8,62 +15,60 @@ import { PopoutAddScheduleComponent } from './popout-add-schedule/popout-add-sch
   styleUrls: ['./workout-scheduling.page.scss'],
 })
 export class WorkoutSchedulingPage {
-  schedules= ["schedule1","schedule2","schedule3","schedule4"];
-  //@select(WorkoutSchedulingState.returnSchedules) schedules$: Observable<WorkoutSchedulingStateModel>;
+  //data containers
+  schedules: IWorkoutScheduleModel[]=[];
+  completedSchedules: IWorkoutScheduleModel[]=[];
+  uncompletedSchedules: IWorkoutScheduleModel[]=[];
+  inSessionSchedules: IWorkoutScheduleModel[]=[];
 
-  constructor(private popoverController: PopoverController) { }
+  selectedSegment: string = '0';
+ 
+  @Select(WorkoutSchedulingState.returnSchedules) schedules$!: Observable<IWorkoutScheduleModel[]>;
+  isAddSlide = false;
+
+  constructor(private popoverController: PopoverController, 
+      private store : Store, 
+      private nav: NavController,
+      private route: ActivatedRoute,
+      private router: Router) {
+      this.route.queryParams.subscribe(() => {
+        if (this.router.getCurrentNavigation()?.extras?.state) {
+          this.schedules$ = this.router.getCurrentNavigation()?.extras.state?.['schedules'];
+        }
+      });
+  }
 
   ngOnInit() {
-     //store.dispatch(new GetWorkoutSchedules(payload))
+    this.displayWorkoutSchedule();
   }
 
   async addSchedule(){
-    const popover = await this.popoverController.create({
-          component: PopoutAddScheduleComponent,
-          translucent: true
-        });
-        console.log("save schedule");
-        return await popover.present();
+   this.nav.navigateRoot("/addSchedule")
   }
 
-
-  /*onInputChange() {
-    console.log('Input fields changed');
-    console.log('pushDay:', this.pushDay);
-    console.log('pullDay:', this.pullDay);
-    console.log('legDay:', this.legDay);
+  displayWorkoutSchedule(){
+    this.store.dispatch(new GetWorkoutSchedules())
+    this.schedules$.subscribe((response)=>{
+      this.schedules = response;
+      this.filterSchedules();
+    });
   }
 
-  pushDay: string = 'Push Day';
-  pullDay: string = 'Pull Day';
-  legDay: string = 'Leg Day';
-  pushDay2: string = 'Push Day';
-  pullDay2: string = 'Pull Day';
-  legDay2: string = 'Leg Day';
-  restDay: string = 'Rest Day';
+  filterSchedules() {
+   this.completedSchedules = this.schedules.filter((schedule)=>
+      schedule.status! === "completed"
+    )
 
-  ngOnInit() {
-    // Retrieve the values from local storage
-    this.pushDay = localStorage.getItem('pushDay') || 'Push Day';
-    this.pullDay = localStorage.getItem('pullDay') || 'Pull Day';
-    this.legDay = localStorage.getItem('legDay') || 'Leg Day';
-    this.pushDay2 = localStorage.getItem('pushDay2') || 'Push Day';
-    this.pullDay2 = localStorage.getItem('pullDay2') || 'Pull Day';
-    this.legDay2 = localStorage.getItem('legDay2') || 'Leg Day';
-    this.restDay = localStorage.getItem('restDay') || 'Rest Day';
-    //store.dispatch(new GetWorkoutSchedules(payload))
+    this.uncompletedSchedules = this.schedules.filter((schedule)=>
+      schedule.status!.match('uncompleted')
+    )
+
+    this.inSessionSchedules = this.schedules.filter((schedule)=>
+      schedule.status!.match("inSession")
+    )
   }
 
-  
-
-  saveData() {
-    // Save the values to local storage
-    localStorage.setItem('pushDay', this.pushDay);
-    localStorage.setItem('pullDay', this.pullDay);
-    localStorage.setItem('legDay', this.legDay);
-    localStorage.setItem('pushDay2', this.pushDay2);
-    localStorage.setItem('pullDay2', this.pullDay2);
-    localStorage.setItem('legDay2', this.legDay2);
-    localStorage.setItem('restDay', this.restDay);
-  }*/
+  onSegmentChange(event: any) {
+    this.selectedSegment = event.detail.value;
+  }
 }

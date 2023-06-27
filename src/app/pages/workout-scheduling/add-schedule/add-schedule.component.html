@@ -1,0 +1,61 @@
+<ion-header>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet">
+  <ion-toolbar>
+    <ion-item lines="none">
+      <backbutton class="larger-back-button"></backbutton>
+      <ion-title class="ion-text-center">Add Workout Schedule</ion-title>
+    </ion-item>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-card>
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label position="stacked">Time</ion-label>
+              <ion-input type="time" [(ngModel)]="schedule.time" [min]="getMinTime()"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label position="stacked">Date</ion-label>
+              <ion-input type="date" [(ngModel)]="schedule.date" [min]="getMinDate()"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>        
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label position="floating">Location</ion-label>
+              <ion-input type="text" [(ngModel)]="schedule.location"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label position="floating">Duration (min)</ion-label>
+              <ion-input type="number" [(ngModel)]="schedule.duration" [min]="10"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label position="floating">Workout Name</ion-label>
+              <ion-input type="text" [(ngModel)]="schedule.name" autofocus="false"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+    <ion-card class="schedule-card">
+      <ion-button expand="block" (click)="addSchedule()" [disabled]="!isValidInput()">Save</ion-button>
+    </ion-card>
+  </ion-card>
+</ion-content>
+

@@ -1,0 +1,63 @@
+.main{
+    --background: none;
+    --background: url('/assets/Asset 2.png') no-repeat center/contain fixed;
+}
+
+.flex-center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: radius 20px;
+    background-color: #A8DADC;
+    ion-button{
+        background-color: #A8DADC;
+    } 
+}
+
+.larger-back-button {
+    --padding-start: 12px; 
+    --padding-end: 12px; 
+    font-size: 24px; 
+}
+
+ion-header{
+    --background: #E63946;
+    ion-toolbar{
+        --background: #E63946;
+        ion-item{
+            --background: #E63946;
+            back-button{
+                --background: #E63946;
+            }
+            ion-title{
+                --background: #E63946;
+            }
+        }
+    }
+}
+
+.Mcard{
+    border: radius 50px;
+    background-color:rgb(144,202,243 , 1)
+    
+}
+.flex-center2{
+    border: radius 50px;
+    background-color:lightgray ;
+    
+}
+.Bcard{
+    background-color:rgb(144,202,243 , 0.9)
+}
+
+.ion-icon1{
+    font-size: 28px;
+}
+
+.flex-center3{
+    display: flex;
+    justify-content: center;
+    
+    border: radius 50px;
+
+}

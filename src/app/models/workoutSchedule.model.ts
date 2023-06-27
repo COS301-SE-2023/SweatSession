@@ -1,12 +1,21 @@
 import { Time } from "@angular/common";
+import { Timestamp } from "firebase/firestore";
 
+export type STATUS = "completed" | "uncompleted" | "inSession";
 export interface IWorkoutScheduleModel {
     id?: string;
-    name?:string;
-    duration?: number;
+    name?: string;
     location?: string;
-    date?: Date;
+    duration?: number;
+    status?: STATUS;
     time?: Time;
+    date?: Date;
+    createdAt?: Timestamp;
+    notifyAt?: Timestamp;
+    notified?: boolean;
+    completeAt?: Timestamp;
+    workoutAdded?: boolean;
+    joined?: boolean;
 }
 
 //request
@@ -36,18 +45,19 @@ export interface IGotWorkoutSchedules {
 }
 
 export interface IAddedWorkoutSchedule {
-    userId: string;
-    schedule: IWorkoutScheduleModel;
+    userId?: string;
+    schedule?: IWorkoutScheduleModel;
     validate: boolean;
 }
 
-export interface IRemovedWorkout {
+export interface IRemovedWorkoutSchedule {
     userId: string;
+    schedules?: IWorkoutScheduleModel[];
     validate: boolean;
 }
 
 export interface IUpdatedWorkoutSchedule {
     userId: string;
-    schedule: IWorkoutScheduleModel;
-    validate: true;
+    schedule?: IWorkoutScheduleModel;
+    validate: boolean;
 }

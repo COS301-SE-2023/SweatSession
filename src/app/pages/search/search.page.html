@@ -1,31 +1,17 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Search
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+<div class="outer-container">
+  <ion-content>
+    <div class="inner-container">
+      <ion-segment (ionChange)="onSegmentChange($event)" value="user">
+        <ion-segment-button value="user">
+          <ion-label>User</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="gym">
+          <ion-label>Gym</ion-label>
+        </ion-segment-button>
+      </ion-segment>
 
-<ion-content class="ion-padding">
-  <ion-searchbar
-    placeholder="Search for a location"
-    [(ngModel)]="searchTerm"
-    (ionInput)="onSearchInput($event)"
-    color="light"
-    animated
-  >
-</ion-searchbar>
-
-  <ion-card *ngFor="let item of filteredData$ | async" >
-    <img [src]="item.image" alt="Silhouette of mountains" />
-    <ion-card-header>
-      <ion-card-title>{{ item.name }}</ion-card-title>
-      <ion-card-subtitle>{{ item.location }}</ion-card-subtitle>
-    </ion-card-header>
-  
-    <ion-card-content>
-      {{ item.description }}
-    </ion-card-content>
-  </ion-card>
-  
-</ion-content>
+      <gymsearch [hidden]="selectedSegment !=='gym'"></gymsearch>
+      <usersearch [hidden]="selectedSegment !=='user'"></usersearch>
+    </div>
+  </ion-content>
+</div>

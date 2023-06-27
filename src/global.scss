@@ -24,3 +24,16 @@
 @import "@ionic/angular/css/text-alignment.css";
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
+
+// ion-content {
+//     --ion-background-color: #F1FAEE;
+// }
+
+// ion-item{
+//     --highlight-height: 0;
+//     --inner-border-width: 0;
+// }
+
+ion-title {
+    text-align: center;
+}

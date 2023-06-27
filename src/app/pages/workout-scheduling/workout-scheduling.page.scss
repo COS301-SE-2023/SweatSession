@@ -1,48 +1,56 @@
-.workout-schedule {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+.add-schedule-button:hover {
+  zoom: 1.2;
+  ion-icon {
+  color: aqua;
   }
+}
 
-  .blue-rectangle {
-    background-color: #457B9D;
-    width: 60%;
-    height: 70%;
-    border-radius: 20px;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    overflow: auto;
-  }
+#search-suggestions {
+  margin: 5px;
+  max-height: 200px;
+  overflow-y: scroll;
+}
 
-  .grey-rectangle {
-    background-color: #F1FAEE;
-    flex-basis: 80%;
-    height: 50px;
-    border-radius: 10px;
-    margin-bottom: 5%;
-    text-align: center;
-    position: relative;   /* Add this line */
-    z-index: 1;           /* Add this line */
-  }
+ion-segment {
+  border-radius: 0px;
+}
 
-  .grey-rectangle input {
-    background-color: transparent; /* Remove the background color */
-    border: none; /* Remove the border */
-    outline: none; /* Remove the outline */
-    width: 100%; /* Ensure the input field takes up the full width */
-    height: 100%; /* Ensure the input field takes up the full height */
-  }
-  
-  input[type="text"] {
-    width: 100%;              /* Add this line */
-    align-self: flex-start;   /* Add this line */
-  }
+.larger-back-button {
+  --padding-start: 12px; 
+  --padding-end: 12px; 
+  font-size: 24px; 
+}
 
-  .add-schedule-button:hover {
-    zoom: 1.2;
-   ion-icon {
-    color: aqua;
-   }
+ion-toolbar{
+  --background: #E63946
+}
+
+ion-segment-button{
+  opacity: 1;
+}
+
+ion-toolbar ion-item{
+  --background: #E63946
+}
+
+* {
+  font-family: 'Montserrat', sans-serif;
+}
+
+ion-content {
+  --background: url('/assets/Asset 2.png') no-repeat center/contain fixed; // #1D3557;
+}
+
+ion-item, ion-toolbar {
+  --background: rgba($color: white, $alpha: 0.1);
+}
+
+ion-fab-button  {
+  --background: #457B9D;
+  --background-hover: #9ce0be;
+  --background-activated: #88f4be;
+  --background-focused: #88f4be;
+  --color: white;
+  --ripple-color: deeppink;
+  opacity: 0.9;
 }

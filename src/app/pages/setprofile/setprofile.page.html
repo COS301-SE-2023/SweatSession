@@ -1,14 +1,17 @@
-<ion-header [translucent]="true">
+ <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-item>
-      <ion-icon name="arrow-back-outline" routerLink="/userprofile"></ion-icon>
+    <ion-item lines="none">
+      <backbutton></backbutton>
       <ion-title>User</ion-title>
     </ion-item>
   </ion-toolbar>
 </ion-header>
 
+<ion-content [fullscreen]="true">
+  <app-setprofile-c></app-setprofile-c>
+</ion-content>
 
-<ion-content>
+<!-- <ion-content>
     <ion-card>
 
       <ion-card-header>
@@ -22,37 +25,60 @@
 
         <ion-input type="file" accept="image/*" (change)="onPictureChange($event)"></ion-input>
 
-    </ion-card>
-    <ion-card>
+      </ion-card>
+      
+      <ion-card>
+        <ion-button fill = "clear" (click)="toggleEditMode()">
+          Edit
+        </ion-button> --> 
+        
+        <!-- <ion-button slot="end" fill="clear" (click)="">Edit</ion-button> -->
+      <!-- <ion-item> -->
+        <!-- <ion-label position="stacked">Name</ion-label>
+        <ion-input type="text" [(ngModel)]="user.name" [disabled]="!isEditMode"></ion-input>
+      </ion-item>
 
-      <ion-item>
-        <ion-label position="stacked">Name</ion-label>
-        <ion-input type="text"  [(ngModel)]="user.name"></ion-input>
-      </ion-item>
-  
-      <ion-item>
-        <ion-label position="stacked">Email</ion-label>
-        <ion-input type="email"  disabled = "true" [(ngModel)]="user.email"></ion-input>
-      </ion-item>
-  
       <ion-item>
         <ion-label position="stacked">Bio</ion-label>
         <ion-textarea  [(ngModel)]="user.bio"></ion-textarea>
       </ion-item>
-  
-      
+
       <ion-item>
         <ion-label position="stacked">Phone Number</ion-label>
         <ion-input type="text"  [(ngModel)]="user.phoneNumber"></ion-input>
       </ion-item>
+    
+      <ion-item>
+        <ion-label position="stacked">Email</ion-label>
+        <ion-input type="email"  disabled = "true" [(ngModel)]="user.email"></ion-input>
+      </ion-item> -->
+    
+      <!-- <ion-item>
+        <ion-label position="stacked">Change Password</ion-label>
+        <ion-input type="password"  [(ngModel)]="user.cPassword"></ion-input>
+      </ion-item> -->
+    
+      <!-- <ion-button expand="block" (click)="saveProfile()" [disabled]="!isEditMode">Save</ion-button>
+    
+    </ion-card> -->
+
+    
+
+    <!-- // will take care of it later -->
+    <!-- <ion-card> -->
+
+      <!-- <app-setprofile-c
+      [user] = "user"
+      > 
+      </app-setprofile-c> -->
 
       <!-- <ion-item>
         <ion-label position="stacked">Change Password</ion-label>
         <ion-input type="password"  [(ngModel)]="user.cPassword"></ion-input>
       </ion-item> -->
 
-      <ion-button expand="block" (click)="saveProfile()">Save</ion-button>
+      <!-- <ion-button expand="block" (click)="saveProfile()">Save</ion-button>
     
-  </ion-card>
+  </ion-card> -->
 
-</ion-content>
+<!-- </ion-content> -->

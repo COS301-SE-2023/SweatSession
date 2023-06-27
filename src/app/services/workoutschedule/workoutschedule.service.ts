@@ -11,21 +11,21 @@ import { WorkoutscheduleRepository } from '../../repository';
 })
 export class WorkoutscheduleService {
 
-  constructor(repository: WorkoutscheduleRepository) { }
+  constructor(private repository: WorkoutscheduleRepository) { }
 
   async addSchedule(request: IAddWorkoutSchedule) {
-
+    return this.repository.addSchedule(request);
   }
 
   async removeSchedule(request: IRemoveWorkoutSchedule) {
-
+    return this.repository.removeSchedule(request);
   }
 
   async updateSchedule(request: IUpdateWorkoutSchedule) {
-
+    return this.repository.updateSchedule(request);
   }
 
   async getSchedules(request: IGetWorkoutSchedules) {
-    
+    return this.repository.getSchedules(request);
   }
 }

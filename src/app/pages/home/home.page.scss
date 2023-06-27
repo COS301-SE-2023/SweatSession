@@ -2,19 +2,13 @@ ion-toolbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
-
-ion-segment {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: transparent;
+    --background: #E63946;
 }
 
 ion-icon {
     width:25px;
     height: 25px;
-}
+}   
 
 .clickable:hover {
     zoom:1.05;
@@ -36,6 +30,26 @@ ion-avatar {
     width:35px;
 }
 
+*{
+    font-family: 'Montserrat', sans-serif;
+}
+
 .menu-label{
     margin-left: 10px;
+}
+
+ion-item {
+    width: 100%;
+    // background-color: aqua;
+}
+
+ion-title {
+    text-align: center;
+    ion-chip {
+        background-color: transparent;
+    }
+}
+
+ion-menu-button {
+    color: black;
 }

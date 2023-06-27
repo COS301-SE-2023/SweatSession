@@ -1,0 +1,40 @@
+<ion-content [fullscreen]="true">
+  <ion-header>
+    <ion-toolbar>
+      <ion-item lines="none">
+        <backbutton class="larger-back-button"></backbutton>
+        <ion-title class="ion-text-center">Workout Tracking</ion-title>
+      </ion-item>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="heading-container">
+    <h2>Customize your workout plan here</h2>
+  </div>
+  
+  <div class="grid-container">
+    <div class="form-container">
+      <form [formGroup]="workoutForm">
+        <div formArrayName="exercises" *ngFor="let exercise of exercises.controls; index as i">
+          <div class="exercise-number">Exercise {{ i + 1 }}</div>
+          <div [formGroupName]="i">
+            <input formControlName="name" placeholder="Name" />
+            <input formControlName="sets" placeholder="Sets" />
+            <input formControlName="reps" placeholder="Repetitions" />
+            <input formControlName="weight" placeholder="Weight (kg)" />
+          </div>
+          <ion-button color="danger" type="button" (click)="deleteExercise(i)">
+            <ion-icon name="trash"></ion-icon>
+          </ion-button>
+        </div>
+
+        <ion-button color="success" type="button" (click)="addExercise()" [disabled]="exercises.length >= 10">
+          <ion-icon name="add"></ion-icon>
+        </ion-button>
+      </form>
+      <ion-button color="primary" type="button" (click)="saveExercises()">
+        Save Exercises
+      </ion-button>
+    </div>
+  </div>
+</ion-content>

@@ -1,10 +1,16 @@
-<ion-card>
-  <ion-item>
-    <ion-icon name="receipt-outline"></ion-icon>
-    <ion-text>
-      {{name}}
-    </ion-text>
-    <!-- <ion-button slot="end">remove</ion-button> -->
-    <ion-button slot="end" (click)="viewSchedule()">view</ion-button>
-  </ion-item>
-</ion-card>
+<search class="custom-search" [data]="schedules" [placeholder]="'find schedule'">Find schedule</search>
+
+<div *ngFor="let schedule of schedules" class="schedules">
+  <schedule-content [schedule]="schedule"></schedule-content>
+</div>
+
+<div [hidden]="schedules.length > 0">
+  <ion-card>
+    <ion-item>
+      <ion-icon name="receipt-outline"></ion-icon>
+      <ion-text>
+        You have 0 {{categoryName}} schedules
+      </ion-text>
+    </ion-item>
+  </ion-card>
+</div>

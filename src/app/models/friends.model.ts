@@ -1,7 +1,7 @@
 export interface IFriendsModel {
-    id: string;
-    name: string;
-    profileUrl: string;
+    userId?: string;
+    name?: string;
+    profileURL?: string;
 }
 
 //requests
@@ -22,14 +22,18 @@ export interface IAddFriend {
 
 //response
 export interface IGotFriends {
+    userId: string;
     friends: IFriendsModel[];
+    validate: boolean;
 }
 
 export interface IRemovedFriend {
+    userId: string;
     validate: boolean;
 }
 
 export interface IAddedFriend {
+    userId: string;
     validate: boolean;
-    friend: IFriendsModel;
+    friend?: IFriendsModel;
 }

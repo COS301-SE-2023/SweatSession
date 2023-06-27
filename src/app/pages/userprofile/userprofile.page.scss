@@ -3,7 +3,28 @@
     justify-content: center;
     align-items: center;
     border: radius 50px;
-    
+   
+
+    ion-card-content{
+        color: black;
+    }
+
+    ion-card-header{
+        ion-card-subtitle{
+            font-weight: bold;
+            font-size: 1rem;
+            color: black;
+        }
+    }
+
+    ion-card{
+        ion-card-content{
+            ion-button{
+                --background: white;
+            }
+        }
+        filter: drop-shadow(0 0.2rem 0.25rem #457B9D);
+    }
 }
 .flex-right{
     display: flex;
@@ -13,16 +34,23 @@
     
 }
 
+.label{
+    filter: none;
+}
+
+.larger-back-button{
+    --padding-start: 12px; 
+    --padding-end: 12px; 
+    font-size: 24px; 
+}
+
 .logo-img {
     img{
         height: 12vh;
         width: auto;
         margin: auto;
         display: block;
-        
-
     }
-    
   }
 
   .side-by-side {
@@ -32,6 +60,7 @@
   .side-by-side ion-title {
     flex-basis: 50%;
     text-align: center;
+    --background: #E63946;
   }
   
 
@@ -40,27 +69,34 @@
     justify-content: center;
     align-items: center;
     height: 100%;
-    background-color: cornflowerblue;
-
 }
 
-.image{
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
+.image-container
+{
+    margin-top: 5%;
+    filter: none;
+}
+
+* {
+    font-family: 'Montserrat', sans-serif;
+}
+
+.rounded-circle {
     border-radius: 50%;
-    width: 200px;
+    overflow: hidden;
     height: 200px;
-}
+    width: 200px;
+  }
+
 .button{
     --background: lightgrey;
     --color:black ;
 }
 .card{
-    --background:#90CAF3;
+    --background: #A8DADC;
     --color:black;
     box-shadow:none !important;
     border: none !important;
-    
 
 }
 .title{
@@ -68,12 +104,24 @@
     padding-left: 5vh;
 }
 ion-item{
-    --background:#90CAF3;
+    --background:#A8DADC;
 }
 // .header{
 //     display: inline-block;
 //     --background:lightgrey;
 // }
-// ion-toolbar{
-//     --background:lightgrey;
-// }
+ion-toolbar{
+    --background:#E63946;
+    ion-item{
+        --background:#E63946;
+    }
+}
+
+ion-card {
+    margin-bottom: 10px;
+    margin-top: 10px;
+    width: 80%;
+    margin-left: 0;
+    margin-right: 0;
+    background-color: #A8DADC;
+  }

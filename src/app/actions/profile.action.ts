@@ -10,3 +10,8 @@ export class UpdateProfileAction {
     static readonly type = "[profile] Update Profile";
     constructor(public payload: IUpdateProfile) { }
 }
+
+export class GetUsersAction {
+    static readonly type = "[profile] get user profiles";
+    constructor() { }
+}
