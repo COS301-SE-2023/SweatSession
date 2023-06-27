@@ -5,34 +5,38 @@ import { Select, Store } from '@ngxs/store';
 import { Observable, Subscription } from 'rxjs';
 import { RemoveWorkoutSchedule, UpdateWorkoutAdded, UpdateWorkoutSchedule } from 'src/app/actions';
 import { IWorkoutScheduleModel } from 'src/app/models';
+import { PointsRepository } from 'src/app/repository/points.repository';
 import { WorkoutSchedulingState } from 'src/app/states';
+import { getAuth } from '@angular/fire/auth';
 
 @Component({
   selector: 'schedule-content',
   templateUrl: './schedule-content.component.html',
   styleUrls: ['./schedule-content.component.scss'],
 })
-export class ScheduleContentComponent  implements OnInit {
+export class ScheduleContentComponent implements OnInit {
+  currUserId: string | undefined | null;
   private firestoreSubscription: Subscription;
   @Input() schedule!: IWorkoutScheduleModel;
   isSlideShow = false;
   isEditSlide = false;
-  ratio:Number = 1;
+  ratio: Number = 1;
 
-  constructor(private store: Store, private nav:NavController, 
-    private actionSheetCtrl: ActionSheetController, 
-    private firestore: AngularFirestore, 
-    private navCtrl: NavController) { }
+  constructor(private store: Store, private nav: NavController,
+    private actionSheetCtrl: ActionSheetController,
+    private firestore: AngularFirestore,
+    private navCtrl: NavController,
+    private pointsRepository: PointsRepository) { }
 
   ngOnInit() {
-    if(!this.isCompleted()) {
-      this. fraction();
+    if (!this.isCompleted()) {
+      this.fraction();
       this.counter();
     }
   }
 
   async viewSchedule() {
-    this.isSlideShow=!this.isSlideShow;
+    this.isSlideShow = !this.isSlideShow;
     this.fraction();
   }
 
@@ -40,7 +44,7 @@ export class ScheduleContentComponent  implements OnInit {
     this.store.dispatch(new RemoveWorkoutSchedule(this.schedule))
   }
 
-  viewExercises () {
+  viewExercises() {
     this.nav.navigateRoot("/workout-tracking");
   }
 
@@ -53,7 +57,7 @@ export class ScheduleContentComponent  implements OnInit {
     const targetTime = new Date(`${this.schedule.date}T${this.schedule.time}`).getTime();
     const timeDiff = targetTime - currentTime;
 
-    if(timeDiff>0){
+    if (timeDiff > 0) {
       const hoursLeft = Math.floor(timeDiff / (1000 * 60 * 60));
       const daysLeft = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
       const minutes = Math.floor(timeDiff / (1000 * 60));
@@ -62,14 +66,14 @@ export class ScheduleContentComponent  implements OnInit {
           return `You have ${minutes} minutes left`;
         return `You have ${hoursLeft} hours left`;
       }
-      else if(daysLeft==1) {
+      else if (daysLeft == 1) {
         return `your have ${daysLeft} day left`;
       }
       return `your have ${daysLeft} days left`;
     }
 
-    if(this.inSession()) {
-      return "Session started";
+    if (this.inSession()) {
+      return "Gym Session Has Begun";
     }
     return "Schedule overdue";
   }
@@ -78,15 +82,15 @@ export class ScheduleContentComponent  implements OnInit {
     const completeAt = this.schedule.completeAt!.toDate().getTime();
     const scheduledTime = new Date(`${this.schedule.date}T${this.schedule.time}`).getTime();
     const now = new Date().getTime();
-    
-    if(now >= scheduledTime && now < completeAt) {
+
+    if (now >= scheduledTime && now < completeAt) {
       return true;
     }
     return false;
   }
 
   isCompleted() {
-    if(this.schedule.status == "completed")
+    if (this.schedule.status == "completed")
       return true;
     return false;
   }
@@ -98,7 +102,7 @@ export class ScheduleContentComponent  implements OnInit {
         {
           text: 'Delete',
           role: 'destructive',
-          handler: ()=>this.removeSchedule()
+          handler: () => this.removeSchedule()
         },
         {
           text: 'Cancel',
@@ -116,31 +120,31 @@ export class ScheduleContentComponent  implements OnInit {
   fraction() {
     const createdAt = this.schedule.createdAt!.toDate()
     const currentTime = new Date().getTime();
-    const timeDiff =  currentTime-createdAt.getTime();
+    const timeDiff = currentTime - createdAt.getTime();
     const targetTime = new Date(`${this.schedule.date}T${this.schedule.time}`).getTime();
     const createdTime = createdAt.getTime();
     const diff = targetTime - createdTime;
-    if(timeDiff/diff > 1){
+    if (timeDiff / diff > 1) {
       this.ratio = 1;
-      if(this.inSession()) {
-        if(this.schedule.status != "inSession") {
+      if (this.inSession()) {
+        if (this.schedule.status != "inSession") {
           this.schedule.status = "inSession";
           this.store.dispatch(new UpdateWorkoutSchedule(this.schedule));
         }
-      }else if(this.schedule.status != "completed") {
+      } else if (this.schedule.status != "completed") {
         this.schedule.status = "completed";
         this.store.dispatch(new UpdateWorkoutSchedule(this.schedule))
       }
     }
-    this.ratio = timeDiff/diff;
+    this.ratio = timeDiff / diff;
   }
 
   counter() {
-    setInterval(()=>{
+    setInterval(() => {
       this.fraction()
-    },1000*60)
+    }, 1000 * 60)
   }
-  
+
 
   addWorkout(schedule: IWorkoutScheduleModel) {
     this.navCtrl.navigateForward('/workout-tracking', { state: { schedule } });
@@ -157,7 +161,7 @@ export class ScheduleContentComponent  implements OnInit {
       console.log('Error: schedule.id is undefined');
     }
   }
-  
+
   viewWorkout(schedule: IWorkoutScheduleModel) {
     this.navCtrl.navigateForward('/workout-tracking', { state: { schedule } });
   }
@@ -165,9 +169,19 @@ export class ScheduleContentComponent  implements OnInit {
   join() {
     this.schedule.joined = true;
     this.store.dispatch(new UpdateWorkoutSchedule(this.schedule))
+    const auth = getAuth();
+    this.currUserId = auth.currentUser?.uid;
+    if (this.currUserId != undefined) {
+      sessionStorage.setItem('currUserId', this.currUserId);
+    } else {
+      this.currUserId = sessionStorage.getItem('currUserId');
+    }
+    if (this.currUserId != undefined) {
+      this.pointsRepository.workoutSessionPoints(this.currUserId);
+    }
   }
 
   joined() {
-    return  this.schedule.joined;
+    return this.schedule.joined;
   }
 }

@@ -1,3 +1,4 @@
 export interface IPoints{
-    userPoints: Number
+    userPoints: Number,
+    workoutSessionsAttended?: Number 
 }

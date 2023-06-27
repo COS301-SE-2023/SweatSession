@@ -1,6 +1,7 @@
 import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin'; 
 import { IWorkoutScheduleModel } from "../../src/app/models";
+import { PointsRepository } from "../../src/app/repository/points.repository";
 
 admin.initializeApp();
 
@@ -21,6 +22,8 @@ export const checkScheduledWorkouts = functions.pubsub
 
 
           if (scheduledDateTime <= now && workout.status !== 'completed' && !workout.notified) {
+            console.log(workout.completeAt);
+            console.log(now);
             // Send a notification to the user userId == doc.id
             await innerDoc.ref.update({notified: true});
             await sendNotificationToUser(workout, "You have a session in 5 minutes");

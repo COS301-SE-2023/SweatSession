@@ -16,11 +16,19 @@ export class PointsPage implements OnInit {
   @Select(PointsState.points)
   points$!: Observable<IPoints | null>;
   
+  @Select(PointsState.workoutSessionsAttended)
+  workoutSessionsAttended$!: Observable<Number | null>;
+  
   constructor(private alertController: AlertController, private store: Store) { }
 
   ngOnInit() {
     this.store.dispatch(new SubscribeToPoints());
   }
+
+  // get progressValue(): number {
+  //   const workoutSessionsAttended = (await this.workoutSessionsAttended$.toPromise()) || 0;
+  //   return workoutSessionsAttended / 3;
+  // }
 
   async showWorkoutPlanPopup() {
     const alert = await this.alertController.create({

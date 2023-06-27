@@ -46,4 +46,13 @@ export class BadgesRepository {
             receivedBadges: fieldValue.arrayUnion(1)
         });
     }
+
+    async stretchingStarBadge(currUserId: string) {
+        const badgeDocRef = this.firestore.collection('badges').doc(currUserId);
+        const fieldValue = firebase.firestore.FieldValue;
+
+        return badgeDocRef.update({
+            receivedBadges: fieldValue.arrayUnion(2)
+        });
+    }
 }
