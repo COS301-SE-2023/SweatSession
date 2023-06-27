@@ -1,0 +1,73 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-item>
+      <backbutton></backbutton>
+      <ion-title>Goal View</ion-title>
+
+    </ion-item>
+  </ion-toolbar>
+</ion-header>
+
+
+  <ion-content [fullscreen]="true" class="form-content">
+    <label>Name of the Goal</label>
+<!--        <ion-header>-->
+<!--          <ion-toolbar>-->
+<!--            <ion-title>Set Fitness Goal</ion-title>-->
+<!--            <ion-buttons slot="end">-->
+<!--              <ion-button (click)="modal.dismiss()">Close</ion-button>-->
+<!--            </ion-buttons>-->
+<!--          </ion-toolbar>-->
+<!--        </ion-header>-->
+
+
+        <form [formGroup]="goalForm" (ngSubmit)="onSubmit()" class="ion-padding" >
+
+          <ion-item>
+            <ion-label position="floating">Goal Name</ion-label>
+            <ion-input type="text" formControlName="name"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Goal Description</ion-label>
+            <ion-input type="text" formControlName="description"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">Start</ion-label>
+            <ion-input type="date" formControlName="start"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">End</ion-label>
+            <ion-input type="date" formControlName="end"></ion-input>
+          </ion-item>
+
+          <form [formGroup]="TaskForm">
+
+            <div *ngFor="let control of Taskses.controls; index as i;" formArrayName="Taskses" class="form-group">
+
+              <div [formGroupName]="i">
+                <div class="task-card">
+                  <input matInput type="text" placeholder="Name Task" formControlName="content" class="form-control">
+                  <button class="button task-button" type="button" (click)="remove(i)">Remove</button>
+                </div>
+              </div>
+
+            </div>
+            <ion-button (click)="addControl()">Add New Task</ion-button>
+          </form>
+
+          <ion-row>
+            <ion-col>
+              <ion-button fill="outline" expand="block" size="small"  (click) = "goback()" >Cancel</ion-button>
+            </ion-col>
+            <ion-col>
+              <ion-button fill="outline" expand="block" size="small" type="submit" [disabled]="!goalForm.valid">Save Goal</ion-button>
+            </ion-col>
+          </ion-row>
+        </form>
+    </ion-content>
+
+
+
+
+
+

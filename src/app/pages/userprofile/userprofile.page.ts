@@ -8,6 +8,8 @@ import { AuthApi } from 'src/app/states/auth/auth.api';
 import {FriendsState} from "../../states";
 import {Observable} from "rxjs";
 import {GetFriendsAction} from "../../actions";
+import {fitness} from "ionicons/icons";
+import {FitnessgoalsPage} from "../fitnessgoals/fitnessgoals.page";
 
 @Component({
   selector: 'app-userprofile',
@@ -36,6 +38,7 @@ export class UserprofilePage implements OnInit {
   groups$ = 0;
   getUser : IGetProfile = {userId: 'na'};
   friends$ = 0;
+
   getUserid() {
     return  this.authApi.getCurrentUserId();
   }
@@ -54,7 +57,6 @@ export class UserprofilePage implements OnInit {
           this.store.dispatch(new GetFriendsAction());
           this.friends2$.subscribe((response)=>{
             this.friends$ = [response].length;
-            console.log(this.friends);
           })
           //getting groups
           // this.groups$ = profile.profile.groups.length;
@@ -67,6 +69,10 @@ export class UserprofilePage implements OnInit {
       });
 
     });
+  }
+
+  load(){
+    // FitnessgoalsPage.prototype.retrieveFitnessGoals();
   }
 
   Leaderboard(){

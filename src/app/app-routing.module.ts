@@ -128,7 +128,15 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     data: { authGuardPipe: redirectLoggedOut },
     loadChildren: () => import('./pages/points/points.module').then( m => m.PointsPageModule)
+  },  {
+    path: 'goalview',
+    loadChildren: () => import('./pages/goalview/goalview.module').then( m => m.GoalviewPageModule)
   },
+  {
+    path: 'fitnessgoal-view',
+    loadChildren: () => import('./pages/fitnessgoal-view/fitnessgoal-view.module').then( m => m.FitnessgoalViewPageModule)
+  },
+
 ];
 @NgModule({
   imports: [

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FitnessgoalState} from "../../states";
+import { GoalcardComponent } from "../fitnessgoals/goalcard/goalcard.component";
 
 @Component({
   selector: 'app-fitnessgoals',
@@ -11,7 +12,7 @@ export class FitnessgoalsPage implements OnInit {
   constructor() { }
 
   ngOnInit() {
-  }
 
+  }
 
 }
