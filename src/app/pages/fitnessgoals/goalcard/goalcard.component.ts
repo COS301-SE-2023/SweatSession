@@ -97,12 +97,13 @@ export class GoalcardComponent  implements OnInit {
                     goal2.progress = progress;
                     goal2.days_left = goal2.duration;
 
-                    if(progress != 1)
+                    if(goal2.progress != 1)
                     {
                         this.goals.goals?.push(goal2);
                     }
 
                 });
+
             }
         });
     }
