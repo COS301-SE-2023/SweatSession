@@ -142,7 +142,20 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     data: { authGuardPipe: redirectLoggedOut },
     loadChildren: () => import('./pages/otheruserbadges/other-user-badges.module').then(m => m.OtherUserBadgesPageModule)
-  }
+  },
+  {
+    path: 'goalview',
+    canActivate: [AuthGuard],
+    data: { authGuardPipe: redirectLoggedOut },
+    loadChildren: () => import('./pages/goalview/goalview.module').then( m => m.GoalviewPageModule)
+  },
+  {
+    path: 'fitnessgoal-view',
+    canActivate: [AuthGuard],
+    data: { authGuardPipe: redirectLoggedOut },
+    loadChildren: () => import('./pages/fitnessgoals/fitnessgoals.module').then( m => m.FitnessgoalsPageModule)
+  },
+
 ];
 @NgModule({
   imports: [

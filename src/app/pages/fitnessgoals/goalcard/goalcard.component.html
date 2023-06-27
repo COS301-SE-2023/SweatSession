@@ -8,9 +8,6 @@
                         <ion-card-title class="ion-text-wrap ion-text-uppercase ion-text-sm">{{ goal.name }}</ion-card-title>
                     </ion-col>
                 </ion-row>
-                <ion-row class = "CoverPhoto" (mouseover)="isHover = true" (mouseout)="isHover = false">
-                    <ion-img [src]="goal.coverPicture" [class]="isHover ? 'normal' : 'dark'"></ion-img>
-                </ion-row>
                 <ion-row>
                     <ion-col>
                         <ion-badge color="primary">{{goal.days_left}}</ion-badge>
@@ -32,7 +29,7 @@
                 </ion-row>
                 <ion-row>
                     <ion-col class="ion-text-end">
-                        <ion-button (click)="viewGoal()">View</ion-button>
+                        <ion-button (click)="viewGoal(goal.id!) ">View</ion-button>
                     </ion-col>
                 </ion-row>
             </ion-grid>
@@ -44,7 +41,7 @@
 
         <ion-item-options side="end">
             <ion-item-option>Favorite</ion-item-option>
-            <ion-item-option color="danger" (click)="removeGoal()">Delete</ion-item-option>
+            <ion-item-option color="danger" (click)="removeGoal( goal.id )">Delete</ion-item-option>
         </ion-item-options>
         </ion-card>
     </ion-item-sliding>
@@ -62,69 +59,6 @@
 </ion-fab>
 
 
-
-
-        <ion-modal #modal trigger="open-modal" [presentingElement]="presentingElement">
-            <ng-template>
-                <ion-header>
-                    <ion-toolbar>
-                        <ion-title>Set Fitness Goal</ion-title>
-                        <ion-buttons slot="end">
-                            <ion-button (click)="modal.dismiss()">Close</ion-button>
-                        </ion-buttons>
-                    </ion-toolbar>
-                </ion-header>
-
-
-                    <form [formGroup]="goalForm" (ngSubmit)="onSubmit()" class="ion-padding" >
-                        <ion-item>
-
-                            <ion-col size="12" size-sm>
-
-                                <ion-row>
-                                    <img [src]="getDp()"  alt="Profile Picture">
-                                </ion-row>
-
-                                <ion-row>
-                                    <input  type="file" id = "fileInput" accept="image/*" (change)="onFileSelected($event)" style="display: none">
-                                    <ion-button  fill="outline" expand="block" size="small" (click)="selectFile()" >Attach Cover Photo</ion-button>
-                                </ion-row>
-
-                            </ion-col>
-
-                        </ion-item>
-
-                        <ion-item>
-                            <ion-label position="floating">Goal Name</ion-label>
-                            <ion-input type="text" formControlName="name"></ion-input>
-                        </ion-item>
-                        <ion-item>
-                            <ion-label position="floating">Goal Description</ion-label>
-                            <ion-input type="text" formControlName="description"></ion-input>
-                        </ion-item>
-                        <ion-item>
-                            <ion-label position="stacked">Start</ion-label>
-                            <ion-input type="date" formControlName="start"></ion-input>
-                        </ion-item>
-                        <ion-item>
-                            <ion-label position="stacked">End</ion-label>
-                            <ion-input type="date" formControlName="end"></ion-input>
-                        </ion-item>
-
-
-
-                        <ion-row>
-                            <ion-col>
-                                <ion-button fill="outline" expand="block" size="small" (click)="modal.dismiss()" (click) = "retrievegoals()" >Cancel</ion-button>
-                            </ion-col>
-                            <ion-col>
-                                <ion-button fill="outline" expand="block" size="small" type="submit" [disabled]="!goalForm.valid">Save Goal</ion-button>
-                            </ion-col>
-                        </ion-row>
-                    </form>
-
-            </ng-template>
-        </ion-modal>
 
 
 

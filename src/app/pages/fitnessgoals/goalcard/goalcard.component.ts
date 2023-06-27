@@ -1,11 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import {IAddGOAL, IGOAL} from 'src/app/models/fitnessgoals.model';
 import { IGOALS } from 'src/app/models/fitnessgoals.model';
-import {FormControl, FormGroup} from "@angular/forms";
+import {FormArray, FormBuilder, FormControl, FormGroup} from "@angular/forms";
 import {Selector, Store} from "@ngxs/store";
 import {AddGoalAction} from "../../../actions/fitnessgoals/fitnessgoals.action";
 import {FitnessgoalService} from "../../../services/fitnessgoal/goal.service";
 import {AuthApi} from "../../../states/auth/auth.api";
+import { Router } from '@angular/router';
+import {getAuth} from "@angular/fire/auth";
+import {FitnessgoalViewPageModule} from "../../fitnessgoal-view/fitnessgoal-view.module";
+import {FitnessgoalViewPage} from "../../fitnessgoal-view/fitnessgoal-view.page";
+import {today} from "ionicons/icons";
 @Component({
   selector: 'app-goalcard',
   templateUrl: './goalcard.component.html',
@@ -14,169 +19,95 @@ import {AuthApi} from "../../../states/auth/auth.api";
 
 
 export class GoalcardComponent  implements OnInit {
-    isHover: boolean = false;
-    presentingElement = null;
-    selectedEndDate: string = "";
-    selectedStartDate: string = "";
-    file: File | null = null;
-
-
-    goalForm = new FormGroup({
-
-        name: new FormControl(''),
-        description: new FormControl(''),
-        coverPicture: new FormControl('https://loremflickr.com/320/240'),
-        start: new FormControl(''),
-        end: new FormControl(''),
-        progress: new FormControl(0),
-        days_left: new FormControl(0),
-
-    });
-
-    goals: IGOALS = {
-        goals: []
-    }
-    currentUserId: string | undefined = undefined;
-
     constructor(private store: Store,
                 private fitnessgaolservive: FitnessgoalService,
                 private authApi: AuthApi,
+                private fb: FormBuilder,
+                private router: Router
     ) {
-        this.retrievegoals();
+
     }
 
-    getGoalss() {
-        this.retrievegoals();
-        return this.goals.goals;
-    }
+    currUserId: string | undefined = undefined;
+
+    goals: IGOALS = {goals: []}
 
     ngOnInit() {
         this.retrievegoals();
     }
 
-    viewSchedule() {
 
+    viewGoal(id: string) {
+        this.router.navigate(['/fitnessgoal-view']);
+        FitnessgoalViewPage.prototype.setgoalid(id);
     }
 
-    viewGoal() {
+    removeGoal(name: string | undefined) {
+        // this.goals.goals?.forEach((goal, index) => {
+        //     if (goal.name == name) {
+        //         this.goals.goals?.splice(index, 1);
+        //     }
+        // });
 
-    }
+        const auth = getAuth();
+        this.currUserId = auth.currentUser?.uid;
 
-    removeGoal() {
+        if (this.currUserId != undefined) {
+            sessionStorage.setItem('currUserId', this.currUserId);
+        } else {
+            this.currUserId = sessionStorage.getItem('currUserId') ?? "";
+        }
 
-    }
+        this.fitnessgaolservive.removeGoal(this.currUserId, name ?? "");
 
-    calculate_Progress() {
-        return 0.5;
     }
 
     addGoal() {
-
-        //success toast
-        // close the modal
+        this.router.navigate(['/goalview']);
         console.log("Add Goal");
     }
 
-    selectFile() {
-        document.getElementById('fileInput')?.click();
-    }
 
-    getDp() {
-        return this.goalForm.value.coverPicture;
-    }
 
-    onFileSelected(event: any) {
-        this.file = event.target.files[0];
-        this.SaveFile();
-    }
+    async retrievegoals() {
+        const auth = getAuth();
+        this.currUserId = auth.currentUser?.uid;
 
-    SaveFile() {
-        if (this.file) {
-            const reader = new FileReader();
-            reader.onloadend = () => {
-                this.goalForm.patchValue({coverPicture: reader.result as string});
-                // this. = reader.result as string;
-
-            };
-            reader.readAsDataURL(this.file);
+        if (this.currUserId != undefined) {
+            sessionStorage.setItem('currUserId', this.currUserId);
+        } else {
+            this.currUserId = sessionStorage.getItem('currUserId') ?? "";
         }
-        console.log(this.goalForm.value.coverPicture);
-    }
 
-    onSubmit() {
+        this.fitnessgaolservive.getGoals(this.currUserId).subscribe((GOALS) => {
+            for (let goal2 of GOALS.goals) {
+                this.fitnessgaolservive.getTasks(this.currUserId, goal2.id!).subscribe((data) => {
+                    let count = 0;
+                    let all = 0;
 
-            const id = this.getUserIDD();
-            const new_goal: IGOAL = {
-                id: id,
-                name: this.goalForm.value.name ?? "",
-                description: this.goalForm.value.description ?? "",
-                coverPicture: this.goalForm.value.coverPicture ?? "",
-                start: this.goalForm.value.start ?? "",
-                end: this.goalForm.value.end ?? "",
-                progress: this.goalForm.value.progress ?? 0, //TODO: will need to fix these
-                days_left: this.goalForm.value.days_left ?? 0,
-            }
+                    data.tasks.forEach((task) => {
+                        if (task.done == true) {
+                            count = count + 1;
+                        }
+                        all = all + 1;
+                    });
 
-            const iaddgoal: IAddGOAL = {
-                userId: id,
-                goal: new_goal
-            }
-            this.fitnessgaolservive.addGoal(iaddgoal);
-            this.retrievegoals();
+                    let progress: number = count / all;
+                    console.log(count, all, progress);
+                    goal2.progress = progress;
+                    goal2.days_left = goal2.duration;
 
-    }
+                    if(progress != 1)
+                    {
+                        this.goals.goals?.push(goal2);
+                    }
 
-
-     async retrievegoals() {
-
-        const userIder = this.getUserIDD();
-        this.fitnessgaolservive.getGoals(userIder).subscribe((goals) => {
-
-            for (let goal of goals) {
-
-
-                //today's date
-                let today = new Date();
-                //end date
-                let end = new Date(goal["end"]);
-                //calculate days left
-                let days_left = Math.floor((end.getTime() - today.getTime()) / (1000 * 3600 * 24));
-
-                if(days_left < 0){
-                    days_left = 0;
-                }
-                goal["days_left"] = days_left;
-
-                let start = new Date(goal["start"]);
-                let progress = ( days_left / Math.floor((end.getTime() - start.getTime())) );
-                goal["progress"] = progress;
-            }
-
-            this.goals.goals = goals;
-        });
-    }
-
-    getUserIDD()
-    {
-        this.authApi.getCurrentUserId().then((currentUserId) => {
-
-            this.currentUserId = currentUserId;
-
-            if (this.currentUserId != undefined)
-            {
-                sessionStorage.setItem("currentUserId", this.currentUserId ?? "");
-            }
-            else
-            {
-                this.currentUserId = sessionStorage.getItem("currentUserId") ?? "";
+                });
             }
         });
-
-        return this.currentUserId;
     }
+
+
+
+
 }
-
-
-
-
-

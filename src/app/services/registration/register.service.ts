@@ -49,7 +49,7 @@ export class RegisterService {
       //this.repository.createProfile({});
       // alert("In register Service");
       this.badgesRepository.createBadgesDocument(currUserId);
-      this.goalsRepository.creategoalsDocument(currUserId);
+      // this.goalsRepository.creategoalsDocument(currUserId);
       this.repository.createUser(newUser);
       this.repository.createProfile(newProfile);
       this.pointsRepository.createPointsDocument(currUserId);
