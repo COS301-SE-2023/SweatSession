@@ -153,9 +153,8 @@ const routes: Routes = [
     path: 'fitnessgoal-view',
     canActivate: [AuthGuard],
     data: { authGuardPipe: redirectLoggedOut },
-    loadChildren: () => import('./pages/fitnessgoals/fitnessgoals.module').then( m => m.FitnessgoalsPageModule)
+    loadChildren: () => import('./pages/fitnessgoal-view/fitnessgoal-view.module').then( m => m.FitnessgoalViewPageModule)
   },
-
 ];
 @NgModule({
   imports: [
