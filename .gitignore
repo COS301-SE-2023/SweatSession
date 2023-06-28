@@ -1,4 +1,5 @@
 /src/environments/**
+/www/**
 
 # Angular
 .angular
