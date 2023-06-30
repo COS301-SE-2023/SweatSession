@@ -3,7 +3,7 @@ import { NavController } from '@ionic/angular';
 import { FormBuilder, Validators } from '@angular/forms'; //, AbstractControl, ValidatorFn, ValidationErrors 
 import { Select, Store } from '@ngxs/store';
 //import { ReactiveFormsModule } from '@angular/forms';
-import {Register} from 'src/app/actions/register';
+import {ContinueWithGoogleAction, Register} from 'src/app/actions/register';
 //import {RegisterPageModule} from './register.module'
 
 @Component({
@@ -50,5 +50,9 @@ export class RegisterPage implements OnInit {
       alert("Invalid Registration Information. Make sure that the password is at least 6 characters long and you have entered a valid email address");
     }
     //this.Nav.navigateRoot('/home');     //moved this to auth api
+  }
+
+  continueWithGoogleAuth() {
+    this.store.dispatch(new ContinueWithGoogleAction());
   }
 }

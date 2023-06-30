@@ -4,7 +4,9 @@ import {
   authState,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  getAuth
+  getAuth,
+  GoogleAuthProvider,
+  signInWithPopup
 } from '@angular/fire/auth';
 
 import { signOut } from '@firebase/auth';
@@ -62,6 +64,17 @@ export class AuthApi {
     }
     // alert("in auth api register function");
     // return await createUserWithEmailAndPassword(this.authObject, regEmail, regPassword);
+  }
+
+  async continueWithGoogle(){
+    try {
+      const googleAuthProvider = new GoogleAuthProvider();
+      await signInWithPopup(this.authObject, googleAuthProvider);
+      this.Nav.navigateRoot('/home');
+      return true;
+    }catch (error){
+      return false;
+    }
   }
 
   async logout() {
