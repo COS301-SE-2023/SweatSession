@@ -21,16 +21,16 @@ import { NavController } from '@ionic/angular';
   providedIn: 'root'
 })
 export class AuthApi {
-  constructor(private readonly authObject: Auth, private Nav: NavController) {}//, private repository: RegisterRepository         //, private service: RegisterService
+  constructor(private readonly authObject: Auth, private Nav: NavController) { }//, private repository: RegisterRepository         //, private service: RegisterService
 
   auth$() {
     return authState(this.authObject);
   }
 
 
-  async getCurrentUserId(){
+  async getCurrentUserId() {
     const auth = getAuth();
-    return(auth.currentUser?.uid);
+    return (auth.currentUser?.uid);
   }
 
 
@@ -40,9 +40,9 @@ export class AuthApi {
       await signInWithEmailAndPassword(this.authObject, regEmail, regPassword);
       // AuthState.currUserId=await this.getCurrentUserId();
       //return await signInWithEmailAndPassword(this.authObject, regEmail, regPassword);
-      
+
       this.Nav.navigateRoot('/home'); // this is so they are only directed to login when they enter a valid email and password combination
-    }catch (error) {
+    } catch (error) {
       console.error('Firebase error:', error);
       alert("Incorrect email password combination");
     }
@@ -54,7 +54,7 @@ export class AuthApi {
       // AuthState.currUserId=null;
       this.Nav.navigateRoot('/home'); // this is so they are only directed to login when they enter a valid email and password combination
       return true;
-    }catch (error) {
+    } catch (error) {
       // Handle the Firebase error
       console.error('Firebase error:', error);
       alert("Incorrect registration info.");
@@ -66,15 +66,19 @@ export class AuthApi {
     // return await createUserWithEmailAndPassword(this.authObject, regEmail, regPassword);
   }
 
-  async continueWithGoogle(){
-    try {
-      const googleAuthProvider = new GoogleAuthProvider();
-      await signInWithPopup(this.authObject, googleAuthProvider);
-      this.Nav.navigateRoot('/home');
-      return true;
-    }catch (error){
-      return false;
-    }
+  async continueWithGoogle() {
+    // try {
+    //   const googleAuthProvider = new GoogleAuthProvider();
+    //   const userCredentials = await signInWithPopup(this.authObject, googleAuthProvider);
+    //   this.Nav.navigateRoot('/home')
+    //   return userCredentials;
+    // } catch (error) {
+    //   return false;
+    // }
+    const googleAuthProvider = new GoogleAuthProvider();
+    const userCredentials = await signInWithPopup(this.authObject, googleAuthProvider);
+    this.Nav.navigateRoot('/home')
+    return userCredentials;
   }
 
   async logout() {

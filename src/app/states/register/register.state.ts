@@ -4,6 +4,7 @@ import { Register as RegisterAction, ContinueWithGoogleAction} from 'src/app/act
 import { Action, State, StateContext, Store } from '@ngxs/store';
 import {AuthApi} from 'src/app/states/auth/auth.api';
 import { RegisterService } from 'src/app/services';
+import { getAdditionalUserInfo } from '@angular/fire/auth';
 // import {} from 'functions/src/';
 
 export interface RegisterStateModel {
@@ -81,11 +82,15 @@ export class RegisterState {
   async continueWithGoogle(context: StateContext<RegisterStateModel>) {
     try {
       const state = context.getState();
-      const continueWithGoogleSuccessful = await this.authApi.continueWithGoogle();
-        if (continueWithGoogleSuccessful){
+      const userCredentials = await this.authApi.continueWithGoogle();
+        if (userCredentials && userCredentials.user.email){
           const currUserId = await this.authApi.getCurrentUserId();
           if (currUserId!=null){
-            // return this.service.register(c);
+            const additionalUserInfo = getAdditionalUserInfo(userCredentials);
+            const isNewUser = additionalUserInfo?.isNewUser;
+            if (isNewUser) {
+              return this.service.register(currUserId, userCredentials.user.email);
+            }
           }
         }
       // return alert("Please set email and/or password");
