@@ -108,8 +108,6 @@ export class OtheruserPage implements OnInit {
         this.profileurl = this.profileList[i].profileURL! ;
       }
     }
-
-      
   });
 }
 
