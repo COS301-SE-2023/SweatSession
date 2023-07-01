@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Store } from '@ngxs/store';
+import { StageOtheruserInfo } from 'src/app/actions';
 import { IProfileModel } from 'src/app/models';
 
 @Component({
@@ -10,8 +12,11 @@ export class UserComponent  implements OnInit {
   @Input() user:IProfileModel={};
   @Input() position:number;
 
-  constructor() { }
+  constructor(private store:Store) { }
 
   ngOnInit() {}
 
+  viewOtherUser(){
+    this.store.dispatch(new StageOtheruserInfo(this.user));
+  }
 }
