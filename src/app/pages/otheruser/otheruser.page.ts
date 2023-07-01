@@ -75,18 +75,11 @@ export class OtheruserPage implements OnInit {
   removeFriend() {
     this.store.dispatch(new RemoveFriendAction(this.friendModel()))
     this.date = new Date().toTimeString() ;
-    console.log(this.date.split(':' , 2));
     this.shortdate = this.date.split(':' , 2);
     this.createNotifications(this.currusername , this.shortdate[0] + ':' + this.shortdate[1] , "Removed you as a Friend!")  ;
   }
 
   addFriend() {
-  //  if(this.user!=null) {
-  //   this.store.dispatch(new AddFriendAction(this.friendModel()))
-  //   console.log(this.user.userId,)
-  //  } else(
-  //   console.log("User is null.....")
-  //  )
    this.date = new Date().toTimeString() ;
    this.shortdate = this.date.split(':' , 2);
    this.createNotifications(this.currusername , this.shortdate[0] + ':' + this.shortdate[1] , "Sent you a Friend Request!")  ;
@@ -109,12 +102,10 @@ export class OtheruserPage implements OnInit {
   displayCurrentUser(id:string){
     this.noticeService.getTheNoticeProfile().subscribe((profiles: Profile[]) => {
     this.profileList = profiles;
-    console.log('Number of PROFILES:', this.profileList.length);
     for(let i = 0 ; i<this.profileList.length ; i++){
       if(this.profileList[i].id == this.currUserId ){
         this.currusername = this.profileList[i].displayName! ;
         this.profileurl = this.profileList[i].profileURL! ;
-        console.log(this.currusername);
       }
     }
 

@@ -6,3 +6,8 @@ ion-item:not(.stats) {
         margin-left: 20px;
     }
 }
+
+ion-card:hover {
+    zoom: 1.2;
+    color: blue;
+}

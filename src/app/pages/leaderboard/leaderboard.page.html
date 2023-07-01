@@ -1,12 +1,12 @@
 <div class="outer-container">
   <ion-content>
-    <ng-container *ngIf="users.length > 0; else noProfile">
-      <div class="inner-container">
-        <ion-segment (ionChange)="onSegmentChange($event)" value="everyone">
-          <ion-segment-button value="everyone">Everyone</ion-segment-button>
-          <ion-segment-button value="friends">Friends</ion-segment-button>
-        </ion-segment>
-  
+    <div class="inner-container">
+      <ion-segment (ionChange)="onSegmentChange($event)" value="everyone">
+        <ion-segment-button value="everyone">Everyone</ion-segment-button>
+        <ion-segment-button value="friends">Friends</ion-segment-button>
+      </ion-segment>
+
+      <ng-container *ngIf="users.length > 0; else noProfile">
         <div [hidden]="selectedSegment!=='everyone'">
           <leaderboard-user *ngFor="let user of users; let i=index"
             [user]="user"
@@ -23,33 +23,32 @@
           >
           </leaderboard-user>
         </div>
-        
-     </div>
-    </ng-container>
+      </ng-container>
 
-    <ng-template #noProfile>
-      <div *ngIf="isLoading">
-        <ion-card *ngFor="let i of [1,2,3,4,5,6,7]">
-          <ion-item lines="none">
-            <ion-avatar>
-              <ion-skeleton-text animated style="width: 40px; height: 40px; border-radius: 50%;"></ion-skeleton-text>
-            </ion-avatar>
-            <ion-text class="user-name">
-              <ion-skeleton-text animated style="width: 100px; height: 16px; margin-left: 10px;"></ion-skeleton-text>
-            </ion-text>
-            <ion-item slot="end" lines="none">
-              <ion-skeleton-text animated style="width: 20px; height: 16px;"></ion-skeleton-text>
+      <ng-template #noProfile>
+        <div *ngIf="isLoading">
+          <ion-card *ngFor="let i of [1,2,3,4,5,6]">
+            <ion-item lines="none">
+              <ion-avatar>
+                <ion-skeleton-text animated style="width: 40px; height: 40px; border-radius: 50%;"></ion-skeleton-text>
+              </ion-avatar>
+              <ion-text class="user-name">
+                <ion-skeleton-text animated style="width: 100px; height: 16px; margin-left: 10px;"></ion-skeleton-text>
+              </ion-text>
+              <ion-item slot="end" lines="none">
+                <ion-skeleton-text animated style="width: 20px; height: 16px;"></ion-skeleton-text>
+              </ion-item>
             </ion-item>
-          </ion-item>
-        
-          <div class="stats">
-            <ion-item lines="none" class="stats">
-              <ion-icon name="star-outline" slot="start"></ion-icon>
-              <ion-skeleton-text animated style="width: 70px; height: 16px; margin-left: 5px;"></ion-skeleton-text>
-            </ion-item>
+          
+            <div class="stats">
+              <ion-item lines="none" class="stats">
+                <ion-icon name="star-outline" slot="start"></ion-icon>
+                <ion-skeleton-text animated style="width: 70px; height: 16px; margin-left: 5px;"></ion-skeleton-text>
+              </ion-item>
+            </div>
+          </ion-card>  
           </div>
-        </ion-card>  
-       </div>
-    </ng-template>
+      </ng-template>
+    </div>
   </ion-content>
 </div>
