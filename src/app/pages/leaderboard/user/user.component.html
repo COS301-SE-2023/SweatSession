@@ -1,0 +1,22 @@
+<ion-card>
+  <ion-item lines="none">
+
+    <ion-avatar>
+      <ion-img [src]='user.profileURL'></ion-img>
+    </ion-avatar>
+    <ion-text class="user-name">
+      {{user.displayName}}
+    </ion-text>
+
+    <ion-item slot="end" lines="none">
+      <ion-text>{{position}}</ion-text>
+    </ion-item>
+  </ion-item>
+
+  <div class="stats">
+    <ion-item lines="none" class="stats">
+      <ion-icon name="star-outline" slot="start"></ion-icon>
+      <ion-text>Points 50</ion-text>
+    </ion-item>
+  </div>
+</ion-card>

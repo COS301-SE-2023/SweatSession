@@ -1,0 +1,8 @@
+ion-item:not(.stats) {
+    --background: #A8DADC;
+    border-radius: 12px;
+
+    .user-name {
+        margin-left: 20px;
+    }
+}
