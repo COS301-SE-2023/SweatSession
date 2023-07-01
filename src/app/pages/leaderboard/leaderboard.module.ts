@@ -7,14 +7,18 @@ import { IonicModule } from '@ionic/angular';
 import { LeaderboardPageRoutingModule } from './leaderboard-routing.module';
 
 import { LeaderboardPage } from './leaderboard.page';
+import { UserComponent } from './user/user.component';
+import { FriendsStateModule, OtheruserStateModule } from 'src/app/states';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    LeaderboardPageRoutingModule
+    LeaderboardPageRoutingModule,
+    OtheruserStateModule,
+    FriendsStateModule
   ],
-  declarations: [LeaderboardPage]
+  declarations: [LeaderboardPage, UserComponent]
 })
 export class LeaderboardPageModule {}
