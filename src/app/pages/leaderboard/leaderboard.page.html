@@ -11,6 +11,7 @@
           <leaderboard-user *ngFor="let user of users; let i=index"
             [user]="user"
             [position]="i+1"
+            [isCurrentUser]="isCurrentUser(user)"
           >
           </leaderboard-user>
         </div>

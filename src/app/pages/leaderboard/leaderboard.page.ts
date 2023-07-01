@@ -2,9 +2,9 @@ import { Store } from '@ngxs/store';
 import { Component, OnInit } from '@angular/core';
 import { Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
-import { GetFriendsAction, GetUsersAction } from 'src/app/actions';
+import { GetFriendsAction, GetUsersAction, SubscribeToAuthState } from 'src/app/actions';
 import { IFriendsModel, IProfileModel } from 'src/app/models';
-import { FriendsState, OtheruserState } from 'src/app/states';
+import { AuthState, FriendsState, OtheruserState } from 'src/app/states';
 
 @Component({
   selector: 'app-leaderboard',
@@ -15,6 +15,8 @@ export class LeaderboardPage implements OnInit {
 
   @Select(OtheruserState.returnProfiles) users$ : Observable<IProfileModel[]>;
   @Select(FriendsState.returnFriends) friends$ : Observable<IFriendsModel[]>;
+  @Select(AuthState.getCurrUserId) userId$!: Observable<string>;
+  userId:string;
   users: IProfileModel[]=[];
   friends: IProfileModel[]=[];
   selectedSegment: any="everyone";
@@ -31,12 +33,17 @@ export class LeaderboardPage implements OnInit {
    * subscribe to the @users$ observable and get user profiles in sorted order(descending) based on user points.
    */
   getUsers() {
+    this.store.dispatch(new SubscribeToAuthState())
     this.store.dispatch(new GetUsersAction());
     this.users$.subscribe((response)=>{
       if(response) {
         this.users = response;
         this.sort()
       }
+    })
+
+    this.userId$.subscribe((response)=>{
+      this.userId = response;
     })
   }
 
@@ -65,6 +72,14 @@ export class LeaderboardPage implements OnInit {
    */
   sort() {
     // this.users.sort((userA, userB)=> userB.points - userA.points)
+  }
+
+  
+  isCurrentUser(user:IProfileModel) {
+    if(this.userId && user.userId){
+      return this.userId === user.userId;
+    }
+    return false;
   }
 
   onSegmentChange(event: any) {

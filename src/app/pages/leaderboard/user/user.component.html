@@ -3,8 +3,11 @@
     <ion-avatar>
       <ion-img [src]='user.profileURL'></ion-img>
     </ion-avatar>
-    <ion-text class="user-name">
+    <ion-text class="user-name" *ngIf="!isCurrentUser">
       {{user.displayName}}
+    </ion-text>
+    <ion-text class="user-name" *ngIf="isCurrentUser">
+      You
     </ion-text>
 
     <ion-item slot="end" lines="none">
