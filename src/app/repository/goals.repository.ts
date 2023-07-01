@@ -52,14 +52,8 @@ export class goalsRepository {
             .doc(goalID)
             .collection('Tasks')
             .doc(taskid)
-            .set(task)
-
-            .then((docRef) => {
-                // console.log('Document written with ID: ', request.id);
-            })
-            .catch((error) => {
-                console.error('Error adding document: ', error);
-            });
+            .set(task);
+            
 
     }
 
@@ -132,14 +126,7 @@ export class goalsRepository {
             .doc(request.id)
             .collection('Tasks')
             .doc(taskid)
-            .set(request)
-
-            .then((docRef) => {
-                // console.log('Document written with ID: ', request.id);
-            })
-            .catch((error) => {
-                console.error('Error adding document: ', error);
-            });
+            .set(request);
 
     }
 
@@ -227,7 +214,19 @@ export class goalsRepository {
             .doc(userId)
             .collection('goals')
             .doc(goalId)
-            .delete();
+            .delete()
+            .then(() => {
+                console.log('Goal successfully deleted!');
+            }
+            )
+            .catch((error) => {
+
+                console.error('Error removing goal: ', error);
+            }
+            );
+
+            
+
     }
 
 

@@ -1,4 +1,4 @@
-<ion-list>
+<!-- <ion-list>
     <ion-item-sliding *ngFor="let goal of goals.goals ">
         <ion-card>
         <ion-item>
@@ -45,7 +45,33 @@
         </ion-item-options>
         </ion-card>
     </ion-item-sliding>
-</ion-list>
+</ion-list> -->
+
+
+<ion-item-sliding *ngFor="let goal of goals.goals">
+    <ion-card>
+        <ion-card>
+            <ion-item id="viewer">
+                <ion-icon name="basketball-outline"></ion-icon>
+                <ion-text>
+                    {{goal.name}}
+                </ion-text>
+            </ion-item>
+
+            <ion-item-options>
+                <ion-item-option color="danger" (click)="removeGoal( goal.id )">Delete</ion-item-option>
+            </ion-item-options>
+
+        </ion-card>
+    <div class="content">
+        <ion-card-content>
+            <ion-icon name="calendar-outline"></ion-icon><ion-text class="schedule-value">{{goal.duration}}</ion-text><br>
+            <ion-icon name="calendar-outline"></ion-icon><ion-text class="schedule-value">{{goal.endDate}}</ion-text><br>
+        </ion-card-content>
+    </div>
+</ion-card>
+</ion-item-sliding>
+
 
 <ion-fab slot="fixed" vertical="bottom" horizontal="end">
     <ion-fab-button >

@@ -61,6 +61,7 @@ export class GoalcardComponent  implements OnInit {
         }
 
         this.fitnessgaolservive.removeGoal(this.currUserId, name ?? "");
+        this.retrievegoals();
 
     }
 
@@ -71,7 +72,7 @@ export class GoalcardComponent  implements OnInit {
 
 
 
-    async retrievegoals() {
+     retrievegoals() {
         const auth = getAuth();
         this.currUserId = auth.currentUser?.uid;
 
@@ -82,6 +83,10 @@ export class GoalcardComponent  implements OnInit {
         }
 
         this.fitnessgaolservive.getGoals(this.currUserId).subscribe((GOALS) => {
+
+        //clear array
+        this.goals.goals = [];
+
             for (let goal2 of GOALS.goals) {
                 this.fitnessgaolservive.getTasks(this.currUserId, goal2.id!).subscribe((data) => {
                     let count = 0;
@@ -104,9 +109,9 @@ export class GoalcardComponent  implements OnInit {
                     const temp = Math.floor(diff / (1000 * 60 * 60 * 24));
                     if(temp < 0)
                     {
-                        goal2.days_left = 0;
+                        goal2.duration = 0;
                     }else {
-                        goal2.days_left = temp;
+                        goal2.duration = temp;
                     }
 
                     console.log("Days left: " + goal2.days_left);
