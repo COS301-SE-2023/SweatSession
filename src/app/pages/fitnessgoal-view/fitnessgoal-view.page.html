@@ -23,7 +23,7 @@
     <ion-list>
       <ion-item *ngFor="let task of tasks">
         <ion-item [disabled] = "task.done">
-          <ion-checkbox [(ngModel)]="task.done" di></ion-checkbox>
+          <ion-checkbox [(ngModel)]="task.done"></ion-checkbox>
           <ion-label>{{ task.content }}</ion-label>
         </ion-item>
 

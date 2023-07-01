@@ -7,8 +7,8 @@ export interface IGOAL {
     name?: string;
     description?: string;
     coverPicture?: string;
-    start?: string;
-    end?: string;
+    startDate?: string;
+    endDate?: string;
     progress?: number;
     days_left?: number;
     isCompleted?: boolean;
