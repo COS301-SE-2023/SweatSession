@@ -17,30 +17,50 @@ export class goalsRepository {
 
     async creategoalsDocument(currUserId: string) {
 
-        try {
-            const goalsRef = this.firestore
-                .collection('fitnessgoals')
-                .doc(currUserId)
-                .collection('goals')
-                .doc(currUserId)
-                .collection('Tasks')
-                .doc(currUserId);
+        let goalID = this.firestore.createId();
+        const goal =
+            {
+                id: "1",
+                name: "First Goal",
+                description: "This is my first goal",
+                duration: 30,
+                startDate: new Date(),
+                endDate: "2024-10-10",
+                progress: 0,
+            }
 
-           const data : ITASK =
-                    {
-                        id: currUserId,
-                        content: "starter",
-                        done: false,
-                    };
+            await  this.firestore
+            .collection('fitnessgoals')
+            .doc(currUserId)
+            .collection('goals')
+            .doc(goalID)
+            .set(goal);
 
-            await goalsRef.set(data);
-            console.log('Document updated successfully');
-        } catch (error) {
-            console.error('Error updating goal document:', error);
-        }
+        const taskid = this.firestore.createId();
 
+        const task: ITASK =
+            {
+                id: taskid,
+                content: "Tick and click save to mark this task as done",
+                done: false,
+            }
 
-        //preturn await admin.firestore().collection('profiles').doc(newProfile.userId).create(newProfile);
+        this.firestore
+            .collection('fitnessgoals')
+            .doc(currUserId)
+            .collection('goals')
+            .doc(goalID)
+            .collection('Tasks')
+            .doc(taskid)
+            .set(task)
+
+            .then((docRef) => {
+                // console.log('Document written with ID: ', request.id);
+            })
+            .catch((error) => {
+                console.error('Error adding document: ', error);
+            });
+
     }
 
      addGoal(request: IAddGOAL) {
@@ -53,8 +73,8 @@ export class goalsRepository {
                 name: request.goal.name,
                 description: request.goal.description,
                 duration: request.goal.days_left,
-                startDate: request.goal.start,
-                endDate: request.goal.end,
+                startDate: request.goal.startDate,
+                endDate: request.goal.endDate,
                 progress: request.goal.progress,
             }
 
@@ -101,7 +121,7 @@ export class goalsRepository {
 
     addTask(request: ITASK,  userId :string) {
 
-        console.log("Request Add Task: " , userId);
+        // console.log("Request Add Task: " , userId);
 
         const taskid = this.firestore.createId();
 
@@ -160,8 +180,10 @@ export class goalsRepository {
 
                 snapshot.forEach((doc) => {
                     const goal = {
+
                         ...doc.payload.doc.data(),
                     };
+                    console.table( goal);
                     goalsList.push(goal);
                 });
 

@@ -11,6 +11,8 @@ import {getAuth} from "@angular/fire/auth";
 import {FitnessgoalViewPageModule} from "../../fitnessgoal-view/fitnessgoal-view.module";
 import {FitnessgoalViewPage} from "../../fitnessgoal-view/fitnessgoal-view.page";
 import {today} from "ionicons/icons";
+import {convertChangeEventsToLogMessage} from "nx/src/daemon/server/watcher";
+import {Time} from "@angular/common";
 @Component({
   selector: 'app-goalcard',
   templateUrl: './goalcard.component.html',
@@ -25,7 +27,7 @@ export class GoalcardComponent  implements OnInit {
                 private fb: FormBuilder,
                 private router: Router
     ) {
-
+     this.ngOnInit();
     }
 
     currUserId: string | undefined = undefined;
@@ -92,8 +94,24 @@ export class GoalcardComponent  implements OnInit {
                         all = all + 1;
                     });
 
+                    const time :Time = {hours: 11, minutes: 59};
+
+                    const endday = new Date(`${goal2.endDate}.${time.hours}:${time.minutes}`).getTime();
+                    const today = new Date().getTime();
+                    const diff = endday - today;
+
+
+                    const temp = Math.floor(diff / (1000 * 60 * 60 * 24));
+                    if(temp < 0)
+                    {
+                        goal2.days_left = 0;
+                    }else {
+                        goal2.days_left = temp;
+                    }
+
+                    console.log("Days left: " + goal2.days_left);
+
                     let progress: number = count / all;
-                    console.log(count, all, progress);
                     goal2.progress = progress;
                     goal2.days_left = goal2.duration;
 

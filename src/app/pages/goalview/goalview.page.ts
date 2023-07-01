@@ -123,8 +123,8 @@ export class GoalviewPage  implements OnInit {
       name: this.goalForm.value.name ?? "",
       description: this.goalForm.value.description ?? "",
       coverPicture: this.goalForm.value.coverPicture ?? "",
-      start: this.goalForm.value.start ?? "",
-      end: this.goalForm.value.end ?? "",
+      startDate: this.goalForm.value.start ?? "",
+      endDate: this.goalForm.value.end ?? "",
       progress: this.goalForm.value.progress ?? 0, //TODO: will need to fix these
       days_left: this.goalForm.value.days_left ?? 0,
       duration: 5,

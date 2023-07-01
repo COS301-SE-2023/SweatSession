@@ -35,7 +35,7 @@ export class RegisterService {
       const [dName] = regEmail.split("@"); //this is to get the part until the @
       const newProfile:IProfileModel = {
         userId:currUserId,
-        name: regEmail,
+        name: dName,
         displayName:dName,
         email: regEmail,
         bio: "Hi there, I am new to Sweat Session!",
@@ -49,7 +49,7 @@ export class RegisterService {
       //this.repository.createProfile({});
       // alert("In register Service");
       this.badgesRepository.createBadgesDocument(currUserId);
-      // this.goalsRepository.creategoalsDocument(currUserId);
+      this.goalsRepository.creategoalsDocument(currUserId);
       this.repository.createUser(newUser);
       this.repository.createProfile(newProfile);
       this.pointsRepository.createPointsDocument(currUserId);
