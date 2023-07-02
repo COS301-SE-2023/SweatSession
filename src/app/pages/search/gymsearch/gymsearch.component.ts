@@ -94,4 +94,7 @@ export class GymsearchComponent  implements OnInit {
     this.modalController.dismiss();
   }
 
+  selectGym(name: string) {
+    this.modalController.dismiss({ selectedGym: name });
+  }
 }

@@ -80,8 +80,9 @@ export class AddScheduleComponent  implements OnInit {
   
     // Handle the location selection event when the modal is dismissed
     const { data } = await modal.onDidDismiss();
-    if (data && data.selectedLocation) {
-      this.schedule.location = data.selectedLocation;
+    if (data && data.selectedGym) {
+      console.log(data);
+      this.schedule.location = data.selectedGym;
     }
   }
 }

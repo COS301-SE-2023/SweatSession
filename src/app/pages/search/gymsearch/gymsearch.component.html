@@ -17,7 +17,7 @@
       >
 </ion-searchbar>   
 
-<ion-card *ngFor="let item of filteredData$ | async" >
+<ion-card *ngFor="let item of filteredData$ | async" (click)="selectGym(item.name)">
   <img [src]="item.image" alt="Silhouette of mountains" />
   <ion-card-header>
     <ion-card-title>{{ item.name }}</ion-card-title>

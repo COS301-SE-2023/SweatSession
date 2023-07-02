@@ -29,10 +29,12 @@
         </ion-row>        
         <ion-row>
           <ion-col>
-            <ion-item>
+            <ion-item class="location-item">
               <ion-label position="floating">Location</ion-label>
               <ion-input type="text" [(ngModel)]="schedule.location"></ion-input>
-              <ion-icon name="location" slot="start" (click)="openLocationModal()"></ion-icon>
+              <!-- <ion-button> -->
+                <ion-icon name="location" slot="end" (click)="openLocationModal()" class="location-icon"></ion-icon>
+              <!-- </ion-button> -->
             </ion-item>
           </ion-col>
         </ion-row>
