@@ -1,3 +1,13 @@
+<ion-header>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet">
+  <ion-toolbar>
+    <ion-title>Select Location</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismissModal()">Close</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
 <ion-searchbar
       placeholder="Search for gyms"
       [(ngModel)]="searchTerm"

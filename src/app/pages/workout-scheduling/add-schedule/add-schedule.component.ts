@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { PopoverController } from '@ionic/angular';
+import { ModalController, PopoverController } from '@ionic/angular';
 import { Store } from '@ngxs/store';
 import { Timestamp } from 'firebase/firestore';
 import { AddWorkoutSchedule } from 'src/app/actions';
 import { IWorkoutScheduleModel } from 'src/app/models';
+import { GymsearchComponent } from '../../search/gymsearch/gymsearch.component';
 
 @Component({
   selector: 'add-schedule',
@@ -13,7 +14,7 @@ import { IWorkoutScheduleModel } from 'src/app/models';
 export class AddScheduleComponent  implements OnInit {
   schedule:IWorkoutScheduleModel={};
 
-  constructor(private popoverController: PopoverController, private store: Store) { }
+  constructor(private popoverController: PopoverController, private store: Store, private modalController: ModalController) { }
 
   ngOnInit() {}
 
@@ -69,5 +70,18 @@ export class AddScheduleComponent  implements OnInit {
     if ( name && location && duration && time && date && this.isDateTimeValid()) 
       return true;
     return false;
+  }
+
+  async openLocationModal() {
+    const modal = await this.modalController.create({
+      component: GymsearchComponent, // Replace LocationModalPage with the name of your modal component
+    });
+    await modal.present();
+  
+    // Handle the location selection event when the modal is dismissed
+    const { data } = await modal.onDidDismiss();
+    if (data && data.selectedLocation) {
+      this.schedule.location = data.selectedLocation;
+    }
   }
 }

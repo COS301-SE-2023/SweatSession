@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
 import { of, Observable,Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map, startWith } from 'rxjs/operators';
 
@@ -9,6 +10,9 @@ import { debounceTime, distinctUntilChanged, map, startWith } from 'rxjs/operato
 })
 export class GymsearchComponent  implements OnInit {
 
+  constructor(private modalController: ModalController) { 
+    this.data.filter(item => item.name.includes(''));
+  }
 
   searchTerm: string | undefined;
   filteredData$: Observable<any[]> = of([]);
@@ -72,11 +76,6 @@ export class GymsearchComponent  implements OnInit {
       );
   }
 
-  constructor() 
-  { 
-    this.data.filter(item => item.name.includes(''));
-  }
-
   filterData(searchTerm: string): any[] {
     if (!searchTerm || searchTerm === ''|| searchTerm === null) {
       return this.data;
@@ -89,6 +88,10 @@ export class GymsearchComponent  implements OnInit {
     const searchTerm = event.target.value;
     // this.searchTerm = searchTerm;
     this.searchTerm$.next(searchTerm);
+  }
+
+  dismissModal() {
+    this.modalController.dismiss();
   }
 
 }

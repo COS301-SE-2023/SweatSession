@@ -32,6 +32,7 @@
             <ion-item>
               <ion-label position="floating">Location</ion-label>
               <ion-input type="text" [(ngModel)]="schedule.location"></ion-input>
+              <ion-icon name="location" slot="start" (click)="openLocationModal()"></ion-icon>
             </ion-item>
           </ion-col>
         </ion-row>
