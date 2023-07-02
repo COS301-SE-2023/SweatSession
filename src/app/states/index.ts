@@ -11,3 +11,4 @@ export * from "./profile/profile.state";
 export * from "./profile/profile.module";
 export * from "./fitnessgoal/fitnessgoal.state";
 export * from "./fitnessgoal/fitnessgoal.module";
+export * from "./points/points.api";

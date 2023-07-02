@@ -1,11 +1,10 @@
 import { Store } from '@ngxs/store';
 import { Component, OnInit } from '@angular/core';
 import { Select } from '@ngxs/store';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { GetFriendsAction, GetUsersAction, SubscribeToAuthState } from 'src/app/actions';
-import { IFriendsModel, IProfileModel } from 'src/app/models';
-import { AuthState, FriendsState, OtheruserState } from 'src/app/states';
-
+import { IFriendsModel, IProfileModel, IPoints } from 'src/app/models';
+import { AuthState, FriendsState, OtheruserState, PointsApi } from 'src/app/states';
 @Component({
   selector: 'app-leaderboard',
   templateUrl: './leaderboard.page.html',
@@ -16,13 +15,14 @@ export class LeaderboardPage implements OnInit {
   @Select(OtheruserState.returnProfiles) users$ : Observable<IProfileModel[]>;
   @Select(FriendsState.returnFriends) friends$ : Observable<IFriendsModel[]>;
   @Select(AuthState.getCurrUserId) userId$!: Observable<string>;
+  points$: Observable<IPoints>;
   userId:string;
   users: IProfileModel[]=[];
   friends: IProfileModel[]=[];
   selectedSegment: any="everyone";
   isLoading = true;
 
-  constructor(private store:Store) { }
+  constructor(private store:Store, private pointsApi: PointsApi) { }
 
   ngOnInit() {
     this.getUsers();
@@ -37,7 +37,13 @@ export class LeaderboardPage implements OnInit {
     this.store.dispatch(new GetUsersAction());
     this.users$.subscribe((response)=>{
       if(response) {
-        this.users = response;
+        this.users = [];
+        response.forEach(user=>{
+          this.pointsApi.otherUserPoints$(user.userId!).subscribe(results=>{
+            user.points = results.userPoints;
+            this.users.push(user);
+          });
+        })
         this.sort()
       }
     })
@@ -71,9 +77,9 @@ export class LeaderboardPage implements OnInit {
    * sort the users in Desceding order of users points.
    */
   sort() {
-    // this.users.sort((userA, userB)=> userB.points - userA.points)
+    this.users.sort((userA, userB) => userB.points! - userA.points!) 
   }
-
+  
   
   isCurrentUser(user:IProfileModel) {
     if(this.userId && user.userId){

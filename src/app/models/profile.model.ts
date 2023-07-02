@@ -10,6 +10,7 @@ export interface IProfileModel {
     phoneNumber?: string;
     height?: string;
     weight?: string;
+    points?: number;
 }
 
 //requests
