@@ -31,33 +31,6 @@ export class LeaderboardPage implements OnInit {
   /**
    * subscribe to the @users$ observable and get user profiles in sorted order(descending) based on user points.
    */
-  // initialize() {
-  //   this.store.dispatch(new SubscribeToAuthState());
-  //   this.store.dispatch(new GetUsersAction());
-  //   this.store.dispatch(new GetFriendsAction());
-
-  //   this.userId$.pipe(tap((response)=>{
-  //       this.userId = response;
-  //     }),
-  //     switchMap(()=>this.users$),
-  //     tap((response)=>{
-  //       this.users = response;
-  //       this.users.forEach(async (user, index)=>{
-  //         this.pointsApi.otherUserPoints$(user.userId!).pipe(tap((response)=>{
-  //         user.points = response ? response.userPoints : 0;
-  //         this.users[index] = user;
-          
-  //         // if(index == this.users.length-1) {
-  //         //   this.users.sort((userA, userB) => userB.points! - userA.points!)
-  //         // }
-  //      })).subscribe(()=>{
-  //       this.users.sort((userA, userB) => userB.points! - userA.points!)
-  //      });
-  //     })
-  //     })
-  //   ).subscribe();
-  // }
-
   initialize() {
     this.store.dispatch(new SubscribeToAuthState());
     this.store.dispatch(new GetUsersAction());

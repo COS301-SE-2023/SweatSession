@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { HomePage } from './home.page';
+import { ChatroomComponent } from '../messages/chatroom/chatroom.component';
 
 const routes: Routes = [
   {
@@ -52,6 +53,10 @@ const routes: Routes = [
       {
         path: 'otheruserbadges',
         loadChildren: () => import('../otheruserbadges/other-user-badges.module').then( m => m.OtherUserBadgesPageModule)
+      },
+      {
+        path: 'chatroom',
+        component: ChatroomComponent
       }
     ],
   }
