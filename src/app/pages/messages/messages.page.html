@@ -1,9 +1,25 @@
 <div class="outer-container">
   <ion-content>
     <div class="inner-container">
-      <div class="message">
-        Page under construction :)
-      </div>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>CHATS</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      
+      <ion-list>
+        <ion-item *ngFor="let chat of chats" (click)="openChat(chat)" lines="none">
+          <ion-avatar slot="start">
+            <!-- <ion-img [src]="chat.avatar"></ion-img> -->
+            <ion-icon name="person-circle-outline"></ion-icon>
+          </ion-avatar>
+          <ion-label>
+            <h2>{{ chat.name }}</h2>
+            <p>{{ chat.lastMessage }}</p>
+            <p class="timestamp">{{ chat.timestamp }}</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
    </div>
   </ion-content>
 </div>
