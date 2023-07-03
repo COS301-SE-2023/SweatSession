@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ChatbotService } from '../../services/chatbot/chatbot.service';
+
 
 @Component({
   selector: 'app-chatbot',
@@ -7,9 +9,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChatbotPage implements OnInit {
 
-  constructor() { }
+  userMessage = '';
+  messages: { text: string, sender: string }[] = [];
+
+  constructor(private chatbotService: ChatbotService) {}
 
   ngOnInit() {
   }
+
+  sendUserMessage() {
+    if (this.userMessage.trim() !== '') {
+        this.messages.push({ text: this.userMessage, sender: 'user' });
+        this.chatbotService.sendMessage(this.userMessage).subscribe((response: any) => {
+            this.messages.push({ text: response.choices[0].text, sender: 'bot' });
+        });
+        this.userMessage = '';
+    }
+}
 
 }
