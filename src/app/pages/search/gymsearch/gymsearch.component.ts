@@ -18,6 +18,7 @@ export class GymsearchComponent  implements OnInit {
   filteredData$: Observable<any[]> = of([]);
   // unfilteredData$: any[] = [];
   private searchTerm$ = new Subject<string>();
+  maxDistance: Number;
   //will get this from the service
   
   data: any[] = [

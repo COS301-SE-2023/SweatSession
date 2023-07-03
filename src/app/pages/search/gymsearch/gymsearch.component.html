@@ -8,6 +8,7 @@
   </ion-toolbar>
 </ion-header>
 
+<ion-content>
 <ion-searchbar
       placeholder="Search for gyms"
       [(ngModel)]="searchTerm"
@@ -16,6 +17,11 @@
       animated
       >
 </ion-searchbar>   
+
+<ion-item>
+  <ion-label position="stacked">Maximum Distance (in kilometers)</ion-label>
+  <ion-input type="number" [(ngModel)]="maxDistance"></ion-input>
+</ion-item>
 
 <ion-card *ngFor="let item of filteredData$ | async" (click)="selectGym(item.name)">
   <img [src]="item.image" alt="Silhouette of mountains" />
@@ -28,3 +34,4 @@
     {{ item.description }}
   </ion-card-content>
 </ion-card>
+</ion-content>
