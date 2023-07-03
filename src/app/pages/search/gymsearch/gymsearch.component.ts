@@ -1,16 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { of, Observable,Subject } from 'rxjs';
+import { of, Observable, Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map, startWith } from 'rxjs/operators';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
+
 
 @Component({
   selector: 'gymsearch',
   templateUrl: './gymsearch.component.html',
   styleUrls: ['./gymsearch.component.scss'],
 })
-export class GymsearchComponent  implements OnInit {
+export class GymsearchComponent implements OnInit {
 
-  constructor(private modalController: ModalController) { 
+  constructor(private modalController: ModalController, private geolocation: Geolocation) {
     this.data.filter(item => item.name.includes(''));
   }
 
@@ -20,7 +22,7 @@ export class GymsearchComponent  implements OnInit {
   private searchTerm$ = new Subject<string>();
   maxDistance: Number;
   //will get this from the service
-  
+
   data: any[] = [
     {
       name: 'Virgin Active',
@@ -53,32 +55,48 @@ export class GymsearchComponent  implements OnInit {
       location: 'Durban',
     },
   ];
-  
+
   unfilteredData$ = this.data;
-  
+
   ngOnInit() {
 
     // this.loadData();
-    this.triggerfilter();  
+    this.triggerfilter();
+    // if (navigator.geolocation) {
+    //   navigator.geolocation.getCurrentPosition();
+    //   navigator.geolocation.getCurrentPosition(function (position) {
+    //     pos = {
+    //       lat: position.coords.latitude,
+    //       lng: position.coords.longitude
+    //     };
+    //   }
+    // }
+    // try {
+    //   const userLocation = await this.getCurrentLocation();
+    //   console.log('User Location:', userLocation);
+    //   Use the userLocation object as needed
+    // } catch (error) {
+    //   console.log('Error getting current location:', error);
+    //   Handle error
+    // }
+    console.log(this.getCurrentLocation());
   }
-  
-  loadData() 
-  {
+
+  loadData() {
     this.onSearchInput('');
   }
 
-  triggerfilter()
-  {
+  triggerfilter() {
     this.filteredData$ = this.searchTerm$.pipe(
       startWith(''),
       debounceTime(300),
       distinctUntilChanged(),
       map(searchTerm => this.filterData(searchTerm))
-      );
+    );
   }
 
   filterData(searchTerm: string): any[] {
-    if (!searchTerm || searchTerm === ''|| searchTerm === null) {
+    if (!searchTerm || searchTerm === '' || searchTerm === null) {
       return this.data;
     }
     return this.data.filter(item => item.name.includes(searchTerm));
@@ -98,4 +116,21 @@ export class GymsearchComponent  implements OnInit {
   selectGym(name: string) {
     this.modalController.dismiss({ selectedGym: name });
   }
+
+  getCurrentLocation(): Promise<GeolocationCoordinates> {
+    return this.geolocation.getCurrentPosition().then((position: GeolocationPosition) => {
+      const { latitude, longitude } = position.coords;
+      const geolocationCoordinates: GeolocationCoordinates = {
+        latitude: latitude,
+        longitude: longitude,
+        accuracy: position.coords.accuracy,
+        altitude: position.coords.altitude,
+        altitudeAccuracy: position.coords.altitudeAccuracy,
+        heading: position.coords.heading,
+        speed: position.coords.speed
+      };
+      return geolocationCoordinates;
+    });
+  }
+  
 }

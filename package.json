@@ -27,6 +27,8 @@
     "@angular/platform-browser": "^16.0.0",
     "@angular/platform-browser-dynamic": "^16.0.0",
     "@angular/router": "^16.0.0",
+    "@ionic-native/core": "^5.36.0",
+    "@ionic-native/geolocation": "^5.36.0",
     "@ionic/angular": "^7.0.0",
     "@ngxs-labs/actions-executing": "^1.0.3",
     "@ngxs/devtools-plugin": "^3.7.6",

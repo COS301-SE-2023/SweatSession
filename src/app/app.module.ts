@@ -5,6 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
+
 import * as admin from 'firebase-admin';
 
 import {
@@ -110,7 +112,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, AngularFirestore],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, AngularFirestore, Geolocation],
   bootstrap: [AppComponent],
 })
 export class AppModule { }
