@@ -21,6 +21,8 @@ export class GymsearchComponent implements OnInit {
   // unfilteredData$: any[] = [];
   private searchTerm$ = new Subject<string>();
   maxDistance: Number;
+  currLatitude: Number;
+  currLongitude: Number;
   //will get this from the service
 
   data: any[] = [
@@ -79,7 +81,14 @@ export class GymsearchComponent implements OnInit {
     //   console.log('Error getting current location:', error);
     //   Handle error
     // }
-    console.log(this.getCurrentLocation());
+    this.getCurrentLocation().then((coordinates: GeolocationCoordinates) => {
+      this.currLatitude = coordinates.latitude;
+      this.currLongitude = coordinates.longitude;
+      console.log('Latitude:', this.currLatitude);
+      console.log('Longitude:', this.currLongitude);
+    }).catch((error) => {
+      console.log('Error getting current location:', error);
+    });
   }
 
   loadData() {
