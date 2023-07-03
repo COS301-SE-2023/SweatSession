@@ -1,7 +1,7 @@
 import { Store } from '@ngxs/store';
 import { Component, OnInit } from '@angular/core';
 import { Select } from '@ngxs/store';
-import { Observable, tap } from 'rxjs';
+import { Observable, switchMap, tap, lastValueFrom, forkJoin } from 'rxjs';
 import { GetFriendsAction, GetUsersAction, SubscribeToAuthState } from 'src/app/actions';
 import { IFriendsModel, IProfileModel, IPoints } from 'src/app/models';
 import { AuthState, FriendsState, OtheruserState, PointsApi } from 'src/app/states';
@@ -25,52 +25,83 @@ export class LeaderboardPage implements OnInit {
   constructor(private store:Store, private pointsApi: PointsApi) { }
 
   ngOnInit() {
-    this.getUsers();
-    this.getFriends();
+   this.initialize();
   }
 
   /**
    * subscribe to the @users$ observable and get user profiles in sorted order(descending) based on user points.
    */
-  getUsers() {
-    this.store.dispatch(new SubscribeToAuthState())
-    this.store.dispatch(new GetUsersAction());
-    this.users$.subscribe((response)=>{
-      if(response) {
-        this.users = [];
-        response.forEach(user=>{
-          this.pointsApi.otherUserPoints$(user.userId!).subscribe(results=>{
-            user.points = results.userPoints;
-            this.users.push(user);
-          });
-        })
-        this.sort()
-      }
-    })
+  // initialize() {
+  //   this.store.dispatch(new SubscribeToAuthState());
+  //   this.store.dispatch(new GetUsersAction());
+  //   this.store.dispatch(new GetFriendsAction());
 
-    this.userId$.subscribe((response)=>{
-      this.userId = response;
+  //   this.userId$.pipe(tap((response)=>{
+  //       this.userId = response;
+  //     }),
+  //     switchMap(()=>this.users$),
+  //     tap((response)=>{
+  //       this.users = response;
+  //       this.users.forEach(async (user, index)=>{
+  //         this.pointsApi.otherUserPoints$(user.userId!).pipe(tap((response)=>{
+  //         user.points = response ? response.userPoints : 0;
+  //         this.users[index] = user;
+          
+  //         // if(index == this.users.length-1) {
+  //         //   this.users.sort((userA, userB) => userB.points! - userA.points!)
+  //         // }
+  //      })).subscribe(()=>{
+  //       this.users.sort((userA, userB) => userB.points! - userA.points!)
+  //      });
+  //     })
+  //     })
+  //   ).subscribe();
+  // }
+
+  initialize() {
+    this.store.dispatch(new SubscribeToAuthState());
+    this.store.dispatch(new GetUsersAction());
+    this.store.dispatch(new GetFriendsAction());
+  
+    this.userId$.pipe(
+      tap((response) => {
+        this.userId = response;
+      }),
+      switchMap(() => this.users$),
+      tap((response) => {
+        this.users = response;
+      }),
+      switchMap(() => {
+        const requests = this.users.map(user =>
+          this.pointsApi.otherUserPoints$(user.userId!).pipe(
+            tap(response => {
+              user.points = response ? response.userPoints : 0;
+              this.users.sort((userA, userB) => userB.points! - userA.points!);
+              this.users = [...this.users]; // Update the users array after modifying a user
+            })
+          )
+        );
+        return forkJoin(requests);
+      })
+    ).subscribe();
+
+    this.friends$.subscribe((response)=>{
+     this.updateFriends(response);
     })
   }
+  
 
   /**
    * subscribe to the @friends$ observable to get user friends
    */
-  getFriends() {
+  updateFriends(friends: IFriendsModel[]) {
     this.friends = [];
-    this.store.dispatch(new GetFriendsAction())
-    this.friends$.subscribe((response)=>{
-      if(response) {
-        response.forEach((friend)=>{
-         this.users.filter((user)=>{
-            if(user.userId?.match(friend.userId!)) {
-              this.friends.push(user);
-              return;
-            }
-          })
-        })
+    friends.forEach(friend => {
+      const user = this.users.find(u => u.userId === friend.userId);
+      if (user) {
+        this.friends.push(user);
       }
-    })
+    });
   }
 
   /**
@@ -78,6 +109,7 @@ export class LeaderboardPage implements OnInit {
    */
   sort() {
     this.users.sort((userA, userB) => userB.points! - userA.points!) 
+    console.table(this.users);
   }
   
   
