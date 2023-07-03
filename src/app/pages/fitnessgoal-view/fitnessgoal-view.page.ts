@@ -59,7 +59,9 @@ export class FitnessgoalViewPage implements OnInit {
     return  this.authApi.getCurrentUserId();
   }
 
-
+  onSegmentChange() {
+  }
+  
   setgoalid(id: string)
   {
     this.goalId = id;

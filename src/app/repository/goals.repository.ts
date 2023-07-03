@@ -128,7 +128,7 @@ export class goalsRepository {
             .doc(taskid)
             .set(request);
 
-    }
+    } 
 
     saveTasks( userId: string, goalid: string,request: ITASK[]) {
 

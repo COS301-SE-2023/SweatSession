@@ -13,6 +13,7 @@ import {FitnessgoalViewPage} from "../../fitnessgoal-view/fitnessgoal-view.page"
 import {today} from "ionicons/icons";
 import {convertChangeEventsToLogMessage} from "nx/src/daemon/server/watcher";
 import {Time} from "@angular/common";
+import { event } from 'firebase-functions/v1/analytics';
 @Component({
   selector: 'app-goalcard',
   templateUrl: './goalcard.component.html',
@@ -39,9 +40,9 @@ export class GoalcardComponent  implements OnInit {
     }
 
 
-    viewGoal(id: string) {
+    viewGoal(id: string | undefined) {
         this.router.navigate(['/fitnessgoal-view']);
-        FitnessgoalViewPage.prototype.setgoalid(id);
+        FitnessgoalViewPage.prototype.setgoalid(id!);
     }
 
     removeGoal(name: string | undefined) {
@@ -69,6 +70,11 @@ export class GoalcardComponent  implements OnInit {
         this.router.navigate(['/goalview']);
         console.log("Add Goal");
     }
+
+    selectedSegment: string = '0'
+    onSegmentChange(event: any) {
+        this.selectedSegment = event.details.value
+      }
 
 
 

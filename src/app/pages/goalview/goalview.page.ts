@@ -35,6 +35,7 @@ export class GoalviewPage  implements OnInit {
     goals: []
   }
 
+  selectedSegment: string = '0';
   currentUserId: string | undefined = undefined;
   TaskForm: FormGroup;
 
@@ -51,7 +52,9 @@ export class GoalviewPage  implements OnInit {
 
 
 
-
+  onSegmentChange(event: any) {
+    this.selectedSegment = event.detail.value;
+  }
 
   getUserid() {
     return  this.authApi.getCurrentUserId();

@@ -21,12 +21,12 @@ export class FitnessgoalService{
         this.repository.deleteTask(userId,goalid,taskid);
     }
      addGoal(request: IAddGOAL){
-        alert('addGoal in Service');
+        // alert('addGoal in Service');
         this.repository.addGoal(request);
     }
 
     addTask(request: ITASK, userId: string){
-        alert('addTask in Service');
+        // alert('addTask in Service');
         this.repository.addTask(request , userId);
     }
 
