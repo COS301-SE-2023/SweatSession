@@ -8,6 +8,7 @@ import {
   redirectUnauthorizedTo
 } from '@angular/fire/auth-guard';
 import { AddScheduleComponent } from './pages/workout-scheduling/add-schedule/add-schedule.component';
+import { ChatroomComponent } from './pages/messages/chatroom/chatroom.component';
 
 const redirectLoggedOut = () => redirectUnauthorizedTo(['login']);
 const redirectLoggedIn = () => redirectLoggedInTo(['home']);
@@ -155,6 +156,12 @@ const routes: Routes = [
     data: { authGuardPipe: redirectLoggedOut },
     loadChildren: () => import('./pages/fitnessgoal-view/fitnessgoal-view.module').then( m => m.FitnessgoalViewPageModule)
   },
+  {
+    path: 'chatroom',
+    canActivate: [AuthGuard],
+    data: { authGuardPipe: redirectLoggedOut },
+    component: ChatroomComponent
+  }
 ];
 @NgModule({
   imports: [
