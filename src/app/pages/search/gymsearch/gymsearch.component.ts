@@ -22,7 +22,7 @@ export class GymsearchComponent implements OnInit {
   filteredData$: Observable<any[]> = of([]);
   // unfilteredData$: any[] = [];
   private searchTerm$ = new Subject<string>();
-  maxDistance: Number;
+  maxDistance: number = 15;//default in kilometers
   currLatitude: Number;
   currLongitude: Number;
   MAPS_API_KEY = environment.mapsApiKey;
@@ -90,6 +90,7 @@ export class GymsearchComponent implements OnInit {
       this.currLongitude = coordinates.longitude;
       console.log('Latitude:', this.currLatitude);
       console.log('Longitude:', this.currLongitude);
+      console.log('maxDistance:', this.maxDistance);
       this.gymsSubscription = this.searchNearbyGyms().subscribe((gyms) => {
         console.log('Nearby gyms:', gyms);
       }, (error) => {
@@ -158,7 +159,7 @@ export class GymsearchComponent implements OnInit {
   
   searchNearbyGyms() {
     const proxyUrl = 'https://cors-anywhere.herokuapp.com/'; // CORS proxy URL
-    const apiUrl = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${this.currLatitude},${this.currLongitude}&radius=${this.maxDistance}&type=gym&key=${this.MAPS_API_KEY}`;
+    const apiUrl = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${this.currLatitude},${this.currLongitude}&radius=${this.maxDistance*1000}&type=gym&key=${this.MAPS_API_KEY}`;
     const url = proxyUrl + apiUrl; // Combine proxy URL and API URL
   
     return this.httpClient.get(url);
