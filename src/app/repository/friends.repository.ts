@@ -42,7 +42,7 @@ export class FriendsRepository {
   
     return friendsCollection.snapshotChanges().pipe(
       map((snapshot) => {
-        const friends: IFriendsModel[] = [];
+        let friends: IFriendsModel[] = [];
   
         snapshot.forEach(async (doc) => {
           const friend = {
