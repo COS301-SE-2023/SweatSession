@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { of, Observable, Subject } from 'rxjs';
+import { of, Observable, Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map, startWith } from 'rxjs/operators';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { environment } from 'src/environments/environment';
+import { HttpClient } from '@angular/common/http';
 
 
 @Component({
@@ -12,7 +14,7 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 })
 export class GymsearchComponent implements OnInit {
 
-  constructor(private modalController: ModalController, private geolocation: Geolocation) {
+  constructor(private modalController: ModalController, private geolocation: Geolocation, private httpClient: HttpClient) {
     this.data.filter(item => item.name.includes(''));
   }
 
@@ -23,6 +25,8 @@ export class GymsearchComponent implements OnInit {
   maxDistance: Number;
   currLatitude: Number;
   currLongitude: Number;
+  MAPS_API_KEY = environment.mapsApiKey;
+  gymsSubscription: Subscription;
   //will get this from the service
 
   data: any[] = [
@@ -86,6 +90,11 @@ export class GymsearchComponent implements OnInit {
       this.currLongitude = coordinates.longitude;
       console.log('Latitude:', this.currLatitude);
       console.log('Longitude:', this.currLongitude);
+      this.gymsSubscription = this.searchNearbyGyms().subscribe((gyms) => {
+        console.log('Nearby gyms:', gyms);
+      }, (error) => {
+        console.error('Error searching for nearby gyms:', error);
+      });
     }).catch((error) => {
       console.log('Error getting current location:', error);
     });
@@ -129,6 +138,11 @@ export class GymsearchComponent implements OnInit {
   getCurrentLocation(): Promise<GeolocationCoordinates> {
     return this.geolocation.getCurrentPosition().then((position: GeolocationPosition) => {
       const { latitude, longitude } = position.coords;
+      // this.searchNearbyGyms().then((gyms) => {
+      //   console.log('Nearby gyms:', gyms);
+      // }).catch((error) => {
+      //   console.error('Error searching for nearby gyms:', error);
+      // });
       const geolocationCoordinates: GeolocationCoordinates = {
         latitude: latitude,
         longitude: longitude,
@@ -140,6 +154,14 @@ export class GymsearchComponent implements OnInit {
       };
       return geolocationCoordinates;
     });
+  }
+  
+  searchNearbyGyms() {
+    const proxyUrl = 'https://cors-anywhere.herokuapp.com/'; // CORS proxy URL
+    const apiUrl = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${this.currLatitude},${this.currLongitude}&radius=${this.maxDistance}&type=gym&key=${this.MAPS_API_KEY}`;
+    const url = proxyUrl + apiUrl; // Combine proxy URL and API URL
+  
+    return this.httpClient.get(url);
   }
   
 }

@@ -49,6 +49,9 @@ import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
 import { AngularFirestore, AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireModule } from '@angular/fire/compat';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { HttpClient, HttpHandler } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
+
  
 
 @NgModule({
@@ -63,6 +66,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
     NgxsRouterPluginModule.forRoot(),
     AppRoutingModule,
     AngularFirestoreModule,
+    HttpClientModule,
     provideRemoteConfig(() => getRemoteConfig()),
     provideAnalytics(() => getAnalytics()),
     provideAuth(() => {
@@ -112,7 +116,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, AngularFirestore, Geolocation],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, AngularFirestore, Geolocation, HttpClient],
   bootstrap: [AppComponent],
 })
 export class AppModule { }
