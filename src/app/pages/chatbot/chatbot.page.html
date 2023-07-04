@@ -1,9 +1,22 @@
-<div class="outer-container">
-  <ion-content>
-    <div class="inner-container">
-      <div class="message">
-        Page under construction :)
-      </div>
-   </div>
-  </ion-content>
-</div>
+<ion-header>
+  <ion-toolbar>
+      <ion-title>Chatbot</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+      <ion-item *ngFor="let message of messages">
+          <div [ngClass]="{'user-message': message.sender === 'user', 'bot-message': message.sender === 'bot'}">
+              {{ message.text }}
+          </div>
+      </ion-item>
+  </ion-list>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+      <ion-input [(ngModel)]="userMessage" placeholder="Enter your message"></ion-input>
+      <ion-button (click)="sendUserMessage()">Send</ion-button>
+  </ion-toolbar>
+</ion-footer>

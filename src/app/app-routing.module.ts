@@ -155,6 +155,12 @@ const routes: Routes = [
     data: { authGuardPipe: redirectLoggedOut },
     loadChildren: () => import('./pages/fitnessgoal-view/fitnessgoal-view.module').then( m => m.FitnessgoalViewPageModule)
   },
+  {
+    path: 'chatbot',
+    canActivate: [AuthGuard],
+    data: { authGuardPipe: redirectLoggedOut },
+    loadChildren: () => import('./pages/chatbot/chatbot.module').then( m => m.ChatbotPageModule)
+  },
 ];
 @NgModule({
   imports: [

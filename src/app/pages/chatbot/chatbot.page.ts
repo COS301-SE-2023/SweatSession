@@ -19,12 +19,13 @@ export class ChatbotPage implements OnInit {
 
   sendUserMessage() {
     if (this.userMessage.trim() !== '') {
-        this.messages.push({ text: this.userMessage, sender: 'user' });
-        this.chatbotService.sendMessage(this.userMessage).subscribe((response: any) => {
-            this.messages.push({ text: response.choices[0].text, sender: 'bot' });
-        });
-        this.userMessage = '';
+      const newMessage = { text: this.userMessage, sender: 'user' };
+      this.messages.push(newMessage);
+      this.chatbotService.sendMessage(newMessage).subscribe((response: any) => {
+        const botMessage = response.choices[0].message.content;
+        this.messages.push({ text: botMessage, sender: 'bot' });
+      });
+      this.userMessage = '';
     }
-}
-
+  }
 }
