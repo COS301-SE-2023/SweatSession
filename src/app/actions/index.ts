@@ -7,3 +7,4 @@ export * from './otheruser.action';
 export * from './profile.action';
 export * from './fitnessgoals';
 export * from './friend.action'
+export * from './messages.action'
