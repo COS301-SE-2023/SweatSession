@@ -1,14 +1,21 @@
-<ion-content [fullscreen]="true">
-  <ion-header>
-    <ion-toolbar>
+<ion-header>
+  <ion-toolbar>
+    <ion-item lines="none">
+      <backbutton></backbutton>
       <ion-title>user here</ion-title>
-    </ion-toolbar>
-  </ion-header>
+    </ion-item>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+ 
 </ion-content>
 
 <ion-footer>
   <ion-toolbar>
+   <ion-item lines="none">
     <ion-input placeholder="Type a message"></ion-input>
-    <ion-button slot="end">Send</ion-button>
+    <ion-icon name="send"></ion-icon>
+   </ion-item>
   </ion-toolbar>
 </ion-footer>
