@@ -2,9 +2,10 @@ import { Timestamp } from "firebase/firestore";
 import { IProfileModel } from "./profile.model";
 
 //chat interface
-export interface IChat {
+export interface IMessage {
     id: string;
     senderId?: string;
+    receiverId?: string;
     date?: Timestamp;
     text?: any;
 }
@@ -12,17 +13,17 @@ export interface IChat {
 //chat friends interfaces
 export interface IChatFriend {
     user: IProfileModel;
-    lastChat: IChat;
+    lastChat: IMessage;
 }
 
 //get chats interfaces
-export interface IGetChats {
-    userId: string;
+export interface IGetMessages {
+    userId?: string;
     otheruserId: string;
 }
 
-export interface IGotChats {
-    chats?: IChat[];
+export interface IGotMessages {
+    chats?: IMessage[];
     validate: boolean;
 }
 
@@ -38,7 +39,7 @@ export interface IGotChatsFriends {
 
 //send message interfaces
 export interface ISendMessage {
-    chat: IChat;
+    chat: IMessage;
 }
 
 export interface ISentMessage {
