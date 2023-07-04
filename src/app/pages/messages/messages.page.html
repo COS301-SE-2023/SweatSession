@@ -10,8 +10,7 @@
       <ion-list>
         <ion-item *ngFor="let chat of chats" (click)="openChat(chat)" lines="none">
           <ion-avatar slot="start">
-            <!-- <ion-img [src]="chat.avatar"></ion-img> -->
-            <ion-icon name="person-circle-outline"></ion-icon>
+            <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
           </ion-avatar>
           <ion-label>
             <h2>{{ chat.name }}</h2>

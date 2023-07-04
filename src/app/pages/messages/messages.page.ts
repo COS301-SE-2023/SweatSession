@@ -53,7 +53,7 @@ export class MessagesPage implements OnInit {
   }
 
   openChat(chat:any) {
-    this.nav.navigateRoot("/home/chatroom");
+    this.nav.navigateRoot("/chatroom");
   }
 
 }
