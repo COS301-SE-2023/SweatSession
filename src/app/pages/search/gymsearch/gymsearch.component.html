@@ -23,7 +23,7 @@
   <ion-input type="number" [(ngModel)]="maxDistance"></ion-input>
 </ion-item>
 
-<ion-card *ngFor="let item of filteredData$ | async" (click)="selectGym(item.name)">
+<!-- <ion-card *ngFor="let item of filteredData$ | async" (click)="selectGym(item.name)">
   <img [src]="item.image" alt="Silhouette of mountains" />
   <ion-card-header>
     <ion-card-title>{{ item.name }}</ion-card-title>
@@ -32,6 +32,17 @@
 
   <ion-card-content>
     {{ item.description }}
+  </ion-card-content>
+</ion-card> -->
+<ion-card *ngFor="let gym of gyms.results" (click)="selectGym(gym.name)">
+  <img [src]="" alt="Silhouette of mountains" />
+  <ion-card-header>
+    <ion-card-title>{{ gym.name }}</ion-card-title>
+    <ion-card-subtitle>{{ gym.vicinity }}</ion-card-subtitle>
+  </ion-card-header>
+
+  <ion-card-content>
+    <!-- {{ gym.description }} -->
   </ion-card-content>
 </ion-card>
 </ion-content>
