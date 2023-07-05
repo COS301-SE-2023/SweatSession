@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ChatbotService } from '../../services/chatbot/chatbot.service';
+import { ChatbotService } from 'src/app/services/chatbot/chatbot.service'; 
 
 
 @Component({
@@ -44,7 +44,7 @@ export class ChatbotPage implements OnInit {
   isHealthRelated(text: string): boolean {
     // You can implement your own logic here to determine if the text is health-related
     // This is just a basic example
-    const healthKeywords = ['health', 'medical', 'veg', 'nutrition' , 'fit' , 'exercise' , 'diet' , 'calories' , 'food' , 'fruit' , 'gym' , 'set' , 'rep' , 'kilojoule' ];
+    const healthKeywords = ['health', 'medical', 'veg', 'nutrition' , 'fit' , 'exercise' , 'diet' , 'calories' , 'food' , 'fruit' , 'gym' , 'set' , 'rep' , 'kilojoule' , 'routine'];
     text = text.toLowerCase();
     return healthKeywords.some(keyword => text.includes(keyword));
   }

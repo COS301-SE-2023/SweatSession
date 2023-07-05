@@ -1,6 +1,36 @@
-.center{
-   
+.user-message {
+    background-color: #DCF8C6;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 5px;
+  }
+
+  .bot-message {
+    background-color: #b9bcf3;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 5px;
+  }
+
+  .loading-container {
+    display: flex;
     justify-content: center;
     align-items: center;
-    
+    height: 40px;
+  }
+
+  .center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .center2{
+    align-items: center;
+    justify-content: center;
+    display: flex;
+  }
+
+  .main{
+    --background: none;
+    --background: url('/assets/Asset 2.png') no-repeat center/contain fixed;
 }
