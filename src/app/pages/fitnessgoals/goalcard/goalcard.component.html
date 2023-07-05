@@ -1,12 +1,12 @@
-<ion-segment (ionChange)="onSegmentChange($event)" value="1" [scrollable]="true">
-    <ion-segment-button value="0">All</ion-segment-button>
-    <ion-segment-button value="1">Active</ion-segment-button>
-    <ion-segment-button value="2">Completed</ion-segment-button>
-    <ion-segment-button value="3">Overdue</ion-segment-button>
+<ion-segment (ionChange)="onSegmentChange($event)" value="0" [scrollable]="true">
+    <ion-segment-button value="0">Active</ion-segment-button>
+    <ion-segment-button value="1">Completed</ion-segment-button>
+    <ion-segment-button value="2">Overdue</ion-segment-button>
   </ion-segment>
 
-<ion-item-sliding *ngFor="let goal of goals.goals">
-    <ion-card *ngIf="selectedSegment === '0'">
+  <ion-content>
+    <ion-item-sliding *ngFor="let goal of GOALS">
+      <ion-card >
         <ion-card>
             <ion-item id="viewer">
                 <ion-icon name="basketball-outline"></ion-icon>
@@ -27,8 +27,8 @@
                  
                 <ion-row>
                     <ion-col>
-                            <ion-label>{{(goal.progress! * 100)}} % Done</ion-label>
-                            <ion-progress-bar value = "{{goal.progress}}" ></ion-progress-bar>
+                            <ion-label>{{(goal.progress!)}} % Done</ion-label>
+                            <ion-progress-bar value = "{{goal.progress! / 100}}" ></ion-progress-bar>
                     </ion-col>
                 </ion-row>
                 <ion-row>
@@ -38,13 +38,23 @@
                 </ion-row>
                 
             </ion-grid>
-            <ion-icon name="alert-circle-outline"></ion-icon><ion-text class="schedule-value">{{goal.duration}} Days Left</ion-text><br>
+            <ion-icon name="alert-circle-outline"></ion-icon><ion-text class="schedule-value">{{getDaysleft(goal)}} Days Left</ion-text><br>
             <ion-icon name="calendar-outline"></ion-icon><ion-text class="schedule-value">Started {{goal.startDate}}</ion-text><br>
             <ion-icon name="alarm-outline"></ion-icon><ion-text class="schedule-value">Ending {{goal.endDate}}</ion-text><br>
         </ion-card-content>
     </div>
-</ion-card>
-</ion-item-sliding>
+      </ion-card>
+    </ion-item-sliding>
+  </ion-content>
+  
+  <!-- <ion-content *ngIf="selectedSegment === '1'">
+    <ion-item-sliding *ngFor="let goal of goals.goals">
+      <ion-card *ngIf="isCompleted(goal)">
+        completed
+      </ion-card>
+    </ion-item-sliding>
+  </ion-content> -->
+
 
 
 <ion-fab slot="fixed" vertical="bottom" horizontal="end">

@@ -15,7 +15,7 @@
 
     <div class="task-list">
       <ion-list>
-        <ion-item *ngFor="let task of tasks">
+        <ion-item *ngFor="let task of GOAL.Tasks!">
           <ion-item [disabled]="task.done" class="task-item">
             <ion-checkbox [(ngModel)]="task.done" slot="start"></ion-checkbox>
             <ion-label class="task-content">{{ task.content }}</ion-label>
@@ -25,6 +25,7 @@
     </div>
 
     <div class="ion-padding">
-      <ion-button expand="full" (click)="saveGoal()" routerLink="/fitnessgoals">Done</ion-button>
+      <ion-button expand="block" (click)="saveGoal()">Done</ion-button>
+      <ion-button expand="block" routerLink="/fitnessgoals">Cancel</ion-button>
     </div>
   </ion-content>

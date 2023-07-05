@@ -16,11 +16,21 @@ export class FitnessgoalService{
      return this.repository.getGoals(userId);
     }
 
+    getGoal(goalid: string)
+    {
+        return this.repository.getGoal(goalid);
+    }
+
     deleteTask(userId: string, goalid: string,taskid: string)
     {
         this.repository.deleteTask(userId,goalid,taskid);
     }
-     addGoal(request: IAddGOAL){
+    updateTask(request : ITASK, userId: string)
+    {
+        this.repository.updateTask(request,userId);
+    }
+    
+    addGoal(request: IAddGOAL){
         // alert('addGoal in Service');
         this.repository.addGoal(request);
     }
@@ -35,15 +45,19 @@ export class FitnessgoalService{
         this.repository.saveTasks(userId,goalid,request);
     }
 
+    doneTask(userId: string, goalid: string, taskid: string, theTask: ITASK)
+    {
+        this.repository.doneTask(userId,goalid,taskid,theTask);
+    }
 
 
     getTasks(userId: string | undefined, goalid: string | undefined) {
         return this.repository.getTasks(userId, goalid);
     }
 
-    removeGoal(userId: string, goalname: string)
+    removeGoal(goalID: string)
     {
-        this.repository.removeGoal(userId,goalname);
+        this.repository.removeGoal(goalID);
     }
 
 }

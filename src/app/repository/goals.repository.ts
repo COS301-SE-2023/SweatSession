@@ -6,16 +6,22 @@ import {getCurrentUserId} from "../actions";
 import {from, map} from "rxjs";
 import {considerSettingUpAutocompletion} from "@angular/cli/src/utilities/completion";
 import {collection} from "@angular/fire/firestore";
-
+import { AuthApi } from 'src/app/states/auth/auth.api';
+import {getAuth} from "@angular/fire/auth";
 
 @Injectable({
     providedIn: 'root'
 })
 export class goalsRepository {
 
-    constructor(private firestore: AngularFirestore) { }
 
-    async creategoalsDocument(currUserId: string) {
+    currUserId: string | undefined = undefined;
+
+    constructor(private firestore: AngularFirestore,
+                private auth: AuthApi
+                ) { }
+
+    creategoalsDocument(currUserId: string) {
 
         let goalID = this.firestore.createId();
         const goal =
@@ -29,7 +35,7 @@ export class goalsRepository {
                 progress: 0,
             }
 
-            await  this.firestore
+            this.firestore
             .collection('fitnessgoals')
             .doc(currUserId)
             .collection('goals')
@@ -66,10 +72,11 @@ export class goalsRepository {
                 id: request.goal.id,
                 name: request.goal.name,
                 description: request.goal.description,
-                duration: request.goal.days_left,
+                duration: 0,
                 startDate: request.goal.startDate,
                 endDate: request.goal.endDate,
-                progress: request.goal.progress,
+                progress: 0,
+                Tasks: request.goal.Tasks,
             }
 
              this.firestore
@@ -79,6 +86,46 @@ export class goalsRepository {
                 .doc(request.goal.id)
                 .set(goal);
 
+
+    }
+
+    getGoal(goalid: string)
+    {
+        const auth = getAuth();
+        this.currUserId = auth.currentUser?.uid;
+
+        if (this.currUserId!=undefined)
+        {
+        sessionStorage.setItem('currUserId', this.currUserId);
+        }
+        else
+        {
+        this.currUserId = sessionStorage.getItem('currUserId') ?? "";
+        }
+
+        const goal = this.firestore
+            .collection('fitnessgoals')
+            .doc(this.currUserId)
+            .collection('goals')
+            .doc(goalid);
+
+            console.log("Goal ID :" + goalid);
+            return goal.snapshotChanges().pipe(
+                map((snapshot) => {
+                  const data = snapshot.payload.data() as IGOAL;
+                  const goal: IGOAL = {
+                    id: data.id,
+                    name: data.name,
+                    startDate: data.startDate,
+                    endDate: data.endDate,
+                    description: data.description,
+                    Tasks: data.Tasks,
+                  };
+                  return {
+                    goal: goal,
+                  }
+                })
+        );
 
     }
 
@@ -128,8 +175,66 @@ export class goalsRepository {
             .doc(taskid)
             .set(request);
 
-    } 
+    }
+    updateTask(request: ITASK, goalid: string) {
+        const auth = getAuth();
+        this.currUserId = auth.currentUser?.uid;
+      
+        if (this.currUserId != undefined) {
+          sessionStorage.setItem('currUserId', this.currUserId);
+        } else {
+          this.currUserId = sessionStorage.getItem('currUserId') ?? '';
+        }
+      
+        const goalsDoc = this.firestore
+          .collection('fitnessgoals')
+          .doc(this.currUserId)
+          .collection('goals')
+          .doc(goalid);
+      
+        const taskId = request.id; 
+      
+        goalsDoc.get().subscribe((snapshot) => {
+          const goalsData = snapshot.data();
+      
+          if (goalsData) {
+            const tasks = goalsData['Tasks'] as ITASK[]; 
+      
+            
+            const taskIndex = tasks.findIndex((task) => task.id === taskId);
+      
+            if (taskIndex > -1) {
+              tasks[taskIndex].done = true;
 
+
+              const numTasksDone = tasks.filter((task) => task.done).length;
+              const progress = Math.round((numTasksDone / tasks.length) * 100);
+            
+              // Update the 'progress' attribute in the 'goals' document
+              goalsDoc.update({ Tasks: tasks, progress: progress });
+            }
+          }
+        });
+      }
+      
+      
+
+    doneTask(userId: string, goalId: string, taskid : string, request: ITASK) {
+
+        // console.log("Request Done Task: " , userId);
+        request.done = true;// just to double check
+        this.firestore
+            .collection('fitnessgoals')
+            .doc(userId)
+            .collection('goals')
+            .doc(goalId)
+            .collection('Tasks')
+            .doc(taskid)
+            .set(request);
+
+    }
+    
+    
     saveTasks( userId: string, goalid: string,request: ITASK[]) {
 
             console.log("Request Save Task: " , userId);
@@ -170,7 +275,6 @@ export class goalsRepository {
 
                         ...doc.payload.doc.data(),
                     };
-                    console.table( goal);
                     goalsList.push(goal);
                 });
 
@@ -207,11 +311,21 @@ export class goalsRepository {
         );
     }
 
-    removeGoal(userId: string, goalId: string) {
-        //remove goal by field from firestore
-        const goalRef = this.firestore
+    removeGoal(goalId: string) {
+
+        const auth = getAuth();
+        this.currUserId = auth.currentUser?.uid;
+      
+        if (this.currUserId != undefined) {
+          sessionStorage.setItem('currUserId', this.currUserId);
+        } else {
+          this.currUserId = sessionStorage.getItem('currUserId') ?? '';
+        }
+
+
+            this.firestore
             .collection('fitnessgoals')
-            .doc(userId)
+            .doc(this.currUserId)
             .collection('goals')
             .doc(goalId)
             .delete()
@@ -224,8 +338,6 @@ export class goalsRepository {
                 console.error('Error removing goal: ', error);
             }
             );
-
-            
 
     }
 
