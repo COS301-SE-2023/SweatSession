@@ -23,7 +23,7 @@ export class ChatbotService {
         model: 'gpt-3.5-turbo',
         messages: this.conversation,
         temperature: 0.95,
-        max_tokens: 150,
+        max_tokens: 300,
         
     };
   
