@@ -9,7 +9,7 @@ import { tap } from 'rxjs/operators';
 export class ChatbotService {
 
   private conversation = [
-    { role: 'system', content: 'You are a helpful assistant.' },
+    { role: 'system', content: 'You are a helpful AI assistant.' },
   ];
 
   constructor(private http: HttpClient) { }
@@ -22,6 +22,9 @@ export class ChatbotService {
     const body = {
         model: 'gpt-3.5-turbo',
         messages: this.conversation,
+        temperature: 0.95,
+        max_tokens: 150,
+        
     };
   
     return this.http.post(environment.openai_endpoint, body, { headers }).pipe(

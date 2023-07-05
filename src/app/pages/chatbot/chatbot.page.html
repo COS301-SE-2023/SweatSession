@@ -12,6 +12,10 @@
           </div>
       </ion-item>
   </ion-list>
+
+  <div *ngIf="loading">{{"&nbsp;".repeat(45)}}
+    <ion-spinner color="warning" class="center"></ion-spinner>
+  </div>
 </ion-content>
 
 <ion-footer>

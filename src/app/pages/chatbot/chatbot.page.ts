@@ -9,6 +9,8 @@ import { ChatbotService } from '../../services/chatbot/chatbot.service';
 })
 export class ChatbotPage implements OnInit {
 
+  loading: boolean = false;
+
   userMessage = '';
   messages: { text: string, sender: string }[] = [];
 
@@ -21,11 +23,33 @@ export class ChatbotPage implements OnInit {
     if (this.userMessage.trim() !== '') {
       const newMessage = { text: this.userMessage, sender: 'user' };
       this.messages.push(newMessage);
+      this.loading = true;
       this.chatbotService.sendMessage(newMessage).subscribe((response: any) => {
+        this.loading = false;
         const botMessage = response.choices[0].message.content;
-        this.messages.push({ text: botMessage, sender: 'bot' });
+        console.log(botMessage);
+        if (this.isHealthRelated(botMessage)){
+          this.messages.push({ text: botMessage, sender: 'SweatSession-bot' });
+        }else{
+          this.messages.push({ text: 'Sorry, I can only answer health-related questions.', sender: 'SweatSession-bot' });
+        }
+        
       });
       this.userMessage = '';
     }
+  }
+
+ 
+
+  isHealthRelated(text: string): boolean {
+    // You can implement your own logic here to determine if the text is health-related
+    // This is just a basic example
+    const healthKeywords = ['health', 'medical', 'veg', 'nutrition' , 'fit' , 'exercise' , 'diet' , 'calories' , 'food' , 'fruit' , 'gym' , 'set' , 'rep' , 'kilojoule' ];
+    text = text.toLowerCase();
+    return healthKeywords.some(keyword => text.includes(keyword));
+  }
+
+  async simulateDelay(ms: number) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
   }
 }
