@@ -27,7 +27,7 @@ export class GymsearchComponent implements OnInit {
   currLongitude: Number;
   MAPS_API_KEY = environment.mapsApiKey;
   gymsSubscription: Subscription;
-  gyms = {
+   gyms = {
      "html_attributions" : [],
      "next_page_token" : "Aaw_FcKS6gtFrXfZ__LTL0vHjOy1Ttd8V3viWJc06eGqjqq8ThbT39ueK2yFakQABdjREX7h32QGWykuAw9Gc7JyA9dNfZuSbFX83hkLj3B_Y3myyz7gOvWFTDEcSO6Qoh0J4PJ0Pxfs6PwbXrZloJaSqVmiqvIoR8Hzab3tcKwyT9VwIfWtDMZ4pJ5bw3o3Eh-rggJJuBQ4ICWv4pLZXCi75ZQ9OXY5SUN7yU4pcHxl6WAWkPR8Cz0jWFpKaudhyTD9679EFygnBH57zuKA1gxAf81LCsNwu7hPqeGTCCQoDl9Qmxd7ol9H3sFYInpUzSL8_vEtVisyzStmF7BQqhW9StrS2E6DHdtv6Z9ENq-DXGvDNRa3B8dE5tr063l6kjA6oDAzP5qy6_h0Xi8FkLx0kQpeD8ZknXg6I8qeF5Ab9tPduRJk5ek",
      "results" : [
@@ -1012,6 +1012,12 @@ export class GymsearchComponent implements OnInit {
     // or: .set('X-Requested-With', 'XMLHttpRequest');
 
   return this.httpClient.get(`https://anycors.com/${apiUrl}`, { headers });
+  }
+  
+  getPhotoUrl(photoReference: string|undefined): string {
+    const maxWidth = 400; // Replace with your desired width
+  
+    return `https://maps.googleapis.com/maps/api/place/photo?maxwidth=${maxWidth}&photoreference=${photoReference}&key=${this.MAPS_API_KEY}`;
   }
   
 }
