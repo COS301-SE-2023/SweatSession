@@ -35,7 +35,8 @@
   </ion-card-content>
 </ion-card> -->
 <ion-card *ngFor="let gym of gyms.results" (click)="selectGym(gym.name)">
-  <img [src]="getPhotoUrl(gym?.photos?.[0]?.photo_reference)"  alt="Silhouette of mountains"/>
+  <ng-container *ngIf="gym.business_status=='OPERATIONAL'">
+    <img [src]="getPhotoUrl(gym?.photos?.[0]?.photo_reference)"  alt="Silhouette of mountains"/>
   <ion-card-header>
     <ion-card-title>{{ gym.name }}</ion-card-title>
     <ion-card-subtitle>{{ gym.vicinity }}</ion-card-subtitle>
@@ -45,5 +46,6 @@
     <!-- {{ gym.description }} replaced with rating-->
     Rating: {{ gym.rating ? gym.rating : 'No Rating' }}
   </ion-card-content>
+  </ng-container>
 </ion-card>
 </ion-content>
