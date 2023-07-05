@@ -11,7 +11,7 @@ export interface MessagesStateModel {
 }
 
 @State<MessagesStateModel>({
-    name: "",
+    name: "messages",
     defaults: {
         chats: [],
         chatFriends: [],
