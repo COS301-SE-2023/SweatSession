@@ -29,9 +29,9 @@ export class ChatbotPage implements OnInit {
         const botMessage = response.choices[0].message.content;
         console.log(botMessage);
         if (this.isHealthRelated(botMessage)){
-          this.messages.push({ text: botMessage, sender: 'SweatSession-bot' });
+          this.messages.push({ text: botMessage, sender: 'SS-bot' });
         }else{
-          this.messages.push({ text: 'Sorry, I can only answer health-related questions.', sender: 'SweatSession-bot' });
+          this.messages.push({ text: 'Sorry, I can only answer health-related questions.', sender: 'SS-bot' });
         }
         
       });
@@ -44,7 +44,7 @@ export class ChatbotPage implements OnInit {
   isHealthRelated(text: string): boolean {
     // You can implement your own logic here to determine if the text is health-related
     // This is just a basic example
-    const healthKeywords = ['health', 'medical', 'veg', 'nutrition' , 'fit' , 'exercise' , 'diet' , 'calories' , 'food' , 'fruit' , 'gym' , 'set' , 'rep' , 'kilojoule' , 'routine'];
+    const healthKeywords = ['health', 'medical', 'veg', 'nutrition' , 'fit' , 'exercise' , 'diet' , 'calories' , 'food' , 'fruit' , 'gym' , 'set' , 'rep' , 'kilojoule' , 'routine' , 'work' , 'Hi' ];
     text = text.toLowerCase();
     return healthKeywords.some(keyword => text.includes(keyword));
   }
