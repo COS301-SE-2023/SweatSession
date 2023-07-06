@@ -60,27 +60,32 @@ export class FitnessgoalViewPage implements OnInit {
     this.goalId = id;
   }
 
-  saveGoal() {
-    // remove the done or checked tasks
-    this.GOAL.Tasks!.forEach((task) => {
-      if (task.done == true)
-      {
-        this.fitnessgaolservive.updateTask(task,this.goalId);
-
+  async saveGoal() {
+    const updatedTasks: ITASK[] = [];
+  
+    // Update the tasks and collect the updated ones
+    for (const task of this.GOAL.Tasks!) {
+      if (task.done) {
+        await this.fitnessgaolservive.updateTask(task, this.goalId);
+        updatedTasks.push(task);
       }
     }
-    );
-    //wait a sec
-
-    setTimeout(() => {
-    this.router.navigate(['/fitnessgoals']);}, 1000);
-
+  
+    // Mark the tasks as done after updating
+    for (const task of updatedTasks) {
+      task.done = true;
+    }
+  
+    this.router.navigate(['/fitnessgoals']);
   }
+  
+  
 
   cancel() {
     // Handle the cancel functionality
     // You can navigate back to the previous page or perform any other necessary actions
   }
+  
   ngOnInit() {
     this.getGoal();
   }

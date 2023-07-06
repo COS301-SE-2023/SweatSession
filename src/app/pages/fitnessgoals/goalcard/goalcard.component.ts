@@ -97,7 +97,7 @@ export class GoalcardComponent  implements OnInit {
                 const today = new Date().getTime();
                 const diff = endDay - today;
                 const temp = Math.floor(diff / (1000 * 60 * 60 * 24));
-                return temp <= 0;
+                return temp > 0;
               }
               return false; 
             });

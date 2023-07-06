@@ -176,46 +176,64 @@ export class goalsRepository {
             .set(request);
 
     }
-    updateTask(request: ITASK, goalid: string) {
-        const auth = getAuth();
-        this.currUserId = auth.currentUser?.uid;
+    async updateTask(request: ITASK, goalid: string): Promise<any> {
+        try {
+          const auth = getAuth();
+          this.currUserId = auth.currentUser?.uid;
       
-        if (this.currUserId != undefined) {
-          sessionStorage.setItem('currUserId', this.currUserId);
-        } else {
-          this.currUserId = sessionStorage.getItem('currUserId') ?? '';
-        }
+          if (this.currUserId != undefined) {
+            sessionStorage.setItem('currUserId', this.currUserId);
+          } else {
+            this.currUserId = sessionStorage.getItem('currUserId') ?? '';
+          }
       
-        const goalsDoc = this.firestore
-          .collection('fitnessgoals')
-          .doc(this.currUserId)
-          .collection('goals')
-          .doc(goalid);
+          const goalsDoc = this.firestore
+            .collection('fitnessgoals')
+            .doc(this.currUserId)
+            .collection('goals')
+            .doc(goalid);
       
-        const taskId = request.id; 
+          const taskId = request.id;
       
-        goalsDoc.get().subscribe((snapshot) => {
-          const goalsData = snapshot.data();
+          const snapshot = await goalsDoc.get().toPromise();
+          const goalsData = snapshot!.data();
       
           if (goalsData) {
-            const tasks = goalsData['Tasks'] as ITASK[]; 
+            const tasks = goalsData['Tasks'] as ITASK[];
       
-            
             const taskIndex = tasks.findIndex((task) => task.id === taskId);
       
             if (taskIndex > -1) {
               tasks[taskIndex].done = true;
-
-
-              const numTasksDone = tasks.filter((task) => task.done).length;
-              const progress = Math.round((numTasksDone / tasks.length) * 100);
-            
-              // Update the 'progress' attribute in the 'goals' document
-              goalsDoc.update({ Tasks: tasks, progress: progress });
+      
+              // Update the task first
+              await goalsDoc.update({ Tasks: tasks });
+      
+              const updatedSnapshot = await goalsDoc.get().toPromise();
+              const updatedGoalsData = updatedSnapshot!.data();
+      
+              if (updatedGoalsData) {
+                const updatedTasks = updatedGoalsData['Tasks'] as ITASK[];
+      
+                const numTasksDone = updatedTasks.filter((task) => task.done).length;
+                const progress = Math.round((numTasksDone / updatedTasks.length) * 100);
+      
+                // Update the progress of the goal
+                await goalsDoc.update({ progress });
+              }
             }
           }
-        });
+      
+          return; // Return a resolved promise
+        } catch (error) {
+          throw error; // Throw any encountered errors
+        }
       }
+      
+      
+      
+      
+      
       
       
 
@@ -338,33 +356,6 @@ export class goalsRepository {
                 console.error('Error removing goal: ', error);
             }
             );
-
     }
-
-
-
-        //     const goal: IGOAL = {
-        //         id: request.userId,
-        //         ...request.goal,
-        //     }
-        //     const response: IAddedGoal = {
-        //         userId: request.userId,
-        //         goal: goal,
-        //         validate: true,
-        //     };
-        //
-        //     return response;
-        // } catch (error) {
-        //     console.log('Error adding goal:', error);
-        //     alert(error);
-        //
-        //     const response: IAddedGoal = {
-        //         userId: request.userId,
-        //         validate: false,
-        //     };
-        //
-        //     return response;
-        // }
-    // }
 
 }

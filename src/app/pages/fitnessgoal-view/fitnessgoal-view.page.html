@@ -16,7 +16,7 @@
     <div class="task-list">
       <ion-list>
         <ion-item *ngFor="let task of GOAL.Tasks!">
-          <ion-item [disabled]="task.done" class="task-item">
+          <ion-item class="task-item">
             <ion-checkbox [(ngModel)]="task.done" slot="start"></ion-checkbox>
             <ion-label class="task-content">{{ task.content }}</ion-label>
           </ion-item>

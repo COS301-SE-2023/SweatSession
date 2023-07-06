@@ -27,7 +27,7 @@ export class FitnessgoalService{
     }
     updateTask(request : ITASK, userId: string)
     {
-        this.repository.updateTask(request,userId);
+        return this.repository.updateTask(request,userId);
     }
     
     addGoal(request: IAddGOAL){
