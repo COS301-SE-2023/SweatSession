@@ -4,8 +4,8 @@
     <ion-segment-button value="2">Overdue</ion-segment-button>
   </ion-segment>
 
-  <ion-content>
-    <ion-item-sliding *ngFor="let goal of GOALS">
+  <ion-content [scrollEvents]="true">
+    <ion-item-sliding *ngFor="let goal of getFilteredGoals()">
       <ion-card >
         <ion-card>
             <ion-item id="viewer">
@@ -39,6 +39,7 @@
                 
             </ion-grid>
             <ion-icon name="alert-circle-outline"></ion-icon><ion-text class="schedule-value">{{getDaysleft(goal)}} Days Left</ion-text><br>
+            <ion-icon name="american-football-outline"></ion-icon><ion-text class="schedule-value">{{goal.Tasks!.length}} Goals</ion-text><br>
             <ion-icon name="calendar-outline"></ion-icon><ion-text class="schedule-value">Started {{goal.startDate}}</ion-text><br>
             <ion-icon name="alarm-outline"></ion-icon><ion-text class="schedule-value">Ending {{goal.endDate}}</ion-text><br>
         </ion-card-content>
@@ -47,14 +48,6 @@
     </ion-item-sliding>
   </ion-content>
   
-  <!-- <ion-content *ngIf="selectedSegment === '1'">
-    <ion-item-sliding *ngFor="let goal of goals.goals">
-      <ion-card *ngIf="isCompleted(goal)">
-        completed
-      </ion-card>
-    </ion-item-sliding>
-  </ion-content> -->
-
 
 
 <ion-fab slot="fixed" vertical="bottom" horizontal="end">

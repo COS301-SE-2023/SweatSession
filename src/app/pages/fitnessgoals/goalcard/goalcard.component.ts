@@ -25,7 +25,9 @@ import { event } from 'firebase-functions/v1/analytics';
 export class GoalcardComponent  implements OnInit {
 
   currUserId: string | undefined = undefined;
-  GOALS : IGOAL[] = []
+  GOALS : IGOAL[] = [];
+  selectedSegment: string = '0';
+
 
 
     constructor(private store: Store,
@@ -86,6 +88,51 @@ export class GoalcardComponent  implements OnInit {
 
     }
 
+    getFilteredGoals() {
+        if (this.selectedSegment === '0') {
+            return this.GOALS.filter(goal => {
+              if (goal.progress! < 100) {
+                const time: Time = { hours: 11, minutes: 59 };
+                const endDay = new Date(`${goal.endDate}.${time.hours}:${time.minutes}`).getTime();
+                const today = new Date().getTime();
+                const diff = endDay - today;
+                const temp = Math.floor(diff / (1000 * 60 * 60 * 24));
+                return temp <= 0;
+              }
+              return false; 
+            });
+          }
+          
+        else if (this.selectedSegment === '1') 
+        {
+          return this.GOALS.filter(goal => goal.progress == 100); // Display completed goals
+        } 
+        else if (this.selectedSegment === '2') 
+        {
+            
+
+          return this.GOALS.filter(goal => 
+            
+            {
+                const time :Time = {hours: 11, minutes: 59};
+                const endday = new Date(`${goal.endDate}.${time.hours}:${time.minutes}`).getTime();
+                const today = new Date().getTime();
+                const diff = endday - today;
+                const temp = Math.floor(diff / (1000 * 60 * 60 * 24));
+                if(temp <= 0)
+                {
+                    return true
+                }
+                else
+                {
+                    return false
+                }
+            }
+            ); 
+        }
+        return this.GOALS;
+    }
+      
     removeGoal(goalid: string|undefined)
     {
         this.fitnessgaolservive.removeGoal(goalid!)
@@ -101,11 +148,10 @@ export class GoalcardComponent  implements OnInit {
     }
 
     
-    onSegmentChange($event: any)
-    {
-    //   deal with it later
-            
+    onSegmentChange(event: any) {
+        this.selectedSegment = event.detail.value;
     }
+      
 
     isCompleted(goalname: IGOAL) {
         return true;
