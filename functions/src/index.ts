@@ -1,4 +1,5 @@
-const functions = require('firebase-functions');
+export * from './workout-scheduling.function';
+//const functions = require('firebase-functions');
 //import * as functions from "firebase-functions";
 //export * from './workout-scheduling.function';
 
