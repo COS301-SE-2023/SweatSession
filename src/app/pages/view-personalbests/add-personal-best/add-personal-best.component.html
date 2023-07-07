@@ -10,40 +10,37 @@
 </ion-header>
 
 <ion-content>
-
-  <form (ngSubmit)="addPersonalBest()">
+  <form [formGroup]="myForm" (ngSubmit)="addPersonalBest()">
     <ion-item>
       <ion-label>Exercise</ion-label>
-      <ion-select [(ngModel)]="selectedExercise">
+      <ion-select formControlName="selectedExercise">
         <ion-select-option *ngFor="let exercise of exerciseOptions" [value]="exercise">
           {{ exercise }}
         </ion-select-option>
       </ion-select>
     </ion-item>
+
     <ion-item>
       <ion-label>Weight Lifted</ion-label>
-      <ion-input type="number" [(ngModel)]="weight"></ion-input>
+      <ion-input type="number" formControlName="weight"></ion-input>
     </ion-item>
+
     <ion-item>
       <ion-label>Repetition Count</ion-label>
-      <ion-input type="number" [(ngModel)]="repetitions"></ion-input>
+      <ion-input type="number" formControlName="repetitions"></ion-input>
     </ion-item>
+
     <ion-item>
       <ion-label>Date Achieved</ion-label>
-      <ion-datetime displayFormat="MM, DD, YYYY" [(ngModel)]="date"></ion-datetime>
+      <ion-datetime displayFormat="MM, DD, YYYY" formControlName="date"></ion-datetime>
     </ion-item>
+
     <ion-item>
       <ion-label>Notes</ion-label>
-      <ion-textarea [(ngModel)]="notes"></ion-textarea>
+      <ion-textarea formControlName="notes"></ion-textarea>
     </ion-item>
+
     <ion-button expand="full" type="submit">Add Personal Best</ion-button>
   </form>
-  
-
+  {{ exerciseOptions | json }}
 </ion-content>
-
-
-
-  
-  
-

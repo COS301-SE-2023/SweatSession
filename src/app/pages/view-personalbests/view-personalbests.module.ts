@@ -8,6 +8,7 @@ import { ViewPersonalbestsPage } from './view-personalbests.page';
 import { AddPersonalBestComponent } from './add-personal-best/add-personal-best.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgChartsModule } from 'ng2-charts';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -17,7 +18,11 @@ import { NgChartsModule } from 'ng2-charts';
     CommonModule,
     FormsModule,
     IonicModule,
-    ViewPersonalbestsPageRoutingModule
+    ViewPersonalbestsPageRoutingModule,
+    ReactiveFormsModule
+  ],
+  exports: [
+    ReactiveFormsModule,
   ],
   declarations: 
               [ 

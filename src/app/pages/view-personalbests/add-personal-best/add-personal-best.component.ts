@@ -1,66 +1,41 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { IPersonalBest } from 'src/app/models';
-import {AngularFirestore} from "@angular/fire/compat/firestore";
-import { getAuth } from '@angular/fire/auth';
-import { PersonalbestRepository } from 'src/app/repository/personalbest.repository';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-add-personal-best',
   templateUrl: './add-personal-best.component.html',
   styleUrls: ['./add-personal-best.component.scss'],
 })
-export class AddPersonalBestComponent  implements OnInit {
-
-  selectedExercise: string;
-  weight: number;
-  repetitions: number;
-  date: string;
-  notes: string;
-
+export class AddPersonalBestComponent implements OnInit {
+  myForm: FormGroup;
   exerciseOptions: string[] = [];
 
-
-  constructor(private modalController: ModalController,
-                      private firestore:AngularFirestore,
-                      private personalbestRepository: PersonalbestRepository) { }
+  constructor(private modalController: ModalController) {
+    this.ngOnInit();
+    this.myForm = new FormGroup({
+      selectedExercise: new FormControl('', Validators.required),
+      weight: new FormControl(0, Validators.required),
+      repetitions: new FormControl(0, Validators.required),
+      date: new FormControl('', Validators.required),
+      notes: new FormControl('', Validators.required),
+    });
+  }
 
   ngOnInit(): void {
-    this.getExercises()
+    this.getExercises();
   }
 
   dismiss() {
     this.modalController.dismiss();
-  }  
+  }
 
   getExercises() {
-    return this.exerciseOptions = ['Push up' , 'Sit up' , 'rope Skips'];
+    this.exerciseOptions = ['Push up', 'Sit up', 'Rope Skips'];
+    console.log("Exersise options", this.exerciseOptions); // Add this line
   }
 
   addPersonalBest() {
-
-    const personalBest : IPersonalBest = {
-      id : this.firestore.createId(),
-      exercise: "Push ups",
-      // exercise: this.selectedExercise,
-      weight: this.weight,
-      matrix: 'kg',
-      repetitions: this.repetitions,
-      date: this.date,
-      notes: this.notes
-    };
-
-
-    this.personalbestRepository.addPersonalBest(personalBest);
-  
-
-
-    // Reset the form fields
-    this.selectedExercise = '';
-    this.weight = 0;
-    this.repetitions = 0;
-    this.date = '';
-    this.notes = '';
+    // Handle the form submission and personal best creation
   }
-
 }

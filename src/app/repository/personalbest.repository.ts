@@ -45,7 +45,8 @@ export class PersonalbestRepository
             },
         ];
         
-    
+        console.table(progress);
+        
         // Add the personal best to the exercise document
         return exerciseRef.set({
           exerciseName: personalBest.exercise,
