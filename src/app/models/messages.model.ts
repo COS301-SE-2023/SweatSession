@@ -13,12 +13,13 @@ export interface IMessage {
 //chat friends interfaces
 export interface IChatFriend {
     user: IProfileModel;
-    lastChat: IMessage;
+    lastChat?: IMessage;
 }
 
 //get chats interfaces
 export interface IGetMessages {
     userId?: string;
+    messageId?: string;
     otheruserId: string;
 }
 
@@ -50,7 +51,8 @@ export interface ISentMessage {
 //delete message interfaces
 export interface IDeleteMessage {
     userId: string;
-    otheruserId: string;
+    otheruserId?: string;
+    messageId: string;
 }
 
 export interface IDeletedMessage {
