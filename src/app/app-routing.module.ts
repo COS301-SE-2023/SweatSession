@@ -155,6 +155,10 @@ const routes: Routes = [
     data: { authGuardPipe: redirectLoggedOut },
     loadChildren: () => import('./pages/fitnessgoal-view/fitnessgoal-view.module').then( m => m.FitnessgoalViewPageModule)
   },
+  {
+    path: 'view-personalbests',
+    loadChildren: () => import('./pages/view-personalbests/view-personalbests.module').then( m => m.ViewPersonalbestsPageModule)
+  },
 ];
 @NgModule({
   imports: [
