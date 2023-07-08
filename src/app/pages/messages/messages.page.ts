@@ -1,5 +1,11 @@
+import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
+import { Select, Store } from '@ngxs/store';
+import { Observable, tap } from 'rxjs';
+import { GetChatFriends } from 'src/app/actions';
+import { IChatFriend } from 'src/app/models';
+import { MessagesState } from 'src/app/states';
 
 @Component({
   selector: 'app-home',
@@ -45,9 +51,14 @@ export class MessagesPage implements OnInit {
       timestamp: "05:35 AM"
     }
   ];
+
+ @Select(MessagesState.returnChatFriends) chatFriends$: Observable<IChatFriend[]>;
+ chatFriends: IChatFriend[] = [];
+ loading: boolean = false;
+ noFriends: boolean = true;
   
 
-  constructor(private nav:NavController) { }
+  constructor(private nav:NavController, private store:Store) { }
 
   ngOnInit() {
   }
@@ -56,4 +67,14 @@ export class MessagesPage implements OnInit {
     this.nav.navigateRoot("/chatroom");
   }
 
+  displayChatFriends() {
+    this.loading = false;
+    this.store.dispatch(new GetChatFriends());
+    this.chatFriends$.pipe(
+      tap((response)=> {
+        this.chatFriends = response;
+        this.chatFriends.length === 0 ? this.noFriends = true : this.noFriends = false;
+      })
+    )
+  }
 }
