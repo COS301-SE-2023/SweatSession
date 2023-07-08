@@ -34,7 +34,7 @@
     {{ item.description }}
   </ion-card-content>
 </ion-card> -->
-<ion-card *ngFor="let gym of gyms.results" (click)="selectGym(gym.name)">
+<ion-card *ngFor="let gym of gyms.results" (click)="selectGym(gym.name, gym.place_id)">
   <ng-container *ngIf="gym.business_status=='OPERATIONAL'">
     <img [src]="getPhotoUrl(gym?.photos?.[0]?.photo_reference)"  alt="Silhouette of mountains"/>
   <ion-card-header>

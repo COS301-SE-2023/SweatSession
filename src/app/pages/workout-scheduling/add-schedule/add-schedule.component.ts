@@ -13,6 +13,7 @@ import { GymsearchComponent } from '../../search/gymsearch/gymsearch.component';
 })
 export class AddScheduleComponent  implements OnInit {
   schedule:IWorkoutScheduleModel={};
+  placeId: string;
 
   constructor(private popoverController: PopoverController, private store: Store, private modalController: ModalController) { }
 
@@ -25,6 +26,9 @@ export class AddScheduleComponent  implements OnInit {
   addSchedule() {
     this.setFields();
     this.store.dispatch(new AddWorkoutSchedule(this.schedule));
+    // this.store.dispatch(new AddWorkoutSchedule(this.placeId));
+    console.log(this.schedule);
+    console.log(this.placeId);
   }
 
   isDateTimeValid(): boolean {
@@ -80,9 +84,10 @@ export class AddScheduleComponent  implements OnInit {
   
     // Handle the location selection event when the modal is dismissed
     const { data } = await modal.onDidDismiss();
-    if (data && data.selectedGym) {
+    if (data && data.selectedGym && data.placeId) {
       console.log(data);
       this.schedule.location = data.selectedGym;
+      this.placeId = data.place_id;
     }
   }
 }

@@ -30,7 +30,7 @@ export class GymsearchComponent implements OnInit {
    gymsSubscription: Subscription;
    gyms = { 
       results:[
-         {name:"default",business_status:"default",photos:[{photo_reference:"default"}],rating:"default",vicinity:"default"},
+         {name:"default",business_status:"default",photos:[{photo_reference:"default"}],rating:"default",vicinity:"default", place_id:"default"},
       ]
    }
 
@@ -162,8 +162,9 @@ export class GymsearchComponent implements OnInit {
       this.modalController.dismiss();
    }
 
-   selectGym(name: string) {
-      this.modalController.dismiss({ selectedGym: name });
+   selectGym(name: string, chosenPlaceId: string) {
+      this.modalController.dismiss({ selectedGym: name, placeId:chosenPlaceId });
+      // alert("gym with name: "+name+"place id: "+place_id);
    }
 
    getCurrentLocation(): Promise<GeolocationCoordinates> {
