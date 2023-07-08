@@ -20,6 +20,7 @@
           <leaderboard-user *ngFor="let user of friends; let i=index"
             [user]="user"
             [position]="i+1"
+            [isCurrentUser]="isCurrentUser(user)"
           >
           </leaderboard-user>
         </div>
