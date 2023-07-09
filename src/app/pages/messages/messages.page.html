@@ -33,23 +33,13 @@
       <ion-content>
         <ion-searchbar placeholder="Search" (click)="modal.setCurrentBreakpoint(0.75)"></ion-searchbar>
         <ion-list>
-          <ion-item lines="none">
+          <ion-item  *ngFor="let friend of friends" lines="none">
             <ion-avatar slot="start">
-              <ion-img src="https://i.pravatar.cc/300?u=b"></ion-img>
+              <ion-img [src]="friend.profileURL"></ion-img>
             </ion-avatar>
             <ion-label>
-              <h2>Connor Smith</h2>
-              <p>Sales Rep</p>
-            </ion-label>
-          </ion-item>
-
-          <ion-item lines="none">
-            <ion-avatar slot="start">
-              <ion-img src="https://i.pravatar.cc/300?u=b"></ion-img>
-            </ion-avatar>
-            <ion-label>
-              <h2>Connor Smith</h2>
-              <p>Sales Rep</p>
+              <h2>{{friend.displayName}}</h2>
+              <p>{{friend.bio}}</p>
             </ion-label>
           </ion-item>
         </ion-list>
