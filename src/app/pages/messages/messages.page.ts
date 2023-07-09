@@ -2,9 +2,9 @@ import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { Select, Store } from '@ngxs/store';
-import { Observable, tap } from 'rxjs';
-import { GetChatFriends } from 'src/app/actions';
-import { IChatFriend } from 'src/app/models';
+import { Observable, switchMap, tap } from 'rxjs';
+import { GetChatFriends, GetFriendsProfiles } from 'src/app/actions';
+import { IChatFriend, IFriendsModel, IProfileModel } from 'src/app/models';
 import { MessagesState } from 'src/app/states';
 
 @Component({
@@ -53,7 +53,9 @@ export class MessagesPage implements OnInit {
   ];
 
  @Select(MessagesState.returnChatFriends) chatFriends$: Observable<IChatFriend[]>;
+ @Select(MessagesState.returnFriendsProfiles) friends$: Observable<IProfileModel[]>;
  chatFriends: IChatFriend[] = [];
+ friends: IProfileModel[] = [];
  loading: boolean = false;
  noFriends: boolean = true;
   
@@ -61,6 +63,7 @@ export class MessagesPage implements OnInit {
   constructor(private nav:NavController, private store:Store) { }
 
   ngOnInit() {
+    this. displayChatFriends();
   }
 
   openChat(chat:any) {
@@ -70,11 +73,20 @@ export class MessagesPage implements OnInit {
   displayChatFriends() {
     this.loading = false;
     this.store.dispatch(new GetChatFriends());
+    this.store.dispatch(new GetFriendsProfiles());
+    
     this.chatFriends$.pipe(
       tap((response)=> {
         this.chatFriends = response;
+        console.log(response);
         this.chatFriends.length === 0 ? this.noFriends = true : this.noFriends = false;
-      })
+      }),
     )
+
+    this.friends$.subscribe((response)=>{
+        this.friends = response
+        console.log(response);
+        console.table(this.friends)
+    })
   }
 }
