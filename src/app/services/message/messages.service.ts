@@ -24,4 +24,8 @@ export class MessagesService {
   async deleteMessage(request: IDeleteMessage) {
     return this.repository.deleteMessage(request);
   }
+
+  async getProfile(request: string) {
+    return this.repository.getProfile(request);
+  }
 }
