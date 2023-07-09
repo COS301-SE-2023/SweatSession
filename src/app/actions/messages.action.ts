@@ -23,3 +23,7 @@ export class StageChatFriend {
     static readonly type = "[messages] sage chat friend";
     constructor(public payload: string) {}
 }
+
+export class GetFriendsProfiles {
+    static readonly type = "[messages] get friends profiles";
+}
