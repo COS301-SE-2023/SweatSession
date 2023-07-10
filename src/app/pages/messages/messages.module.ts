@@ -10,7 +10,7 @@ import { MessagesPage } from './messages.page';
 import { ChatroomComponent } from './chatroom/chatroom.component';
 import { ChatComponent } from './chat/chat.component';
 import { BackButtonDirectiveModule } from 'src/app/directives';
-import { MessageStateModule } from 'src/app/states';
+import { AuthModule, MessageStateModule } from 'src/app/states';
 
 @NgModule({
   imports: [
@@ -19,7 +19,8 @@ import { MessageStateModule } from 'src/app/states';
     IonicModule,
     MessagesPageRoutingModule,
     BackButtonDirectiveModule,
-    MessageStateModule
+    MessageStateModule,
+    AuthModule
   ],
   declarations: [MessagesPage, ChatroomComponent, ChatComponent]
 })

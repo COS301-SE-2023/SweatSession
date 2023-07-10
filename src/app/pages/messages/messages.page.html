@@ -33,7 +33,7 @@
       <ion-content>
         <ion-searchbar placeholder="Search" (click)="modal.setCurrentBreakpoint(0.75)"></ion-searchbar>
         <ion-list>
-          <ion-item  *ngFor="let friend of friends" lines="none" (click)="stageUser(friend)">
+          <ion-item  *ngFor="let friend of friends" lines="none" (click)="stageUser(friend,modal)">
             <ion-avatar slot="start">
               <ion-img [src]="friend.profileURL"></ion-img>
             </ion-avatar>
