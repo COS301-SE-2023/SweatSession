@@ -49,25 +49,27 @@ import { GetChatFriends } from "../actions";
             map((snapshot) => {
                 let chatFriends: IChatFriend[] = [];
 
-                snapshot.forEach((doc)=> {
-                    const chatFriend:any = doc.payload.doc.data();
-                   this.getProfile(chatFriend.userId).then((response)=>{
+                snapshot.forEach(async (doc)=> {
+                    const chatFriendData:any = doc.payload.doc.data();
+                   this.getProfile(chatFriendData.userId).then((response)=>{
                     let chatFriend: IChatFriend = {
                         user: response
                     }
 
                     const getMessage: IGetMessages = {
                         userId: response.userId,
-                        messageId: "",
+                        messageId: chatFriendData.lastChatId,
                         otheruserId: request.userId!
                     }
                     this.getChat(getMessage).then((response)=>{
                         chatFriend.lastChat = response;
                         chatFriends.push(chatFriend);
+                        console.table(chatFriends)
                     })
                    })
                 })
 
+                console.table(chatFriends);
                 const response:IGotChatsFriends = {
                     chatFriends: chatFriends,
                     validate: true
@@ -93,6 +95,8 @@ import { GetChatFriends } from "../actions";
 
                     messages.push(message);
                 })
+
+                console.table(messages);
  
                 return {
                     chats: messages,
@@ -129,9 +133,10 @@ import { GetChatFriends } from "../actions";
     }
 
     async getChat(request: IGetMessages) {
-        const messageDoc = this.firestore.doc<IMessage>(`messages/${request.userId}/${request.otheruserId}/${request.messageId}`).get();
+        console.log(`messages/${request.userId}/${request.otheruserId}/${request.messageId}`);
+        const messageDoc = this.firestore.doc<IMessage>(`messages/${request.otheruserId}/${request.userId}/${request.messageId}`).get();
         const message: IMessage = (await lastValueFrom(messageDoc)).data()!;
-
+       
         return message;
     }
   }
