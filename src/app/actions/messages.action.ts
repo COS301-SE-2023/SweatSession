@@ -6,7 +6,7 @@ export class GetChatFriends {
 
 export class GetMessages {
     static readonly type = "[messages] get messages";
-    constructor(public payload: IGetMessages) {}
+    constructor() {}
 }
 
 export class SendMessage {
