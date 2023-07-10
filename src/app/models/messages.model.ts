@@ -3,7 +3,7 @@ import { IProfileModel } from "./profile.model";
 
 //chat interface
 export interface IMessage {
-    id: string;
+    id?: string;
     senderId?: string;
     receiverId?: string;
     date?: Timestamp;

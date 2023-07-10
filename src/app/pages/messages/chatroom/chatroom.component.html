@@ -7,15 +7,21 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
- 
+<ion-content>
+  <ion-item lines="none" *ngFor="let chat of chats" slot="currentUserId == chat.senderId ? end : start">
+    <ion-card>
+      <ion-card-content>
+        {{chat.text}}
+      </ion-card-content>
+    </ion-card>
+  </ion-item>
 </ion-content>
 
 <ion-footer>
   <ion-toolbar>
    <ion-item lines="none">
-    <ion-input placeholder="Type a message"></ion-input>
-    <ion-icon name="send"></ion-icon>
+    <ion-input placeholder="Type a message" [(ngModel)]="message.text"></ion-input>
+    <ion-icon name="send" (click)="sendMessage()"></ion-icon>
    </ion-item>
   </ion-toolbar>
 </ion-footer>
