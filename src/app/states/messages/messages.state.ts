@@ -42,6 +42,7 @@ export class MessagesState {
 
             return (await this.service.getChatFriends(request)).pipe(
                 tap((response)=>{
+                    console.table(response);
                     ctx.patchState({
                         chatFriends: response.chatFriends
                     })
@@ -79,6 +80,7 @@ export class MessagesState {
         const currentUserId = await this.authApi.getCurrentUserId();
         if(currentUserId) {
             payload.senderId = currentUserId;
+            payload.receiverId = sessionStorage.getItem('chatFriend')!;
             const request: ISendMessage = {
                 chat: payload
             }
@@ -94,7 +96,7 @@ export class MessagesState {
         if(currentUserId) {
            const request:IDeleteMessage = {
                 userId: currentUserId,
-                messageId: payload.id
+                messageId: payload.id!
             }
 
             if(currentUserId === payload.senderId)
@@ -129,7 +131,6 @@ export class MessagesState {
             return (await this.friendsService.getFriends(request)).pipe(
                 tap((response)=>{
                     const friends: IFriendsModel[] = response.friends;
-                    console.table(friends);
                     let friendsProfiles:IProfileModel[] = [];
 
                     friends.forEach((friend)=>{
