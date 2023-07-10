@@ -5,7 +5,7 @@ import { Select, Store } from '@ngxs/store';
 import { Observable, switchMap, tap } from 'rxjs';
 import { GetChatFriends, GetFriendsProfiles, StageChatFriend } from 'src/app/actions';
 import { IChatFriend, IFriendsModel, IProfileModel } from 'src/app/models';
-import { MessagesState } from 'src/app/states';
+import { AuthState, MessagesState } from 'src/app/states';
 
 @Component({
   selector: 'app-home',
@@ -78,7 +78,6 @@ export class MessagesPage implements OnInit {
     this.chatFriends$.pipe(
       tap((response)=> {
         this.chatFriends = response;
-        console.log(response);
         this.chatFriends.length === 0 ? this.noFriends = true : this.noFriends = false;
       }),
     )
@@ -88,7 +87,8 @@ export class MessagesPage implements OnInit {
     })
   }
 
-  stageUser(user: IProfileModel) {
+  stageUser(user: IProfileModel, model:any) {
+    model.dismiss();
     this.store.dispatch(new StageChatFriend(user.userId!))
   }
 }
