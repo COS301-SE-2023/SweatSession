@@ -53,12 +53,13 @@ export class MessagesState {
     }
 
     @Action(GetMessages)
-    async getMessages (ctx: StateContext<MessagesStateModel>, {payload}: GetMessages) {
+    async getMessages (ctx: StateContext<MessagesStateModel>) {
         const currentUserId = await this.authApi.getCurrentUserId();
         if(currentUserId) {
+                const otheruserId = sessionStorage.getItem('chatFriend');
                 const request: IGetMessages ={
-                    userId: payload.userId,
-                    otheruserId: payload.otheruserId
+                    userId: currentUserId,
+                    otheruserId: otheruserId!
                 }
                 return(await this.service.getMessages(request)).pipe(
                     tap((response)=>{
@@ -112,6 +113,8 @@ export class MessagesState {
         ctx.patchState({
             chatFriend: payload
         })
+
+        return ctx.dispatch(new Navigate(['chatroom']));
     }
 
     @Action(GetFriendsProfiles)
@@ -123,7 +126,7 @@ export class MessagesState {
                 userId: currentUserId
             };
 
-            (await this.friendsService.getFriends(request)).pipe(
+            return (await this.friendsService.getFriends(request)).pipe(
                 tap((response)=>{
                     const friends: IFriendsModel[] = response.friends;
                     console.table(friends);
@@ -132,12 +135,6 @@ export class MessagesState {
                     friends.forEach((friend)=>{
                         this.service.getProfile(friend.userId!).then((response)=>{
                             friendsProfiles.push(response);
-                            ctx.setState({
-                                ...ctx.getState(),
-                                friendProfiles: [...ctx.getState().friendProfiles!, response],
-                                f: [...ctx.getState().f!,friend]
-                            })
-
                         })
                     })
 
@@ -148,6 +145,7 @@ export class MessagesState {
                 })
             );
         }
+        return;
     }
 
     @Selector()

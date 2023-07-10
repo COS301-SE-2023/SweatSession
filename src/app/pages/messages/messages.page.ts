@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { Select, Store } from '@ngxs/store';
 import { Observable, switchMap, tap } from 'rxjs';
-import { GetChatFriends, GetFriendsProfiles } from 'src/app/actions';
+import { GetChatFriends, GetFriendsProfiles, StageChatFriend } from 'src/app/actions';
 import { IChatFriend, IFriendsModel, IProfileModel } from 'src/app/models';
 import { MessagesState } from 'src/app/states';
 
@@ -85,8 +85,10 @@ export class MessagesPage implements OnInit {
 
     this.friends$.subscribe((response)=>{
         this.friends = response
-        console.log(response);
-        console.table(this.friends)
     })
+  }
+
+  stageUser(user: IProfileModel) {
+    this.store.dispatch(new StageChatFriend(user.userId!))
   }
 }
