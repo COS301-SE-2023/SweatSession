@@ -8,14 +8,14 @@
       </ion-header>
       
       <ion-list>
-        <ion-item *ngFor="let chat of chats" (click)="openChat(chat)" lines="none">
+        <ion-item *ngFor="let chatFriend of chatFriends" (click)="openChat(chatFriend)" lines="none">
           <ion-avatar slot="start">
-            <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+            <img alt="Silhouette of a person's head" [src]="chatFriend.user.profileURL!" />
           </ion-avatar>
           <ion-label>
-            <h2>{{ chat.name }}</h2>
-            <p>{{ chat.lastMessage }}</p>
-            <p class="timestamp">{{ chat.timestamp }}</p>
+            <h2>{{ chatFriend.user.displayName! }}</h2>
+            <p>{{ chatFriend.lastChat!.text }}</p>
+            <!-- <p class="timestamp">{{ chat.timestamp }}</p> -->
           </ion-label>
         </ion-item>
       </ion-list>
@@ -33,7 +33,7 @@
       <ion-content>
         <ion-searchbar placeholder="Search" (click)="modal.setCurrentBreakpoint(0.75)"></ion-searchbar>
         <ion-list>
-          <ion-item  *ngFor="let friend of friends" lines="none">
+          <ion-item  *ngFor="let friend of friends" lines="none" (click)="stageUser(friend)">
             <ion-avatar slot="start">
               <ion-img [src]="friend.profileURL"></ion-img>
             </ion-avatar>
