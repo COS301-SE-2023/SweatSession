@@ -4,7 +4,7 @@
   <h1 class="center2">SweatSession-Bot</h1>
   <ion-list>
     <ion-item lines="none" *ngFor="let message of messages">
-      <p slot="end" *ngIf="message.sender === 'SS-bot'">{{": "}}{{message.sender}}</p>
+      <p slot="end" *ngIf="message.sender === 'SS-bot'">{{":"}}{{message.sender}}</p>
       <p *ngIf="message.sender === 'user'">{{message.sender}}{{": "}}</p>
       <div [ngClass]="{'user-message': message.sender === 'user', 'bot-message': message.sender === 'SS-bot'}">
         {{ message.text }}
