@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-item lines="none">
-      <backbutton></backbutton>
+      <backbutton (click)="removeSession()"></backbutton>
       <ion-title>
         <ion-item lines="none">
           <ion-avatar>
@@ -23,18 +23,17 @@
         <div class="message-bubble">
           {{ message.text }}
         </div>
-        <div class="message-timestamp">{{ message.date?.toDate() | date:'MMM d, hh:mm a' }}</div>
-
+        <div class="message-timestamp">
+          {{ message.date?.toDate() | date:'MMM d, hh:mm a' }}
+        </div>
       </div>
     </div>
   </div>
 </ion-content>
 
 <ion-footer>
-  <ion-toolbar>
-   <ion-item lines="none">
+  <ion-item lines="none">
     <ion-input placeholder="Type a message" [(ngModel)]="message.text"></ion-input>
     <ion-icon name="send" (click)="sendMessage()"></ion-icon>
-   </ion-item>
-  </ion-toolbar>
+  </ion-item>
 </ion-footer>

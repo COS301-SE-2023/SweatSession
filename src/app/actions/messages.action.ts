@@ -31,3 +31,7 @@ export class GetFriendsProfiles {
 export class GetChatFriend {
     static readonly type = "[messages] get chat friend";
 }
+
+export class RemoveChatFriendSession {
+    static readonly type  = "[messages] remove chat friend from session storage";
+}
