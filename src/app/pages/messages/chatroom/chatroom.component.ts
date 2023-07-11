@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
 import { Timestamp } from 'firebase/firestore';
 import { Observable, tap, switchMap } from 'rxjs';
-import { GetChatFriend, GetMessages, SendMessage, SubscribeToAuthState } from 'src/app/actions';
+import { GetChatFriend, GetMessages, RemoveChatFriendSession, SendMessage, SubscribeToAuthState } from 'src/app/actions';
 import { IMessage, IProfileModel } from 'src/app/models';
 import { AuthState, MessagesState } from 'src/app/states';
 
@@ -53,13 +53,7 @@ export class ChatroomComponent  implements OnInit {
     }
   }
 
-  toDate(chat: IMessage) {
-    const date = chat.date?.toDate();
-    const day = date?.getDay();
-    const month = date?.getMonth();
-    const year = date?.getFullYear()
-    const time = date
-
-    return `${year}-${month}-${day}`;
+  removeSession() {
+    this.store.dispatch(new RemoveChatFriendSession());
   }
 }
