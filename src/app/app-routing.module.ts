@@ -160,7 +160,7 @@ const routes: Routes = [
     path: 'chatroom',
     canActivate: [AuthGuard],
     data: { authGuardPipe: redirectLoggedOut },
-    component: ChatroomComponent
+    loadChildren: () => import('./pages/messages/chatroom/chatroom.module').then( m => m.ChatroomComponentModule )
   }
 ];
 @NgModule({
