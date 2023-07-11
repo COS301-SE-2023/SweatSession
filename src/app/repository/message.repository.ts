@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { IMessage, IDeleteMessage, IGetChatFriends, IGetMessages, IGotMessages, ISendMessage, IChatFriend, IProfileModel, IDeletedMessage, IGotChatsFriends } from "../models";
-import { AngularFirestore } from "@angular/fire/compat/firestore";
+import { AngularFirestore, AngularFirestoreCollection } from "@angular/fire/compat/firestore";
 import { Observable, lastValueFrom, map } from "rxjs";
 import { GetChatFriends } from "../actions";
 
@@ -82,7 +82,8 @@ import { GetChatFriends } from "../actions";
     }
   
     getMessages(request: IGetMessages): Observable<IGotMessages> {
-        const messageCollection = this.firestore.collection<IMessage>(`messages/${request.userId}/${request.otheruserId}`);
+        const messageCollection:AngularFirestoreCollection<IMessage> = this.firestore.collection<IMessage>(`messages/${request.userId}/${request.otheruserId}`,(ref) =>
+        ref.orderBy('date', 'asc'));
 
         return messageCollection.snapshotChanges().pipe(
             map((snapshot) => {
@@ -95,9 +96,7 @@ import { GetChatFriends } from "../actions";
 
                     messages.push(message);
                 })
-
-                console.table(messages);
- 
+                
                 return {
                     chats: messages,
                     validate: true
@@ -105,7 +104,7 @@ import { GetChatFriends } from "../actions";
             })
         )
     }
-  
+
     deleteMessage(request: IDeleteMessage) {
        try {
         const messageDoc = this.firestore.doc(`messages/${request.userId}/${request.otheruserId}/${request.messageId}`).delete();

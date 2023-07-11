@@ -1,3 +1,4 @@
+import { time } from 'console';
 import { Component, OnInit } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
 import { Timestamp } from 'firebase/firestore';
@@ -32,10 +33,9 @@ export class ChatroomComponent  implements OnInit {
       tap((response)=> this.currentUserId = response),
       switchMap(()=>this.chats$),
       tap((response)=>{
-        console.log(response);
         this.chats = response;
       })
-    )
+    ).subscribe();
   }
 
   sendMessage() {
@@ -44,5 +44,15 @@ export class ChatroomComponent  implements OnInit {
       this.store.dispatch(new SendMessage(this.message))
       this.message = {};
     }
+  }
+
+  toDate(chat: IMessage) {
+    const date = chat.date?.toDate();
+    const day = date?.getDay();
+    const month = date?.getMonth();
+    const year = date?.getFullYear()
+    const time = date
+
+    return `${year}-${month}-${day}`;
   }
 }
