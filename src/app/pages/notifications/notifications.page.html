@@ -10,7 +10,7 @@
 
 
 <ion-content class="main">
-  <ion-title class="flex-center3" style="display:inline-block; background: none; " ><ion-button color="light" size="default" (click)="clearNotifications()">Clear All</ion-button></ion-title>
+  <ion-title *ngIf="noticeamount > 0" class="flex-center3" style="display:inline-block; background: none; " ><ion-button color="light" size="default" (click)="clearNotifications()">Clear All</ion-button></ion-title>
     <br>
     <br>
     
