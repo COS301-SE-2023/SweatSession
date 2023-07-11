@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Action, Selector, State, StateContext } from "@ngxs/store";
 import { IMessage, IChatFriend, IGetChatFriends, IGetMessages, ISendMessage, IDeleteMessage, IProfileModel, IFriendsModel } from "src/app/models";
-import { DeleteMessage, GetMessages, SendMessage, GetChatFriends, StageChatFriend, GetFriendsProfiles, GetChatFriend } from 'src/app/actions';
+import { DeleteMessage, GetMessages, SendMessage, GetChatFriends, StageChatFriend, GetFriendsProfiles, GetChatFriend, RemoveChatFriendSession } from 'src/app/actions';
 import { AuthApi } from "../auth";
 import { FriendsService, MessagesService, OtheruserService } from "src/app/services";
 import { tap } from "rxjs";
@@ -44,7 +44,7 @@ export class MessagesState {
 
             return (await this.service.getChatFriends(request)).pipe(
                 tap((response)=>{
-                    console.table(response);
+                    console.log(response)
                     ctx.patchState({
                         chatFriends: response.chatFriends
                     })
@@ -167,6 +167,11 @@ export class MessagesState {
             );
         }
         return;
+    }
+
+    @Action(RemoveChatFriendSession)
+    async removeChatFriendSession() {
+        sessionStorage.removeItem('chatFriend');
     }
 
     @Selector()

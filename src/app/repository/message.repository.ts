@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { IMessage, IDeleteMessage, IGetChatFriends, IGetMessages, IGotMessages, ISendMessage, IChatFriend, IProfileModel, IDeletedMessage, IGotChatsFriends } from "../models";
-import { AngularFirestore, AngularFirestoreCollection } from "@angular/fire/compat/firestore";
-import { Observable, lastValueFrom, map } from "rxjs";
+import { AngularFirestore, AngularFirestoreCollection, DocumentChangeAction } from "@angular/fire/compat/firestore";
+import { Observable, combineLatest, from, last, lastValueFrom, map, mergeMap, of, switchMap, toArray } from "rxjs";
 import { GetChatFriends } from "../actions";
 
 @Injectable({
@@ -42,45 +42,91 @@ import { GetChatFriends } from "../actions";
             })
     }
 
-    async getChatFriends(request: IGetChatFriends) {
-        const chatFriendsCollection = this.firestore.collection(`users/${request.userId}/chatFriends`);
+    // getChatFriends(request: IGetChatFriends): Observable<IGotChatsFriends> {
+    //     const chatFriendsCollection = this.firestore.collection(`users/${request.userId}/chatFriends`);
 
-        return chatFriendsCollection.snapshotChanges().pipe(
-            map((snapshot) => {
-                let chatFriends: IChatFriend[] = [];
+    //     return chatFriendsCollection.snapshotChanges().pipe(
+    //         map((snapshot) => {
+    //             let chatFriends: IChatFriend[] = [];
 
-                snapshot.forEach(async (doc)=> {
-                    const chatFriendData:any = doc.payload.doc.data();
-                   this.getProfile(chatFriendData.userId).then((response)=>{
-                    let chatFriend: IChatFriend = {
-                        user: response
-                    }
+    //             snapshot.forEach(async (doc)=> {
+    //                 const chatFriendData:any = doc.payload.doc.data();
+    //                this.getProfile(chatFriendData.userId).then((response)=>{
+    //                 let chatFriend: IChatFriend = {
+    //                     user: response
+    //                 }
 
-                    const getMessage: IGetMessages = {
-                        userId: response.userId,
-                        messageId: chatFriendData.lastChatId,
-                        otheruserId: request.userId!
-                    }
-                    this.getChat(getMessage).then((response)=>{
-                        chatFriend.lastChat = response;
-                        chatFriends.push(chatFriend);
-                        console.table(chatFriends)
-                    })
-                   })
-                })
+    //                 const getMessage: IGetMessages = {
+    //                     userId: response.userId,
+    //                     messageId: chatFriendData.lastChatId,
+    //                     otheruserId: request.userId!
+    //                 }
+    //                 this.getChat(getMessage).then((response)=>{
+    //                     chatFriend.lastChat = response;
+    //                     chatFriends.push(chatFriend);
+    //                     console.table(chatFriends)
+    //                 })
+    //                })
+    //             })
 
-                console.table(chatFriends);
-                const response:IGotChatsFriends = {
-                    chatFriends: chatFriends,
-                    validate: true
-                }
+    //             console.table(chatFriends);
+    //             const response:IGotChatsFriends = {
+    //                 chatFriends: chatFriends,
+    //                 validate: true
+    //             }
                 
-                return response;
-            })
-        )
+    //             return response;
+    //         })
+    //     )
   
-    }
-  
+    // }
+    
+    getChatFriends(request: IGetChatFriends): Observable<IGotChatsFriends> {
+        const chatFriendsCollection = this.firestore.collection(`users/${request.userId}/chatFriends`);
+      
+        return chatFriendsCollection.snapshotChanges().pipe(
+          switchMap((snapshot: DocumentChangeAction<any>[]) => {
+            const chatFriends$: Observable<IChatFriend>[] = snapshot.map((doc) => {
+              const chatFriendData = doc.payload.doc.data();
+              return from(this.getProfile(chatFriendData.userId)).pipe(
+                mergeMap((response) => {
+                  const getMessage: IGetMessages = {
+                    userId: response.userId,
+                    messageId: chatFriendData.lastChatId,
+                    otheruserId: request.userId!
+                  };
+        
+                  return from(this.getChat(getMessage)).pipe(
+                    map((chat) => {
+                      const chatFriend: IChatFriend = {
+                        user: response,
+                        lastChat: chat
+                      };
+                      return chatFriend;
+                    })
+                  );
+                })
+              );
+            });
+      
+            return chatFriends$.length > 0 ? combineLatest(chatFriends$) : of([]);
+          }),
+          toArray(),
+          map((chatFriends: IChatFriend[][]) => {
+            const flattenedChatFriends = chatFriends.reduce((acc, curr) => acc.concat(curr), []);
+      
+            console.table(flattenedChatFriends);
+      
+            const response: IGotChatsFriends = {
+              chatFriends: flattenedChatFriends,
+              validate: true
+            };
+      
+            return response;
+          })
+        );
+      }
+    
     getMessages(request: IGetMessages): Observable<IGotMessages> {
         const messageCollection:AngularFirestoreCollection<IMessage> = this.firestore.collection<IMessage>(`messages/${request.userId}/${request.otheruserId}`,(ref) =>
         ref.orderBy('date', 'asc'));
@@ -132,7 +178,6 @@ import { GetChatFriends } from "../actions";
     }
 
     async getChat(request: IGetMessages) {
-        console.log(`messages/${request.userId}/${request.otheruserId}/${request.messageId}`);
         const messageDoc = this.firestore.doc<IMessage>(`messages/${request.otheruserId}/${request.userId}/${request.messageId}`).get();
         const message: IMessage = (await lastValueFrom(messageDoc)).data()!;
        
