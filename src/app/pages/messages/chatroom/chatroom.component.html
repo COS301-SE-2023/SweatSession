@@ -2,7 +2,14 @@
   <ion-toolbar>
     <ion-item lines="none">
       <backbutton></backbutton>
-      <ion-title>user here</ion-title>
+      <ion-title>
+        <ion-item lines="none">
+          <ion-avatar>
+            <ion-img [src]="friendProfile.profileURL" alt="profile pic here"></ion-img>
+          </ion-avatar>
+          <ion-text> {{friendProfile.displayName}}</ion-text>
+        </ion-item>
+      </ion-title>
     </ion-item>
   </ion-toolbar>
 </ion-header>

@@ -3,8 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
 import { Timestamp } from 'firebase/firestore';
 import { Observable, tap, switchMap } from 'rxjs';
-import { GetMessages, SendMessage, SubscribeToAuthState } from 'src/app/actions';
-import { IMessage } from 'src/app/models';
+import { GetChatFriend, GetMessages, SendMessage, SubscribeToAuthState } from 'src/app/actions';
+import { IMessage, IProfileModel } from 'src/app/models';
 import { AuthState, MessagesState } from 'src/app/states';
 
 @Component({
@@ -16,9 +16,11 @@ export class ChatroomComponent  implements OnInit {
 
   @Select(MessagesState.returnChats) chats$: Observable<IMessage[]>;
   @Select(AuthState.getCurrUserId) userId$!: Observable<string>;
+  @Select(MessagesState.returnChatFriendProfile) friendProfile$: Observable<IProfileModel>;
   chats: IMessage[] = [];
   currentUserId: string = "";
   message: IMessage = {text: ''};
+  friendProfile: IProfileModel={};
 
 
   constructor(private store: Store) { }
@@ -26,11 +28,16 @@ export class ChatroomComponent  implements OnInit {
   ngOnInit() {this.getChatMessages()}
 
   getChatMessages() {
+    this.store.dispatch(new GetChatFriend());
     this.store.dispatch(new GetMessages());
     this.store.dispatch(new SubscribeToAuthState());
 
     this.userId$.pipe(
       tap((response)=> this.currentUserId = response),
+      switchMap(()=>this.friendProfile$),
+      tap((response)=>{
+        this.friendProfile = response;
+      }),
       switchMap(()=>this.chats$),
       tap((response)=>{
         this.chats = response;
