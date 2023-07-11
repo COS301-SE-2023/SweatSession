@@ -10,7 +10,7 @@
 
 
 <ion-content class="main">
-  <ion-title *ngIf="noticeamount > 0" class="flex-center3" style="display:inline-block; background: none; " ><ion-button color="light" size="default" (click)="clearNotifications()">Clear All</ion-button></ion-title>
+  <ion-title *ngIf="noticeamount > 0"class="flex-center3" style="display:inline-block; background: none; " ><ion-button color="light" size="default" (click)="clearNotifications()">Clear All</ion-button></ion-title>
     <br>
     <br>
     
@@ -30,7 +30,7 @@
 </ion-card-content>
 <div class="flex-center3" *ngIf="notice.message == 'Sent you a Friend Request!'">
 <ion-button size="small" (click)="addFriend(notice)">Accept</ion-button>
-<ion-button size="small" (click)="clearNotification(notice.id!); rejectFriendRequest(notice.senderid! , notice.senttoid!);">Reject</ion-button>
+<ion-button size="small" (click)="clearNotification(notice.id!); rejectFriendRequest(notice , notice.senderid! , notice.senttoid!);">Reject</ion-button>
 </div>
 <ion-label>{{"&nbsp;".repeat(87)}}{{notice.sentdate}}</ion-label>
 
