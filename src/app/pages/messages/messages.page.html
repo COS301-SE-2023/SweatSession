@@ -15,7 +15,7 @@
           <ion-label>
             <h2>{{ chatFriend.user.displayName! }}</h2>
             <p>{{ chatFriend.lastChat!.text }}</p>
-            <!-- <p class="timestamp">{{ chat.timestamp }}</p> -->
+            <p class="timestamp">{{ chatFriend.lastChat!.date?.toDate() | date:'MMM d, hh:mm a' }}</p>
           </ion-label>
         </ion-item>
       </ion-list>
