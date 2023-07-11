@@ -1,14 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
 import { IonicModule } from '@ionic/angular';
-
-import { MessagesPageRoutingModule } from './messages-routing.module';
-
-import { MessagesPage } from './messages.page';
-import { ChatroomComponent } from './chatroom/chatroom.component';
-import { ChatComponent } from './chat/chat.component';
+import { ChatroomComponentRoutingModule } from './chatroom-routing.module';
+import { ChatroomComponent } from './chatroom.component';
 import { BackButtonDirectiveModule } from 'src/app/directives';
 import { AuthModule, MessageStateModule } from 'src/app/states';
 
@@ -17,11 +12,11 @@ import { AuthModule, MessageStateModule } from 'src/app/states';
     CommonModule,
     FormsModule,
     IonicModule,
-    MessagesPageRoutingModule,
     BackButtonDirectiveModule,
     MessageStateModule,
-    AuthModule
+    AuthModule,
+    ChatroomComponentRoutingModule
   ],
-  declarations: [MessagesPage, ChatComponent]
+  declarations: [ChatroomComponent]
 })
-export class MessagesPageModule {}
+export class ChatroomComponentModule {}
