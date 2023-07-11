@@ -8,13 +8,17 @@
 </ion-header>
 
 <ion-content>
-  <ion-item lines="none" *ngFor="let chat of chats" slot="currentUserId == chat.senderId ? end : start">
-    <ion-card>
-      <ion-card-content>
-        {{chat.text}}
-      </ion-card-content>
-    </ion-card>
-  </ion-item>
+  <div class="chat-container">
+    <div class="message" *ngFor="let message of chats" [ngClass]="{ 'message-sent': message.senderId === currentUserId, 'message-received': message.senderId !== currentUserId }">
+      <div class="message-content">
+        <div class="message-bubble">
+          {{ message.text }}
+        </div>
+        <div class="message-timestamp">{{ message.date?.toDate() | date:'MMM d, hh:mm a' }}</div>
+
+      </div>
+    </div>
+  </div>
 </ion-content>
 
 <ion-footer>
