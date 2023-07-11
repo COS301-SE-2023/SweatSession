@@ -27,3 +27,7 @@ export class StageChatFriend {
 export class GetFriendsProfiles {
     static readonly type = "[messages] get friends profiles";
 }
+
+export class GetChatFriend {
+    static readonly type = "[messages] get chat friend";
+}

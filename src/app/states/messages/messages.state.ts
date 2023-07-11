@@ -1,9 +1,9 @@
 import { Injectable } from "@angular/core";
 import { Action, Selector, State, StateContext } from "@ngxs/store";
 import { IMessage, IChatFriend, IGetChatFriends, IGetMessages, ISendMessage, IDeleteMessage, IProfileModel, IFriendsModel } from "src/app/models";
-import { DeleteMessage, GetMessages, SendMessage, GetChatFriends, StageChatFriend, GetFriendsProfiles } from 'src/app/actions';
+import { DeleteMessage, GetMessages, SendMessage, GetChatFriends, StageChatFriend, GetFriendsProfiles, GetChatFriend } from 'src/app/actions';
 import { AuthApi } from "../auth";
-import { FriendsService, MessagesService } from "src/app/services";
+import { FriendsService, MessagesService, OtheruserService } from "src/app/services";
 import { tap } from "rxjs";
 import { Navigate } from "@ngxs/router-plugin";
 
@@ -13,6 +13,7 @@ export interface MessagesStateModel {
     chatFriend?: string;
     friendProfiles?: IProfileModel[];
     f?: IFriendsModel[];
+    chatFriendProfile?: IProfileModel;
 }
 
 @State<MessagesStateModel>({
@@ -22,7 +23,8 @@ export interface MessagesStateModel {
         chatFriends: [],
         chatFriend: "",
         friendProfiles: [],
-        f: []
+        f: [],
+        chatFriendProfile: {}
     }
 })
 
@@ -30,7 +32,7 @@ export interface MessagesStateModel {
     providedIn: 'root'
 })
 export class MessagesState {
-    constructor(private authApi:AuthApi, private service: MessagesService, private friendsService: FriendsService) {}
+    constructor(private authApi:AuthApi, private service: MessagesService, private friendsService: FriendsService, private otheruserService: OtheruserService) {}
 
     @Action(GetChatFriends)
     async getChatFriends (ctx: StateContext<MessagesStateModel>) {
@@ -119,6 +121,24 @@ export class MessagesState {
         return ctx.dispatch(new Navigate(['chatroom']));
     }
 
+    @Action(GetChatFriend)
+    async getChatFriend(ctx: StateContext<MessagesStateModel>) {
+        const userId = sessionStorage.getItem('chatFriend');
+        if(userId) {
+            const request: IProfileModel ={
+                userId: userId
+            }
+            return(await this.otheruserService.getProfile(request)).pipe(
+                tap((response)=>{
+                    ctx.patchState({
+                        chatFriendProfile: response
+                    })
+                })
+            )
+        }
+        return;
+    }
+
     @Action(GetFriendsProfiles)
     async getFriendsProfiles (ctx: StateContext<MessagesStateModel>) {
         const currentUserId = await this.authApi.getCurrentUserId();
@@ -162,5 +182,10 @@ export class MessagesState {
     @Selector()
     static returnFriendsProfiles(state: MessagesStateModel) {
         return state.friendProfiles;
+    }
+
+    @Selector()
+    static returnChatFriendProfile(state: MessagesStateModel) {
+        return state.chatFriendProfile;
     }
 }
