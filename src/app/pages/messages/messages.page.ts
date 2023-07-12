@@ -46,8 +46,10 @@ export class MessagesPage implements OnInit {
     })
   }
 
-  stageUser(user: IProfileModel, model:any) {
-    model.dismiss();
+  stageUser(user: IProfileModel, model?:any) {
+    if(model) {
+      model.dismiss();
+    }
     this.store.dispatch(new StageChatFriend(user.userId!))
   }
 }

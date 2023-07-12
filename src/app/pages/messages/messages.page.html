@@ -8,7 +8,7 @@
       </ion-header>
       
       <ion-list>
-        <ion-item *ngFor="let chatFriend of chatFriends" (click)="openChat(chatFriend)" lines="none">
+        <ion-item *ngFor="let chatFriend of chatFriends" (click)="stageUser(chatFriend.user)" lines="none">
           <ion-avatar slot="start">
             <img alt="Silhouette of a person's head" [src]="chatFriend.user.profileURL!" />
           </ion-avatar>
