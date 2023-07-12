@@ -43,41 +43,40 @@ import { GetChatFriends } from "../actions";
     }
 
     getChatFriends(request: IGetChatFriends): Observable<IGotChatsFriends> {
-        const chatFriendsCollection = this.firestore.collection(`users/${request.userId}/chatFriends`);
+      const chatFriendsCollection = this.firestore.collection(`users/${request.userId}/chatFriends`);
 
-        return chatFriendsCollection.snapshotChanges().pipe(
-          map((snapshot) => {
-            let chatFriends: IChatFriend[] = [];
+      return chatFriendsCollection.snapshotChanges().pipe(
+        map((snapshot) => {
+          let chatFriends: IChatFriend[] = [];
 
-            snapshot.forEach(async (doc)=> {
-                const chatFriendData:any = doc.payload.doc.data();
-                this.getProfile(chatFriendData.userId).then((response)=>{
-                let chatFriend: IChatFriend = {
-                    user: response
-                }
+          snapshot.forEach(async (doc)=> {
+              const chatFriendData:any = doc.payload.doc.data();
+              this.getProfile(chatFriendData.userId).then((response)=>{
+              let chatFriend: IChatFriend = {
+                user: response
+              }
 
-                const getMessage: IGetMessages = {
-                    userId: response.userId,
-                    messageId: chatFriendData.lastChatId,
-                    otheruserId: request.userId!
-                }
-                this.getChat(getMessage).then((response)=>{
-                    chatFriend.lastChat = response;
-                    chatFriends.push(chatFriend);
-                    console.table(chatFriends)
-                })
-                })
+              const getMessage: IGetMessages = {
+                userId: response.userId,
+                messageId: chatFriendData.lastChatId,
+                otheruserId: request.userId!
+              }
+              this.getChat(getMessage).then((response)=>{
+                chatFriend.lastChat = response;
+                chatFriends.push(chatFriend);
+                console.table(chatFriends)
+              })
             })
-
-            const response:IGotChatsFriends = {
-                chatFriends: chatFriends,
-                validate: true
-            }
-            
-            return response;
           })
-        )
-  
+
+          const response:IGotChatsFriends = {
+            chatFriends: chatFriends,
+            validate: true
+          }
+          
+          return response;
+        })
+      )
     }
     
     getMessages(request: IGetMessages): Observable<IGotMessages> {
