@@ -1,7 +1,3 @@
-ion-content {
-    --ion-background-color: #f4f4f4;
-  }
-  
   .chat-container {
     display: flex;
     flex-direction: column;
@@ -43,20 +39,19 @@ ion-content {
   }
   
   ion-footer {
-    --ion-background-color: #f4f4f4;
     padding: 10px;
   }
   
   ion-input {
-    --background: #fff;
-    --padding-start: 10px;
-    --padding-end: 10px;
-    --border-radius: 20px;
-    --border-color: #ddd;
+    --border-radius: 5px;
   }
   
   ion-button {
     margin-left: 10px;
     --background: #007bff;
   }
+
+ion-title {
+  text-align: center;
+}
   

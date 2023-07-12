@@ -16,7 +16,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content #contentElement>
   <div class="chat-container">
     <div class="message" *ngFor="let message of chats" [ngClass]="{ 'message-sent': message.senderId === currentUserId, 'message-received': message.senderId !== currentUserId }">
       <div class="message-content">

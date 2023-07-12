@@ -1,5 +1,5 @@
 import { time } from 'console';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
 import { Timestamp } from 'firebase/firestore';
 import { Observable, tap, switchMap } from 'rxjs';
@@ -17,6 +17,7 @@ export class ChatroomComponent  implements OnInit {
   @Select(MessagesState.returnChats) chats$: Observable<IMessage[]>;
   @Select(AuthState.getCurrUserId) userId$!: Observable<string>;
   @Select(MessagesState.returnChatFriendProfile) friendProfile$: Observable<IProfileModel>;
+  @ViewChild('contentElement', { static: false }) contentElement: IonContent;
   chats: IMessage[] = [];
   currentUserId: string = "";
   message: IMessage = {text: ''};
@@ -42,7 +43,9 @@ export class ChatroomComponent  implements OnInit {
       tap((response)=>{
         this.chats = response;
       })
-    ).subscribe();
+    ).subscribe(()=>{
+      this.scrollToBottom();
+    });
   }
 
   sendMessage() {
@@ -50,7 +53,14 @@ export class ChatroomComponent  implements OnInit {
       this.message.date = Timestamp.now();
       this.store.dispatch(new SendMessage(this.message))
       this.message = {};
+      this.scrollToBottom()
     }
+  }
+
+  scrollToBottom() {
+    setTimeout(() => {
+      this.contentElement.scrollToBottom();
+    }, 100);
   }
 
   removeSession() {

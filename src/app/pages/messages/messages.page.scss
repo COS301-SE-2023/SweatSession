@@ -1,9 +1,19 @@
 .outer-container {
     height: 100vh;
-    background-color: aqua;
 }
 
 .inner-container {
     padding-top: 50px;
     height: 100%;
+}
+
+ion-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    --background: transparent;
+}
+
+p {
+    color: grey;
 }

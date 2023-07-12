@@ -64,7 +64,6 @@ import { GetChatFriends } from "../actions";
               this.getChat(getMessage).then((response)=>{
                 chatFriend.lastChat = response;
                 chatFriends.push(chatFriend);
-                console.table(chatFriends)
               })
             })
           })

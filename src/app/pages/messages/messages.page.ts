@@ -37,7 +37,6 @@ export class MessagesPage implements OnInit {
     
     this.chatFriends$.subscribe((response)=> {
       this.chatFriends = response;
-        console.log(this.chatFriends);
         this.chatFriends.length === 0 ? this.noFriends = true : this.noFriends = false;
     })
 
