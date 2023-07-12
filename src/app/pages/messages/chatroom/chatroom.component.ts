@@ -6,6 +6,7 @@ import { Observable, tap, switchMap } from 'rxjs';
 import { GetChatFriend, GetMessages, RemoveChatFriendSession, SendMessage, SubscribeToAuthState } from 'src/app/actions';
 import { IMessage, IProfileModel } from 'src/app/models';
 import { AuthState, MessagesState } from 'src/app/states';
+import { IonContent } from '@ionic/angular';
 
 @Component({
   selector: 'chatroom',
