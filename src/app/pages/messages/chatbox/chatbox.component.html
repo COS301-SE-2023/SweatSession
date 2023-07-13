@@ -1,0 +1,12 @@
+<div class="message" 
+[ngClass]="{ 'message-sent': message.senderId === currentUserId, 'message-received': message.senderId !== currentUserId }"
+>
+  <div class="message-content">
+    <div class="message-bubble">
+      {{ message.text }}
+    </div>
+    <div class="message-timestamp">
+      {{ message.date?.toDate() | date:'MMM d, hh:mm a' }}
+    </div>
+  </div>
+</div>

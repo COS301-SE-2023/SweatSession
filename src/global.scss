@@ -25,9 +25,9 @@
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
 
-// ion-content {
-//     --ion-background-color: #F1FAEE;
-// }
+ion-content {
+    overflow: auto;
+}
 
 // ion-item{
 //     --highlight-height: 0;
