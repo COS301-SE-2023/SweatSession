@@ -3,7 +3,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
 import { Timestamp } from 'firebase/firestore';
 import { Observable, tap, switchMap } from 'rxjs';
-import { GetChatFriend, GetMessages, RemoveChatFriendSession, SendMessage, SubscribeToAuthState } from 'src/app/actions';
+import { GetChatFriend, GetMessages, RemoveChatFriendSession, SendMessage, StageOtheruserInfo, SubscribeToAuthState } from 'src/app/actions';
 import { IMessage, IProfileModel } from 'src/app/models';
 import { AuthState, MessagesState } from 'src/app/states';
 import { IonContent } from '@ionic/angular';
@@ -23,6 +23,7 @@ export class ChatroomComponent  implements OnInit {
   currentUserId: string = "";
   message: IMessage = {text: ''};
   friendProfile: IProfileModel={};
+  showDelete = false;
 
 
   constructor(private store: Store) { }
@@ -66,5 +67,9 @@ export class ChatroomComponent  implements OnInit {
 
   removeSession() {
     this.store.dispatch(new RemoveChatFriendSession());
+  }
+
+  viewOtherUser(){
+    this.store.dispatch(new StageOtheruserInfo(this.friendProfile));
   }
 }

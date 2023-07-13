@@ -5,7 +5,8 @@ import { IonicModule } from '@ionic/angular';
 import { ChatroomComponentRoutingModule } from './chatroom-routing.module';
 import { ChatroomComponent } from './chatroom.component';
 import { BackButtonDirectiveModule } from 'src/app/directives';
-import { AuthModule, MessageStateModule } from 'src/app/states';
+import { AuthModule, MessageStateModule, OtheruserStateModule } from 'src/app/states';
+import { ChatboxComponent } from '../chatbox/chatbox.component';
 
 @NgModule({
   imports: [
@@ -15,8 +16,9 @@ import { AuthModule, MessageStateModule } from 'src/app/states';
     BackButtonDirectiveModule,
     MessageStateModule,
     AuthModule,
-    ChatroomComponentRoutingModule
+    ChatroomComponentRoutingModule,
+    OtheruserStateModule
   ],
-  declarations: [ChatroomComponent]
+  declarations: [ChatroomComponent, ChatboxComponent]
 })
 export class ChatroomComponentModule {}

@@ -3,7 +3,7 @@
     <ion-item lines="none">
       <backbutton (click)="removeSession()"></backbutton>
       <ion-title>
-        <ion-item lines="none">
+        <ion-item lines="none" (click)="viewOtherUser()">
           <ion-avatar>
             <ion-img [src]="friendProfile.profileURL" alt="profile pic here"></ion-img>
           </ion-avatar>
@@ -18,15 +18,11 @@
 
 <ion-content #contentElement>
   <div class="chat-container">
-    <div class="message" *ngFor="let message of chats" [ngClass]="{ 'message-sent': message.senderId === currentUserId, 'message-received': message.senderId !== currentUserId }">
-      <div class="message-content">
-        <div class="message-bubble">
-          {{ message.text }}
-        </div>
-        <div class="message-timestamp">
-          {{ message.date?.toDate() | date:'MMM d, hh:mm a' }}
-        </div>
-      </div>
+    <div *ngFor="let message of chats">
+      <chatbox
+        [message]="message"
+        [currentUserId]="currentUserId"
+      ></chatbox>
     </div>
   </div>
 </ion-content>
