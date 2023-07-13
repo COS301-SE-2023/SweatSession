@@ -5,6 +5,7 @@ import { Timestamp } from 'firebase/firestore';
 import { AddWorkoutSchedule } from 'src/app/actions';
 import { AddGymSessionLocation } from 'src/app/actions/location.actions';
 import { IWorkoutScheduleModel } from 'src/app/models';
+import { LocationRepository } from 'src/app/repository/location.repository';
 import { GymsearchComponent } from '../../search/gymsearch/gymsearch.component';
 
 @Component({
@@ -16,7 +17,7 @@ export class AddScheduleComponent  implements OnInit {
   schedule:IWorkoutScheduleModel={};
   placeId: string;
 
-  constructor(private popoverController: PopoverController, private store: Store, private modalController: ModalController) { }
+  constructor(private popoverController: PopoverController, private store: Store, private modalController: ModalController, private locationRepository: LocationRepository) { }
 
   ngOnInit() {}
 
@@ -27,8 +28,9 @@ export class AddScheduleComponent  implements OnInit {
   addSchedule() {
     this.setFields();
     this.store.dispatch(new AddWorkoutSchedule(this.schedule));
-    this.store.dispatch(new AddGymSessionLocation(this.placeId));
+    // this.store.dispatch(new AddGymSessionLocation(this.placeId));
     // this.store.dispatch(new AddWorkoutSchedule(this.placeId));
+    this.locationRepository.addGymSession(this.placeId, this.schedule.date?, this.schedule.time?, this.schedule.completeAt?, );
     console.log(this.schedule);
     console.log(this.placeId);
   }
