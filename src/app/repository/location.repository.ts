@@ -16,7 +16,7 @@ export class LocationRepository {
     currUserId: string | undefined | null;
   constructor(private firestore: AngularFirestore) { }
 
-  async addGymSession(placeId: string, date: string, time: string, completedAt: Timestamp){
+  async addGymSession(placeId: string, sessionDate: string, time: string, completedAt: Timestamp){
     const auth = getAuth();
     this.currUserId = auth.currentUser?.uid;
     if (this.currUserId!=undefined){
@@ -25,34 +25,49 @@ export class LocationRepository {
       this.currUserId = sessionStorage.getItem('currUserId');
     }
     
-    const locationsRef = this.firestore.collection('locations').doc(placeId);
-    const fieldValue = firebase.firestore.FieldValue;
+    const userLocationsGymSessionRef = this.firestore.collection('locations').doc(placeId).collection(this.currUserId!).doc();
+
+    const newGymSessionDoc = {
+        friendDisplayName: "y",
+        startTime: time,
+        endTime: completedAt,
+        date: sessionDate
+    };
     
-        const docSnapshot = await locationsRef.get().toPromise(); // Convert Observable to Promise
+    userLocationsGymSessionRef.set(newGymSessionDoc)
+            .then((docRef) => {
+                console.log('Location: Document created successfully with ID:', docRef);
+            })
+            .catch((error) => {
+                console.error('Location: Error creating document:', error);
+            });
+    // const fieldValue = firebase.firestore.FieldValue;
     
-        if (docSnapshot && docSnapshot.exists) {
-            const data = docSnapshot.data() as { [key: string]: any }; // Typecast data as an object with any keys
-            const currentWorkoutSessionsAttended = data?.['workoutSessionsAttended'] || 0;
-            const newWorkoutSessionsAttended = currentWorkoutSessionsAttended + 1;
+    //     const docSnapshot = await userLocationsGymSessionRef.get().toPromise(); // Convert Observable to Promise
     
-            let updatedFields = {};
+    //     if (docSnapshot && docSnapshot.exists) {
+    //         const data = docSnapshot.data() as { [key: string]: any }; // Typecast data as an object with any keys
+    //         const currentWorkoutSessionsAttended = data?.['workoutSessionsAttended'] || 0;
+    //         const newWorkoutSessionsAttended = currentWorkoutSessionsAttended + 1;
     
-            if (newWorkoutSessionsAttended % 3 === 0) {
-                updatedFields = {
-                    userPoints: fieldValue.increment(75),
-                    workoutSessionsAttended: fieldValue.increment(1)
-                };
-            } else {
-                updatedFields = {
-                    workoutSessionsAttended: fieldValue.increment(1)
-                };
-            }
+    //         let updatedFields = {};
     
-            return locationsRef.update(updatedFields);
-        } else {
-            // Handle the case when the document does not exist
-            console.log("Document does not exist");
-            return null;
-        }
+    //         if (newWorkoutSessionsAttended % 3 === 0) {
+    //             updatedFields = {
+    //                 userPoints: fieldValue.increment(75),
+    //                 workoutSessionsAttended: fieldValue.increment(1)
+    //             };
+    //         } else {
+    //             updatedFields = {
+    //                 workoutSessionsAttended: fieldValue.increment(1)
+    //             };
+    //         }
+    
+    //         return userLocationsGymSessionRef.update(updatedFields);
+    //     } else {
+    //         // Handle the case when the document does not exist
+    //         console.log("Document does not exist");
+    //         return null;
+    //     }
   }
 }
