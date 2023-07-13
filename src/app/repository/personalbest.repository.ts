@@ -39,37 +39,37 @@ export class PersonalbestRepository
                 notes: personalBest.notes
             };
 
-        var exerciseNum = 1;
+        // var exerciseNum = "n/a";
 
-        if(progress.exercise == "Bench Press")
-        {
-            exerciseNum = 1;
-        }else if(progress.exercise == "Squat")
-        {
-            exerciseNum = 2;
-        }else if(progress.exercise == "Deadlift")
-        {
-            exerciseNum = 3;
-        }else if(progress.exercise == "Overhead Press")
-        {
-            exerciseNum = 4;    
-        }else if(progress.exercise == "Barbell Row")
-        {
-            exerciseNum = 5;
-        }
+        // if(progress.exercise == "Bench Press")
+        // {
+        //     exerciseNum = "BenchPress";
+        // }else if(progress.exercise == "Squat")
+        // {
+        //     exerciseNum = "Squat";
+        // }else if(progress.exercise == "Deadlift")
+        // {
+        //     exerciseNum = "Deadlift";
+        // }else if(progress.exercise == "Overhead Press")
+        // {
+        //     exerciseNum = "Overhead Press";    
+        // }else if(progress.exercise == "Barbell Row")
+        // {
+        //     exerciseNum = 5;
+        // }
 
         const exerciseRef = this.firestore
         .collection('Personalbests')
         .doc(this.currUserId)
         .collection('exercises')
-        .doc("1");
+        .doc(progress.exercise)
+        .collection('exerciseEntries');
 
         console.table(progress);
         
         // Add the personal best to the exercise document
-        return exerciseRef.set({
-          exerciseName: personalBest.exercise,
-          progress: progress,
+        return exerciseRef.add({
+          progress: progress
         }
         );
 
