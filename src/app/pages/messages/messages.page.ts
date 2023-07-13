@@ -18,6 +18,7 @@ export class MessagesPage implements OnInit {
  friends: IProfileModel[] = [];
  loading: boolean = false;
  noFriends: boolean = true;
+ selectedSegment = 'chats';
   
 
   constructor(private nav:NavController, private store:Store) { }
@@ -50,5 +51,9 @@ export class MessagesPage implements OnInit {
       model.dismiss();
     }
     this.store.dispatch(new StageChatFriend(user.userId!))
+  }
+
+  onSegmentChange(event: any) {
+    this.selectedSegment = event.detail.value;
   }
 }

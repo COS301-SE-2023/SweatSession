@@ -2,27 +2,46 @@
   <ion-content>
     <div class="inner-container">
       <ion-header>
-        <ion-toolbar>
+        <!-- <ion-toolbar>
           <ion-title>CHATS</ion-title>
-        </ion-toolbar>
+        </ion-toolbar> -->
+        <ion-segment (ionChange)="onSegmentChange($event)" value="chats">
+          <ion-segment-button value="chats">chats</ion-segment-button>
+          <ion-segment-button value="groups">groups</ion-segment-button>
+        </ion-segment>
       </ion-header>
       
       <ion-list>
-        <ion-item *ngFor="let chatFriend of chatFriends" (click)="stageUser(chatFriend.user)" lines="none">
-          <ion-avatar slot="start">
-            <img alt="Silhouette of a person's head" [src]="chatFriend.user.profileURL!" />
-          </ion-avatar>
-          <ion-label>
-            <h2>{{ chatFriend.user.displayName! }}</h2>
-            <p>{{ chatFriend.lastChat!.text }}</p>
-            <p class="timestamp">{{ chatFriend.lastChat!.date?.toDate() | date:'MMM d, hh:mm a' }}</p>
-          </ion-label>
-        </ion-item>
+        <div [hidden]="selectedSegment!=='chats'">
+          <ion-item *ngFor="let chatFriend of chatFriends" (click)="stageUser(chatFriend.user)" lines="none">
+            <ion-avatar slot="start">
+              <img alt="Silhouette of a person's head" [src]="chatFriend.user.profileURL!" />
+            </ion-avatar>
+            <ion-label>
+              <h2>{{ chatFriend.user.displayName! }}</h2>
+              <p>{{ chatFriend.lastChat!.text }}</p>
+              <p class="timestamp">{{ chatFriend.lastChat!.date?.toDate() | date:'MMM d, hh:mm a' }}</p>
+            </ion-label>
+          </ion-item>
+        </div>
+
+        <div [hidden]="selectedSegment!=='groups'">
+          <ion-item *ngFor="let group of [1,2,3]" lines="none">
+            <ion-avatar slot="start">
+              <img alt="Silhouette of a person's head" src="/assets/Asset 2.png"/>
+            </ion-avatar>
+            <ion-label>
+              <h2>group {{group}}</h2>
+              <p>last message here</p>
+              <p class="timestamp">jan 01, 10:00 PM</p>
+            </ion-label>
+          </ion-item>
+        </div>
       </ion-list>
    </div>
   </ion-content>
 
-  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end" [hidden]="selectedSegment!=='chats'">
     <ion-fab-button id="open-modal">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
