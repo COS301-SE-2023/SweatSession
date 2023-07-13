@@ -3,6 +3,7 @@ import { ModalController, PopoverController } from '@ionic/angular';
 import { Store } from '@ngxs/store';
 import { Timestamp } from 'firebase/firestore';
 import { AddWorkoutSchedule } from 'src/app/actions';
+import { AddGymSessionLocation } from 'src/app/actions/location.actions';
 import { IWorkoutScheduleModel } from 'src/app/models';
 import { GymsearchComponent } from '../../search/gymsearch/gymsearch.component';
 
@@ -26,6 +27,7 @@ export class AddScheduleComponent  implements OnInit {
   addSchedule() {
     this.setFields();
     this.store.dispatch(new AddWorkoutSchedule(this.schedule));
+    this.store.dispatch(new AddGymSessionLocation(this.placeId));
     // this.store.dispatch(new AddWorkoutSchedule(this.placeId));
     console.log(this.schedule);
     console.log(this.placeId);
