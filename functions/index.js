@@ -3,7 +3,7 @@
 const functions = require("firebase-functions");
 const axios = require("axios");
 const admin = require("firebase-admin");
-exports.proxyRequest = functions.https.onRequest(async (req, res) => {
+exports.nearbyGymProxyRequest = functions.https.onRequest(async (req, res) => {
   res.set("Access-Control-Allow-Origin", "*");
   res.set("Access-Control-Allow-Methods", "GET");
   res.set("Access-Control-Allow-Headers", "Content-Type");
