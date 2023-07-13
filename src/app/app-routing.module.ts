@@ -96,6 +96,8 @@ const routes: Routes = [
   },
   {
     path: 'fitnessgoals',
+    canActivate: [AuthGuard],
+    data: { authGuardPipe: redirectLoggedOut },
     loadChildren: () => import('./pages/fitnessgoals/fitnessgoals.module').then(m => m.FitnessgoalsPageModule)
   },
   {
@@ -157,6 +159,8 @@ const routes: Routes = [
   },
   {
     path: 'view-personalbests',
+    canActivate: [AuthGuard],
+    data: { authGuardPipe: redirectLoggedOut },
     loadChildren: () => import('./pages/view-personalbests/view-personalbests.module').then( m => m.ViewPersonalbestsPageModule)
   },
 ];

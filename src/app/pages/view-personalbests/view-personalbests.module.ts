@@ -9,6 +9,7 @@ import { AddPersonalBestComponent } from './add-personal-best/add-personal-best.
 import { BrowserModule } from '@angular/platform-browser';
 import { NgChartsModule } from 'ng2-charts';
 import { ReactiveFormsModule } from '@angular/forms';
+import { BackButtonDirectiveModule } from 'src/app/directives';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     IonicModule,
     ViewPersonalbestsPageRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BackButtonDirectiveModule
   ],
   exports: [
     ReactiveFormsModule,

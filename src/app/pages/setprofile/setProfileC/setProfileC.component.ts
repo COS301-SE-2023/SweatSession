@@ -47,8 +47,7 @@ export class SetprofileCComponent  implements OnInit {
     getUserid() {
       return  this.authApi.getCurrentUserId();
     }
-
-
+    
     saveProfile()
     {
       this.UpadateP = {

@@ -1,6 +1,55 @@
-<!-- button to open addPersonalBest modal -->
+<ion-header>
+    <ion-toolbar>
+      <ion-item lines="none">
+        <backbutton></backbutton>
+        <ion-title> Personal Bests </ion-title>
+      </ion-item>
+    </ion-toolbar>
+  </ion-header>
 
-<app-personal-bests-chart>
+<app-personal-bests-chart *ngIf="!showForm">
 
 </app-personal-bests-chart>
-<ion-button (click)="openPopup()">Add new best</ion-button>
+
+<ion-button *ngIf="!showForm" (click)="openPopup()">Add new best</ion-button>
+
+<ion-content *ngIf="showForm">
+<form [formGroup]="PersonalBestForm" (ngSubmit)="onSubmit()" >
+
+    <ion-item>
+      <ion-label>Exercise</ion-label>
+      <ion-select formControlName="exercise" placeholder="Select One">
+        <ion-select-option value="benchpress">Bench Press</ion-select-option>
+        <ion-select-option value="squat">Squat</ion-select-option>
+        <ion-select-option value="deadlift">Deadlift</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Weight</ion-label>
+      <ion-input formControlName="weight" type="number"></ion-input>
+    </ion-item>
+
+    <ion-item>
+        <ion-label>Repitetions</ion-label>
+        <ion-input formControlName="reps" type="number"></ion-input>
+    </ion-item>
+
+    <ion-item>
+        <ion-label>Date</ion-label>
+        <ion-datetime presentation="date" formControlName="date" displayFormat="YYYY/MM/DD" placeholder="Select Date"></ion-datetime>
+    </ion-item>
+
+    <ion-item>
+        <ion-label>Location</ion-label>
+        <ion-input formControlName="location" type="txt"></ion-input>
+      </ion-item>
+
+    <ion-item>
+      <ion-label>Notes</ion-label>
+      <ion-input formControlName="notes" type="txt"></ion-input>
+    </ion-item>
+    <ion-button type="submit" [disabled]="PersonalBestForm.invalid">Submit</ion-button>
+</form>
+</ion-content>
+

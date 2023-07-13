@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { IPersonalBest } from 'src/app/models';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { PersonalbestService } from 'src/app/services/personalbest/personalbest.service';
 
 @Component({
   selector: 'app-add-personal-best',
@@ -8,27 +11,59 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./add-personal-best.component.scss'],
 })
 export class AddPersonalBestComponent implements OnInit {
-  myForm: FormGroup;
-  exerciseOptions: string[] = [];
+  exerciseOptions: any = [];
+  PersonalBestForm: FormGroup;
+  PersonalBes : IPersonalBest = 
+  {
+    id : this.firestore.createId(),
+    exercise : "default exercise",
+    weight : 0,
+    repetitions : 0,
+    date : "the date",
+    notes: "decription of the best",
+    
+  }
+  constructor(private modalController: ModalController,
+                      private firestore : AngularFirestore,
+                      private personalbestServices :PersonalbestService,
+                      private formBuilder: FormBuilder ) 
+{
+  this.workaround();
+}
 
-  constructor(private modalController: ModalController) {
-    this.ngOnInit();
-    this.myForm = new FormGroup({
-      selectedExercise: new FormControl('', Validators.required),
-      weight: new FormControl(0, Validators.required),
-      repetitions: new FormControl(0, Validators.required),
-      date: new FormControl('', Validators.required),
-      notes: new FormControl('', Validators.required),
+ngOnInit(): void {
+    
+}
+  workaround(): void { //lazy loading causing some issues
+    this.getExercises();
+    this.PersonalBestForm = this.formBuilder.group({
+      name: [''],
+      email: [''],
     });
+
+    
   }
 
-  ngOnInit(): void {
-    this.getExercises();
+  onSubmit() {
+    if (this.PersonalBestForm.invalid) {
+      return;
+    }
+
+    // Get the form data
+    const formData = this.PersonalBestForm.value;
+    console.log('Form Data:', formData);
+
+    // Clear the form or perform other actions
+    // this.PersonalBestForm.reset();
   }
 
   dismiss() {
     this.modalController.dismiss();
   }
+
+  // get exerciseOptionsgetter() {
+  //   return this.myForm.get('selectedExercise');
+  // }
 
   getExercises() {
     this.exerciseOptions = ['Push up', 'Sit up', 'Rope Skips'];
@@ -36,6 +71,16 @@ export class AddPersonalBestComponent implements OnInit {
   }
 
   addPersonalBest() {
-    // Handle the form submission and personal best creation
+    // this.PersonalBes = {
+    //   ...this.PersonalBes,
+    //   weight: this.PersonalBes.weight,
+    //   repetitions: this.PersonalBes.repetitions,
+    //   notes: this.PersonalBes.notes
+    // };
+
+    console.log("Done Hey");
+    console.table(this.PersonalBes);
+  
   }
+
 }

@@ -1,10 +1,10 @@
 export interface IPersonalBest
 {
-    id: string,
-    exercise: string,
-    weight: number,
-    matrix: string,
-    repetitions: number,
-    date: string,
-    notes: string
+    id?: string,
+    exercise?: string,
+    weight?: number,
+    repetitions?: number,
+    location?: string,
+    date?: string,
+    notes?: string
 }
