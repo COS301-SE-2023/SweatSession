@@ -53,6 +53,10 @@ export class MessagesPage implements OnInit {
     this.store.dispatch(new StageChatFriend(user.userId!))
   }
 
+  stageGroup() {
+    this.nav.navigateRoot("/groupchatroom");
+  }
+
   onSegmentChange(event: any) {
     this.selectedSegment = event.detail.value;
   }

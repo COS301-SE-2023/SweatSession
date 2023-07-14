@@ -26,7 +26,7 @@
         </div>
 
         <div [hidden]="selectedSegment!=='groups'">
-          <ion-item *ngFor="let group of [1,2,3]" lines="none">
+          <ion-item *ngFor="let group of [1,2,3]" lines="none" (click)="stageGroup()">
             <ion-avatar slot="start">
               <img alt="Silhouette of a person's head" src="/assets/Asset 2.png"/>
             </ion-avatar>
