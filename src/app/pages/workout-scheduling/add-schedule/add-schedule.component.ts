@@ -91,7 +91,6 @@ export class AddScheduleComponent  implements OnInit {
     if (data && data.selectedGym && data.placeId) {
       console.log(data);
       this.schedule.location = data.selectedGym;
-      this.placeId = data.place_id;
-    }
+      this.placeId = data.placeId;    }
   }
 }

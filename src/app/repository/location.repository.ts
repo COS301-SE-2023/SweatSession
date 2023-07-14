@@ -27,7 +27,7 @@ export class LocationRepository {
     }else{
       this.currUserId = sessionStorage.getItem('currUserId');
     }
-    const profileDocRef = this.firestore.collection('profiles').doc(placeId);
+    // const profileDocRef = this.firestore.collection('profiles').doc(placeId);
     const userProfile = await this.profileService.getProfile({userId: this.currUserId!}).toPromise();
     const displayName = userProfile?.profile.displayName;
     const profilePhoto = userProfile?.profile.profileURL;
