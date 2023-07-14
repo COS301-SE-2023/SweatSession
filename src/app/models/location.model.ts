@@ -1,0 +1,11 @@
+import { Time } from "@angular/common";
+import { Timestamp } from "firebase/firestore";
+
+
+export interface LocationGymSession {
+    friendDisplayName: string|undefined,
+    startTime: Time,
+    endTime: Timestamp,
+    date: Date,
+    profilePhoto: string|undefined
+}

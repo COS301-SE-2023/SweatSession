@@ -9,6 +9,7 @@ import { getAuth } from '@angular/fire/auth';
 import { Timestamp } from "firebase/firestore";
 import { ProfileService } from '../services';
 import { Time } from '@angular/common';
+import { LocationGymSession } from '../models/location.model';
 
 
 @Injectable({
@@ -33,7 +34,7 @@ export class LocationRepository {
 
 
     const userLocationsGymSessionRef = this.firestore.collection('locations').doc(placeId).collection(this.currUserId!).doc();
-    const newGymSessionDoc = {
+    const newGymSessionDoc: LocationGymSession = {
         friendDisplayName: displayName,
         startTime: time,
         endTime: completedAt,
