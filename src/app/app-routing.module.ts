@@ -161,6 +161,12 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     data: { authGuardPipe: redirectLoggedOut },
     loadChildren: () => import('./pages/messages/chatroom/chatroom.module').then( m => m.ChatroomComponentModule )
+  },
+  {
+    path: 'groupchatroom',
+    canActivate: [AuthGuard],
+    data: { authGuardPipe: redirectLoggedOut },
+    loadChildren: () => import('./pages/messages/group-chatroom/group-chatroom.module').then( m => m.GroupChatroomComponentModule )
   }
 ];
 @NgModule({
