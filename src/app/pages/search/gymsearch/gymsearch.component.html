@@ -46,18 +46,24 @@
     <!-- {{ gym.description }} replaced with rating-->
     Rating: {{ gym.rating ? gym.rating : 'No Rating' }}
   </ion-card-content>
-  <ion-card-header>
-    Friends that go to this gym
-  </ion-card-header>
   <ion-card-content class="friend-container">
+    <ion-card-header>
+      Friends that go to this gym
+    </ion-card-header>
     <ng-container *ngIf="friends.length > 0; else noFriends">
       <ul class="no-bullet">
         <li *ngFor="let friend of friends" (click)="viewProfile(friend.id)">
+          <div class="friend-details">
           <img [src]="friend.profilePhoto" alt="Profile Photo" class="friend-photo"/>
           <div>
             <p>{{ friend.displayName }}</p>
-            <p>Date: {{ friend.date }}</p>
-            <p>Time: {{ friend.startTime }}-{{ friend.endTime }}</p>
+            <ul>
+              <li *ngFor="let gymSession of friend.gymSessions">
+                <p>{{ gymSession.date }}: {{ gymSession.startTime }}-{{ gymSession.endTime }}</p>
+              </li>
+            </ul>
+            
+          </div>
           </div>
         </li>
       </ul>

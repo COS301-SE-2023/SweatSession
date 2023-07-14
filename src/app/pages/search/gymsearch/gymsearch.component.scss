@@ -12,7 +12,8 @@ ion-searchbar {
 
 
 .friend-container {
-    background: green;
+    background: lightblue;
+    border-radius: 15px;
 }
 
 .friend-photo {
@@ -21,3 +22,10 @@ ion-searchbar {
     border-radius: 50%;
   }
   
+  .friend-details {
+    background: lightgreen;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+  }
+
