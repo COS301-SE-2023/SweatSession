@@ -24,7 +24,7 @@ export class ChatroomComponent  implements OnInit {
   message: IMessage = {text: ''};
   friendProfile: IProfileModel={};
   showDelete = false;
-
+  dropdownVisible = false;
 
   constructor(private store: Store) { }
 
@@ -71,5 +71,9 @@ export class ChatroomComponent  implements OnInit {
 
   viewOtherUser(){
     this.store.dispatch(new StageOtheruserInfo(this.friendProfile));
+  }
+
+  toggleDropdown() {
+    this.dropdownVisible = !this.dropdownVisible;
   }
 }

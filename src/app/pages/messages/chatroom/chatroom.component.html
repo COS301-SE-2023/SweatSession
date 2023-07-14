@@ -12,6 +12,14 @@
           </ion-label> 
         </ion-item>
       </ion-title>
+      <ion-icon name="ellipsis-vertical-outline" id="trigger" slot="end"></ion-icon>
+      <ion-popover trigger="trigger" triggerAction="click">
+        <ng-template>
+          <ion-item lines="none">
+            clear chat
+          </ion-item>
+        </ng-template>
+      </ion-popover>
     </ion-item>
   </ion-toolbar>
 </ion-header>
