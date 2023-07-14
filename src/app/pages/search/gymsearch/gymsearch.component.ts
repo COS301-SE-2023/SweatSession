@@ -28,9 +28,9 @@ export class GymsearchComponent implements OnInit {
    currLongitude: Number;
    MAPS_API_KEY = environment.mapsApiKey;
    gymsSubscription: Subscription;
-   gyms = { 
-      results:[
-         {name:"default",business_status:"default",photos:[{photo_reference:"default"}],rating:"default",vicinity:"default", place_id:"default"},
+   gyms = {
+      results: [
+         { name: "default", business_status: "default", photos: [{ photo_reference: "default" }], rating: "default", vicinity: "default", place_id: "default" },
       ]
    }
 
@@ -99,20 +99,20 @@ export class GymsearchComponent implements OnInit {
          console.log('Longitude:', this.currLongitude);
          console.log('maxDistance:', this.maxDistance);
          // const url = `https://us-central1-sweatsession.cloudfunctions.net/nearbyGymProxyRequest?latitude=${this.currLatitude}&longitude=${this.currLongitude}&radius=${this.maxDistance*1000}&key=${this.MAPS_API_KEY}`;
-         const url = `http://127.0.0.1:5005/demo-project/us-central1/nearbyGymProxyRequest?latitude=${this.currLatitude}&longitude=${this.currLongitude}&radius=${this.maxDistance*1000}&key=${this.MAPS_API_KEY}`;
+         const url = `http://127.0.0.1:5005/demo-project/us-central1/nearbyGymProxyRequest?latitude=${this.currLatitude}&longitude=${this.currLongitude}&radius=${this.maxDistance * 1000}&key=${this.MAPS_API_KEY}`;
          // const url = `localhost:4200/nearbyGymProxyRequest?latitude=${this.currLatitude}&longitude=${this.currLongitude}&radius=${this.maxDistance}&key=${this.MAPS_API_KEY}`;
          fetch(url)
-    .then((response) => response.json())
-    .then((data) => {
-      // Handle the response data
-      console.log(data);
-      console.log(data.results);
-      this.gyms=data;
-    })
-    .catch((error) => {
-      // Handle any errors that occur during the request
-      console.error(error);
-    });
+            .then((response) => response.json())
+            .then((data) => {
+               // Handle the response data
+               console.log(data);
+               console.log(data.results);
+               this.gyms = data;
+            })
+            .catch((error) => {
+               // Handle any errors that occur during the request
+               console.error(error);
+            });
          // this.gymsSubscription = this.locationService.searchNearbyGyms(this.currLatitude, this.currLongitude, this.maxDistance, this.MAPS_API_KEY).subscribe((gyms) => {
          //    console.log('Nearby gyms:', gyms);
          // }, (error) => {
@@ -130,6 +130,31 @@ export class GymsearchComponent implements OnInit {
       // const functions = getFunctions();
       // const nearbyGymProxyRequest = httpsCallable(functions, 'nearbyGymProxyRequest');
       // nearbyGymProxyRequest()
+   }
+
+   searchNearbyGyms() {
+      this.getCurrentLocation().then((coordinates: GeolocationCoordinates) => {
+         this.currLatitude = coordinates.latitude;
+         this.currLongitude = coordinates.longitude;
+         console.log('Latitude:', this.currLatitude);
+         console.log('Longitude:', this.currLongitude);
+         console.log('maxDistance:', this.maxDistance);
+         // const url = `https://us-central1-sweatsession.cloudfunctions.net/nearbyGymProxyRequest?latitude=${this.currLatitude}&longitude=${this.currLongitude}&radius=${this.maxDistance*1000}&key=${this.MAPS_API_KEY}`;
+         const url = `http://127.0.0.1:5005/demo-project/us-central1/nearbyGymProxyRequest?latitude=${this.currLatitude}&longitude=${this.currLongitude}&radius=${this.maxDistance * 1000}&key=${this.MAPS_API_KEY}`;
+         // const url = `localhost:4200/nearbyGymProxyRequest?latitude=${this.currLatitude}&longitude=${this.currLongitude}&radius=${this.maxDistance}&key=${this.MAPS_API_KEY}`;
+         fetch(url)
+            .then((response) => response.json())
+            .then((data) => {
+               console.log(data);
+               console.log(data.results);
+               this.gyms = data;
+            })
+            .catch((error) => {
+               console.error(error);
+            });
+      }).catch((error) => {
+         console.log('Error getting current location:', error);
+      });
    }
 
    loadData() {
@@ -164,7 +189,7 @@ export class GymsearchComponent implements OnInit {
    }
 
    selectGym(name: string, chosenPlaceId: string) {
-      this.modalController.dismiss({ selectedGym: name, placeId:chosenPlaceId });
+      this.modalController.dismiss({ selectedGym: name, placeId: chosenPlaceId });
       // alert("gym with name: "+name+"place id: "+place_id);
    }
 
@@ -187,15 +212,6 @@ export class GymsearchComponent implements OnInit {
          };
          return geolocationCoordinates;
       });
-   }
-
-   searchNearbyGyms() {
-      // const apiUrl = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${this.currLatitude},${this.currLongitude}&radius=${this.maxDistance * 1000}&type=gym&key=${this.MAPS_API_KEY}`;
-      // // const headers = new HttpHeaders()
-      // //    .set('X-Requested-With', 'XMLHttpRequest')
-      // // or: .set('X-Requested-With', 'XMLHttpRequest');
-
-      // return this.httpClient.get(apiUrl);
    }
 
    getPhotoUrl(photoReference: string | undefined): string {

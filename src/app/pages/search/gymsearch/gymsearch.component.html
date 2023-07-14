@@ -20,7 +20,7 @@
 
 <ion-item>
   <ion-label position="stacked">Maximum Distance (in kilometers)</ion-label>
-  <ion-input type="number" [(ngModel)]="maxDistance"></ion-input>
+  <ion-input type="number" [(ngModel)]="maxDistance" (ionInput)="searchNearbyGyms()"></ion-input>
 </ion-item>
 
 <!-- <ion-card *ngFor="let item of filteredData$ | async" (click)="selectGym(item.name)">
