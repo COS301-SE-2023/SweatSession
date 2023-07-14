@@ -7,6 +7,8 @@ import { BadgesRepository } from './badges.repository';
 import { OtheruserRepository } from './otheruser.repository';
 import { getAuth } from '@angular/fire/auth';
 import { Timestamp } from "firebase/firestore";
+import { ProfileService } from '../services';
+import { Time } from '@angular/common';
 
 
 @Injectable({
@@ -14,9 +16,9 @@ import { Timestamp } from "firebase/firestore";
 })
 export class LocationRepository {
     currUserId: string | undefined | null;
-  constructor(private firestore: AngularFirestore) { }
+  constructor(private firestore: AngularFirestore, private profileService: ProfileService) { }
 
-  async addGymSession(placeId: string, sessionDate: string, time: string, completedAt: Timestamp){
+  async addGymSession(placeId: string, sessionDate: Date, time: Time, completedAt: Timestamp){
     const auth = getAuth();
     this.currUserId = auth.currentUser?.uid;
     if (this.currUserId!=undefined){
@@ -24,15 +26,20 @@ export class LocationRepository {
     }else{
       this.currUserId = sessionStorage.getItem('currUserId');
     }
-    
-    const userLocationsGymSessionRef = this.firestore.collection('locations').doc(placeId).collection(this.currUserId!).doc();
+    const profileDocRef = this.firestore.collection('profiles').doc(placeId);
+    const userProfile = await this.profileService.getProfile({userId: this.currUserId!}).toPromise();
+    const displayName = userProfile?.profile.displayName;
+    const profilePhoto = userProfile?.profile.profileURL;
 
+
+    const userLocationsGymSessionRef = this.firestore.collection('locations').doc(placeId).collection(this.currUserId!).doc();
     const newGymSessionDoc = {
-        friendDisplayName: "y",
+        friendDisplayName: displayName,
         startTime: time,
         endTime: completedAt,
-        date: sessionDate
-    };
+        date: sessionDate,
+        profilePhoto: profilePhoto
+    }
     
     userLocationsGymSessionRef.set(newGymSessionDoc)
             .then((docRef) => {
