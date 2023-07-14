@@ -49,11 +49,11 @@
   <ion-card-header>
     Friends that go to this gym
   </ion-card-header>
-  <ion-card-content>
+  <ion-card-content class="friend-container">
     <ng-container *ngIf="friends.length > 0; else noFriends">
       <ul class="no-bullet">
-        <li *ngFor="let friend of friends">
-          <img [src]="friend.profilePhoto" alt="Profile Photo" />
+        <li *ngFor="let friend of friends" (click)="viewProfile(friend.id)">
+          <img [src]="friend.profilePhoto" alt="Profile Photo" class="friend-photo"/>
           <div>
             <p>{{ friend.displayName }}</p>
             <p>Date: {{ friend.date }}</p>

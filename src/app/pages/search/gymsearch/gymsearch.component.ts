@@ -34,7 +34,7 @@ export class GymsearchComponent implements OnInit {
       ]
    }
    friends = [
-      {displayName: "Jack", profilePhoto: "", date: "", startTime: "", endTime: ""}
+      {displayName: "Jack", profilePhoto: "https://firebasestorage.googleapis.com/v0/b/timehive-29588.appspot.com/o/profilephoto.jpg?alt=media&token=b82a829e-88ca-4d69-8929-730073ce3240", date: "", startTime: "", endTime: "", id: ""}
    ]
 
    //will get this from the service
@@ -223,4 +223,7 @@ export class GymsearchComponent implements OnInit {
       return `https://maps.googleapis.com/maps/api/place/photo?maxwidth=${maxWidth}&photoreference=${photoReference}&key=${this.MAPS_API_KEY}`;
    }
 
+   viewProfile(id: string){
+
+   }
 }
