@@ -21,6 +21,7 @@ export class DashboardPage implements OnInit {
   upcoming = 0;
   inSession = 0;
   load = true;
+
   constructor(private store:Store) { }
 
   ngOnInit(){

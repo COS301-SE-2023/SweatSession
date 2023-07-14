@@ -21,6 +21,7 @@ export interface IGetMessages {
     userId?: string;
     messageId?: string;
     otheruserId: string;
+    isGroup?: boolean;
 }
 
 export interface IGotMessages {
