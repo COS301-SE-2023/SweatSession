@@ -1,0 +1,68 @@
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-item lines="none">
+      <backbutton (click)="removeSession()"></backbutton>
+      <ion-title>
+        <ion-item lines="none" (click)="viewOtherUser()">
+          <ion-avatar>
+            <ion-img [src]="friendProfile.profileURL" alt="profile pic here"></ion-img>
+          </ion-avatar>
+          <ion-label>
+            <h2>{{friendProfile.displayName}}</h2>
+          </ion-label> 
+        </ion-item>
+      </ion-title>
+      <ion-icon name="ellipsis-vertical-outline" id="trigger" slot="end"></ion-icon>
+      <ion-popover trigger="trigger" triggerAction="click">
+        <ng-template>
+          <ion-item lines="none">
+            clear chat
+          </ion-item>
+        </ng-template>
+      </ion-popover>
+    </ion-item>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content #contentElement>
+  <div class="chat-container">
+    <div *ngFor="let message of chats">
+      <chatbox
+        [message]="message"
+        [currentUserId]="currentUserId"
+      ></chatbox>
+    </div>
+  </div>
+</ion-content>
+
+<ion-footer>
+  <ion-item lines="none">
+    <ion-input placeholder="Type a message" [(ngModel)]="message.text"></ion-input>
+    <ion-icon name="send" (click)="sendMessage()"></ion-icon>
+  </ion-item>
+</ion-footer> -->
+
+<ion-header>
+  <ion-toolbar>
+    <ion-item lines="none">
+      <backbutton></backbutton>
+      <ion-title>
+        <ion-avatar slot="start">
+          <img alt="Silhouette of a person's head" src="src/app/assets/Asset 2.png"/>
+        </ion-avatar>
+        <ion-label>Group name</ion-label>
+      </ion-title>
+    </ion-item>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+</ion-content>
+
+<ion-footer>
+  <ion-item lines="none">
+    <ion-input placeholder="Type a message"></ion-input>
+    <ion-icon name="send"></ion-icon>
+  </ion-item>
+</ion-footer>
