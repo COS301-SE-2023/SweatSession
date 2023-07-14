@@ -33,6 +33,9 @@ export class GymsearchComponent implements OnInit {
          { name: "default", business_status: "default", photos: [{ photo_reference: "default" }], rating: "default", vicinity: "default", place_id: "default" },
       ]
    }
+   friends = [
+      {displayName: "Jack", profilePhoto: "", date: "", startTime: "", endTime: ""}
+   ]
 
    //will get this from the service
 
