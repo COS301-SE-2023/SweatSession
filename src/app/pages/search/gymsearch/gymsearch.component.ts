@@ -120,7 +120,9 @@ export class GymsearchComponent implements OnInit {
       // });
       this.friends$.subscribe((response)=>{
          this.userFriends = response;
-         console.log(this.userFriends);
+         this.userFriends.forEach(element => {
+            console.log(element);
+         });
        })
 
       this.getCurrentLocation().then((coordinates: GeolocationCoordinates) => {

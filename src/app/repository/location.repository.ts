@@ -8,8 +8,10 @@ import { OtheruserRepository } from './otheruser.repository';
 import { getAuth } from '@angular/fire/auth';
 import { Timestamp } from "firebase/firestore";
 import { ProfileService } from '../services';
-import { Time } from '@angular/common';
+import { getLocaleDirection, Time } from '@angular/common';
 import { LocationGymSession } from '../models/location.model';
+import { doc, docData, Firestore } from '@angular/fire/firestore';
+
 
 
 @Injectable({
@@ -17,7 +19,7 @@ import { LocationGymSession } from '../models/location.model';
 })
 export class LocationRepository {
     currUserId: string | undefined | null;
-  constructor(private firestore: AngularFirestore, private profileService: ProfileService) { }
+  constructor(private angularFirestore: AngularFirestore, private profileService: ProfileService, private firestore: Firestore) { }
 
   async addGymSession(placeId: string, sessionDate: Date, time: Time, completedAt: Timestamp){
     const auth = getAuth();
@@ -33,7 +35,7 @@ export class LocationRepository {
     const profilePhoto = userProfile?.profile.profileURL;
 
 
-    const userLocationsGymSessionRef = this.firestore.collection('locations').doc(placeId).collection(this.currUserId!).doc();
+    const userLocationsGymSessionRef = this.angularFirestore.collection('locations').doc(placeId).collection(this.currUserId!).doc();
     const newGymSessionDoc: LocationGymSession = {
         friendDisplayName: displayName,
         startTime: time,
@@ -49,6 +51,7 @@ export class LocationRepository {
             .catch((error) => {
                 console.error('Location: Error creating document:', error);
             });
+
     // const fieldValue = firebase.firestore.FieldValue;
     
     //     const docSnapshot = await userLocationsGymSessionRef.get().toPromise(); // Convert Observable to Promise
@@ -77,5 +80,28 @@ export class LocationRepository {
     //         console.log("Document does not exist");
     //         return null;
     //     }
+  }
+
+  async getLocation(){
+      const auth = getAuth();
+      this.currUserId = auth.currentUser?.uid;
+      if (this.currUserId!=undefined){
+        sessionStorage.setItem('currUserId', this.currUserId);
+      }else{
+        this.currUserId = sessionStorage.getItem('currUserId');
+      }
+      // alert(AuthState.currUserId);
+      // alert("IN badges.api.ts");
+      // alert(currUserId);
+      const docRef = doc(
+        this.firestore,
+        `locations/${this.currUserId}`
+      ).withConverter<ILocation>({       //convert our firestore data into the IBadges type
+        fromFirestore: (snapshot) => {
+          return (snapshot.data() as ILocation);
+        },
+        toFirestore: (it: ILocation) => it,
+      });
+      return docData(docRef, { idField: 'id' });
   }
 }
