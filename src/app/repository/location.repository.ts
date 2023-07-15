@@ -82,7 +82,7 @@ export class LocationRepository {
     //     }
   }
 
-  async getLocation(){
+  async getLocation(placeId: string){
       const auth = getAuth();
       this.currUserId = auth.currentUser?.uid;
       if (this.currUserId!=undefined){
@@ -95,7 +95,7 @@ export class LocationRepository {
       // alert(currUserId);
       const docRef = doc(
         this.firestore,
-        `locations/${this.currUserId}`
+        `locations/${placeId}`
       ).withConverter<ILocation>({       //convert our firestore data into the IBadges type
         fromFirestore: (snapshot) => {
           return (snapshot.data() as ILocation);
