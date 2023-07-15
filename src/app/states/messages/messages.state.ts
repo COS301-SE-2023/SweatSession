@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Action, Selector, State, StateContext } from "@ngxs/store";
-import { IMessage, IChatFriend, IGetChatFriends, IGetMessages, ISendMessage, IDeleteMessage, IProfileModel, IFriendsModel } from "src/app/models";
-import { DeleteMessage, GetMessages, SendMessage, GetChatFriends, StageChatFriend, GetFriendsProfiles, GetChatFriend, RemoveChatFriendSession } from 'src/app/actions';
+import { IMessage, IChatFriend, IGetChatFriends, IGetMessages, ISendMessage, IDeleteMessage, IProfileModel, IFriendsModel, IGroup, IGetGroups } from "src/app/models";
+import { DeleteMessage, GetMessages, SendMessage, GetChatFriends, StageChatFriend, GetFriendsProfiles, GetChatFriend, RemoveChatFriendSession, SendGroupMessage, RemoveChatGroupSession, GetGroups } from 'src/app/actions';
 import { AuthApi } from "../auth";
 import { FriendsService, MessagesService, OtheruserService } from "src/app/services";
 import { tap } from "rxjs";
@@ -14,6 +14,7 @@ export interface MessagesStateModel {
     friendProfiles?: IProfileModel[];
     f?: IFriendsModel[];
     chatFriendProfile?: IProfileModel;
+    chatGroups?: IGroup[];
 }
 
 @State<MessagesStateModel>({
@@ -24,7 +25,8 @@ export interface MessagesStateModel {
         chatFriend: "",
         friendProfiles: [],
         f: [],
-        chatFriendProfile: {}
+        chatFriendProfile: {},
+        chatGroups: []
     }
 })
 
@@ -87,6 +89,21 @@ export class MessagesState {
                 chat: payload
             }
             this.service.sendMessage(request);
+        }else {
+            ctx.dispatch(new Navigate(['home/dashboard']));
+        }
+    }
+
+    @Action(SendGroupMessage)
+    async sendGroupMessage(ctx: StateContext<MessagesStateModel>, {payload}: SendGroupMessage) {
+        const currentUserId = await this.authApi.getCurrentUserId();
+        if(currentUserId) {
+            payload.senderId = currentUserId;
+            payload.receiverId = sessionStorage.getItem('groupChat')!;
+            const request: ISendMessage = {
+                chat: payload
+            }
+            this.service.sendGroupMessage(request);
         }else {
             ctx.dispatch(new Navigate(['home/dashboard']));
         }
@@ -169,6 +186,28 @@ export class MessagesState {
         return;
     }
 
+    @Action(GetGroups)
+    async getChatGroups (ctx: StateContext<MessagesStateModel>) {
+        const currentUserId = await this.authApi.getCurrentUserId();
+
+        if(currentUserId) {
+           const request: IGetGroups = {
+            userId: currentUserId
+           }
+
+           return (await this.service.getGroups(request)).pipe(
+            tap((response)=>{
+                const groups: IGroup[] = response.groups;
+
+                ctx.patchState({
+                    chatGroups: groups
+                })
+            })
+           )
+        }
+        return;
+    }
+
     @Action(RemoveChatFriendSession)
     async removeChatFriendSession() {
         sessionStorage.removeItem('chatFriend');
@@ -192,5 +231,10 @@ export class MessagesState {
     @Selector()
     static returnChatFriendProfile(state: MessagesStateModel) {
         return state.chatFriendProfile;
+    }
+
+    @Selector()
+    static returnGroup(state: MessagesStateModel) {
+        return state.chatGroups;
     }
 }
