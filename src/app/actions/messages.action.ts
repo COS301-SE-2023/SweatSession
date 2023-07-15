@@ -1,4 +1,4 @@
-import { IGetMessages, IMessage } from "../models";
+import { IGetMessages, IGroup, IMessage } from "../models";
 
 export class GetChatFriends {
     static readonly type = "[messages] get chat friends";
@@ -34,4 +34,22 @@ export class GetChatFriend {
 
 export class RemoveChatFriendSession {
     static readonly type  = "[messages] remove chat friend from session storage";
+}
+
+export class RemoveChatGroupSession {
+    static readonly type  = "[messages] remove chat group from session storage";
+}
+
+export class GetGroups {
+    static readonly type = "[messages] get groups";
+}
+
+export class SendGroupMessage {
+    static readonly type = "[messages] send a group message";
+    constructor(public payload: IMessage) {}
+}
+
+export class AddChatGroup {
+    static readonly type = "[messages] add chat group";
+    constructor(public paload: IGroup) {}
 }
