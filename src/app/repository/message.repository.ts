@@ -1,8 +1,18 @@
 import { Injectable } from "@angular/core";
-import { IMessage, IDeleteMessage, IGetChatFriends, IGetMessages, IGotMessages, ISendMessage, IChatFriend, IProfileModel, IDeletedMessage, IGotChatsFriends } from "../models";
-import { AngularFirestore, AngularFirestoreCollection, DocumentChangeAction } from "@angular/fire/compat/firestore";
-import { Observable, combineLatest, from, last, lastValueFrom, map, mergeMap, of, switchMap, toArray } from "rxjs";
-import { GetChatFriends } from "../actions";
+import { IMessage,
+   IDeleteMessage, 
+   IGetChatFriends, 
+   IGetMessages, 
+   IGotMessages, 
+   ISendMessage, 
+   IChatFriend, 
+   IProfileModel, 
+   IDeletedMessage, 
+   IGotChatsFriends, 
+   IGetGroups, 
+   IGroup } from "../models";
+import { AngularFirestore, AngularFirestoreCollection } from "@angular/fire/compat/firestore";
+import { Observable,lastValueFrom, map } from "rxjs";
 
 @Injectable({
     providedIn: 'root'
@@ -12,34 +22,41 @@ import { GetChatFriends } from "../actions";
     constructor(private firestore: AngularFirestore) {}
 
     async sendMessage(request: ISendMessage) {
-        //add to current user collection
-        const messageDoc = this.firestore
-            .collection<IMessage>(`messages/${request.chat.senderId}/${request.chat.receiverId}`)
-            .doc();
-            messageDoc.set(request.chat);
+      //add to current user collection
+      const messageDoc = this.firestore
+        .collection<IMessage>(`messages/${request.chat.senderId}/${request.chat.receiverId}`)
+        .doc();
+      messageDoc.set(request.chat);
 
-        //add to receiver collection
-        const otheruserMessegeDoc = this.firestore
-            .collection<IMessage>(`messages/${request.chat.receiverId}/${request.chat.senderId}`)
-            .doc();
-            otheruserMessegeDoc.set(request.chat);
+      //add to receiver collection
+      const otheruserMessegeDoc = this.firestore
+        .collection<IMessage>(`messages/${request.chat.receiverId}/${request.chat.senderId}`)
+        .doc();
+      otheruserMessegeDoc.set(request.chat);
 
-        //update user collection
-        const currentUserDoc= this.firestore
-            .collection(`users/${request.chat.senderId}/chatFriends`)
-            .doc(`${request.chat.receiverId}`)
-            .set({
-                userId: request.chat.receiverId,
-                lastChatId:  messageDoc.ref.id
-            })
+      //update user collection
+      const currentUserDoc= this.firestore
+        .collection(`users/${request.chat.senderId}/chatFriends`)
+        .doc(`${request.chat.receiverId}`)
+        .set({
+            userId: request.chat.receiverId,
+            lastChatId:  messageDoc.ref.id
+      })
 
-        const chatFriendsDoc= this.firestore
-            .collection(`users/${request.chat.receiverId}/chatFriends`)
-            .doc(`${request.chat.senderId}`)
-            .set({
-                userId: request.chat.senderId,
-                lastChatId:  otheruserMessegeDoc.ref.id
-            })
+      const chatFriendsDoc= this.firestore
+        .collection(`users/${request.chat.receiverId}/chatFriends`)
+        .doc(`${request.chat.senderId}`)
+        .set({
+            userId: request.chat.senderId,
+            lastChatId:  otheruserMessegeDoc.ref.id
+      })
+    }
+
+    async sendGroupMessage(request: ISendMessage) {
+      const messageDoc = this.firestore
+        .collection<IMessage>(`groups/${request.chat.receiverId}/messages`)
+        .doc();
+        messageDoc.set(request.chat);
     }
 
     getChatFriends(request: IGetChatFriends): Observable<IGotChatsFriends> {
@@ -79,16 +96,24 @@ import { GetChatFriends } from "../actions";
     }
     
     getMessages(request: IGetMessages): Observable<IGotMessages> {
-        const messageCollection:AngularFirestoreCollection<IMessage> = this.firestore.collection<IMessage>(`messages/${request.userId}/${request.otheruserId}`,(ref) =>
-        ref.orderBy('date', 'asc'));
-
+        let messageCollection:AngularFirestoreCollection<IMessage>;
+        
+        if(!request.isGroup) {
+          messageCollection = this.firestore.collection<IMessage>(`messages/${request.userId}/${request.otheruserId}`,(ref) =>
+          ref.orderBy('date', 'asc'));  
+        }else {
+          messageCollection = this.firestore.collection<IMessage>(`groups/${request.otheruserId}/messages`,(ref) => 
+          ref.orderBy('date', 'asc'));
+        }
+       
         return messageCollection.snapshotChanges().pipe(
             map((snapshot) => {
                 let messages: IMessage[] = [];
 
                 snapshot.forEach((doc)=>{
                     const message = {
-                        ...doc.payload.doc.data()
+                        ...doc.payload.doc.data(),
+                        id: doc.payload.doc.id
                     }
 
                     messages.push(message);
@@ -100,6 +125,29 @@ import { GetChatFriends } from "../actions";
                 }
             })
         )
+    }
+
+    getGroups(request: IGetGroups) {
+      const groupCollection: AngularFirestoreCollection<IGroup> = this.firestore.collection<IGroup>(`users/${request.userId}/userGroups`);
+
+      return groupCollection.snapshotChanges().pipe(
+        map((snapshot)=>{
+          let groups: IGroup[] = [];
+
+          snapshot.forEach((doc)=>{
+            const group = {
+              ...doc.payload.doc.data()
+            }
+
+            groups.push(group);
+          })
+
+          return {
+            groups: groups,
+            validate: true
+          }
+        })
+      )
     }
 
     deleteMessage(request: IDeleteMessage) {
