@@ -92,11 +92,26 @@ export class GymsearchComponent implements OnInit {
 
    unfilteredData$ = this.data;
 
-   ngOnInit() {
+   async ngOnInit() {
 
       this.store.dispatch(new GetFriendsAction());
-      // this.loadData();
       this.triggerfilter();
+      this.friends$.subscribe((response) => {
+         this.userFriends = response;
+         this.userFriends.forEach(element => {
+            console.log(element);
+         });
+      })
+
+      const coordinates = await this.getCurrentLocation();
+      this.currLatitude = coordinates.latitude;
+      this.currLongitude = coordinates.longitude;
+      console.log('Latitude:', this.currLatitude);
+      console.log('Longitude:', this.currLongitude);
+      console.log('maxDistance:', this.maxDistance);
+      await this.loadData();
+      await this.getGymUsersForGyms();
+      console.log(this.gymUsers);
       // if (navigator.geolocation) {
       //   navigator.geolocation.getCurrentPosition();
       //   navigator.geolocation.getCurrentPosition(function (position) {
@@ -120,43 +135,35 @@ export class GymsearchComponent implements OnInit {
       //    console.log("Your friends");
       //    console.log(this.userFriends);
       // });
-      this.friends$.subscribe((response) => {
-         this.userFriends = response;
-         this.userFriends.forEach(element => {
-            console.log(element);
-         });
-      })
-
-      this.getCurrentLocation().then((coordinates: GeolocationCoordinates) => {
-         this.currLatitude = coordinates.latitude;
-         this.currLongitude = coordinates.longitude;
-         console.log('Latitude:', this.currLatitude);
-         console.log('Longitude:', this.currLongitude);
-         console.log('maxDistance:', this.maxDistance);
-         // const url = `https://us-central1-sweatsession.cloudfunctions.net/nearbyGymProxyRequest?latitude=${this.currLatitude}&longitude=${this.currLongitude}&radius=${this.maxDistance*1000}&key=${this.MAPS_API_KEY}`;
-         this.loadData().catch((error) => {
-            console.error(error);
-          });
-         this.gymUsers = [];
-         this.gyms.results.forEach((gym) => {
-            this.getGymUsers(gym.place_id).subscribe((response) => {
-               this.gymUsers.push(response);
-            });
-         });
-         console.log(this.gymUsers);
-         // this.gymsSubscription = this.locationService.searchNearbyGyms(this.currLatitude, this.currLongitude, this.maxDistance, this.MAPS_API_KEY).subscribe((gyms) => {
-         //    console.log('Nearby gyms:', gyms);
-         // }, (error) => {
-         //    console.error('Error searching for nearby gyms:', error);
-         // });
-         // this.gymsSubscription = this.searchNearbyGyms().subscribe((gyms) => {
-         //   console.log('Nearby gyms:', gyms);
-         // }, (error) => {
-         //   console.error('Error searching for nearby gyms:', error);
-         // });
-      }).catch((error) => {
-         console.log('Error getting current location:', error);
-      });
+      // this.getCurrentLocation().then((coordinates: GeolocationCoordinates) => {
+      //    this.currLatitude = coordinates.latitude;
+      //    this.currLongitude = coordinates.longitude;
+      //    console.log('Latitude:', this.currLatitude);
+      //    console.log('Longitude:', this.currLongitude);
+      //    console.log('maxDistance:', this.maxDistance);
+      //    // const url = `https://us-central1-sweatsession.cloudfunctions.net/nearbyGymProxyRequest?latitude=${this.currLatitude}&longitude=${this.currLongitude}&radius=${this.maxDistance*1000}&key=${this.MAPS_API_KEY}`;
+      //    await this.loadData();
+      //    this.gymUsers = [];
+      //    this.gyms.results.forEach((gym) => {
+      //       console.log(gym)
+      //       this.getGymUsers(gym.place_id).subscribe((response) => {
+      //          this.gymUsers.push(response);
+      //       });
+      //    });
+      //    console.log(this.gymUsers);
+      //    // this.gymsSubscription = this.locationService.searchNearbyGyms(this.currLatitude, this.currLongitude, this.maxDistance, this.MAPS_API_KEY).subscribe((gyms) => {
+      //    //    console.log('Nearby gyms:', gyms);
+      //    // }, (error) => {
+      //    //    console.error('Error searching for nearby gyms:', error);
+      //    // });
+      //    // this.gymsSubscription = this.searchNearbyGyms().subscribe((gyms) => {
+      //    //   console.log('Nearby gyms:', gyms);
+      //    // }, (error) => {
+      //    //   console.error('Error searching for nearby gyms:', error);
+      //    // });
+      // }).catch((error) => {
+      //    console.log('Error getting current location:', error);
+      // });
       // const nearbyGymProxyRequestFunction = firebase.functions().httpsCallable('nearbyGymProxyRequest');
       // const functions = getFunctions();
       // const nearbyGymProxyRequest = httpsCallable(functions, 'nearbyGymProxyRequest');
@@ -170,9 +177,8 @@ export class GymsearchComponent implements OnInit {
          console.log('Latitude:', this.currLatitude);
          console.log('Longitude:', this.currLongitude);
          console.log('maxDistance:', this.maxDistance);
-         // const url = `https://us-central1-sweatsession.cloudfunctions.net/nearbyGymProxyRequest?latitude=${this.currLatitude}&longitude=${this.currLongitude}&radius=${this.maxDistance*1000}&key=${this.MAPS_API_KEY}`;
-         const url = `http://127.0.0.1:5005/demo-project/us-central1/nearbyGymProxyRequest?latitude=${this.currLatitude}&longitude=${this.currLongitude}&radius=${this.maxDistance * 1000}&key=${this.MAPS_API_KEY}`;
-         // const url = `localhost:4200/nearbyGymProxyRequest?latitude=${this.currLatitude}&longitude=${this.currLongitude}&radius=${this.maxDistance}&key=${this.MAPS_API_KEY}`;
+         const url = `https://us-central1-sweatsession.cloudfunctions.net/nearbyGymProxyRequest?latitude=${this.currLatitude}&longitude=${this.currLongitude}&radius=${this.maxDistance * 1000}&key=${this.MAPS_API_KEY}`;
+         // const url = `http://127.0.0.1:5005/demo-project/us-central1/nearbyGymProxyRequest?latitude=${this.currLatitude}&longitude=${this.currLongitude}&radius=${this.maxDistance * 1000}&key=${this.MAPS_API_KEY}`;
          fetch(url)
             .then((response) => response.json())
             .then((data) => {
@@ -190,16 +196,17 @@ export class GymsearchComponent implements OnInit {
 
    async loadData(): Promise<void> {
       try {
-        const url = `http://127.0.0.1:5005/demo-project/us-central1/nearbyGymProxyRequest?latitude=${this.currLatitude}&longitude=${this.currLongitude}&radius=${this.maxDistance * 1000}&key=${this.MAPS_API_KEY}`;
-        const response = await fetch(url);
-        const data = await response.json();
-        console.log(data);
-        console.log(data.results);
-        this.gyms = data;
+         const url = `http://127.0.0.1:5005/demo-project/us-central1/nearbyGymProxyRequest?latitude=${this.currLatitude}&longitude=${this.currLongitude}&radius=${this.maxDistance * 1000}&key=${this.MAPS_API_KEY}`;
+         // const url = `https://us-central1-sweatsession.cloudfunctions.net/nearbyGymProxyRequest?latitude=${this.currLatitude}&longitude=${this.currLongitude}&radius=${this.maxDistance*1000}&key=${this.MAPS_API_KEY}`;
+         const response = await fetch(url);
+         const data = await response.json();
+         console.log(data);
+         console.log(data.results);
+         this.gyms = data;
       } catch (error) {
-        console.error(error);
+         console.error(error);
       }
-    }
+   }
 
    triggerfilter() {
       this.filteredData$ = this.searchTerm$.pipe(
@@ -259,27 +266,25 @@ export class GymsearchComponent implements OnInit {
 
       return `https://maps.googleapis.com/maps/api/place/photo?maxwidth=${maxWidth}&photoreference=${photoReference}&key=${this.MAPS_API_KEY}`;
    }
-   
+
 
    getGymUsers(placeId: string) {
-      console.log('Getting gym users for place ID:', placeId);
-      return this.locationRepository.getLocation(placeId);
+      const locationObservable = this.locationRepository.getLocation(placeId);
+      console.log(locationObservable);
+      return locationObservable;
+   }
+
+   async getGymUsersForGyms() {
+      this.gymUsers = [];
+      this.gyms.results.forEach((gym) => {
+         this.getGymUsers(gym.place_id).subscribe((response) => {
+            this.gymUsers.push(response);
+            console.log(response)
+         });
+      });
    }
 
    viewProfile(id: string) {
 
    }
-
-   // async getCurrUserFriends() {
-   //    const auth = getAuth();
-   //    this.currUserId = auth.currentUser?.uid;
-   //    if (this.currUserId != undefined) {
-   //       sessionStorage.setItem('currUserId', this.currUserId);
-   //    } else {
-   //       this.currUserId = sessionStorage.getItem('currUserId');
-   //    }
-   //    const userFriends = await this.friendsRepository.getFriends({ userId: this.currUserId! }).toPromise();
-   //    console.log(userFriends);
-   //    return userFriends?.friends;
-   // }
 }
