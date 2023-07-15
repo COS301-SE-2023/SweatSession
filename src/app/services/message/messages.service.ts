@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IDeleteMessage, IGetChatFriends, IGetMessages, ISendMessage } from 'src/app/models';
+import { IDeleteMessage, IGetChatFriends, IGetGroups, IGetMessages, ISendMessage } from 'src/app/models';
 import { MessageRepository } from 'src/app/repository';
 
 @Injectable({
@@ -11,6 +11,10 @@ export class MessagesService {
 
   async sendMessage(request: ISendMessage) {
     return this.repository.sendMessage(request);
+  }
+
+  async sendGroupMessage(request: ISendMessage) {
+    return this.repository.sendGroupMessage(request);
   }
 
   async getChatFriends(request: IGetChatFriends) {
@@ -27,5 +31,9 @@ export class MessagesService {
 
   async getProfile(request: string) {
     return this.repository.getProfile(request);
+  }
+
+  async getGroups(request: IGetGroups) {
+    return this.repository.getGroups(request);
   }
 }
