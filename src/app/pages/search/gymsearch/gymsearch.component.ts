@@ -14,6 +14,7 @@ import { FriendsState } from 'src/app/states';
 import { Select, Store } from '@ngxs/store';
 import { IFriendsModel } from 'src/app/models';
 import { GetFriendsAction } from 'src/app/actions';
+import { LocationRepository } from 'src/app/repository/location.repository';
 
 @Component({
    selector: 'gymsearch',
@@ -22,7 +23,7 @@ import { GetFriendsAction } from 'src/app/actions';
 })
 export class GymsearchComponent implements OnInit {
    currUserId: string | undefined | null;
-   constructor(private store: Store, private modalController: ModalController, private geolocation: Geolocation, private httpClient: HttpClient, private locationService: LocationsService, private friendsRepository: FriendsRepository, private friendsState: FriendsState) {
+   constructor(private store: Store, private modalController: ModalController, private geolocation: Geolocation, private httpClient: HttpClient, private locationRepository: LocationRepository, private friendsRepository: FriendsRepository, private friendsState: FriendsState) {
       this.data.filter(item => item.name.includes(''));
    }
 
@@ -51,7 +52,8 @@ export class GymsearchComponent implements OnInit {
          }]
       }
    ]
-   userFriends:IFriendsModel[]=[];
+   userFriends: IFriendsModel[] = [];
+   gymUsers: any;
 
    //will get this from the service
 
@@ -118,12 +120,12 @@ export class GymsearchComponent implements OnInit {
       //    console.log("Your friends");
       //    console.log(this.userFriends);
       // });
-      this.friends$.subscribe((response)=>{
+      this.friends$.subscribe((response) => {
          this.userFriends = response;
          this.userFriends.forEach(element => {
             console.log(element);
          });
-       })
+      })
 
       this.getCurrentLocation().then((coordinates: GeolocationCoordinates) => {
          this.currLatitude = coordinates.latitude;
@@ -132,20 +134,16 @@ export class GymsearchComponent implements OnInit {
          console.log('Longitude:', this.currLongitude);
          console.log('maxDistance:', this.maxDistance);
          // const url = `https://us-central1-sweatsession.cloudfunctions.net/nearbyGymProxyRequest?latitude=${this.currLatitude}&longitude=${this.currLongitude}&radius=${this.maxDistance*1000}&key=${this.MAPS_API_KEY}`;
-         const url = `http://127.0.0.1:5005/demo-project/us-central1/nearbyGymProxyRequest?latitude=${this.currLatitude}&longitude=${this.currLongitude}&radius=${this.maxDistance * 1000}&key=${this.MAPS_API_KEY}`;
-         // const url = `localhost:4200/nearbyGymProxyRequest?latitude=${this.currLatitude}&longitude=${this.currLongitude}&radius=${this.maxDistance}&key=${this.MAPS_API_KEY}`;
-         fetch(url)
-            .then((response) => response.json())
-            .then((data) => {
-               // Handle the response data
-               console.log(data);
-               console.log(data.results);
-               this.gyms = data;
-            })
-            .catch((error) => {
-               // Handle any errors that occur during the request
-               console.error(error);
+         this.loadData().catch((error) => {
+            console.error(error);
+          });
+         this.gymUsers = [];
+         this.gyms.results.forEach((gym) => {
+            this.getGymUsers(gym.place_id).subscribe((response) => {
+               this.gymUsers.push(response);
             });
+         });
+         console.log(this.gymUsers);
          // this.gymsSubscription = this.locationService.searchNearbyGyms(this.currLatitude, this.currLongitude, this.maxDistance, this.MAPS_API_KEY).subscribe((gyms) => {
          //    console.log('Nearby gyms:', gyms);
          // }, (error) => {
@@ -190,9 +188,18 @@ export class GymsearchComponent implements OnInit {
       });
    }
 
-   loadData() {
-      this.onSearchInput('');
-   }
+   async loadData(): Promise<void> {
+      try {
+        const url = `http://127.0.0.1:5005/demo-project/us-central1/nearbyGymProxyRequest?latitude=${this.currLatitude}&longitude=${this.currLongitude}&radius=${this.maxDistance * 1000}&key=${this.MAPS_API_KEY}`;
+        const response = await fetch(url);
+        const data = await response.json();
+        console.log(data);
+        console.log(data.results);
+        this.gyms = data;
+      } catch (error) {
+        console.error(error);
+      }
+    }
 
    triggerfilter() {
       this.filteredData$ = this.searchTerm$.pipe(
@@ -251,6 +258,12 @@ export class GymsearchComponent implements OnInit {
       const maxWidth = 400; // Replace with your desired width
 
       return `https://maps.googleapis.com/maps/api/place/photo?maxwidth=${maxWidth}&photoreference=${photoReference}&key=${this.MAPS_API_KEY}`;
+   }
+   
+
+   getGymUsers(placeId: string) {
+      console.log('Getting gym users for place ID:', placeId);
+      return this.locationRepository.getLocation(placeId);
    }
 
    viewProfile(id: string) {
