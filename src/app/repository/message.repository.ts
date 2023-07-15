@@ -10,7 +10,8 @@ import { IMessage,
    IDeletedMessage, 
    IGotChatsFriends, 
    IGetGroups, 
-   IGroup } from "../models";
+   IGroup, 
+   IAddChatGroup} from "../models";
 import { AngularFirestore, AngularFirestoreCollection } from "@angular/fire/compat/firestore";
 import { Observable,lastValueFrom, map } from "rxjs";
 
@@ -167,6 +168,13 @@ import { Observable,lastValueFrom, map } from "rxjs";
 
         return response;
        }
+    }
+
+    async addChatGroup(request: IAddChatGroup) {
+      const groupCollection = this.firestore
+      .collection<IGroup>(`users/${request.userId}/userGroups`)
+      .doc()
+      .set(request.group);
     }
 
     async getProfile(userId: string) {

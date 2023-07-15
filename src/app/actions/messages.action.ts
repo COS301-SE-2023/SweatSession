@@ -51,5 +51,5 @@ export class SendGroupMessage {
 
 export class AddChatGroup {
     static readonly type = "[messages] add chat group";
-    constructor(public paload: IGroup) {}
+    constructor(public payload: IGroup) {}
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IDeleteMessage, IGetChatFriends, IGetGroups, IGetMessages, ISendMessage } from 'src/app/models';
+import { IAddChatGroup, IDeleteMessage, IGetChatFriends, IGetGroups, IGetMessages, ISendMessage } from 'src/app/models';
 import { MessageRepository } from 'src/app/repository';
 
 @Injectable({
@@ -35,5 +35,9 @@ export class MessagesService {
 
   async getGroups(request: IGetGroups) {
     return this.repository.getGroups(request);
+  }
+
+  async addChatGroup(request: IAddChatGroup) {
+    return this.repository.addChatGroup(request);
   }
 }

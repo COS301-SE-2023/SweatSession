@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Action, Selector, State, StateContext } from "@ngxs/store";
-import { IMessage, IChatFriend, IGetChatFriends, IGetMessages, ISendMessage, IDeleteMessage, IProfileModel, IFriendsModel, IGroup, IGetGroups } from "src/app/models";
-import { DeleteMessage, GetMessages, SendMessage, GetChatFriends, StageChatFriend, GetFriendsProfiles, GetChatFriend, RemoveChatFriendSession, SendGroupMessage, RemoveChatGroupSession, GetGroups } from 'src/app/actions';
+import { IMessage, IChatFriend, IGetChatFriends, IGetMessages, ISendMessage, IDeleteMessage, IProfileModel, IFriendsModel, IGroup, IGetGroups, IAddChatGroup } from "src/app/models";
+import { DeleteMessage, GetMessages, SendMessage, GetChatFriends, StageChatFriend, GetFriendsProfiles, GetChatFriend, RemoveChatFriendSession, SendGroupMessage, RemoveChatGroupSession, GetGroups, AddChatGroup } from 'src/app/actions';
 import { AuthApi } from "../auth";
 import { FriendsService, MessagesService, OtheruserService } from "src/app/services";
 import { tap } from "rxjs";
@@ -206,6 +206,19 @@ export class MessagesState {
            )
         }
         return;
+    }
+
+    @Action(AddChatGroup)
+    async addGroupChat(ctx: StateContext<MessagesStateModel>,{payload}: AddChatGroup) {
+        const currentUserId = await this.authApi.getCurrentUserId();
+        if(currentUserId) {
+            payload.admin?.push(currentUserId);
+            const request:IAddChatGroup = {
+                userId: currentUserId,
+                group: payload
+            }
+            this.service.addChatGroup(request);
+        }
     }
 
     @Action(RemoveChatFriendSession)
