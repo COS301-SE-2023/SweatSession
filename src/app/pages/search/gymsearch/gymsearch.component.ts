@@ -7,6 +7,13 @@ import { environment } from 'src/environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { LocationsService } from 'src/app/services/location/location.services';
 import { getFunctions, httpsCallable } from '@angular/fire/functions';
+import { FriendsService } from 'src/app/services';
+import { getAuth, user } from '@angular/fire/auth';
+import { FriendsRepository } from 'src/app/repository';
+import { FriendsState } from 'src/app/states';
+import { Select, Store } from '@ngxs/store';
+import { IFriendsModel } from 'src/app/models';
+import { GetFriendsAction } from 'src/app/actions';
 
 @Component({
    selector: 'gymsearch',
@@ -14,11 +21,12 @@ import { getFunctions, httpsCallable } from '@angular/fire/functions';
    styleUrls: ['./gymsearch.component.scss'],
 })
 export class GymsearchComponent implements OnInit {
-
-   constructor(private modalController: ModalController, private geolocation: Geolocation, private httpClient: HttpClient, private locationService: LocationsService) {
+   currUserId: string | undefined | null;
+   constructor(private store: Store, private modalController: ModalController, private geolocation: Geolocation, private httpClient: HttpClient, private locationService: LocationsService, private friendsRepository: FriendsRepository, private friendsState: FriendsState) {
       this.data.filter(item => item.name.includes(''));
    }
 
+   @Select(FriendsState.returnFriends) friends$!: Observable<IFriendsModel[]>;
    searchTerm: string | undefined;
    filteredData$: Observable<any[]> = of([]);
    // unfilteredData$: any[] = [];
@@ -34,15 +42,16 @@ export class GymsearchComponent implements OnInit {
       ]
    }
    friends = [
-      { 
-         displayName: "Jack", 
-         profilePhoto: "https://cdn.pixabay.com/photo/2013/07/12/14/36/man-148582_1280.png", 
-         id: "", 
+      {
+         displayName: "Jack",
+         profilePhoto: "https://cdn.pixabay.com/photo/2013/07/12/14/36/man-148582_1280.png",
+         id: "",
          gymSessions: [{
             date: "", startTime: "", endTime: ""
          }]
       }
    ]
+   userFriends:IFriendsModel[]=[];
 
    //will get this from the service
 
@@ -83,6 +92,7 @@ export class GymsearchComponent implements OnInit {
 
    ngOnInit() {
 
+      this.store.dispatch(new GetFriendsAction());
       // this.loadData();
       this.triggerfilter();
       // if (navigator.geolocation) {
@@ -102,6 +112,17 @@ export class GymsearchComponent implements OnInit {
       //   console.log('Error getting current location:', error);
       //   Handle error
       // }
+
+      // this.getCurrUserFriends().then((friends)=>{
+      //    this.userFriends=friends;
+      //    console.log("Your friends");
+      //    console.log(this.userFriends);
+      // });
+      this.friends$.subscribe((response)=>{
+         this.userFriends = response;
+         console.log(this.userFriends);
+       })
+
       this.getCurrentLocation().then((coordinates: GeolocationCoordinates) => {
          this.currLatitude = coordinates.latitude;
          this.currLongitude = coordinates.longitude;
@@ -233,4 +254,17 @@ export class GymsearchComponent implements OnInit {
    viewProfile(id: string) {
 
    }
+
+   // async getCurrUserFriends() {
+   //    const auth = getAuth();
+   //    this.currUserId = auth.currentUser?.uid;
+   //    if (this.currUserId != undefined) {
+   //       sessionStorage.setItem('currUserId', this.currUserId);
+   //    } else {
+   //       this.currUserId = sessionStorage.getItem('currUserId');
+   //    }
+   //    const userFriends = await this.friendsRepository.getFriends({ userId: this.currUserId! }).toPromise();
+   //    console.log(userFriends);
+   //    return userFriends?.friends;
+   // }
 }

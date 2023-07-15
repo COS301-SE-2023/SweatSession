@@ -48,7 +48,7 @@
   </ion-card-content>
   <ion-card-content class="friend-container">
     <ion-card-header>
-      Friends that go to this gym
+      Friends that have workout sessions scheduled here
     </ion-card-header>
     <ng-container *ngIf="friends.length > 0; else noFriends">
       <ul class="no-bullet">
@@ -62,14 +62,13 @@
                 <p>{{ gymSession.date }}: {{ gymSession.startTime }}-{{ gymSession.endTime }}</p>
               </li>
             </ul>
-            
           </div>
           </div>
         </li>
       </ul>
     </ng-container>
     <ng-template #noFriends>
-      No friends go to this gym
+      No friends have workout sessions scheduled here
     </ng-template>
   </ion-card-content>
   </ng-container>
