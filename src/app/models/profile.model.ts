@@ -11,6 +11,7 @@ export interface IProfileModel {
     height?: string;
     weight?: string;
     points?: number;
+    groupIds?: string[];
 }
 
 //requests
@@ -37,4 +38,13 @@ export interface IGotProfile {
 
 export interface IUpdatedProfile {
     validate: boolean;
+}
+
+export interface IGroup {
+    id: string;
+    displayName?: string;
+    profileURL?: string;
+    bio?: string;
+    admin?: string[];
+    lastChatid?: string;
 }
