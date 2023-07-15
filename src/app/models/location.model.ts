@@ -9,3 +9,7 @@ export interface LocationGymSession {
     date: Date,
     profilePhoto: string|undefined
 }
+
+export interface ILocation {
+    gymUsers: any[]
+}

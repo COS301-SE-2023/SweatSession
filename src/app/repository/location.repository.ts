@@ -9,7 +9,7 @@ import { getAuth } from '@angular/fire/auth';
 import { Timestamp } from "firebase/firestore";
 import { ProfileService } from '../services';
 import { getLocaleDirection, Time } from '@angular/common';
-import { LocationGymSession } from '../models/location.model';
+import { ILocation, LocationGymSession } from '../models/location.model';
 import { doc, docData, Firestore } from '@angular/fire/firestore';
 
 
