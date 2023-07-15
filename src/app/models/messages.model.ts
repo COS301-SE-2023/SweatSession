@@ -1,5 +1,5 @@
 import { Timestamp } from "firebase/firestore";
-import { IProfileModel } from "./profile.model";
+import { IGroup, IProfileModel } from "./profile.model";
 
 //chat interface
 export interface IMessage {
@@ -13,6 +13,12 @@ export interface IMessage {
 //chat friends interfaces
 export interface IChatFriend {
     user: IProfileModel;
+    lastChat?: IMessage;
+}
+
+//group interface
+export interface IChatGroup {
+    group: IGroup;
     lastChat?: IMessage;
 }
 
@@ -57,5 +63,24 @@ export interface IDeleteMessage {
 }
 
 export interface IDeletedMessage {
+    validate: boolean;
+}
+
+export interface IAddChatGroup {
+    userId?: string;
+    group: IGroup;
+}
+
+export interface IAddedChatGroup {
+    validate: boolean;
+}
+
+//get groups
+export interface IGetGroups {
+    userId: string;
+}
+
+export interface IGotGroups {
+    groups: IGroup[];
     validate: boolean;
 }
