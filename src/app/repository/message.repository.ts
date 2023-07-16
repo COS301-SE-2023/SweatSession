@@ -11,7 +11,10 @@ import { IMessage,
    IGotChatsFriends, 
    IGetGroups, 
    IGroup, 
-   IAddChatGroup} from "../models";
+   IAddChatGroup,
+   IJoinGroup,
+   IExitChatGroup,
+   IRemoveChatGroup} from "../models";
 import { AngularFirestore, AngularFirestoreCollection } from "@angular/fire/compat/firestore";
 import { Observable,lastValueFrom, map } from "rxjs";
 
@@ -171,23 +174,90 @@ import { Observable,lastValueFrom, map } from "rxjs";
     }
 
     async addChatGroup(request: IAddChatGroup) {
-      const groupCollection = this.firestore
-      .collection<IGroup>(`users/${request.userId}/userGroups`)
-      .doc()
-      .set(request.group);
+      try{
+        const groupDocument = await this.firestore
+        .collection(`groups`)
+        .add(request.group);
+
+        const groupCollection = await this.firestore
+        .collection<IGroup>(`users/${request.userId}/userGroups`)
+        .doc(groupDocument.id)
+        .set(request.group);
+      }catch(error){
+        alert("ERROR: "+error)
+      }
+    }
+
+    async joinChatGroup(request: IJoinGroup) {
+      try{
+        const userGroupsCollection = await this.firestore
+        .collection<IGroup>(`users/${request.userId}/userGroups`)
+        .doc(request.group.id)
+        .set(request.group);
+      }catch(error){
+        alert("ERROR: "+error)
+      }
+    }
+
+    async exitChatGroup(request: IExitChatGroup) {
+      try{
+        const userGroupsCollection = await this.firestore
+        .collection(`users/${request.userId}/userGroups`)
+        .doc<IGroup>(request.group.id)
+        .delete();
+
+        const groupDoc = await this.firestore
+          .doc<IGroup>(`groups/${request.group.id}`);
+
+        const group = groupDoc.get().pipe(
+          map((r)=>{
+            let group = r.data();
+            let members = group?.members?.filter((userId)=> !userId.match(request.userId!))
+            groupDoc.update({
+              members: members
+            });
+          })
+        );
+      }catch(error){
+        alert("ERROR: "+error)
+      }
+    }
+
+    async removeChatGroup(request: IRemoveChatGroup) {
+      try{
+        const groupDoc = await this.firestore
+        .doc<IGroup>(`groups/${request.group.id}`);
+
+        const group = groupDoc.get().pipe(
+          map((r)=>{
+            let group = r.data();
+            let members = group?.members;
+
+            members?.forEach((userId)=>{
+              const userGroupDoc = this.firestore
+                .doc<IGroup>(`users/${request.userId}/userGroups/${request.group.id}`)
+                .delete();
+            })
+
+            groupDoc.delete();
+          })
+        );
+      }catch(error){
+        alert("error: "+error);
+      }
     }
 
     async getProfile(userId: string) {
-        const profileDoc = this.firestore.doc<IProfileModel>(`profiles/${userId}`).get();
-        const profile: IProfileModel = (await lastValueFrom(profileDoc)).data()!;
+      const profileDoc = this.firestore.doc<IProfileModel>(`profiles/${userId}`).get();
+      const profile: IProfileModel = (await lastValueFrom(profileDoc)).data()!;
 
-        return profile;
+      return profile;
     }
 
     async getChat(request: IGetMessages) {
-        const messageDoc = this.firestore.doc<IMessage>(`messages/${request.otheruserId}/${request.userId}/${request.messageId}`).get();
-        const message: IMessage = (await lastValueFrom(messageDoc)).data()!;
-       
-        return message;
+      const messageDoc = this.firestore.doc<IMessage>(`messages/${request.otheruserId}/${request.userId}/${request.messageId}`).get();
+      const message: IMessage = (await lastValueFrom(messageDoc)).data()!;
+      
+      return message;
     }
   }
