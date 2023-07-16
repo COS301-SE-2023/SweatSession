@@ -13,7 +13,8 @@ export class PersonalBestsChartComponent implements OnInit {
   chartLabels: string[] = [];
   chartOptions: ChartOptions;
   chartType: ChartType = 'line';
-  showExersise: string = 'Push ups';
+  showExercise: string = 'Squats';
+  showReps = 'reps';
 
   personalBestsData: IPersonalBest[] = [];
 
@@ -21,12 +22,9 @@ export class PersonalBestsChartComponent implements OnInit {
 
 
   ngOnInit() {
-    // Replace with your own logic to fetch personal best data
     
-    this.retrieveExercisesByName("Squat");
-    
-    
-    
+    this.retrieveExercisesByName(this.showExercise); 
+     
   }
 
   // exercises: IPersonalBest[] = [];
@@ -41,24 +39,28 @@ export class PersonalBestsChartComponent implements OnInit {
       });
     }
 
+    showChart() {
+      this.retrieveExercisesByName(this.showExercise);
+    }
+
+    
+
     setChartData()
     {
-        this.personalBestsData.sort((a, b) => {
-          return new Date(a.date!).getTime() - new Date(b.date!).getTime();
-        });
+      const dataKey = this.showReps as keyof IPersonalBest;
 
-        // this.personalBestsData.forEach(element => {
-          this.chartData = [
-            {
-              data: this.personalBestsData.map((data) => data.reps!),
-              label: 'Squat',
-            }
-          ];
+      this.personalBestsData.sort((a, b) => {
+        return new Date(a.date!).getTime() - new Date(b.date!).getTime();
+      });
 
-          //sort chart data by date
-          
-        // });    
-
+      this.chartData = [
+        {
+          data: this.personalBestsData
+            .filter((data) => data[dataKey] !== undefined)
+            .map((data) => data[dataKey] as number),
+          label: this.showReps!,
+        }
+      ];
         console.log("Chart Data" ,this.chartData);
     }
 
@@ -92,47 +94,4 @@ export class PersonalBestsChartComponent implements OnInit {
       
     }
 
-
-  // generateChartData() {
-  //   // Replace with your own logic to extract the necessary data for the chart
-  //   const personalBestsData1 = [
-  //     { date: '2022-01-01', weight: 100 },
-  //     { date: '2022-02-01', weight: 110 },
-  //     { date: '2022-03-01', weight: 120 },
-  //     // Add more personal best data points
-  //   ];
-
-  //   const personalBestsData2 = [
-  //     { date: '2022-01-01', weight: 90 },
-  //     { date: '2022-02-01', weight: 95 },
-  //     { date: '2022-03-01', weight: 105 },
-  //     // Add more personal best data points
-  //   ];
-
-  //   // Extract the necessary data for the chart
-  //   this.chartData = [
-  //     {
-  //       data: personalBestsData1.map((data) => data.weight),
-  //       label: 'Push ups'
-  //     },
-  //     {
-  //       data: personalBestsData2.map((data) => data.weight),
-  //       label: 'Run ups'
-  //     }
-  //   ];
-
-  //   // Assign the dates from personalBestsData to chartLabels
-  //   // Make sure all datasets have the same labels
-  //   this.chartLabels = personalBestsData1.map((data) => data.date);
-
-  //   // Configure the chart options
-  //   this.chartOptions = {
-  //     responsive: true,
-  //     scales: {
-  //       y: {
-  //         beginAtZero: true
-  //       }
-  //     }
-  //   };
-  // }
-}
+  }

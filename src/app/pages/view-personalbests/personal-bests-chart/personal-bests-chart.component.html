@@ -1,9 +1,27 @@
 <div style="display: block;">
+  <div>
+    <ion-select [(ngModel)]="showExercise">
+        <ion-select-option value="Bench Press">Bench Press</ion-select-option>
+        <ion-select-option value="Squats">Squats</ion-select-option>
+        <ion-select-option value="Deadlifts">Deadlifts</ion-select-option>
+        <ion-select-option value="Overhead Press">Overhead Press</ion-select-option>
+        <ion-select-option value="Barbell Rows">Barbell Rows</ion-select-option>
+        <ion-select-option value="Push ups">Push ups</ion-select-option>
+    </ion-select>
+
+    <ion-radio-group [(ngModel)]="showReps">
+      <ion-radio value="reps">Reps</ion-radio>
+      <ion-radio value="weight">Weight (kg)</ion-radio>
+    </ion-radio-group>
+  </div>
+  
+
+  <ion-button (click)="showChart()">Show chart</ion-button>
   <canvas baseChart
+          *ngIf="chartData.length > 0"
           [datasets]="chartData"
           [labels]="chartLabels"
           [options]="chartOptions"
           [type]="chartType">
   </canvas>
-  <ion-button>Add new best</ion-button>
 </div>
