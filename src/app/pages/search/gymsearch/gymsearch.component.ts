@@ -53,6 +53,7 @@ export class GymsearchComponent implements OnInit {
       }
    ]
    userFriends: IFriendsModel[] = [];
+   userFriendIds: string[];
    gymUsers: any;
 
    //will get this from the service
@@ -97,12 +98,15 @@ export class GymsearchComponent implements OnInit {
       this.locationRepository.getLocation("ChIJF7oBeAFhlR4RcP7sFSzacP8");
       this.store.dispatch(new GetFriendsAction());
       this.triggerfilter();
+      this.userFriendIds=[]
       this.friends$.subscribe((response) => {
          this.userFriends = response;
          this.userFriends.forEach(element => {
             console.log(element);
+            this.userFriendIds.push(element.userId!)
          });
       })
+      console.log(this.userFriendIds)
 
       const coordinates = await this.getCurrentLocation();
       this.currLatitude = coordinates.latitude;
