@@ -47,12 +47,13 @@ export class PersonalbestRepository
         .doc(this.currUserId)
         .collection('exercises')
         .doc(progress.exercise)
-        .collection('exerciseEntries');
+        .collection('exerciseEntries')
+        .doc(progress.id);
 
         console.table(progress);
         
         // Add the personal best to the exercise document
-        return exerciseRef.add({
+        return exerciseRef.set({
           id: progress.id,
           exercise: progress.exercise,
           weight: progress.weight,
@@ -64,6 +65,29 @@ export class PersonalbestRepository
 
         }
       
+        deletePersonalbest(personalBest: IPersonalBest) {
+          const auth = getAuth();
+          this.currUserId = auth.currentUser?.uid;
+
+          if (this.currUserId!=undefined)
+          {
+          sessionStorage.setItem('currUserId', this.currUserId);
+          }
+          else
+          {
+          this.currUserId = sessionStorage.getItem('currUserId') ?? "";
+          }
+
+          const exerciseRef = this.firestore
+            .collection('Personalbests')
+            .doc(this.currUserId)
+            .collection('exercises')
+            .doc(personalBest.exercise)
+            .collection('exerciseEntries')
+            .doc(personalBest.id);
+
+          return exerciseRef.delete();
+        }
 
         getExercisesByName(name: string): Observable<IPersonalBest[]> {
           const auth = getAuth();

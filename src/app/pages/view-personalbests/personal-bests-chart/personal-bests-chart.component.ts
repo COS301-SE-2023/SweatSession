@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ChartDataset, ChartOptions, ChartType } from 'chart.js';
 import { IPersonalBest } from 'src/app/models/personalbest.model';
 import { PersonalbestService } from 'src/app/services/personalbest/personalbest.service';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-personal-bests-chart',
@@ -18,7 +19,8 @@ export class PersonalBestsChartComponent implements OnInit {
 
   personalBestsData: IPersonalBest[] = [];
 
-  constructor(private personalbestService: PersonalbestService) { }
+  constructor(private personalbestService: PersonalbestService,
+              private alertController: AlertController) { }
 
 
   ngOnInit() {
@@ -63,6 +65,37 @@ export class PersonalBestsChartComponent implements OnInit {
       ];
         console.log("Chart Data" ,this.chartData);
     }
+
+    // Component class
+  async confirmDelete(DpersonalBest: any) {
+    const alert = await this.alertController.create({
+      header: 'Confirm Delete',
+      message: 'Are you sure you want to delete this Personal Best ('+ DpersonalBest.exercise +') ?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+        },
+        {
+          text: 'Delete',
+          handler: () => {
+            this.deleteItem(DpersonalBest);
+          },
+        },
+      ],
+    });
+
+    await alert.present();
+  }
+
+deleteItem(personalBest: IPersonalBest) {
+  this.personalbestService.deletePersonalbest(personalBest);
+
+  const index = this.personalBestsData.indexOf(personalBest);
+  if (index > -1) {
+    this.personalBestsData.splice(index, 1);
+  }
+}
 
     setChartLabels()
     {

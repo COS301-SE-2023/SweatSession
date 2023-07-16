@@ -16,6 +16,11 @@ export class PersonalbestService {
         return this.repository.addPersonalBest(personalbest);
     }
 
+    deletePersonalbest(personalbest: IPersonalBest)
+    {
+        return this.repository.deletePersonalbest(personalbest);
+    }
+
     getExercisesByName(exexersiceName : string)
     {
         return this.repository.getExercisesByName(exexersiceName);
