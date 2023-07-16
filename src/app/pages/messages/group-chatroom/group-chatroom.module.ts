@@ -6,7 +6,6 @@ import { GroupChatroomComponentRoutingModule } from './group-chatroom-routing.mo
 import { GroupChatroomComponent } from './group-chatroom.component';
 import { BackButtonDirectiveModule } from 'src/app/directives';
 import { AuthModule, MessageStateModule, OtheruserStateModule } from 'src/app/states';
-import { ChatboxComponent } from '../chatbox/chatbox.component';
 
 @NgModule({
   imports: [

@@ -41,7 +41,7 @@ export interface IUpdatedProfile {
 }
 
 export interface IGroup {
-    id: string;
+    id?: string;
     displayName?: string;
     profileURL?: string;
     bio?: string;
