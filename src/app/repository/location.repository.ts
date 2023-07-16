@@ -83,7 +83,7 @@ export class LocationRepository {
     //     }
   }
 
-  async getLocation(placeId: string) {
+  async getLocation(placeId: string, friendIds: string[]) {
     const auth = getAuth();
     this.currUserId = auth.currentUser?.uid;
     if (this.currUserId != undefined) {

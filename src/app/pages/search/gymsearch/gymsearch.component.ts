@@ -95,7 +95,7 @@ export class GymsearchComponent implements OnInit {
 
    async ngOnInit() {
 
-      this.locationRepository.getLocation("ChIJF7oBeAFhlR4RcP7sFSzacP8");
+      this.locationRepository.getLocation("ChIJF7oBeAFhlR4RcP7sFSzacP8", this.userFriendIds);
       this.store.dispatch(new GetFriendsAction());
       this.triggerfilter();
       this.userFriendIds=[]
@@ -115,7 +115,7 @@ export class GymsearchComponent implements OnInit {
       console.log('Longitude:', this.currLongitude);
       console.log('maxDistance:', this.maxDistance);
       await this.loadData();
-      await this.getGymUsersForGyms();
+      await this.getGymUsersForGyms(this.userFriendIds);
       console.log(this.gymUsers);
       // if (navigator.geolocation) {
       //   navigator.geolocation.getCurrentPosition();
@@ -273,21 +273,21 @@ export class GymsearchComponent implements OnInit {
    }
 
 
-   getGymUsers(placeId: string) {
+   getGymUsers(placeId: string, friendIds: string[]) {
       // console.log("getting gym users for: "+placeId)
-      const locationObservable = this.locationRepository.getLocation(placeId);
+      const locationObservable = this.locationRepository.getLocation(placeId, friendIds);
       // console.log(locationObservable);
       return locationObservable;
    }
 
-   async getGymUsersForGyms() {
+   async getGymUsersForGyms(friendIds: string[]) {
       this.gymUsers = [];
       this.gyms.results.forEach((gym) => {
          // this.getGymUsers(gym.place_id).subscribe((response) => {
          //    this.gymUsers.push(response);
          //    console.log(response)
          // });
-         this.getGymUsers(gym.place_id)
+         this.getGymUsers(gym.place_id, friendIds);
       });
    }
 
