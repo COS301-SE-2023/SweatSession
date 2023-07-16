@@ -84,3 +84,26 @@ export interface IGotGroups {
     groups: IGroup[];
     validate: boolean;
 }
+
+export interface IJoinGroup {
+    userId: string;
+    group: IGroup;
+}
+
+export interface IJoinedGroups {
+    validate: boolean;
+}
+
+export interface IExitChatGroup {
+    userId?: string;
+    group: IGroup;
+}
+
+export interface IExitedChatGroup {
+    validate: boolean;
+}
+
+export interface IRemoveChatGroup {
+    userId?: string;
+    group: IGroup;
+}
