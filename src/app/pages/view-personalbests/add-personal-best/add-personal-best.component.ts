@@ -18,7 +18,7 @@ export class AddPersonalBestComponent implements OnInit {
     id : this.firestore.createId(),
     exercise : "default exercise",
     weight : 0,
-    repetitions : 0,
+    reps : 0,
     date : "the date",
     notes: "decription of the best",
     

@@ -3,7 +3,7 @@ export interface IPersonalBest
     id?: string,
     exercise?: string,
     weight?: number,
-    repetitions?: number,
+    reps?: number,
     location?: string,
     date?: string,
     notes?: string

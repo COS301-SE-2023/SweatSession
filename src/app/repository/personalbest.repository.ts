@@ -3,6 +3,8 @@ import { IPersonalBest } from "../models";
 import {AngularFirestore} from "@angular/fire/compat/firestore";
 import {getAuth} from "@angular/fire/auth";
 import 'firebase/firestore';
+import { map } from 'rxjs/operators';
+import { Observable } from "rxjs";
 
 @Injectable({
     providedIn: 'root'
@@ -34,29 +36,10 @@ export class PersonalbestRepository
                 id : personalBest.id,
                 exercise: personalBest.exercise,
                 weight: personalBest.weight,
-                repetitions: personalBest.repetitions,
+                reps: personalBest.reps,
                 date: personalBest.date,
                 notes: personalBest.notes
             };
-
-        // var exerciseNum = "n/a";
-
-        // if(progress.exercise == "Bench Press")
-        // {
-        //     exerciseNum = "BenchPress";
-        // }else if(progress.exercise == "Squat")
-        // {
-        //     exerciseNum = "Squat";
-        // }else if(progress.exercise == "Deadlift")
-        // {
-        //     exerciseNum = "Deadlift";
-        // }else if(progress.exercise == "Overhead Press")
-        // {
-        //     exerciseNum = "Overhead Press";    
-        // }else if(progress.exercise == "Barbell Row")
-        // {
-        //     exerciseNum = 5;
-        // }
 
         const exerciseRef = this.firestore
         .collection('Personalbests')
@@ -69,9 +52,40 @@ export class PersonalbestRepository
         
         // Add the personal best to the exercise document
         return exerciseRef.add({
-          progress: progress
-        }
-        );
+          id: progress.id,
+          exercise: progress.exercise,
+          weight: progress.weight,
+          reps: progress.reps,
+          date: progress.date,
+          notes: progress.notes
+        });
 
-      }
+        }
+      
+
+        getExercisesByName(name: string): Observable<IPersonalBest[]> {
+          const auth = getAuth();
+          this.currUserId = auth.currentUser?.uid;
+        
+          if (this.currUserId != undefined) {
+            sessionStorage.setItem('currUserId', this.currUserId);
+          } else {
+            this.currUserId = sessionStorage.getItem('currUserId') ?? "";
+          }
+        
+          const exerciseRef = this.firestore
+            .collection('Personalbests')
+            .doc(this.currUserId)
+            .collection('exercises')
+            .doc(name)
+            .collection('exerciseEntries');
+        
+          return exerciseRef.valueChanges();
+        }
+        
+        
+      
+      
+      
+      
 }

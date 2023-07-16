@@ -42,7 +42,7 @@ export class ViewPersonalbestsPage implements OnInit {
       id : this.firestore.createId(),
       exercise: formData.exercise,
       weight: formData.weight,
-      repetitions: formData.reps,
+      reps: formData.reps,
       location: formData.location,
       date: formData.date,
       notes: formData.notes,

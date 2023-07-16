@@ -16,4 +16,8 @@ export class PersonalbestService {
         return this.repository.addPersonalBest(personalbest);
     }
 
+    getExercisesByName(exexersiceName : string)
+    {
+        return this.repository.getExercisesByName(exexersiceName);
+    }
 }
