@@ -1,25 +1,14 @@
-
-  <ion-header [translucent]="true">
-    <ion-toolbar>
-      <ion-item>
-        <backbutton></backbutton>
-        <ion-title>Goal Details</ion-title>
-      </ion-item>
-    </ion-toolbar>
-  </ion-header>
-
-  <ion-content>
-    <div class="goal-name">
+<ion-content>
+  <div class="goal-name">
+      <ion-title>View Goal</ion-title>
       <ion-label class="goal-name-label">{{goalName}}</ion-label>
     </div>
 
     <div class="task-list">
       <ion-list>
         <ion-item *ngFor="let task of GOAL.Tasks!">
-          <ion-item class="task-item">
             <ion-checkbox [(ngModel)]="task.done" slot="start"></ion-checkbox>
             <ion-label class="task-content">{{ task.content }}</ion-label>
-          </ion-item>
         </ion-item>
       </ion-list>
     </div>
