@@ -47,4 +47,6 @@ export interface IGroup {
     bio?: string;
     admin?: string[];
     lastChatid?: string;
+    createBy?: string;
+    members?: string[];
 }
