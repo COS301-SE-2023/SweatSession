@@ -38,6 +38,7 @@ export class PersonalbestRepository
                 weight: personalBest.weight,
                 reps: personalBest.reps,
                 date: personalBest.date,
+                location: personalBest.location,
                 notes: personalBest.notes
             };
 
@@ -57,6 +58,7 @@ export class PersonalbestRepository
           weight: progress.weight,
           reps: progress.reps,
           date: progress.date,
+          location: progress.location,
           notes: progress.notes
         });
 

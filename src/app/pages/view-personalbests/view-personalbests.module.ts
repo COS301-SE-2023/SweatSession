@@ -31,6 +31,6 @@ import { BackButtonDirectiveModule } from 'src/app/directives';
                 ViewPersonalbestsPage,
                 AddPersonalBestComponent,
                 PersonalBestsChartComponent
-              ],
+              ]
 })
 export class ViewPersonalbestsPageModule {}

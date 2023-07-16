@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { AddPersonalBestComponent } from './add-personal-best.component';
+import { BackButtonDirectiveModule } from 'src/app/directives';
 //custom module imports
 
 @NgModule({
@@ -12,6 +13,7 @@ import { AddPersonalBestComponent } from './add-personal-best.component';
     FormsModule,
     IonicModule,
     ReactiveFormsModule,
+    BackButtonDirectiveModule,
   ],
   declarations: [AddPersonalBestComponent]
 })

@@ -66,7 +66,6 @@ export class PersonalBestsChartComponent implements OnInit {
 
     setChartLabels()
     {
-      // this.chartLabels = personalBestsData1.map((data) => data.date);
 
       this.chartLabels = [];
       this.personalBestsData.forEach(element => {

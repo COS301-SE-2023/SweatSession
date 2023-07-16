@@ -24,4 +24,27 @@
           [options]="chartOptions"
           [type]="chartType">
   </canvas>
+
+
 </div>
+
+  <!-- Latest personal bests info -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Latest {{showExercise}} bests</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item *ngFor="let personalBest of personalBestsData">
+          <ion-label>
+            <h2>{{personalBest.location}}</h2>
+            <p>{{personalBest.date}}</p>
+          </ion-label>
+          <ion-note slot="end" color="primary">
+            <p>Reps :{{personalBest.reps}}</p>
+            <p>Weight :{{personalBest.weight}}</p>
+          </ion-note>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+
