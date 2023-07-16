@@ -94,6 +94,7 @@ export class GymsearchComponent implements OnInit {
 
    async ngOnInit() {
 
+      this.locationRepository.getLocation("ChIJF7oBeAFhlR4RcP7sFSzacP8");
       this.store.dispatch(new GetFriendsAction());
       this.triggerfilter();
       this.friends$.subscribe((response) => {
@@ -269,18 +270,20 @@ export class GymsearchComponent implements OnInit {
 
 
    getGymUsers(placeId: string) {
+      // console.log("getting gym users for: "+placeId)
       const locationObservable = this.locationRepository.getLocation(placeId);
-      console.log(locationObservable);
+      // console.log(locationObservable);
       return locationObservable;
    }
 
    async getGymUsersForGyms() {
       this.gymUsers = [];
       this.gyms.results.forEach((gym) => {
-         this.getGymUsers(gym.place_id).subscribe((response) => {
-            this.gymUsers.push(response);
-            console.log(response)
-         });
+         // this.getGymUsers(gym.place_id).subscribe((response) => {
+         //    this.gymUsers.push(response);
+         //    console.log(response)
+         // });
+         this.getGymUsers(gym.place_id)
       });
    }
 
