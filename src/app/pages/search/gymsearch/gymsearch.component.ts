@@ -95,7 +95,7 @@ export class GymsearchComponent implements OnInit {
 
    async ngOnInit() {
 
-      this.locationRepository.getLocation("ChIJF7oBeAFhlR4RcP7sFSzacP8", this.userFriendIds);
+      // this.locationRepository.getLocation("ChIJF7oBeAFhlR4RcP7sFSzacP8", this.userFriendIds);
       this.store.dispatch(new GetFriendsAction());
       this.triggerfilter();
       this.userFriendIds=[]

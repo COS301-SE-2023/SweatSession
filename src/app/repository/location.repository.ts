@@ -6,11 +6,11 @@ import { map, tap } from 'rxjs/operators';
 import { BadgesRepository } from './badges.repository';
 import { OtheruserRepository } from './otheruser.repository';
 import { getAuth } from '@angular/fire/auth';
-import { Timestamp } from "firebase/firestore";
+import { getDocs, Timestamp } from "firebase/firestore";
 import { ProfileService } from '../services';
 import { getLocaleDirection, Time } from '@angular/common';
 import { ILocation, LocationGymSession } from '../models/location.model';
-import { doc, docData, Firestore, getDoc } from '@angular/fire/firestore';
+import { collection, doc, docData, Firestore, getDoc } from '@angular/fire/firestore';
 
 
 
@@ -118,18 +118,29 @@ export class LocationRepository {
     //   // // Retrieve and log all subcollections
     //   // this.retrieveSubcollections(snapshot.ref);
     // });
-    const docRef = doc(this.firestore, "locations", placeId);
-    try {
-      const docSnap = await getDoc(docRef);
-      if (docSnap.exists()) {
-        console.log(docSnap.data());
-      } else {
-        console.log("Document does not exist")
-      }
+    // const docRef = doc(this.firestore, "locations", placeId);
+    // try {
+    //   const docSnap = await getDoc(docRef);
+    //   if (docSnap.exists()) {
+    //     console.log(docSnap.data());
+    //   } else {
+    //     console.log("Document does not exist")
+    //   }
 
-    } catch (error) {
-      console.log(error)
-    }
+    // } catch (error) {
+    //   console.log(error)
+    // }
+
+    // console.log(friendIds)
+    friendIds.forEach(async id=>{
+      console.log(placeId);
+      const colRef = collection(this.firestore, `locations/${placeId}`, id);
+      const docs = await getDocs(colRef);
+      docs.forEach(document=>{
+        console.log(document.data());
+        console.log(document.id);
+      })
+    })
   }
 
   // private retrieveSubcollections(ref: QueryDocumentSnapshot<any> | undefined): void {
