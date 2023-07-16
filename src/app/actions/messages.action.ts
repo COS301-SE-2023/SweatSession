@@ -53,3 +53,18 @@ export class AddChatGroup {
     static readonly type = "[messages] add chat group";
     constructor(public payload: IGroup) {}
 }
+
+export class JoinChatGroup {
+    static readonly type = "[messages] join a chat group";
+    constructor(public payload: IGroup) {}
+}
+
+export class ExitChatGroup {
+    static readonly type = "[chatGroup] exit a chat group";
+    constructor(public payload: IGroup) {}
+}
+
+export class RemoveChatGroup {
+    static readonly type = "[chatGroup] remove a chat group";
+    constructor(public payload: IGroup) {}
+}
