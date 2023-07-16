@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Action, Selector, State, StateContext } from "@ngxs/store";
-import { IMessage, IChatFriend, IGetChatFriends, IGetMessages, ISendMessage, IDeleteMessage, IProfileModel, IFriendsModel, IGroup, IGetGroups, IAddChatGroup } from "src/app/models";
-import { DeleteMessage, GetMessages, SendMessage, GetChatFriends, StageChatFriend, GetFriendsProfiles, GetChatFriend, RemoveChatFriendSession, SendGroupMessage, RemoveChatGroupSession, GetGroups, AddChatGroup } from 'src/app/actions';
+import { IMessage, IChatFriend, IGetChatFriends, IGetMessages, ISendMessage, IDeleteMessage, IProfileModel, IFriendsModel, IGroup, IGetGroups, IAddChatGroup, IJoinGroup, IRemoveChatGroup, IExitChatGroup } from "src/app/models";
+import { DeleteMessage, GetMessages, SendMessage, GetChatFriends, StageChatFriend, GetFriendsProfiles, GetChatFriend, RemoveChatFriendSession, SendGroupMessage, RemoveChatGroupSession, GetGroups, AddChatGroup, JoinChatGroup, RemoveChatGroup, ExitChatGroup } from 'src/app/actions';
 import { AuthApi } from "../auth";
 import { FriendsService, MessagesService, OtheruserService } from "src/app/services";
 import { tap } from "rxjs";
@@ -213,6 +213,7 @@ export class MessagesState {
         const currentUserId = await this.authApi.getCurrentUserId();
         if(currentUserId) {
             payload.admin?.push(currentUserId);
+            payload.members?.push(currentUserId);
             const request:IAddChatGroup = {
                 userId: currentUserId,
                 group: payload
@@ -224,6 +225,44 @@ export class MessagesState {
     @Action(RemoveChatFriendSession)
     async removeChatFriendSession() {
         sessionStorage.removeItem('chatFriend');
+    }
+
+    @Action(JoinChatGroup)
+    async joinChatGroup(ctx: StateContext<MessagesStateModel>, {payload}: JoinChatGroup) {
+        const currentUserId = await this.authApi.getCurrentUserId();
+        if(currentUserId) {
+            payload.members?.push(currentUserId);
+            const request: IJoinGroup = {
+                userId: currentUserId,
+                group: payload
+            }
+            this.service.joinChatGroup(request);
+        }
+    }
+
+    @Action(RemoveChatGroup)
+    async removeChatGroup(ctx: StateContext<MessagesStateModel>, {payload}: RemoveChatGroup) {
+        const currentUserId = await this.authApi.getCurrentUserId();
+        if(currentUserId) {
+            const request: IRemoveChatGroup = {
+                userId: currentUserId,
+                group: payload
+            }
+
+            this.service.removeChatGroup(request);
+        }
+    }
+
+    @Action(ExitChatGroup)
+    async exitChatGroup(ctx: StateContext<MessagesStateModel>, {payload}: ExitChatGroup) {
+        const currentUserId = await this.authApi.getCurrentUserId();
+        if(currentUserId) {
+            const request: IExitChatGroup = {
+                userId: currentUserId,
+                group: payload
+            }
+            this.service.exitChatGroup(request);
+        }
     }
 
     @Selector()
