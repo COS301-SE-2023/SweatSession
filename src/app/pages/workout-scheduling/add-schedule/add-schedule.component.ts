@@ -4,6 +4,10 @@ import { Store } from '@ngxs/store';
 import { Timestamp } from 'firebase/firestore';
 import { AddWorkoutSchedule } from 'src/app/actions';
 import { IWorkoutScheduleModel } from 'src/app/models';
+import { NoticeService } from 'src/app/services/notifications/notice.service';
+import { getAuth } from 'firebase/auth';
+import { Profile } from 'src/app/models/notice.model';
+import { URL } from 'url';
 
 @Component({
   selector: 'add-schedule',
@@ -12,10 +16,21 @@ import { IWorkoutScheduleModel } from 'src/app/models';
 })
 export class AddScheduleComponent  implements OnInit {
   schedule:IWorkoutScheduleModel={};
+  auth = getAuth();
+  currUserId = this.auth.currentUser?.uid;
+  profileList: Profile[];
+  currusername: string;
+  profileurl: string;
+  sweatsessionurl: string ;
 
-  constructor(private popoverController: PopoverController, private store: Store) { }
+  date : string ;
+  shortdate : string[] ;
 
-  ngOnInit() {}
+  constructor(private popoverController: PopoverController, private store: Store , private noticeService: NoticeService) { }
+
+  ngOnInit() {
+    this.displayCurrentUser(this.currUserId!);
+  }
 
   closePopup() {
     this.popoverController.dismiss();
@@ -24,6 +39,9 @@ export class AddScheduleComponent  implements OnInit {
   addSchedule() {
     this.setFields();
     this.store.dispatch(new AddWorkoutSchedule(this.schedule));
+    this.date = new Date().toTimeString() ;
+   this.shortdate = this.date.split(':' , 2);
+   this.createNotifications("SWEAT-SESSION" , this.shortdate[0] + ':' + this.shortdate[1] , "LETS-GO!! Your workout as been scheduled!")  ;
   }
 
   isDateTimeValid(): boolean {
@@ -70,4 +88,29 @@ export class AddScheduleComponent  implements OnInit {
       return true;
     return false;
   }
+
+
+  displayCurrentUser(id:string){
+    this.noticeService.getTheNoticeProfile().subscribe((profiles: Profile[]) => {
+    this.profileList = profiles;
+    console.log('Number of PROFILES:', this.profileList.length);
+    for(let i = 0 ; i<this.profileList.length ; i++){
+      if(this.profileList[i].id == this.currUserId ){
+        this.currusername = this.profileList[i].displayName! ;
+        this.profileurl = this.profileList[i].profileURL! ;
+        this.sweatsessionurl = "SweatSession/src/assets/Asset 3.png"
+        console.log(this.profileurl);
+        console.log(this.currusername);
+      }
+    }
+
+      
+  });
+}
+
+
+createNotifications(sendername: string , sentdate: string , message: string){
+  this.noticeService.createNotices(sendername , sentdate , message , this.currUserId! , this.currUserId! , '/assets/Asset 3.png');
+}
+
 }

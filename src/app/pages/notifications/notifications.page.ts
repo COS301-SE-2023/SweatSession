@@ -52,6 +52,11 @@ export class NotificationsPage implements OnInit {
       this.noticeList = notices;
       for(let i = 0 ; i<this.noticeList.length ; i++){
         if(this.noticeList[i].senttoid == this.currUserId){
+          for(let x = 0 ; x<this.noticeList2.length ; x++){
+            if(this.noticeList2[x].id == this.noticeList[i].id){
+              return ;
+            }
+          }
           this.noticeList2.push(this.noticeList[i]) ;
         }
       }
@@ -80,6 +85,7 @@ export class NotificationsPage implements OnInit {
     for(let i = 0 ; i<this.noticeList2.length ; i++){
       this.noticeService.deleteNotices(this.noticeList2[i].id!);
       console.log(this.noticeList2[i].id)
+      
     }
     this.noticeList2 = [] ;
   }
