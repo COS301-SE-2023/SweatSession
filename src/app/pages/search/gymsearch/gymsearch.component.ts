@@ -37,9 +37,9 @@ export class GymsearchComponent implements OnInit {
    currLongitude: Number;
    MAPS_API_KEY = environment.mapsApiKey;
    gymsSubscription: Subscription;
-   gyms = {
+   gyms: any = {
       results: [
-         { name: "default", business_status: "default", photos: [{ photo_reference: "default" }], rating: "default", vicinity: "default", place_id: "default", friendsLocationInfo: {}},
+         { name: "default", business_status: "default", photos: [{ photo_reference: "default" }], rating: "default", vicinity: "default", place_id: "default", friendsLocationInfo: [[]]},
       ]
    }
    friends = [
@@ -283,7 +283,7 @@ export class GymsearchComponent implements OnInit {
 
    async getGymUsersForGyms(friendIds: string[]) {
       this.gymUsers = [];
-      this.gyms.results.forEach(async (gym) => {
+      this.gyms.results.forEach(async (gym: any) => {
          // this.getGymUsers(gym.place_id).subscribe((response) => {
          //    this.gymUsers.push(response);
          //    console.log(response)
