@@ -10,6 +10,14 @@ export interface LocationGymSession {
     profilePhoto: string|undefined
 }
 
+export interface LocationGymSession2 {
+    friendDisplayName: string|undefined,
+    startTime: Time,
+    endTime: Time,
+    date: Date,
+    profilePhoto: string|undefined
+}
+
 export interface ILocation {
     gymUsers: any[]
 }

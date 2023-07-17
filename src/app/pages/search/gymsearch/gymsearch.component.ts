@@ -15,6 +15,7 @@ import { Select, Store } from '@ngxs/store';
 import { IFriendsModel } from 'src/app/models';
 import { GetFriendsAction } from 'src/app/actions';
 import { LocationRepository } from 'src/app/repository/location.repository';
+import { Timestamp } from 'firebase/firestore';
 
 @Component({
    selector: 'gymsearch',
@@ -293,6 +294,15 @@ export class GymsearchComponent implements OnInit {
          }
       });
    }
+
+   formatTime(timestamp: Timestamp): string {
+      const date: Date = timestamp.toDate();
+      const hours: number = date.getHours();
+      const minutes: number = date.getMinutes();
+    
+      return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
+    }
+    
 
    viewProfile(id: string) {
 

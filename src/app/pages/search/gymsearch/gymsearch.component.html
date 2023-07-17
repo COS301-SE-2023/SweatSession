@@ -51,7 +51,7 @@
       <ion-card-header>
         Friends that have workout sessions scheduled here:
       </ion-card-header>
-      <!-- <ul class="no-bullet">
+      <ul class="no-bullet">
         <li *ngFor="let friend of gym.friendsLocationInfo" (click)="viewProfile(friend.id)">
           <div class="friend-details">
           <img [src]="friend[0].profilePhoto" alt="Profile Photo" class="friend-photo"/>
@@ -59,13 +59,13 @@
             <p>{{ friend[0].displayName }}</p>
             <ul>
               <li *ngFor="let gymSession of friend">
-                <p>{{ gymSession.date }}: {{ gymSession.startTime }}-{{ gymSession.endTime }}</p>
+                <p>{{ gymSession.date }}: {{ gymSession.startTime }}-{{ formatTime(gymSession.endTime) }}</p>
               </li>
             </ul>
           </div>
           </div>
         </li>
-      </ul> -->
+      </ul>
     </ng-container>
     <ng-template #noFriends>
       No friends have workout sessions scheduled here
