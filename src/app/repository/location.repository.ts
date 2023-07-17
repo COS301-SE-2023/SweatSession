@@ -84,13 +84,13 @@ export class LocationRepository {
   }
 
   async getLocation(placeId: string, friendIds: string[]) {
-    const auth = getAuth();
-    this.currUserId = auth.currentUser?.uid;
-    if (this.currUserId != undefined) {
-      sessionStorage.setItem('currUserId', this.currUserId);
-    } else {
-      this.currUserId = sessionStorage.getItem('currUserId');
-    }
+    // const auth = getAuth();
+    // this.currUserId = auth.currentUser?.uid;
+    // if (this.currUserId != undefined) {
+    //   sessionStorage.setItem('currUserId', this.currUserId);
+    // } else {
+    //   this.currUserId = sessionStorage.getItem('currUserId');
+    // }
     // alert(AuthState.currUserId);
     // alert("IN badges.api.ts");
     // alert(currUserId);
@@ -132,14 +132,19 @@ export class LocationRepository {
     // }
 
     // console.log(friendIds)
+    const locationGymSessions: LocationGymSession[][]=[];
     friendIds.forEach(async id=>{
       console.log(placeId);
       const colRef = collection(this.firestore, `locations/${placeId}`, id);
       const docs = await getDocs(colRef);
+      const friendGymSessions:LocationGymSession[]=[];
       docs.forEach(document=>{
         console.log(document.data());
         console.log(document.id);
+        friendGymSessions.push(document.data() as LocationGymSession);
       })
+      locationGymSessions.push(friendGymSessions);
+      return locationGymSessions;
     })
   }
 

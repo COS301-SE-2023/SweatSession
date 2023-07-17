@@ -39,7 +39,7 @@ export class GymsearchComponent implements OnInit {
    gymsSubscription: Subscription;
    gyms = {
       results: [
-         { name: "default", business_status: "default", photos: [{ photo_reference: "default" }], rating: "default", vicinity: "default", place_id: "default" },
+         { name: "default", business_status: "default", photos: [{ photo_reference: "default" }], rating: "default", vicinity: "default", place_id: "default", friendsLocationInfo: {}},
       ]
    }
    friends = [
@@ -275,9 +275,9 @@ export class GymsearchComponent implements OnInit {
 
    getGymUsers(placeId: string, friendIds: string[]) {
       // console.log("getting gym users for: "+placeId)
-      const locationObservable = this.locationRepository.getLocation(placeId, friendIds);
+      const friendsLocationInfo = this.locationRepository.getLocation(placeId, friendIds);
       // console.log(locationObservable);
-      return locationObservable;
+      return friendsLocationInfo;
    }
 
    async getGymUsersForGyms(friendIds: string[]) {
@@ -287,7 +287,9 @@ export class GymsearchComponent implements OnInit {
          //    this.gymUsers.push(response);
          //    console.log(response)
          // });
-         this.getGymUsers(gym.place_id, friendIds);
+         if (gym.business_status=="OPERATIONAL"){
+            gym.friendsLocationInfo=this.getGymUsers(gym.place_id, friendIds);
+         }
       });
    }
 
