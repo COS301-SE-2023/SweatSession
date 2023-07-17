@@ -44,7 +44,7 @@ export class ChatbotPage implements OnInit {
   isHealthRelated(text: string): boolean {
     // You can implement your own logic here to determine if the text is health-related
     // This is just a basic example
-    const healthKeywords = ['health', 'medical', 'veg', 'nutrition' , 'fit' , 'exercise' , 'diet' , 'calories' , 'food' , 'fruit' , 'gym' , 'set' , 'rep' , 'kilojoule' , 'routine' , 'work' , 'Hi' ];
+    const healthKeywords = ['health', 'medical', 'veg', 'nutrition' , 'fit' , 'exercise' , 'diet' , 'calories' , 'food' , 'fruit' , 'gym' , 'set' , 'rep' , 'kilojoule' , 'routine' , 'work' , 'Hi' , 'schedule' , 'plan' , 'meal' , 'track'];
     text = text.toLowerCase();
     return healthKeywords.some(keyword => text.includes(keyword));
   }
