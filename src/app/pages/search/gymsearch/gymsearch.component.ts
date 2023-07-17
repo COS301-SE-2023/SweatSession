@@ -39,7 +39,7 @@ export class GymsearchComponent implements OnInit {
    gymsSubscription: Subscription;
    gyms: any = {
       results: [
-         { name: "default", business_status: "default", photos: [{ photo_reference: "default" }], rating: "default", vicinity: "default", place_id: "default", friendsLocationInfo: [[]]},
+         { name: "default", business_status: "default", photos: [{ photo_reference: "default" }], rating: "default", vicinity: "default", place_id: "default", friendsLocationInfo: [[]]},{friendsLocationInfo: []}
       ]
    }
    friends = [
