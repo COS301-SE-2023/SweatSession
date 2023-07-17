@@ -144,8 +144,8 @@ export class LocationRepository {
         friendGymSessions.push(document.data() as LocationGymSession);
       })
       locationGymSessions.push(friendGymSessions);
-      return locationGymSessions;
     })
+    return locationGymSessions;
   }
 
   // private retrieveSubcollections(ref: QueryDocumentSnapshot<any> | undefined): void {

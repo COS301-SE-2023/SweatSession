@@ -117,6 +117,7 @@ export class GymsearchComponent implements OnInit {
       await this.loadData();
       await this.getGymUsersForGyms(this.userFriendIds);
       console.log(this.gymUsers);
+      console.log(this.gyms);
       // if (navigator.geolocation) {
       //   navigator.geolocation.getCurrentPosition();
       //   navigator.geolocation.getCurrentPosition(function (position) {
@@ -273,22 +274,22 @@ export class GymsearchComponent implements OnInit {
    }
 
 
-   getGymUsers(placeId: string, friendIds: string[]) {
+   async getGymUsers(placeId: string, friendIds: string[]) {
       // console.log("getting gym users for: "+placeId)
-      const friendsLocationInfo = this.locationRepository.getLocation(placeId, friendIds);
+      const friendsLocationInfo = await this.locationRepository.getLocation(placeId, friendIds);
       // console.log(locationObservable);
       return friendsLocationInfo;
    }
 
    async getGymUsersForGyms(friendIds: string[]) {
       this.gymUsers = [];
-      this.gyms.results.forEach((gym) => {
+      this.gyms.results.forEach(async (gym) => {
          // this.getGymUsers(gym.place_id).subscribe((response) => {
          //    this.gymUsers.push(response);
          //    console.log(response)
          // });
          if (gym.business_status=="OPERATIONAL"){
-            gym.friendsLocationInfo=this.getGymUsers(gym.place_id, friendIds);
+            gym.friendsLocationInfo= await this.getGymUsers(gym.place_id, friendIds);
          }
       });
    }
