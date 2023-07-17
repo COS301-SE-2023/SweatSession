@@ -305,6 +305,6 @@ export class GymsearchComponent implements OnInit {
     
 
    viewProfile(id: string) {
-
+      // this.store.dispatch(new StageOtheruserInfo(user));
    }
 }

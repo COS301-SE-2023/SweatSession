@@ -56,7 +56,7 @@
           <div class="friend-details">
           <img [src]="friend[0].profilePhoto" alt="Profile Photo" class="friend-photo"/>
           <div>
-            <p>{{ friend[0].displayName }}</p>
+            <p>{{ friend[0].friendDisplayName }}</p>
             <ul>
               <li *ngFor="let gymSession of friend">
                 <p>{{ gymSession.date }}: {{ gymSession.startTime }}-{{ formatTime(gymSession.endTime) }}</p>
