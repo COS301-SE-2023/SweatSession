@@ -84,7 +84,7 @@ export class NotificationsPage implements OnInit {
 
     for(let i = 0 ; i<this.noticeList2.length ; i++){
       this.noticeService.deleteNotices(this.noticeList2[i].id!);
-      console.log(this.noticeList2[i].id)
+      console.log(this.noticeList2[i].id) ;
       
     }
     this.noticeList2 = [] ;
