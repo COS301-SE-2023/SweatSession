@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
-import { FormBuilder, Validators } from '@angular/forms'; //, AbstractControl, ValidatorFn, ValidationErrors 
+import { FormBuilder, Validators } from '@angular/forms';
 import { Select, Store } from '@ngxs/store';
-//import { ReactiveFormsModule } from '@angular/forms';
 import {Register} from 'src/app/actions/register';
 import { AlertController } from '@ionic/angular';
 
@@ -55,6 +54,22 @@ export class RegisterPage implements OnInit {
     await alert.present();
   }
 
+  async InvalidInforAlert()
+  {
+    const alert = await this.alertController.create({
+      header: 'Invalid Registration Information',
+      message: 'Make sure that the password is at least 6 characters long and you have entered a valid email address',
+      buttons: [
+        {
+          text: 'Ok',
+          role: 'cancel',
+        },
+      ],
+    });
+    await alert.present();
+
+  }
+
   ngOnInit() {
   }
 
@@ -63,13 +78,13 @@ export class RegisterPage implements OnInit {
     if (this.registrationForm.valid) {
       const regEmail = this.registrationForm?.get('email')?.value;
       const regPassword = this.registrationForm?.get('password')?.value;
-      if (regEmail != null && regPassword!=null){
-        // alert("Registering with email: " + regEmail + " and password: " + regPassword);
+      if (regEmail != null && regPassword!=null)
+      {
         this.store.dispatch(new Register(regEmail,regPassword));
       }
-    }else{
-      alert("Invalid Registration Information. Make sure that the password is at least 6 characters long and you have entered a valid email address");
+    }else
+    {
+      this.InvalidInforAlert();
     }
-    //this.Nav.navigateRoot('/home');     //moved this to auth api
   }
 }
