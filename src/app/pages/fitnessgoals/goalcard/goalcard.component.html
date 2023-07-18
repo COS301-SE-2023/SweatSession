@@ -47,18 +47,12 @@ l<ion-segment (ionChange)="onSegmentChange($event)" value="0" [scrollable]="true
       </ion-card>
     </ion-item-sliding>
   </ion-content>
-  
 
 
-<ion-fab slot="fixed" vertical="bottom" horizontal="end">
-    <ion-fab-button >
-        <ion-icon name="add" ></ion-icon>
+<ion-fab slot="fixed" vertical="bottom" horizontal="right">
+    <ion-fab-button (click)="addGoal()">
+      <ion-icon name="add"></ion-icon>
     </ion-fab-button>
-    <ion-fab-list side="top">
-        <ion-fab-button>
-            <ion-icon id="open-modal" name="add-circle-outline" (click)="addGoal()"></ion-icon>
-        </ion-fab-button>
-    </ion-fab-list>
 </ion-fab>
 
 

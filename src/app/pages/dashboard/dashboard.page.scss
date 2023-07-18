@@ -13,10 +13,13 @@ ion-content {
 
 ion-card {
     --background: #457B9D;
+    border-radius: 25px; /* Adjust the value as per your preference */
+    overflow: hidden;
     opacity: 0.9;
     height: 100%;
     
     ion-card-title {
+        text-align: center;
         font-weight: bold;
         font-style: italic;
         color: #457B9D;

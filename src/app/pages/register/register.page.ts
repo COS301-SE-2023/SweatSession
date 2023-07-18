@@ -4,7 +4,7 @@ import { FormBuilder, Validators } from '@angular/forms'; //, AbstractControl, V
 import { Select, Store } from '@ngxs/store';
 //import { ReactiveFormsModule } from '@angular/forms';
 import {Register} from 'src/app/actions/register';
-//import {RegisterPageModule} from './register.module'
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-register',
@@ -20,7 +20,8 @@ export class RegisterPage implements OnInit {
   constructor(
     private Nav: NavController,
     private readonly regFormBuilder: FormBuilder,
-    private readonly store: Store
+    private readonly store: Store,
+    private alertController: AlertController
   ){}
 
   get email() {
@@ -32,6 +33,26 @@ export class RegisterPage implements OnInit {
   }
   get cPassword() {
     return this.registrationForm.get('cPassword');
+  }
+
+  async AcceptUserTerms() {
+    const alert = await this.alertController.create({
+      header: 'Terms and Conditions',
+      message: 'Some text for the terms and conditions that can be really long and stuff and Some text for the terms and conditions that can be really long and stuff and',
+      buttons: [
+        {
+          text: 'Decline',
+          role: 'cancel',
+        },
+        {
+          text: 'Accept',
+          handler: () => {
+            this.register();
+          },
+        },
+      ],
+    });
+    await alert.present();
   }
 
   ngOnInit() {
