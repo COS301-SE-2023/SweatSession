@@ -141,7 +141,12 @@ export class LocationRepository {
       docs.forEach(document=>{
         console.log(document.data());
         console.log(document.id);
-        friendGymSessions.push(document.data() as LocationGymSession);
+        const data = document.data() as LocationGymSession;
+        const startDateTime = new Date(data.date + " " + data.startTime);
+        const currentTime = Timestamp.now().toDate();
+        if (startDateTime > currentTime){
+          friendGymSessions.push(data);
+        }
       })
       locationGymSessions.push(friendGymSessions);
     })
