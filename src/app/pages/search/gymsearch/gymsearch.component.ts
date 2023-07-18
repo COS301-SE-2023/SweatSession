@@ -177,7 +177,7 @@ export class GymsearchComponent implements OnInit {
       // nearbyGymProxyRequest()
    }
 
-   searchNearbyGyms() {
+   async searchNearbyGyms() {
       this.getCurrentLocation().then((coordinates: GeolocationCoordinates) => {
          this.currLatitude = coordinates.latitude;
          this.currLongitude = coordinates.longitude;
@@ -188,10 +188,12 @@ export class GymsearchComponent implements OnInit {
          // const url = `http://127.0.0.1:5005/demo-project/us-central1/nearbyGymProxyRequest?latitude=${this.currLatitude}&longitude=${this.currLongitude}&radius=${this.maxDistance * 1000}&key=${this.MAPS_API_KEY}`;
          fetch(url)
             .then((response) => response.json())
-            .then((data) => {
+            .then(async (data) => {
                console.log(data);
                console.log(data.results);
                this.gyms = data;
+               await this.getGymUsersForGyms(this.userFriendIds);
+               console.log(this.gyms);
             })
             .catch((error) => {
                console.error(error);
@@ -199,6 +201,7 @@ export class GymsearchComponent implements OnInit {
       }).catch((error) => {
          console.log('Error getting current location:', error);
       });
+      
    }
 
    async loadData(): Promise<void> {
