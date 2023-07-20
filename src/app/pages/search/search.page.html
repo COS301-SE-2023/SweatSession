@@ -1,16 +1,16 @@
 <div class="outer-container">
   <ion-content>
     <div class="inner-container">
-      <ion-segment (ionChange)="onSegmentChange($event)" value="user">
+      <!-- <ion-segment (ionChange)="onSegmentChange($event)" value="user">
         <ion-segment-button value="user">
           <ion-label>User</ion-label>
         </ion-segment-button>
         <ion-segment-button value="gym">
           <ion-label>Gym</ion-label>
         </ion-segment-button>
-      </ion-segment>
+      </ion-segment> -->
 
-      <gymsearch [hidden]="selectedSegment !=='gym'"></gymsearch>
+      <!-- <gymsearch [hidden]="selectedSegment !=='gym'"></gymsearch> -->
       <usersearch [hidden]="selectedSegment !=='user'"></usersearch>
     </div>
   </ion-content>
