@@ -16,6 +16,7 @@ import { IFriendsModel } from 'src/app/models';
 import { GetFriendsAction } from 'src/app/actions';
 import { LocationRepository } from 'src/app/repository/location.repository';
 import { Timestamp } from 'firebase/firestore';
+import { take } from 'rxjs/operators';
 
 @Component({
    selector: 'gymsearch',
@@ -100,13 +101,15 @@ export class GymsearchComponent implements OnInit {
       this.store.dispatch(new GetFriendsAction());
       this.triggerfilter();
       this.userFriendIds=[]
-      this.friends$.subscribe((response) => {
+      this.friends$.pipe(
+         take(1)
+       ).subscribe((response) => {
          this.userFriends = response;
          this.userFriends.forEach(element => {
-            console.log(element);
-            this.userFriendIds.push(element.userId!)
+           console.log(element);
+           this.userFriendIds.push(element.userId!);
          });
-      })
+       });
       console.log(this.userFriendIds)
 
       const coordinates = await this.getCurrentLocation();
@@ -281,11 +284,16 @@ export class GymsearchComponent implements OnInit {
    async getGymUsers(placeId: string, friendIds: string[]) {
       // console.log("getting gym users for: "+placeId)
       const friendsLocationInfo = await this.locationRepository.getLocation(placeId, friendIds);
+      if(placeId=="ChIJ4-tknf5glR4RGm5xRwH54ds"){ 
+         console.log("in getGymUsers")
+      }
       // console.log(locationObservable);
       return friendsLocationInfo;
    }
 
    async getGymUsersForGyms(friendIds: string[]) {
+      console.log("getGymUsersForGyms")
+      console.log(friendIds)
       this.gymUsers = [];
       this.gyms.results.forEach(async (gym: any) => {
          // this.getGymUsers(gym.place_id).subscribe((response) => {

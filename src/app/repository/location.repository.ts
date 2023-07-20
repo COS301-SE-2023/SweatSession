@@ -132,24 +132,30 @@ export class LocationRepository {
     // }
 
     // console.log(friendIds)
-    const locationGymSessions: LocationGymSession[][]=[];
-    friendIds.forEach(async id=>{
+    if (placeId == "ChIJ4-tknf5glR4RGm5xRwH54ds") {
+      console.log("friendIds location repository")
+      console.log(friendIds)
+    }
+    const locationGymSessions: LocationGymSession[][] = [];
+    friendIds.forEach(async id => {
       console.log(placeId);
       const colRef = collection(this.firestore, `locations/${placeId}`, id);
       const docs = await getDocs(colRef);
-      const friendGymSessions:LocationGymSession[]=[];
-      docs.forEach(document=>{
+      const friendGymSessions: LocationGymSession[] = [];
+      docs.forEach(document => {
         console.log(document.data());
         console.log(document.id);
         const data = document.data() as LocationGymSession;
         const startDateTime = new Date(data.date + " " + data.startTime);
         const currentTime = Timestamp.now().toDate();
-        if (startDateTime > currentTime){
+        if (startDateTime > currentTime) {
           friendGymSessions.push(data);
         }
       })
-      if (friendGymSessions.length>0){
+      if (friendGymSessions.length > 0) {
         locationGymSessions.push(friendGymSessions);
+        console.log("friendGymSessions")
+        console.log(friendGymSessions)
       }
     })
     return locationGymSessions;
