@@ -137,7 +137,8 @@ export class LocationRepository {
       console.log(friendIds)
     }
     const locationGymSessions: LocationGymSession[][] = [];
-    friendIds.forEach(async id => {
+    for (let i = 0; i < friendIds.length; i++) {
+      const id = friendIds[i];
       console.log(placeId);
       const colRef = collection(this.firestore, `locations/${placeId}`, id);
       const docs = await getDocs(colRef);
@@ -157,7 +158,7 @@ export class LocationRepository {
         console.log("friendGymSessions")
         console.log(friendGymSessions)
       }
-    })
+    }
     return locationGymSessions;
   }
 
