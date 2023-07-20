@@ -1,8 +1,11 @@
 .user-message {
-    background-color: #e76363;
-    padding: 10px;
-    border-radius: 10px;
-    margin-bottom: 5px;
+  background-color: #f0f0f0;
+  border-radius: 15px;
+  padding: 10px;
+  margin-right: auto; // Push the message to the left
+  max-width: 70%; // Limit the width to a percentage of the container
+  align-self: flex-start; 
+  
   }
 
 * {
@@ -17,11 +20,16 @@ ion-footer{
 }
 
   .bot-message {
-    background-color: #2adeee;
-    padding: 10px;
-    border-radius: 10px;
-    margin-bottom: 5px;
-    --slot: end ;
+   background-color: #e51b1b;
+   color: #ffffff;
+   border-radius: 15px;
+   padding: 10px;
+   margin-left: auto; // Push the message to the right
+   max-width: 70%; // Limit the width to a percentage of the container
+   align-self: flex-end; // A
+    
+   
+   
   }
 
   .loading-container {
