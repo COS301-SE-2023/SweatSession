@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { Select, Store } from '@ngxs/store';
 import { Observable, switchMap, tap } from 'rxjs';
-import { GetChatFriends, GetFriendsProfiles, StageChatFriend } from 'src/app/actions';
-import { IChatFriend, IProfileModel } from 'src/app/models';
+import { GetChatFriends, GetFriendsProfiles, GetGroups, StageChatFriend, StageChatGroup } from 'src/app/actions';
+import { IChatFriend, IGroup, IProfileModel } from 'src/app/models';
 import { MessagesState } from 'src/app/states';
 
 @Component({
@@ -14,6 +14,8 @@ import { MessagesState } from 'src/app/states';
 export class MessagesPage implements OnInit {
  @Select(MessagesState.returnChatFriends) chatFriends$: Observable<IChatFriend[]>;
  @Select(MessagesState.returnFriendsProfiles) friends$: Observable<IProfileModel[]>;
+ @Select(MessagesState.returnGroups) groups$: Observable<IGroup[]>;
+  groups: IGroup[] = [];
  chatFriends: IChatFriend[] = [];
  friends: IProfileModel[] = [];
  loading: boolean = false;
@@ -25,6 +27,7 @@ export class MessagesPage implements OnInit {
 
   ngOnInit() {
     this. displayChatFriends();
+    this.displayGroups();
   }
 
   openChat(chat:any) {
@@ -46,6 +49,13 @@ export class MessagesPage implements OnInit {
     })
   }
 
+  displayGroups() {
+    this.store.dispatch(new GetGroups())
+    this.groups$.subscribe((response)=>{
+      this.groups=response;
+    })
+  }
+
   stageUser(user: IProfileModel, model?:any) {
     if(model) {
       model.dismiss();
@@ -53,8 +63,8 @@ export class MessagesPage implements OnInit {
     this.store.dispatch(new StageChatFriend(user.userId!))
   }
 
-  stageGroup() {
-    this.nav.navigateRoot("/groupchatroom");
+  stageGroup(group: IGroup) {
+    this.store.dispatch(new StageChatGroup(group.id!));
   }
 
   onSegmentChange(event: any) {

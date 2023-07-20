@@ -140,6 +140,7 @@ import { Observable,lastValueFrom, map } from "rxjs";
 
           snapshot.forEach((doc)=>{
             const group = {
+              id: doc.payload.doc.id,
               ...doc.payload.doc.data()
             }
 

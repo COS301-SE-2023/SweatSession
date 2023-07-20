@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Action, Selector, State, StateContext } from "@ngxs/store";
 import { IMessage, IChatFriend, IGetChatFriends, IGetMessages, ISendMessage, IDeleteMessage, IProfileModel, IFriendsModel, IGroup, IGetGroups, IAddChatGroup, IJoinGroup, IRemoveChatGroup, IExitChatGroup } from "src/app/models";
-import { DeleteMessage, GetMessages, SendMessage, GetChatFriends, StageChatFriend, GetFriendsProfiles, GetChatFriend, RemoveChatFriendSession, SendGroupMessage, RemoveChatGroupSession, GetGroups, AddChatGroup, JoinChatGroup, RemoveChatGroup, ExitChatGroup } from 'src/app/actions';
+import { DeleteMessage, GetMessages, SendMessage, GetChatFriends, StageChatFriend, GetFriendsProfiles, GetChatFriend, RemoveChatFriendSession, SendGroupMessage, RemoveChatGroupSession, GetGroups, AddChatGroup, JoinChatGroup, RemoveChatGroup, ExitChatGroup, StageChatGroup } from 'src/app/actions';
 import { AuthApi } from "../auth";
 import { FriendsService, MessagesService, OtheruserService } from "src/app/services";
 import { tap } from "rxjs";
@@ -138,6 +138,16 @@ export class MessagesState {
         return ctx.dispatch(new Navigate(['chatroom']));
     }
 
+    @Action(StageChatGroup)
+    async stageChatGroup(ctx: StateContext<MessagesStateModel>, {payload}: StageChatFriend) {
+        sessionStorage.setItem('chatFriend', payload);
+        ctx.patchState({
+            chatFriend: payload
+        })
+
+        return ctx.dispatch(new Navigate(['groupchatroom']));
+    }
+
     @Action(GetChatFriend)
     async getChatFriend(ctx: StateContext<MessagesStateModel>) {
         const userId = sessionStorage.getItem('chatFriend');
@@ -202,6 +212,7 @@ export class MessagesState {
                 ctx.patchState({
                     chatGroups: groups
                 })
+                console.table(groups);
             })
            )
         }
@@ -212,8 +223,9 @@ export class MessagesState {
     async addGroupChat(ctx: StateContext<MessagesStateModel>,{payload}: AddChatGroup) {
         const currentUserId = await this.authApi.getCurrentUserId();
         if(currentUserId) {
-            payload.admin?.push(currentUserId);
-            payload.members?.push(currentUserId);
+            payload.admin = [currentUserId];
+            payload.members = [currentUserId];
+            payload.createBy = currentUserId;
             const request:IAddChatGroup = {
                 userId: currentUserId,
                 group: payload
@@ -286,7 +298,7 @@ export class MessagesState {
     }
 
     @Selector()
-    static returnGroup(state: MessagesStateModel) {
+    static returnGroups(state: MessagesStateModel) {
         return state.chatGroups;
     }
 }
