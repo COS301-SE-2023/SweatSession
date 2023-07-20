@@ -148,7 +148,9 @@ export class LocationRepository {
           friendGymSessions.push(data);
         }
       })
-      locationGymSessions.push(friendGymSessions);
+      if (friendGymSessions.length>0){
+        locationGymSessions.push(friendGymSessions);
+      }
     })
     return locationGymSessions;
   }
