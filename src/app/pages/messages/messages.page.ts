@@ -64,7 +64,7 @@ export class MessagesPage implements OnInit {
   }
 
   stageGroup(group: IGroup) {
-    this.store.dispatch(new StageChatGroup(group.id!));
+    this.store.dispatch(new StageChatGroup(group));
   }
 
   onSegmentChange(event: any) {
