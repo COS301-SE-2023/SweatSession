@@ -9,6 +9,11 @@ export class GetMessages {
     constructor() {}
 }
 
+export class GetGroupMessages {
+    static readonly type = "[messages] get group messages";
+    constructor() {}
+}
+
 export class SendMessage {
     static readonly type = "[messages] send a message";
     constructor(public payload: IMessage) {}
@@ -26,7 +31,7 @@ export class StageChatFriend {
 
 export class StageChatGroup {
     static readonly type = "[messages] sage chat group";
-    constructor(public payload: string) {}
+    constructor(public payload: IGroup) {}
 }
 
 export class GetFriendsProfiles {
@@ -72,4 +77,9 @@ export class ExitChatGroup {
 export class RemoveChatGroup {
     static readonly type = "[chatGroup] remove a chat group";
     constructor(public payload: IGroup) {}
+}
+
+export class GetGroup {
+    static readonly type = "[chatGroup] get chat group info";
+    constructor(public payload: string) {}
 }
