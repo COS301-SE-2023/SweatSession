@@ -16,6 +16,7 @@ export interface MessagesStateModel {
     f?: IFriendsModel[];
     chatFriendProfile?: IProfileModel;
     chatGroups?: IGroup[];
+    chatGroup?: IGroup;
 }
 
 @State<MessagesStateModel>({
@@ -27,7 +28,8 @@ export interface MessagesStateModel {
         friendProfiles: [],
         f: [],
         chatFriendProfile: {},
-        chatGroups: []
+        chatGroups: [],
+        chatGroup: {}
     }
 })
 
@@ -166,6 +168,9 @@ export class MessagesState {
 
     @Action(StageChatGroup)
     async stageChatGroup(ctx: StateContext<MessagesStateModel>, {payload}: StageChatGroup) {
+        ctx.patchState({
+            chatGroup: payload
+        })
         sessionStorage.setItem('chatGroup',JSON.stringify(payload));
         return ctx.dispatch(new Navigate(['groupchatroom']));
     }
