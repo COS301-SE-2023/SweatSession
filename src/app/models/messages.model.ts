@@ -107,3 +107,7 @@ export interface IRemoveChatGroup {
     userId?: string;
     group: IGroup;
 }
+
+export interface IGetGroup {
+    groupId: string;
+}

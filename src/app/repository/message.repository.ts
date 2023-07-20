@@ -14,7 +14,8 @@ import { IMessage,
    IAddChatGroup,
    IJoinGroup,
    IExitChatGroup,
-   IRemoveChatGroup} from "../models";
+   IRemoveChatGroup,
+   IGetGroup} from "../models";
 import { AngularFirestore, AngularFirestoreCollection } from "@angular/fire/compat/firestore";
 import { Observable,lastValueFrom, map } from "rxjs";
 
