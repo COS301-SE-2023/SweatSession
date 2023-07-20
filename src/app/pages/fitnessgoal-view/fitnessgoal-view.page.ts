@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import {FitnessgoalService} from "../../services";
 import {forEach} from "@angular-devkit/schematics";
-import {ITASK} from "../../models";
+import {ITASK,IGOAL} from "../../models";
 import { AuthApi } from 'src/app/states/auth/auth.api';
 import {getAuth} from "@angular/fire/auth";
 import { getCurrentUserId } from 'src/app/actions';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-fitnessgoal-view',
@@ -15,10 +17,11 @@ export class FitnessgoalViewPage implements OnInit {
 
   goalName: string;
   goalId: string;
-  tasks: ITASK[] = [];
+  GOAL: IGOAL = {};
   currUserId: string | undefined = undefined;
   constructor(private fitnessgaolservive: FitnessgoalService,
               private authApi: AuthApi,
+              private router:Router,
               )
   {
 
@@ -38,65 +41,51 @@ export class FitnessgoalViewPage implements OnInit {
       this.currUserId = sessionStorage.getItem('currUserId') ?? "";
     }
 
-    this.fitnessgaolservive.getGoals(this.currUserId).subscribe((data) => {
-      data.goals.forEach((goal) => {
-        if (goal.id == this.goalId)
-        {
-          this.goalName = goal.name!;
-          this.fitnessgaolservive.getTasks(this.currUserId, goal.id!).subscribe((data) => {
-            data.tasks.forEach((task) => {
-              this.tasks.push(task);
-            });
-          }
-            );
-        }
-
-        });
+    this.fitnessgaolservive.getGoal(this.goalId).subscribe((data) => {
+          this.goalName = data.goal.name!;
+          this.GOAL = data.goal;
+          console.table(this.GOAL);
     });
   }
 
   getUserid() {
+    
     return  this.authApi.getCurrentUserId();
   }
 
-
+ 
+  
   setgoalid(id: string)
   {
     this.goalId = id;
   }
 
-  saveGoal() {
-    //remove the done or checked tasks
-    const tobedel : ITASK[] = [];
-
-    this.tasks.forEach((task, index) => {
-        if (task.done == true)
-        {
-            tobedel.push(task);
-        }
-    });
-
-    //save the tasks
-    if (this.currUserId!=undefined)
-    {
-      sessionStorage.setItem('currUserId', this.currUserId);
+  async saveGoal() {
+    const updatedTasks: ITASK[] = [];
+  
+    // Update the tasks and collect the updated ones
+    for (const task of this.GOAL.Tasks!) {
+      if (task.done) {
+        await this.fitnessgaolservive.updateTask(task, this.goalId);
+        updatedTasks.push(task);
+      }
     }
-    else
-    {
-      this.currUserId = sessionStorage.getItem('currUserId') ?? "";
+  
+    // Mark the tasks as done after updating
+    for (const task of updatedTasks) {
+      task.done = true;
     }
-
-   //delete these tasks
-    tobedel.forEach((task, index) => {
-      this.fitnessgaolservive.deleteTask(this.currUserId!, this.goalId, task.content);
-    });
-
+  
+    this.router.navigate(['/fitnessgoals']);
   }
+  
+  
 
   cancel() {
     // Handle the cancel functionality
     // You can navigate back to the previous page or perform any other necessary actions
   }
+  
   ngOnInit() {
     this.getGoal();
   }

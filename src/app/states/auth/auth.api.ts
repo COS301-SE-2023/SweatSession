@@ -10,7 +10,7 @@ import {
 } from '@angular/fire/auth';
 
 import { signOut } from '@firebase/auth';
-import { NavController } from '@ionic/angular';
+import { AlertController, NavController } from '@ionic/angular';
 // import { AuthState } from 'src/app/states/auth';
 //import { RegisterRepository } from 'src/app/repository/register.repository';
 
@@ -21,7 +21,10 @@ import { NavController } from '@ionic/angular';
   providedIn: 'root'
 })
 export class AuthApi {
-  constructor(private readonly authObject: Auth, private Nav: NavController) { }//, private repository: RegisterRepository         //, private service: RegisterService
+  constructor(private readonly authObject: Auth,
+     private Nav: NavController,
+    private alertController: AlertController
+    ) {}//, private repository: RegisterRepository         //, private service: RegisterService
 
   auth$() {
     return authState(this.authObject);
@@ -33,8 +36,6 @@ export class AuthApi {
     return (auth.currentUser?.uid);
   }
 
-
-
   async login(regEmail: string, regPassword: string) {
     try {
       await signInWithEmailAndPassword(this.authObject, regEmail, regPassword);
@@ -44,8 +45,24 @@ export class AuthApi {
       this.Nav.navigateRoot('/home'); // this is so they are only directed to login when they enter a valid email and password combination
     } catch (error) {
       console.error('Firebase error:', error);
-      alert("Incorrect email password combination");
+      // alert("Incorrect email password combination");
+      this.IncorrectCombination();
     }
+  }
+
+  async IncorrectCombination()
+  {
+    const alert = await this.alertController.create({
+      header: 'Invalid Login Information',
+      message: 'Incorrect email password combination',
+      buttons: [
+        {
+          text: 'Ok',
+          role: 'cancel',
+        },
+      ],
+    });
+    await alert.present();
   }
 
   async register(regEmail: string, regPassword: string) {
@@ -81,7 +98,8 @@ export class AuthApi {
     return userCredentials;
   }
 
-  async logout() {
+  async LogoutConfirmed() {
+
     // const auth = getAuth();
     // console.log(auth.currentUser?.uid);
     // alert("logout");
@@ -90,5 +108,25 @@ export class AuthApi {
     sessionStorage.removeItem("otherUserBadgesName");
     sessionStorage.removeItem("otherUserBadgesId");
     return await signOut(this.authObject);
+  }
+
+  async logout() { // Do not want to refactor the code will switch content
+    const alert = await this.alertController.create({
+      header: 'Logout',
+      message: 'Are you sure you want to logout?',
+      buttons: [
+        {
+          text: 'Camcel',
+          role: 'cancel',
+        },
+        {
+          text: 'Yes',
+          handler: () => {
+            this.LogoutConfirmed();
+          },
+        },
+      ],
+    });
+    await alert.present();
   }
 }

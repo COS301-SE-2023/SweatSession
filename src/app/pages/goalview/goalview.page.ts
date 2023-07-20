@@ -4,6 +4,7 @@ import {IAddGOAL, IGOAL, IGOALS, ITASK} from "../../models";
 import {Store} from "@ngxs/store";
 import {FitnessgoalService} from "../../services";
 import {AuthApi} from "../../states";
+import {getAuth} from "@angular/fire/auth";
 import {Router} from "@angular/router";
 import {forEach} from "@angular-devkit/schematics";
 import firebase from "firebase/compat/app";
@@ -25,9 +26,7 @@ export class GoalviewPage  implements OnInit {
 
               )
             {
-              this.TaskForm = this.formBuilder.group({
-                Taskses: this.formBuilder.array([])
-              });
+              
             }
 
 
@@ -35,8 +34,12 @@ export class GoalviewPage  implements OnInit {
     goals: []
   }
 
-  currentUserId: string | undefined = undefined;
-  TaskForm: FormGroup;
+  selectedSegment: string = '0';
+  currUserId: string | undefined = undefined;
+
+  TaskForm = this.formBuilder.group({
+    Taskses: this.formBuilder.array([])
+  });
 
   goalForm = new FormGroup({
 
@@ -51,7 +54,9 @@ export class GoalviewPage  implements OnInit {
 
 
 
-
+  onSegmentChange(event: any) {
+    this.selectedSegment = event.detail.value;
+  }
 
   getUserid() {
     return  this.authApi.getCurrentUserId();
@@ -60,12 +65,6 @@ export class GoalviewPage  implements OnInit {
   get Taskses(): FormArray {
     return this.TaskForm.get('Taskses') as FormArray;
   }
-
-  // Task(): any {
-  //   return this.fb.group({
-  //     Task: this.fb.control(''),
-  //   });
-  // }
 
   addControl(): void {
     this.Taskses.push(
@@ -93,85 +92,55 @@ export class GoalviewPage  implements OnInit {
 
   }
 
-  calculate_Progress() {
-    return 0.5;
-  }
-
-  addGoal() {
-
-    //success toast
-    // close the modal
-    console.log("Add Goal");
-  }
-
-  selectFile() {
-    document.getElementById('fileInput')?.click();
-  }
-
-  getDp() {
-    return this.goalForm.value.coverPicture;
-  }
-
 
   onSubmit() {
 
-    const id = this.getUserIDD();
-    const id2 = this.firestore.createId();
+    const auth = getAuth();
+    this.currUserId = auth.currentUser?.uid;
 
-    const new_goal: IGOAL = {
-      id: id2,
-      name: this.goalForm.value.name ?? "",
-      description: this.goalForm.value.description ?? "",
-      coverPicture: this.goalForm.value.coverPicture ?? "",
-      startDate: this.goalForm.value.start ?? "",
-      endDate: this.goalForm.value.end ?? "",
-      progress: this.goalForm.value.progress ?? 0, //TODO: will need to fix these
-      days_left: this.goalForm.value.days_left ?? 0,
-      duration: 5,
+    if (this.currUserId!=undefined)
+    {
+      sessionStorage.setItem('currUserId', this.currUserId);
+    }
+    else
+    {
+      this.currUserId = sessionStorage.getItem('currUserId') ?? "";
     }
 
-    // new_goal.duration = (new_goal.end.getTime() - new_goal.start.getTime()) / (1000 * 3600 * 24);
-    const iaddGoal: IAddGOAL = {
-        userId: id,
-        goal: new_goal
+    const Tasks2 : ITASK[] = [];
+    const tasksesArray = this.TaskForm.get('Taskses') as FormArray;
+
+    for (let i = 0; i < tasksesArray.length; i++) {
+    const tasksControl = tasksesArray.controls[i];
+    const tasksValue = tasksControl.value;
+
+    const task:ITASK = {
+      id : this.firestore.createId(),
+      content : tasksValue.content,
+      done : false
     }
-
-
-    this.fitnessgaolservive.addGoal(iaddGoal);
-
-    this.Taskses.controls.forEach( (task) => {
-
-        const iaddtask: ITASK = {
-          id: id2 ?? "",
-          done : false,
-          content: task.get('content')?.value
-        }
-
-        this.fitnessgaolservive.addTask(iaddtask, id ?? "");
-
-      });
-
-    this.router.navigate(['/fitnessgoals']);
+    Tasks2.push(task);
   }
 
+    const goal2 :IGOAL = 
+    {
+      id: this.firestore.createId(),
+      name: this.goalForm.value.name!,
+      description: this.goalForm.value.description!,
+      startDate: this.goalForm.value.start!,
+      endDate: this.goalForm.value.end!,
+      isCompleted: false,
+      Tasks: Tasks2
+    }
 
-  getUserIDD()
-  {
-    this.authApi.getCurrentUserId().then((currentUserId) => {
+    const Iadd : IAddGOAL = 
+    {
+      userId: this.currUserId,
+      goal: goal2
+    }
+    this.fitnessgaolservive.addGoal(Iadd);
 
-      this.currentUserId = currentUserId;
-
-      if (this.currentUserId != undefined)
-      {
-        sessionStorage.setItem("currentUserId", this.currentUserId ?? "");
-      }
-      else
-      {
-        this.currentUserId = sessionStorage.getItem("currentUserId") ?? "";
-      }
-    });
-
-    return this.currentUserId;
+    this.router.navigate(['/fitnessgoals']);
   }
 
   ngOnInit()

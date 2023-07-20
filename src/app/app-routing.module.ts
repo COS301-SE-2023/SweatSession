@@ -97,6 +97,8 @@ const routes: Routes = [
   },
   {
     path: 'fitnessgoals',
+    canActivate: [AuthGuard],
+    data: { authGuardPipe: redirectLoggedOut },
     loadChildren: () => import('./pages/fitnessgoals/fitnessgoals.module').then(m => m.FitnessgoalsPageModule)
   },
   {
@@ -173,7 +175,13 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     data: { authGuardPipe: redirectLoggedOut },
     loadChildren: () => import('./pages/messages/create-group/create-group.module').then( m => m.CreateGroupComponentModule )
-  }
+  },
+  {
+    path: 'view-personalbests',
+    canActivate: [AuthGuard],
+    data: { authGuardPipe: redirectLoggedOut },
+    loadChildren: () => import('./pages/view-personalbests/view-personalbests.module').then( m => m.ViewPersonalbestsPageModule)
+  },
 ];
 @NgModule({
   imports: [

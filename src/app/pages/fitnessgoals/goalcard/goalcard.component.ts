@@ -13,6 +13,8 @@ import {FitnessgoalViewPage} from "../../fitnessgoal-view/fitnessgoal-view.page"
 import {today} from "ionicons/icons";
 import {convertChangeEventsToLogMessage} from "nx/src/daemon/server/watcher";
 import {Time} from "@angular/common";
+import { event } from 'firebase-functions/v1/analytics';
+
 @Component({
   selector: 'app-goalcard',
   templateUrl: './goalcard.component.html',
@@ -21,112 +23,137 @@ import {Time} from "@angular/common";
 
 
 export class GoalcardComponent  implements OnInit {
+
+  currUserId: string | undefined = undefined;
+  GOALS : IGOAL[] = [];
+  selectedSegment: string = '0';
+
+
+
     constructor(private store: Store,
                 private fitnessgaolservive: FitnessgoalService,
                 private authApi: AuthApi,
                 private fb: FormBuilder,
                 private router: Router
-    ) {
-     this.ngOnInit();
+    ) 
+    {
+        
     }
 
-    currUserId: string | undefined = undefined;
-
-    goals: IGOALS = {goals: []}
-
-    ngOnInit() {
-        this.retrievegoals();
+    ngOnInit(): void {
+        this.getGoals();
     }
 
-
-    viewGoal(id: string) {
-        this.router.navigate(['/fitnessgoal-view']);
-        FitnessgoalViewPage.prototype.setgoalid(id);
-    }
-
-    removeGoal(name: string | undefined) {
-        // this.goals.goals?.forEach((goal, index) => {
-        //     if (goal.name == name) {
-        //         this.goals.goals?.splice(index, 1);
-        //     }
-        // });
+    getGoals()
+    {
 
         const auth = getAuth();
         this.currUserId = auth.currentUser?.uid;
 
-        if (this.currUserId != undefined) {
-            sessionStorage.setItem('currUserId', this.currUserId);
-        } else {
-            this.currUserId = sessionStorage.getItem('currUserId') ?? "";
+        if (this.currUserId!=undefined)
+        {
+        sessionStorage.setItem('currUserId', this.currUserId);
+        }
+        else
+        {
+        this.currUserId = sessionStorage.getItem('currUserId') ?? "";
         }
 
-        this.fitnessgaolservive.removeGoal(this.currUserId, name ?? "");
+        this.fitnessgaolservive.getGoals(this.currUserId).subscribe((data: { goals: IGOAL[]; }) => {
+            //calculate days left
+            
+            this.GOALS = data.goals;
+          });
+    }
 
+    getDaysleft(goal: IGOAL)
+    {
+        const time :Time = {hours: 11, minutes: 59};
+
+        const endday = new Date(`${goal.endDate}.${time.hours}:${time.minutes}`).getTime();
+        const today = new Date().getTime();
+        const diff = endday - today;
+        const temp = Math.floor(diff / (1000 * 60 * 60 * 24));
+        if(temp < 0)
+        {
+               return 0
+        }else {
+               return temp;
+        }
     }
 
     addGoal() {
+        //route to goalview page
         this.router.navigate(['/goalview']);
-        console.log("Add Goal");
+
     }
 
+    getFilteredGoals() {
+        if (this.selectedSegment === '0') {
+            return this.GOALS.filter(goal => {
+              if (goal.progress! < 100) {
+                const time: Time = { hours: 11, minutes: 59 };
+                const endDay = new Date(`${goal.endDate}.${time.hours}:${time.minutes}`).getTime();
+                const today = new Date().getTime();
+                const diff = endDay - today;
+                const temp = Math.floor(diff / (1000 * 60 * 60 * 24));
+                return temp > 0;
+              }
+              return false; 
+            });
+          }
+          
+        else if (this.selectedSegment === '1') 
+        {
+          return this.GOALS.filter(goal => goal.progress == 100); // Display completed goals
+        } 
+        else if (this.selectedSegment === '2') 
+        {
+            
 
-
-    async retrievegoals() {
-        const auth = getAuth();
-        this.currUserId = auth.currentUser?.uid;
-
-        if (this.currUserId != undefined) {
-            sessionStorage.setItem('currUserId', this.currUserId);
-        } else {
-            this.currUserId = sessionStorage.getItem('currUserId') ?? "";
-        }
-
-        this.fitnessgaolservive.getGoals(this.currUserId).subscribe((GOALS) => {
-            for (let goal2 of GOALS.goals) {
-                this.fitnessgaolservive.getTasks(this.currUserId, goal2.id!).subscribe((data) => {
-                    let count = 0;
-                    let all = 0;
-
-                    data.tasks.forEach((task) => {
-                        if (task.done == true) {
-                            count = count + 1;
-                        }
-                        all = all + 1;
-                    });
-
-                    const time :Time = {hours: 11, minutes: 59};
-
-                    const endday = new Date(`${goal2.endDate}.${time.hours}:${time.minutes}`).getTime();
-                    const today = new Date().getTime();
-                    const diff = endday - today;
-
-
-                    const temp = Math.floor(diff / (1000 * 60 * 60 * 24));
-                    if(temp < 0)
-                    {
-                        goal2.days_left = 0;
-                    }else {
-                        goal2.days_left = temp;
-                    }
-
-                    console.log("Days left: " + goal2.days_left);
-
-                    let progress: number = count / all;
-                    goal2.progress = progress;
-                    goal2.days_left = goal2.duration;
-
-                    if(goal2.progress != 1)
-                    {
-                        this.goals.goals?.push(goal2);
-                    }
-
-                });
-
+          return this.GOALS.filter(goal => 
+            
+            {
+                const time :Time = {hours: 11, minutes: 59};
+                const endday = new Date(`${goal.endDate}.${time.hours}:${time.minutes}`).getTime();
+                const today = new Date().getTime();
+                const diff = endday - today;
+                const temp = Math.floor(diff / (1000 * 60 * 60 * 24));
+                if(temp <= 0)
+                {
+                    return true
+                }
+                else
+                {
+                    return false
+                }
             }
-        });
+            ); 
+        }
+        return this.GOALS;
+    }
+      
+    removeGoal(goalid: string|undefined)
+    {
+        this.fitnessgaolservive.removeGoal(goalid!)
+        //reload page
+        //Todo: add a popup to confirm you want to delete the 
+        // this.ngOnInit();
     }
 
+    viewGoal(goalid: string|undefined) {
+        // setgoalid
+        FitnessgoalViewPage.prototype.setgoalid(goalid!);
+        this.router.navigate(['/fitnessgoal-view'])
+    }
 
+    
+    onSegmentChange(event: any) {
+        this.selectedSegment = event.detail.value;
+    }
+      
 
-
+    isCompleted(goalname: IGOAL) {
+        return true;
+    }
 }

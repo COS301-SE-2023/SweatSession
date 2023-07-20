@@ -1,25 +1,34 @@
-<ion-list>
-    <ion-item-sliding *ngFor="let goal of goals.goals ">
+l<ion-segment (ionChange)="onSegmentChange($event)" value="0" [scrollable]="true">
+    <ion-segment-button value="0">Active</ion-segment-button>
+    <ion-segment-button value="1">Completed</ion-segment-button>
+    <ion-segment-button value="2">Overdue</ion-segment-button>
+  </ion-segment>
+
+  <ion-content [scrollEvents]="true">
+    <ion-item-sliding *ngFor="let goal of getFilteredGoals()">
+      <ion-card >
         <ion-card>
-        <ion-item>
+            <ion-item id="viewer">
+                <ion-icon name="basketball-outline"></ion-icon>
+                <ion-text>
+                    {{goal.name}}
+                </ion-text>
+                <ion-button slot="end" (click)="viewGoal(goal.id)">View</ion-button>
+            </ion-item>
+
+            <ion-item-options>
+                <ion-item-option color="danger" (click)="removeGoal( goal.id )">Delete</ion-item-option>
+            </ion-item-options>
+
+        </ion-card>
+    <div class="content">
+        <ion-card-content>
             <ion-grid>
+                 
                 <ion-row>
                     <ion-col>
-                        <ion-card-title class="ion-text-wrap ion-text-uppercase ion-text-sm">{{ goal.name }}</ion-card-title>
-                    </ion-col>
-                </ion-row>
-                <ion-row>
-                    <ion-col size = "7.0">
-                        <ion-badge color="primary">{{goal.days_left}}</ion-badge>
-                    </ion-col>
-                    <ion-col>
-                        <ion-label>Days Left</ion-label>
-                    </ion-col>
-                </ion-row>
-                <ion-row>
-                    <ion-col>
-                            <ion-label>Progress</ion-label>
-                            <ion-progress-bar value = "{{goal.progress}}" ></ion-progress-bar>
+                            <ion-label>{{(goal.progress!)}} % Done</ion-label>
+                            <ion-progress-bar value = "{{goal.progress! / 100}}" ></ion-progress-bar>
                     </ion-col>
                 </ion-row>
                 <ion-row>
@@ -27,35 +36,23 @@
                         <ion-card-subtitle class="ion-text-wrap ion-text-sm">{{ goal.description }}</ion-card-subtitle>
                     </ion-col>
                 </ion-row>
-                <ion-row>
-                    <ion-col class="ion-text-end">
-                        <ion-button (click)="viewGoal(goal.id!) ">View</ion-button>
-                    </ion-col>
-                </ion-row>
+                
             </ion-grid>
-        </ion-item>
-
-        <ion-item-options side="start">
-            <ion-item-option color="success">Edit</ion-item-option>
-        </ion-item-options>
-
-        <ion-item-options side="end">
-            <ion-item-option>Favorite</ion-item-option>
-            <ion-item-option color="danger" (click)="removeGoal( goal.id )">Delete</ion-item-option>
-        </ion-item-options>
-        </ion-card>
+            <ion-icon name="alert-circle-outline"></ion-icon><ion-text class="schedule-value">{{getDaysleft(goal)}} Days Left</ion-text><br>
+            <ion-icon name="american-football-outline"></ion-icon><ion-text class="schedule-value">{{goal.Tasks!.length}} Tasks</ion-text><br>
+            <ion-icon name="calendar-outline"></ion-icon><ion-text class="schedule-value">Started {{goal.startDate}}</ion-text><br>
+            <ion-icon name="alarm-outline"></ion-icon><ion-text class="schedule-value">Ending {{goal.endDate}}</ion-text><br>
+        </ion-card-content>
+    </div>
+      </ion-card>
     </ion-item-sliding>
-</ion-list>
+  </ion-content>
 
-<ion-fab slot="fixed" vertical="bottom" horizontal="end">
-    <ion-fab-button >
-        <ion-icon name="add" ></ion-icon>
+
+<ion-fab slot="fixed" vertical="bottom" horizontal="right">
+    <ion-fab-button (click)="addGoal()">
+      <ion-icon name="add"></ion-icon>
     </ion-fab-button>
-    <ion-fab-list side="top">
-        <ion-fab-button>
-            <ion-icon id="open-modal" name="add-circle-outline" (click)="addGoal()"></ion-icon>
-        </ion-fab-button>
-    </ion-fab-list>
 </ion-fab>
 
 
