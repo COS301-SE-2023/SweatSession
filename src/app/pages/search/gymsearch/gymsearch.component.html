@@ -61,7 +61,7 @@
             <p>{{ friend[0].friendDisplayName }}</p>
             <ul>
               <li *ngFor="let gymSession of friend">
-                <p>{{ gymSession.date }}: {{ gymSession.startTime }}-{{ formatTime(gymSession.endTime) }}</p>
+                <p>{{ formatDate(gymSession.date) }}: {{ gymSession.startTime }}-{{ formatTime(gymSession.endTime) }}</p>
               </li>
             </ul>
           </div>

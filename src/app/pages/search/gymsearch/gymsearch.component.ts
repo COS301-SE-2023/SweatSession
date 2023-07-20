@@ -17,15 +17,18 @@ import { GetFriendsAction } from 'src/app/actions';
 import { LocationRepository } from 'src/app/repository/location.repository';
 import { Timestamp } from 'firebase/firestore';
 import { take } from 'rxjs/operators';
+import { DatePipe } from '@angular/common';
+
 
 @Component({
    selector: 'gymsearch',
    templateUrl: './gymsearch.component.html',
    styleUrls: ['./gymsearch.component.scss'],
+   providers: [DatePipe],
 })
 export class GymsearchComponent implements OnInit {
    currUserId: string | undefined | null;
-   constructor(private store: Store, private modalController: ModalController, private geolocation: Geolocation, private httpClient: HttpClient, private locationRepository: LocationRepository, private friendsRepository: FriendsRepository, private friendsState: FriendsState) {
+   constructor(private store: Store, private modalController: ModalController, private geolocation: Geolocation, private httpClient: HttpClient, private locationRepository: LocationRepository, private friendsRepository: FriendsRepository, private friendsState: FriendsState, private datePipe: DatePipe) {
       this.data.filter(item => item.name.includes(''));
    }
 
@@ -101,10 +104,8 @@ export class GymsearchComponent implements OnInit {
       this.store.dispatch(new GetFriendsAction());
       this.triggerfilter();
       this.userFriendIds=[]
-      this.friends$.pipe(
-         take(1)
-       ).subscribe((response) => {
-         this.userFriends = response;
+      await this.friends$.pipe(take(1)).toPromise().then((response) => {
+         this.userFriends = response!;
          this.userFriends.forEach(element => {
            console.log(element);
            this.userFriendIds.push(element.userId!);
@@ -312,6 +313,11 @@ export class GymsearchComponent implements OnInit {
       const minutes: number = date.getMinutes();
     
       return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
+    }
+
+    formatDate(dateString: string): string {
+      const date = new Date(dateString);
+      return this.datePipe.transform(date, 'dd MMMM yyyy')!;
     }
     
 
