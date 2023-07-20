@@ -9,18 +9,23 @@
 </ion-header>
 
 <ion-content>
-<ion-searchbar
+<!-- <ion-searchbar
       placeholder="Search for gyms"
       [(ngModel)]="searchTerm"
       (ionInput)="onSearchInput($event)"
       color="light"
       animated
       >
-</ion-searchbar>   
+</ion-searchbar>    -->
 
 <ion-item>
   <ion-label position="stacked">Search Radius (km): </ion-label>
   <ion-input type="number" [(ngModel)]="maxDistance" (ionInput)="searchNearbyGyms()"></ion-input>
+</ion-item>
+
+<ion-item>
+  <ion-label position="stacked">Search for a gym by name: </ion-label>
+  <ion-input [(ngModel)]="searchTerm" (ionInput)="onSearchInput($event)" placeholder="Enter a gym name" color="light" clearInput animated></ion-input>
 </ion-item>
 
 <!-- <ion-card *ngFor="let item of filteredData$ | async" (click)="selectGym(item.name)">

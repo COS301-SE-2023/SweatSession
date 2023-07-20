@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { of, Observable, Subject, Subscription } from 'rxjs';
+import { of, Observable, Subject, Subscription, firstValueFrom } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map, startWith } from 'rxjs/operators';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { environment } from 'src/environments/environment';
@@ -44,7 +44,7 @@ export class GymsearchComponent implements OnInit {
    gymsSubscription: Subscription;
    gyms: any = {
       results: [
-         { name: "default", business_status: "default", photos: [{ photo_reference: "default" }], rating: "default", vicinity: "default", place_id: "default", friendsLocationInfo: [[]]},{friendsLocationInfo: []}
+         { name: "default", business_status: "default", photos: [{ photo_reference: "default" }], rating: "default", vicinity: "default", place_id: "default", friendsLocationInfo: [[]] }, { friendsLocationInfo: [] }
       ]
    }
    friends = [
@@ -103,26 +103,38 @@ export class GymsearchComponent implements OnInit {
       // this.locationRepository.getLocation("ChIJF7oBeAFhlR4RcP7sFSzacP8", this.userFriendIds);
       this.store.dispatch(new GetFriendsAction());
       this.triggerfilter();
-      this.userFriendIds=[]
-      await this.friends$.pipe(take(1)).toPromise().then((response) => {
-         this.userFriends = response!;
-         this.userFriends.forEach(element => {
-           console.log(element);
-           this.userFriendIds.push(element.userId!);
-         });
-       });
-      console.log(this.userFriendIds)
+      this.userFriendIds = []
+      // await this.friends$.pipe(take(1)).toPromise().then((response) => {
+      //    this.userFriends = response!;
+      //    this.userFriends.forEach(element => {
+      //      console.log(element);
+      //      this.userFriendIds.push(element.userId!);
+      //    });
+      //  });
+      this.friends$.subscribe(async (response) => {
+         if (this.userFriends.length === 0) {
+            this.userFriends = response;
+            this.userFriends.forEach(element => {
+               console.log(element);
+               this.userFriendIds.push(element.userId!);
+            });
 
-      const coordinates = await this.getCurrentLocation();
-      this.currLatitude = coordinates.latitude;
-      this.currLongitude = coordinates.longitude;
-      console.log('Latitude:', this.currLatitude);
-      console.log('Longitude:', this.currLongitude);
-      console.log('maxDistance:', this.maxDistance);
-      await this.loadData();
-      await this.getGymUsersForGyms(this.userFriendIds);
-      console.log(this.gymUsers);
-      console.log(this.gyms);
+
+            console.log(this.userFriendIds)
+
+            const coordinates = await this.getCurrentLocation();
+            this.currLatitude = coordinates.latitude;
+            this.currLongitude = coordinates.longitude;
+            console.log('Latitude:', this.currLatitude);
+            console.log('Longitude:', this.currLongitude);
+            console.log('maxDistance:', this.maxDistance);
+            await this.loadData();
+            await this.getGymUsersForGyms(this.userFriendIds);
+            console.log(this.gymUsers);
+            console.log(this.gyms);
+         }
+      });
+      //  this.userFriendIds= await firstValueFrom(this.friends$);
       // if (navigator.geolocation) {
       //   navigator.geolocation.getCurrentPosition();
       //   navigator.geolocation.getCurrentPosition(function (position) {
@@ -205,7 +217,7 @@ export class GymsearchComponent implements OnInit {
       }).catch((error) => {
          console.log('Error getting current location:', error);
       });
-      
+
    }
 
    async loadData(): Promise<void> {
@@ -285,7 +297,7 @@ export class GymsearchComponent implements OnInit {
    async getGymUsers(placeId: string, friendIds: string[]) {
       // console.log("getting gym users for: "+placeId)
       const friendsLocationInfo = await this.locationRepository.getLocation(placeId, friendIds);
-      if(placeId=="ChIJ4-tknf5glR4RGm5xRwH54ds"){ 
+      if (placeId == "ChIJ4-tknf5glR4RGm5xRwH54ds") {
          console.log("in getGymUsers")
       }
       // console.log(locationObservable);
@@ -301,8 +313,8 @@ export class GymsearchComponent implements OnInit {
          //    this.gymUsers.push(response);
          //    console.log(response)
          // });
-         if (gym.business_status=="OPERATIONAL"){
-            gym.friendsLocationInfo= await this.getGymUsers(gym.place_id, friendIds);
+         if (gym.business_status == "OPERATIONAL") {
+            gym.friendsLocationInfo = await this.getGymUsers(gym.place_id, friendIds);
          }
       });
    }
@@ -311,15 +323,15 @@ export class GymsearchComponent implements OnInit {
       const date: Date = timestamp.toDate();
       const hours: number = date.getHours();
       const minutes: number = date.getMinutes();
-    
-      return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
-    }
 
-    formatDate(dateString: string): string {
+      return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
+   }
+
+   formatDate(dateString: string): string {
       const date = new Date(dateString);
       return this.datePipe.transform(date, 'dd MMMM yyyy')!;
-    }
-    
+   }
+
 
    viewProfile(id: string) {
       // this.store.dispatch(new StageOtheruserInfo(user));
