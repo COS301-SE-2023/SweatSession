@@ -30,7 +30,7 @@ export const checkScheduledWorkouts = functions.pubsub
 
             if(workout.completeAt! <= now) {
               // Send a notification to the user userId == doc.id
-              await sendNotificationToUser(workout, "schedule completed");
+              await sendNotificationToUser(workout, "Workout Session Completed");//changed from schedule to Workout Session
               await innerDoc.ref.update({ status: 'completed' });
             }
           }
