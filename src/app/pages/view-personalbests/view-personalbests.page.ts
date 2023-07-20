@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { AddPersonalBestComponent } from './add-personal-best/add-personal-best.component';
+// import { AddPersonalBestComponent } from './add-personal-best/add-personal-best.component';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
-import { NgChartsModule } from 'ng2-charts';
-import { ReactiveFormsModule } from '@angular/forms';
+// import { BrowserModule } from '@angular/platform-browser';
+// import { NgChartsModule } from 'ng2-charts';
+// import { ReactiveFormsModule } from '@angular/forms';
 import { IPersonalBest } from 'src/app/models';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { PersonalbestService } from 'src/app/services/personalbest/personalbest.service';
