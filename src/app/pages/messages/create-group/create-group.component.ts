@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngxs/store';
+import { AddChatGroup } from 'src/app/actions';
 import { IGroup} from 'src/app/models';
 
 @Component({
@@ -8,7 +10,7 @@ import { IGroup} from 'src/app/models';
 })
 export class CreateGroupComponent  implements OnInit {
   group:IGroup = {}
-  constructor() { }
+  constructor(private store: Store) { }
 
   ngOnInit() {}
 
@@ -26,7 +28,7 @@ export class CreateGroupComponent  implements OnInit {
   }
 
   createGroup() {
-   
+   this.store.dispatch(new AddChatGroup(this.group));
   }
 
 }
