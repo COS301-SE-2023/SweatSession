@@ -7,24 +7,24 @@
           <ion-col size="12">
             <ion-card>
               <ion-card-title> 
-                <ion-icon name="receipt-outline"></ion-icon> Schedules
+                <ion-icon name="receipt-outline"></ion-icon> Workout Schedule
               </ion-card-title>
               <ion-skeleton-text [animated]="true" *ngIf="load"></ion-skeleton-text>
               <ion-card-content *ngIf="!load">
                 <swiper-container effect="flip">
                   <swiper-slide>
                     <div class="slide">
-                      {{upcoming}} scheduled sessions<br>
+                      {{upcoming}} Scheduled Workout Sessions<br>
                     </div>
                   </swiper-slide>
                   <swiper-slide>
                     <div class="slide">
-                      {{completed}} completed workout sessions
+                      {{completed}} Completed workout sessions
                     </div>
                   </swiper-slide>
                   <swiper-slide>
                     <div class="slide">
-                      {{inSession}} in session sessions
+                      {{inSession}} In session Workout Sessions
                     </div>
                   </swiper-slide>
                 </swiper-container>
