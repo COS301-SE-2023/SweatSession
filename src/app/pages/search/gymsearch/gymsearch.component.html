@@ -52,7 +52,7 @@
       </ion-card-header>
       <ion-card-content class="friend-container">
         <ng-container *ngIf="gym.friendsLocationInfo && gym.friendsLocationInfo[0] && gym.friendsLocationInfo[0].length > 0; else noFriends">
-          <ion-card-header class="whiteText">
+          <ion-card-header class="whiteText friendsHeader">
             Friends that have workout sessions scheduled here:
           </ion-card-header>
           <ul class="no-bullet">
@@ -73,7 +73,7 @@
           </ul>
         </ng-container>
         <ng-template #noFriends>
-          <ion-card-header class="whiteText">
+          <ion-card-header class="whiteText friendsHeader">
             No friends have workout sessions scheduled here
           </ion-card-header>
         </ng-template>
