@@ -47,8 +47,10 @@
       </ng-container>
       <ion-card-header style="display: flex; flex-direction: column;" class="gymDetails">
         <ion-card-title class="whiteText" >{{ gym.name }}</ion-card-title>
+        <br>
         <ion-card-subtitle class="whiteText" >{{ gym.vicinity }}</ion-card-subtitle>
-        Rating: {{ gym.rating ? gym.rating : 'No Rating' }}
+        <br>
+        <ion-card-subtitle class="whiteText" >Rating: {{ gym.rating ? gym.rating : 'No Rating' }}<ion-icon name="star" class="ratingIcon"></ion-icon></ion-card-subtitle>
       </ion-card-header>
       <ion-card-content class="friend-container">
         <ng-container *ngIf="gym.friendsLocationInfo && gym.friendsLocationInfo[0] && gym.friendsLocationInfo[0].length > 0; else noFriends">
