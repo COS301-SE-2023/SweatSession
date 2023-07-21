@@ -6,7 +6,6 @@ import { AuthApi } from "../auth";
 import { FriendsService, MessagesService, OtheruserService } from "src/app/services";
 import { tap } from "rxjs";
 import { Navigate } from "@ngxs/router-plugin";
-import { stringify } from "querystring";
 
 export interface MessagesStateModel {
     chats?: IMessage[];
@@ -29,7 +28,7 @@ export interface MessagesStateModel {
         f: [],
         chatFriendProfile: {},
         chatGroups: [],
-        chatGroup: {}
+        chatGroup: {},
     }
 })
 
@@ -49,7 +48,6 @@ export class MessagesState {
 
             return (await this.service.getChatFriends(request)).pipe(
                 tap((response)=>{
-                    console.log(response)
                     ctx.patchState({
                         chatFriends: response.chatFriends
                     })
@@ -87,10 +85,10 @@ export class MessagesState {
     async getGroupMessages (ctx: StateContext<MessagesStateModel>) {
         const currentUserId = await this.authApi.getCurrentUserId();
         if(currentUserId) {
-                const otheruserId = sessionStorage.getItem('chatGroup');
+                const group: IGroup = JSON.parse(sessionStorage.getItem('chatGroup')!);
                 const request: IGetMessages ={
                     userId: currentUserId,
-                    otheruserId: otheruserId!,
+                    otheruserId: group.id!,
                     isGroup: true
                 }
                 return(await this.service.getMessages(request)).pipe(
@@ -126,7 +124,7 @@ export class MessagesState {
         const currentUserId = await this.authApi.getCurrentUserId();
         if(currentUserId) {
             payload.senderId = currentUserId;
-            const group = JSON.parse(sessionStorage.getItem('groupChat')!);
+            const group = JSON.parse(sessionStorage.getItem('chatGroup')!);
             payload.receiverId = group.id;
             const request: ISendMessage = {
                 chat: payload
@@ -239,7 +237,6 @@ export class MessagesState {
                 ctx.patchState({
                     chatGroups: groups
                 })
-                console.table(groups);
             })
            )
         }
@@ -309,12 +306,13 @@ export class MessagesState {
         }
     }
 
-    // @Action(GetGroup)
-    // async getGroup(ctx: StateContext<MessagesStateModel>, {payload}:GetGroup) {
-    //     const request: IGetGroup = {
-    //         groupId: sessionStorage.getItem("chatFriend")!
-    //     }
-    // }
+    @Action(GetGroup)
+    async getGroup(ctx: StateContext<MessagesStateModel>) {
+        const group: IGroup = JSON.parse(sessionStorage.getItem("chatGroup")!);
+        ctx.patchState({
+            chatGroup: group
+        })
+    }
 
     @Selector()
     static returnChats(state: MessagesStateModel) {
@@ -339,5 +337,10 @@ export class MessagesState {
     @Selector()
     static returnGroups(state: MessagesStateModel) {
         return state.chatGroups;
+    }
+
+    @Selector()
+    static returnGroup(state: MessagesStateModel) {
+        return state.chatGroup;
     }
 }
