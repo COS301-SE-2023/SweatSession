@@ -1,6 +1,7 @@
 ion-item:not(.stats) {
     --background: #A8DADC;
-    border-radius: 12px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
 
     .user-name {
         margin-left: 20px;
@@ -10,4 +11,19 @@ ion-item:not(.stats) {
 ion-card:hover {
     zoom: 1.2;
     color: blue;
+}
+
+ion-text {
+    font-size: larger;
+    font-weight: bold;
+    font-style: italic;
+    color: #457B9D;
+    text-shadow: #E63946 1px 2px;
+    padding-right: 4px;
+}
+
+ion-icon {
+    font-size: larger;
+    font-weight: bold;
+    color: #E63946;
 }

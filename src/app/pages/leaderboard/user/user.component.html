@@ -12,13 +12,16 @@
 
     <ion-item slot="end" lines="none">
       <ion-text>{{position}}</ion-text>
+      <!-- <ion-icon type="image/png" href="assets/Asset 2.png" /> -->
     </ion-item>
   </ion-item>
 
   <div class="stats">
     <ion-item lines="none" class="stats">
-      <ion-icon name="star-outline" slot="start"></ion-icon>
-      <ion-text>{{user.points}}</ion-text>
+      <ion-text>
+        {{user.points}}  
+      </ion-text>
+      <ion-icon name="star-outline"></ion-icon>
     </ion-item>
   </div>
 </ion-card>
