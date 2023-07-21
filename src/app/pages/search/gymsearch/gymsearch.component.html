@@ -39,46 +39,46 @@
     {{ item.description }}
   </ion-card-content>
 </ion-card> -->
-<ion-card *ngFor="let gym of gyms.results" (click)="selectGym(gym.name, gym.place_id)">
+<ng-container *ngFor="let gym of gyms.results">
   <ng-container *ngIf="gym.business_status=='OPERATIONAL'">
-    <ng-container *ngIf="gym?.photos?.[0]?.photo_reference">
-      <img [src]="getPhotoUrl(gym?.photos?.[0]?.photo_reference)"  alt="Silhouette of mountains"/>
-    </ng-container>
-  <ion-card-header style="display: flex; flex-direction: column;">
-    <ion-card-title>{{ gym.name }}</ion-card-title>
-    <ion-card-subtitle>{{ gym.vicinity }}</ion-card-subtitle>
-  </ion-card-header>
-
-  <ion-card-content>
-    <!-- {{ gym.description }} replaced with rating-->
-    Rating: {{ gym.rating ? gym.rating : 'No Rating' }}
-  </ion-card-content>
-  <ion-card-content class="friend-container">
-    <ng-container *ngIf="gym.friendsLocationInfo && gym.friendsLocationInfo[0] && gym.friendsLocationInfo[0].length > 0; else noFriends">
-      <ion-card-header>
-        Friends that have workout sessions scheduled here:
+    <ion-card (click)="selectGym(gym.name, gym.place_id)" class="locationCard">
+      <ng-container *ngIf="gym?.photos?.[0]?.photo_reference">
+        <img [src]="getPhotoUrl(gym?.photos?.[0]?.photo_reference)"  alt="Silhouette of mountains" class="gymImage"/>
+      </ng-container>
+      <ion-card-header style="display: flex; flex-direction: column;">
+        <ion-card-title>{{ gym.name }}</ion-card-title>
+        <ion-card-subtitle>{{ gym.vicinity }}</ion-card-subtitle>
       </ion-card-header>
-      <ul class="no-bullet">
-        <li *ngFor="let friend of gym.friendsLocationInfo" (click)="viewProfile(friend.id)">
-          <div class="friend-details">
-          <img [src]="friend[0].profilePhoto" alt="Profile Photo" class="friend-photo"/>
-          <div>
-            <p>{{ friend[0].friendDisplayName }}</p>
-            <ul>
-              <li *ngFor="let gymSession of friend">
-                <h1>{{ gymSession.workoutName }}</h1>
-                <p>{{ formatDate(gymSession.date) }}: {{ gymSession.startTime }}-{{ formatTime(gymSession.endTime) }}</p>
-              </li>
-            </ul>
-          </div>
-          </div>
-        </li>
-      </ul>
-    </ng-container>
-    <ng-template #noFriends>
-      No friends have workout sessions scheduled here
-    </ng-template>
-  </ion-card-content>
+      <ion-card-content>
+        <!-- {{ gym.description }} replaced with rating-->
+        Rating: {{ gym.rating ? gym.rating : 'No Rating' }}
+      </ion-card-content>
+      <ion-card-content class="friend-container">
+        <ng-container *ngIf="gym.friendsLocationInfo && gym.friendsLocationInfo[0] && gym.friendsLocationInfo[0].length > 0; else noFriends">
+          <ion-card-header>
+            Friends that have workout sessions scheduled here:
+          </ion-card-header>
+          <ul class="no-bullet">
+            <li *ngFor="let friend of gym.friendsLocationInfo" (click)="viewProfile(friend.id)">
+              <div class="friend-details">
+              <img [src]="friend[0].profilePhoto" alt="Profile Photo" class="friend-photo"/>
+              <div>
+                <p>{{ friend[0].friendDisplayName }}</p>
+                <ul>
+                  <li *ngFor="let gymSession of friend">
+                    <h1>{{ gymSession.workoutName }}</h1>
+                    <p>{{ formatDate(gymSession.date) }}: {{ gymSession.startTime }}-{{ formatTime(gymSession.endTime) }}</p>
+                  </li>
+                </ul>
+              </div>
+              </div>
+            </li>
+          </ul>
+        </ng-container>
+        <ng-template #noFriends>
+          No friends have workout sessions scheduled here
+        </ng-template>
+      </ion-card-content>
+    </ion-card>
   </ng-container>
-</ion-card>
-</ion-content>
+</ng-container>

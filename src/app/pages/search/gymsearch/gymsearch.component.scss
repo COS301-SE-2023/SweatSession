@@ -20,12 +20,20 @@ ion-searchbar {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-  }
-  
-  .friend-details {
+}
+
+.friend-details {
     background: lightgreen;
     border-radius: 15px;
     display: flex;
     align-items: center;
-  }
+}
 
+.locationCard{
+    // margin: 10%;
+    padding: 5%;
+}
+
+.gymImage{
+    border-radius: 15px;
+}
