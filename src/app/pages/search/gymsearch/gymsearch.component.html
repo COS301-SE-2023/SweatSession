@@ -44,7 +44,7 @@
     <ng-container *ngIf="gym?.photos?.[0]?.photo_reference">
       <img [src]="getPhotoUrl(gym?.photos?.[0]?.photo_reference)"  alt="Silhouette of mountains"/>
     </ng-container>
-  <ion-card-header>
+  <ion-card-header style="display: flex; flex-direction: column;">
     <ion-card-title>{{ gym.name }}</ion-card-title>
     <ion-card-subtitle>{{ gym.vicinity }}</ion-card-subtitle>
   </ion-card-header>
@@ -66,6 +66,7 @@
             <p>{{ friend[0].friendDisplayName }}</p>
             <ul>
               <li *ngFor="let gymSession of friend">
+                <h1>{{ gymSession.workoutName }}</h1>
                 <p>{{ formatDate(gymSession.date) }}: {{ gymSession.startTime }}-{{ formatTime(gymSession.endTime) }}</p>
               </li>
             </ul>
