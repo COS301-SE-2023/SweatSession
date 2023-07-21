@@ -62,11 +62,11 @@
               <div class="friend-details">
               <img [src]="friend[0].profilePhoto" alt="Profile Photo" class="friend-photo"/>
               <div>
-                <p>{{ friend[0].friendDisplayName }}</p>
+                <p class="friendDisplayName">{{ friend[0].friendDisplayName }}</p>
                 <ul>
                   <li *ngFor="let gymSession of friend">
-                    <h1>{{ gymSession.workoutName }}</h1>
-                    <p>{{ formatDate(gymSession.date) }}: {{ gymSession.startTime }}-{{ formatTime(gymSession.endTime) }}</p>
+                    <h1 class="workoutName">{{ gymSession.workoutName }}</h1>
+                    <p class="dateAndTime">{{ formatDate(gymSession.date) }}: {{ gymSession.startTime }}-{{ formatTime(gymSession.endTime) }}</p>
                   </li>
                 </ul>
               </div>

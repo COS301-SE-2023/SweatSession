@@ -8,6 +8,7 @@ ion-searchbar {
 
 .no-bullet {
     list-style-type: none;
+    padding-left: 0;
 }
 
 
@@ -31,10 +32,11 @@ ion-searchbar {
 
 .friend-details {
     margin-top: 5%;
-    background: lightgreen;
+    background: #1D3557;
     border-radius: 15px;
     display: flex;
     align-items: center;
+    padding: 5%;
 }
 
 .locationCard{
@@ -65,4 +67,17 @@ ion-card-subtitle{
 .ratingIcon{
     color: gold;
     margin-bottom: -2px;
+}
+
+.friendDisplayName{
+    font-size: 20px;
+    text-align: center;
+}
+
+.workoutName{
+    font-size: 15px;
+}
+
+.dateAndTime{
+    font-size: 12px;
 }
