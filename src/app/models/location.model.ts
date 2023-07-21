@@ -7,7 +7,8 @@ export interface LocationGymSession {
     startTime: Time,
     endTime: Timestamp,
     date: Date,
-    profilePhoto: string|undefined
+    profilePhoto: string|undefined,
+    workoutName: string
 }
 
 export interface LocationGymSession2 {

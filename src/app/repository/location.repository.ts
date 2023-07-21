@@ -22,7 +22,7 @@ export class LocationRepository {
   document$: any
   constructor(private angularFirestore: AngularFirestore, private profileService: ProfileService, private firestore: Firestore) { }
 
-  async addGymSession(placeId: string, sessionDate: Date, time: Time, completedAt: Timestamp) {
+  async addGymSession(placeId: string, sessionDate: Date, time: Time, completedAt: Timestamp, wName: string) {
     const auth = getAuth();
     this.currUserId = auth.currentUser?.uid;
     if (this.currUserId != undefined) {
@@ -42,7 +42,8 @@ export class LocationRepository {
       startTime: time,
       endTime: completedAt,
       date: sessionDate,
-      profilePhoto: profilePhoto
+      profilePhoto: profilePhoto,
+      workoutName: wName,
     }
 
     userLocationsGymSessionRef.set(newGymSessionDoc)

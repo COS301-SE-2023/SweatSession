@@ -30,7 +30,7 @@ export class AddScheduleComponent  implements OnInit {
     this.store.dispatch(new AddWorkoutSchedule(this.schedule));
     // this.store.dispatch(new AddGymSessionLocation(this.placeId));
     // this.store.dispatch(new AddWorkoutSchedule(this.placeId));
-    this.locationRepository.addGymSession(this.placeId, this.schedule.date!, this.schedule.time!, this.schedule.completeAt!);
+    this.locationRepository.addGymSession(this.placeId, this.schedule.date!, this.schedule.time!, this.schedule.completeAt!, this.schedule.name!);
     console.log(this.schedule);
     console.log(this.placeId);
   }
