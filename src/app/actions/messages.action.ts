@@ -81,5 +81,5 @@ export class RemoveChatGroup {
 
 export class GetGroup {
     static readonly type = "[chatGroup] get chat group info";
-    constructor(public payload: string) {}
+    constructor(public payload?: string) {}
 }
