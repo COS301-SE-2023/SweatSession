@@ -19,7 +19,7 @@ ion-searchbar {
 .gymDetails{
     background: #E63946;
     border-radius: 15px;
-    color: white;
+    color: white !important;
     margin-bottom: 5%;
 }
 
@@ -30,6 +30,7 @@ ion-searchbar {
 }
 
 .friend-details {
+    margin-top: 5%;
     background: lightgreen;
     border-radius: 15px;
     display: flex;
@@ -40,10 +41,14 @@ ion-searchbar {
     // margin: 10%;
     padding: 5%;
     background: #A8DADC;
-    color: white;
+    color: white !important;
 }
 
 .gymImage{
     border-radius: 15px;
     margin-bottom: 5%;
+}
+
+.whiteText{
+    color: white;
 }
