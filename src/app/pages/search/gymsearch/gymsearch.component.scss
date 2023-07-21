@@ -12,8 +12,15 @@ ion-searchbar {
 
 
 .friend-container {
-    background: lightblue;
+    background: #E63946;
     border-radius: 15px;
+}
+
+.gymDetails{
+    background: #E63946;
+    border-radius: 15px;
+    color: white;
+    margin-bottom: 5%;
 }
 
 .friend-photo {
@@ -32,8 +39,11 @@ ion-searchbar {
 .locationCard{
     // margin: 10%;
     padding: 5%;
+    background: #A8DADC;
+    color: white;
 }
 
 .gymImage{
     border-radius: 15px;
+    margin-bottom: 5%;
 }

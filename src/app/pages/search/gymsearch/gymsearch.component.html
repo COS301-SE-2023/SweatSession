@@ -45,14 +45,11 @@
       <ng-container *ngIf="gym?.photos?.[0]?.photo_reference">
         <img [src]="getPhotoUrl(gym?.photos?.[0]?.photo_reference)"  alt="Silhouette of mountains" class="gymImage"/>
       </ng-container>
-      <ion-card-header style="display: flex; flex-direction: column;">
+      <ion-card-header style="display: flex; flex-direction: column;" class="gymDetails">
         <ion-card-title>{{ gym.name }}</ion-card-title>
         <ion-card-subtitle>{{ gym.vicinity }}</ion-card-subtitle>
-      </ion-card-header>
-      <ion-card-content>
-        <!-- {{ gym.description }} replaced with rating-->
         Rating: {{ gym.rating ? gym.rating : 'No Rating' }}
-      </ion-card-content>
+      </ion-card-header>
       <ion-card-content class="friend-container">
         <ng-container *ngIf="gym.friendsLocationInfo && gym.friendsLocationInfo[0] && gym.friendsLocationInfo[0].length > 0; else noFriends">
           <ion-card-header>
