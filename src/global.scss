@@ -37,3 +37,15 @@ ion-content {
 ion-title {
     text-align: center;
 }
+
+ion-toolbar{
+    --background: #E63946
+}
+
+ion-toolbar ion-item{
+--background: #E63946
+}
+
+* {
+font-family: 'Montserrat', sans-serif;
+}
