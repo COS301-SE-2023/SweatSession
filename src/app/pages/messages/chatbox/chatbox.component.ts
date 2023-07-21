@@ -1,5 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { IMessage } from 'src/app/models';
+import { Select, Store } from '@ngxs/store';
+import { Observable } from 'rxjs';
+import { GetProfileAction } from 'src/app/actions';
+import { IMessage, IProfileModel } from 'src/app/models';
+import { ProfileState } from 'src/app/states';
 
 @Component({
   selector: 'chatbox',
@@ -9,8 +13,24 @@ import { IMessage } from 'src/app/models';
 export class ChatboxComponent  implements OnInit {
   @Input() message: IMessage;
   @Input() currentUserId: string;
-  constructor() { }
+  @Input() showUser: boolean = false;
+  @Select(ProfileState.returnProfile) profile$: Observable<IProfileModel>;
+  profile: IProfileModel;
 
-  ngOnInit() {}
+  constructor(private store:Store) { }
+
+  ngOnInit() {
+    if(this.showUser) {
+     this.displayProfile();
+    }
+  }
+
+  displayProfile() {
+    this.store.dispatch(new GetProfileAction({userId: this.message.senderId!}));
+
+    this.profile$.subscribe((response)=>{
+      this.profile = response;
+    })
+  }
 
 }
