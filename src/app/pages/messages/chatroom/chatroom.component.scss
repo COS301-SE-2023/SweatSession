@@ -34,3 +34,9 @@ ion-content {
 .active {
   background-color: #f1f1f1;
 }
+
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
