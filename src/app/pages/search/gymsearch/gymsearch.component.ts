@@ -28,6 +28,7 @@ import { DatePipe } from '@angular/common';
 })
 export class GymsearchComponent implements OnInit {
    currUserId: string | undefined | null;
+   showFriends = false;
    constructor(private store: Store, private modalController: ModalController, private geolocation: Geolocation, private httpClient: HttpClient, private locationRepository: LocationRepository, private friendsRepository: FriendsRepository, private friendsState: FriendsState, private datePipe: DatePipe) {
       this.data.filter(item => item.name.includes(''));
    }
@@ -331,6 +332,10 @@ export class GymsearchComponent implements OnInit {
       const date = new Date(dateString);
       return this.datePipe.transform(date, 'dd MMMM yyyy')!;
    }
+
+   toggleFriends() {
+      this.showFriends = !this.showFriends;
+    }
 
 
    viewProfile(id: string) {
