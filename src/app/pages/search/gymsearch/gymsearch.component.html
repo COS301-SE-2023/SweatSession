@@ -41,7 +41,7 @@
 </ion-card> -->
 <ng-container *ngFor="let gym of gyms.results">
   <ng-container *ngIf="gym.business_status=='OPERATIONAL'">
-    <ion-card (click)="selectGym(gym.name, gym.place_id)" class="locationCard">
+    <ion-card class="locationCard">
       <ng-container *ngIf="gym?.photos?.[0]?.photo_reference">
         <img [src]="getPhotoUrl(gym?.photos?.[0]?.photo_reference)"  alt="Silhouette of mountains" class="gymImage"/>
       </ng-container>
@@ -53,7 +53,6 @@
         <ion-card-subtitle class="whiteText" >Rating: {{ gym.rating ? gym.rating : 'No Rating' }}<ion-icon name="star" class="ratingIcon"></ion-icon></ion-card-subtitle>
       </ion-card-header>
       
-      <!-- <ion-card-content *ngIf="showFriends" class="friend-container"> -->
         <ion-card-content class="friend-container">
           <ng-container *ngIf="gym.friendsLocationInfo && gym.friendsLocationInfo[0] && gym.friendsLocationInfo[0].length > 0; else noFriends">
             <ion-card-content *ngIf="showFriends; else dontShowFriends" class="friend-container">
@@ -78,8 +77,8 @@
             </ul>
           </ion-card-content>
           <ng-template #dontShowFriends>
-            <ion-card-header class="whiteText friendsHeader" (click)="toggleFriends()">
-              {{showFriends ? 'Hide' : 'Show'}} Friends
+            <ion-card-header class="whiteText friendsHeader showFriendsOrNot" (click)="toggleFriends()">
+              {{showFriends ? 'Hide' : 'Show'}} Friends that are planning a workout here
             </ion-card-header>
           </ng-template>
           </ng-container>
@@ -89,7 +88,9 @@
             </ion-card-header>
           </ng-template>
         </ion-card-content>
-      <!-- </ion-card-content> -->
+        <ion-card-content (click)="selectGym(gym.name, gym.place_id)" class="selectGym">
+          Select Gym
+        </ion-card-content>
     </ion-card>
   </ng-container>
 </ng-container>
