@@ -24,3 +24,8 @@ export class RemoveUser {
     static readonly type = "[otheruser] remove user form localstorage";
     constructor() {}
 }
+
+export class GetOtheruserProfile {
+    static readonly type = "[otheruser] get other user profile";
+    constructor(public payload: IProfileModel) {}
+}
