@@ -16,6 +16,7 @@ ion-searchbar {
     background: #E63946;
     border-radius: 15px;
     margin-bottom: 5%;
+    padding-top: 5%;
 }
 
 .gymDetails{
@@ -90,13 +91,13 @@ ion-card-subtitle{
     font-size: 28px;
     font-weight: 700;
     text-align: center;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5);
     cursor: pointer;
 }
 
 .showFriendsOrNot{
     background: #1D3557;
     border-radius: 15px;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5);
     cursor: pointer;
 }
