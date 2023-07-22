@@ -36,6 +36,7 @@ export class GymsearchComponent implements OnInit {
    @Select(FriendsState.returnFriends) friends$!: Observable<IFriendsModel[]>;
    searchTerm: string | undefined;
    filteredData$: Observable<any[]> = of([]);
+   nextPageToken = null;
    // unfilteredData$: any[] = [];
    private searchTerm$ = new Subject<string>();
    maxDistance: number = 15;//default in kilometers
@@ -201,7 +202,7 @@ export class GymsearchComponent implements OnInit {
          console.log('Latitude:', this.currLatitude);
          console.log('Longitude:', this.currLongitude);
          console.log('maxDistance:', this.maxDistance);
-         const url = `https://us-central1-sweatsession.cloudfunctions.net/nearbyGymProxyRequest?latitude=${this.currLatitude}&longitude=${this.currLongitude}&radius=${this.maxDistance * 1000}&key=${this.MAPS_API_KEY}`;
+         const url = `https://us-central1-sweatsession.cloudfunctions.net/nearbyGymProxyRequest?latitude=${this.currLatitude}&longitude=${this.currLongitude}&radius=${this.maxDistance * 1000}&key=${this.MAPS_API_KEY}&nextPageToken=${this.nextPageToken}`;
          // const url = `http://127.0.0.1:5005/demo-project/us-central1/nearbyGymProxyRequest?latitude=${this.currLatitude}&longitude=${this.currLongitude}&radius=${this.maxDistance * 1000}&key=${this.MAPS_API_KEY}`;
          fetch(url)
             .then((response) => response.json())
@@ -209,6 +210,7 @@ export class GymsearchComponent implements OnInit {
                console.log(data);
                console.log(data.results);
                this.gyms = data;
+               this.nextPageToken=data.next_page_token;
                await this.getGymUsersForGyms(this.userFriendIds);
                console.log(this.gyms);
             })
