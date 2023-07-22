@@ -1,9 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
-import { GetProfileAction } from 'src/app/actions';
+import { GetOtheruserProfile, GetProfileAction } from 'src/app/actions';
 import { IMessage, IProfileModel } from 'src/app/models';
-import { ProfileState } from 'src/app/states';
+import { OtheruserState } from 'src/app/states';
 
 @Component({
   selector: 'chatbox',
@@ -14,7 +14,7 @@ export class ChatboxComponent  implements OnInit {
   @Input() message: IMessage;
   @Input() currentUserId: string;
   @Input() showUser: boolean = false;
-  @Select(ProfileState.returnProfile) profile$: Observable<IProfileModel>;
+  @Select(OtheruserState.returnOtherUserProfile) profile$: Observable<IProfileModel>;
   profile: IProfileModel;
 
   constructor(private store:Store) { }
@@ -26,11 +26,10 @@ export class ChatboxComponent  implements OnInit {
   }
 
   displayProfile() {
-    this.store.dispatch(new GetProfileAction({userId: this.message.senderId!}));
+    this.store.dispatch(new GetOtheruserProfile({userId: this.message.senderId!}));
 
     this.profile$.subscribe((response)=>{
       this.profile = response;
     })
   }
-
 }
