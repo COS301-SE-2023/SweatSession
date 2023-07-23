@@ -163,7 +163,7 @@ const routes: Routes = [
   },
   {
     path: 'healthdata',
-    loadChildren: () => import('./pages/healthdata/healthdata.module').then( m => m.HealthdataPageModule)
+    loadChildren: () => import('./pages/healthdata/healthdata.module').then( m => m.HealthDataPageModule)
   },
 ];
 @NgModule({

@@ -1,12 +1,12 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { HealthdataPage } from './healthdata.page';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { HealthDataPage } from './healthdata.page';
 
-describe('HealthdataPage', () => {
-  let component: HealthdataPage;
-  let fixture: ComponentFixture<HealthdataPage>;
+describe('HealthDataPage', () => {
+  let component: HealthDataPage;
+  let fixture: ComponentFixture<HealthDataPage>;
 
-  beforeEach(async(() => {
-    fixture = TestBed.createComponent(HealthdataPage);
+  beforeEach(waitForAsync(() => {
+    fixture = TestBed.createComponent(HealthDataPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

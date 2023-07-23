@@ -5,16 +5,18 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { HealthdataPageRoutingModule } from './healthdata-routing.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
-import { HealthdataPage } from './healthdata.page';
+import { HealthDataPage } from './healthdata.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    HealthdataPageRoutingModule
+    HealthdataPageRoutingModule,
+    ReactiveFormsModule 
   ],
-  declarations: [HealthdataPage]
+  declarations: [HealthDataPage]
 })
-export class HealthdataPageModule {}
+export class HealthDataPageModule {}

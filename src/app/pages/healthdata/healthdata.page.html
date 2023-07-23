@@ -1,13 +1,38 @@
-<ion-header [translucent]="true">
+<ion-header style="background-color: #E63946;">
   <ion-toolbar>
-    <ion-title>healthdata</ion-title>
+    <ion-item lines="none">
+      <ion-back-button class="larger-back-button"></ion-back-button>
+      <ion-title style="margin-left: 0rem;">Health Data</ion-title>
+    </ion-item>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">healthdata</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  <form [formGroup]="healthDataForm" (ngSubmit)="onSubmit()">
+    <ion-list>
+      <ion-item>
+        <ion-label>Height</ion-label>
+        <ion-input formControlName="height" type="text"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Weight</ion-label>
+        <ion-input formControlName="weight" type="text"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Diet</ion-label>
+        <ion-input formControlName="diet" type="text"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Medical Conditions</ion-label>
+        <ion-input formControlName="medicalConditions" type="text"></ion-input>
+      </ion-item>
+      
+      <ion-item>
+        <ion-button expand="full" type="submit" [disabled]="!healthDataForm.valid">Submit</ion-button>
+      </ion-item>
+    </ion-list>
+  </form>
 </ion-content>
