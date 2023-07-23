@@ -28,7 +28,7 @@ import { DatePipe } from '@angular/common';
 })
 export class GymsearchComponent implements OnInit {
    currUserId: string | undefined | null;
-   showFriends = false;
+   showFriends:any = {};
    constructor(private store: Store, private modalController: ModalController, private geolocation: Geolocation, private httpClient: HttpClient, private locationRepository: LocationRepository, private friendsRepository: FriendsRepository, private friendsState: FriendsState, private datePipe: DatePipe) {
       this.data.filter(item => item.name.includes(''));
    }
@@ -127,6 +127,8 @@ export class GymsearchComponent implements OnInit {
             const coordinates = await this.getCurrentLocation();
             this.currLatitude = coordinates.latitude;
             this.currLongitude = coordinates.longitude;
+            // this.currLatitude = -25.7694108
+            // this.currLongitude = 28.259215
             console.log('Latitude:', this.currLatitude);
             console.log('Longitude:', this.currLongitude);
             console.log('maxDistance:', this.maxDistance);
@@ -300,9 +302,9 @@ export class GymsearchComponent implements OnInit {
    async getGymUsers(placeId: string, friendIds: string[]) {
       // console.log("getting gym users for: "+placeId)
       const friendsLocationInfo = await this.locationRepository.getLocation(placeId, friendIds);
-      if (placeId == "ChIJ4-tknf5glR4RGm5xRwH54ds") {
-         console.log("in getGymUsers")
-      }
+      // if (placeId == "ChIJ4-tknf5glR4RGm5xRwH54ds") {
+      //    console.log("in getGymUsers")
+      // }
       // console.log(locationObservable);
       return friendsLocationInfo;
    }
@@ -335,8 +337,8 @@ export class GymsearchComponent implements OnInit {
       return this.datePipe.transform(date, 'dd MMMM yyyy')!;
    }
 
-   toggleFriends() {
-      this.showFriends = !this.showFriends;
+   toggleFriends(place_id: string) {
+      this.showFriends[place_id] = true;
     }
 
 

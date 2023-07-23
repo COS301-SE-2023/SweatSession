@@ -55,7 +55,7 @@
       
         <ion-card-content class="friend-container">
           <ng-container *ngIf="gym.friendsLocationInfo && gym.friendsLocationInfo[0] && gym.friendsLocationInfo[0].length > 0; else noFriends">
-            <ion-card-content *ngIf="showFriends; else dontShowFriends" class="friend-container">
+            <ion-card-content *ngIf="showFriends[gym.place_id]; else dontShowFriends" class="friend-container">
             <ion-card-header class="whiteText friendsHeader">
               Friends that have workout sessions scheduled here:
             </ion-card-header>
@@ -77,8 +77,8 @@
             </ul>
           </ion-card-content>
           <ng-template #dontShowFriends>
-            <ion-card-header class="whiteText friendsHeader showFriendsOrNot" (click)="toggleFriends()">
-              {{showFriends ? 'Hide' : 'Show'}} Friends that are planning a workout here
+            <ion-card-header class="whiteText friendsHeader showFriendsOrNot" (click)="toggleFriends(gym.place_id)">
+              {{showFriends[gym.place_id] ? 'Hide' : 'Show'}} Friends that are planning a workout here
             </ion-card-header>
           </ng-template>
           </ng-container>
