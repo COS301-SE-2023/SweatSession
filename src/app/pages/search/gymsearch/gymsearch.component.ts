@@ -28,7 +28,7 @@ import { DatePipe } from '@angular/common';
 })
 export class GymsearchComponent implements OnInit {
    currUserId: string | undefined | null;
-   showFriends:any = {};
+   showFriends: any = {};
    constructor(private store: Store, private modalController: ModalController, private geolocation: Geolocation, private httpClient: HttpClient, private locationRepository: LocationRepository, private friendsRepository: FriendsRepository, private friendsState: FriendsState, private datePipe: DatePipe) {
       this.data.filter(item => item.name.includes(''));
    }
@@ -127,8 +127,8 @@ export class GymsearchComponent implements OnInit {
             const coordinates = await this.getCurrentLocation();
             this.currLatitude = coordinates.latitude;
             this.currLongitude = coordinates.longitude;
-            // this.currLatitude = -25.7694108
-            // this.currLongitude = 28.259215
+            this.currLatitude = -25.7694108
+            this.currLongitude = 28.259215
             console.log('Latitude:', this.currLatitude);
             console.log('Longitude:', this.currLongitude);
             console.log('maxDistance:', this.maxDistance);
@@ -204,7 +204,7 @@ export class GymsearchComponent implements OnInit {
          console.log('Latitude:', this.currLatitude);
          console.log('Longitude:', this.currLongitude);
          console.log('maxDistance:', this.maxDistance);
-         const url = `https://us-central1-sweatsession.cloudfunctions.net/nearbyGymProxyRequest?latitude=${this.currLatitude}&longitude=${this.currLongitude}&radius=${this.maxDistance * 1000}&key=${this.MAPS_API_KEY}&nextPageToken=${this.nextPageToken}`;
+         const url = `https://us-central1-sweatsession.cloudfunctions.net/nearbyGymProxyRequest?latitude=${this.currLatitude}&longitude=${this.currLongitude}&radius=${this.maxDistance * 1000}&key=${this.MAPS_API_KEY}` + (this.nextPageToken ? `&nextPageToken=${this.nextPageToken}` : '');
          // const url = `http://127.0.0.1:5005/demo-project/us-central1/nearbyGymProxyRequest?latitude=${this.currLatitude}&longitude=${this.currLongitude}&radius=${this.maxDistance * 1000}&key=${this.MAPS_API_KEY}`;
          fetch(url)
             .then((response) => response.json())
@@ -212,7 +212,7 @@ export class GymsearchComponent implements OnInit {
                console.log(data);
                console.log(data.results);
                this.gyms = data;
-               this.nextPageToken=data.next_page_token;
+               // this.nextPageToken=data.next_page_token;
                await this.getGymUsersForGyms(this.userFriendIds);
                console.log(this.gyms);
             })
@@ -227,7 +227,7 @@ export class GymsearchComponent implements OnInit {
 
    async loadData(): Promise<void> {
       try {
-         const url = `http://127.0.0.1:5005/demo-project/us-central1/nearbyGymProxyRequest?latitude=${this.currLatitude}&longitude=${this.currLongitude}&radius=${this.maxDistance * 1000}&key=${this.MAPS_API_KEY}`;
+         const url = `http://127.0.0.1:5005/demo-project/us-central1/nearbyGymProxyRequest?latitude=${this.currLatitude}&longitude=${this.currLongitude}&radius=${this.maxDistance * 1000}&key=${this.MAPS_API_KEY}` + (this.nextPageToken ? `&nextPageToken=${this.nextPageToken}` : '');;
          // const url = `https://us-central1-sweatsession.cloudfunctions.net/nearbyGymProxyRequest?latitude=${this.currLatitude}&longitude=${this.currLongitude}&radius=${this.maxDistance*1000}&key=${this.MAPS_API_KEY}`;
          const response = await fetch(url);
          const data = await response.json();
@@ -324,6 +324,21 @@ export class GymsearchComponent implements OnInit {
       });
    }
 
+   async nextPage() {
+      this.nextPageToken=this.gyms.next_page_token;
+      console.log(this.nextPageToken)
+      // const coordinates = await this.getCurrentLocation();
+      // this.currLatitude = coordinates.latitude;
+      // this.currLongitude = coordinates.longitude;
+      // this.currLatitude = -25.7694108
+      // this.currLongitude = 28.259215
+      // console.log('Latitude:', this.currLatitude);
+      // console.log('Longitude:', this.currLongitude);
+      // console.log('maxDistance:', this.maxDistance);
+      await this.loadData();
+      await this.getGymUsersForGyms(this.userFriendIds);
+   }
+
    formatTime(timestamp: Timestamp): string {
       const date: Date = timestamp.toDate();
       const hours: number = date.getHours();
@@ -339,7 +354,7 @@ export class GymsearchComponent implements OnInit {
 
    toggleFriends(place_id: string) {
       this.showFriends[place_id] = true;
-    }
+   }
 
 
    viewProfile(id: string) {

@@ -19,7 +19,7 @@ ion-searchbar {
     padding-top: 5%;
 }
 
-.gymDetails{
+.gymDetails {
     background: #E63946;
     border-radius: 15px;
     color: white !important;
@@ -41,50 +41,50 @@ ion-searchbar {
     padding: 5%;
 }
 
-.locationCard{
+.locationCard {
     // margin: 10%;
     padding: 5%;
     background: #A8DADC;
     color: white !important;
 }
 
-.gymImage{
+.gymImage {
     border-radius: 15px;
     margin-bottom: 5%;
 }
 
-.whiteText{
+.whiteText {
     color: white;
 }
 
-.friendsHeader{
+.friendsHeader {
     font-size: 28px;
     font-weight: 700;
 }
 
-ion-card-subtitle{
+ion-card-subtitle {
     font-size: 20px;
 }
 
-.ratingIcon{
+.ratingIcon {
     color: gold;
     margin-bottom: -2px;
 }
 
-.friendDisplayName{
+.friendDisplayName {
     font-size: 22px;
     text-align: center;
 }
 
-.workoutName{
+.workoutName {
     font-size: 18px;
 }
 
-.dateAndTime{
+.dateAndTime {
     font-size: 15px;
 }
 
-.selectGym{
+.selectGym {
     background: #1D3557;
     border-radius: 15px;
     color: white !important;
@@ -95,9 +95,31 @@ ion-card-subtitle{
     cursor: pointer;
 }
 
-.showFriendsOrNot{
+.showFriendsOrNot {
     background: #1D3557;
     border-radius: 15px;
     box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5);
     cursor: pointer;
+}
+
+.nextPage {
+    border-radius: 50px;
+    --background: #A8DADC;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+    text-align: center;
+    width: 40%;
+    margin: 0 auto;
+    
+    // margin-left: 0 auto;
+}
+
+// .next-page-content {
+//     display: inline-block;
+//     text-align: left;
+// }
+
+.centralize{
+    text-align: center;
+    --padding-bottom: 20px;
 }

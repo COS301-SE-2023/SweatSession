@@ -8,7 +8,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="centralize">
 <!-- <ion-searchbar
       placeholder="Search for gyms"
       [(ngModel)]="searchTerm"
@@ -94,3 +94,11 @@
     </ion-card>
   </ng-container>
 </ng-container>
+
+<ion-item class="nextPage" (click)="nextPage()">
+  <!-- <div class="next-page-content"> -->
+    Next Page: <ion-icon name="arrow-forward"></ion-icon> 
+  <!-- </div> -->
+</ion-item>
+
+</ion-content>
