@@ -2,7 +2,7 @@
 [ngClass]="{ 'message-sent': message.senderId === currentUserId, 'message-received': message.senderId !== currentUserId }"
 >
   <div class="message-content">
-    <div class="messege-sender" *ngIf="showUser && profile">
+    <div class="messege-sender" *ngIf="showUser && profile && currentUserId !== message.senderId">
       ~ {{profile.displayName}}.
     </div>
     <div class="message-bubble">
