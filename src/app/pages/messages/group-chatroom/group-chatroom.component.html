@@ -1,19 +1,18 @@
 <ion-header>
-  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet">
   <ion-toolbar>
-    <ion-item lines="none">
+    <ion-buttons slot="start">
       <backbutton (click)="removeSession()"></backbutton>
-      <ion-title>
-        <ion-item lines="none">
-          <ion-avatar>
-            <ion-img alt="Silhouette of a person's head" [src]="group.profileURL"/>
-          </ion-avatar>
-          <ion-label>
-            {{group.displayName}}
-          </ion-label>
-        </ion-item>
-      </ion-title>
-    </ion-item>
+    </ion-buttons>
+    <ion-title>
+      <ion-chip id="group-name">
+        <ion-avatar>
+          <ion-img alt="Silhouette of a person's head" [src]="group.profileURL"/>
+        </ion-avatar>
+        <ion-label>
+          {{group.displayName}}
+        </ion-label>
+      </ion-chip>
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -27,6 +26,73 @@
       ></chatbox>
     </div>
   </div>
+
+  <ion-modal #modal trigger="group-name">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <!-- <ion-icon name="arrow-back" (click)="modal.dismiss()" slot="start"></ion-icon> -->
+            <ion-button (click)="modal.dismiss()">close</ion-button>
+          </ion-buttons>
+          <ion-title>
+            <ion-chip>
+              <ion-avatar>
+                <ion-img [src]="group.profileURL"></ion-img>
+              </ion-avatar>
+              <ion-label>
+                {{group.displayName}}
+              </ion-label>
+            </ion-chip>
+          </ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+       <div class="profile-outer-wrapper">
+        <div class="profile-inner-wrapper">
+          <div class="profile-img-container">
+            <ion-avatar class="profile-image">
+              <ion-img [src]="group.profileURL"></ion-img>
+            </ion-avatar>
+          </div>
+          <ion-label class="profile-label">
+            <div class="name">
+              {{group.displayName}}
+            </div>
+            <div class="members">
+              {{group.members?.length}} Members
+            </div>
+            <div class="bio">
+              {{group.bio}}
+            </div>
+          </ion-label>
+        </div>
+
+        <ion-card>
+          <ion-item class="item-header"> 
+            <ion-icon name="people-outline"></ion-icon>
+            <ion-text>Members</ion-text>
+            <ion-button slot="end" (click)="showMembers()" *ngIf="!isShowMembers">view</ion-button>
+            <ion-button slot="end" (click)="showMembers()" *ngIf="isShowMembers">close</ion-button>
+          </ion-item>
+          <div class="content" *ngIf="isShowMembers">
+            <ion-list>
+              <group-user *ngFor="let userId of group.members"
+              [userId]="userId"
+              [currentUserId]="currentUserId"></group-user>
+            </ion-list>
+          </div>
+          <div *ngIf="!isShowMembers">
+            <ion-item lines="none">
+              <ion-icon name="people" slot="end"></ion-icon>
+              <ion-text slot="end">{{group.members?.length}}</ion-text>
+            </ion-item>
+          </div>
+        </ion-card>
+       </div>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
 </ion-content>
 
 <ion-footer>

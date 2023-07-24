@@ -1,26 +1,28 @@
 <ion-header>
   <ion-toolbar>
-    <ion-item lines="none">
+    <ion-buttons slot="start">
       <backbutton (click)="removeSession()"></backbutton>
-      <ion-title>
-        <ion-item lines="none" (click)="viewOtherUser()">
-          <ion-avatar>
-            <ion-img [src]="friendProfile.profileURL" alt="profile pic here"></ion-img>
-          </ion-avatar>
-          <ion-label>
-            <h2>{{friendProfile.displayName}}</h2>
-          </ion-label> 
+    </ion-buttons>
+    <ion-title>
+      <ion-chip (click)="viewOtherUser()">
+        <ion-avatar>
+          <ion-img [src]="friendProfile.profileURL" alt="profile pic here"></ion-img>
+        </ion-avatar>
+        <ion-label>
+          <h2>{{friendProfile.displayName}}</h2>
+        </ion-label> 
+      </ion-chip>
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-icon name="ellipsis-vertical-outline" id="trigger"></ion-icon>
+    </ion-buttons>
+    <ion-popover trigger="trigger" triggerAction="click">
+      <ng-template>
+        <ion-item lines="none">
+          clear chat
         </ion-item>
-      </ion-title>
-      <ion-icon name="ellipsis-vertical-outline" id="trigger" slot="end"></ion-icon>
-      <ion-popover trigger="trigger" triggerAction="click">
-        <ng-template>
-          <ion-item lines="none">
-            clear chat
-          </ion-item>
-        </ng-template>
-      </ion-popover>
-    </ion-item>
+      </ng-template>
+    </ion-popover>
   </ion-toolbar>
 </ion-header>
 

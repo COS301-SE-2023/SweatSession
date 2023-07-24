@@ -7,6 +7,7 @@ import { GroupChatroomComponent } from './group-chatroom.component';
 import { BackButtonDirectiveModule } from 'src/app/directives';
 import { AuthModule, MessageStateModule, OtheruserStateModule } from 'src/app/states';
 import { ChatroomComponentModule } from '../chatroom/chatroom.module';
+import { GroupUserComponent } from '../group-user/group-user.component';
 
 @NgModule({
   imports: [
@@ -20,6 +21,6 @@ import { ChatroomComponentModule } from '../chatroom/chatroom.module';
     OtheruserStateModule,
     ChatroomComponentModule
   ],
-  declarations: [GroupChatroomComponent]
+  declarations: [GroupChatroomComponent, GroupUserComponent]
 })
 export class GroupChatroomComponentModule {}

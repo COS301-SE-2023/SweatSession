@@ -19,6 +19,8 @@ export class GroupChatroomComponent  implements OnInit {
   chats: IMessage[] = [];
   currentUserId = '';
   group: IGroup = {}
+  isShowMembers = false;
+
   @ViewChild('contentElement', { static: false }) contentElement: IonContent;
   message: IMessage = {text: ''};
   
@@ -54,6 +56,10 @@ export class GroupChatroomComponent  implements OnInit {
       this.message = {};
       this.scrollToBottom()
     }
+  }
+
+  showMembers() {
+    this.isShowMembers = !this.isShowMembers;
   }
 
   removeSession() {
