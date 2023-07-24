@@ -2,8 +2,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    border: radius 50px;
-   
+
+
 
     ion-card-content{
         color: black;
@@ -26,6 +26,7 @@
         filter: drop-shadow(0 0.2rem 0.25rem #457B9D);
     }
 }
+
 .flex-right{
     display: flex;
     justify-content: right; 
@@ -125,3 +126,8 @@ ion-card {
     margin-right: 0;
     background-color: #A8DADC;
   }
+.bio-content {
+   max-height: 100px;
+    overflow-y: auto;
+}
+

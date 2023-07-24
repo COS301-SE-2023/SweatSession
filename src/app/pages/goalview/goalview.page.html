@@ -18,31 +18,31 @@
       <ion-input type="text" formControlName="description"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label position="stacked">Start</ion-label>
+      <ion-label position="stacked">Start date</ion-label>
       <ion-input type="date" formControlName="start"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label position="stacked">End</ion-label>
+      <ion-label position="stacked">End date</ion-label>
       <ion-input type="date" formControlName="end"></ion-input>
     </ion-item>
 
     <form [formGroup]="TaskForm">
+      <ion-item>
+        <ion-card-title >Tasks</ion-card-title>
+        <ion-icon name = "add"(click)="addControl()" slot = "end" ></ion-icon>
+        </ion-item>
       <ion-card>
-        <ion-card-header>
-          <ion-card-title slot="centre">Tasks</ion-card-title>
-        </ion-card-header>
         <ion-item *ngFor="let control of Taskses.controls; index as i;" formArrayName="Taskses" class="form-group">
           <ion-item [formGroupName]="i">
             <ion-input type="text" placeholder="Name Task" formControlName="content"></ion-input>
             <ion-button (click)="remove(i)" color = "danger">
               <ion-icon name="close-circle-outline" ></ion-icon>
-              remove
+              Remove
             </ion-button>
           </ion-item>
         </ion-item>
       </ion-card>
-      
-      <ion-button (click)="addControl()" expand="full" color="primary">Add New Task</ion-button>
+
     </form>
 
     <ion-row>

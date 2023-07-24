@@ -1,20 +1,32 @@
-<ion-content>
-  <div class="goal-name">
-      <ion-title>View Goal</ion-title>
-      <ion-label class="goal-name-label">{{goalName}}</ion-label>
-    </div>
+<ion-header [translucent]="true">
+    <ion-toolbar>
+        <ion-item lines="none">
+            <backbutton></backbutton>
+            <ion-title>Goals</ion-title>
 
-    <div class="task-list">
-      <ion-list>
-        <ion-item *ngFor="let task of GOAL.Tasks!">
-            <ion-checkbox [(ngModel)]="task.done" slot="start"></ion-checkbox>
-            <ion-label class="task-content">{{ task.content }}</ion-label>
         </ion-item>
-      </ion-list>
-    </div>
+    </ion-toolbar>
+</ion-header>
 
-    <div class="ion-padding">
-      <ion-button expand="block" (click)="saveGoal()">Done</ion-button>
-      <ion-button expand="block" routerLink="/fitnessgoals">Cancel</ion-button>
-    </div>
+<ion-content>
+
+    <ion-card>
+      <ion-item class="goal-name">
+          <ion-title>{{goalName}}</ion-title>
+      </ion-item>
+
+
+          <ion-list>
+            <ion-item *ngFor="let task of GOAL.Tasks!">
+                <ion-checkbox [(ngModel)]="task.done" slot="start"></ion-checkbox>
+                <ion-label class="task-content">{{ task.content }}</ion-label>
+            </ion-item>
+          </ion-list>
+
+
+        <div class="ion-padding">
+          <ion-button expand="block" (click)="saveGoal()">Done</ion-button>
+          <ion-button expand="block" routerLink="/fitnessgoals">Cancel</ion-button>
+        </div>
+    </ion-card>
   </ion-content>
