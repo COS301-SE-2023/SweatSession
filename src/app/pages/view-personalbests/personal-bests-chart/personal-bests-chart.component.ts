@@ -29,8 +29,6 @@ export class PersonalBestsChartComponent implements OnInit {
      
   }
 
-  // exercises: IPersonalBest[] = [];
-
     retrieveExercisesByName(name: string) {
       this.personalbestService.getExercisesByName(name).subscribe((exercises) => {
         this.personalBestsData = exercises;
@@ -60,7 +58,7 @@ export class PersonalBestsChartComponent implements OnInit {
           data: this.personalBestsData
             .filter((data) => data[dataKey] !== undefined)
             .map((data) => data[dataKey] as number),
-          label: this.showReps!,
+          label: this.showReps!.toUpperCase(),
         }
       ];
         console.log("Chart Data" ,this.chartData);
