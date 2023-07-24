@@ -30,7 +30,9 @@
     <ion-content *ngIf="showForm">
             <form [formGroup]="PersonalBestForm" (ngSubmit)="onSubmit()" >
                     <ion-item>
-                        <ion-label>Exercise</ion-label>
+
+                      <!--Todo: User should be able to add their own exercises -->
+                        <ion-label>Exercise</ion-label> 
                             <ion-select formControlName="exercise" placeholder="Select Exercise">
                                 <ion-select-option value="Bench Press">Bench Press</ion-select-option>
                                 <ion-select-option value="Squats">Squats</ion-select-option>
@@ -41,7 +43,7 @@
                             </ion-select>
                     </ion-item>
 
-                <ion-item [enabeled]>
+                <ion-item>
                   <ion-label>Weight :</ion-label>
                   <ion-input formControlName="weight" type="number"></ion-input>
                 </ion-item>
@@ -71,7 +73,7 @@
                   <ion-label>Notes :</ion-label>
                   <ion-input formControlName="notes" type="txt"></ion-input>
                 </ion-item>
-                    <ion-button type="submit" expand="full" [disabled]="PersonalBestForm.invalid"><ion-icon slot="start" name="checkmark"></ion-icon>Submit</ion-button>
+                    <ion-button type="submit" expand="full" [disabled]="!isValid(PersonalBestForm.value)"><ion-icon slot="start" name="checkmark"></ion-icon>Submit</ion-button>
             </form>
     </ion-content>
 

@@ -27,6 +27,23 @@ export class ViewPersonalbestsPage implements OnInit {
     this.showForm = true;
   }
 
+  isValid(formData :any) {
+    if (
+      formData.date != null &&
+      formData.exercise != null &&
+      formData.location != null &&
+      formData.notes != null &&
+      formData.reps != null &&
+      formData.weight != null
+    ) {
+      // console.log('Form is valid');
+      return true;
+    } else {
+      // console.log('Form is not valid');
+      return false;
+    }
+  }
+
   onSubmit() {
     if (this.PersonalBestForm.invalid) {
       console.log('Invalid form');
@@ -44,7 +61,7 @@ export class ViewPersonalbestsPage implements OnInit {
       weight: formData.weight,
       reps: formData.reps,
       location: formData.location,
-      date: formData.date,
+      date: formData.date.split('T')[0],
       notes: formData.notes,
     }
 
@@ -60,12 +77,17 @@ export class ViewPersonalbestsPage implements OnInit {
   ngOnInit() 
   {
     this.PersonalBestForm = this.formBuilder.group({
-      exercise: [''],
-      weight: 0,
-      reps: 0,
-      date: this.getTodayDate(),
-      location: [''],
-      notes: [''],
+      exercise: null,
+      weight: null,
+      reps: null,
+      date: null,
+      location: null,
+      notes: null,
+    });
+
+    this.PersonalBestForm.valueChanges.subscribe((formData) => {
+      // Update the isValid() function whenever the form value changes
+      this.isValid(formData);
     });
 
   }
