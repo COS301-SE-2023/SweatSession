@@ -227,13 +227,16 @@ export class GymsearchComponent implements OnInit {
 
    async loadData(): Promise<void> {
       try {
-         const url = `http://127.0.0.1:5005/demo-project/us-central1/nearbyGymProxyRequest?latitude=${this.currLatitude}&longitude=${this.currLongitude}&radius=${this.maxDistance * 1000}&key=${this.MAPS_API_KEY}` + (this.nextPageToken ? `&nextPageToken=${this.nextPageToken}` : '');;
+         const nextPageToken = this.nextPageToken || "";
+         const url = `http://127.0.0.1:5005/demo-project/us-central1/nearbyGymProxyRequest?latitude=${this.currLatitude}&longitude=${this.currLongitude}&radius=${this.maxDistance * 1000}&key=${this.MAPS_API_KEY}&nextPageToken=${nextPageToken}`;
+         console.log(url)
          // const url = `https://us-central1-sweatsession.cloudfunctions.net/nearbyGymProxyRequest?latitude=${this.currLatitude}&longitude=${this.currLongitude}&radius=${this.maxDistance*1000}&key=${this.MAPS_API_KEY}`;
          const response = await fetch(url);
          const data = await response.json();
          console.log(data);
          console.log(data.results);
          this.gyms = data;
+         this.nextPageToken = data.next_page_token; // Get the new nextPageToken
       } catch (error) {
          console.error(error);
       }
@@ -325,8 +328,8 @@ export class GymsearchComponent implements OnInit {
    }
 
    async nextPage() {
-      this.nextPageToken=this.gyms.next_page_token;
-      console.log(this.nextPageToken)
+      // this.nextPageToken=this.gyms.next_page_token;
+      // console.log(this.nextPageToken)
       // const coordinates = await this.getCurrentLocation();
       // this.currLatitude = coordinates.latitude;
       // this.currLongitude = coordinates.longitude;
