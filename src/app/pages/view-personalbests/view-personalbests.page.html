@@ -8,6 +8,13 @@
 </ion-header>
 
 <ion-content>
+  <!-- <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+  
+  <lottie-player src="https://lottie.host/d718ea5d-0be0-4d43-9592-58646b44c5f4/SYQQWCk4ZN.json"
+      background="#339bdb" speed="1" style="width:300px;
+      height: 300px" loop controls autoplay direction="1" mode="normal">
+  </lottie-player> -->
+
     <app-personal-bests-chart *ngIf="!showForm">
 
     </app-personal-bests-chart>
@@ -24,7 +31,7 @@
             <form [formGroup]="PersonalBestForm" (ngSubmit)="onSubmit()" >
                     <ion-item>
                         <ion-label>Exercise</ion-label>
-                            <ion-select formControlName="exercise" placeholder="Select One">
+                            <ion-select formControlName="exercise" placeholder="Select Exercise">
                                 <ion-select-option value="Bench Press">Bench Press</ion-select-option>
                                 <ion-select-option value="Squats">Squats</ion-select-option>
                                 <ion-select-option value="Deadlifts">Deadlifts</ion-select-option>
@@ -34,13 +41,13 @@
                             </ion-select>
                     </ion-item>
 
-                <ion-item>
-                  <ion-label>Weight</ion-label>
+                <ion-item [enabeled]>
+                  <ion-label>Weight :</ion-label>
                   <ion-input formControlName="weight" type="number"></ion-input>
                 </ion-item>
 
                 <ion-item>
-                    <ion-label>Repetetions</ion-label>
+                    <ion-label>Repetetions :</ion-label>
                     <ion-input formControlName="reps" type="number"></ion-input>
                 </ion-item>
 
@@ -56,12 +63,12 @@
                 </ion-item>
 
                 <ion-item>
-                    <ion-label>Location</ion-label>
+                    <ion-label>Location :</ion-label>
                     <ion-input formControlName="location" type="txt"></ion-input>
                   </ion-item>
 
                 <ion-item>
-                  <ion-label>Notes</ion-label>
+                  <ion-label>Notes :</ion-label>
                   <ion-input formControlName="notes" type="txt"></ion-input>
                 </ion-item>
                     <ion-button type="submit" expand="full" [disabled]="PersonalBestForm.invalid"><ion-icon slot="start" name="checkmark"></ion-icon>Submit</ion-button>
