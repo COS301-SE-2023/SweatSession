@@ -16,4 +16,11 @@ ion-item {
   ion-item:hover .hover-text {
     opacity: 1;
   }
-  
+  .max-height-card-content {
+    max-height: 250px;
+    overflow-y: auto; 
+  }
+
+  .chart-card {
+    padding: 20px;
+  }

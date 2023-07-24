@@ -39,22 +39,24 @@
 
   </ion-card>
   
-  
 
-  
-    <canvas baseChart
+<ion-card class = "chart-card">
+  <canvas baseChart
           *ngIf="chartData.length > 0"
           [datasets]="chartData"
           [labels]="chartLabels"
           [options]="chartOptions"
           [type]="chartType">
   </canvas>
+</ion-card>
+  
+    
 
             <ion-card >
               <ion-card-header>
                 <ion-card-title>Latest {{showExercise}} bests</ion-card-title>
               </ion-card-header>
-              <ion-card-content>
+              <ion-card-content class="max-height-card-content">
                 <ion-list>
                   <ion-item-sliding *ngFor="let personalBest of personalBestsData">
                     <ion-item>
