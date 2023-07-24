@@ -27,14 +27,21 @@
     </ion-item>
 
     <form [formGroup]="TaskForm">
-      <div *ngFor="let control of Taskses.controls; index as i;" formArrayName="Taskses" class="form-group">
-        <div [formGroupName]="i" class="task-card">
-          <input matInput type="text" placeholder="Name Task" formControlName="content" class="form-control">
-          <button ion-button clear icon-only (click)="remove(i)">
-            <ion-icon name="close"></ion-icon>
-          </button>
-        </div>
-      </div>
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title slot="centre">Tasks</ion-card-title>
+        </ion-card-header>
+        <ion-item *ngFor="let control of Taskses.controls; index as i;" formArrayName="Taskses" class="form-group">
+          <ion-item [formGroupName]="i">
+            <ion-input type="text" placeholder="Name Task" formControlName="content"></ion-input>
+            <ion-button (click)="remove(i)" color = "danger">
+              <ion-icon name="close-circle-outline" ></ion-icon>
+              remove
+            </ion-button>
+          </ion-item>
+        </ion-item>
+      </ion-card>
+      
       <ion-button (click)="addControl()" expand="full" color="primary">Add New Task</ion-button>
     </form>
 
@@ -43,7 +50,7 @@
         <ion-button fill="outline" expand="block" size="small" (click)="goback()">Cancel</ion-button>
       </ion-col>
       <ion-col>
-        <ion-button fill="outline" expand="block" size="small" type="submit" [disabled]="!goalForm.valid">Save Goal</ion-button>
+        <ion-button fill="outline" expand="block" size="small" type="submit" [disabled]="!isValid(goalForm.value)">Save Goal</ion-button>
       </ion-col>
     </ion-row>
   </form>

@@ -41,16 +41,7 @@ export class GoalviewPage  implements OnInit {
     Taskses: this.formBuilder.array([])
   });
 
-  goalForm = new FormGroup({
 
-    name: new FormControl(''),
-    description: new FormControl(''),
-    coverPicture: new FormControl('https://loremflickr.com/320/240'),
-    start: new FormControl(''),
-    end: new FormControl(''),
-    progress: new FormControl(0),
-    days_left: new FormControl(0),
-  });
 
 
 
@@ -80,6 +71,7 @@ export class GoalviewPage  implements OnInit {
   {
     this.router.navigate(['/fitnessgoals']);
   }
+
   remove(i: number): void {
     this.Taskses.removeAt(i);
   }
@@ -143,8 +135,41 @@ export class GoalviewPage  implements OnInit {
     this.router.navigate(['/fitnessgoals']);
   }
 
+  goalForm : FormGroup;
+
   ngOnInit()
   {
+    this.goalForm = this.formBuilder.group({
+
+      name: null,
+      description: null,
+      coverPicture: null,
+      start: null,
+      end: null,
+      progress: null,
+      days_left: null,
+    });
+
+    this.goalForm.valueChanges.subscribe((data) => {
+      this.isValid(data);
+    }
+    );
+  }
+
+  isValid(formData :any) {
+    if (
+        formData.name != null &&
+        formData.description != null &&
+        formData.start != null &&
+        formData.end != null &&
+        this.Taskses.length > 0
+    ) {
+      // console.log('Form is valid');
+      return true;
+    } else {
+      // console.log('Form is not valid');
+      return false;
+    }
   }
 
 }
