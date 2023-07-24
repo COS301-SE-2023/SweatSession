@@ -46,11 +46,17 @@ export class OtheruserState {
 
     @Action(StageOtheruserInfo)
     async stageOtheruserInfo(ctx: StateContext<OtherUserStateModel>, {payload}: StageOtheruserInfo) {
-        ctx.patchState({
-            otheruser: payload
-        })
-        sessionStorage.setItem("otheruser",JSON.stringify(payload));
-       return ctx.dispatch(new Navigate(['otheruser']));
+        const currentUserId = await this.authApi.getCurrentUserId();
+        if(currentUserId) {
+           if(payload.userId !== currentUserId) {
+            ctx.patchState({
+                otheruser: payload
+            })
+            sessionStorage.setItem("otheruser",JSON.stringify(payload));
+            ctx.dispatch(new Navigate(['otheruser']));
+           }
+           ctx.dispatch(new Navigate(['userprofile']));
+        }
     }
 
     @Action(LoadOtherUserProfile)
