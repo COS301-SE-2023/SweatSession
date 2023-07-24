@@ -8,7 +8,9 @@
 </ion-header>
 
 <ion-content>
-  <form [formGroup]="healthDataForm" (ngSubmit)="onSubmit()">
+  <ion-spinner *ngIf="isLoading"></ion-spinner>
+
+  <form [formGroup]="healthDataForm" *ngIf="!isLoading" (ngSubmit)="saveHealthData()">
     <ion-list>
       <ion-item>
         <ion-label>Height</ion-label>
