@@ -9744,10 +9744,10 @@ neo-async@^2.6.2:
   resolved "https://registry.npmjs.org/neo-async/-/neo-async-2.6.2.tgz"
   integrity sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==
 
-ng2-charts@^4.1.1:
-  version "4.1.1"
-  resolved "https://registry.yarnpkg.com/ng2-charts/-/ng2-charts-4.1.1.tgz#699bee539030b093caf54ab6111c6dea9e8e7ed3"
-  integrity sha512-iHwXDbmX86lfeH8VRcsaW2tJATsuAZo4kvvC/Yk2l35zOHjevja1qBvO6BAibiDazi9r9aS6ZRJOqWPsz1pP2w==
+ng2-charts@^5.0.1:
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/ng2-charts/-/ng2-charts-5.0.1.tgz#b7973f78d798b14ba3c2805bb34ed74419238989"
+  integrity sha512-vlIJ0cMBO6pXUfcOlmzW8XTwho2Ypx2fdorVpLf2eTeNadkTQTCdhKib3EsI3aTDiVsG3z5KzI2hL+rDvi5nAA==
   dependencies:
     lodash-es "^4.17.15"
     tslib "^2.3.0"
