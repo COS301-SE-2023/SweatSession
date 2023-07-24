@@ -40,7 +40,7 @@
                 </ion-item>
 
                 <ion-item>
-                    <ion-label>Repitetions</ion-label>
+                    <ion-label>Repetetions</ion-label>
                     <ion-input formControlName="reps" type="number"></ion-input>
                 </ion-item>
 
@@ -64,7 +64,7 @@
                   <ion-label>Notes</ion-label>
                   <ion-input formControlName="notes" type="txt"></ion-input>
                 </ion-item>
-                <ion-button type="submit" [disabled]="PersonalBestForm.invalid">Submit</ion-button>
+                    <ion-button type="submit" expand="full" [disabled]="PersonalBestForm.invalid"><ion-icon slot="start" name="checkmark"></ion-icon>Submit</ion-button>
             </form>
     </ion-content>
 
