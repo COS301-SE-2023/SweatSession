@@ -95,7 +95,7 @@
   </ng-container>
 </ng-container>
 
-<ion-item class="nextPage" (click)="nextPage()">
+<ion-item class="nextPage" *ngIf="nextPageToken" (click)="nextPage()">
   <!-- <div class="next-page-content"> -->
     Next Page: <ion-icon name="arrow-forward"></ion-icon> 
   <!-- </div> -->

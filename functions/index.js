@@ -9,7 +9,7 @@ exports.nearbyGymProxyRequest = functions.https.onRequest(async (req, res) => {
   res.set("Access-Control-Allow-Headers", "Content-Type");
   res.set('Access-Control-Max-Age', '3600');
   try {
-    const apiUrl = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${req.query.latitude},${req.query.longitude}&radius=${req.query.radius}&type=gym&key=${req.query.key}` + (req.query.nextPageToken ? `&pagetoken=${req.query.nextPageToken}` : '');
+    const apiUrl = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${req.query.latitude},${req.query.longitude}&radius=${req.query.radius}&type=gym&rankby=prominence&key=${req.query.key}` + (req.query.nextPageToken ? `&pagetoken=${req.query.nextPageToken}` : '');
 
     const response = await axios.get(apiUrl);
     res.json(response.data);
