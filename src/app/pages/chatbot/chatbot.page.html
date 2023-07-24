@@ -19,9 +19,11 @@
 </ion-content>
 
 <ion-footer>
+  <br><br>
   <ion-toolbar color="light">
     <ion-input [(ngModel)]="userMessage" placeholder="Enter your Question"></ion-input>
-    <ion-button slot="end" fill="outline" color="danger"  (click)="sendUserMessage()">Send</ion-button>
+    <ion-icon size="large" slot="end" name="send-outline" color="danger" (click)="sendUserMessage()"></ion-icon>
+    <br><br>
   </ion-toolbar>
 </ion-footer>
 
