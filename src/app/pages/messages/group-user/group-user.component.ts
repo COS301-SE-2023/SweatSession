@@ -14,6 +14,7 @@ import { OtheruserState } from 'src/app/states';
 export class GroupUserComponent  implements OnInit {
   @Input() userId: string;
   @Input() currentUserId: string;
+  @Input() modal:any;
   @Select(OtheruserState.returnOtherUserProfile) profile$: Observable<IProfileModel>;
   profile: IProfileModel = {};
 
@@ -27,6 +28,7 @@ export class GroupUserComponent  implements OnInit {
   }
 
   viewOtherUser(){
+    this.modal.dismiss();
     this.store.dispatch(new StageOtheruserInfo(this.profile));
   }
 }

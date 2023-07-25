@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { Select, Store } from '@ngxs/store';
 import { Observable, switchMap, tap } from 'rxjs';
-import { GetChatFriends, GetFriendsProfiles, GetGroups, StageChatFriend, StageChatGroup } from 'src/app/actions';
+import { GetChatFriends, GetFriendsProfiles, GetUserGroups, StageChatFriend, StageChatGroup } from 'src/app/actions';
 import { IChatFriend, IGroup, IProfileModel } from 'src/app/models';
 import { MessagesState } from 'src/app/states';
 
@@ -14,7 +14,7 @@ import { MessagesState } from 'src/app/states';
 export class MessagesPage implements OnInit {
  @Select(MessagesState.returnChatFriends) chatFriends$: Observable<IChatFriend[]>;
  @Select(MessagesState.returnFriendsProfiles) friends$: Observable<IProfileModel[]>;
- @Select(MessagesState.returnGroups) groups$: Observable<IGroup[]>;
+ @Select(MessagesState.returnChatGroups) groups$: Observable<IGroup[]>;
   groups: IGroup[] = [];
  chatFriends: IChatFriend[] = [];
  friends: IProfileModel[] = [];
@@ -50,7 +50,7 @@ export class MessagesPage implements OnInit {
   }
 
   displayGroups() {
-    this.store.dispatch(new GetGroups())
+    this.store.dispatch(new GetUserGroups())
     this.groups$.subscribe((response)=>{
       this.groups=response;
     })
