@@ -33,6 +33,10 @@ export class MessagesService {
     return this.repository.getProfile(request);
   }
 
+  async getUserGroups(request: IGetGroups) {
+    return this.repository.getUserGroups(request);
+  }
+
   async getGroups(request: IGetGroups) {
     return this.repository.getGroups(request);
   }
