@@ -1,0 +1,55 @@
+.group-page-profile {
+    border-radius: 0px;
+    // border-bottom-left-radius: 24px;
+    // border-bottom-right-radius: 24px;
+    padding: 10px;
+    // background: #A8DADC;
+    background: #E63946
+}
+
+.profile-inner-wrapper {
+    width: fit-content;
+    max-width: 95%;
+    margin: auto;
+    padding-bottom: 10px;
+}
+
+.profile-image {
+    height: 150px;
+    width: 150px;
+    margin-bottom: 20px;
+}
+
+ion-label div, .profile-img-container  {
+    width: fit-content;
+    margin: auto;
+}
+
+.larger-back-button {
+    --padding-start: 12px; 
+    --padding-end: 12px; 
+    font-size: 24px; 
+  }
+
+ion-title {
+    text-align: center;
+}
+
+ion-avatar {
+    background-color: white;
+}
+
+ion-segment {
+    border-radius: 0px;
+}
+
+.group-buttons {
+    display: flex;
+    justify-content: center;
+}
+
+ion-button {
+    padding: 5px;
+    --color: #A8DADC;
+    --border-color: #A8DADC;
+}
