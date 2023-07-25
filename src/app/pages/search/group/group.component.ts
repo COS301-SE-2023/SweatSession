@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
-import { GetGroups, SubscribeToAuthState } from 'src/app/actions';
+import { GetGroups, StageChatGroup, SubscribeToAuthState } from 'src/app/actions';
 import { IGroup, ISearchTerms } from 'src/app/models';
 import { AuthState, MessagesState } from 'src/app/states';
 
@@ -15,6 +15,8 @@ export class GroupSearchComponent  implements OnInit {
   groups: IGroup[] = [];
   showNoResults = false;
   userId:string;
+  selectedGroup: IGroup = {};
+  showGroupPage = false;
   @Select(MessagesState.returnGroups) groups$!: Observable<IGroup[]>;
   @Select(AuthState.getCurrUserId) userId$!: Observable<string>;
   constructor(private store:Store) {
@@ -62,4 +64,15 @@ export class GroupSearchComponent  implements OnInit {
     })
   }
 
+  selectGroup(group?:IGroup) {
+    if(group){
+      this.selectedGroup = group;
+    }
+    this.showGroupPage = !this.showGroupPage;
+  }
+
+  stageGroup(group: IGroup, modal: any) {
+    modal.dismiss();
+    this.store.dispatch(new StageChatGroup(group));
+  }
 }

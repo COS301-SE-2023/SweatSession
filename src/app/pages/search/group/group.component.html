@@ -11,8 +11,9 @@
   <div class="search-suggestions" *ngIf="searchTerms.showSuggestions">
     <ion-card id="search-suggestions">
       <ion-list >
-        <ion-item lines="none" 
-          *ngFor="let suggestion of searchTerms.filteredSuggestions">
+        <ion-item lines="none"
+          *ngFor="let suggestion of searchTerms.filteredSuggestions"
+          (click)="selectGroup(suggestion)">
           <ion-avatar>
             <ion-img src ="{{suggestion.profileURL}}"></ion-img>
           </ion-avatar>
@@ -25,3 +26,13 @@
     </ion-card>
   </div>
 </div>
+
+<ion-modal #modal [isOpen]="showGroupPage">
+  <ng-template>
+    <ion-content>
+      <group-home-page
+        [selectedGroup]="selectedGroup"
+        [modal]="modal"></group-home-page>
+    </ion-content>
+  </ng-template>
+</ion-modal>
