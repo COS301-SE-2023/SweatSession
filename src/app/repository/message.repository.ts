@@ -17,7 +17,7 @@ import { IMessage,
    IRemoveChatGroup,
    IGetGroup} from "../models";
 import { AngularFirestore, AngularFirestoreCollection } from "@angular/fire/compat/firestore";
-import { Observable,lastValueFrom, map } from "rxjs";
+import { Observable,lastValueFrom, map, tap } from "rxjs";
 
 @Injectable({
     providedIn: 'root'
@@ -132,8 +132,32 @@ import { Observable,lastValueFrom, map } from "rxjs";
         )
     }
 
-    getGroups(request: IGetGroups) {
+    getUserGroups(request: IGetGroups) {
       const groupCollection: AngularFirestoreCollection<IGroup> = this.firestore.collection<IGroup>(`users/${request.userId}/userGroups`);
+
+      return groupCollection.snapshotChanges().pipe(
+        map((snapshot)=>{
+          let groups: IGroup[] = [];
+
+          snapshot.forEach((doc)=>{
+            const group = {
+              id: doc.payload.doc.id,
+              ...doc.payload.doc.data()
+            }
+
+            groups.push(group);
+          })
+
+          return {
+            groups: groups,
+            validate: true
+          }
+        })
+      )
+    }
+
+    getGroups(request: IGetGroups) {
+      const groupCollection: AngularFirestoreCollection<IGroup> = this.firestore.collection<IGroup>(`groups`);
 
       return groupCollection.snapshotChanges().pipe(
         map((snapshot)=>{
@@ -190,14 +214,28 @@ import { Observable,lastValueFrom, map } from "rxjs";
       }
     }
 
-    async joinChatGroup(request: IJoinGroup) {
-      try{
-        const userGroupsCollection = await this.firestore
-        .collection<IGroup>(`users/${request.userId}/userGroups`)
-        .doc(request.group.id)
-        .set(request.group);
-      }catch(error){
-        alert("ERROR: "+error)
+    joinChatGroup(request: IJoinGroup) {
+      try {
+        const groupDocRef = this.firestore.doc<IGroup>(`groups/${request.group.id}`);
+    
+        groupDocRef.get().pipe(
+          tap((doc)=>{
+            let group = doc.data();
+            if(group) {
+              alert(request.userId!);
+              if (!group.members?.includes(request.userId!)) {
+                group.members?.push(request.userId!);
+                groupDocRef.update({ members: group.members });
+                this.firestore
+                .collection<IGroup>(`users/${request.userId}/userGroups`)
+                .doc(request.group.id)
+                .set(request.group);
+              }
+            }
+          })
+        ).subscribe();
+      } catch (error) {
+        alert("ERROR: " + error);
       }
     }
 

@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { IAddFriend,
      IAddedFriend,
+     IFriendRequest,
      IFriendsModel, 
      IGetFriends, 
      IGotFriends, 
@@ -147,5 +148,39 @@ export class FriendsRepository {
         }
         return response;
     }
+  }
+
+  async createFriendRequest(request: IFriendRequest){
+    const docRef = await this.firestore
+      .doc<IProfileModel>(`profiles/${request.to}`)
+    
+    docRef.get().pipe(
+      map((doc)=>{
+        let profile = doc.data()
+        if(profile) {
+          let fRequest:string[] = [];
+          profile.friendRequests ? fRequest = profile.friendRequests : fRequest = []
+          fRequest.push(request.from)
+
+          docRef.update({friendRequests: fRequest})
+        }
+      })
+    ).subscribe()
+  }
+
+  async removeFriendRequest(request: IFriendRequest){
+    const docRef = await this.firestore
+    .doc<IProfileModel>(`profiles/${request.to}`)
+  
+  docRef.get().pipe(
+    map((doc)=>{
+      let profile = doc.data()
+      if(profile) {
+        let fRequest = profile.friendRequests?.filter((userId)=> !userId.match(request.from!))
+        alert(request.from);
+        docRef.update({friendRequests: fRequest})
+      }
+    })
+  ).subscribe();
   }
 }
