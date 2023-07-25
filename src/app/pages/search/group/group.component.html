@@ -1,6 +1,6 @@
 <div class="content-container">
   <ion-searchbar
-      placeholder="Search for users"
+      placeholder="Search for groups"
       [(ngModel)] = "searchTerms.searchQuery"
       (ionInput) = onSearchInput($event)
       color="light"
@@ -12,8 +12,7 @@
     <ion-card id="search-suggestions">
       <ion-list >
         <ion-item lines="none" 
-          *ngFor="let suggestion of searchTerms.filteredSuggestions" 
-          (click)="find(suggestion)">
+          *ngFor="let suggestion of searchTerms.filteredSuggestions">
           <ion-avatar>
             <ion-img src ="{{suggestion.profileURL}}"></ion-img>
           </ion-avatar>

@@ -11,6 +11,7 @@ import { SearchPage } from './search.page';
 import { UsersearchComponent } from './usersearch/usersearch.component';
 import { GymsearchComponent } from './gymsearch/gymsearch.component';
 import { OtheruserStateModule, AuthModule } from 'src/app/states';
+import { GroupSearchComponent } from './group/group.component';
 
 
 @NgModule({
@@ -22,6 +23,6 @@ import { OtheruserStateModule, AuthModule } from 'src/app/states';
     OtheruserStateModule,
     AuthModule
   ],
-  declarations: [SearchPage, UsersearchComponent, GymsearchComponent]
+  declarations: [SearchPage, UsersearchComponent, GymsearchComponent,GroupSearchComponent]
 })
 export class SearchPageModule {}
