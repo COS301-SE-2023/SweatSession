@@ -12,6 +12,7 @@ export interface IProfileModel {
     weight?: string;
     points?: number;
     groupIds?: string[];
+    friendRequests?: string[];
 }
 
 //requests
