@@ -15,3 +15,13 @@ export class GetFriendsAction {
     static readonly type = "[friends] Get Friends";
 }
 
+export class CreateFriendRequest {
+    static readonly type = "[friends] create a friend request";
+    constructor(public otheruserId: string){}
+}
+
+export class RemoveFriendRequest {
+    static readonly type = "[friends] remove a friend request";
+    constructor(public otheruserId: string){}
+}
+

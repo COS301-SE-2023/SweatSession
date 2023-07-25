@@ -50,10 +50,13 @@ export class RemoveChatGroupSession {
     static readonly type  = "[messages] remove chat group from session storage";
 }
 
+export class GetUserGroups {
+    static readonly type = "[messages] get user groups";
+}
+
 export class GetGroups {
     static readonly type = "[messages] get groups";
 }
-
 export class SendGroupMessage {
     static readonly type = "[messages] send a group message";
     constructor(public payload: IMessage) {}
