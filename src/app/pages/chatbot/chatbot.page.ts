@@ -38,13 +38,15 @@ export class ChatbotPage implements OnInit {
 
   private async getUserHealthData(displayName: string) {
     const snapshot = await this.firestore.collection('healthdata', ref => ref.where('displayName', '==', displayName)).get().toPromise();
-
     if (snapshot?.empty) {
       return null;
     } else {
-      return snapshot?.docs[0].data();
+      const data = snapshot?.docs[0].data();
+      const formattedData = `The user's height is ${data?.['height']} cm, weight is ${data?.['weight']} kg, diet is ${data?.['diet']}, and the medical conditions are ${data?.['medicalConditions']}.`;
+      return formattedData;
     }
   }
+  
 
   async sendUserMessage() {
     if (this.userMessage.trim() !== '') {
@@ -59,7 +61,7 @@ export class ChatbotPage implements OnInit {
       let newMessage = { text: this.userMessage, sender: 'user', displayText: this.userMessage };
   
       if(healthData) {
-        newMessage.text += '\nUser Health Data: ' + JSON.stringify(healthData);
+        newMessage.text += '\nUser Health Data: ' + healthData;
       }
       
       this.messages.push(newMessage);
