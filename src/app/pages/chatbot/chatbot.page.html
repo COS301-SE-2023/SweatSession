@@ -8,7 +8,7 @@
     <ion-item lines="none" *ngFor="let message of messages">
      
       <div [ngClass]="{'user-message': message.sender === 'user', 'bot-message': message.sender === 'SS-bot'}">
-        {{ message.text }}
+        {{ message.displayText }}
       </div>
     </ion-item><br>
   </ion-list>

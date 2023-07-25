@@ -54,7 +54,6 @@ export class HealthDataPage implements OnInit {
     if(this.currUserId) {
       const userProfile = await this.profileService.getProfile({ userId: this.currUserId }).toPromise();
       const displayName = userProfile?.profile.displayName;
-      console.log(displayName);
       this.firestore.collection('healthdata', ref => ref.where('displayName', '==', displayName))
         .valueChanges()
         .subscribe(data => {
