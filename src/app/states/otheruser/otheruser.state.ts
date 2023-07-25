@@ -54,8 +54,9 @@ export class OtheruserState {
             })
             sessionStorage.setItem("otheruser",JSON.stringify(payload));
             ctx.dispatch(new Navigate(['otheruser']));
+           }else {
+            ctx.dispatch(new Navigate(['userprofile']));
            }
-           ctx.dispatch(new Navigate(['userprofile']));
         }
     }
 

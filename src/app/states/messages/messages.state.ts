@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Action, Selector, State, StateContext } from "@ngxs/store";
 import { IMessage, IChatFriend, IGetChatFriends, IGetMessages, ISendMessage, IDeleteMessage, IProfileModel, IFriendsModel, IGroup, IGetGroups, IAddChatGroup, IJoinGroup, IRemoveChatGroup, IExitChatGroup, IGetGroup } from "src/app/models";
-import { DeleteMessage, GetMessages, SendMessage, GetChatFriends, StageChatFriend, GetFriendsProfiles, GetChatFriend, RemoveChatFriendSession, SendGroupMessage, RemoveChatGroupSession, GetGroups, AddChatGroup, JoinChatGroup, RemoveChatGroup, ExitChatGroup, StageChatGroup, GetGroupMessages, GetGroup } from 'src/app/actions';
+import { DeleteMessage, GetMessages, SendMessage, GetChatFriends, StageChatFriend, GetFriendsProfiles, GetChatFriend, RemoveChatFriendSession, SendGroupMessage, RemoveChatGroupSession, AddChatGroup, JoinChatGroup, RemoveChatGroup, ExitChatGroup, StageChatGroup, GetGroupMessages, GetGroup, GetUserGroups, GetGroups } from 'src/app/actions';
 import { AuthApi } from "../auth";
 import { FriendsService, MessagesService, OtheruserService } from "src/app/services";
 import { tap } from "rxjs";
@@ -16,6 +16,7 @@ export interface MessagesStateModel {
     chatFriendProfile?: IProfileModel;
     chatGroups?: IGroup[];
     chatGroup?: IGroup;
+    groups?: IGroup[];
 }
 
 @State<MessagesStateModel>({
@@ -29,6 +30,7 @@ export interface MessagesStateModel {
         chatFriendProfile: {},
         chatGroups: [],
         chatGroup: {},
+        groups: []
     }
 })
 
@@ -221,8 +223,30 @@ export class MessagesState {
         return;
     }
 
-    @Action(GetGroups)
+    @Action(GetUserGroups)
     async getChatGroups (ctx: StateContext<MessagesStateModel>) {
+        const currentUserId = await this.authApi.getCurrentUserId();
+
+        if(currentUserId) {
+           const request: IGetGroups = {
+            userId: currentUserId
+           }
+
+           return (await this.service.getUserGroups(request)).pipe(
+            tap((response)=>{
+                const groups: IGroup[] = response.groups;
+
+                ctx.patchState({
+                    chatGroups: groups
+                })
+            })
+           )
+        }
+        return;
+    }
+
+    @Action(GetGroups)
+    async getGroups (ctx: StateContext<MessagesStateModel>) {
         const currentUserId = await this.authApi.getCurrentUserId();
 
         if(currentUserId) {
@@ -235,7 +259,7 @@ export class MessagesState {
                 const groups: IGroup[] = response.groups;
 
                 ctx.patchState({
-                    chatGroups: groups
+                    groups: groups
                 })
             })
            )
@@ -335,8 +359,13 @@ export class MessagesState {
     }
 
     @Selector()
-    static returnGroups(state: MessagesStateModel) {
+    static returnChatGroups(state: MessagesStateModel) {
         return state.chatGroups;
+    }
+
+    @Selector()
+    static returnGroups(state: MessagesStateModel) {
+        return state.groups;
     }
 
     @Selector()
