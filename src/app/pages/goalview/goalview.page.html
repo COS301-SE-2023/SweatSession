@@ -29,7 +29,7 @@
     <form [formGroup]="TaskForm">
       <ion-item>
         <ion-card-title >Tasks</ion-card-title>
-        <ion-icon name = "add"(click)="addControl()" slot = "end" ></ion-icon>
+        <ion-icon name = "add" (click)="addControl()" slot = "end" ></ion-icon>
         </ion-item>
       <ion-card>
         <ion-item *ngFor="let control of Taskses.controls; index as i;" formArrayName="Taskses" class="form-group">
