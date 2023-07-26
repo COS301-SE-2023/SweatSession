@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Action, Selector, State, StateContext } from "@ngxs/store";
 import { IMessage, IChatFriend, IGetChatFriends, IGetMessages, ISendMessage, IDeleteMessage, IProfileModel, IFriendsModel, IGroup, IGetGroups, IAddChatGroup, IJoinGroup, IRemoveChatGroup, IExitChatGroup, IGetGroup } from "src/app/models";
-import { DeleteMessage, GetMessages, SendMessage, GetChatFriends, StageChatFriend, GetFriendsProfiles, GetChatFriend, RemoveChatFriendSession, SendGroupMessage, RemoveChatGroupSession, AddChatGroup, JoinChatGroup, RemoveChatGroup, ExitChatGroup, StageChatGroup, GetGroupMessages, GetGroup, GetUserGroups, GetGroups } from 'src/app/actions';
+import { DeleteMessage, GetMessages, SendMessage, GetChatFriends, StageChatFriend, GetFriendsProfiles, GetChatFriend, RemoveChatFriendSession, SendGroupMessage, RemoveChatGroupSession, AddChatGroup, JoinChatGroup, RemoveChatGroup, ExitChatGroup, StageChatGroup, GetGroupMessages, GetGroup, GetUserGroups, GetGroups, GetUser } from 'src/app/actions';
 import { AuthApi } from "../auth";
 import { FriendsService, MessagesService, OtheruserService } from "src/app/services";
 import { tap } from "rxjs";
@@ -336,6 +336,11 @@ export class MessagesState {
         ctx.patchState({
             chatGroup: group
         })
+    }
+
+    @Action(GetUser)
+    getUser(userId: string) {
+        return this.service.getUser(userId);
     }
 
     @Selector()

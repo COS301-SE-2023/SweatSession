@@ -56,4 +56,8 @@ export class MessagesService {
   async exitChatGroup(request: IExitChatGroup) {
     return this.repository.exitChatGroup(request);
   }
+
+  async getUser(userId: string) {
+    return this.repository.getUser(userId);
+  }
 }
