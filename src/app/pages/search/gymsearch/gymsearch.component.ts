@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { IonContent, ModalController } from '@ionic/angular';
 import { of, Observable, Subject, Subscription, firstValueFrom } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map, startWith } from 'rxjs/operators';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
@@ -34,7 +34,7 @@ export class GymsearchComponent implements OnInit {
    }
 
    @Select(FriendsState.returnFriends) friends$!: Observable<IFriendsModel[]>;
-   
+   @ViewChild(IonContent) content: IonContent;
    searchTerm: string | undefined;
    filteredData$: Observable<any[]> = of([]);
    nextPageToken = null;
@@ -340,7 +340,7 @@ export class GymsearchComponent implements OnInit {
       // console.log('Longitude:', this.currLongitude);
       // console.log('maxDistance:', this.maxDistance);
       await this.loadData();
-      const modalContent = document.querySelector('.centralize');      // await this.getGymUsersForGyms(this.userFriendIds);
+      this.content.scrollToTop();
    }
 
    formatTime(timestamp: Timestamp): string {
