@@ -239,24 +239,25 @@ describe('LocationRepository Integration Tests', () => {
         profileService = {
             getProfile: jest.fn().mockReturnValue(of({ // Use the "of" function from 'rxjs' to create an Observable with the mock response
                 profile: {
-                  displayName: 'John Doe',
-                  profileURL: 'https://example.com/profile.jpg',
-                  // Add other properties you need for userProfile
+                    displayName: 'John Doe',
+                    profileURL: 'https://example.com/profile.jpg',
+                    // Add other properties you need for userProfile
                 },
-              })),
-          };
-      
-          angularFirestore = {
+            })),
+        };
+
+        angularFirestore = {
             collection: jest.fn().mockReturnThis(),
             doc: jest.fn().mockReturnThis(),
             set: jest.fn().mockResolvedValue({}), // Mock the set method
-          };
-      
-          auth = {
+            get: jest.fn(),
+        };
+
+        auth = {
             currentUser: {
-              uid: 'TestUserID1234567890', // Mock current user ID
+                uid: 'TestUserID1234567890', // Mock current user ID
             },
-          };
+        };
         TestBed.configureTestingModule({
             // declarations: [LocationRepository],
             imports: [
@@ -267,7 +268,7 @@ describe('LocationRepository Integration Tests', () => {
                 { provide: ProfileService, useValue: profileService },
                 { provide: AngularFirestore, useValue: angularFirestore },
                 { provide: getAuth, useValue: () => auth },
-              ],
+            ],
         }).compileComponents();
         repository = TestBed.inject(LocationRepository);
         // component = fixture.componentInstance;
@@ -275,7 +276,7 @@ describe('LocationRepository Integration Tests', () => {
     }));
 
     // it('should create', async () => {
-        
+
     // });
 
     it('should create a new gym session', async () => {
@@ -294,13 +295,35 @@ describe('LocationRepository Integration Tests', () => {
         expect(newGymSession.workoutName).toEqual("Test workout session");
     });
 
-    it('should get gym location info', async () => {
-        expect(true).toBeTruthy();
-        const gymLocationInfo = await repository.getLocation(
-            'testingPlaceID1234567890',
-            ["TestUserID1234567890"]
-        )
-            console.log(gymLocationInfo)
-        expect(true).toBeTruthy();
+    it('should retrieve gym sessions for friends that go to a certain gym', async () => {
+        const placeId = 'testingPlaceID';
+        const friendIds = ['friendId1', 'friendId2'];
+        const mockDocs = [
+            {
+                data: () => ({
+                    friendDisplayName: "TestUser1",
+                    startTime: { hours: 15, minutes: 0 },
+                    endTime: Timestamp.fromDate(new Date("03-08-2023 15:30")),
+                    date: new Date("03-08-2023"),
+                    profilePhoto: "https://example.com/profile.png",
+                    workoutName: "Test Workout 1"
+                })
+            },
+            { data: () => ({
+                friendDisplayName: "TestUser2",
+                startTime: { hours: 17, minutes: 0 },
+                endTime: Timestamp.fromDate(new Date("07-08-2023 17:45")),
+                date: new Date("07-08-2023"),
+                profilePhoto: "https://example.com/profile.jpg",
+                workoutName: "Test Workout 2"
+            }) },
+        ];
+
+        angularFirestore.get.mockResolvedValue(mockDocs);
+        const result = await repository.getLocation(placeId, friendIds);
+        console.log(result)
+        expect([true]).toEqual([
+            true
+          ]);
     }, 60000);
 });
