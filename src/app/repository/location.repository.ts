@@ -30,11 +30,14 @@ export class LocationRepository {
     } else {
       this.currUserId = sessionStorage.getItem('currUserId');
     }
+    // this.currUserId = "TestUserID1234567890"
+    // console.log(auth);
+    // console.log(auth.currentUser);
     // const profileDocRef = this.firestore.collection('profiles').doc(placeId);
     const userProfile = await this.profileService.getProfile({ userId: this.currUserId! }).toPromise();
     const displayName = userProfile?.profile.displayName;
     const profilePhoto = userProfile?.profile.profileURL;
-
+    console.log(this.currUserId);
 
     const userLocationsGymSessionRef = this.angularFirestore.collection('locations').doc(placeId).collection(this.currUserId!).doc();
     const newGymSessionDoc: LocationGymSession = {
@@ -53,7 +56,7 @@ export class LocationRepository {
       .catch((error) => {
         console.error('Location: Error creating document:', error);
       });
-
+    return newGymSessionDoc;
     // const fieldValue = firebase.firestore.FieldValue;
 
     //     const docSnapshot = await userLocationsGymSessionRef.get().toPromise(); // Convert Observable to Promise
@@ -133,10 +136,10 @@ export class LocationRepository {
     // }
 
     // console.log(friendIds)
-    if (placeId == "ChIJ4-tknf5glR4RGm5xRwH54ds") {
-      console.log("friendIds location repository")
-      console.log(friendIds)
-    }
+    // if (placeId == "ChIJ4-tknf5glR4RGm5xRwH54ds") {
+    //   console.log("friendIds location repository")
+    //   console.log(friendIds)
+    // }
     const locationGymSessions: LocationGymSession[][] = [];
     for (let i = 0; i < friendIds.length; i++) {
       const id = friendIds[i];
@@ -160,6 +163,7 @@ export class LocationRepository {
         console.log(friendGymSessions)
       }
     }
+    console.log(locationGymSessions)
     return locationGymSessions;
   }
 
