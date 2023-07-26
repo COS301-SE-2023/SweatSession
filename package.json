@@ -40,6 +40,7 @@
     "@ngxs/store": "^3.7.6",
     "@nxtend/capacitor": "^13.0.0",
     "@nxtend/ionic-angular": "13.1.0",
+    "@testing-library/jest-dom": "^5.17.0",
     "axios": "^1.4.0",
     "firebase": "^9.22.0",
     "firebase-admin": "^11.9.0",
@@ -50,6 +51,7 @@
     "ng2-search-filter": "^0.5.1",
     "rxjs": "~7.8.0",
     "swiper": "^9.4.1",
+    "testing-library": "^0.0.2",
     "tslib": "^2.3.0",
     "zone.js": "~0.13.0"
   },

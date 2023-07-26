@@ -34,6 +34,7 @@ export class GymsearchComponent implements OnInit {
    }
 
    @Select(FriendsState.returnFriends) friends$!: Observable<IFriendsModel[]>;
+   
    searchTerm: string | undefined;
    filteredData$: Observable<any[]> = of([]);
    nextPageToken = null;
@@ -127,13 +128,12 @@ export class GymsearchComponent implements OnInit {
             const coordinates = await this.getCurrentLocation();
             this.currLatitude = coordinates.latitude;
             this.currLongitude = coordinates.longitude;
-            this.currLatitude = -25.7694108
-            this.currLongitude = 28.259215
+            // this.currLatitude = -25.7694108
+            // this.currLongitude = 28.259215
             console.log('Latitude:', this.currLatitude);
             console.log('Longitude:', this.currLongitude);
             console.log('maxDistance:', this.maxDistance);
             await this.loadData();
-            await this.getGymUsersForGyms(this.userFriendIds);
             console.log(this.gymUsers);
             console.log(this.gyms);
          }
@@ -230,12 +230,13 @@ export class GymsearchComponent implements OnInit {
          const nextPageToken = this.nextPageToken || "";
          const url = `http://127.0.0.1:5005/demo-project/us-central1/nearbyGymProxyRequest?latitude=${this.currLatitude}&longitude=${this.currLongitude}&radius=${this.maxDistance * 1000}&key=${this.MAPS_API_KEY}&nextPageToken=${nextPageToken}`;
          console.log(url)
-         // const url = `https://us-central1-sweatsession.cloudfunctions.net/nearbyGymProxyRequest?latitude=${this.currLatitude}&longitude=${this.currLongitude}&radius=${this.maxDistance*1000}&key=${this.MAPS_API_KEY}`;
+         // const url = `https://us-central1-sweatsession.cloudfunctions.net/nearbyGymProxyRequest?latitude=${this.currLatitude}&longitude=${this.currLongitude}&radius=${this.maxDistance*1000}&key=${this.MAPS_API_KEY}&nextPageToken=${nextPageToken}`;
          const response = await fetch(url);
          const data = await response.json();
          console.log(data);
          console.log(data.results);
          this.gyms = data;
+         await this.getGymUsersForGyms(this.userFriendIds);
          this.nextPageToken = data.next_page_token; // Get the new nextPageToken
       } catch (error) {
          console.error(error);
@@ -339,7 +340,7 @@ export class GymsearchComponent implements OnInit {
       // console.log('Longitude:', this.currLongitude);
       // console.log('maxDistance:', this.maxDistance);
       await this.loadData();
-      await this.getGymUsersForGyms(this.userFriendIds);
+      const modalContent = document.querySelector('.centralize');      // await this.getGymUsersForGyms(this.userFriendIds);
    }
 
    formatTime(timestamp: Timestamp): string {
