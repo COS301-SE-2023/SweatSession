@@ -13,16 +13,18 @@
       
       <ion-list>
         <div [hidden]="selectedSegment!=='chats'">
-          <ion-item *ngFor="let chatFriend of chatFriends" (click)="stageUser(chatFriend.user)" lines="none">
-            <ion-avatar slot="start">
-              <img alt="Silhouette of a person's head" [src]="chatFriend.user.profileURL!" />
-            </ion-avatar>
-            <ion-label>
-              <h2>{{ chatFriend.user.displayName! }}</h2>
-              <p>{{ chatFriend.lastChat!.text }}</p>
-              <p class="timestamp">{{ chatFriend.lastChat!.date?.toDate() | date:'MMM d, hh:mm a' }}</p>
-            </ion-label>
-          </ion-item>
+          <div *ngIf="chatFriends.length !== 0; else loaderContent" class="chatFriends-container">
+            <ion-item *ngFor="let chatFriend of chatFriends" (click)="stageUser(chatFriend.user)" lines="none">
+              <ion-avatar slot="start">
+                <img alt="Silhouette of a person's head" [src]="chatFriend.user.profileURL!" />
+              </ion-avatar>
+              <ion-label>
+                <h2>{{ chatFriend.user.displayName! }}</h2>
+                <p>{{ chatFriend.lastChat!.text }}</p>
+                <p class="timestamp">{{ chatFriend.lastChat!.date?.toDate() | date:'MMM d, hh:mm a' }}</p>
+              </ion-label>
+            </ion-item>
+          </div>
         </div>
 
         <div [hidden]="selectedSegment!=='groups'">
@@ -74,3 +76,9 @@
     </ng-template>
   </ion-modal>
 </div>
+
+<ng-template #loaderContent>
+  <div class="loader-wrapper">
+    <ion-spinner></ion-spinner>
+  </div>
+</ng-template>

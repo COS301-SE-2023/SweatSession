@@ -2,9 +2,10 @@ import { Component, Input, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { Select, Store } from '@ngxs/store';
 import { Observable, tap } from 'rxjs';
-import { GetOtheruserProfile, StageOtheruserInfo } from 'src/app/actions';
+import { GetOtheruserProfile, GetUser, StageOtheruserInfo } from 'src/app/actions';
 import { IProfileModel } from 'src/app/models';
-import { OtheruserState } from 'src/app/states';
+import { MessagesService } from 'src/app/services';
+import { MessagesState, OtheruserState } from 'src/app/states';
 
 @Component({
   selector: 'group-user',
@@ -16,15 +17,14 @@ export class GroupUserComponent  implements OnInit {
   @Input() currentUserId: string;
   @Input() modal:any;
   @Select(OtheruserState.returnOtherUserProfile) profile$: Observable<IProfileModel>;
-  profile: IProfileModel = {};
+  @Input() profile: IProfileModel = {displayName: 'me'};
 
-  constructor(private store:Store, private nav: NavController) { }
+  constructor(private store:Store, private nav: NavController,private service: MessagesService) {}
 
   ngOnInit() {
-    this.store.dispatch(new GetOtheruserProfile({userId: this.userId}));
-    this.profile$.pipe(
-      tap((response) => this.profile = response)
-    ).subscribe();
+    this.service.getUser(this.userId).then((profile)=>{
+      this.profile = profile;
+    })
   }
 
   viewOtherUser(){

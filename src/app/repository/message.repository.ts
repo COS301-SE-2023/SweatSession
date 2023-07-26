@@ -300,4 +300,11 @@ import { Observable,lastValueFrom, map, tap } from "rxjs";
       
       return message;
     }
+
+    async getUser(userId: string) {
+      const profileDoc = this.firestore.doc<IProfileModel>(`profiles/${userId}`).get();
+      const profile: IProfileModel = (await lastValueFrom(profileDoc)).data()!;
+      
+      return profile;
+    }
   }
