@@ -8,13 +8,16 @@ import { Injectable } from '@angular/core';
 })
 export class LocationsService {
 
-  constructor(private httpClient: HttpClient) { }//private repository:FriendsRepository
-  searchNearbyGyms(currLatitude: Number, currLongitude:Number, maxDistance:any, MAPS_API_KEY:string) {
+
+  //has been implemented in the component file
+  
+  // constructor(private httpClient: HttpClient) { }//private repository:FriendsRepository
+  // searchNearbyGyms(currLatitude: Number, currLongitude:Number, maxDistance:any, MAPS_API_KEY:string) {
     // const apiUrl = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${currLatitude},${currLongitude}&radius=${maxDistance*1000}&type=gym&key=${MAPS_API_KEY}`;
     // const headers = new HttpHeaders()
     // .set('X-Requested-With', 'XMLHttpRequest')
     // or: .set('X-Requested-With', 'XMLHttpRequest');
 
   // return this.httpClient.get(apiUrl);
-  }
+  // }
 }
