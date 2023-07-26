@@ -48,8 +48,22 @@ ion-toolbar ion-item{
 
 * {
 font-family: 'Montserrat', sans-serif;
+transition: .2;
 }
 
 ion-chip {
     background-color: transparent;
+}
+
+ion-spinner {
+    --color: #E63946;//#A8DADC;
+    width: 1.2rem;
+    height: 1.2rem;
+}
+
+.loader-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
 }

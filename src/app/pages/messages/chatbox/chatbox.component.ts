@@ -1,8 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
-import { GetOtheruserProfile, GetProfileAction } from 'src/app/actions';
+import { GetOtheruserProfile, GetProfileAction, StageOtheruserInfo } from 'src/app/actions';
 import { IMessage, IProfileModel } from 'src/app/models';
+import { MessagesService } from 'src/app/services';
 import { OtheruserState } from 'src/app/states';
 
 @Component({
@@ -15,9 +16,9 @@ export class ChatboxComponent  implements OnInit {
   @Input() currentUserId: string;
   @Input() showUser: boolean = false;
   @Select(OtheruserState.returnOtherUserProfile) profile$: Observable<IProfileModel>;
-  profile: IProfileModel;
+  profile: IProfileModel = {};
 
-  constructor(private store:Store) { }
+  constructor(private store:Store, private service: MessagesService) { }
 
   ngOnInit() {
     if(this.showUser) {
@@ -26,10 +27,12 @@ export class ChatboxComponent  implements OnInit {
   }
 
   displayProfile() {
-    this.store.dispatch(new GetOtheruserProfile({userId: this.message.senderId!}));
-
-    this.profile$.subscribe((response)=>{
-      this.profile = response;
+    this.service.getUser(this.message.senderId!).then((profile)=>{
+      this.profile = profile;
     })
+  }
+
+  stageUser() {
+    this.store.dispatch(new StageOtheruserInfo(this.profile))
   }
 }
