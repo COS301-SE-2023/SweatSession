@@ -22,9 +22,7 @@ export class ChatbotService {
     const body = {
         model: 'gpt-3.5-turbo',
         messages: this.conversation,
-        temperature: 0.95,
-        max_tokens: 300,
-        
+        temperature: 0.95,        
     };
   
     return this.http.post(environment.openai_endpoint, body, { headers }).pipe(

@@ -86,7 +86,7 @@
       }
       this.exercises.removeAt(index);
     }
-    private async saveExercise(exerciseData: Exercise, index: number) {
+    public async saveExercise(exerciseData: Exercise, index: number) {
       let exercise = this.exercisesArray[index];
     
       if (exercise) {
@@ -102,7 +102,7 @@
       }
     }
 
-    async saveExercises() { 
+    public async saveExercises() { 
       console.log('Initial exercisesArray:', this.exercisesArray);
       console.log('Form exercises:', this.exercises.controls);
       console.log('Deleted exercises:', this.deletedExercises);   
