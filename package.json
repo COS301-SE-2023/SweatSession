@@ -49,6 +49,7 @@
     "ionic-select-searchable": "^2.10.0",
     "ionicons": "^7.0.0",
     "ng2-search-filter": "^0.5.1",
+    "node-fetch": "^3.3.2",
     "rxjs": "~7.8.0",
     "swiper": "^9.4.1",
     "testing-library": "^0.0.2",
