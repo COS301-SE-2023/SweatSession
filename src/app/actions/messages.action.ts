@@ -86,3 +86,8 @@ export class GetGroup {
     static readonly type = "[chatGroup] get chat group info";
     constructor(public payload?: string) {}
 }
+
+export class GetUser {
+    static readonly type = "[chatGroup] get group user";
+    constructor(public payload: string) {}
+}
