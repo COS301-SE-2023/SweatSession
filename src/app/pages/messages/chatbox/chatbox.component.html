@@ -2,8 +2,21 @@
 [ngClass]="{ 'message-sent': message.senderId === currentUserId, 'message-received': message.senderId !== currentUserId }"
 >
   <div class="message-content">
-    <div class="messege-sender" *ngIf="showUser && profile && currentUserId !== message.senderId">
-      ~ {{profile.displayName}}.
+    <div class="message-sender" *ngIf="showUser && profile && currentUserId !== message.senderId">
+      <div *ngIf="profile.profileURL; else loaderContent">
+        <ion-item lines="none" class="smaller-item" (click)="stageUser()">
+          <ion-avatar>
+            <ion-img [src]="profile.profileURL" class="sender-img"></ion-img>
+          </ion-avatar>
+         {{'~ '+profile.displayName}}.
+        </ion-item>
+      </div>
+
+      <ng-template #loaderContent>
+        <div class="loader-wrapper">
+          <ion-spinner></ion-spinner>
+        </div>
+      </ng-template>
     </div>
     <div class="message-bubble">
       {{ message.text }}
