@@ -3,20 +3,6 @@ name: Tests
 on: [push]
 
 jobs:
-  AddEnvironmentVariablesFile:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Use Node.js 19
-        uses: actions/setup-node@v3
-        with:
-          node-version: "19.x"
-          cache: 'npm'
-      - uses: mskelton/setup-yarn@v1
-        with:
-          node-version: '19.x'
-      - run: touch src/app/environments/environment.ts
-      - run: echo ${{secrets.ENVIRONMENT_VARIABLES}} >> src/app/environments/environment.ts
   unitTests:
     runs-on: ubuntu-latest
     steps:
@@ -43,5 +29,8 @@ jobs:
       - uses: mskelton/setup-yarn@v1
         with:
           node-version: '19.x'
+      - run: mkdir src/environments
+      - run: touch src/environments/environment.ts
+      - run: echo ${{secrets.ENVIRONMENT_VARIABLES}} >> src/environments/environment.ts
       - run: yarn
       - run: yarn jest --testPathPattern=int.spec.ts
