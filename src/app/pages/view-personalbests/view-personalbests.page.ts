@@ -1,10 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { AddPersonalBestComponent } from './add-personal-best/add-personal-best.component';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
-import { NgChartsModule } from 'ng2-charts';
-import { ReactiveFormsModule } from '@angular/forms';
 import { IPersonalBest } from 'src/app/models';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { PersonalbestService } from 'src/app/services/personalbest/personalbest.service';
@@ -36,10 +32,8 @@ export class ViewPersonalbestsPage implements OnInit {
       formData.reps != null &&
       formData.weight != null
     ) {
-      // console.log('Form is valid');
       return true;
     } else {
-      // console.log('Form is not valid');
       return false;
     }
   }
@@ -86,7 +80,6 @@ export class ViewPersonalbestsPage implements OnInit {
     });
 
     this.PersonalBestForm.valueChanges.subscribe((formData) => {
-      // Update the isValid() function whenever the form value changes
       this.isValid(formData);
     });
 
@@ -101,12 +94,5 @@ export class ViewPersonalbestsPage implements OnInit {
     return `${currentYear}-${currentMonth}-${currentDay}`;
   }
 
-  // getTime(): string {
-  //   const currentDate = new Date();
-  //   const currentHour = currentDate.getHours().toString().padStart(2, '0');
-  //   const currentMinute = (currentDate.getMinutes()).toString().padStart(2, '0'); //time in ten minutes;
-
-  //   return `${currentHour}:${currentMinute}`;
-  // }
 
 }

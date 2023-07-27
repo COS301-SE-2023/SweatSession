@@ -64,7 +64,6 @@ export class goalsRepository {
     }
 
      addGoal(request: IAddGOAL) {
-        // request.goal.id = this.firestore.createId();
 
 
         const goal =

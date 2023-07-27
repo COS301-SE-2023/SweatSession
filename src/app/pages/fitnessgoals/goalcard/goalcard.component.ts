@@ -141,6 +141,32 @@ export class GoalcardComponent  implements OnInit {
         // this.ngOnInit();
     }
 
+    confirmDelete(id: string) {
+        const alert = document.createElement('ion-alert');
+        alert.header = 'Confirm';
+        alert.message = 'Are you sure you want to delete this Goal?';
+        alert.buttons = [
+            {
+                text: 'Cancel',
+                role: 'cancel',
+                handler: () => {
+                    console.log('Confirm Cancel');
+                    this.router.navigate(['/goals']);
+                }
+            },
+            {
+                text: 'Confirm',
+                handler: () => {
+                    console.log('Confirm Okay');
+                    this.removeGoal(id);
+                }
+            }
+        ];
+
+        document.body.appendChild(alert);
+        return alert.present();
+    }
+
     viewGoal(goalid: string|undefined) {
         // setgoalid
         FitnessgoalViewPage.prototype.setgoalid(goalid!);

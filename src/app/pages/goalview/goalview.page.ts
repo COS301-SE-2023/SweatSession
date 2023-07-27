@@ -76,6 +76,7 @@ export class GoalviewPage  implements OnInit {
     this.Taskses.removeAt(i);
   }
 
+
   formValue(): void {
     console.log(this.goalForm.value);
   }
