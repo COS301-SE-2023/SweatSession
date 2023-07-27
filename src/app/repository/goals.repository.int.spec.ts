@@ -20,7 +20,10 @@ describe('goalsRepository', () => {
         collection: jest.fn().mockReturnThis(),
         doc: jest.fn().mockReturnThis(),
         add: jest.fn().mockReturnValue(of({})),
-        set: jest.fn().mockReturnValue(of({}))
+        set: jest.fn().mockReturnValue(of({})),
+        update: jest.fn().mockReturnValue(of({})),
+        delete: jest.fn().mockReturnValue(of({})),
+
     };
 
     beforeEach(() => {
@@ -31,7 +34,7 @@ describe('goalsRepository', () => {
                 {provide: AuthApi, useValue: {},},
                 {provide: Auth, useValue: {},},
                 {provide: getAuth, useValue: {},},
-                {provide: AngularFireModule, useValue: {},},
+                {provide: AngularFireModule, useValue: firestoreMock,},
             ],
         });
 
@@ -56,6 +59,29 @@ describe('goalsRepository', () => {
                 expect(firestoreMock.set).toHaveBeenCalled();
 
             });
+
+            it('should mark task as done', async () => {
+                const userId = 'testUserId';
+                const goalId = 'testGoalId';
+                const taskid = 'testTaskId';
+                const request: ITASK = {
+                    id: taskid,
+                    content: 'testContent',
+                    done : true,
+
+                };
+
+                const response = await repository.doneTask(userId, goalId, taskid,request);
+                expect(firestoreMock.collection).toHaveBeenCalledWith('fitnessgoals');
+                expect(firestoreMock.collection).toHaveBeenCalledWith('goals');
+                expect(firestoreMock.collection).toHaveBeenCalledWith('Tasks');
+                expect(firestoreMock.doc).toHaveBeenCalledWith(`${userId}`);
+                expect(firestoreMock.doc).toHaveBeenCalledWith(`${goalId}`);
+                expect(firestoreMock.doc).toHaveBeenCalledWith(`${taskid}`);
+                expect(firestoreMock.set).toHaveBeenCalled();
+
+            });
+
 
 
     });
