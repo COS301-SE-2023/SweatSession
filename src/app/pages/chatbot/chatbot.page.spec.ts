@@ -2,7 +2,6 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { ChatbotPage } from './chatbot.page';
 import { ChatbotService } from 'src/app/services/chatbot/chatbot.service';
-import { of } from 'rxjs';
 import { HttpClientModule } from '@angular/common/http';
 
 describe('ChatbotPage', () => {
