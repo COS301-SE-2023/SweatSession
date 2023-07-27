@@ -17,13 +17,16 @@ export class GroupUserComponent  implements OnInit {
   @Input() currentUserId: string;
   @Input() modal:any;
   @Select(OtheruserState.returnOtherUserProfile) profile$: Observable<IProfileModel>;
-  @Input() profile: IProfileModel = {displayName: 'me'};
+  @Input() profile: IProfileModel;
+  load = true;
 
   constructor(private store:Store, private nav: NavController,private service: MessagesService) {}
 
   ngOnInit() {
+
     this.service.getUser(this.userId).then((profile)=>{
       this.profile = profile;
+      this.load = false;
     })
   }
 

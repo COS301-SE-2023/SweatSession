@@ -1,4 +1,4 @@
-<ion-item lines="none" (click)="viewOtherUser()">
+<ion-item lines="none" (click)="viewOtherUser()" *ngIf="!load; else loaderContent">
   <ion-avatar slot="start">
     <ion-img [src]="profile.profileURL"></ion-img>
   </ion-avatar>
@@ -8,3 +8,11 @@
     <p>{{profile.bio}}</p>
   </ion-label>
 </ion-item>
+
+<ng-template #loaderContent>
+ <ion-item lines="none">
+  <div class="loader-wrapper">
+    <ion-spinner></ion-spinner>
+  </div>
+ </ion-item>
+</ng-template>
