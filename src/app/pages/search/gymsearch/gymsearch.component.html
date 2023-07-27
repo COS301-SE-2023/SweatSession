@@ -39,7 +39,7 @@
     {{ item.description }}
   </ion-card-content>
 </ion-card> -->
-<ng-container *ngFor="let gym of gyms.results">
+<ng-container *ngFor="let gym of filter(gyms.results)">
   <ng-container *ngIf="gym.business_status=='OPERATIONAL'">
     <ion-card class="locationCard">
       <ng-container *ngIf="gym?.photos?.[0]?.photo_reference">
