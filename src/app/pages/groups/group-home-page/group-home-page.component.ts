@@ -1,9 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
 import { Observable, tap } from 'rxjs';
-import { ExitChatGroup, JoinChatGroup, StageChatGroup } from 'src/app/actions';
+import { ExitChatGroup, GetGroup, JoinChatGroup, StageChatGroup } from 'src/app/actions';
 import { IGroup } from 'src/app/models';
-import { AuthState } from 'src/app/states';
+import { AuthState, MessagesState } from 'src/app/states';
 
 @Component({
   selector: 'group-home-page',
@@ -12,6 +12,7 @@ import { AuthState } from 'src/app/states';
 })
 export class GroupHomePageComponent  implements OnInit {
   @Select(AuthState.getCurrUserId) userId$!: Observable<string>;
+  @Select(MessagesState.returnGroup) group$!: Observable<IGroup>;
   @Input() selectedGroup: IGroup;
   @Input() modal:any;
   selectedSegment = "members"
@@ -23,6 +24,7 @@ export class GroupHomePageComponent  implements OnInit {
 
   stageGroup() {
     this.modal.dismiss();
+    this.store.dispatch(new GetGroup(this.selectedGroup.id))
     this.store.dispatch(new StageChatGroup(this.selectedGroup));
   }
 
