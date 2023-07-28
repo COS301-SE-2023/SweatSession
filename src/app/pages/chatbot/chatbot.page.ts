@@ -38,11 +38,11 @@ export class ChatbotPage implements OnInit {
 
   private async getUserHealthData(displayName: string) {
     const snapshot = await this.firestore.collection('healthdata', ref => ref.where('displayName', '==', displayName)).get().toPromise();
-    if (snapshot?.empty) {
+    if (!snapshot) {
       return null;
     } else {
-      const data = snapshot?.docs[0].data();
-      const formattedData = `The user's height is ${data?.['height']} cm, weight is ${data?.['weight']} kg, diet is ${data?.['diet']}, and the medical conditions are ${data?.['medicalConditions']}.`;
+      const data:any = snapshot.docs[0].data();
+      const formattedData = `The user's height is ${data['height']} cm, weight is ${data?.['weight']} kg, diet is ${data?.['diet']}, and the medical conditions are ${data?.['medicalConditions']}.`;
       return formattedData;
     }
   }
