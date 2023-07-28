@@ -5,7 +5,7 @@ import { Notice } from 'src/app/models/notice.model';
 import { AlertController, NavController } from '@ionic/angular';
 import { getAuth } from 'firebase/auth';
 import { IFriendsModel } from 'src/app/models';
-import { AddFriendAction, RemoveFriendRequest } from 'src/app/actions';
+import { AddFriendAction, RemoveFriendAction, RemoveFriendRequest } from 'src/app/actions';
 import { Store } from '@ngxs/store';
 // import { HomePage } from '../home/home.page';
 // import { Router } from '@angular/router';
