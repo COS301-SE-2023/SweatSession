@@ -62,3 +62,8 @@ ion-header{
     border: radius 50px;
 
 }
+
+.right-align-label {
+    display: flex;
+    justify-content: flex-end; /* Align the content to the right */
+  }
