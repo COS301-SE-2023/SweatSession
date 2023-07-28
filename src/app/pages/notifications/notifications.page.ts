@@ -94,7 +94,13 @@ export class NotificationsPage implements OnInit {
     }
   }
 
-  rejectFriendRequest(senderid: string , senttoid: string){
+  rejectFriendRequest(notice: Notice , senderid: string , senttoid: string){
+    const friend: IFriendsModel = {
+      userId: notice.senderid,
+      name: notice.sendername,
+      profileURL: notice.profileurl,
+    }
+    this.store.dispatch(new RemoveFriendAction(friend))
     this.noticeService.rejectFriend(senderid , senttoid) ;
     console.log('reject working');
 

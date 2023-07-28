@@ -6,6 +6,7 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import * as admin from 'firebase-admin';
+import { HttpClientModule } from '@angular/common/http';
 
 import {
   initializeFirestore,
@@ -61,6 +62,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
     IonicModule.forRoot(), 
     NgxsRouterPluginModule.forRoot(),
     AppRoutingModule,
+    HttpClientModule,
     AngularFirestoreModule,
     provideRemoteConfig(() => getRemoteConfig()),
     provideAnalytics(() => getAnalytics()),
