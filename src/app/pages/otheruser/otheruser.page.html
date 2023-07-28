@@ -1,14 +1,10 @@
-<ion-header [translucent]="true" *ngIf="user!=null">
-  <ion-toolbar>
-    <ion-item>
-      <backbutton class="larger-back-button"></backbutton>
-      <ion-title>{{user!.name}}</ion-title>
-    </ion-item>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true" *ngIf="user!=null">
   <ion-card class="otheruser-profile">
+    <div class="back-button">
+      <ion-item lines="none">
+        <backbutton class="larger-back-button" slot="start"></backbutton>
+      </ion-item>
+    </div>
     <ion-item>
       <ion-avatar>
         <img src="{{user!.profileURL}}"/>
@@ -53,7 +49,6 @@
  <ion-card>
   <ion-item>
     <ion-icon name="medal"></ion-icon>
-    <!-- {{friends!.length}}  -->
     <ion-card-header *ngIf="badges$ | async as badges">{{badges.receivedBadges.length}} Badges</ion-card-header>
     <ion-button slot="end" (click)="viewOtherUserBadges()">view</ion-button>
   </ion-item>
@@ -61,17 +56,7 @@
  <ion-card>
   <ion-item>
     <ion-icon name="star-outline"></ion-icon>
-    <!-- {{}} Points  -->
     <ion-card-header *ngIf="points$ | async as points">{{points.userPoints}} Points</ion-card-header>
-    <!-- <ion-button slot="end" (click)="viewOtherUserBadges()">view</ion-button> -->
   </ion-item>
  </ion-card>
- <!-- <ion-card>
-  <ion-item>
-    <ion-icon name="people-outline"></ion-icon>
-    <ion-card-header>{{friends!.length}} Points</ion-card-header>
-    <ion-button slot="end" (click)="viewFriends()">view</ion-button>
-  </ion-item>
- </ion-card> -->
-
 </ion-content>
