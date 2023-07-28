@@ -1,0 +1,28 @@
+name: AutoDeployment
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  autoDeploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js 19
+        uses: actions/setup-node@v3
+        with:
+          node-version: "19.x"
+          cache: 'npm'
+      - uses: mskelton/setup-yarn@v1
+        with:
+          node-version: '19.x'
+      - run: mkdir src/environments
+      - run: touch src/environments/environment.ts
+      - run: echo "${{secrets.ENVIRONMENT_VARIABLES}}" >> src/environments/environment.ts
+      - run: yarn
+      - run: yarn fix:node_modules
+      - run: firebase login:ci --token "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}"
+      - run: ionic build --prod
+      - run: firebase deploy
