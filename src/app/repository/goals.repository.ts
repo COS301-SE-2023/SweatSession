@@ -254,8 +254,6 @@ export class goalsRepository {
     
     saveTasks( userId: string, goalid: string,request: ITASK[]) {
 
-            console.log("Request Save Task: " , userId);
-
             request.forEach((task) => {
 
                 this.firestore

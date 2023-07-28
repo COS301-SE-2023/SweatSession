@@ -144,3 +144,22 @@ ion-label{
     color: white;
     align-content: center;
 }
+
+.theCol
+{
+    border: solid 1px #E63946;
+    color: #fff;
+    text-align: center;
+}
+
+/* styles.css or your custom styles file */
+.center-content {
+    position: relative;
+}
+
+.image {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

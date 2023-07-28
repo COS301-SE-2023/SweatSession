@@ -2,55 +2,42 @@
   <ion-toolbar>
     <ion-item lines="none">
       <backbutton class="larger-back-button"></backbutton>
-      <!-- <ion-title>Profile</ion-title> -->
-      <ion-icon name="create-outline" routerLink="/setprofile" style="filter: none;" slot="end">
-        <ion-label>Edit</ion-label>
-      </ion-icon>
+      <ion-icon name="create-outline" routerLink="/setprofile" style="filter: none;" slot="end"></ion-icon>
     </ion-item>
 
-    <div class="flex-center image-container">   
+    <ion-item class="center-content">
       <ion-img src={{ProfilePicture$}} alt="logo-image" class="image rounded-circle"></ion-img>
-    </div>
-  
-    <div class="flex-center">
-      <ion-label class="label" style="padding-top: 2%; font-weight: bold; font-size: 1.5rem;">{{displayName$}}</ion-label>
-    </div>
-    
-    <!-- <ion-row>
-      <ion-col style="display: flex;">
-        <ion-label style="margin:auto;">{{myBio$}}</ion-label>
-      </ion-col>
-    </ion-row> -->
+    </ion-item>
 
-  
 
-    <!-- <ion-label class="bio-content">
-      {{myBio$}}
-    </ion-label> -->
-  
-    <ion-row>
-      <ion-col size="6" routerLink="/friends">
-        <ion-title class="title" style=" margin-left: 40px">{{friendsSize}}<br>Friends</ion-title>
-      </ion-col>
-      <ion-col size="6" (click)="Groups()" >
-        <ion-title class="title" >{{groups$}}<br>Groups</ion-title>
-      </ion-col>
-    </ion-row>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col class = "theCol">{{displayName$}}</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col class = "theCol">{{myBio$}}</ion-col>
+      </ion-row>
+    </ion-grid>
+
+
+      <ion-grid >
+        <ion-row>
+          <ion-col class = "theCol">{{friendsSize}}</ion-col>
+          <ion-col class = "theCol">{{groups$}}</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col class = "theCol">Friends</ion-col>
+          <ion-col class = "theCol">Groups</ion-col>
+        </ion-row>
+      </ion-grid>
+
   </ion-toolbar>
-  <!-- <div style="display: flex; justify-content: center;"> -->
-    <ion-label>
-      {{myBio$}}
-    </ion-label>
-  <!-- </div> -->
-  
+
 </ion-header>
 
    
-<ion-content> 
- <br>
- <br>
- <br>
-
+<ion-content>
   <div class="flex-center">
     <ion-card class="card">
       <ion-card-content>

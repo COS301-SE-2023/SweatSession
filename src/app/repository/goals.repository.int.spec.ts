@@ -20,9 +20,16 @@ describe('goalsRepository', () => {
         collection: jest.fn().mockReturnThis(),
         doc: jest.fn().mockReturnThis(),
         add: jest.fn().mockReturnValue(of({})),
-        set: jest.fn().mockReturnValue(of({})),
+        set: jest.fn().mockReturnValue(of({}),),
+        // set: jest.fn().mockReturnThis(
+        //     {
+        //         then: jest.fn().mockReturnThis(),
+        //         catch: jest.fn().mockReturnThis(),
+        //     }
+        // ),
         update: jest.fn().mockReturnValue(of({})),
         delete: jest.fn().mockReturnValue(of({})),
+        then: jest.fn().mockReturnThis(),
 
     };
 
@@ -82,7 +89,35 @@ describe('goalsRepository', () => {
 
             });
 
+            it('should save Tasks', async () => {
+                const userId = 'testUserId';
+                const goalId = 'testGoalId';
+                const request: ITASK[] =
+                    [
+                        {
+                            id: 'testTaskId',
+                            content: 'testContent',
+                            done : false,
+                        },
+                        {
+                            id: 'testTaskId2',
+                            content: 'testContent2',
+                            done : false,
+                        }
+                    ]
 
+                const response = await repository.saveTasks(userId, goalId, request);
+                expect(firestoreMock.collection).toHaveBeenCalledWith('fitnessgoals');
+                expect(firestoreMock.collection).toHaveBeenCalledWith('goals');
+                expect(firestoreMock.collection).toHaveBeenCalledWith('Tasks');
+                expect(firestoreMock.doc).toHaveBeenCalledWith(`${userId}`);
+                expect(firestoreMock.doc).toHaveBeenCalledWith(`${goalId}`);
+                expect(firestoreMock.doc).toHaveBeenCalledWith(`${request[0].id}`);
+                expect(firestoreMock.doc).toHaveBeenCalledWith(`${request[1].id}`);
+                expect(firestoreMock.set).toHaveBeenCalled();
+
+
+            });
 
     });
 });
