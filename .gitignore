@@ -1,5 +1,6 @@
 /src/environments/**
 /www/**
+.firebase/
 
 # Angular
 .angular
