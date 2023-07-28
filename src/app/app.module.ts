@@ -5,6 +5,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
+
 import * as admin from 'firebase-admin';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -48,6 +50,9 @@ import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
 import { AngularFirestore, AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireModule } from '@angular/fire/compat';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { HttpClient, HttpHandler } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
+
  
 
 @NgModule({
@@ -64,6 +69,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
     AppRoutingModule,
     HttpClientModule,
     AngularFirestoreModule,
+    HttpClientModule,
     provideRemoteConfig(() => getRemoteConfig()),
     provideAnalytics(() => getAnalytics()),
     provideAuth(() => {
@@ -113,7 +119,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, AngularFirestore],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, AngularFirestore, Geolocation, HttpClient],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

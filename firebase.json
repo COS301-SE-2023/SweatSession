@@ -22,21 +22,28 @@
     "rules": "firestore.rules",
     "indexes": "firestore.indexes.json"
   },
-  "hosting": {
-    "public": "public",
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ]
-  },
+  "hosting": [
+    {
+      "public": "www",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ]
+    },
+    {
+      "target": "app",
+      "source": ".",
+      "frameworksBackend": {}
+    }
+  ],
   "storage": {
     "rules": "storage.rules"
   },
   "ui": {
-      "enabled": true,
-      "port": 5001
-    },
+    "enabled": true,
+    "port": 5001
+  },
   "emulators": {
     "auth": {
       "port": 5002

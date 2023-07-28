@@ -3,7 +3,7 @@
   <ion-toolbar>
     <ion-item lines="none">
       <backbutton class="larger-back-button"></backbutton>
-      <ion-title class="ion-text-center">Add Workout Schedule</ion-title>
+      <ion-title class="ion-text-center">Add Gym Session</ion-title>
     </ion-item>
   </ion-toolbar>
 </ion-header>
@@ -29,10 +29,14 @@
         </ion-row>        
         <ion-row>
           <ion-col>
-            <ion-item>
-              <ion-label position="floating">Location</ion-label>
-              <ion-input type="text" [(ngModel)]="schedule.location"></ion-input>
-            </ion-item>
+            <div class="location-container">
+              <ion-item class="location-item">   
+                <ion-label position="stacked">Location</ion-label>  
+                <ion-input type="text" [(ngModel)]="schedule.location" placeholder="Click on the location icon."></ion-input>      
+              </ion-item>
+            
+              <ion-icon name="location" slot="end" (click)="openLocationModal()" class="location-icon"></ion-icon>
+            </div>
           </ion-col>
         </ion-row>
         <ion-row>

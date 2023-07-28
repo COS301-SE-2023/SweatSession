@@ -73,9 +73,9 @@ export class ScheduleContentComponent implements OnInit {
     }
 
     if (this.inSession()) {
-      return "Gym Session Has Begun";
+      return "Workout Session Has Begun";
     }
-    return "Schedule overdue";
+    return "Workout Session Overdue";
   }
 
   inSession() {
