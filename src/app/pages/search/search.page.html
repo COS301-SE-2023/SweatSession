@@ -1,14 +1,14 @@
 <div class="outer-container">
   <ion-content>
     <div class="inner-container">
-      <!-- <ion-segment (ionChange)="onSegmentChange($event)" value="user">
+      <ion-segment (ionChange)="onSegmentChange($event)" value="user">
         <ion-segment-button value="user">
           <ion-label>Users</ion-label>
         </ion-segment-button>
         <ion-segment-button value="group">
           <ion-label>Groups</ion-label>
         </ion-segment-button>
-      </ion-segment> -->
+      </ion-segment>
 
       <groupsearch [hidden]="selectedSegment !=='group'"></groupsearch>
       <usersearch [hidden]="selectedSegment !=='user'"></usersearch>
