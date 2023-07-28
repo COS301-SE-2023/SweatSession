@@ -85,8 +85,8 @@
 .rounded-circle {
     border-radius: 50%;
     overflow: hidden;
-    height: 200px;
-    width: 200px;
+    height: 150px;
+    width: 150px;
   }
 
 .button{
@@ -103,6 +103,8 @@
 .title{
     display: inline-block;
     padding-left: 5vh;
+    color: white;
+
 }
 ion-item{
     --background:#A8DADC;
@@ -129,5 +131,16 @@ ion-card {
 .bio-content {
    max-height: 100px;
     overflow-y: auto;
+    color: white;
 }
 
+ion-header{
+    background-color: #E63946;
+
+
+}
+
+ion-label{
+    color: white;
+    align-content: center;
+}
