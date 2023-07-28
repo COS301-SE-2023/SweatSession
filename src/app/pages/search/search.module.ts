@@ -11,6 +11,8 @@ import { SearchPage } from './search.page';
 import { UsersearchComponent } from './usersearch/usersearch.component';
 import { GymsearchComponent } from './gymsearch/gymsearch.component';
 import { OtheruserStateModule, AuthModule } from 'src/app/states';
+import { GroupSearchComponent } from './group/group.component';
+import { GroupsHomePageModule } from '../groups/group-home-page/group-home-page.module';
 
 
 @NgModule({
@@ -20,8 +22,9 @@ import { OtheruserStateModule, AuthModule } from 'src/app/states';
     IonicModule,
     SearchPageRoutingModule,
     OtheruserStateModule,
-    AuthModule
+    AuthModule,
+    GroupsHomePageModule
   ],
-  declarations: [SearchPage, UsersearchComponent, GymsearchComponent]
+  declarations: [SearchPage, UsersearchComponent, GymsearchComponent,GroupSearchComponent]
 })
 export class SearchPageModule {}

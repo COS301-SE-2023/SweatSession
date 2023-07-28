@@ -8,6 +8,7 @@ import {
   redirectUnauthorizedTo
 } from '@angular/fire/auth-guard';
 import { AddScheduleComponent } from './pages/workout-scheduling/add-schedule/add-schedule.component';
+import { ChatroomComponent } from './pages/messages/chatroom/chatroom.component';
 
 const redirectLoggedOut = () => redirectUnauthorizedTo(['login']);
 const redirectLoggedIn = () => redirectLoggedInTo(['home']);
@@ -156,6 +157,24 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     data: { authGuardPipe: redirectLoggedOut },
     loadChildren: () => import('./pages/fitnessgoal-view/fitnessgoal-view.module').then( m => m.FitnessgoalViewPageModule)
+  },
+  {
+    path: 'chatroom',
+    canActivate: [AuthGuard],
+    data: { authGuardPipe: redirectLoggedOut },
+    loadChildren: () => import('./pages/messages/chatroom/chatroom.module').then( m => m.ChatroomComponentModule )
+  },
+  {
+    path: 'groupchatroom',
+    canActivate: [AuthGuard],
+    data: { authGuardPipe: redirectLoggedOut },
+    loadChildren: () => import('./pages/messages/group-chatroom/group-chatroom.module').then( m => m.GroupChatroomComponentModule )
+  },
+  {
+    path: 'creategroup',
+    canActivate: [AuthGuard],
+    data: { authGuardPipe: redirectLoggedOut },
+    loadChildren: () => import('./pages/messages/create-group/create-group.module').then( m => m.CreateGroupComponentModule )
   },
   {
     path: 'view-personalbests',

@@ -1,0 +1,27 @@
+<ion-card>
+  <ion-item lines="none" (click)="viewOtherUser()">
+    <ion-avatar>
+      <ion-img [src]='user.profileURL'></ion-img>
+    </ion-avatar>
+    <ion-text class="user-name" *ngIf="!isCurrentUser">
+      {{user.displayName}}
+    </ion-text>
+    <ion-text class="user-name" *ngIf="isCurrentUser">
+      {{user.displayName}}(You)
+    </ion-text>
+
+    <ion-item slot="end" lines="none">
+      <ion-text>{{position}}</ion-text>
+      <!-- <ion-icon type="image/png" href="assets/Asset 2.png" /> -->
+    </ion-item>
+  </ion-item>
+
+  <div class="stats">
+    <ion-item lines="none" class="stats">
+      <ion-text>
+        {{user.points}}  
+      </ion-text>
+      <ion-icon name="star-outline"></ion-icon>
+    </ion-item>
+  </div>
+</ion-card>

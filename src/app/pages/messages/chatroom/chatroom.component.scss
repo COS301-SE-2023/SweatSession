@@ -1,0 +1,42 @@
+  ion-footer {
+    padding: 10px;
+  }
+  
+  ion-input {
+    --border-radius: 5px;
+    white-space: pre;
+    height: auto;
+    overflow-wrap: break-word;
+  }
+  
+  ion-button {
+    margin-left: 10px;
+    --background: #007bff;
+  }
+
+ion-title {
+  text-align: center;
+}
+
+ion-content {
+  position: relative;
+}
+
+.inline-dropdown {
+  position: fixed;
+  top: 50px;
+  right: 0;
+  background-color: #ffffff;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
+  z-index: 999;
+}
+
+.active {
+  background-color: #f1f1f1;
+}
+
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}

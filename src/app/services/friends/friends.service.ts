@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FriendsRepository } from '../../repository';
-import { IGetFriends, IAddFriend, IRemoveFriend, IGotFriends } from 'src/app/models';
+import { IGetFriends, IAddFriend, IRemoveFriend, IGotFriends, IFriendRequest } from 'src/app/models';
 
 @Injectable({
   providedIn: 'root'
@@ -19,5 +19,13 @@ export class FriendsService {
 
   async removeFriend(request: IRemoveFriend){
     return this.repository.removeFriend(request);
+  }
+
+  async createFriendRequest(request: IFriendRequest) {
+    return this.repository.createFriendRequest(request);
+  }
+
+  async removeFriendRequest(request: IFriendRequest) {
+    return this.repository.removeFriendRequest(request);
   }
 }

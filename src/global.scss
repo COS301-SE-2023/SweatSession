@@ -25,9 +25,9 @@
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
 
-// ion-content {
-//     --ion-background-color: #F1FAEE;
-// }
+ion-content {
+    overflow: auto;
+}
 
 // ion-item{
 //     --highlight-height: 0;
@@ -36,4 +36,34 @@
 
 ion-title {
     text-align: center;
+}
+
+ion-toolbar{
+    --background: #E63946
+}
+
+ion-toolbar ion-item{
+--background: #E63946
+}
+
+* {
+font-family: 'Montserrat', sans-serif;
+transition: .2;
+}
+
+ion-chip {
+    background-color: transparent;
+}
+
+ion-spinner {
+    --color: #E63946;//#A8DADC;
+    width: 1.2rem;
+    height: 1.2rem;
+}
+
+.loader-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
 }

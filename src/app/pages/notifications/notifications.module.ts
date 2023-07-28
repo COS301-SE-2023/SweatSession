@@ -8,7 +8,7 @@ import { NotificationsPageRoutingModule } from './notifications-routing.module';
 
 import { NotificationsPage } from './notifications.page';
 import { BackButtonDirectiveModule } from 'src/app/directives';
-import { OtheruserStateModule } from 'src/app/states';
+import { FriendsStateModule, OtheruserStateModule } from 'src/app/states';
 
 @NgModule({
   imports: [
@@ -18,6 +18,7 @@ import { OtheruserStateModule } from 'src/app/states';
     NotificationsPageRoutingModule,
     BackButtonDirectiveModule,
     OtheruserStateModule,
+    FriendsStateModule
   ],
   declarations: [NotificationsPage]
 })

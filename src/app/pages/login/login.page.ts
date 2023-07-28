@@ -3,6 +3,7 @@ import { NavController } from '@ionic/angular';
 import { FormBuilder, Validators } from '@angular/forms'; //, AbstractControl, ValidatorFn, ValidationErrors 
 import { Store } from '@ngxs/store';
 import {Login} from 'src/app/actions/login';
+import { ContinueWithGoogleAction } from 'src/app/actions';
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -37,6 +38,10 @@ export class LoginPage implements OnInit {
         this.store.dispatch(new Login(loginEmail,loginPassword));
       }
     }
+  }
+
+  continueWithGoogleAuth() {
+    this.store.dispatch(new ContinueWithGoogleAction());
   }
 
   ngOnInit() {

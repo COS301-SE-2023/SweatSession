@@ -1,0 +1,10 @@
+<ion-item (click)="openChat()" lines="none">
+  <ion-avatar slot="start">
+    <img alt="Silhouette of a person's head" [src]="chatFriend.user.profileURL" />
+  </ion-avatar>
+  <ion-label>
+    <h2>{{ chatFriend.user.displayName }}</h2>
+    <p>{{ chatFriend.lastChat!.text }}</p>
+    <p class="timestamp">{{ toDate() }}</p>
+  </ion-label>
+</ion-item>

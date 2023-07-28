@@ -1,0 +1,55 @@
+<div class="group-page-container">
+  <div class="group-page-profile">
+    <ion-buttons slot="start">
+      <ion-icon name="arrow-back" class="larger-back-button" (click)="closeModal()"></ion-icon>
+    </ion-buttons>
+    <div class="profile-inner-wrapper">
+      <div class="profile-img-container">
+        <ion-avatar class="profile-image">
+          <ion-img [src]="selectedGroup.profileURL"></ion-img>
+        </ion-avatar>
+      </div>
+      <ion-label class="profile-label">
+        <div class="name">
+          <h1>{{selectedGroup.displayName}}.</h1>
+        </div>
+        <div class="members">
+          <p>{{selectedGroup.members?.length}} Members.</p>
+        </div>
+        <div class="bio">
+          <p>{{selectedGroup.bio}}.</p>
+        </div>
+      </ion-label>
+      <div class="group-buttons">
+        <ion-button fill="outline" *ngIf="!isGroupMember()" (click)="joinGroup()">
+          <ion-icon name="people" slot="start"></ion-icon>
+          <ion-label>Join</ion-label>
+        </ion-button>
+        <ion-button fill="outline" [disabled]="true" *ngIf="isGroupMember()">
+          <ion-icon name="people" slot="start"></ion-icon>
+          <ion-label>Joined</ion-label>
+        </ion-button>
+        <ion-button fill="outline" (click)="stageGroup()" *ngIf="isGroupMember()">
+          <ion-icon name="chatbox-outline" slot="start"></ion-icon>
+          <ion-label>Chats</ion-label>
+        </ion-button>
+      </div>
+    </div>
+  </div>
+  <div>
+    <ion-segment (ionChange)="onSegmentChange($event)" value="members" [scrollable]="true">
+      <ion-segment-button value="members">members</ion-segment-button>
+      <ion-segment-button value="schedules">workout Sessions</ion-segment-button>
+      <ion-segment-button value="leaderboard">leaderboard</ion-segment-button>
+    </ion-segment>
+
+    <div class="content" [hidden]="selectedSegment !== 'members'">
+      <ion-list>
+        <group-user *ngFor="let userId of selectedGroup.members"
+        [userId]="userId"
+        [currentUserId]="currentUserId"
+        [modal]="modal"></group-user>
+      </ion-list>
+    </div>
+  </div>
+</div>

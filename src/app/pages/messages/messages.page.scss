@@ -1,0 +1,27 @@
+.outer-container {
+    height: 100vh;
+}
+
+.inner-container {
+    padding-top: 50px;
+    height: 100%;
+}
+
+ion-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    --background: transparent;
+}
+
+p {
+    color: grey;
+}
+
+ion-segment {
+    border-radius: 0px;
+}
+
+.loader-wrapper {
+    height: 80vh;
+}

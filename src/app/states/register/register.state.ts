@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 //import { RegisterAuth as AuthActionRegister } from 'src/app/actions/auth';
-import { Register as RegisterAction} from 'src/app/actions/register';
+import { Register as RegisterAction, ContinueWithGoogleAction} from 'src/app/actions/register';
 import { Action, State, StateContext, Store } from '@ngxs/store';
 import {AuthApi} from 'src/app/states/auth/auth.api';
 import { RegisterService } from 'src/app/services';
+import { getAdditionalUserInfo } from '@angular/fire/auth';
 // import {} from 'functions/src/';
 
 export interface RegisterStateModel {
@@ -76,4 +77,25 @@ export class RegisterState {
       return alert((error as Error).message);
     }
   }
+
+  @Action(ContinueWithGoogleAction)
+  async continueWithGoogle(context: StateContext<RegisterStateModel>) {
+    try {
+      const state = context.getState();
+      const userCredentials = await this.authApi.continueWithGoogle();
+        if (userCredentials && userCredentials.user.email){
+          const currUserId = await this.authApi.getCurrentUserId();
+          if (currUserId!=null){
+            const additionalUserInfo = getAdditionalUserInfo(userCredentials);
+            const isNewUser = additionalUserInfo?.isNewUser;
+            if (isNewUser) {
+              return this.service.register(currUserId, userCredentials.user.email);
+            }
+          }
+        }
+      // return alert("Please set email and/or password");
+    } catch (error) {
+      return alert((error as Error).message);
+    }
+  } 
 }

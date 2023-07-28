@@ -3,8 +3,8 @@ import { Action, State, StateContext, Store, Selector } from "@ngxs/store";
 import { Navigate } from "@ngxs/router-plugin";
 import { Router } from "@angular/router";
 import { FriendsService } from "src/app/services";
-import { AddFriendAction, GetFriendsAction, RemoveFriendAction } from "src/app/actions";
-import { IAddFriend, IAddedFriend, IFriendsModel, IGetFriends, IGotFriends, IRemoveFriend } from "src/app/models";
+import { AddFriendAction, CreateFriendRequest, GetFriendsAction, RemoveFriendAction, RemoveFriendRequest } from "src/app/actions";
+import { IAddFriend, IAddedFriend, IFriendRequest, IFriendsModel, IGetFriends, IGotFriends, IRemoveFriend } from "src/app/models";
 import { AuthApi } from '../auth/auth.api';
 import { catchError, of, tap } from "rxjs";
 
@@ -107,6 +107,30 @@ export class FriendsState {
             
         }else {
             return ctx.dispatch(new Navigate(['home/dashboard']));
+        }
+    }
+
+    @Action(CreateFriendRequest)
+    async createFriendRequest(ctx: StateContext<FriendsStateModel>, {otheruserId}: CreateFriendRequest) {
+        const currentUserId = await this.authApi.getCurrentUserId();
+        if(currentUserId) {
+            const request: IFriendRequest = {
+                from: currentUserId,
+                to: otheruserId
+            }
+            return this.friendsService.createFriendRequest(request)
+        }
+    }
+
+    @Action(RemoveFriendRequest)
+    async removeFriendRequest(ctx: StateContext<FriendsStateModel>,  {otheruserId}: RemoveFriendRequest) {
+        const currentUserId = await this.authApi.getCurrentUserId();
+        if(currentUserId) {
+            const request: IFriendRequest = {
+                from: currentUserId,
+                to: otheruserId
+            }
+            return this.friendsService.removeFriendRequest(request)
         }
     }
 

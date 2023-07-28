@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <backbutton (click)="removeSession()"></backbutton>
+    </ion-buttons>
+    <ion-title>
+      <ion-chip (click)="viewOtherUser()">
+        <ion-avatar>
+          <ion-img [src]="friendProfile.profileURL" alt="profile pic here"></ion-img>
+        </ion-avatar>
+        <ion-label>
+          <h2>{{friendProfile.displayName}}</h2>
+        </ion-label> 
+      </ion-chip>
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-icon name="ellipsis-vertical-outline" id="trigger"></ion-icon>
+    </ion-buttons>
+    <ion-popover trigger="trigger" triggerAction="click">
+      <ng-template>
+        <ion-item lines="none">
+          clear chat
+        </ion-item>
+      </ng-template>
+    </ion-popover>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content #contentElement>
+  <div class="chat-container">
+    <div *ngFor="let message of chats">
+      <chatbox
+        [message]="message"
+        [currentUserId]="currentUserId"
+      ></chatbox>
+    </div>
+  </div>
+</ion-content>
+
+<ion-footer>
+  <ion-item lines="none">
+    <ion-textarea placeholder="Type a message" [(ngModel)]="message.text"></ion-textarea>
+    <ion-icon name="send" (click)="sendMessage()"></ion-icon>
+  </ion-item>
+</ion-footer>

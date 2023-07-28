@@ -14,7 +14,6 @@ import { BackButtonDirectiveModule } from 'src/app/directives';
 
 @NgModule({
   imports: [
-
     NgChartsModule,
     CommonModule,
     FormsModule,

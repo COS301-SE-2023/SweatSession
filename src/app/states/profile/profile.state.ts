@@ -1,19 +1,21 @@
 import { Injectable, OnInit } from "@angular/core";
 import { Action, State, StateContext, Store, Selector } from "@ngxs/store";
 import { Router } from "@angular/router";
-import { ProfileService } from "src/app/services";
+import { OtheruserService, ProfileService } from "src/app/services";
 import { GetProfileAction } from "src/app/actions/profile.action";
 import { IGetProfile,IGotProfile, IProfileModel } from "src/app/models";
 import { tap } from "rxjs/operators";
 
 export class ProfileStateModel {
     profile?: IProfileModel[];
+    otheruser?: IProfileModel;
 }
 
 @State<ProfileStateModel>({
     name: "profile",
     defaults: {
         profile: undefined,
+        otheruser: {}
     }
 })
 
@@ -21,7 +23,8 @@ export class ProfileStateModel {
 export class ProfileState{
   constructor(
     private readonly store: Store,
-    private readonly profileService: ProfileService
+    private readonly profileService: ProfileService,
+    private readonly otheruserService: OtheruserService
     ) {}
 
 

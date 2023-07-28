@@ -4,7 +4,9 @@ import {
   authState,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  getAuth
+  getAuth,
+  GoogleAuthProvider,
+  signInWithPopup
 } from '@angular/fire/auth';
 
 import { signOut } from '@firebase/auth';
@@ -29,9 +31,9 @@ export class AuthApi {
   }
 
 
-  async getCurrentUserId(){
+  async getCurrentUserId() {
     const auth = getAuth();
-    return(auth.currentUser?.uid);
+    return (auth.currentUser?.uid);
   }
 
   async login(regEmail: string, regPassword: string) {
@@ -39,9 +41,9 @@ export class AuthApi {
       await signInWithEmailAndPassword(this.authObject, regEmail, regPassword);
       // AuthState.currUserId=await this.getCurrentUserId();
       //return await signInWithEmailAndPassword(this.authObject, regEmail, regPassword);
-      
+
       this.Nav.navigateRoot('/home'); // this is so they are only directed to login when they enter a valid email and password combination
-    }catch (error) {
+    } catch (error) {
       console.error('Firebase error:', error);
       // alert("Incorrect email password combination");
       this.IncorrectCombination();
@@ -69,7 +71,7 @@ export class AuthApi {
       // AuthState.currUserId=null;
       this.Nav.navigateRoot('/home'); // this is so they are only directed to login when they enter a valid email and password combination
       return true;
-    }catch (error) {
+    } catch (error) {
       // Handle the Firebase error
       console.error('Firebase error:', error);
       alert("Incorrect registration info.");
@@ -79,6 +81,21 @@ export class AuthApi {
     }
     // alert("in auth api register function");
     // return await createUserWithEmailAndPassword(this.authObject, regEmail, regPassword);
+  }
+
+  async continueWithGoogle() {
+    // try {
+    //   const googleAuthProvider = new GoogleAuthProvider();
+    //   const userCredentials = await signInWithPopup(this.authObject, googleAuthProvider);
+    //   this.Nav.navigateRoot('/home')
+    //   return userCredentials;
+    // } catch (error) {
+    //   return false;
+    // }
+    const googleAuthProvider = new GoogleAuthProvider();
+    const userCredentials = await signInWithPopup(this.authObject, googleAuthProvider);
+    this.Nav.navigateRoot('/home')
+    return userCredentials;
   }
 
   async LogoutConfirmed() {

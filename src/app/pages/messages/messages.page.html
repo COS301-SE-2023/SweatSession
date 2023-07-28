@@ -1,9 +1,84 @@
 <div class="outer-container">
   <ion-content>
     <div class="inner-container">
-      <div class="message">
-        Page under construction :)
-      </div>
+      <ion-header>
+        <!-- <ion-toolbar>
+          <ion-title>CHATS</ion-title>
+        </ion-toolbar> -->
+        <ion-segment (ionChange)="onSegmentChange($event)" value="chats">
+          <ion-segment-button value="chats">chats</ion-segment-button>
+          <ion-segment-button value="groups">groups</ion-segment-button>
+        </ion-segment>
+      </ion-header>
+      
+      <ion-list>
+        <div [hidden]="selectedSegment!=='chats'">
+          <div *ngIf="chatFriends.length !== 0; else loaderContent" class="chatFriends-container">
+            <ion-item *ngFor="let chatFriend of chatFriends" (click)="stageUser(chatFriend.user)" lines="none">
+              <ion-avatar slot="start">
+                <img alt="Silhouette of a person's head" [src]="chatFriend.user.profileURL!" />
+              </ion-avatar>
+              <ion-label>
+                <h2>{{ chatFriend.user.displayName! }}</h2>
+                <p>{{ chatFriend.lastChat!.text }}</p>
+                <p class="timestamp">{{ chatFriend.lastChat!.date?.toDate() | date:'MMM d, hh:mm a' }}</p>
+              </ion-label>
+            </ion-item>
+          </div>
+        </div>
+
+        <div [hidden]="selectedSegment!=='groups'">
+          <ion-item *ngFor="let group of groups" lines="none" (click)="stageGroup(group)">
+            <ion-avatar slot="start">
+              <img alt="Silhouette of a person's head" src="/assets/Asset 2.png"/>
+            </ion-avatar>
+            <ion-label>
+              <h2>{{group.displayName}}</h2>
+              <div>
+                <p>last message here</p>
+                <p class="timestamp">jan 01, 10:00 PM</p>
+              </div>
+            </ion-label>
+          </ion-item>
+        </div>
+      </ion-list>
    </div>
   </ion-content>
+
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end" [hidden]="selectedSegment!=='chats'">
+    <ion-fab-button id="open-modal">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end" [hidden]="selectedSegment!=='groups'">
+    <ion-fab-button routerLink="/creategroup">
+      <ion-icon name="people-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-modal #modal trigger="open-modal" [initialBreakpoint]="0.5" [breakpoints]="[0, 0.25, 0.5, 0.75]">
+    <ng-template>
+      <ion-content>
+        <ion-searchbar placeholder="Search" (click)="modal.setCurrentBreakpoint(0.75)"></ion-searchbar>
+        <ion-list>
+          <ion-item  *ngFor="let friend of friends" lines="none" (click)="stageUser(friend,modal)">
+            <ion-avatar slot="start">
+              <ion-img [src]="friend.profileURL"></ion-img>
+            </ion-avatar>
+            <ion-label>
+              <h2>{{friend.displayName}}</h2>
+              <p>{{friend.bio}}</p>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
 </div>
+
+<ng-template #loaderContent>
+  <div class="loader-wrapper">
+    <ion-spinner></ion-spinner>
+  </div>
+</ng-template>

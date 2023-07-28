@@ -3,7 +3,7 @@ import { NavController } from '@ionic/angular';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import {GetUsersAction} from 'src/app/actions/profile.action'
-import { AddFriendAction, GetOtheruserFriends, GetOtheruserSchedules, LoadOtherUserProfile, RemoveFriendAction, RemoveUser } from 'src/app/actions';
+import { AddFriendAction, CreateFriendRequest, GetOtheruserFriends, GetOtheruserSchedules, LoadOtherUserProfile, RemoveFriendAction, RemoveUser } from 'src/app/actions';
 import { IFriendsModel, IProfileModel, IWorkoutScheduleModel , IGotProfile } from 'src/app/models';
 import { Profile } from 'src/app/models/notice.model';
 import { OtherUserStateModel, OtheruserState } from 'src/app/states';
@@ -75,21 +75,15 @@ export class OtheruserPage implements OnInit {
   removeFriend() {
     this.store.dispatch(new RemoveFriendAction(this.friendModel()))
     this.date = new Date().toTimeString() ;
-    console.log(this.date.split(':' , 2));
     this.shortdate = this.date.split(':' , 2);
     this.createNotifications(this.currusername , this.shortdate[0] + ':' + this.shortdate[1] , "Removed you as a Friend!")  ;
   }
 
   addFriend() {
-  //  if(this.user!=null) {
-  //   this.store.dispatch(new AddFriendAction(this.friendModel()))
-  //   console.log(this.user.userId,)
-  //  } else(
-  //   console.log("User is null.....")
-  //  )
    this.date = new Date().toTimeString() ;
    this.shortdate = this.date.split(':' , 2);
-   this.createNotifications(this.currusername , this.shortdate[0] + ':' + this.shortdate[1] , "Sent you a Friend Request!")  ;
+   this.store.dispatch(new CreateFriendRequest(this.user.userId!))
+   this.createNotifications(this.currusername , this.shortdate[0] + ':' + this.shortdate[1] , "Sent you a Friend Request!");
   }
 
   viewSchedules() {
@@ -109,16 +103,12 @@ export class OtheruserPage implements OnInit {
   displayCurrentUser(id:string){
     this.noticeService.getTheNoticeProfile().subscribe((profiles: Profile[]) => {
     this.profileList = profiles;
-    console.log('Number of PROFILES:', this.profileList.length);
     for(let i = 0 ; i<this.profileList.length ; i++){
       if(this.profileList[i].id == this.currUserId ){
         this.currusername = this.profileList[i].displayName! ;
         this.profileurl = this.profileList[i].profileURL! ;
-        console.log(this.currusername);
       }
     }
-
-      
   });
 }
 
@@ -167,5 +157,13 @@ export class OtheruserPage implements OnInit {
 
   createNotifications(sendername: string , sentdate: string , message: string){
     this.noticeService.createNotices(sendername , sentdate , message , this.user.userId! , this.currUserId! , this.profileurl);
+  }
+
+  isRequested() {
+    const res = this.user.friendRequests?.includes(this.currUserId!)
+    if(res) {
+      return res;
+    }
+    return false;
   }
 }

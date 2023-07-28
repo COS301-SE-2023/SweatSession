@@ -15,16 +15,20 @@
       </ion-avatar>
     </ion-item>
     <ion-item id="userName">
-        {{user!.name}}
+        {{user!.displayName}}
     </ion-item>
     <ion-item>
-        <ion-button *ngIf="friendshipStatus" (click)="removeFriend()">
+        <ion-button *ngIf="friendshipStatus && !isRequested()" (click)="removeFriend()">
           <ion-icon name="person-outline" style="padding-right: 5px;"></ion-icon>
           Remove friend
         </ion-button>
-        <ion-button *ngIf="!friendshipStatus" (click)="addFriend()">
+        <ion-button *ngIf="!friendshipStatus && !isRequested()" (click)="addFriend()">
           <ion-icon name="person-outline" style="padding-right: 5px;"></ion-icon>
           Add friend
+        </ion-button>
+        <ion-button *ngIf="isRequested()" [disabled]="true">
+          <ion-icon name="person-outline" style="padding-right: 5px;"></ion-icon>
+          requested
         </ion-button>
     </ion-item>
     <ion-item id="userBio">

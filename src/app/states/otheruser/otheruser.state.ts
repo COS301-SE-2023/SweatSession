@@ -4,7 +4,7 @@ import { Action, State, StateContext, Store, Selector } from "@ngxs/store";
 import { Navigate } from "@ngxs/router-plugin";
 import { Router } from "@angular/router";
 import { IFriendsModel, IGetFriends, IGetWorkoutSchedules, IGotFriends, IGotWorkoutSchedules, IProfileModel, IWorkoutScheduleModel } from "src/app/models";
-import { GetOtheruserFriends, GetOtheruserSchedules, LoadOtherUserProfile, RemoveUser, StageOtheruserInfo } from "src/app/actions";
+import { GetOtheruserFriends, GetOtheruserProfile, GetOtheruserSchedules, LoadOtherUserProfile, RemoveUser, StageOtheruserInfo } from "src/app/actions";
 import { NavController } from "@ionic/angular";
 import { FriendsService, OtheruserService,  WorkoutscheduleService } from "src/app/services";
 import { WorkoutscheduleRepository } from "src/app/repository";
@@ -46,11 +46,18 @@ export class OtheruserState {
 
     @Action(StageOtheruserInfo)
     async stageOtheruserInfo(ctx: StateContext<OtherUserStateModel>, {payload}: StageOtheruserInfo) {
-        ctx.patchState({
-            otheruser: payload
-        })
-        sessionStorage.setItem("otheruser",JSON.stringify(payload));
-       return ctx.dispatch(new Navigate(['otheruser']));
+        const currentUserId = await this.authApi.getCurrentUserId();
+        if(currentUserId) {
+           if(payload.userId !== currentUserId) {
+            ctx.patchState({
+                otheruser: payload
+            })
+            sessionStorage.setItem("otheruser",JSON.stringify(payload));
+            ctx.dispatch(new Navigate(['otheruser']));
+           }else {
+            ctx.dispatch(new Navigate(['userprofile']));
+           }
+        }
     }
 
     @Action(LoadOtherUserProfile)
@@ -68,6 +75,18 @@ export class OtheruserState {
       }else{
         return ctx.dispatch(new Navigate(["home"]));
       }
+    }
+
+    @Action(GetOtheruserProfile)
+    async getOtheruserProfile(ctx: StateContext<OtherUserStateModel>, {payload}: GetOtheruserProfile) {
+
+        return (await this.otheruserService.getProfile(payload)).pipe(
+            tap((response)=> {
+                ctx.patchState({
+                    otheruser: response,
+                })
+            })
+        );
     }
 
     @Action(GetOtheruserFriends)
