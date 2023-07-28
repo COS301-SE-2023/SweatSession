@@ -8,8 +8,6 @@ import { AppComponent } from './app.component';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 import * as admin from 'firebase-admin';
-import { HttpClientModule } from '@angular/common/http';
-
 import {
   initializeFirestore,
   provideFirestore,
