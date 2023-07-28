@@ -1,11 +1,12 @@
 .otheruser-profile {
-    box-shadow: 3px 3px 5px #1D3557;
+    // box-shadow: 3px 3px 5px #1D3557;
     text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
     width: 100%;
+    height: 100%;
     margin:0px;
     border-radius: 0px;
     ion-item {
@@ -48,6 +49,7 @@
 
     .back-button {
         width: 100%;
+        padding-left: 20px;
     }
 }
 
@@ -103,8 +105,15 @@ ion-item{
     }
 }
 
-ion-content{
-    ion-card{
-        box-shadow: 3px 3px 5px #1D3557;
-    }
+swiper-container::part(bullet-active) {
+    background-color: red;
+  }
+
+.otheruser-profile-activity {
+    width: 100%;
+    // background-color: #E63946;
+}
+
+.slide-header {
+    width: 100%;
 }

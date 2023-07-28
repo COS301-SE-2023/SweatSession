@@ -67,3 +67,17 @@ ion-spinner {
     align-items: center;
     height: 100%;
 }
+
+ion-fab-button  {
+    --background: #457B9D;
+    --background-hover: #9ce0be;
+    --background-activated: #88f4be;
+    --background-focused: #88f4be;
+    --color: white;
+    --ripple-color: deeppink;
+    opacity: 0.9;
+}
+
+ion-segment {
+    border-radius: 0px;
+}
