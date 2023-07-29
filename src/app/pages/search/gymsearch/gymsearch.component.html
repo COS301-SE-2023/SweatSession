@@ -25,7 +25,7 @@
 
 <ion-item>
   <ion-label position="stacked">Search for a gym by name: </ion-label>
-  <ion-input [(ngModel)]="searchTerm" (ionInput)="onSearchInput($event)" placeholder="Enter a gym name" color="light" clearInput animated></ion-input>
+  <ion-input [(ngModel)]="searchTerm" (ionInput)="onSearchInput($event)" placeholder="Enter a gym name" clearInput animated></ion-input>
 </ion-item>
 
 <!-- <ion-card *ngFor="let item of filteredData$ | async" (click)="selectGym(item.name)">
@@ -39,8 +39,10 @@
     {{ item.description }}
   </ion-card-content>
 </ion-card> -->
-<ng-container *ngFor="let gym of filter(gyms.results)">
+<ng-container *ngFor="let gym of gyms.results">
+  <!-- {{ !gym.name || gym.name.toLowerCase().includes(searchTerm.toLowerCase()) }} -->
   <ng-container *ngIf="gym.business_status=='OPERATIONAL'">
+  <ng-container *ngIf="gym.name.toLowerCase().includes(searchTerm.toLowerCase())">
     <ion-card class="locationCard">
       <ng-container *ngIf="gym?.photos?.[0]?.photo_reference">
         <img [src]="getPhotoUrl(gym?.photos?.[0]?.photo_reference)"  alt="Silhouette of mountains" class="gymImage"/>
@@ -92,6 +94,7 @@
           Select Gym
         </ion-card-content>
     </ion-card>
+  </ng-container>
   </ng-container>
 </ng-container>
 

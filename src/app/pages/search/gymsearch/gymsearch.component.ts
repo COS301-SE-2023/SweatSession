@@ -35,7 +35,7 @@ export class GymsearchComponent implements OnInit {
 
    @Select(FriendsState.returnFriends) friends$!: Observable<IFriendsModel[]>;
    @ViewChild(IonContent) content: IonContent;
-   searchTerm: string | undefined;
+   searchTerm: string = "";
    filteredData$: Observable<any[]> = of([]);
    nextPageToken = null;
    // unfilteredData$: any[] = [];
