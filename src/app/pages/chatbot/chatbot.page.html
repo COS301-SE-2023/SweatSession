@@ -1,9 +1,29 @@
-<div class="outer-container">
-  <ion-content>
-    <div class="inner-container">
-      <div class="message">
-        Page under construction :)
+<ion-header></ion-header>
+<br><br><br>
+<ion-content class="main">
+  <h1 class="center2">SweatSession-Bot</h1>
+  <br>
+  <ion-list>
+    
+    <ion-item lines="none" *ngFor="let message of messages">
+     
+      <div [ngClass]="{'user-message': message.sender === 'user', 'bot-message': message.sender === 'SS-bot'}">
+        {{ message.displayText }}
       </div>
-   </div>
-  </ion-content>
-</div>
+    </ion-item><br>
+  </ion-list>
+  <div *ngIf="loading" class="loading-container">
+    <ion-spinner color="secondary" class="center"></ion-spinner>
+  </div>
+  <br><br>
+</ion-content>
+
+<ion-footer>
+  <br><br>
+  <ion-toolbar color="light">
+    <ion-input [(ngModel)]="userMessage" placeholder="Enter your Question"></ion-input>
+    <ion-icon style="margin-right: 15px;" size="large" slot="end" name="send-outline" color="danger" (click)="sendUserMessage()"></ion-icon>
+    <br><br>
+  </ion-toolbar>
+</ion-footer>
+

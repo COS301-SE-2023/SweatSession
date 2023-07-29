@@ -5,7 +5,7 @@ import { Notice } from 'src/app/models/notice.model';
 import { AlertController, NavController } from '@ionic/angular';
 import { getAuth } from 'firebase/auth';
 import { IFriendsModel } from 'src/app/models';
-import { AddFriendAction, RemoveFriendRequest } from 'src/app/actions';
+import { AddFriendAction, RemoveFriendAction, RemoveFriendRequest } from 'src/app/actions';
 import { Store } from '@ngxs/store';
 // import { HomePage } from '../home/home.page';
 // import { Router } from '@angular/router';
@@ -94,7 +94,13 @@ export class NotificationsPage implements OnInit {
     }
   }
 
-  rejectFriendRequest(senderid: string , senttoid: string){
+  rejectFriendRequest(notice: Notice , senderid: string , senttoid: string){
+    const friend: IFriendsModel = {
+      userId: notice.senderid,
+      name: notice.sendername,
+      profileURL: notice.profileurl,
+    }
+    this.store.dispatch(new RemoveFriendAction(friend))
     this.noticeService.rejectFriend(senderid , senttoid) ;
     console.log('reject working');
 

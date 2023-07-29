@@ -16,6 +16,9 @@ import { IPoints } from 'src/app/models/points.model';
 import { IBadges } from 'src/app/models/badges.model';
 import { BadgesApi } from 'src/app/states/badges/badges.api';
 import { DocumentSnapshot } from 'firebase/firestore';
+import { register } from 'swiper/element/bundle';
+
+register();
 
 @Component({
   selector: 'app-otheruser',
@@ -30,6 +33,7 @@ export class OtheruserPage implements OnInit {
   profileurl: string;
   friends: IFriendsModel[] =[];
   workoutSchedules: IWorkoutScheduleModel[] = [];
+  selectedSegment = "friends"
   
   points$: Observable<IPoints>;
   badges$: Observable<IBadges>;
@@ -165,5 +169,9 @@ export class OtheruserPage implements OnInit {
       return res;
     }
     return false;
+  }
+
+  onSegmentChange(event: any) {
+    this.selectedSegment = event.detail.value;
   }
 }

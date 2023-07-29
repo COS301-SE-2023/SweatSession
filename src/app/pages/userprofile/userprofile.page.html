@@ -56,4 +56,108 @@
       </ion-card-content>
     </ion-card>
   </div>
+<ion-content [fullscreen]="true">
+  <ion-card class="otheruser-profile">
+    <div class="profile-outer-container">
+      <div class="back-button">
+        <ion-item lines="none">
+          <backbutton slot="start"></backbutton>
+          <ion-icon name="create-outline" routerLink="/setprofile" slot="end"></ion-icon>
+        </ion-item>
+      </div>
+      <div class="profile-img-container">
+        <ion-avatar class="profile-image">
+          <ion-img [src]="ProfilePicture$"></ion-img>
+        </ion-avatar>
+      </div>
+      <ion-label class="profile-label">
+        <div class="name">
+          <h1>{{displayName$}}.</h1>
+        </div>
+        <div class="bio">
+          <p>{{myBio$}}.</p>
+        </div>
+      </ion-label>
+      <div class="group-buttons">
+        <ion-button fill="outline" routerLink="/friends">
+          <ion-icon name="person-outline" style="padding-right: 5px;"></ion-icon>
+          {{friendsSize + " Friends"}}
+        </ion-button>
+        <ion-button fill="outline" (click)="Groups()">
+          <ion-icon name="people-outline" style="padding-right: 5px;"></ion-icon>
+          0 Groups
+        </ion-button>
+      </div>
+    </div>
+   
+    <div class="otheruser-profile-activity">
+      <div class="slide-header">
+        <h2 class="slides-headers first-header">
+          <ion-icon name="body"></ion-icon> Activities
+        </h2>
+      </div>
+      <swiper-container [slidesPerView]="2" centered-slides="true"  pagination="{hideOnClick: true}">
+        <swiper-slide>
+          <ion-card routerLink="/fitnessgoals">
+            <ion-card-content>
+              <ion-card-title>
+                <ion-icon name="american-football-outline"></ion-icon>
+              </ion-card-title>
+              <h2>Goals</h2>
+            </ion-card-content>
+          </ion-card>
+        </swiper-slide>
+        <swiper-slide>
+          <ion-card routerLink="/view-personalbests">
+            <ion-card-content>
+              <ion-card-title>
+                <ion-icon name="analytics-outline"></ion-icon>
+              </ion-card-title>
+              <h2>Personal Best</h2>
+            </ion-card-content>
+          </ion-card>
+        </swiper-slide>
+        <swiper-slide>
+          <ion-card routerLink="/healthdata">
+            <ion-card-content>
+              <ion-card-title>
+                <ion-icon name="heart-outline"></ion-icon>
+              </ion-card-title>
+              <h2>Health Data</h2>
+            </ion-card-content>
+          </ion-card>
+        </swiper-slide>
+      </swiper-container>
+      
+      <div class="slide-header">
+        <h2 class="slides-headers">
+          <ion-icon name="trophy"></ion-icon> Achievements
+        </h2>
+      </div>
+      <swiper-container [slidesPerView]="2" centered-slides="true"
+        pagination="{hideOnClick: true}"
+      >
+        <swiper-slide>
+          <ion-card routerLink="/badges">
+            <ion-card-content>
+              <ion-card-title>
+                <ion-icon name="medal"></ion-icon>
+              </ion-card-title>
+              <h2>Badges</h2>
+            </ion-card-content>
+          </ion-card>
+        </swiper-slide>
+        <swiper-slide>
+          <ion-card routerLink="/points">
+            <ion-card-content>
+              <ion-card-title>
+                <ion-icon name="star-outline"></ion-icon>
+              </ion-card-title>
+              <h2>Points</h2>
+            </ion-card-content>
+          </ion-card>
+        </swiper-slide>
+      </swiper-container>
+    </div>
+   </ion-card>
 </ion-content>
