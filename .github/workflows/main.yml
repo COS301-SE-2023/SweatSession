@@ -33,7 +33,7 @@ jobs:
       - run: touch src/environments/environment.ts
       - run: echo "${{secrets.ENVIRONMENT_VARIABLES}}" >> src/environments/environment.ts
       - run: yarn
-      - run: yarn jest --testPathPattern=int.spec.ts --code-coverage
+      - run: yarn jest --testPathPattern=int.spec.ts --coverage
       - name: CodeCov
         uses: codecov/codecov-action@v2
         with:
