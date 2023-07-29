@@ -5,15 +5,17 @@
       <ion-icon name="create-outline" routerLink="/setprofile" style="filter: none;" slot="end"></ion-icon>
     </ion-item>
 
-    <ion-item class="center-content">
-      <ion-img src={{ProfilePicture$}} alt="logo-image" class="image rounded-circle"></ion-img>
-    </ion-item>
 
+    <div class="profile-img-container">
+      <ion-avatar class="profile-image">
+        <ion-img [src]='ProfilePicture$'></ion-img>
+      </ion-avatar>
+    </div>
 
 
     <ion-grid>
       <ion-row>
-        <ion-col class = "theCol">{{displayName$}}</ion-col>
+        <ion-col class = "theCol displayname">{{displayName$}}</ion-col>
       </ion-row>
       <ion-row>
         <ion-col class = "theCol">{{myBio$}}</ion-col>

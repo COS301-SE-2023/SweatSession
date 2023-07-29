@@ -156,10 +156,28 @@ ion-label{
 .center-content {
     position: relative;
 }
-
+.displayname
+{
+    color: #000000;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+}
 .image {
+    height: 100%;
+
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+
+.profile-img-container  {
+    width: fit-content;
+    margin: auto;
+}
+.profile-image {
+    height: 150px;
+    width: 150px;
+    margin-bottom: 20px;
 }
