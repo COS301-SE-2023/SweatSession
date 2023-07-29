@@ -39,11 +39,11 @@ ion-title {
 }
 
 ion-toolbar{
-    --background: #E63946
+    --background: #E63946;
 }
 
 ion-toolbar ion-item{
---background: #E63946
+--background: #E63946;
 }
 
 * {
@@ -80,4 +80,22 @@ ion-fab-button  {
 
 ion-segment {
     border-radius: 0px;
+}
+
+.message-input-field {
+    border: 2px solid #457B9D;
+    border-radius: 10px;
+
+    .input-field-wrapper {
+        width: 80%;
+    }
+      
+      
+    .message-send-icon {
+        color: #A8DADC; //#E63946;
+    }
+}
+
+* {
+    transition: 0.5;
 }
