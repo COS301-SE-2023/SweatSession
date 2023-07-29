@@ -16,6 +16,11 @@ ion-toolbar {
 
 p {
     color: grey;
+    font-style: italic;
+}
+
+.last-message {
+    font-weight: bold;
 }
 
 ion-segment {
@@ -24,4 +29,17 @@ ion-segment {
 
 .loader-wrapper {
     height: 80vh;
+}
+
+.user-profile-img {
+    height: 70px;
+    width: 70px;
+}
+
+.messages-list {
+    padding: 0.9rem;
+}
+
+.user-name {
+    font-weight: bolder;
 }

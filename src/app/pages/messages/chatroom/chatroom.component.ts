@@ -76,4 +76,8 @@ export class ChatroomComponent  implements OnInit {
   toggleDropdown() {
     this.dropdownVisible = !this.dropdownVisible;
   }
+
+  isText() {
+    return this.message.text.trim()!== '';
+  }
 }

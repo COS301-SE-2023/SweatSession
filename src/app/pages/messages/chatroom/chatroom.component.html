@@ -38,8 +38,14 @@
 </ion-content>
 
 <ion-footer>
-  <ion-item lines="none">
-    <ion-textarea placeholder="Type a message" [(ngModel)]="message.text"></ion-textarea>
-    <ion-icon name="send" (click)="sendMessage()"></ion-icon>
+  <ion-item lines="none" class="message-input-field">
+    <div class="input-field-wrapper">
+      <ion-textarea placeholder="Type a message" [(ngModel)]="message.text"></ion-textarea>
+    </div>
+    <ion-fab horizontal="end" *ngIf="isText()">
+      <ion-fab-button>
+        <ion-icon name="send" (click)="sendMessage()" class="message-send-icon"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
   </ion-item>
 </ion-footer>

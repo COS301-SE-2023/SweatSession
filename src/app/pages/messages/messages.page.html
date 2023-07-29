@@ -2,26 +2,23 @@
   <ion-content>
     <div class="inner-container">
       <ion-header>
-        <!-- <ion-toolbar>
-          <ion-title>CHATS</ion-title>
-        </ion-toolbar> -->
         <ion-segment (ionChange)="onSegmentChange($event)" value="chats">
           <ion-segment-button value="chats">chats</ion-segment-button>
           <ion-segment-button value="groups">groups</ion-segment-button>
         </ion-segment>
       </ion-header>
       
-      <ion-list>
+      <ion-list class="messages-list">
         <div [hidden]="selectedSegment!=='chats'">
           <div *ngIf="chatFriends.length !== 0; else loaderContent" class="chatFriends-container">
             <ion-item *ngFor="let chatFriend of chatFriends" (click)="stageUser(chatFriend.user)" lines="none">
-              <ion-avatar slot="start">
+              <ion-avatar slot="start" class="user-profile-img">
                 <img alt="Silhouette of a person's head" [src]="chatFriend.user.profileURL!" />
               </ion-avatar>
               <ion-label>
-                <h2>{{ chatFriend.user.displayName! }}</h2>
-                <p>{{ chatFriend.lastChat!.text }}</p>
-                <p class="timestamp">{{ chatFriend.lastChat!.date?.toDate() | date:'MMM d, hh:mm a' }}</p>
+                <h2 class="user-name">{{ chatFriend.user.displayName! }}</h2>
+                <p class="last-message">{{"~ " + chatFriend.lastChat!.text }}</p>
+                <p class="timestamp" slot="end">{{ chatFriend.lastChat!.date?.toDate() | date:'MMM d, hh:mm a' }}</p>
               </ion-label>
             </ion-item>
           </div>
@@ -33,10 +30,9 @@
               <img alt="Silhouette of a person's head" src="/assets/Asset 2.png"/>
             </ion-avatar>
             <ion-label>
-              <h2>{{group.displayName}}</h2>
-              <div>
-                <p>last message here</p>
-                <p class="timestamp">jan 01, 10:00 PM</p>
+              <h2 class="user-name">{{group.displayName}}</h2>
+              <div class="bio">
+                <p>{{"~" + group.bio}}</p>
               </div>
             </ion-label>
           </ion-item>

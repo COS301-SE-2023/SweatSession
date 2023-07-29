@@ -65,4 +65,8 @@ export class GroupChatroomComponent  implements OnInit {
   removeSession() {
     this.store.dispatch(new RemoveChatGroupSession());
   }
+
+  isText() {
+    return this.message.text.trim()!== '';
+  }
 }
