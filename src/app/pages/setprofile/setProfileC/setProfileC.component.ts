@@ -84,11 +84,7 @@ export class SetprofileCComponent  implements OnInit {
     return this.remainingCharacters;
   }
 
-  getLastupdate()
-  {
-    console.log(this.file?.lastModified.)
-    return this.file?.lastModified
-  }
+
 
   getDp()
   {
