@@ -272,7 +272,7 @@ export class GymsearchComponent implements OnInit {
       if (!this.searchTerm || this.searchTerm === '' || this.searchTerm === null) {
          return data;
       }
-      return this.data.filter(item => item.name.includes(this.searchTerm));
+      return this.data.filter(item => item.name.toLowerCase().includes(this.searchTerm));
    }
 
    dismissModal() {
