@@ -6,7 +6,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { HealthdataPageRoutingModule } from './healthdata-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { BackButtonDirectiveModule } from 'src/app/directives';
 import { HealthDataPage } from './healthdata.page';
 
 @NgModule({
@@ -15,7 +15,8 @@ import { HealthDataPage } from './healthdata.page';
     FormsModule,
     IonicModule,
     HealthdataPageRoutingModule,
-    ReactiveFormsModule 
+    ReactiveFormsModule,
+    BackButtonDirectiveModule
   ],
   declarations: [HealthDataPage]
 })

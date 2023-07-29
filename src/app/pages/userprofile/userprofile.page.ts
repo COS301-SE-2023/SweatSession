@@ -9,6 +9,9 @@ import { SetProfileService } from 'src/app/services';
 import { FriendsState } from 'src/app/states';
 import { AuthApi } from 'src/app/states/auth/auth.api';
 import {getAuth} from "@angular/fire/auth";
+import { register } from 'swiper/element/bundle';
+
+register();
 
 @Component({
   selector: 'app-userprofile',
