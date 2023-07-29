@@ -1,61 +1,62 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-item lines="none">
-      <backbutton class="larger-back-button"></backbutton>
-      <ion-icon name="create-outline" routerLink="/setprofile" style="filter: none;" slot="end"></ion-icon>
-    </ion-item>
+<!--<ion-header>-->
+<!--  <ion-toolbar>-->
+<!--    <ion-item lines="none">-->
+<!--      <backbutton class="larger-back-button"></backbutton>-->
+<!--      <ion-icon name="create-outline" routerLink="/setprofile" style="filter: none;" slot="end"></ion-icon>-->
+<!--    </ion-item>-->
 
 
-    <div class="profile-img-container">
-      <ion-avatar class="profile-image">
-        <ion-img [src]='ProfilePicture$'></ion-img>
-      </ion-avatar>
-    </div>
+<!--    <div class="profile-img-container">-->
+<!--      <ion-avatar class="profile-image">-->
+<!--        <ion-img [src]='ProfilePicture$'></ion-img>-->
+<!--      </ion-avatar>-->
+<!--    </div>-->
 
 
-    <ion-grid>
-      <ion-row>
-        <ion-col class = "theCol displayname">{{displayName$}}</ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col class = "theCol">{{myBio$}}</ion-col>
-      </ion-row>
-    </ion-grid>
+<!--    <ion-grid>-->
+<!--      <ion-row>-->
+<!--        <ion-col class = "theCol displayname">{{displayName$}}</ion-col>-->
+<!--      </ion-row>-->
+<!--      <ion-row>-->
+<!--        <ion-col class = "theCol">{{myBio$}}</ion-col>-->
+<!--      </ion-row>-->
+<!--    </ion-grid>-->
 
 
-      <ion-grid >
-        <ion-row>
-          <ion-col class = "theCol">{{friendsSize}}</ion-col>
-          <ion-col class = "theCol">{{groups$}}</ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col class = "theCol">Friends</ion-col>
-          <ion-col class = "theCol">Groups</ion-col>
-        </ion-row>
-      </ion-grid>
+<!--      <ion-grid >-->
+<!--        <ion-row>-->
+<!--          <ion-col class = "theCol">{{friendsSize}}</ion-col>-->
+<!--          <ion-col class = "theCol">{{groups$}}</ion-col>-->
+<!--        </ion-row>-->
+<!--        <ion-row>-->
+<!--          <ion-col class = "theCol">Friends</ion-col>-->
+<!--          <ion-col class = "theCol">Groups</ion-col>-->
+<!--        </ion-row>-->
+<!--      </ion-grid>-->
 
-  </ion-toolbar>
+<!--  </ion-toolbar>-->
 
-</ion-header>
+<!--</ion-header>-->
 
-   
-<ion-content>
-  <div class="flex-center">
-    <ion-card class="card">
-      <ion-card-content>
-        <ion-button class="button" expand="block" routerLink="/fitnessgoals"><ion-icon name="american-football-outline" slot = "start"></ion-icon>Goals<ion-icon name="chevron-forward-outline" slot="end"></ion-icon></ion-button>
-      </ion-card-content>
-      <ion-card-content>
-        <ion-button class="button" expand="block" routerLink="/badges"><ion-icon name="medal" slot="start"></ion-icon>&nbsp;Badges&nbsp;<ion-icon name="chevron-forward-outline" slot="end"></ion-icon></ion-button>
-      </ion-card-content>
-      <ion-card-content>
-        <ion-button class="button" expand="block" routerLink="/points"><ion-icon name="star-outline" slot="start"></ion-icon>&nbsp;Points&nbsp;<ion-icon name="chevron-forward-outline" slot="end"></ion-icon></ion-button>
-      </ion-card-content>
-      <ion-card-content>
-        <ion-button class="button" expand="block" routerLink="/view-personalbests"><ion-icon name="analytics-outline" slot="start"></ion-icon>&nbsp;Personal Best&nbsp;<ion-icon name="chevron-forward-outline" slot="end"></ion-icon></ion-button>
-      </ion-card-content>
-    </ion-card>
-  </div>
+<!--   -->
+<!--<ion-content>-->
+<!--  <div class="flex-center">-->
+<!--    <ion-card class="card">-->
+<!--      <ion-card-content>-->
+<!--        <ion-button class="button" expand="block" routerLink="/fitnessgoals"><ion-icon name="american-football-outline" slot = "start"></ion-icon>Goals<ion-icon name="chevron-forward-outline" slot="end"></ion-icon></ion-button>-->
+<!--      </ion-card-content>-->
+<!--      <ion-card-content>-->
+<!--        <ion-button class="button" expand="block" routerLink="/badges"><ion-icon name="medal" slot="start"></ion-icon>&nbsp;Badges&nbsp;<ion-icon name="chevron-forward-outline" slot="end"></ion-icon></ion-button>-->
+<!--      </ion-card-content>-->
+<!--      <ion-card-content>-->
+<!--        <ion-button class="button" expand="block" routerLink="/points"><ion-icon name="star-outline" slot="start"></ion-icon>&nbsp;Points&nbsp;<ion-icon name="chevron-forward-outline" slot="end"></ion-icon></ion-button>-->
+<!--      </ion-card-content>-->
+<!--      <ion-card-content>-->
+<!--        <ion-button class="button" expand="block" routerLink="/view-personalbests"><ion-icon name="analytics-outline" slot="start"></ion-icon>&nbsp;Personal Best&nbsp;<ion-icon name="chevron-forward-outline" slot="end"></ion-icon></ion-button>-->
+<!--      </ion-card-content>-->
+<!--    </ion-card>-->
+<!--  </div>-->
+
 <ion-content [fullscreen]="true">
   <ion-card class="otheruser-profile">
     <div class="profile-outer-container">
@@ -74,9 +75,9 @@
         <div class="name">
           <h1>{{displayName$}}.</h1>
         </div>
-        <div class="bio">
-          <p>{{myBio$}}.</p>
-        </div>
+              <ion-row>
+                <ion-col class = "theCol">{{myBio$}}</ion-col>
+              </ion-row>
       </ion-label>
       <div class="group-buttons">
         <ion-button fill="outline" routerLink="/friends">
