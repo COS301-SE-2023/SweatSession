@@ -51,8 +51,10 @@
             <ion-input label="Name"  labelPlacement="stacked" type = "text" formControlName= "name"  placeholder="Enter Name"></ion-input>
           </ion-item>
         
-          <ion-item [disabled] = "!isEditMode">
-            <ion-input label="Bio"  labelPlacement="stacked" type = "text" formControlName= "bio" placeholder="Enter Bio"></ion-input>
+          <ion-item [disabled] = "!isEditMode" >
+            <ion-input label="Bio"  labelPlacement="stacked" type = "text" formControlName= "bio" placeholder="Enter Bio" maxlength="120"
+                       (input)="updateCharacterCount()" #bioInput></ion-input>
+              <div class="character-count">{{ remainingCharacters }}</div>
           </ion-item>
 
           <ion-item [disabled] = "!isEditMode">
