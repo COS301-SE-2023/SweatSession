@@ -3,7 +3,7 @@
       <ion-toast trigger="open-toast" color = "success" position = "top" message= "Profile Picture Saved" [duration]="1500" icon="shield-checkmark-outline"></ion-toast>
       <ion-toast trigger="SDP" color = "success" position = "top" message="Personal Info Saved" [duration]="1500" icon="shield-checkmark-outline"></ion-toast>
 
-    <ion-item-divider >
+    <ion-item-divider style="background-color: #A8DADC ">
         <ion-label slot="start">Profile Picture</ion-label>
         <ion-icon name="create-outline" slot="end" size="large" (click)="selectFile()"></ion-icon>
         <input  type="file" id = "fileInput" accept="image/*" (change)="onFileSelected($event)" style="display: none">
@@ -28,7 +28,7 @@
 
     <ion-card>
   
-      <ion-item-divider>
+      <ion-item-divider style="background-color: #A8DADC">
           <ion-label slot="start">Personal Info</ion-label>
           <ion-icon name="create-outline" slot="end" size="large" (click)="toggleEditMode()"></ion-icon>
       </ion-item-divider>

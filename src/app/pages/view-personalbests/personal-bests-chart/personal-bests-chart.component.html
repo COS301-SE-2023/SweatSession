@@ -1,4 +1,7 @@
 
+<ion-item-divider  style="background-color: #A8DADC; padding: 2%; border-radius: 10px; text-align: center; font-size: 1.5rem;">
+  <ion-label>Choose Exercise</ion-label>
+</ion-item-divider>
   <ion-card>
     <ion-row>
       <ion-col>
@@ -38,9 +41,12 @@
       <ion-button (click)="showChart()" expand="full">Show chart</ion-button>
 
   </ion-card>
-  
 
-<ion-card class = "chart-card">
+<ion-item-divider  style="background-color: #A8DADC; padding: 2%; border-radius: 10px; text-align: center; font-size: 1.5rem;">
+  <ion-label>Progress Chart</ion-label>
+</ion-item-divider>
+
+<ion-card class = "chart-card" style="background-color: rgba(215,200,200,0.76)">
   <canvas baseChart
           *ngIf="chartData.length > 0"
           [datasets]="chartData"
@@ -49,10 +55,12 @@
           [type]="chartType">
   </canvas>
 </ion-card>
+
+<ion-item-divider  style="background-color: #A8DADC; padding: 2%; border-radius: 10px; text-align: center; font-size: 1.5rem;">
+  <ion-label>Latest {{showExercise}} bests</ion-label>
+</ion-item-divider>
+
             <ion-card >
-              <ion-card-header>
-                <ion-card-title>Latest {{showExercise}} bests</ion-card-title>
-              </ion-card-header>
               <ion-card-content class="max-height-card-content">
                 <ion-list>
                   <ion-item-sliding *ngFor="let personalBest of personalBestsData">
