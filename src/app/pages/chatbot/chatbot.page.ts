@@ -91,4 +91,8 @@ export class ChatbotPage implements OnInit {
   async simulateDelay(ms: number) {
     return new Promise((resolve) => setTimeout(resolve, ms));
   }
+
+  isText() {
+    return this.userMessage.trim()!== '';
+  }
 }

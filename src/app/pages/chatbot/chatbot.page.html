@@ -19,11 +19,15 @@
 </ion-content>
 
 <ion-footer>
-  <br><br>
-  <ion-toolbar color="light">
-    <ion-input [(ngModel)]="userMessage" placeholder="Enter your Question"></ion-input>
-    <ion-icon style="margin-right: 15px;" size="large" slot="end" name="send-outline" color="danger" (click)="sendUserMessage()"></ion-icon>
-    <br><br>
-  </ion-toolbar>
+  <ion-item lines="none" class="message-input-field">
+    <div class="input-field-wrapper">
+      <ion-textarea placeholder="Enter your Question" [(ngModel)]="userMessage"></ion-textarea>
+    </div>
+    <ion-fab horizontal="end" *ngIf="isText()">
+      <ion-fab-button>
+        <ion-icon name="send" (click)="sendUserMessage()" class="message-send-icon"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+  </ion-item>
 </ion-footer>
 
