@@ -1,4 +1,4 @@
-import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { GetProfileAction, } from '../../../actions/profile.action';
 import { IGetProfile,IProfileModel } from '../../../models';
@@ -17,9 +17,7 @@ import { UserprofilePage } from 'src/app/pages/userprofile/userprofile.page'
 })
 
 export class SetprofileCComponent  implements OnInit {
-  remainingCharacters: number = 120;
-  @ViewChild('bioInput', { static: false }) bioInput: ElementRef;
-
+  
   profileForm = new FormGroup({
 
     userId: new FormControl(''),
@@ -45,12 +43,7 @@ export class SetprofileCComponent  implements OnInit {
     private modalController: ModalController,
     private setprofileservices: SetProfileService, 
     private authApi: AuthApi, 
-  ){
-    this.profileForm.controls.bio.valueChanges.subscribe(() => {
-      this.updateCharacterCount();
-    });
-
-  }
+  ){}
 
     getUserid() {
       return  this.authApi.getCurrentUserId();
@@ -75,16 +68,17 @@ export class SetprofileCComponent  implements OnInit {
 
     }
 
-  updateCharacterCount() {
-    const inputText = this.profileForm.value.bio ?? ``;
-    this.remainingCharacters = 120 - inputText.length;
+  openPicturePopup()
+  {
+    // this.modalController.create({
+    //   component: 'editPictureModal',
+    //   componentProps: {
+    //     selectedPicture: this.profileForm.get('profileURL')?.value as string,
+    //   },
+    // }).then((modal) => {
+    //   modal.present();
+    // });
   }
-
-  getRemainingCharacters() {
-    return this.remainingCharacters;
-  }
-
-
 
   getDp()
   {
@@ -94,7 +88,7 @@ export class SetprofileCComponent  implements OnInit {
   isEditMode = false;
 
   toggleEditMode() {
-    this.isEditMode = !this.isEditMode;
+    this.isEditMode = true;
     //refresh page
     this.ngOnInit();
 
