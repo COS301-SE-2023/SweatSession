@@ -49,6 +49,7 @@ export class SetprofileCComponent  implements OnInit {
     this.profileForm.controls.bio.valueChanges.subscribe(() => {
       this.updateCharacterCount();
     });
+
   }
 
     getUserid() {
@@ -83,6 +84,12 @@ export class SetprofileCComponent  implements OnInit {
     return this.remainingCharacters;
   }
 
+  getLastupdate()
+  {
+    console.log(this.file?.lastModified.)
+    return this.file?.lastModified
+  }
+
   getDp()
   {
     return this.profileForm.get('profileURL')?.value as string; 
@@ -91,7 +98,7 @@ export class SetprofileCComponent  implements OnInit {
   isEditMode = false;
 
   toggleEditMode() {
-    this.isEditMode = true;
+    this.isEditMode = !this.isEditMode;
     //refresh page
     this.ngOnInit();
 

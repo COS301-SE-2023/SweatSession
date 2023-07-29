@@ -67,3 +67,7 @@ ion-spinner {
     align-items: center;
     height: 100%;
 }
+
+::ng-deep ::-webkit-scrollbar {// should hide all the scrollers on the app
+    display: none;
+}
