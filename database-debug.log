@@ -3,11 +3,7 @@ WARNING: Illegal reflective access by io.netty.util.internal.ReflectionUtil (fil
 WARNING: Please consider reporting this to the maintainers of io.netty.util.internal.ReflectionUtil
 WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
 WARNING: All illegal access operations will be denied in a future release
-21:18:38.671 [NamespaceSystem-akka.actor.default-dispatcher-4] INFO akka.event.slf4j.Slf4jLogger - Slf4jLogger started
-21:18:39.111 [main] INFO com.firebase.server.forge.App$ - Listening at 127.0.0.1:5004
-21:19:00.999 [NamespaceSystem-akka.actor.default-dispatcher-4] INFO com.firebase.core.namespace.NamespaceActor - sweatsession-default-rtdb successfully activated FBKV (SurveyIdle(0)) wait: 300ms, init: 0ms
-21:19:01.145 [NamespaceSystem-blocking-namespace-operation-dispatcher-6] INFO com.firebase.core.namespace.StateManager - Namespace sweatsession-default-rtdb status Active to Active
-00:33:47.980 [Thread-0] INFO com.firebase.server.forge.App$ - Attempting graceful shutdown.
-00:33:48.010 [NamespaceSystem-akka.actor.default-dispatcher-8] INFO com.firebase.core.namespace.Terminator$Terminator - 1 actors left to terminate: sweatsession-default-rtdb
-00:33:48.024 [NamespaceSystem-akka.actor.default-dispatcher-10] INFO com.firebase.core.namespace.NamespaceActor - stopped namespace actor for sweatsession-default-rtdb
-00:33:48.032 [Thread-0] INFO com.firebase.server.forge.App$ - Graceful shutdown complete.
+22:55:12.489 [NamespaceSystem-akka.actor.default-dispatcher-4] INFO akka.event.slf4j.Slf4jLogger - Slf4jLogger started
+22:55:12.724 [main] INFO com.firebase.server.forge.App$ - Listening at 127.0.0.1:5004
+22:55:25.169 [NamespaceSystem-akka.actor.default-dispatcher-4] INFO com.firebase.core.namespace.NamespaceActor - sweatsession-default-rtdb successfully activated FBKV (SurveyIdle(0)) wait: 138ms, init: 0ms
+22:55:25.221 [NamespaceSystem-blocking-namespace-operation-dispatcher-6] INFO com.firebase.core.namespace.StateManager - Namespace sweatsession-default-rtdb status Active to Active
