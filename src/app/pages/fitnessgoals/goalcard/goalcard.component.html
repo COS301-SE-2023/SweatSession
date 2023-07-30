@@ -4,7 +4,7 @@
     <ion-segment-button value="2">Overdue</ion-segment-button>
   </ion-segment>
 
-  <ion-content [scrollEvents]="true">
+  <ion-content [scrollEvents]="true" *ngIf="isLoading; else loaderContent">
     <ion-item-sliding *ngFor="let goal of getFilteredGoals()">
       <ion-card >
         <ion-card>
@@ -48,6 +48,11 @@
     </ion-item-sliding>
   </ion-content>
 
+<ng-template #loaderContent>
+    <div class="loader-wrapper">
+        <ion-spinner></ion-spinner>
+    </div>
+</ng-template>
 
 <ion-fab slot="fixed" vertical="bottom" horizontal="right">
     <ion-fab-button (click)="addGoal()">
