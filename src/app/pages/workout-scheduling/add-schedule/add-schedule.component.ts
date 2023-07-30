@@ -7,6 +7,10 @@ import { AddGymSessionLocation } from 'src/app/actions/location.actions';
 import { IWorkoutScheduleModel } from 'src/app/models';
 import { LocationRepository } from 'src/app/repository/location.repository';
 import { GymsearchComponent } from '../../search/gymsearch/gymsearch.component';
+import { NoticeService } from 'src/app/services/notifications/notice.service';
+import { getAuth } from 'firebase/auth';
+import { Profile } from 'src/app/models/notice.model';
+import { URL } from 'url';
 
 @Component({
   selector: 'add-schedule',
@@ -16,10 +20,21 @@ import { GymsearchComponent } from '../../search/gymsearch/gymsearch.component';
 export class AddScheduleComponent  implements OnInit {
   schedule:IWorkoutScheduleModel={};
   placeId: string;
+  auth = getAuth();
+  currUserId = this.auth.currentUser?.uid;
+  profileList: Profile[];
+  currusername: string;
+  profileurl: string;
+  sweatsessionurl: string ;
 
-  constructor(private popoverController: PopoverController, private store: Store, private modalController: ModalController, private locationRepository: LocationRepository) { }
+  date : string ;
+  shortdate : string[] ;
 
-  ngOnInit() {}
+  constructor(private popoverController: PopoverController, private store: Store, private modalController: ModalController, private locationRepository: LocationRepository, private noticeService: NoticeService) { }
+
+  ngOnInit() {
+    this.displayCurrentUser(this.currUserId!);
+  }
 
   closePopup() {
     this.popoverController.dismiss();
@@ -31,8 +46,9 @@ export class AddScheduleComponent  implements OnInit {
     // this.store.dispatch(new AddGymSessionLocation(this.placeId));
     // this.store.dispatch(new AddWorkoutSchedule(this.placeId));
     this.locationRepository.addGymSession(this.placeId, this.schedule.date!, this.schedule.time!, this.schedule.completeAt!, this.schedule.name!);
-    console.log(this.schedule);
-    console.log(this.placeId);
+    this.date = new Date().toTimeString() ;
+   this.shortdate = this.date.split(':' , 2);
+   this.createNotifications("SWEAT-SESSION" , this.shortdate[0] + ':' + this.shortdate[1] , "LETS-GO!! Your workout as been scheduled at " + this.schedule.location )  ;
   }
 
   isDateTimeValid(): boolean {
@@ -93,4 +109,28 @@ export class AddScheduleComponent  implements OnInit {
       this.schedule.location = data.selectedGym;
       this.placeId = data.placeId;    }
   }
+
+  displayCurrentUser(id:string){
+    this.noticeService.getTheNoticeProfile().subscribe((profiles: Profile[]) => {
+    this.profileList = profiles;
+    console.log('Number of PROFILES:', this.profileList.length);
+    for(let i = 0 ; i<this.profileList.length ; i++){
+      if(this.profileList[i].id == this.currUserId ){
+        this.currusername = this.profileList[i].displayName! ;
+        this.profileurl = this.profileList[i].profileURL! ;
+        this.sweatsessionurl = "SweatSession/src/assets/Asset 3.png"
+        console.log(this.profileurl);
+        console.log(this.currusername);
+      }
+    }
+
+      
+  });
+}
+
+
+createNotifications(sendername: string , sentdate: string , message: string){
+  this.noticeService.createNotices(sendername , sentdate , message , this.currUserId! , this.currUserId! , '/assets/Asset 3.png');
+}
+
 }
