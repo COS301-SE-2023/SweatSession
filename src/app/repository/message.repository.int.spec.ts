@@ -50,28 +50,23 @@ describe('sendChatMessage', () => {
       },
     };
 
-    // Call the method
    messageRepository.sendMessage(request).then(()=>{
-    // Verify Firestore methods were called with the correct arguments
     expect(angularFirestoreMock.collection).toHaveBeenCalledWith('messages/senderId/receiverId');
     expect(angularFirestoreMock.collection).toHaveBeenCalledWith('messages/receiverId/senderId');
     expect(angularFirestoreMock.collection).toHaveBeenCalledWith(`users/senderId/chatFriends`);
     expect(angularFirestoreMock.collection).toHaveBeenCalledWith(`users/receiverId/chatFriends`);
 
-    // Verify set method was called with the correct data
-
     expect(angularFirestoreMock.doc).toHaveBeenCalledWith(`${request.chat.senderId}`);
     expect(angularFirestoreMock.doc).toHaveBeenCalledWith(`${request.chat.receiverId}`);
 
-    // Verify user collection update
     expect(angularFirestoreMock.collection().doc().set).toHaveBeenCalledWith({
       userId: 'receiverId',
-      lastChatId: 'messageId', // This value is hardcoded as 'messageId' because we mocked it in the Firestore ref
+      lastChatId: 'messageId',
     });
 
     expect(angularFirestoreMock.collection().doc().set).toHaveBeenCalledWith({
       userId: 'senderId',
-      lastChatId: 'messageId', // This value is hardcoded as 'messageId' because we mocked it in the Firestore ref
+      lastChatId: 'messageId',
     });
    });
   });
@@ -87,7 +82,6 @@ describe('sendGroupMessage', () => {
       },
     };
   
-    // Call the method
    messageRepository.sendGroupMessage(request).then(()=>{
     expect(angularFirestoreMock.collection).toHaveBeenCalledTimes(1);
     expect(angularFirestoreMock.collection).toHaveBeenCalledWith('groups/groupId/messages');

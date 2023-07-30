@@ -1,3 +1,4 @@
+import { IonicModule } from '@ionic/angular';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { NavController } from '@ionic/angular';
@@ -38,6 +39,9 @@ describe('GroupUserComponent', () => {
 
     await TestBed.configureTestingModule({
       declarations: [GroupUserComponent],
+      imports: [
+        IonicModule,
+      ],
       providers: [
         { provide: NavController, useValue: mockNavController },
         { provide: MessagesService, useValue: mockMessagesService },

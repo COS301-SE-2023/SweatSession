@@ -1,3 +1,4 @@
+import { IonicModule } from '@ionic/angular';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { UserComponent } from './user.component';
 import { NavController } from '@ionic/angular';
@@ -23,6 +24,9 @@ describe('UserComponent', () => {
 
     await TestBed.configureTestingModule({
       declarations: [UserComponent],
+      imports: [
+        IonicModule,
+      ],
       providers: [
         { provide: Store, useValue: storeMock },
         { provide: NavController, useValue: navMock },

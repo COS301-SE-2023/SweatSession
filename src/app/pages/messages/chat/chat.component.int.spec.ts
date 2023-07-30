@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ChatComponent } from './chat.component';
-import { NavController } from '@ionic/angular';
+import { IonicModule, NavController } from '@ionic/angular';
 
 describe('ChatComponent', () => {
   let component: ChatComponent;
@@ -14,6 +14,7 @@ describe('ChatComponent', () => {
 
     await TestBed.configureTestingModule({
       declarations: [ChatComponent],
+      imports: [ IonicModule],
       providers: [{ provide: NavController, useValue: navMock }],
     }).compileComponents();
 

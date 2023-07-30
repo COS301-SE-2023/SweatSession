@@ -4,6 +4,8 @@ import { IonicModule, ModalController } from '@ionic/angular';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { ViewPersonalbestsPage } from './view-personalbests.page';
 import { PersonalbestService } from 'src/app/services/personalbest/personalbest.service';
+import { BackButtonDirectiveModule } from 'src/app/directives';
+import { AddPersonalBestComponent } from './add-personal-best/add-personal-best.component';
 
 describe('ViewPersonalbestsPage', () => {
     let component: ViewPersonalbestsPage;
@@ -13,8 +15,8 @@ describe('ViewPersonalbestsPage', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [ViewPersonalbestsPage],
-            imports: [ReactiveFormsModule, IonicModule],
+            declarations: [ViewPersonalbestsPage, AddPersonalBestComponent,],
+            imports: [ReactiveFormsModule, IonicModule,  BackButtonDirectiveModule],
             providers: [
                 { provide: ModalController, useValue: {} },
                 { provide: AngularFirestore, useValue: {} },

@@ -4,6 +4,7 @@ import { NgxsModule, Select, Store } from '@ngxs/store';
 import { of } from 'rxjs';
 import { IGroup } from 'src/app/models';
 import { GetGroup, JoinChatGroup, StageChatGroup, ExitChatGroup } from 'src/app/actions';
+import { IonicModule } from '@ionic/angular';
 
 describe('GroupHomePageComponent', () => {
   let component: GroupHomePageComponent;
@@ -18,7 +19,7 @@ describe('GroupHomePageComponent', () => {
 
     await TestBed.configureTestingModule({
       declarations: [GroupHomePageComponent],
-      imports: [NgxsModule.forRoot([])],
+      imports: [NgxsModule.forRoot([]), IonicModule,],
       providers: [
         { provide: Store, useValue: storeMock },
       ],

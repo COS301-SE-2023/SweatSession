@@ -5,8 +5,9 @@ import { Observable, of } from 'rxjs';
 import { IMessage, IProfileModel } from 'src/app/models';
 import { GetChatFriend, GetMessages, RemoveChatFriendSession, SendMessage, StageOtheruserInfo, SubscribeToAuthState } from 'src/app/actions';
 import { AuthState, MessagesState } from 'src/app/states';
-import { IonContent } from '@ionic/angular';
+import { IonContent, IonicModule } from '@ionic/angular';
 import { Timestamp } from 'firebase/firestore';
+import { BackButtonDirectiveModule } from 'src/app/directives';
 
 describe('ChatroomComponent', () => {
   let component: ChatroomComponent;
@@ -22,7 +23,7 @@ describe('ChatroomComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ChatroomComponent],
       providers: [{ provide: Store, useValue: storeMock }],
-      imports: [NgxsModule.forRoot([])],
+      imports: [NgxsModule.forRoot([]),  IonicModule,  BackButtonDirectiveModule,],
     }).compileComponents();
 
     fixture = TestBed.createComponent(ChatroomComponent);

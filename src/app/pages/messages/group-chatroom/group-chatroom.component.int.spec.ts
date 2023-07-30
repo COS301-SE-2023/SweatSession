@@ -5,8 +5,9 @@ import { Observable, of } from 'rxjs';
 import { IGroup, IMessage } from 'src/app/models';
 import { GetGroup, GetGroupMessages, RemoveChatGroupSession, SendGroupMessage, SubscribeToAuthState } from 'src/app/actions';
 import { AuthState, MessagesState } from 'src/app/states';
-import { IonContent } from '@ionic/angular';
+import { IonContent, IonicModule } from '@ionic/angular';
 import { Timestamp } from 'firebase/firestore';
+import { BackButtonDirectiveModule } from 'src/app/directives';
 
 describe('GroupChatroomComponent', () => {
   let component: GroupChatroomComponent;
@@ -21,7 +22,7 @@ describe('GroupChatroomComponent', () => {
 
     await TestBed.configureTestingModule({
       declarations: [GroupChatroomComponent],
-      imports: [NgxsModule.forRoot([])],
+      imports: [NgxsModule.forRoot([]),  IonicModule,  BackButtonDirectiveModule,],
       providers: [{ provide: Store, useValue: storeMock }],
     }).compileComponents();
 

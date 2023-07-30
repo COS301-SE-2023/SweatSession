@@ -41,7 +41,7 @@ describe('MessagesPage', () => {
 
     await TestBed.configureTestingModule({
       declarations: [MessagesPage],
-      imports: [IonicModule.forRoot(), NgxsModule.forRoot([])],
+      imports: [IonicModule.forRoot(), NgxsModule.forRoot([]), IonicModule],
       providers: [
         { provide: NavController, useValue: mockNavController },
         { provide: Store, useValue: mockStore },

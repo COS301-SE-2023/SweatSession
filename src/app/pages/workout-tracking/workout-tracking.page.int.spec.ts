@@ -1,6 +1,6 @@
 import { TestBed, async, ComponentFixture } from '@angular/core/testing';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
-import { NavController } from '@ionic/angular';
+import { IonicModule, NavController } from '@ionic/angular';
 import { FormArray } from '@angular/forms';
 import {
   Router,
@@ -12,6 +12,7 @@ import { of } from 'rxjs';
 import { WorkoutTrackingPage } from '../workout-tracking/workout-tracking.page';
 import { ExerciseService } from '../../services/exercise/exercise.service';
 import { Exercise } from '../../models/exercise.model';
+import { BackButtonDirectiveModule } from 'src/app/directives';
 
 class NavControllerMock {
   navigateForward(): Promise<any> {
@@ -49,7 +50,7 @@ describe('WorkoutTrackingPage', () => {
   beforeEach(async (() => {
     TestBed.configureTestingModule({
       declarations: [WorkoutTrackingPage],
-      imports: [ReactiveFormsModule],
+      imports: [ReactiveFormsModule, IonicModule,  BackButtonDirectiveModule],
       providers: [
         FormBuilder,
         { provide: ExerciseService, useValue: exerciseServiceStub },

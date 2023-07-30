@@ -5,6 +5,8 @@ import { of } from 'rxjs';
 import { IGroup } from 'src/app/models';
 import { By } from '@angular/platform-browser';
 import { AddChatGroup } from 'src/app/actions';
+import { IonicModule } from '@ionic/angular';
+import { BackButtonDirectiveModule } from 'src/app/directives';
 
 describe('CreateGroupComponent', () => {
   let component: CreateGroupComponent;
@@ -17,6 +19,7 @@ describe('CreateGroupComponent', () => {
     };
 
     await TestBed.configureTestingModule({
+      imports: [IonicModule,  BackButtonDirectiveModule,],
       declarations: [CreateGroupComponent],
       providers: [{ provide: Store, useValue: storeMock }],
     }).compileComponents();

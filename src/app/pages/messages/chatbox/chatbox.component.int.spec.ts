@@ -5,6 +5,7 @@ import { Observable, of } from 'rxjs';
 import { IProfileModel, IMessage } from 'src/app/models';
 import { GetOtheruserProfile, StageOtheruserInfo } from 'src/app/actions';
 import { MessagesService } from 'src/app/services';
+import { IonicModule } from '@ionic/angular';
 
 describe('ChatboxComponent', () => {
   let component: ChatboxComponent;
@@ -24,6 +25,7 @@ describe('ChatboxComponent', () => {
 
     await TestBed.configureTestingModule({
       declarations: [ChatboxComponent],
+      imports: [ IonicModule],
       providers: [
         { provide: Store, useValue: storeMock },
         { provide: MessagesService, useValue: serviceMock },
