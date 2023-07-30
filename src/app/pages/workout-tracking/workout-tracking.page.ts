@@ -78,7 +78,6 @@
       (this.workoutForm.get('exercises') as FormArray).push(exerciseControl);
     }
     
-    
     deleteExercise(index: number) {
       const exercise = this.exercisesArray[index];
       if (exercise.id) {
@@ -130,7 +129,5 @@
     
       console.log('All exercises saved.');
     }
-    
-    
     
   }
