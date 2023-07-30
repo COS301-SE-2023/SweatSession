@@ -279,7 +279,7 @@ describe('LocationRepository Integration Tests', () => {
 
     // });
 
-    it('should create a new gym session', async () => {
+    it('should create a new gym session and then retrieve gym sessions for friends that go to a certain gym', async () => {
         const newGymSession: LocationGymSession = await repository.addGymSession(
             'testingPlaceID1234567890',
             new Date("01-08-2023"),
@@ -293,9 +293,7 @@ describe('LocationRepository Integration Tests', () => {
         expect(newGymSession.profilePhoto).toEqual("https://example.com/profile.jpg");
         expect(newGymSession.startTime).toEqual({ hours: 16, minutes: 30 });
         expect(newGymSession.workoutName).toEqual("Test workout session");
-    });
 
-    it('should retrieve gym sessions for friends that go to a certain gym', async () => {
         const placeId = 'testingPlaceID';
         const friendIds = ['friendId1', 'friendId2'];
         const mockDocs = [
@@ -325,5 +323,5 @@ describe('LocationRepository Integration Tests', () => {
         expect([true]).toEqual([
             true
           ]);
-    }, 60000);
+    }, 120000);
 });

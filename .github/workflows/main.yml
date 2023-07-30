@@ -19,7 +19,7 @@ jobs:
         with:
           node-version: '19.x'
       - run: yarn
-      - run: yarn jest
+      - run: yarn jest --testPathPattern=unit.spec.ts
   integrationTests:
     runs-on: ubuntu-latest
     steps:
@@ -36,4 +36,9 @@ jobs:
       - run: touch src/environments/environment.ts
       - run: echo "${{secrets.ENVIRONMENT_VARIABLES}}" >> src/environments/environment.ts
       - run: yarn
-      - run: yarn jest --testPathPattern=int.spec.ts
+      - run: yarn jest --testPathPattern=int.spec.ts --coverage
+      - name: CodeCov
+        uses: codecov/codecov-action@v2
+        with:
+          files: coverage/lcov.info
+          token: ${{ secrets.CODECOV_TOKEN }}
