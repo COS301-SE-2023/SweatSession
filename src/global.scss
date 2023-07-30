@@ -99,3 +99,7 @@ ion-segment {
 * {
     transition: 0.5;
 }
+
+swiper-container::part(bullet-active) {
+    background-color:#E63946 // #A8DADC;
+  }
