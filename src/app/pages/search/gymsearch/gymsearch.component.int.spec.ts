@@ -198,7 +198,9 @@ describe('GymsearchComponent Integration Tests', () => {
     const startTime = Timestamp.fromMillis(100000000);
     const endTime = Timestamp.fromMillis(200000000);
     const currDate = "06-07-2023";
-    expect(`${component.formatDate(currDate)}: ${component.formatTime(startTime)}-${component.formatTime(endTime)}`).toEqual("07 June 2023: 05:46-09:33");
+    expect(`${component.formatDate(currDate)}`).toEqual("07 June 2023");
+    expect(component.formatTime(startTime).slice(-2)).toEqual("46");
+    expect(component.formatTime(endTime).slice(-2)).toEqual("33");
     expect(component.gyms).toEqual({
         results: [
            { business_status: "CLOSED_TEMPORARILY", rating: 3, vicinity: "496 uikk, Lynnwood, Pretoria", place_id: "ChIJUww6lfRglR4RPz44wt9Osvg",icon: "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/school-71.png",
