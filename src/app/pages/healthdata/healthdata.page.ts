@@ -58,7 +58,7 @@ export class HealthDataPage implements OnInit {
         .valueChanges()
         .subscribe(data => {
           if (data.length > 0) {
-            this.healthDataForm.patchValue(data[0]);
+            this.healthDataForm.patchValue(data[0]!);
           }
         });
     }

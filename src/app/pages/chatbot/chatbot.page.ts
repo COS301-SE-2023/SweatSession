@@ -4,6 +4,13 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { ProfileService } from '../../services';
 import { getAuth } from '@angular/fire/auth';
 
+interface UserHealthData {
+  height: string;
+  weight: string; 
+  diet: string;
+  medicalConditions: string;
+}
+
 
 @Component({
   selector: 'app-chatbot',
@@ -41,7 +48,7 @@ export class ChatbotPage implements OnInit {
     if (snapshot?.empty) {
       return null;
     } else {
-      const data = snapshot?.docs[0].data();
+      const data = <UserHealthData>snapshot?.docs[0].data();
       const formattedData = `The user's height is ${data?.['height']} cm, weight is ${data?.['weight']} kg, diet is ${data?.['diet']}, and the medical conditions are ${data?.['medicalConditions']}.`;
       return formattedData;
     }
@@ -73,7 +80,7 @@ export class ChatbotPage implements OnInit {
         if (this.isHealthRelated(botMessage)){
           this.messages.push({ text: botMessage, sender: 'SS-bot', displayText: botMessage });
         }else{
-          this.messages.push({ text: 'Sorry, I can only answer health-related questions.', sender: 'SS-bot' });
+          this.messages.push({ text: 'Sorry, I can only answer health-related questions.', sender: 'SS-bot' ,displayText:'Sorry, I can only answer health-related questions.'  });
         }
         
       });
