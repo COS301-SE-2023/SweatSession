@@ -42,8 +42,8 @@
 <ng-container *ngFor="let gym of gyms.results">
   <!-- {{ !gym.name || gym.name.toLowerCase().includes(searchTerm.toLowerCase()) }} -->
   <ng-container *ngIf="gym.business_status=='OPERATIONAL'">
-  <ng-container *ngIf="gym.name.toLowerCase().includes(searchTerm.toLowerCase())">
-    <ion-card class="locationCard">
+  <!-- <ng-container *ngIf="gym.name.toLowerCase().includes(searchTerm.toLowerCase())"> -->
+    <ion-card class="locationCard" *ngIf="gym.name.toLowerCase().includes(searchTerm.toLowerCase())">
       <ng-container *ngIf="gym?.photos?.[0]?.photo_reference">
         <img [src]="getPhotoUrl(gym?.photos?.[0]?.photo_reference)"  alt="Silhouette of mountains" class="gymImage"/>
       </ng-container>
@@ -94,7 +94,7 @@
           Select Gym
         </ion-card-content>
     </ion-card>
-  </ng-container>
+  <!-- </ng-container> -->
   </ng-container>
 </ng-container>
 
