@@ -47,6 +47,7 @@ import { HttpClientModule } from '@angular/common/http';
 // import { ProfileService } from '../services';
 import { of } from 'rxjs';
 import { DatePipe } from '@angular/common';
+import { Timestamp } from 'firebase/firestore';
 import fetch from 'node-fetch';
 global.fetch = jest.fn().mockImplementation(() => 
   Promise.resolve({
@@ -194,6 +195,10 @@ describe('GymsearchComponent Integration Tests', () => {
 
     // Perform assertions
     console.log(gyms)
+    const startTime = Timestamp.fromMillis(100000000);
+    const endTime = Timestamp.fromMillis(200000000);
+    const currDate = "06-07-2023";
+    expect(`${component.formatDate(currDate)}: ${component.formatTime(startTime)}-${component.formatTime(endTime)}`).toEqual("07 June 2023: 05:46-09:33");
     expect(component.gyms).toEqual({
         results: [
            { business_status: "CLOSED_TEMPORARILY", rating: 3, vicinity: "496 uikk, Lynnwood, Pretoria", place_id: "ChIJUww6lfRglR4RPz44wt9Osvg",icon: "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/school-71.png",
@@ -207,6 +212,5 @@ describe('GymsearchComponent Integration Tests', () => {
         status: "OK"
 });
     // You may add more assertions based on the behavior of the method
-        expect(true).toBeTruthy;
     });
 });

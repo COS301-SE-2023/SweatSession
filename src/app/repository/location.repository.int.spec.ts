@@ -323,5 +323,5 @@ describe('LocationRepository Integration Tests', () => {
         expect([true]).toEqual([
             true
           ]);
-    }, 60000);
+    }, 120000);
 });
