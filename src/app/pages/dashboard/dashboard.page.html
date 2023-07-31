@@ -13,8 +13,8 @@
                   <ion-icon name="receipt-outline"></ion-icon>
                 </ion-card-title>
                <ion-item lines="none">
-                <ion-text slot="start">Sessions</ion-text>
-                <ion-icon name="chevron-forward" slot="end"></ion-icon>
+                <ion-text>Sessions</ion-text>
+                <ion-icon name="chevron-forward" slot="end" routerLink="/workout-scheduling"></ion-icon>
                </ion-item>
               </ion-card-content>
             </ion-card>
@@ -27,7 +27,7 @@
                 </ion-card-title>
                <ion-item lines="none">
                 <ion-text slot="start">Goals</ion-text>
-                <ion-icon name="chevron-forward" slot="end"></ion-icon>
+                <ion-icon name="chevron-forward" slot="end"  routerLink="/fitnessgoals"></ion-icon>
                </ion-item>
               </ion-card-content>
             </ion-card>
@@ -40,7 +40,7 @@
                 </ion-card-title>
                 <ion-item lines="none">
                   <ion-text slot="start">Rank</ion-text>
-                  <ion-icon name="chevron-forward" slot="end"></ion-icon>
+                  <ion-icon name="chevron-forward" slot="end" routerLink="/home/leaderboard"></ion-icon>
                  </ion-item>
               </ion-card-content>
             </ion-card>
@@ -52,8 +52,8 @@
                   <ion-icon name="analytics-outline"></ion-icon>
                 </ion-card-title>
                 <ion-item lines="none">
-                  <ion-text slot="start">Performance</ion-text>
-                  <ion-icon name="chevron-forward" slot="end"></ion-icon>
+                  Performance
+                  <ion-icon name="chevron-forward" slot="end" routerLink="/view-personalbests"></ion-icon>
                  </ion-item>
               </ion-card-content>
             </ion-card>
@@ -68,17 +68,17 @@
         <ion-grid>
           <ion-row>
             <ion-col size="6">
-              <ion-card class="grid-cards">
+              <ion-card class="grid-cards" routerLink="/points">
                 <ion-card-content>
                   <ion-card-title>
-                    <ion-icon name="star-outline"></ion-icon>
+                    <ion-icon name="star"></ion-icon>
                   </ion-card-title>
                   Points
                 </ion-card-content>
               </ion-card>
             </ion-col>
             <ion-col size="6">
-              <ion-card class="grid-cards">
+              <ion-card class="grid-cards" routerLink="/badges">
                 <ion-card-content>
                   <ion-card-title>
                     <ion-icon name="trophy"></ion-icon>
@@ -112,20 +112,20 @@
           <ion-grid>
             <ion-row>
               <ion-col size="6">
-                <ion-card class="discover-card">
+                <ion-card class="discover-card" routerLink="/workout-scheduling">
                  <ion-card-content>
                   <ion-card-title>
-                    <ion-icon name="barbell-outline"></ion-icon>
+                    <ion-icon name="calendar-outline"></ion-icon>
                   </ion-card-title>
                   Schedules
                  </ion-card-content>
                 </ion-card>
               </ion-col>
               <ion-col size="6">
-                <ion-card class="discover-card">
+                <ion-card class="discover-card" routerLink="/friends">
                  <ion-card-content>
                   <ion-card-title>
-                    <ion-icon name="people-outline"></ion-icon>
+                    <ion-icon name="people-circle-outline"></ion-icon>
                   </ion-card-title>
                  friends
                  </ion-card-content>
@@ -134,7 +134,7 @@
             </ion-row>
             <ion-row>
               <ion-col size="6">
-                <ion-card class="discover-card">
+                <ion-card class="discover-card" routerLink="/groups">
                  <ion-card-content>
                   <ion-card-title>
                     <ion-icon name="people-outline"></ion-icon>
@@ -144,10 +144,10 @@
                 </ion-card>
               </ion-col>
               <ion-col size="6">
-                <ion-card class="discover-card">
+                <ion-card class="discover-card" routerLink="/home/search">
                  <ion-card-content>
                   <ion-card-title>
-                    <ion-icon name="people-outline"></ion-icon>
+                    <ion-icon name="barbell-outline"></ion-icon>
                   </ion-card-title>
                  Gyms
                  </ion-card-content>
@@ -159,7 +159,7 @@
                 <ion-card class="discover-card">
                  <ion-card-content>
                   <ion-card-title>
-                    <ion-icon name="add"></ion-icon>
+                    <ion-icon name="watch-outline"></ion-icon>
                   </ion-card-title>
                  Connect!
                  </ion-card-content>

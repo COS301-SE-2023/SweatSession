@@ -18,14 +18,14 @@
   <br><br>
 </ion-content>
 
-<ion-footer>
+<ion-footer class="input-field-footer">
   <ion-item lines="none" class="message-input-field">
     <div class="input-field-wrapper">
       <ion-textarea placeholder="Enter your Question" [(ngModel)]="userMessage"></ion-textarea>
     </div>
     <ion-fab horizontal="end" *ngIf="isText()">
-      <ion-fab-button>
-        <ion-icon name="send" (click)="sendUserMessage()" class="message-send-icon"></ion-icon>
+      <ion-fab-button class="message-send-fab-button" (click)="sendUserMessage()">
+        <ion-icon name="send" class="message-send-icon"></ion-icon>
       </ion-fab-button>
     </ion-fab>
   </ion-item>

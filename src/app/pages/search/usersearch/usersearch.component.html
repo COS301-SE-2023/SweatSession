@@ -9,20 +9,21 @@
   </ion-searchbar>
   
   <div class="search-suggestions" *ngIf="searchTerms.showSuggestions">
-    <ion-card id="search-suggestions">
-      <ion-list >
-        <ion-item lines="none" 
-          *ngFor="let suggestion of searchTerms.filteredSuggestions" 
-          (click)="find(suggestion)">
-          <ion-avatar>
-            <ion-img src ="{{suggestion.profileURL}}"></ion-img>
-          </ion-avatar>
-          {{ suggestion.displayName }}
-        </ion-item>
-        <ion-item lines="none" *ngIf="showNoResults && this.searchTerms.filteredSuggestions!.length==0">
-          <ion-text>No users found</ion-text>
-        </ion-item>
-      </ion-list>
-    </ion-card>
+    <ion-list >
+      <ion-item lines="none" 
+        *ngFor="let suggestion of searchTerms.filteredSuggestions" 
+        (click)="find(suggestion)">
+        <ion-avatar slot="start">
+          <ion-img src ="{{suggestion.profileURL}}"></ion-img>
+        </ion-avatar>
+        <ion-label>
+          <h2>{{ suggestion.displayName }}</h2>
+          <p>{{"~ " +suggestion.bio}}</p>
+        </ion-label>
+      </ion-item>
+      <ion-item lines="none" *ngIf="showNoResults && this.searchTerms.filteredSuggestions!.length==0">
+        <ion-text>No users found</ion-text>
+      </ion-item>
+    </ion-list>
   </div>
 </div>

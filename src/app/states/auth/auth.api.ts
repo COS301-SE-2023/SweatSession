@@ -116,7 +116,7 @@ export class AuthApi {
       message: 'Are you sure you want to logout?',
       buttons: [
         {
-          text: 'Camcel',
+          text: 'Cancel',
           role: 'cancel',
         },
         {

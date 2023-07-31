@@ -93,7 +93,12 @@ ion-segment {
       
     .message-send-icon {
         color: #A8DADC; //#E63946;
+        
     }
+}
+
+.input-field-footer {
+    padding: 10px;
 }
 
 * {
@@ -103,3 +108,17 @@ ion-segment {
 swiper-container::part(bullet-active) {
     background-color:#E63946 // #A8DADC;
   }
+
+  .message-send-fab-button {
+    width: 40px;
+    height: 40px;
+  }
+
+  .native-wrapper.sc-ion-textarea-md textarea.sc-ion-textarea-md {
+    -webkit-padding-start: 0px;
+    padding-inline-start: 0px;
+    -webkit-padding-end: 0px;
+    padding-inline-end: 0px;
+    padding-top:18px;
+    padding-bottom: 0px;
+}

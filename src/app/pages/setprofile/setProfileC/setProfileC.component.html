@@ -19,16 +19,6 @@
                 </div>
             </ion-col>
         </ion-row>
-        <ion-row>
-            <ion-col >
-                <input  type="file" id = "fileInput" accept="image/*" (change)="onFileSelected($event)" style="display: none">
-                <ion-button fill="outline" expand="block" size="small" (click)="selectFile()" >Change Picture</ion-button>
-            </ion-col>
-            <ion-col >
-                <input type="file" id = "photoInput" accept="image/*" capture="environment" (change)="onFileSelected($event)" style="display: none">
-                <ion-button fill="outline" expand="block" size="small"  (click)="takePicture()">Take Picture</ion-button>
-            </ion-col>
-        </ion-row>
     <ion-row>
         <ion-col class="ion-text-center">
             <ion-button fill="outline" id="SDP" expand="block" size="small" (click)="saveProfile()" [disabled]="!file">Save Picture</ion-button>
