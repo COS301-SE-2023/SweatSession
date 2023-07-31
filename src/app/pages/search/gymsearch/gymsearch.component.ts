@@ -128,8 +128,8 @@ export class GymsearchComponent implements OnInit {
             const coordinates = await this.getCurrentLocation();
             this.currLatitude = coordinates.latitude;
             this.currLongitude = coordinates.longitude;
-            // this.currLatitude = -25.7694108
-            // this.currLongitude = 28.259215
+            this.currLatitude = -25.7694108
+            this.currLongitude = 28.259215
             console.log('Latitude:', this.currLatitude);
             console.log('Longitude:', this.currLongitude);
             console.log('maxDistance:', this.maxDistance);
