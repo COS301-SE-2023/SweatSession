@@ -177,7 +177,6 @@ export class FriendsRepository {
       let profile = doc.data()
       if(profile) {
         let fRequest = profile.friendRequests?.filter((userId)=> !userId.match(request.from!))
-        alert(request.from);
         docRef.update({friendRequests: fRequest})
       }
     })
