@@ -66,8 +66,6 @@ export class AuthState {
     { email, password }: RegisterAuth
   ) {
     try {
-      alert(email);
-      alert(password);
       await this.authenticationApi.register(email, password);
       return context.dispatch(new Navigate(['home']));
     } catch (err) {
