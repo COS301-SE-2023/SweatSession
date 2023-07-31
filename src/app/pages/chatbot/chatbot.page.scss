@@ -2,6 +2,7 @@
   background-color: #f0f0f0;
   border-radius: 15px;
   padding: 10px;
+  margin-bottom: 10px;
   margin-right: auto; // Push the message to the left
   max-width: 70%; // Limit the width to a percentage of the container
   align-self: flex-start; 
@@ -24,11 +25,11 @@ ion-footer{
    color: #ffffff;
    border-radius: 15px;
    padding: 10px;
-   margin-left: auto; // Push the message to the right
-   max-width: 70%; // Limit the width to a percentage of the container
-   align-self: flex-end; // A
-    
-   
+   margin-left: auto; 
+   max-width: 70%; 
+   align-self: flex-end; 
+   white-space: pre-line;
+   margin-bottom: 10px;
    
   }
 

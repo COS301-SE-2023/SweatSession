@@ -161,6 +161,10 @@ const routes: Routes = [
     data: { authGuardPipe: redirectLoggedOut },
     loadChildren: () => import('./pages/chatbot/chatbot.module').then( m => m.ChatbotPageModule)
   },
+  {
+    path: 'healthdata',
+    loadChildren: () => import('./pages/healthdata/healthdata.module').then( m => m.HealthDataPageModule)
+  },
 ];
 @NgModule({
   imports: [

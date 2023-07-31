@@ -2,11 +2,14 @@
 <br><br><br>
 <ion-content class="main">
   <h1 class="center2">SweatSession-Bot</h1>
+  <br>
   <ion-list>
+    
     <ion-item lines="none" *ngFor="let message of messages">
       
+     
       <div [ngClass]="{'user-message': message.sender === 'user', 'bot-message': message.sender === 'SS-bot'}">
-        {{ message.text }}
+        {{ message.displayText }}
       </div>
     </ion-item><br>
   </ion-list>
@@ -17,9 +20,11 @@
 </ion-content>
 
 <ion-footer>
+  <br><br>
   <ion-toolbar color="light">
     <ion-input [(ngModel)]="userMessage" placeholder="Enter your Question"></ion-input>
-    <ion-button slot="end" fill="outline" color="danger"  (click)="sendUserMessage()">Send</ion-button>
+    <ion-icon style="margin-right: 15px;" size="large" slot="end" name="send-outline" color="danger" (click)="sendUserMessage()"></ion-icon>
+    <br><br>
   </ion-toolbar>
 </ion-footer>
 

@@ -78,7 +78,6 @@
       (this.workoutForm.get('exercises') as FormArray).push(exerciseControl);
     }
     
-    
     deleteExercise(index: number) {
       const exercise = this.exercisesArray[index];
       if (exercise.id) {
@@ -86,7 +85,7 @@
       }
       this.exercises.removeAt(index);
     }
-    private async saveExercise(exerciseData: Exercise, index: number) {
+    public async saveExercise(exerciseData: Exercise, index: number) {
       let exercise = this.exercisesArray[index];
     
       if (exercise) {
@@ -102,7 +101,7 @@
       }
     }
 
-    async saveExercises() { 
+    public async saveExercises() { 
       console.log('Initial exercisesArray:', this.exercisesArray);
       console.log('Form exercises:', this.exercises.controls);
       console.log('Deleted exercises:', this.deletedExercises);   
@@ -130,7 +129,5 @@
     
       console.log('All exercises saved.');
     }
-    
-    
     
   }
