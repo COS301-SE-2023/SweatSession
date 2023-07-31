@@ -3,7 +3,7 @@ name: Tests
 on: [push]
 
 jobs:
-  build:
+  unitTests:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -16,4 +16,26 @@ jobs:
         with:
           node-version: '19.x'
       - run: yarn
-      - run: yarn jest
+      - run: yarn jest --testPathPattern=unit.spec.ts
+  integrationTests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js 19
+        uses: actions/setup-node@v3
+        with:
+          node-version: "19.x"
+          cache: 'npm'
+      - uses: mskelton/setup-yarn@v1
+        with:
+          node-version: '19.x'
+      - run: mkdir src/environments
+      - run: touch src/environments/environment.ts
+      - run: echo "${{secrets.ENVIRONMENT_VARIABLES}}" >> src/environments/environment.ts
+      - run: yarn
+      - run: yarn jest --testPathPattern=int.spec.ts --coverage
+      - name: CodeCov
+        uses: codecov/codecov-action@v2
+        with:
+          files: coverage/lcov.info
+          token: ${{ secrets.CODECOV_TOKEN }}
