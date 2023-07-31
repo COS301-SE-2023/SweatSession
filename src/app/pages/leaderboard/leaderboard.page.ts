@@ -49,6 +49,7 @@ export class LeaderboardPage implements OnInit {
           this.pointsApi.otherUserPoints$(user.userId!).pipe(
             tap(response => {
               user.points = response ? response.userPoints : 0;
+              user.sessionsCompleted = response.workoutSessionsAttended ? response.workoutSessionsAttended : 0;
               this.users.sort((userA, userB) => userB.points! - userA.points!);
               this.users = [...this.users]; // Update the users array after modifying a user
             }),

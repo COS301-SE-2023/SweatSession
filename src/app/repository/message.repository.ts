@@ -222,7 +222,6 @@ import { Observable,lastValueFrom, map, tap } from "rxjs";
           tap((doc)=>{
             let group = doc.data();
             if(group) {
-              alert(request.userId!);
               if (!group.members?.includes(request.userId!)) {
                 group.members?.push(request.userId!);
                 groupDocRef.update({ members: group.members });

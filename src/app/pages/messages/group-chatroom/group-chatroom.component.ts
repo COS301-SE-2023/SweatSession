@@ -53,7 +53,7 @@ export class GroupChatroomComponent  implements OnInit {
     if(this.message.text.trim()!== '') {
       this.message.date = Timestamp.now();
       this.store.dispatch(new SendGroupMessage(this.message))
-      this.message = {};
+      this.message = {text: ""};
       this.scrollToBottom()
     }
   }
@@ -67,6 +67,6 @@ export class GroupChatroomComponent  implements OnInit {
   }
 
   isText() {
-    return this.message.text.trim()!== '';
+    return this.message.text?.trim() != '';
   }
 }

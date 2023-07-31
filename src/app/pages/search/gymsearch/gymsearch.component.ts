@@ -37,7 +37,7 @@ export class GymsearchComponent implements OnInit {
    @ViewChild(IonContent) content: IonContent;
    searchTerm: string = "";
    filteredData$: Observable<any[]> = of([]);
-   nextPageToken = null;
+   nextPageToken = "";
    // unfilteredData$: any[] = [];
    private searchTerm$ = new Subject<string>();
    maxDistance: number = 15;//default in kilometers
@@ -230,14 +230,19 @@ export class GymsearchComponent implements OnInit {
          const nextPageToken = this.nextPageToken || "";
          // const url = `http://127.0.0.1:5005/sweatsession/us-central1/nearbyGymProxyRequest?latitude=${this.currLatitude}&longitude=${this.currLongitude}&radius=${this.maxDistance * 1000}&key=${this.MAPS_API_KEY}&nextPageToken=${nextPageToken}`;
          // console.log(url)
-         const url = `https://us-central1-sweatsession.cloudfunctions.net/nearbyGymProxyRequest?latitude=${this.currLatitude}&longitude=${this.currLongitude}&radius=${this.maxDistance*1000}&key=${this.MAPS_API_KEY}&nextPageToken=${nextPageToken}`;
-         const response = await fetch(url);
-         const data = await response.json();
-         console.log(data);
-         console.log(data.results);
-         this.gyms = data;
-         await this.getGymUsersForGyms(this.userFriendIds);
-         this.nextPageToken = data.next_page_token; // Get the new nextPageToken
+         let responseStatus = "";
+         while (responseStatus != "OK") {
+            const url = `https://us-central1-sweatsession.cloudfunctions.net/nearbyGymProxyRequest?latitude=${this.currLatitude}&longitude=${this.currLongitude}&radius=${this.maxDistance * 1000}&key=${this.MAPS_API_KEY}&nextPageToken=${nextPageToken}`;
+            console.log(url)
+            const response = await fetch(url);
+            const data = await response.json();
+            console.log(data);
+            console.log(data.results);
+            responseStatus = data.status;
+            this.gyms = data;
+            await this.getGymUsersForGyms(this.userFriendIds);
+            this.nextPageToken = data.next_page_token; // Get the new nextPageToken
+         }
          return this.gyms;
       } catch (error) {
          console.error(error);
@@ -268,7 +273,7 @@ export class GymsearchComponent implements OnInit {
       this.searchTerm$.next(searchTerm);
    }
 
-   filter(data: any){
+   filter(data: any) {
       if (!this.searchTerm || this.searchTerm === '' || this.searchTerm === null) {
          return data;
       }
@@ -277,6 +282,7 @@ export class GymsearchComponent implements OnInit {
 
    dismissModal() {
       this.modalController.dismiss();
+      this.nextPageToken = "";
    }
 
    selectGym(name: string, chosenPlaceId: string) {
@@ -350,6 +356,7 @@ export class GymsearchComponent implements OnInit {
       // console.log('maxDistance:', this.maxDistance);
       await this.loadData();
       this.content.scrollToTop();
+      console.log(this.maxDistance)
    }
 
    formatTime(timestamp: Timestamp): string {

@@ -43,6 +43,8 @@ export class RegisterService {
         phoneNumber: "0000000000",
         height: '0',
         weight: '0',
+        points: 0,
+        sessionsCompleted: 0,
       }
       console.log(newProfile);
       //this.repository.createUser(newUser);

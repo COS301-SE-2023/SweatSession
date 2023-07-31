@@ -27,7 +27,7 @@
         <div [hidden]="selectedSegment!=='groups'">
           <ion-item *ngFor="let group of groups" lines="none" (click)="stageGroup(group)">
             <ion-avatar slot="start">
-              <img alt="Silhouette of a person's head" src="/assets/Asset 2.png"/>
+              <img alt="Silhouette of a person's head" [src]="group.profileURL"/>
             </ion-avatar>
             <ion-label>
               <h2 class="user-name">{{group.displayName}}</h2>
