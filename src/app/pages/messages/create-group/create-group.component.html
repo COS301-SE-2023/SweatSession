@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-item lines="none">
+      <backbutton></backbutton>
+      <ion-title>
+        Create a new group
+      </ion-title>
+    </ion-item>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item lines="none">
+      <ion-label position="floating">Group Name</ion-label>
+      <ion-input type="text" [(ngModel)]="group.displayName"></ion-input>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label position="floating">Group Description</ion-label>
+      <ion-textarea [(ngModel)]="group.bio"></ion-textarea>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label position="stacked">Profile Photo</ion-label>
+      <input type="file" (change)="onFileSelected($event)" accept="image/*" />
+    </ion-item>
+    <ion-item lines="none" *ngIf="group.profileURL">
+      <ion-label>Selected Photo:</ion-label>
+      <ion-avatar slot="end">
+        <img [src]="group.profileURL" />
+      </ion-avatar>
+    </ion-item>
+  </ion-list>
+
+  <ion-button expand="full" (click)="createGroup()">Create Group</ion-button>
+</ion-content>

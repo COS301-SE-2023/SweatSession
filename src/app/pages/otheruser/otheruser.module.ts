@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { OtheruserPageRoutingModule } from './otheruser-routing.module';
 
 import { OtheruserPage } from './otheruser.page';
-import { AuthModule, OtheruserStateModule } from 'src/app/states';
+import { AuthModule, FriendsStateModule, OtheruserStateModule } from 'src/app/states';
 import { FriendsComponent } from './friends/friends.component';
 import { SchedulesComponent } from './schedules/schedules.component';
 //import { ScheduleContentModule } from "../workout-scheduling/schedulecontent/schedule-content.module";
@@ -25,8 +25,10 @@ import { WorkoutSchedulingPageModule } from '../workout-scheduling/workout-sched
     WorkoutSchedulingPageModule,
     WorkoutSchedulingStateModule,
     BackButtonDirectiveModule,
-    AuthModule
+    AuthModule,
+    FriendsStateModule
   ],
   declarations: [OtheruserPage, FriendsComponent, SchedulesComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class OtheruserPageModule {}

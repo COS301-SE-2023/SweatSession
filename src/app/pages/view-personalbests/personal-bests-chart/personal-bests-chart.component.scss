@@ -1,0 +1,33 @@
+ion-item {
+    position: relative;
+  }
+  
+  .hover-text {
+    position: absolute;
+    top: 0;
+    left: 100%;
+    background-color: lightgray;
+    padding: 5px;
+    color: white;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  ion-item:hover .hover-text {
+    opacity: 1;
+  }
+  .max-height-card-content {
+    max-height: 250px;
+    overflow-y: auto; 
+  }
+
+  .chart-card {
+    padding: 20px;
+  }
+
+.rounded-button
+{
+  //border-radius: 20px;
+  //display: inline-block;
+
+}

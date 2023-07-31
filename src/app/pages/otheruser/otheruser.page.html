@@ -1,73 +1,118 @@
-<ion-header [translucent]="true" *ngIf="user!=null">
-  <ion-toolbar>
-    <ion-item>
-      <backbutton class="larger-back-button"></backbutton>
-      <ion-title>{{user!.name}}</ion-title>
-    </ion-item>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true" *ngIf="user!=null">
   <ion-card class="otheruser-profile">
-    <ion-item>
-      <ion-avatar>
-        <img src="{{user!.profileURL}}"/>
-      </ion-avatar>
-    </ion-item>
-    <ion-item id="userName">
-        {{user!.name}}
-    </ion-item>
-    <ion-item>
-        <ion-button *ngIf="friendshipStatus" (click)="removeFriend()">
+    <div class="profile-outer-container">
+      <div class="back-button">
+        <ion-buttons>
+          <backbutton slot="start"></backbutton>
+        </ion-buttons>
+      </div>
+      <div class="profile-img-container">
+        <ion-avatar class="profile-image">
+          <ion-img [src]="user!.profileURL"></ion-img>
+        </ion-avatar>
+      </div>
+      <ion-label class="profile-label">
+        <div class="name">
+          <h1>{{user!.displayName}}.</h1>
+        </div>
+        <div class="bio">
+          <p>{{user.bio}}.</p>
+        </div>
+      </ion-label>
+      <div class="group-buttons">
+        <ion-button fill="outline" *ngIf="friendshipStatus && !isRequested()" (click)="removeFriend()">
           <ion-icon name="person-outline" style="padding-right: 5px;"></ion-icon>
           Remove friend
         </ion-button>
-        <ion-button *ngIf="!friendshipStatus" (click)="addFriend()">
+        <ion-button fill="outline" *ngIf="!friendshipStatus && !isRequested()" (click)="addFriend()">
           <ion-icon name="person-outline" style="padding-right: 5px;"></ion-icon>
           Add friend
         </ion-button>
-    </ion-item>
-    <ion-item id="userBio">
-      {{user!.bio}}
-    </ion-item>
+        <ion-button fill="outline" *ngIf="isRequested()" [disabled]="true">
+          <ion-icon name="person-outline" style="padding-right: 5px;"></ion-icon>
+          requested
+        </ion-button>
+      </div>
+    </div>
+   
+    <div class="otheruser-profile-activity">
+      <div class="slide-header">
+        <h2 class="slides-headers first-header">
+          <ion-icon name="body"></ion-icon> Activities
+        </h2>
+      </div>
+      <swiper-container [slidesPerView]="2" centered-slides="true"  pagination="{hideOnClick: true}">
+        <swiper-slide>
+          <ion-card (click)="viewFriends()">
+            <ion-card-content>
+              <ion-card-title>
+                <ion-icon name="people-outline"></ion-icon>
+              </ion-card-title>
+              <h2>{{friends!.length + " Friends"}}</h2>
+            </ion-card-content>
+          </ion-card>
+        </swiper-slide>
+        <swiper-slide>
+          <ion-card>
+            <ion-card-content>
+              <ion-card-title>
+                <ion-icon name="people-outline"></ion-icon>
+              </ion-card-title>
+              <h2>0 Groups</h2>
+            </ion-card-content>
+          </ion-card>
+        </swiper-slide>
+        <swiper-slide>
+          <ion-card (click)="viewSchedules()">
+            <ion-card-content>
+              <ion-card-title>
+                <ion-icon name="barbell-outline"></ion-icon>
+              </ion-card-title>
+              <h2>{{workoutSchedules!.length}} Schedules</h2>
+            </ion-card-content>
+          </ion-card>
+        </swiper-slide>
+      </swiper-container>
+      
+      <div class="slide-header">
+        <h2 class="slides-headers">
+          <ion-icon name="trophy"></ion-icon> Achievements
+        </h2>
+      </div>
+      <swiper-container [slidesPerView]="2" centered-slides="true"
+        pagination="{hideOnClick: true}"
+      >
+        <swiper-slide>
+          <ion-card (click)="viewOtherUserBadges()">
+            <ion-card-content>
+              <ion-card-title>
+                <ion-icon name="medal"></ion-icon>
+              </ion-card-title>
+              <h2 *ngIf="badges$ | async as badges; else loaderContent">{{badges.receivedBadges.length}} Badges</h2>
+              <ng-template #loaderContent>
+                <div class="loader-wrapper">
+                  <ion-spinner></ion-spinner>
+                </div>
+              </ng-template>
+            </ion-card-content>
+          </ion-card>
+        </swiper-slide>
+        <swiper-slide>
+          <ion-card>
+            <ion-card-content>
+              <ion-card-title>
+                <ion-icon name="star-outline"></ion-icon>
+              </ion-card-title>
+              <h2 *ngIf="points$ | async as points; else loaderContent">{{points.userPoints}} Points</h2>
+              <ng-template #loaderContent>
+                <div class="loader-wrapper">
+                  <ion-spinner></ion-spinner>
+                </div>
+              </ng-template>
+            </ion-card-content>
+          </ion-card>
+        </swiper-slide>
+      </swiper-container>
+    </div>
    </ion-card>
-  
- <ion-card>
-  <ion-item style="box-shadow: 3px 3px 5px #1D3557;">
-    <ion-icon name="barbell-outline"></ion-icon>
-    <ion-card-header>{{workoutSchedules!.length}} WorkoutSchedules</ion-card-header>
-    <ion-button slot="end" (click)="viewSchedules()">View</ion-button>
-  </ion-item>
- </ion-card>
- <ion-card>
-  <ion-item style="box-shadow: 3px 3px 5px #1D3557;">
-    <ion-icon name="people-outline"></ion-icon>
-    <ion-card-header>{{friends!.length}} Friends</ion-card-header>
-    <ion-button slot="end" (click)="viewFriends()">View</ion-button>
-  </ion-item>
- </ion-card>
- <ion-card>
-  <ion-item>
-    <ion-icon name="medal"></ion-icon>
-    <!-- {{friends!.length}}  -->
-    <ion-card-header *ngIf="badges$ | async as badges">{{badges.receivedBadges.length}} Badges</ion-card-header>
-    <ion-button slot="end" (click)="viewOtherUserBadges()">view</ion-button>
-  </ion-item>
- </ion-card>
- <ion-card>
-  <ion-item>
-    <ion-icon name="star-outline"></ion-icon>
-    <!-- {{}} Points  -->
-    <ion-card-header *ngIf="points$ | async as points">{{points.userPoints}} Points</ion-card-header>
-    <!-- <ion-button slot="end" (click)="viewOtherUserBadges()">view</ion-button> -->
-  </ion-item>
- </ion-card>
- <!-- <ion-card>
-  <ion-item>
-    <ion-icon name="people-outline"></ion-icon>
-    <ion-card-header>{{friends!.length}} Points</ion-card-header>
-    <ion-button slot="end" (click)="viewFriends()">view</ion-button>
-  </ion-item>
- </ion-card> -->
-
 </ion-content>

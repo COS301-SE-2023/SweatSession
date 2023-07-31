@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>New Personal Best</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+    <form [formGroup]="PersonalBestForm" (ngSubmit)="onSubmit()">
+      <ion-item>
+        <ion-label>Name</ion-label>
+        <ion-input formControlName="name" type="text"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Email</ion-label>
+        <ion-input formControlName="email" type="email"></ion-input>
+      </ion-item>
+      <ion-button type="submit" [disabled]="PersonalBestForm.invalid">Submit</ion-button>
+    </form>
+
+ 
+    
+<!-- </ion-content> -->

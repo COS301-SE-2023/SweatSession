@@ -10,8 +10,7 @@
         "firebase-debug.*.log"
       ],
       "predeploy": [
-        "npm --prefix \"$RESOURCE_DIR\" run lint",
-        "npm --prefix \"$RESOURCE_DIR\" run build"
+        
       ]
     }
   ],
@@ -23,20 +22,23 @@
     "indexes": "firestore.indexes.json"
   },
   "hosting": {
-    "public": "public",
+    "source": ".",
     "ignore": [
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
-    ]
+    ],
+    "frameworksBackend": {
+      "region": "us-central1"
+    }
   },
   "storage": {
     "rules": "storage.rules"
   },
   "ui": {
-      "enabled": true,
-      "port": 5001
-    },
+    "enabled": true,
+    "port": 5001
+  },
   "emulators": {
     "auth": {
       "port": 5002

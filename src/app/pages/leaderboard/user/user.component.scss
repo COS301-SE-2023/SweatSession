@@ -1,0 +1,31 @@
+.user {
+    margin: 8px;
+    background-color: #A8DADC;
+    border-radius: 2px;
+    .user-name {
+        font-weight: bolder;
+    }
+    
+    .stats {
+        display: flex;
+        justify-content: center;
+        color: #457B9D;
+    }
+
+    .position {
+        color: #E63946;
+        font-weight: bolder;
+        font-style: italic;
+        font-size: 20px;
+    }
+    
+    ion-item {
+        --background: transparent;
+    }
+    
+    .user-pr {
+        text-align: center;
+        margin: 10px;
+        font-style: italic;
+    }
+}

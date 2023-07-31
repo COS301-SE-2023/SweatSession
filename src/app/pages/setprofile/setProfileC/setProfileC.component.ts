@@ -7,6 +7,7 @@ import { ModalController } from '@ionic/angular';
 import { SetProfileService } from 'src/app/services';
 import { AuthApi } from 'src/app/states/auth/auth.api';
 import { getCurrentUserId } from 'src/app/actions';
+import { UserprofilePage } from 'src/app/pages/userprofile/userprofile.page'
 
 
 @Component({
@@ -41,14 +42,13 @@ export class SetprofileCComponent  implements OnInit {
     private store: Store,
     private modalController: ModalController,
     private setprofileservices: SetProfileService, 
-    private authApi: AuthApi,
+    private authApi: AuthApi, 
   ){}
 
     getUserid() {
       return  this.authApi.getCurrentUserId();
     }
-
-
+    
     saveProfile()
     {
       this.UpadateP = {
@@ -64,6 +64,7 @@ export class SetprofileCComponent  implements OnInit {
       }
       this.setprofileservices.updateProfile(this.UpadateP);
       this.DetailsSaved();
+      // this.userprofilepage.updateprofileinfor();
 
     }
 

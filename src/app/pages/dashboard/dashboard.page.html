@@ -1,77 +1,174 @@
-<div class="outer-container">
+ <div class="outer-container">
   <ion-content>
     <div class="inner-container">
-      <!-- *ngIf="(profile$ | async) as profile; else noProfile" -->
-      <ion-grid>
-        <ion-row>
-          <ion-col size="12">
+      <div class="slider-container">
+        <div class="slider-header">
+          <h2>Today</h2>
+        </div>
+        <swiper-container [slidesPerView]="2" centered-slides="true"  pagination="{hideOnClick: true}">
+          <swiper-slide>
             <ion-card>
-              <ion-card-title> 
-                <ion-icon name="receipt-outline"></ion-icon> Schedules
-              </ion-card-title>
-              <ion-skeleton-text [animated]="true" *ngIf="load"></ion-skeleton-text>
-              <ion-card-content *ngIf="!load">
-                <swiper-container effect="flip">
-                  <swiper-slide>
-                    <div class="slide">
-                      {{upcoming}} scheduled sessions<br>
-                    </div>
-                  </swiper-slide>
-                  <swiper-slide>
-                    <div class="slide">
-                      {{completed}} completed workout sessions
-                    </div>
-                  </swiper-slide>
-                  <swiper-slide>
-                    <div class="slide">
-                      {{inSession}} in session sessions
-                    </div>
-                  </swiper-slide>
-                </swiper-container>
-                <ion-button routerLink="/workout-scheduling" slot="end">view</ion-button>
+              <ion-card-content>
+                <ion-card-title>
+                  <ion-icon name="receipt-outline"></ion-icon>
+                </ion-card-title>
+               <ion-item lines="none">
+                <ion-text>Sessions</ion-text>
+                <ion-icon name="chevron-forward" slot="end" routerLink="/workout-scheduling"></ion-icon>
+               </ion-item>
               </ion-card-content>
             </ion-card>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col size="12">
+          </swiper-slide>
+          <swiper-slide>
             <ion-card>
-              <ion-card-title> 
-                <ion-icon name="american-football-outline"></ion-icon> Goals
-              </ion-card-title>
-               <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+              <ion-card-content>
+                <ion-card-title>
+                  <ion-icon name="american-football-outline"></ion-icon>
+                </ion-card-title>
+               <ion-item lines="none">
+                <ion-text slot="start">Goals</ion-text>
+                <ion-icon name="chevron-forward" slot="end"  routerLink="/fitnessgoals"></ion-icon>
+               </ion-item>
+              </ion-card-content>
             </ion-card>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col size="6">
+          </swiper-slide>
+          <swiper-slide>
             <ion-card>
-              <ion-card-title> 
-                <ion-icon name="bar-chart-outline"></ion-icon> Position
-              </ion-card-title>
-                <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+              <ion-card-content>
+                <ion-card-title>
+                  <ion-icon name="bar-chart-outline"></ion-icon>
+                </ion-card-title>
+                <ion-item lines="none">
+                  <ion-text slot="start">Rank</ion-text>
+                  <ion-icon name="chevron-forward" slot="end" routerLink="/home/leaderboard"></ion-icon>
+                 </ion-item>
+              </ion-card-content>
             </ion-card>
-          </ion-col>
-          <ion-col size="6">
+          </swiper-slide>
+          <swiper-slide>
             <ion-card>
-              <ion-card-title> 
-                <ion-icon name="star-outline"></ion-icon> Points
-              </ion-card-title>
-               <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+              <ion-card-content>
+                <ion-card-title>
+                  <ion-icon name="analytics-outline"></ion-icon>
+                </ion-card-title>
+                <ion-item lines="none">
+                  Performance
+                  <ion-icon name="chevron-forward" slot="end" routerLink="/view-personalbests"></ion-icon>
+                 </ion-item>
+              </ion-card-content>
             </ion-card>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col size="12">
-            <ion-card>
-              <ion-card-title> 
-                <ion-icon name="medal"></ion-icon> Badges
-              </ion-card-title>
-               <ion-skeleton-text [animated]="true"></ion-skeleton-text>
-            </ion-card>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
+          </swiper-slide>
+        </swiper-container>
+      </div>
+
+      <div class="slider-container">
+        <div class="slider-header">
+          <h2>Rewards</h2>
+        </div>
+        <ion-grid>
+          <ion-row>
+            <ion-col size="6">
+              <ion-card class="grid-cards" routerLink="/points">
+                <ion-card-content>
+                  <ion-card-title>
+                    <ion-icon name="star"></ion-icon>
+                  </ion-card-title>
+                  Points
+                </ion-card-content>
+              </ion-card>
+            </ion-col>
+            <ion-col size="6">
+              <ion-card class="grid-cards" routerLink="/badges">
+                <ion-card-content>
+                  <ion-card-title>
+                    <ion-icon name="trophy"></ion-icon>
+                  </ion-card-title>
+                  Badges
+                </ion-card-content>
+              </ion-card>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col size="12">
+              <ion-card class="grid-cards">
+                <ion-card-content>
+                  <ion-card-title>
+                    <ion-icon name="receipt"></ion-icon>
+                  </ion-card-title>
+                  0 Sessions Completed
+                </ion-card-content>
+              </ion-card>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+
+      <div class="slider-container">
+        <div class="slider-header">
+          <h2>Discover</h2>
+        </div>
+        <ion-card class="dashboard-card">
+          <ion-grid>
+            <ion-row>
+              <ion-col size="6">
+                <ion-card class="discover-card" routerLink="/workout-scheduling">
+                 <ion-card-content>
+                  <ion-card-title>
+                    <ion-icon name="calendar-outline"></ion-icon>
+                  </ion-card-title>
+                  Schedules
+                 </ion-card-content>
+                </ion-card>
+              </ion-col>
+              <ion-col size="6">
+                <ion-card class="discover-card" routerLink="/friends">
+                 <ion-card-content>
+                  <ion-card-title>
+                    <ion-icon name="people-circle-outline"></ion-icon>
+                  </ion-card-title>
+                 friends
+                 </ion-card-content>
+                </ion-card>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size="6">
+                <ion-card class="discover-card" routerLink="/groups">
+                 <ion-card-content>
+                  <ion-card-title>
+                    <ion-icon name="people-outline"></ion-icon>
+                  </ion-card-title>
+                 Groups
+                 </ion-card-content>
+                </ion-card>
+              </ion-col>
+              <ion-col size="6">
+                <ion-card class="discover-card" routerLink="/home/search">
+                 <ion-card-content>
+                  <ion-card-title>
+                    <ion-icon name="barbell-outline"></ion-icon>
+                  </ion-card-title>
+                 Gyms
+                 </ion-card-content>
+                </ion-card>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size="12">
+                <ion-card class="discover-card">
+                 <ion-card-content>
+                  <ion-card-title>
+                    <ion-icon name="watch-outline"></ion-icon>
+                  </ion-card-title>
+                 Connect!
+                 </ion-card-content>
+                </ion-card>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card>
+      </div>
    </div>
   </ion-content>
 </div>

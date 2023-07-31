@@ -1,0 +1,55 @@
+<ion-header style="background-color: #E63946;">
+  <ion-toolbar>
+    <ion-item lines="none">
+      <backbutton slot="start"></backbutton>
+      <ion-title style="margin-left: 0rem;">Health Data</ion-title>
+    </ion-item>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="spinner-container" *ngIf="isLoading">
+    <ion-spinner></ion-spinner>
+  </div>
+
+  <div class="icon-container">
+    <ion-icon name="heart" class="health-icon"></ion-icon>
+  </div>
+  <ion-text class="subtext">Enter all your health data here for catered results</ion-text>
+
+  <form [formGroup]="healthDataForm" *ngIf="!isLoading" (ngSubmit)="saveHealthData()">
+    <ion-list class="centered">
+      <ion-item class="full-width">
+        <div class="input-field">
+          <ion-label>Height</ion-label>
+          <ion-input formControlName="height" type="text"></ion-input>
+        </div>
+      </ion-item>
+
+      <ion-item class="full-width">
+        <div class="input-field">
+          <ion-label>Weight</ion-label>
+          <ion-input formControlName="weight" type="text"></ion-input>
+        </div>
+      </ion-item>
+
+      <ion-item class="full-width">
+        <div class="input-field">
+          <ion-label>Diet</ion-label>
+          <ion-input formControlName="diet" type="text"></ion-input>
+        </div>
+      </ion-item>
+
+      <ion-item class="full-width">
+        <div class="input-field">
+          <ion-label>Medical Conditions</ion-label>
+          <ion-input formControlName="medicalConditions" type="text"></ion-input>
+        </div>
+      </ion-item>
+      
+      <ion-item>
+        <ion-button class="submit" expand="full" type="submit" [disabled]="!healthDataForm.valid">Submit</ion-button>
+      </ion-item>
+    </ion-list>
+  </form>
+</ion-content>

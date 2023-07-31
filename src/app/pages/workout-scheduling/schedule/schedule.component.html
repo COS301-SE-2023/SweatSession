@@ -1,4 +1,4 @@
-<search class="custom-search" [data]="schedules" [placeholder]="'find schedule'">Find schedule</search>
+<search class="custom-search" [data]="schedules" [placeholder]="'Find Scheduled Sessions'">Find schedule</search>
 
 <div *ngFor="let schedule of schedules" class="schedules">
   <schedule-content [schedule]="schedule"></schedule-content>
@@ -9,7 +9,7 @@
     <ion-item>
       <ion-icon name="receipt-outline"></ion-icon>
       <ion-text>
-        You have 0 {{categoryName}} schedules
+        You have 0 {{categoryName}} scheduled workout sessions.
       </ion-text>
     </ion-item>
   </ion-card>

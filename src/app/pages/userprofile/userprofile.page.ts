@@ -8,6 +8,10 @@ import { GetFriendsAction } from 'src/app/actions/friend.action';
 import { SetProfileService } from 'src/app/services';
 import { FriendsState } from 'src/app/states';
 import { AuthApi } from 'src/app/states/auth/auth.api';
+import {getAuth} from "@angular/fire/auth";
+import { register } from 'swiper/element/bundle';
+
+register();
 
 @Component({
   selector: 'app-userprofile',
@@ -23,6 +27,8 @@ export class UserprofilePage implements OnInit {
   friendsSize = 0;
   groups$ = 0;
   getUser : IGetProfile = {userId: 'na'};
+  currUserId: string | undefined = undefined;
+
 
   constructor(
     private Nav: NavController,
@@ -30,16 +36,29 @@ export class UserprofilePage implements OnInit {
     private setprofileservices: SetProfileService, 
     private authApi: AuthApi,) {}
 
-  getUserid() {
-    return  this.authApi.getCurrentUserId();
-  }
 
   ngOnInit() {
     this.displayFriendsSize();
-    this.getUserid().then((id) => {
-      this.getUser.userId = id;
+    this.updateprofileinfor();
+  }
+
+  updateprofileinfor()
+  {
+    const auth = getAuth();
+        this.currUserId = auth.currentUser?.uid;
+
+        if (this.currUserId!=undefined)
+        {
+        sessionStorage.setItem('currUserId', this.currUserId);
+        }
+        else
+        {
+        this.currUserId = sessionStorage.getItem('currUserId') ?? "";
+        }
+
+    this.getUser.userId = this.currUserId;
+
     this.setprofileservices.getProfile(this.getUser).subscribe((profile) => {
-        
           this.ProfilePicture$ = profile.profile.profileURL;
           this.displayName$ = profile.profile.displayName;
           this.myBio$ = profile.profile.bio;
@@ -52,7 +71,6 @@ export class UserprofilePage implements OnInit {
           }
            
       });
-    });
   }
 
   Leaderboard() {
@@ -75,7 +93,7 @@ export class UserprofilePage implements OnInit {
     this.store.dispatch(new GetFriendsAction())
     this.friendsSize$.subscribe((response)=>{
       this.friendsSize = response;
-      console.log("number of friends: " +response);
+      // console.log("number of friends: " +response);
     })
   }
 }

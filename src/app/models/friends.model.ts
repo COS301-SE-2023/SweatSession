@@ -37,3 +37,9 @@ export interface IAddedFriend {
     validate: boolean;
     friend?: IFriendsModel;
 }
+
+export interface IFriendRequest {
+    from: string;
+    to: string;
+}
+

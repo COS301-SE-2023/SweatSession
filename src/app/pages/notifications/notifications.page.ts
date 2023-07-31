@@ -5,7 +5,7 @@ import { Notice } from 'src/app/models/notice.model';
 import { AlertController, NavController } from '@ionic/angular';
 import { getAuth } from 'firebase/auth';
 import { IFriendsModel } from 'src/app/models';
-import { AddFriendAction } from 'src/app/actions';
+import { AddFriendAction, RemoveFriendAction, RemoveFriendRequest } from 'src/app/actions';
 import { Store } from '@ngxs/store';
 // import { HomePage } from '../home/home.page';
 // import { Router } from '@angular/router';
@@ -52,6 +52,11 @@ export class NotificationsPage implements OnInit {
       this.noticeList = notices;
       for(let i = 0 ; i<this.noticeList.length ; i++){
         if(this.noticeList[i].senttoid == this.currUserId){
+          for(let x = 0 ; x<this.noticeList2.length ; x++){
+            if(this.noticeList2[x].id == this.noticeList[i].id){
+              return ;
+            }
+          }
           this.noticeList2.push(this.noticeList[i]) ;
         }
       }
@@ -79,7 +84,8 @@ export class NotificationsPage implements OnInit {
 
     for(let i = 0 ; i<this.noticeList2.length ; i++){
       this.noticeService.deleteNotices(this.noticeList2[i].id!);
-      console.log(this.noticeList2[i].id)
+      console.log(this.noticeList2[i].id) ;
+      
     }
     this.noticeList2 = [] ;
   }
@@ -94,7 +100,13 @@ export class NotificationsPage implements OnInit {
     }
   }
 
-  rejectFriendRequest(senderid: string , senttoid: string){
+  rejectFriendRequest(notice: Notice , senderid: string , senttoid: string){
+    const friend: IFriendsModel = {
+      userId: notice.senderid,
+      name: notice.sendername,
+      profileURL: notice.profileurl,
+    }
+    this.store.dispatch(new RemoveFriendAction(friend))
     this.noticeService.rejectFriend(senderid , senttoid) ;
     console.log('reject working');
 
@@ -111,6 +123,7 @@ export class NotificationsPage implements OnInit {
       name: notice.sendername,
       profileURL: notice.profileurl,
     }
+    this.store.dispatch(new RemoveFriendRequest(notice.senttoid!))
     this.store.dispatch(new AddFriendAction(friend))
     this.clearNotification(notice.id!);
   }

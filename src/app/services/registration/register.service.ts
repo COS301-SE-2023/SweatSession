@@ -35,10 +35,10 @@ export class RegisterService {
       const [dName] = regEmail.split("@"); //this is to get the part until the @
       const newProfile:IProfileModel = {
         userId:currUserId,
-        name: regEmail,
+        name: dName,
         displayName:dName,
         email: regEmail,
-        bio: "Hi there, I am new to Sweat Session!",
+        bio: "Hi there, I am new to SweatSession!",//SweatSession is one word
         profileURL: "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png",//will add some default schelotte
         phoneNumber: "0000000000",
         height: '0',

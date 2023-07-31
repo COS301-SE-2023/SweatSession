@@ -1,0 +1,45 @@
+.outer-container {
+    height: 100vh;
+}
+
+.inner-container {
+    padding-top: 50px;
+    height: 100%;
+}
+
+ion-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    --background: transparent;
+}
+
+p {
+    color: grey;
+    font-style: italic;
+}
+
+.last-message {
+    font-weight: bold;
+}
+
+ion-segment {
+    border-radius: 0px;
+}
+
+.loader-wrapper {
+    height: 80vh;
+}
+
+.user-profile-img {
+    height: 70px;
+    width: 70px;
+}
+
+.messages-list {
+    padding: 0.9rem;
+}
+
+.user-name {
+    font-weight: bolder;
+}

@@ -57,7 +57,13 @@ ion-header{
 .flex-center3{
     display: flex;
     justify-content: center;
+    align-items: center;
     
     border: radius 50px;
 
 }
+
+.right-align-label {
+    display: flex;
+    justify-content: flex-end; /* Align the content to the right */
+  }

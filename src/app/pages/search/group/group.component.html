@@ -1,0 +1,39 @@
+<div class="content-container">
+  <ion-searchbar
+      placeholder="Search for groups"
+      [(ngModel)] = "searchTerms.searchQuery"
+      (ionInput) = onSearchInput($event)
+      color="light"
+      animated
+      >
+  </ion-searchbar>
+  
+  <div class="search-suggestions" *ngIf="searchTerms.showSuggestions">
+    <ion-list >
+      <ion-item lines="none"
+        *ngFor="let suggestion of searchTerms.filteredSuggestions"
+        (click)="selectGroup(suggestion)">
+        <ion-avatar slot="start">
+          <ion-img src ="{{suggestion.profileURL}}"></ion-img>
+        </ion-avatar>
+        <ion-label>
+          <h2>{{ suggestion.displayName }}</h2>
+          <p>{{"~ " + suggestion.bio}}</p>
+        </ion-label>
+      </ion-item>
+      <ion-item lines="none" *ngIf="showNoResults && this.searchTerms.filteredSuggestions!.length==0">
+        <ion-text>No groups found</ion-text>
+      </ion-item>
+    </ion-list>
+  </div>
+</div>
+
+<ion-modal #modal [isOpen]="showGroupPage">
+  <ng-template>
+    <ion-content>
+      <group-home-page
+        [selectedGroup]="selectedGroup"
+        [modal]="modal"></group-home-page>
+    </ion-content>
+  </ng-template>
+</ion-modal>

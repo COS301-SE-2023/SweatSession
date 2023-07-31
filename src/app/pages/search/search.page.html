@@ -3,14 +3,14 @@
     <div class="inner-container">
       <ion-segment (ionChange)="onSegmentChange($event)" value="user">
         <ion-segment-button value="user">
-          <ion-label>User</ion-label>
+          <ion-label>Users</ion-label>
         </ion-segment-button>
-        <ion-segment-button value="gym">
-          <ion-label>Gym</ion-label>
+        <ion-segment-button value="group">
+          <ion-label>Groups</ion-label>
         </ion-segment-button>
       </ion-segment>
 
-      <gymsearch [hidden]="selectedSegment !=='gym'"></gymsearch>
+      <groupsearch [hidden]="selectedSegment !=='group'"></groupsearch>
       <usersearch [hidden]="selectedSegment !=='user'"></usersearch>
     </div>
   </ion-content>

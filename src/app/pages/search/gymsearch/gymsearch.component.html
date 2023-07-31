@@ -1,13 +1,34 @@
-<ion-searchbar
+<ion-header>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet">
+  <ion-toolbar>
+    <ion-title>Select Location</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismissModal()">Close</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="centralize">
+<!-- <ion-searchbar
       placeholder="Search for gyms"
       [(ngModel)]="searchTerm"
       (ionInput)="onSearchInput($event)"
       color="light"
       animated
       >
-</ion-searchbar>   
+</ion-searchbar>    -->
 
-<ion-card *ngFor="let item of filteredData$ | async" >
+<ion-item>
+  <ion-label position="stacked">Search Radius (km): </ion-label>
+  <ion-input type="number" [(ngModel)]="maxDistance" (ionInput)="loadData()"></ion-input>
+</ion-item>
+
+<ion-item>
+  <ion-label position="stacked">Search for a gym by name: </ion-label>
+  <ion-input [(ngModel)]="searchTerm" (ionInput)="onSearchInput($event)" placeholder="Enter a gym name" clearInput animated></ion-input>
+</ion-item>
+
+<!-- <ion-card *ngFor="let item of filteredData$ | async" (click)="selectGym(item.name)">
   <img [src]="item.image" alt="Silhouette of mountains" />
   <ion-card-header>
     <ion-card-title>{{ item.name }}</ion-card-title>
@@ -17,4 +38,70 @@
   <ion-card-content>
     {{ item.description }}
   </ion-card-content>
-</ion-card>
+</ion-card> -->
+<ng-container *ngFor="let gym of gyms.results">
+  <!-- {{ !gym.name || gym.name.toLowerCase().includes(searchTerm.toLowerCase()) }} -->
+  <ng-container *ngIf="gym.business_status=='OPERATIONAL'">
+  <!-- <ng-container *ngIf="gym.name.toLowerCase().includes(searchTerm.toLowerCase())"> -->
+    <ion-card class="locationCard" *ngIf="gym.name.toLowerCase().includes(searchTerm.toLowerCase())">
+      <ng-container *ngIf="gym?.photos?.[0]?.photo_reference">
+        <img [src]="getPhotoUrl(gym?.photos?.[0]?.photo_reference)"  alt="Silhouette of mountains" class="gymImage"/>
+      </ng-container>
+      <ion-card-header style="display: flex; flex-direction: column;" class="gymDetails">
+        <ion-card-title class="whiteText" >{{ gym.name }}</ion-card-title>
+        <br>
+        <ion-card-subtitle class="whiteText" >{{ gym.vicinity }}</ion-card-subtitle>
+        <br>
+        <ion-card-subtitle class="whiteText" >Rating: {{ gym.rating ? gym.rating : 'No Rating' }}<ion-icon name="star" class="ratingIcon"></ion-icon></ion-card-subtitle>
+      </ion-card-header>
+      
+        <ion-card-content class="friend-container">
+          <ng-container *ngIf="gym.friendsLocationInfo && gym.friendsLocationInfo[0] && gym.friendsLocationInfo[0].length > 0; else noFriends">
+            <ion-card-content *ngIf="showFriends[gym.place_id]; else dontShowFriends" class="friend-container">
+            <ion-card-header class="whiteText friendsHeader">
+              Friends that have workout sessions scheduled here:
+            </ion-card-header>
+            <ul class="no-bullet">
+              <li *ngFor="let friend of gym.friendsLocationInfo" (click)="viewProfile(friend.id)">
+                <div class="friend-details">
+                <img [src]="friend[0].profilePhoto" alt="Profile Photo" class="friend-photo"/>
+                <div>
+                  <p class="friendDisplayName">{{ friend[0].friendDisplayName }}</p>
+                  <ul>
+                    <li *ngFor="let gymSession of friend">
+                      <h1 class="workoutName">{{ gymSession.workoutName }}</h1>
+                      <p class="dateAndTime">{{ formatDate(gymSession.date) }}: {{ gymSession.startTime }}-{{ formatTime(gymSession.endTime) }}</p>
+                    </li>
+                  </ul>
+                </div>
+                </div>
+              </li>
+            </ul>
+          </ion-card-content>
+          <ng-template #dontShowFriends>
+            <ion-card-header class="whiteText friendsHeader showFriendsOrNot" (click)="toggleFriends(gym.place_id)">
+              {{showFriends[gym.place_id] ? 'Hide' : 'Show'}} Friends that are planning a workout here
+            </ion-card-header>
+          </ng-template>
+          </ng-container>
+          <ng-template #noFriends>
+            <ion-card-header class="whiteText friendsHeader">
+              No friends have workout sessions scheduled here
+            </ion-card-header>
+          </ng-template>
+        </ion-card-content>
+        <ion-card-content (click)="selectGym(gym.name, gym.place_id)" class="selectGym">
+          Select Gym
+        </ion-card-content>
+    </ion-card>
+  <!-- </ng-container> -->
+  </ng-container>
+</ng-container>
+
+<ion-item class="nextPage" *ngIf="nextPageToken" (click)="nextPage()">
+  <!-- <div class="next-page-content"> -->
+    Next Page: <ion-icon name="arrow-forward"></ion-icon> 
+  <!-- </div> -->
+</ion-item>
+
+</ion-content>

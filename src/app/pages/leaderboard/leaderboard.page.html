@@ -1,9 +1,35 @@
 <div class="outer-container">
   <ion-content>
     <div class="inner-container">
-      <div class="message">
-        Page under construction :)
-      </div>
-   </div>
+      <ion-segment (ionChange)="onSegmentChange($event)" value="everyone">
+        <ion-segment-button value="everyone">Everyone</ion-segment-button>
+        <ion-segment-button value="friends">Friends</ion-segment-button>
+      </ion-segment>
+
+      <ng-container *ngIf="users.length > 0; else loaderContent">
+        <div [hidden]="selectedSegment!=='everyone'">
+          <leaderboard-user *ngFor="let user of users; let i=index"
+            [user]="user"
+            [position]="i+1"
+            [isCurrentUser]="isCurrentUser(user)"
+          >
+          </leaderboard-user>
+        </div>
+  
+        <div [hidden]="selectedSegment!=='friends'">
+          <leaderboard-user *ngFor="let user of friends; let i=index"
+            [user]="user"
+            [position]="i+1"
+            [isCurrentUser]="isCurrentUser(user)"
+          >
+          </leaderboard-user>
+        </div>
+      </ng-container>
+      <ng-template #loaderContent>
+        <div *ngIf="isLoading" class="loader-wrapper">
+          <ion-spinner></ion-spinner>
+        </div>
+      </ng-template>
+    </div>
   </ion-content>
 </div>

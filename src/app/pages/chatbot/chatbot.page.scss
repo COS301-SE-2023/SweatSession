@@ -1,0 +1,56 @@
+.user-message {
+  background-color: #A8DADC; //#f0f0f0; 
+  border-radius: 15px;
+  padding: 10px;
+  margin-bottom: 10px;
+  margin-right: auto; // Push the message to the left
+  max-width: 70%; // Limit the width to a percentage of the container
+  align-self: flex-start; 
+  
+  }
+
+* {
+  font-family: 'Montserrat', sans-serif;
+}
+
+ion-footer{
+  ion-toolbar{
+    display: flex;
+    justify-content: center;
+  }
+}
+
+  .bot-message {
+   background-color: #e2e6e9; //#e51b1b;
+   color: #000;
+   border-radius: 15px;
+   padding: 10px;
+   margin-left: auto; 
+   max-width: 70%; 
+   align-self: flex-end; 
+   white-space: pre-line;
+   margin-bottom: 10px;
+  }
+
+  .loading-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+  }
+
+  .center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .center2{
+    align-items: center;
+    justify-content: center;
+    display: flex;
+  }
+
+  .main{
+    --background: none;
+    --background: url('/assets/Asset 2.png') no-repeat center/contain fixed;
+}

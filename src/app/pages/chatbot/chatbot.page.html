@@ -1,9 +1,33 @@
-<div class="outer-container">
-  <ion-content>
-    <div class="inner-container">
-      <div class="message">
-        Page under construction :)
+<ion-header></ion-header>
+<br><br><br>
+<ion-content class="main">
+  <h1 class="center2">SweatSession-Bot</h1>
+  <br>
+  <ion-list>
+    
+    <ion-item lines="none" *ngFor="let message of messages">
+     
+      <div [ngClass]="{'user-message': message.sender === 'user', 'bot-message': message.sender === 'SS-bot'}">
+        {{ message.displayText }}
       </div>
-   </div>
-  </ion-content>
-</div>
+    </ion-item><br>
+  </ion-list>
+  <div *ngIf="loading" class="loading-container">
+    <ion-spinner color="secondary" class="center"></ion-spinner>
+  </div>
+  <br><br>
+</ion-content>
+
+<ion-footer class="input-field-footer">
+  <ion-item lines="none" class="message-input-field">
+    <div class="input-field-wrapper">
+      <ion-textarea placeholder="Enter your Question" [(ngModel)]="userMessage"></ion-textarea>
+    </div>
+    <ion-fab horizontal="end" *ngIf="isText()">
+      <ion-fab-button class="message-send-fab-button" (click)="sendUserMessage()">
+        <ion-icon name="send" class="message-send-icon"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+  </ion-item>
+</ion-footer>
+

@@ -8,3 +8,4 @@ export * from "./exercise/exercise.service";
 export * from "./otheruser/otheruser.service";
 export * from "./navigation/navigation.service";
 export * from "./fitnessgoal/goal.service";
+export * from "./message/messages.service";

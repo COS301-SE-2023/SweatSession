@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <backbutton (click)="removeSession()"></backbutton>
+    </ion-buttons>
+    <ion-title>
+      <ion-chip id="group-name">
+        <ion-avatar>
+          <ion-img alt="Silhouette of a person's head" [src]="group.profileURL"/>
+        </ion-avatar>
+        <ion-label>
+          {{group.displayName}}
+        </ion-label>
+      </ion-chip>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content #contentElement>
+  <div class="chat-container">
+    <div *ngFor="let message of chats">
+      <chatbox
+        [message]="message"
+        [currentUserId]="currentUserId"
+        [showUser]=true
+      ></chatbox>
+    </div>
+  </div>
+
+  <ion-modal #modal trigger="group-name">
+    <ng-template>
+      <ion-content>
+        <group-home-page
+          [selectedGroup]="group"
+          [modal]="modal"></group-home-page>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+</ion-content> 
+
+<ion-footer>
+  <ion-item lines="none" class="message-input-field">
+    <div class="input-field-wrapper">
+      <ion-textarea placeholder="Type a message" [(ngModel)]="message.text"></ion-textarea>
+    </div>
+    <ion-fab horizontal="end" *ngIf="isText()">
+      <ion-fab-button>
+        <ion-icon name="send" (click)="sendMessage()" class="message-send-icon"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+  </ion-item>
+</ion-footer>

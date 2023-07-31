@@ -1,0 +1,57 @@
+.chat-container {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+.group-info {
+    display: flex;
+    justify-content: center;
+}
+
+.profile-inner-wrapper {
+    width: fit-content;
+    max-width: 95%;
+    margin: auto;
+    padding-bottom: 30px;
+}
+
+.profile-image {
+    height: 150px;
+    width: 150px;
+    margin-bottom: 20px;
+}
+
+ion-title {
+    text-align: center;
+}
+
+ion-chip {
+    background-color: transparent;
+}
+
+ion-label div, .profile-img-container  {
+    width: fit-content;
+    margin: auto;
+}
+
+.profile-label {
+    font-weight: bolder;
+    p {
+        font-style: italic;
+    }
+}
+
+.item-header {
+    --background: #A8DADC;
+}
+
+ion-button {
+    --background: #E63946;
+    --color: black;
+}
+
+ion-icon {
+    margin-right: 5px;
+    color: #E63946;
+}
