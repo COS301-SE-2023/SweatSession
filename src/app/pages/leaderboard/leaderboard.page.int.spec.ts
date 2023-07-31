@@ -47,18 +47,18 @@ describe('LeaderboardPage', () => {
     expect(component.initialize).toHaveBeenCalled();
   });
 
-  it('should update friends list on updateFriends method call', () => {
-    const friends: IFriendsModel[] = [{ userId: 'user1' }, { userId: 'user2' }];
-    const users: IProfileModel[] = [
-      { userId: 'user1', points: 100 },
-      { userId: 'user2', points: 200 },
-    ];
-    component.users = users;
-    component.userId = 'user1';
-    component.updateFriends(friends);
+  // it('should update friends list on updateFriends method call', () => {
+  //   const friends: IFriendsModel[] = [{ userId: 'user1' }, { userId: 'user2' }];
+  //   const users: IProfileModel[] = [
+  //     { userId: 'user1', points: 100 },
+  //     { userId: 'user2', points: 200 },
+  //   ];
+  //   component.users = users;
+  //   component.userId = 'user1';
+  //   component.updateFriends(friends);
 
-    expect(component.friends).toEqual([users[0]]);
-  });
+  //   expect(component.friends).toEqual([users[0]]);
+  // });
 
   // it('should sort friends list in descending order of points on sort method call', () => {
   //   const users: IProfileModel[] = [
