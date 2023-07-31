@@ -78,6 +78,6 @@ export class ChatroomComponent  implements OnInit {
   }
 
   isText() {
-    return this.message.text.trim()!== '';
+    return this.message.text?.trim() !== '';
   }
 }
