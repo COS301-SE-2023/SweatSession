@@ -24,9 +24,8 @@ jobs:
       - run: echo "${{secrets.ENVIRONMENT_VARIABLES}}" >> src/environments/environment.ts
       - run: yarn
       - run: yarn fix:node_modules
-      - name: Login to Firebase 
-        env:
-          FIREBASE_TOKEN: "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}"
-        run: firebase login:ci
-      - run: ionic build --prod
-      - run: firebase deploy
+      - uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: "${{ secrets.GITHUB_TOKEN }}"
+          firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}"
+          projectId: sweatsession
