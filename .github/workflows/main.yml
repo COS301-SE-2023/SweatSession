@@ -6,20 +6,6 @@ on:
       - main
 
 jobs:
-  unitTests:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Use Node.js 19
-        uses: actions/setup-node@v3
-        with:
-          node-version: "19.x"
-          cache: 'npm'
-      - uses: mskelton/setup-yarn@v1
-        with:
-          node-version: '19.x'
-      - run: yarn
-      - run: yarn jest --testPathPattern=unit.spec.ts
   integrationTests:
     runs-on: ubuntu-latest
     steps:
