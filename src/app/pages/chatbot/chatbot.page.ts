@@ -73,7 +73,7 @@ export class ChatbotPage implements OnInit {
         if (this.isHealthRelated(botMessage)){
           this.messages.push({ text: botMessage, sender: 'SS-bot', displayText: botMessage });
         }else{
-          this.messages.push({ text: 'Sorry, I can only answer health-related questions.', sender: 'SS-bot' });
+          this.messages.push({ text: 'Sorry, I can only answer health-related questions.', sender: 'SS-bot' , displayText: 'Sorry, I can only answer health-related questions.'});
         }
         
       });
