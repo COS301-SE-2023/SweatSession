@@ -1,10 +1,12 @@
 import { Store } from '@ngxs/store';
 import { Component, OnInit } from '@angular/core';
 import { Select } from '@ngxs/store';
-import { Observable, switchMap, tap, lastValueFrom, forkJoin } from 'rxjs';
+import { Observable, switchMap, tap, lastValueFrom, forkJoin, map, filter } from 'rxjs';
 import { GetFriendsAction, GetUsersAction, SubscribeToAuthState } from 'src/app/actions';
 import { IFriendsModel, IProfileModel, IPoints } from 'src/app/models';
 import { AuthState, FriendsState, OtheruserState, PointsApi } from 'src/app/states';
+import { BadgesApi } from 'src/app/states/badges/badges.api';
+import { IBadges } from 'src/app/models/badges.model';
 @Component({
   selector: 'app-leaderboard',
   templateUrl: './leaderboard.page.html',
@@ -21,8 +23,9 @@ export class LeaderboardPage implements OnInit {
   friends: IProfileModel[]=[];
   selectedSegment: any="everyone";
   isLoading = true;
+  badges$: Observable<IBadges>;
 
-  constructor(private store:Store, private pointsApi: PointsApi) { }
+  constructor(private store:Store, private pointsApi: PointsApi, private badgesApi: BadgesApi) { }
 
   ngOnInit() {
    this.initialize();
@@ -50,13 +53,24 @@ export class LeaderboardPage implements OnInit {
             tap(response => {
               user.points = response ? response.userPoints : 0;
               user.sessionsCompleted = response.workoutSessionsAttended ? response.workoutSessionsAttended : 0;
-              this.users.sort((userA, userB) => userB.points! - userA.points!);
-              this.users = [...this.users]; // Update the users array after modifying a user
+              this.badgesApi.otheruserbadges$(user.userId!).subscribe((result)=>{
+                user.badgesNumber = result.receivedBadges.length;
+                this.users.sort((userA, userB) =>{
+                  if(userB.points! == userA.points!) {
+                    if(userB.badgesNumber! == userA.badgesNumber!) {
+                      return userB.sessionsCompleted! - userA.sessionsCompleted!
+                    }
+                   return userB.badgesNumber! - userA.badgesNumber!
+                  }
+                  return userB.points! - userA.points!
+                });
+                this.users = [...this.users];
+              })
             }),
             switchMap(()=>this.friends$),
-            tap((response)=>{
+            map((response)=>{
               this.updateFriends(response);
-                this.friends.sort((userA, userB) => userB.points! - userA.points!);
+              this.sortProfiles(this.friends);
             })
           )
         );
@@ -64,7 +78,6 @@ export class LeaderboardPage implements OnInit {
       })
     ).subscribe();
   }
-  
 
   /**
    * subscribe to the @friends$ observable to get user friends
@@ -86,9 +99,18 @@ export class LeaderboardPage implements OnInit {
   /**
    * sort the users in Desceding order of users points.
    */
-  sort() {
-    this.friends.sort((userA, userB) => userB.points! - userA.points!) 
-    console.table(this.friends);
+  sortProfiles(profiles: IProfileModel[]){
+   const p = profiles.sort((userA, userB) =>{
+      if(userB.points! == userA.points!) {
+        if(userB.badgesNumber! == userA.badgesNumber!) {
+          return userB.sessionsCompleted! - userA.sessionsCompleted!
+        }
+       return userB.badgesNumber! - userA.badgesNumber!
+      }
+      return userB.points! - userA.points!
+    });
+
+    this.friends = [...p];
   }
   
   

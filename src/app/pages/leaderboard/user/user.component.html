@@ -27,7 +27,13 @@
       </div>
       <div class="user-pr">
         <ion-text>Badges</ion-text><br>
-        <ion-text>{{badges}}</ion-text>
+        <!-- <ion-text *ngIf="badges$ | async as badges; else loaderContent">{{badges.receivedBadges.length}}</ion-text> -->
+        <ion-text>{{user.badgesNumber}}</ion-text>
+        <ng-template #loaderContent>
+          <div class="loader-wrapper">
+            <ion-spinner></ion-spinner>
+          </div>
+        </ng-template>
       </div>
       <div class="user-pr">
         <ion-text>Sessions</ion-text><br>

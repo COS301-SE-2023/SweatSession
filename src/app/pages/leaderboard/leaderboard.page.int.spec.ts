@@ -5,12 +5,14 @@ import { NgxsModule, Store } from '@ngxs/store';
 import { of } from 'rxjs';
 import { IFriendsModel, IProfileModel } from 'src/app/models';
 import { PointsApi } from 'src/app/states';
+import { BadgesApi } from 'src/app/states/badges/badges.api';
 
 describe('LeaderboardPage', () => {
   let component: LeaderboardPage;
   let fixture: ComponentFixture<LeaderboardPage>;
   let storeMock: Partial<Store>;
   let pointsApiMock: Partial<PointsApi>;
+  let badgesApiMock: Partial<BadgesApi>;
 
   beforeEach(async () => {
     storeMock = {
@@ -18,7 +20,11 @@ describe('LeaderboardPage', () => {
       select: jest.fn(() => of([])),
     };
     pointsApiMock = {
-      otherUserPoints$: jest.fn(() => of({ userPoints: 100 })),
+      otherUserPoints$: jest.fn(() => of({ userPoints: 100, workoutSessionsAttended: 3 })),
+    };
+
+    badgesApiMock = {
+      badges$: jest.fn(() => of({receivedBadges: [1,2]})),
     };
 
     await TestBed.configureTestingModule({
@@ -29,6 +35,7 @@ describe('LeaderboardPage', () => {
       providers: [
         { provide: Store, useValue: storeMock },
         { provide: PointsApi, useValue: pointsApiMock },
+        { provide: BadgesApi, useValue:  badgesApiMock}
       ],
     }).compileComponents();
 
@@ -57,7 +64,7 @@ describe('LeaderboardPage', () => {
   //   component.userId = 'user1';
   //   component.updateFriends(friends);
 
-  //   expect(component.friends).toEqual([users[0]]);
+  //   expect(component.friends).toEqual([]);
   // });
 
   // it('should sort friends list in descending order of points on sort method call', () => {
