@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { NavController } from '@ionic/angular';
 import { Select, Store } from '@ngxs/store';
-import { Observable, tap } from 'rxjs';
+import {Observable, Subscription, tap} from 'rxjs';
 import { IGetProfile } from 'src/app/models';
 import { GetFriendsAction } from 'src/app/actions/friend.action';
 import { SetProfileService } from 'src/app/services';
@@ -10,6 +10,7 @@ import { FriendsState } from 'src/app/states';
 import { AuthApi } from 'src/app/states/auth/auth.api';
 import {getAuth} from "@angular/fire/auth";
 import { register } from 'swiper/element/bundle';
+import {Router, NavigationStart, ActivatedRoute} from '@angular/router';
 
 register();
 
@@ -34,15 +35,26 @@ export class UserprofilePage implements OnInit {
     private Nav: NavController,
     private store: Store,
     private setprofileservices: SetProfileService, 
-    private authApi: AuthApi,) {}
+    private authApi: AuthApi,
+    private activatedRoute: ActivatedRoute,
 
+    )
+    {}
+    @ViewChild('loaderContent') loaderContentTemplate: any;
+    isLoading :boolean = false;
 
   ngOnInit() {
     this.displayFriendsSize();
     this.updateprofileinfor();
   }
 
-  updateprofileinfor()
+
+
+
+    // Unsubscribe from the router events to avoid memory leaks
+
+
+    updateprofileinfor()
   {
     const auth = getAuth();
         this.currUserId = auth.currentUser?.uid;
@@ -62,17 +74,16 @@ export class UserprofilePage implements OnInit {
           this.ProfilePicture$ = profile.profile.profileURL;
           this.displayName$ = profile.profile.displayName;
           this.myBio$ = profile.profile.bio;
-          //getting groups
-          // this.groups$ = profile.profile.groups.length;
 
           if(profile.profile.profileURL == "" || profile.profile.profileURL == undefined)
           {
             this.ProfilePicture$ =  '/assets/ProfileSE.jpg';
           }
-           
-      });
-  }
 
+        this.isLoading = true;
+      });
+
+  }
   Leaderboard() {
     this.Nav.navigateRoot('/home/leaderboard');
   }

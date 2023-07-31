@@ -1,5 +1,5 @@
 <ion-content [fullscreen]="true">
-  <ion-card class="otheruser-profile">
+  <ion-card class="otheruser-profile" *ngIf="isLoading; else loaderContent">
     <div class="profile-outer-container">
       <div class="back-button">
         <ion-item lines="none">
@@ -102,4 +102,10 @@
       </swiper-container>
     </div>
    </ion-card>
+
+  <ng-template #loaderContent>
+    <div class="loader-wrapper">
+      <ion-spinner></ion-spinner>
+    </div>
+  </ng-template>
 </ion-content>

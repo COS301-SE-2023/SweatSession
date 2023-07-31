@@ -8,6 +8,8 @@ import { SetProfileService } from 'src/app/services';
 import { AuthApi } from 'src/app/states/auth/auth.api';
 import { getCurrentUserId } from 'src/app/actions';
 import { UserprofilePage } from 'src/app/pages/userprofile/userprofile.page'
+import {NavigationStart, Router} from "@angular/router";
+import {Subscription} from "rxjs";
 
 
 @Component({
@@ -34,6 +36,8 @@ export class SetprofileCComponent  implements OnInit {
   
   // ProfilePicture: string = 'assets/img/ProfileSE.png';
 
+  remainingCharacters: number = 120;
+  private navigationSubscription: Subscription;
   getUser : IGetProfile = {userId: 'na'};
   UpadateP? : IProfileModel;
   file: File | null = null;
@@ -42,8 +46,14 @@ export class SetprofileCComponent  implements OnInit {
     private store: Store,
     private modalController: ModalController,
     private setprofileservices: SetProfileService, 
-    private authApi: AuthApi, 
-  ){}
+    private authApi: AuthApi,
+    private router: Router,
+  ){
+    this.profileForm.controls.bio.valueChanges.subscribe(() => {
+      this.updateCharacterCount();
+    });
+
+  }
 
     getUserid() {
       return  this.authApi.getCurrentUserId();
@@ -80,6 +90,10 @@ export class SetprofileCComponent  implements OnInit {
     // });
   }
 
+  getRemainingCharacters() {
+    return this.remainingCharacters;
+  }
+
   getDp()
   {
     return this.profileForm.get('profileURL')?.value as string; 
@@ -93,14 +107,16 @@ export class SetprofileCComponent  implements OnInit {
     this.ngOnInit();
 
   }
+  updateCharacterCount() {
+    const inputText = this.profileForm.value.bio ?? ``;
+    this.remainingCharacters = 120 - inputText.length;
+  }
 
   SaveFile() {
     if (this.file) {
       const reader = new FileReader();
       reader.onloadend = () => {
         this.profileForm.patchValue({ profileURL: reader.result as string});
-        // this. = reader.result as string;
-
       };
       reader.readAsDataURL(this.file);
     }
@@ -145,10 +161,27 @@ export class SetprofileCComponent  implements OnInit {
           {
             this.profileForm.patchValue( {profileURL: 'src/assets/ProfileSE.jpg'});
           }
-           
+            this.navigationSubscription = this.router.events.subscribe((event) => {
+              console.log("Should refresh")
+              if (event instanceof NavigationStart) {
+                const currentUrl = this.router.routerState.snapshot.url;
+
+                if (event.url === currentUrl) {
+                  location.reload();
+                }
+              }
+            });
       });
 
     });
+
+
+  }
+
+  ngOnDestroy() {
+    if (this.navigationSubscription) {
+      this.navigationSubscription.unsubscribe();
+    }
   }
 
   takePicture() {
