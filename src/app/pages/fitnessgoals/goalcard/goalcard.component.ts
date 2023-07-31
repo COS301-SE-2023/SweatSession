@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {IAddGOAL, IGOAL} from 'src/app/models/fitnessgoals.model';
 import { IGOALS } from 'src/app/models/fitnessgoals.model';
 import {FormArray, FormBuilder, FormControl, FormGroup} from "@angular/forms";
@@ -27,6 +27,8 @@ export class GoalcardComponent  implements OnInit {
   currUserId: string | undefined = undefined;
   GOALS : IGOAL[] = [];
   selectedSegment: string = '0';
+  @ViewChild('loaderContent') loaderContentTemplate: any;
+  isLoading :boolean = false;
 
 
 
@@ -63,6 +65,7 @@ export class GoalcardComponent  implements OnInit {
             //calculate days left
             
             this.GOALS = data.goals;
+            this.isLoading = true;
           });
     }
 
@@ -130,6 +133,7 @@ export class GoalcardComponent  implements OnInit {
             }
             ); 
         }
+
         return this.GOALS;
     }
       

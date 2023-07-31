@@ -4,7 +4,7 @@
     <ion-segment-button value="2">Overdue</ion-segment-button>
   </ion-segment>
 
-  <ion-content [scrollEvents]="true">
+  <ion-content [scrollEvents]="true" *ngIf="isLoading; else loaderContent">
     <ion-item-sliding *ngFor="let goal of getFilteredGoals()">
       <ion-card >
         <ion-card>
@@ -28,7 +28,7 @@
                 <ion-row>
                     <ion-col>
                             <ion-label>{{(goal.progress!)}} % Done</ion-label>
-                            <ion-progress-bar value = "{{goal.progress! / 100}}" ></ion-progress-bar>
+                            <ion-progress-bar style = "height: 15px; border-radius: 10px" value = "{{goal.progress! / 100}}" ></ion-progress-bar>
                     </ion-col>
                 </ion-row>
                 <ion-row>
@@ -48,6 +48,11 @@
     </ion-item-sliding>
   </ion-content>
 
+<ng-template #loaderContent>
+    <div class="loader-wrapper">
+        <ion-spinner></ion-spinner>
+    </div>
+</ng-template>
 
 <ion-fab slot="fixed" vertical="bottom" horizontal="right">
     <ion-fab-button (click)="addGoal()">

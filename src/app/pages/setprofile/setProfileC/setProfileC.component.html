@@ -1,24 +1,21 @@
 
 <ion-card>
-      <ion-toast trigger="open-toast" color = "success" position = "top" message= "Profile Picture Saved" [duration]="1500" icon="shield-checkmark-outline"></ion-toast>
-      <ion-toast trigger="SDP" color = "success" position = "top" message="Personal Info Saved" [duration]="1500" icon="shield-checkmark-outline"></ion-toast>
+    <ion-toast trigger="open-toast" color = "success" position = "top" message= "Profile Picture Saved" [duration]="1500" icon="shield-checkmark-outline"></ion-toast>
+    <ion-toast trigger="SDP" color = "success" position = "top" message="Personal Info Saved" [duration]="1500" icon="shield-checkmark-outline"></ion-toast>
 
-    <ion-item-divider style="background-color: #A8DADC ">
+    <ion-item-divider style="background-color: #A8DADC;">
         <ion-label slot="start">Profile Picture</ion-label>
         <ion-icon name="create-outline" slot="end" size="large" (click)="selectFile()"></ion-icon>
         <input  type="file" id = "fileInput" accept="image/*" (change)="onFileSelected($event)" style="display: none">
     </ion-item-divider>
 
 
-        <ion-row>
-            <ion-col size="6" offset="3">
-                <div class="avatar-container" >
-                    <ion-avatar  class="preview-container" *ngIf="getDp()">
-                        <img [src]="getDp()"  alt="Profile Picture">
-                    </ion-avatar>
-                </div>
-            </ion-col>
-        </ion-row>
+    <div class="profile-img-container">
+        <ion-avatar class="profile-image">
+            <ion-img [src]="getDp()"></ion-img>
+        </ion-avatar>
+    </div>
+
     <ion-row>
         <ion-col class="ion-text-center">
             <ion-button fill="outline" id="SDP" expand="block" size="small" (click)="saveProfile()" [disabled]="!file">Save Picture</ion-button>
@@ -26,53 +23,44 @@
     </ion-row>
 
 
-      </ion-card>
-      
-      
-    
-    <ion-card>
-  
-      <ion-item-divider style="background-color: #A8DADC">
-          <ion-label slot="start">Personal Info</ion-label>
-          <ion-icon name="create-outline" slot="end" size="large" (click)="toggleEditMode()"></ion-icon>
-      </ion-item-divider>
-      
-      
-      <ion-list>
-          <form [formGroup]="profileForm">
-          <ion-item [disabled] = "!isEditMode">
-            <ion-input label="Display Name"  labelPlacement="stacked" type = "text" formControlName= "displayName" placeholder="Enter Display Name"></ion-input>
-          </ion-item>
-        
-          <ion-item [disabled] = "!isEditMode">
-            <ion-input label="Name"  labelPlacement="stacked" type = "text" formControlName= "name"  placeholder="Enter Name"></ion-input>
-          </ion-item>
-        
-          <ion-item [disabled] = "!isEditMode">
-            <ion-input label="Bio"  labelPlacement="stacked" type = "text" formControlName= "bio" placeholder="Enter Bio"></ion-input>
-          </ion-item>
+</ion-card>
 
-          <ion-item [disabled] = "!isEditMode">
-            <ion-input label="Email"  labelPlacement="stacked" type = "email" formControlName= "email" placeholder="Enter Email"></ion-input>
-          </ion-item>
-        
-          <ion-item [disabled] = "!isEditMode">
-            <ion-input label="Phone Number" labelPlacement="stacked" type = "text" formControlName= "phoneNumber" placeholder="Enter Phone Number"></ion-input>
-          </ion-item>
+<ion-card>
 
-          <ion-item [disabled] = "!isEditMode">
-            <ion-input label="Height (Cm)"  labelPlacement="stacked" type = "Number" formControlName= "height" placeholder="Enter Height in Cm"></ion-input>
-          </ion-item>
+    <ion-item-divider style="background-color: #A8DADC">
+        <ion-label slot="start">Personal Info</ion-label>
+        <ion-icon name="create-outline" slot="end" size="large" (click)="toggleEditMode()"></ion-icon>
+    </ion-item-divider>
 
-          <ion-item [disabled] = "!isEditMode">
-            <ion-input label="Weight (Kg)"  labelPlacement="stacked" type = "Number" formControlName= "weight" placeholder="Enter Weight in Kg"></ion-input>
-          </ion-item>
-          
-          <ion-button id="open-toast" expand="block" (click)="saveProfile()" [disabled] = "!isEditMode"> Save </ion-button>
+
+    <ion-list>
+        <form [formGroup]="profileForm">
+            <ion-item [disabled] = "!isEditMode">
+                <ion-input label="Display Name"  labelPlacement="stacked" type = "text" formControlName= "displayName" placeholder="Enter Display Name" maxlength="20"></ion-input>
+            </ion-item>
+
+            <ion-item [disabled] = "!isEditMode">
+                <ion-input label="Name"  labelPlacement="stacked" type = "text" formControlName= "name"  placeholder="Enter Name" maxlength="50"></ion-input>
+            </ion-item>
+
+            <ion-item [disabled] = "!isEditMode" >
+                <ion-input label="Bio"  labelPlacement="stacked" type = "text" formControlName= "bio" placeholder="Enter Bio" maxlength="120"
+                           (input)="updateCharacterCount()" #bioInput></ion-input>
+                <div class="character-count">{{ remainingCharacters }}</div>
+            </ion-item>
+
+            <ion-item [disabled] = "!isEditMode">
+                <ion-input label="Email"  labelPlacement="stacked" type = "email" formControlName= "email" placeholder="Enter Email"></ion-input>
+            </ion-item>
+
+            <ion-item [disabled] = "!isEditMode">
+                <ion-input label="Phone Number" labelPlacement="stacked" type = "text" formControlName= "phoneNumber" placeholder="Enter Phone Number"></ion-input>
+            </ion-item>
+
+            <ion-button id="open-toast" expand="block" (click)="saveProfile()" [disabled] = "!isEditMode"> Save </ion-button>
         </form>
-        </ion-list>
+    </ion-list>
 
 
-      
-    </ion-card>
 
+</ion-card>
