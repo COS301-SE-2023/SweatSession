@@ -20,6 +20,8 @@ ion-searchbar {
     margin-left: 0%;
     margin-right: 0%;
     margin-bottom: 0%;
+    margin-top: 0%;
+    padding-top: 0%;
     // margin-bottom: 5%;
     // padding-top: 5%;
 }
@@ -80,6 +82,7 @@ ion-card-subtitle {
 .ratingIcon {
     color: gold;
     margin-bottom: -2px;
+    border: 1px solid black;
 }
 
 .friendDisplayName {
