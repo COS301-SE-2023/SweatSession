@@ -12,6 +12,8 @@ export class UserComponent  implements OnInit {
   @Input() user:IProfileModel={};
   @Input() position:number;
   @Input() isCurrentUser:boolean = false;
+  badges = 0;
+  sessionsCompleted = 0;
 
   constructor(private store:Store,private nav:NavController) { }
 

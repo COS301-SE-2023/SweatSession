@@ -13,6 +13,7 @@ export interface IProfileModel {
     points?: number;
     groupIds?: string[];
     friendRequests?: string[];
+    sessionsCompleted?: number;
 }
 
 //requests
