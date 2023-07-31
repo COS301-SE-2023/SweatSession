@@ -1,8 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { Store } from '@ngxs/store';
+import { Observable } from 'rxjs';
 import { StageOtheruserInfo, SubscribeToAuthState } from 'src/app/actions';
 import { IProfileModel } from 'src/app/models';
+import { IBadges } from 'src/app/models/badges.model';
+import { BadgesApi } from 'src/app/states/badges/badges.api';
 @Component({
   selector: 'leaderboard-user',
   templateUrl: './user.component.html',
@@ -14,10 +17,11 @@ export class UserComponent  implements OnInit {
   @Input() isCurrentUser:boolean = false;
   badges = 0;
   sessionsCompleted = 0;
+  badges$: Observable<IBadges>;
 
-  constructor(private store:Store,private nav:NavController) { }
+  constructor(private store:Store,private nav:NavController,private badgesApi: BadgesApi) {}
 
-  ngOnInit() {}
+  ngOnInit() {this.getBadges()}
 
   viewOtherUser(){
     if(this.isCurrentUser){
@@ -25,5 +29,9 @@ export class UserComponent  implements OnInit {
     }else{
       this.store.dispatch(new StageOtheruserInfo(this.user));
     }
+  }
+
+  getBadges() {
+    this.badges$ = this.badgesApi.otheruserbadges$(this.user.userId!);
   }
 }
