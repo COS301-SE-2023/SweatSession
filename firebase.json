@@ -9,9 +9,7 @@
         "firebase-debug.log",
         "firebase-debug.*.log"
       ],
-      "predeploy": [
-        
-      ]
+      "predeploy": []
     }
   ],
   "database": {
@@ -22,7 +20,8 @@
     "indexes": "firestore.indexes.json"
   },
   "hosting": {
-    "source": ".",
+    "source": "/",
+    "destination": "/SweatSession/splash",
     "ignore": [
       "firebase.json",
       "**/.*",
