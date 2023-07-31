@@ -82,7 +82,7 @@ ion-card-subtitle {
 .ratingIcon {
     color: gold;
     margin-bottom: -2px;
-    border: 1px solid black;
+    filter: drop-shadow(1px 1px 0 black); 
 }
 
 .friendDisplayName {
