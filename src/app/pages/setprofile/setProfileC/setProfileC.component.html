@@ -32,35 +32,31 @@
         <ion-icon name="create-outline" slot="end" size="large" (click)="toggleEditMode()"></ion-icon>
     </ion-item-divider>
 
-
     <ion-list>
-        <form [formGroup]="profileForm">
-            <ion-item [disabled] = "!isEditMode">
-                <ion-input label="Display Name"  labelPlacement="stacked" type = "text" formControlName= "displayName" placeholder="Enter Display Name" maxlength="20"></ion-input>
-            </ion-item>
+            <form [formGroup]="profileForm">
+                <ion-item [disabled] = "!isEditMode">
+                    <ion-input label="Display Name"  labelPlacement="stacked" type = "text" formControlName= "displayName" placeholder="Enter Display Name" maxlength="20"></ion-input>
+                </ion-item>
 
-            <ion-item [disabled] = "!isEditMode">
-                <ion-input label="Name"  labelPlacement="stacked" type = "text" formControlName= "name"  placeholder="Enter Name" maxlength="50"></ion-input>
-            </ion-item>
+                <ion-item [disabled] = "!isEditMode">
+                    <ion-input label="Name"  labelPlacement="stacked" type = "text" formControlName= "name"  placeholder="Enter Name" maxlength="50"></ion-input>
+                </ion-item>
 
-            <ion-item [disabled] = "!isEditMode" >
-                <ion-input label="Bio"  labelPlacement="stacked" type = "text" formControlName= "bio" placeholder="Enter Bio" maxlength="120"
-                           (input)="updateCharacterCount()" #bioInput></ion-input>
-                <div class="character-count">{{ remainingCharacters }}</div>
-            </ion-item>
+                <ion-item [disabled] = "!isEditMode" >
+                    <ion-input label="Bio"  labelPlacement="stacked" type = "text" formControlName= "bio" placeholder="Enter Bio" maxlength="120"
+                               (input)="updateCharacterCount()" #bioInput></ion-input>
+                    <div class="character-count">{{ remainingCharacters }}</div>
+                </ion-item>
 
-            <ion-item [disabled] = "!isEditMode">
-                <ion-input label="Email"  labelPlacement="stacked" type = "email" formControlName= "email" placeholder="Enter Email"></ion-input>
-            </ion-item>
+                <ion-item [disabled] = "!isEditMode">
+                    <ion-input label="Email"  labelPlacement="stacked" type = "email" formControlName= "email" placeholder="Enter Email"></ion-input>
+                </ion-item>
 
-            <ion-item [disabled] = "!isEditMode">
-                <ion-input label="Phone Number" labelPlacement="stacked" type = "text" formControlName= "phoneNumber" placeholder="Enter Phone Number"></ion-input>
-            </ion-item>
+                <ion-item [disabled] = "!isEditMode">
+                    <ion-input label="Phone Number" labelPlacement="stacked" type = "text" formControlName= "phoneNumber" placeholder="Enter Phone Number"></ion-input>
+                </ion-item>
 
-            <ion-button id="open-toast" expand="block" (click)="saveProfile()" [disabled] = "!isEditMode"> Save </ion-button>
-        </form>
+                <ion-button id="open-toast" expand="block" (click)="saveProfile()" [disabled] = "!isEditMode"> Save </ion-button>
+            </form>
     </ion-list>
-
-
-
 </ion-card>
