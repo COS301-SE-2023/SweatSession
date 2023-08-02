@@ -48,7 +48,6 @@ jobs:
       - run: yarn
       - run: yarn fix:node_modules
       - run: ng serve &
-      - name: Wait for server
       - uses: nick-invision/retry@v2
         with:
           timeout_minutes: 5
