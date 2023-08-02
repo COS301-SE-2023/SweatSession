@@ -47,6 +47,11 @@ jobs:
       - run: echo "${{secrets.ENVIRONMENT_VARIABLES}}" >> src/environments/environment.ts
       - run: yarn
       - run: yarn fix:node_modules
-      - uses: mskelton/wait-on@v1
-      - run: ng serve &  
+      - run: ng serve &
+      - name: Wait for server
+      - uses: nick-invision/retry@v2
+        with:
+          timeout_minutes: 5
+          max_attempts: 5
+          command: wait-on http://localhost:4200 --timeout 120000
       - run: npx cypress run
