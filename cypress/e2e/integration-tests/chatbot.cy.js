@@ -1,6 +1,7 @@
 describe('ChatbotPage', () => {
     beforeEach(() => {
-      cy.visit('https://sweatsession.web.app/SweatSession/home'); 
+      // cy.visit('https://sweatsession.web.app/SweatSession/home'); 
+      cy.visit('http://localhost:4200/SweatSession/home'); 
       cy.wait(4000);
       cy.get('ion-tab-button[tab="chatbot"]').click();
     });

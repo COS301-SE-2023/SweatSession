@@ -1,6 +1,7 @@
 describe('Add Schedule Component', () => {
     beforeEach(() => {
-      cy.visit('https://sweatsession.web.app/SweatSession/addSchedule'); 
+      // cy.visit('https://sweatsession.web.app/SweatSession/addSchedule');
+      cy.visit('http://localhost:4200/SweatSession/addSchedule'); 
     });
   
     it('should fill out the form and add a schedule', () => {

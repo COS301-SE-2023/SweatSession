@@ -1,6 +1,7 @@
 describe('Authentication Page Testing', () => {
     beforeEach(() => {
-        cy.visit('https://sweatsession.web.app/SweatSession/login');
+        // cy.visit('https://sweatsession.web.app/SweatSession/login');
+        cy.visit('http://localhost:4200/SweatSession/login');
     });
 
     it('should display the sign-in form', () => {
