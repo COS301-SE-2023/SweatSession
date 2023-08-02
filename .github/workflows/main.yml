@@ -42,6 +42,7 @@ jobs:
           node-version: '19.x'
       - run: npm install -g firebase-tools
       - run: npm install -g @angular/cli@latest
+      - run: npm install -g wait-on
       - run: mkdir src/environments
       - run: touch src/environments/environment.ts
       - run: echo "${{secrets.ENVIRONMENT_VARIABLES}}" >> src/environments/environment.ts
