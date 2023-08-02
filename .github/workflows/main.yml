@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  integrationTests:
+  unitTests:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -28,3 +28,30 @@ jobs:
         with:
           files: coverage/lcov.info
           token: ${{ secrets.CODECOV_TOKEN }}
+  integrationTests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js 19
+        uses: actions/setup-node@v3
+        with:
+          node-version: "19.x"
+          cache: 'npm'
+      - uses: mskelton/setup-yarn@v1
+        with:
+          node-version: '19.x'
+      - run: npm install -g firebase-tools
+      - run: npm install -g @angular/cli@latest
+      - run: npm install -g wait-on
+      - run: mkdir src/environments
+      - run: touch src/environments/environment.ts
+      - run: echo "${{secrets.ENVIRONMENT_VARIABLES}}" >> src/environments/environment.ts
+      - run: yarn
+      - run: yarn fix:node_modules
+      - run: ng serve &
+      - uses: nick-invision/retry@v2
+        with:
+          timeout_minutes: 5
+          max_attempts: 5
+          command: wait-on http://localhost:4200 --timeout 120000
+      - run: npx cypress run
