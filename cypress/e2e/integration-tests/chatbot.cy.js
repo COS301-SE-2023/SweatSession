@@ -1,6 +1,6 @@
 describe('ChatbotPage', () => {
     beforeEach(() => {
-      cy.visit('http://localhost:4200/SweatSession/home'); // Adjust the URL based on your Angular app's routing
+      cy.visit('https://sweatsession.web.app/SweatSession/home'); 
       cy.wait(4000);
       cy.get('ion-tab-button[tab="chatbot"]').click();
     });
