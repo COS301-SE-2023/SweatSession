@@ -47,5 +47,6 @@ jobs:
       - run: echo "${{secrets.ENVIRONMENT_VARIABLES}}" >> src/environments/environment.ts
       - run: yarn
       - run: yarn fix:node_modules
-      - run: ng serve
+      - uses: mskelton/wait-on@v1
+      - run: ng serve &  
       - run: npx cypress run
