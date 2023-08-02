@@ -40,6 +40,7 @@ jobs:
       - uses: mskelton/setup-yarn@v1
         with:
           node-version: '19.x'
+      - run: npm install -g firebase-tools
       - run: mkdir src/environments
       - run: touch src/environments/environment.ts
       - run: echo "${{secrets.ENVIRONMENT_VARIABLES}}" >> src/environments/environment.ts
