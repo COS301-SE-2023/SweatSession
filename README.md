@@ -95,7 +95,7 @@ I'm a 3rd year Computer Science student at the University of Pretoria. I'm passi
 <table style="border: none;">
   <tr>
     <td style="vertical-align: top; width: 30%;">
-      <img src="" width="150" height="auto">
+      <img src="https://github.com/COS301-SE-2023/SweatSession/assets/113734523/d6250027-b625-45d5-add2-22faa2f22529" width="150" height="auto">
     </td>
     <td style="vertical-align: top; width: 70%;">
             <b>Luqmaan Abram</b><br>
@@ -115,7 +115,7 @@ I am a passionate 3rd year Computer Science student studying at the University o
 <table style="border: none;">
   <tr>
     <td style="vertical-align: top; width: 30%;">
-      <img src="" width="150" height="auto">
+      <img src="https://github.com/COS301-SE-2023/SweatSession/assets/113734523/d6250027-b625-45d5-add2-22faa2f22529" width="150" height="auto">
     </td>
     <td style="vertical-align: top; width: 70%;">
             <b>Thabo Letsoalo ;)</b><br>
