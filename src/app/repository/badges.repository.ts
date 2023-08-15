@@ -55,4 +55,21 @@ export class BadgesRepository {
             receivedBadges: fieldValue.arrayUnion(2)
         });
     }
+
+    async addBadge(currUserId: string, badgeNo: number) {
+        //0 Starter's Success
+        //1 socialite
+        //2 Stretching Star
+        //3 Record Breaker
+        //4 Workout Warrior
+        //5 Dynamic Duo
+        //6 Push-ups Pro
+        //7 Active Adventurer
+        const badgeDocRef = this.firestore.collection('badges').doc(currUserId);
+        const fieldValue = firebase.firestore.FieldValue;
+
+        return badgeDocRef.update({
+            receivedBadges: fieldValue.arrayUnion(badgeNo)
+        });
+    }
 }
