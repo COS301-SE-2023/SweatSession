@@ -8,6 +8,9 @@ import { IWorkoutScheduleModel } from 'src/app/models';
 import { PointsRepository } from 'src/app/repository/points.repository';
 import { WorkoutSchedulingState } from 'src/app/states';
 import { getAuth } from '@angular/fire/auth';
+import { NoticeService } from 'src/app/services/notifications/notice.service';
+import { AlertController } from '@ionic/angular';
+
 
 @Component({
   selector: 'schedule-content',
@@ -15,6 +18,7 @@ import { getAuth } from '@angular/fire/auth';
   styleUrls: ['./schedule-content.component.scss'],
 })
 export class ScheduleContentComponent implements OnInit {
+  
   currUserId: string | undefined | null;
   private firestoreSubscription: Subscription;
   @Input() schedule!: IWorkoutScheduleModel;
@@ -22,18 +26,30 @@ export class ScheduleContentComponent implements OnInit {
   isEditSlide = false;
   ratio: Number = 1;
 
+  date : string ;
+  shortdate : string[] ;
+
   constructor(private store: Store, private nav: NavController,
     private actionSheetCtrl: ActionSheetController,
     private firestore: AngularFirestore,
     private navCtrl: NavController,
-    private pointsRepository: PointsRepository) { }
+    private pointsRepository: PointsRepository , 
+    private noticeService: NoticeService ,
+    private alertController: AlertController) { }
 
   ngOnInit() {
+    /*if (!sessionStorage.getItem('siteInit')) {
+      this.sendReminder();
+      sessionStorage.setItem('siteInit', 'true');
+
+    }*/
     if (!this.isCompleted()) {
       this.fraction();
       this.counter();
     }
   }
+
+ 
 
   async viewSchedule() {
     this.isSlideShow = !this.isSlideShow;
@@ -52,6 +68,46 @@ export class ScheduleContentComponent implements OnInit {
     this.isEditSlide = !this.isEditSlide;
   }
 
+ /* async sendReminder(){
+    console.log("sendreminder");
+    const currentTime = new Date().getTime();
+    const targetTime = new Date(`${this.schedule.date}T${this.schedule.time}`).getTime();
+    const timeDiff = targetTime - currentTime;
+    if (timeDiff > 0) {
+     const hoursLeft = Math.floor(timeDiff / (1000 * 60 * 60));
+     const daysLeft = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+     const minutes = Math.floor(timeDiff / (1000 * 60));
+      
+        if(timeDiff > 0){
+
+          if(daysLeft < 1 ){
+            if(hoursLeft >= 1){
+              const alert =  await this.alertController.create({
+                header: 'Workout Reminder',
+                message: "LETS-GO!! Your workout at " + this.schedule.location + " will begin in " + hoursLeft +" hours.",
+                buttons: ['OK']
+              });
+  
+              await alert.present();
+
+            }else{
+
+            const alert =  await this.alertController.create({
+              header: 'Workout Reminder',
+              message: "LETS-GO!! Your workout at " + this.schedule.location + " will begin in " + minutes +" minutes.",
+              buttons: ['OK']
+            });
+
+            await alert.present();
+          }
+          }
+         
+          
+        }  
+
+  }
+}*/
+
   timeLeft() {
     const currentTime = new Date().getTime();
     const targetTime = new Date(`${this.schedule.date}T${this.schedule.time}`).getTime();
@@ -61,12 +117,17 @@ export class ScheduleContentComponent implements OnInit {
       const hoursLeft = Math.floor(timeDiff / (1000 * 60 * 60));
       const daysLeft = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
       const minutes = Math.floor(timeDiff / (1000 * 60));
+      const seconds = Math.floor(timeDiff / (1000));
       if(daysLeft<1){
-        if(hoursLeft<1)
+        if(hoursLeft<1){
+         
           return `You have ${minutes} minutes left`;
+        }
         return `You have ${hoursLeft} hours left`;
+       
       }
       else if (daysLeft == 1) {
+        
         return `your have ${daysLeft} day left`;
       }
       return `your have ${daysLeft} days left`;
@@ -122,6 +183,8 @@ export class ScheduleContentComponent implements OnInit {
     const currentTime = new Date().getTime();
     const timeDiff = currentTime - createdAt.getTime();
     const targetTime = new Date(`${this.schedule.date}T${this.schedule.time}`).getTime();
+    const timeDiff2 = targetTime - currentTime;
+
     const createdTime = createdAt.getTime();
     const diff = targetTime - createdTime;
     if (timeDiff / diff > 1) {
@@ -184,4 +247,13 @@ export class ScheduleContentComponent implements OnInit {
   joined() {
     return this.schedule.joined;
   }
+
+  createNotifications(sendername: string , sentdate: string , message: string){
+    const auth = getAuth();
+    this.currUserId = auth.currentUser?.uid;
+    this.noticeService.createNotices(sendername , sentdate , message , this.currUserId! , this.currUserId! , '/assets/Asset 3.png');
+  }
+
+
+
 }
