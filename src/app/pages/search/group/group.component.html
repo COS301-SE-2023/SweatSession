@@ -9,7 +9,7 @@
   </ion-searchbar>
   
   <div class="search-suggestions" *ngIf="searchTerms.showSuggestions">
-    <ion-list >
+    <ion-list class="transparent-list">
       <ion-item lines="none"
         *ngFor="let suggestion of searchTerms.filteredSuggestions"
         (click)="selectGroup(suggestion)">
