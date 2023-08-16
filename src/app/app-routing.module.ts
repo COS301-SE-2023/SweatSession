@@ -192,6 +192,10 @@ const routes: Routes = [
     path: 'healthdata',
     loadChildren: () => import('./pages/healthdata/healthdata.module').then( m => m.HealthDataPageModule)
   },
+  {
+    path: 'exercise-explorer',
+    loadChildren: () => import('./pages/exercise-explorer/exercise-explorer.module').then( m => m.ExerciseExplorerPageModule)
+  },
 ];
 @NgModule({
   imports: [
