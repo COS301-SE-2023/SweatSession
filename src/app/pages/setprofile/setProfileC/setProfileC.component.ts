@@ -41,7 +41,7 @@ export class SetprofileCComponent  implements OnInit {
   getUser : IGetProfile = {userId: 'na'};
   UpadateP? : IProfileModel;
   file: File | null = null;
-  isEditMode = true;
+  isEditMode = false;
 
   constructor
   (
@@ -54,6 +54,8 @@ export class SetprofileCComponent  implements OnInit {
     this.profileForm.controls.bio.valueChanges.subscribe(() => {
       this.updateCharacterCount();
     });
+
+
 
   }
 
@@ -105,6 +107,7 @@ export class SetprofileCComponent  implements OnInit {
   }
 
 
+
   onFileSelected(event: any) {
     this.file = event.target.files[0];
     this.SaveFile();
@@ -112,6 +115,7 @@ export class SetprofileCComponent  implements OnInit {
   }
   DetailsSaved()
   {
+    this.isEditMode = false;
     this.file = null;
     this.ngOnInit();
   }
@@ -154,6 +158,12 @@ export class SetprofileCComponent  implements OnInit {
 
     });
 
+    setTimeout(() => {
+      this.profileForm.valueChanges.subscribe((value) => {
+        console.log("editedProfile");
+        this.isEditMode = true;
+      });
+    }, 2000);
 
   }
 
