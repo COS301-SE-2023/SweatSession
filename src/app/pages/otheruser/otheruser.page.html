@@ -22,7 +22,7 @@
       <div class="group-buttons">
         <ion-button fill="outline" *ngIf="friendshipStatus && !isRequested()" (click)="removeFriend()">
           <ion-icon name="person-outline" style="padding-right: 5px;"></ion-icon>
-          Remove friend
+          Remove Friend
         </ion-button>
         <ion-button fill="outline" *ngIf="!friendshipStatus && !isRequested()" (click)="addFriend()">
           <ion-icon name="person-outline" style="padding-right: 5px;"></ion-icon>
@@ -30,7 +30,7 @@
         </ion-button>
         <ion-button fill="outline" *ngIf="isRequested()" [disabled]="true">
           <ion-icon name="person-outline" style="padding-right: 5px;"></ion-icon>
-          requested
+          Requested
         </ion-button>
       </div>
     </div>
@@ -68,7 +68,7 @@
               <ion-card-title>
                 <ion-icon name="barbell-outline"></ion-icon>
               </ion-card-title>
-              <h2>{{workoutSchedules!.length}} Schedules</h2>
+              <h2>{{workoutSchedules!.length}} Sessions</h2>
             </ion-card-content>
           </ion-card>
         </swiper-slide>

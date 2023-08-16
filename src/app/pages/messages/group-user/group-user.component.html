@@ -4,7 +4,7 @@
   </ion-avatar>
   <ion-label>
     <h2 *ngIf="userId !== currentUserId">{{profile.displayName}}</h2>
-    <h2 *ngIf="userId === currentUserId">{{profile.displayName}} (you)</h2>
+    <h2 *ngIf="userId === currentUserId">{{profile.displayName}} (You)</h2>
     <p>{{profile.bio}}</p>
   </ion-label>
 </ion-item>
