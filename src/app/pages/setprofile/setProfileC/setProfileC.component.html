@@ -42,9 +42,9 @@
                 </ion-item>
 
                 <ion-item >
-                    <ion-input label="Bio"  labelPlacement="stacked" type = "text" formControlName= "bio" placeholder="Enter Bio" maxlength="120"
+                    <ion-input label="Bio({{ remainingCharacters }})"  labelPlacement="stacked" type = "text" formControlName= "bio" placeholder="Enter Bio" maxlength="120"
                                (input)="updateCharacterCount()" #bioInput></ion-input>
-                    <div class="character-count">{{ remainingCharacters }}</div>
+<!--                    <div class="character-count"></div>-->
                 </ion-item>
 
                 <ion-item >
