@@ -6,6 +6,8 @@ import 'firebase/firestore';
 import { map } from 'rxjs/operators';
 import { Observable } from "rxjs";
 import { BadgesRepository } from "./badges.repository";
+import { Firestore, collection } from '@angular/fire/firestore';
+import { getDocs } from "firebase/firestore";
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +15,7 @@ import { BadgesRepository } from "./badges.repository";
 export class PersonalbestRepository {
   currUserId: string | undefined = undefined;
 
-  constructor(private firestore: AngularFirestore, private badgesRepository: BadgesRepository) { }
+  constructor(private firestore: AngularFirestore, private badgesRepository: BadgesRepository, private angularFireFirestore: Firestore) { }
 
   addPersonalBest(personalBest: IPersonalBest) {
     // Create a reference to the exercise document
@@ -50,8 +52,26 @@ export class PersonalbestRepository {
 
     console.table(progress);
 
-    if (personalBest.weight!>6 && personalBest.exercise=="Bench Press"){
-      this.badgesRepository.addBadge(this.currUserId, 3);//Record Breaker Badge
+    if (personalBest.exercise == "Bench Press") {
+      // alert("Bench Press")
+      const personalBestHistoryRef = collection(this.angularFireFirestore, `Personalbests/${this.currUserId}/exercises/Bench Press/exerciseEntries`);
+      const weights:any = [];
+      getDocs(personalBestHistoryRef).then((docs) => {
+        docs.forEach(document => {
+          // alert("In Promise")
+          console.log(document.data());
+          console.log(document.id);
+          const data = document.data() as IPersonalBest;
+          weights.push(data.weight);
+          alert(data.weight)
+        })
+      });
+      // alert(personalBest.weight)
+      alert(Math.max(weights))
+      if (personalBest.weight! > Math.max(weights)) {
+        // alert("Bench Press Record")
+        this.badgesRepository.addBadge(this.currUserId!, 3);//Record Breaker Badge
+      }
     }
 
     // Add the personal best to the exercise document
