@@ -41,6 +41,8 @@ export class SetprofileCComponent  implements OnInit {
   getUser : IGetProfile = {userId: 'na'};
   UpadateP? : IProfileModel;
   file: File | null = null;
+  isEditMode = true;
+
   constructor
   (
     private store: Store,
@@ -74,39 +76,17 @@ export class SetprofileCComponent  implements OnInit {
       }
       this.setprofileservices.updateProfile(this.UpadateP);
       this.DetailsSaved();
-      // this.userprofilepage.updateprofileinfor();
 
     }
-
-  openPicturePopup()
-  {
-    // this.modalController.create({
-    //   component: 'editPictureModal',
-    //   componentProps: {
-    //     selectedPicture: this.profileForm.get('profileURL')?.value as string,
-    //   },
-    // }).then((modal) => {
-    //   modal.present();
-    // });
-  }
-
-  getRemainingCharacters() {
-    return this.remainingCharacters;
-  }
 
   getDp()
   {
     return this.profileForm.get('profileURL')?.value as string; 
   }
 
-  isEditMode = false;
 
-  toggleEditMode() {
-    this.isEditMode = true;
-    //refresh page
-    this.ngOnInit();
 
-  }
+
   updateCharacterCount() {
     const inputText = this.profileForm.value.bio ?? ``;
     this.remainingCharacters = 120 - inputText.length;
@@ -132,7 +112,6 @@ export class SetprofileCComponent  implements OnInit {
   }
   DetailsSaved()
   {
-    this.isEditMode = false;
     this.file = null;
     this.ngOnInit();
   }
