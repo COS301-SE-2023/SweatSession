@@ -145,7 +145,7 @@ export class SetprofileCComponent  implements OnInit {
             this.profileForm.patchValue( {profileURL: 'src/assets/ProfileSE.jpg'});
           }
             this.navigationSubscription = this.router.events.subscribe((event) => {
-              console.log("Should refresh")
+
               if (event instanceof NavigationStart) {
                 const currentUrl = this.router.routerState.snapshot.url;
 
@@ -160,7 +160,6 @@ export class SetprofileCComponent  implements OnInit {
 
     setTimeout(() => {
       this.profileForm.valueChanges.subscribe((value) => {
-        console.log("editedProfile");
         this.isEditMode = true;
       });
     }, 2000);
