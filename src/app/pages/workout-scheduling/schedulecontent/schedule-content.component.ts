@@ -38,11 +38,11 @@ export class ScheduleContentComponent implements OnInit {
     private alertController: AlertController) { }
 
   ngOnInit() {
-    /*if (!sessionStorage.getItem('siteInit')) {
+    if (!sessionStorage.getItem('siteInit')) {
       this.sendReminder();
       sessionStorage.setItem('siteInit', 'true');
 
-    }*/
+    }
     if (!this.isCompleted()) {
       this.fraction();
       this.counter();
@@ -68,7 +68,7 @@ export class ScheduleContentComponent implements OnInit {
     this.isEditSlide = !this.isEditSlide;
   }
 
- /* async sendReminder(){
+  async sendReminder(){
     console.log("sendreminder");
     const currentTime = new Date().getTime();
     const targetTime = new Date(`${this.schedule.date}T${this.schedule.time}`).getTime();
@@ -82,23 +82,18 @@ export class ScheduleContentComponent implements OnInit {
 
           if(daysLeft < 1 ){
             if(hoursLeft >= 1){
-              const alert =  await this.alertController.create({
-                header: 'Workout Reminder',
-                message: "LETS-GO!! Your workout at " + this.schedule.location + " will begin in " + hoursLeft +" hours.",
-                buttons: ['OK']
-              });
-  
-              await alert.present();
+              this.date = new Date().toTimeString() ;
+              this.shortdate = this.date.split(':' , 2);
+              this.createNotifications("SWEAT-SESSION" , this.shortdate[0] + ':' + this.shortdate[1] , "Your workout begins at " + this.schedule.location + " in " + hoursLeft + " hours")  ;
 
+              
             }else{
 
-            const alert =  await this.alertController.create({
-              header: 'Workout Reminder',
-              message: "LETS-GO!! Your workout at " + this.schedule.location + " will begin in " + minutes +" minutes.",
-              buttons: ['OK']
-            });
+              this.date = new Date().toTimeString() ;
+              this.shortdate = this.date.split(':' , 2);
+              this.createNotifications("SWEAT-SESSION" , this.shortdate[0] + ':' + this.shortdate[1] , "Your workout begins at " + this.schedule.location + "in " + minutes + " minutes")  ;
 
-            await alert.present();
+              
           }
           }
          
@@ -106,7 +101,7 @@ export class ScheduleContentComponent implements OnInit {
         }  
 
   }
-}*/
+}
 
   timeLeft() {
     const currentTime = new Date().getTime();
