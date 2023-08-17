@@ -1,40 +1,46 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-item>
+    <ion-item lines = "none">
       <backbutton></backbutton>
-      <ion-title>Goal View</ion-title>
+      <ion-title>Add New Goal</ion-title>
     </ion-item>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true" class="form-content">
   <form [formGroup]="goalForm" (ngSubmit)="onSubmit()" class="ion-padding">
-    <ion-item>
-      <ion-label position="floating">Goal Name</ion-label>
-      <ion-input type="text" formControlName="name"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">Goal Description</ion-label>
-      <ion-input type="text" formControlName="description"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="stacked">Start date</ion-label>
-      <ion-input type="date" formControlName="start"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="stacked">End date</ion-label>
-      <ion-input type="date" formControlName="end"></ion-input>
-    </ion-item>
+
+    <ion-item-divider style="background-color: #A8DADC; border-radius: 7px; padding: 5px">
+      <ion-card-title>Goal details</ion-card-title>
+    </ion-item-divider>
+    <ion-card>
+      <ion-item>
+        <ion-label position="stacked"><h2>Name</h2></ion-label>
+        <ion-input type="text" placeholder="name your goal" formControlName="name"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked"><h2>Description</h2></ion-label>
+        <ion-input type="text" placeholder="describe goal" formControlName="description"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked"><h2>Start date</h2></ion-label>
+        <ion-input type="date" formControlName="start"></ion-input>
+      </ion-item>
+      <ion-item lines = "none">
+        <ion-label position="stacked"><h2>End date</h2></ion-label>
+        <ion-input type="date" formControlName="end"></ion-input>
+      </ion-item>
+    </ion-card>
 
     <form [formGroup]="TaskForm">
-      <ion-item>
+      <ion-item-divider style="background-color: #A8DADC; border-radius: 7px">
         <ion-card-title >Tasks</ion-card-title>
-        <ion-icon name = "add" (click)="addControl()" slot = "end" ></ion-icon>
-        </ion-item>
+        <ion-icon name = "add" size="large" (click)="addControl()" slot = "end" ></ion-icon>
+        </ion-item-divider>
       <ion-card>
         <ion-item *ngFor="let control of Taskses.controls; index as i;" formArrayName="Taskses" class="form-group">
-          <ion-item [formGroupName]="i">
-            <ion-input type="text" placeholder="Name Task" formControlName="content"></ion-input>
+          <ion-item [formGroupName]="i" lines="none">
+            <ion-input type="text" placeholder="task name" formControlName="content"></ion-input>
             <ion-button (click)="remove(i)" color = "danger">
               <ion-icon name="close-circle-outline"></ion-icon>
               Remove
