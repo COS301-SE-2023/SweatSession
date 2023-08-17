@@ -16,7 +16,7 @@ export class PersonalBestsChartComponent implements OnInit {
   chartType: ChartType = 'line';
   showExercise: string = 'Squats';
   showReps = 'reps';
-
+  radioButtons = document.getElementsByName("radioButton") as NodeListOf<HTMLInputElement>;
   personalBestsData: IPersonalBest[] = [];
 
   constructor(private personalbestService: PersonalbestService,
@@ -25,9 +25,18 @@ export class PersonalBestsChartComponent implements OnInit {
 
   ngOnInit() {
     
-    this.retrieveExercisesByName(this.showExercise); 
+    this.retrieveExercisesByName(this.showExercise);
      
   }
+
+  handleRadioChange(event: Event) {
+    const selectedValue = (event.target as HTMLInputElement).value;
+    console.log(`Changed radio button `);
+  }
+
+  // radioButtons.forEach(radio => {
+  // radio.addEventListener("change", handleRadioChange);
+  // });
 
     retrieveExercisesByName(name: string) {
       this.personalbestService.getExercisesByName(name).subscribe((exercises) => {

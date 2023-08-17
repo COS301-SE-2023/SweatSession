@@ -2,12 +2,11 @@
 <ion-item-divider  style="background-color: #A8DADC; padding: 2%; border-radius: 10px; text-align: center; font-size: 1.5rem;">
   <ion-label>Choose Exercise</ion-label>
 </ion-item-divider>
+
   <ion-card>
     <ion-row>
       <ion-col>
-          <ion-item>
-            <ion-label>Exercise</ion-label>
-          </ion-item>
+        <ion-label>Exercise</ion-label>
       </ion-col>
 
       <ion-col>
@@ -21,25 +20,22 @@
         </ion-select>
       </ion-col>
 
-
     </ion-row>
 
-      <ion-radio-group [(ngModel)]="showReps">
-        <ion-item>
-          <ion-label>Reps</ion-label>
-          <ion-radio value="reps"></ion-radio>
-        </ion-item>
-
-        <ion-item>
-          <ion-label>Weight (kg)</ion-label>
-          <ion-radio value="weight"></ion-radio>
-        </ion-item>
-
-      </ion-radio-group>
+          <ion-radio-group [(ngModel)]="showReps">
+            <ion-row>
+              <ion-col>
+                <ion-radio class="radioButton" name = "radioButton" value="reps"><ion-label>Reps</ion-label></ion-radio>
+              </ion-col>
+              <ion-col>
+                <ion-radio class="radioButton" name = "radioButton" value="weight"><ion-label>Weight (kg)</ion-label></ion-radio>
+              </ion-col>
+            </ion-row>
+          </ion-radio-group>
 
 
-      <ion-button (click)="showChart()" expand="full" class="rounded-button"
-      >Show chart</ion-button>
+<!--      <ion-button (click)="showChart()" expand="full" class="rounded-button"-->
+<!--      >Show chart</ion-button>-->
 
   </ion-card>
 

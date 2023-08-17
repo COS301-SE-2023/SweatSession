@@ -8,18 +8,11 @@
 </ion-header>
 
 <ion-content>
-  <!-- <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-  
-  <lottie-player src="https://lottie.host/d718ea5d-0be0-4d43-9592-58646b44c5f4/SYQQWCk4ZN.json"
-      background="#339bdb" speed="1" style="width:300px;
-      height: 300px" loop controls autoplay direction="1" mode="normal">
-  </lottie-player> -->
 
     <app-personal-bests-chart *ngIf="!showForm">
 
     </app-personal-bests-chart>
 
-<!-- <ion-button *ngIf="!showForm" (click)="openPopup()">Add new best</ion-button> -->
 
     <ion-fab slot="fixed" vertical="bottom" horizontal="end">
       <ion-fab-button *ngIf="!showForm" (click)="openPopup()">
