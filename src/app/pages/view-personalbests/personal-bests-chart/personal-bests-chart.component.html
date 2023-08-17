@@ -1,10 +1,13 @@
 
-<ion-item-divider  style="background-color: #A8DADC; padding: 2%; border-radius: 10px; text-align: center; font-size: 1.5rem;">
-  <ion-label>Choose Exercise</ion-label>
-</ion-item-divider>
 
-  <ion-card>
-    <ion-row>
+
+
+<ion-card class = "chart-card" style="background-color:#A8DADC; color: black; weight:10">
+  <ion-item-divider  style="background-color: #A8DADC; padding: 2%; border-radius: 10px; text-align: center; font-size: 1.5rem;">
+    <ion-label>Progress Chart</ion-label>
+  </ion-item-divider>
+
+  <ion-row>
       <ion-col>
         <ion-label>Exercise</ion-label>
       </ion-col>
@@ -19,31 +22,19 @@
           <ion-select-option value="Push ups">Push ups</ion-select-option>
         </ion-select>
       </ion-col>
+  </ion-row>
 
-    </ion-row>
+    <ion-radio-group [(ngModel)]="showReps">
+      <ion-row>
+        <ion-col>
+          <ion-radio class="radioButton" name = "radioButton" value="reps"><ion-label>Reps</ion-label></ion-radio>
+        </ion-col>
+        <ion-col>
+          <ion-radio class="radioButton" name = "radioButton" value="weight"><ion-label>Weight (kg)</ion-label></ion-radio>
+        </ion-col>
+      </ion-row>
+    </ion-radio-group>
 
-          <ion-radio-group [(ngModel)]="showReps">
-            <ion-row>
-              <ion-col>
-                <ion-radio class="radioButton" name = "radioButton" value="reps"><ion-label>Reps</ion-label></ion-radio>
-              </ion-col>
-              <ion-col>
-                <ion-radio class="radioButton" name = "radioButton" value="weight"><ion-label>Weight (kg)</ion-label></ion-radio>
-              </ion-col>
-            </ion-row>
-          </ion-radio-group>
-
-
-<!--      <ion-button (click)="showChart()" expand="full" class="rounded-button"-->
-<!--      >Show chart</ion-button>-->
-
-  </ion-card>
-
-<ion-item-divider  style="background-color: #A8DADC; padding: 2%; border-radius: 10px; text-align: center; font-size: 1.5rem;">
-  <ion-label>Progress Chart</ion-label>
-</ion-item-divider>
-
-<ion-card class = "chart-card" style="background-color:#A8DADC; color: black; weight:10">
   <canvas baseChart
           *ngIf="chartData.length > 0"
           [datasets]="chartData"
@@ -53,23 +44,27 @@
   </canvas>
 </ion-card>
 
-<ion-item-divider  style="background-color: #A8DADC; padding: 2%; border-radius: 10px; text-align: center; font-size: 1.5rem;">
-  <ion-label>Latest {{showExercise}} bests</ion-label>
-</ion-item-divider>
-
             <ion-card class = "chart-card" style="background-color:#A8DADC; color: black; weight:10">
+
+              <ion-item-divider  style="background-color: #A8DADC; padding: 2%; border-radius: 10px; text-align: center; font-size: 1.5rem;">
+                <ion-label>Latest {{showExercise}} bests</ion-label>
+              </ion-item-divider>
+
               <ion-card-content class="max-height-card-content">
-                <ion-list >
+
                   <ion-item-sliding *ngFor="let personalBest of personalBestsData">
                     <ion-item clsss = "chart-card" style="background-color:#A8DADC; color: black; weight:10">
+
                       <ion-label>
                         <h2>{{ personalBest.location }}</h2>
                         <p>{{ personalBest.date }}</p>
                       </ion-label>
+
                       <ion-note slot="end" color="black">
                         <p>Reps: {{ personalBest.reps }}</p>
                         <p>Weight: {{ personalBest.weight }}</p>
                       </ion-note>
+
                     </ion-item>
                     <ion-item-options side="end">
                       <ion-item-option color="danger" (click)="confirmDelete(personalBest)">
@@ -77,6 +72,6 @@
                       </ion-item-option>
                     </ion-item-options>
                   </ion-item-sliding>
-                </ion-list>
+
               </ion-card-content>
           </ion-card>

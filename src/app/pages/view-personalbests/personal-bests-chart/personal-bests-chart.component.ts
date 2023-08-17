@@ -23,7 +23,7 @@ export class PersonalBestsChartComponent implements OnInit {
               private alertController: AlertController) { }
 
 
-  ngOnInit() {
+  ngOnInit(){
     
     this.retrieveExercisesByName(this.showExercise);
      
@@ -34,9 +34,6 @@ export class PersonalBestsChartComponent implements OnInit {
     console.log(`Changed radio button `);
   }
 
-  // radioButtons.forEach(radio => {
-  // radio.addEventListener("change", handleRadioChange);
-  // });
 
     retrieveExercisesByName(name: string) {
       this.personalbestService.getExercisesByName(name).subscribe((exercises) => {
@@ -111,7 +108,7 @@ deleteItem(personalBest: IPersonalBest) {
       this.personalBestsData.forEach(element => {
         this.chartLabels.push(element.date!)
 
-        //sort Chart labesls by date
+
         this.chartLabels.sort((a, b) => {
           return new Date(a).getTime() - new Date(b).getTime();
         }

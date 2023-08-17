@@ -21,12 +21,16 @@
     </ion-fab>
 
     <ion-content *ngIf="showForm">
-            <form [formGroup]="PersonalBestForm" (ngSubmit)="onSubmit()" >
-                    <ion-item>
+        <ion-card>
+                <ion-item-divider  style="background-color: #A8DADC; padding: 5px">
+                    <ion-label>Add Best Details</ion-label>
+                </ion-item-divider>
 
-                      <!--Todo: User should be able to add their own exercises -->
-                        <ion-label>Exercise</ion-label> 
-                            <ion-select formControlName="exercise" placeholder="Select Exercise">
+                <form [formGroup]="PersonalBestForm" (ngSubmit)="onSubmit()" >
+
+                    <ion-item>
+                        <ion-label>Select Exercise</ion-label>
+                            <ion-select formControlName="exercise" placeholder="exercise">
                                 <ion-select-option value="Bench Press">Bench Press</ion-select-option>
                                 <ion-select-option value="Squats">Squats</ion-select-option>
                                 <ion-select-option value="Deadlifts">Deadlifts</ion-select-option>
@@ -36,38 +40,49 @@
                             </ion-select>
                     </ion-item>
 
-                <ion-item>
-                  <ion-label>Weight :</ion-label>
-                  <ion-input formControlName="weight" type="number"></ion-input>
-                </ion-item>
+<!--                    <ion-item>-->
+<!--                        <ion-label position="stacked"><h2>Start date</h2></ion-label>-->
+<!--                        <ion-input type="date" formControlName="start"></ion-input>-->
+<!--                    </ion-item>-->
 
-                <ion-item>
-                    <ion-label>Repetetions :</ion-label>
-                    <ion-input formControlName="reps" type="number"></ion-input>
-                </ion-item>
+                    <ion-item>
+                      <ion-label position="stacked">Weight</ion-label>
+                      <ion-input placeholder="Enter weight(Kg)" formControlName="weight" type="number"></ion-input>
+                    </ion-item>
 
-                <ion-item>
-                    <ion-label>Date</ion-label>
+                    <ion-item>
+                        <ion-label position="stacked">Repetetions</ion-label>
+                        <ion-input placeholder="Enter Reps" formControlName="reps" type="number"></ion-input>
+                    </ion-item>
 
-                    <ion-datetime presentation="date"
-                                  formControlName="date"
-                                  displayFormat="YYYY/MM/DD"
-                                  placeholder="Select Date"
-                    ></ion-datetime>
 
-                </ion-item>
 
-                <ion-item>
-                    <ion-label>Location :</ion-label>
-                    <ion-input formControlName="location" type="txt"></ion-input>
-                  </ion-item>
+                    <ion-item>
+                        <ion-label position="stacked">Date</ion-label>
+                        <ion-input type="date" displayFormat="YYYY/MM/DD" formControlName="date"></ion-input>
+                    </ion-item>
 
-                <ion-item>
-                  <ion-label>Notes :</ion-label>
-                  <ion-input formControlName="notes" type="txt"></ion-input>
-                </ion-item>
-                    <ion-button type="submit" expand="full" [disabled]="!isValid(PersonalBestForm.value)"><ion-icon slot="start" name="checkmark"></ion-icon>Submit</ion-button>
-            </form>
+<!--                    <ion-item>-->
+<!--                        <ion-label>Date</ion-label>-->
+<!--                        <ion-datetime presentation="date"-->
+<!--                                      formControlName="date"-->
+<!--                                      displayFormat="YYYY/MM/DD"-->
+<!--                                      placeholder="Select Date"-->
+<!--                        ></ion-datetime>-->
+<!--                    </ion-item>-->
+
+                    <ion-item>
+                        <ion-label position="stacked">Location</ion-label>
+                        <ion-input placeholder="Enter Location" formControlName="location" type="txt"></ion-input>
+                      </ion-item>
+
+                    <ion-item>
+                      <ion-label position="stacked">Notes</ion-label>
+                      <ion-input placeholder="Enter notes" formControlName="notes" type="txt"></ion-input>
+                    </ion-item>
+                        <ion-button type="submit" expand="full" [disabled]="!isValid(PersonalBestForm.value)"><ion-icon slot="start" name="checkmark"></ion-icon>Submit</ion-button>
+                </form>
+        </ion-card>
     </ion-content>
 
   
