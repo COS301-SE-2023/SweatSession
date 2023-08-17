@@ -10,13 +10,23 @@
 
 <ion-content>
 
-    <ion-item class="goal-name" >
-        <ion-title type = "large">{{goalName}}</ion-title>
-    </ion-item>
+    <ion-card class="goal-name" >
+        <ion-card-title style="padding-left: 10px">
+                    {{goalName}}
+        </ion-card-title>
+        <ion-card-subtitle style="padding-left: 10px">
+                    {{goalDesc}}
+        </ion-card-subtitle>
+        <ion-card-content>
+            <img src="../../../assets/goalsBanner.jpg" class="goal-image" />
+        </ion-card-content>
+
+    </ion-card>
 
     <ion-card>
           <ion-list>
-            <ion-item *ngFor="let task of GOAL.Tasks!">
+
+            <ion-item *ngFor="let task of GOAL.Tasks!" lines="none">
                 <ion-checkbox [(ngModel)]="task.done" slot="start"></ion-checkbox>
                 <ion-label class="task-content">{{ task.content }}</ion-label>
             </ion-item>
