@@ -21,22 +21,19 @@
                 <ion-item-option color="danger" (click)="confirmDelete( goal.id! )">Delete</ion-item-option>
             </ion-item-options>
             </ion-item-sliding>
-        <ion-card-content>
-            <ion-card-subtitle class="ion-text-wrap ion-text-sm">{{ goal.description }}</ion-card-subtitle>
-            <ion-progress-bar style = "height: 15px; border-radius: 10px" value = "{{goal.progress! / 100}}" ></ion-progress-bar>
+            <ion-card-content>
+                <ion-card-subtitle class="ion-text-wrap ion-text-sm">{{ goal.description }}</ion-card-subtitle>
+                <ion-progress-bar style = "height: 15px; border-radius: 10px" value = "{{goal.progress! / 100}}" ></ion-progress-bar>
 
-            <div style="padding-top: 20px">
-                <ion-icon name="speedometer-outline"></ion-icon><ion-text class="schedule-value">{{(goal.progress!)}}% Done</ion-text><br>
-                <ion-icon name="alert-circle-outline"></ion-icon><ion-text class="schedule-value">{{getDaysleft(goal)}} Days Left</ion-text><br>
-                <ion-icon name="american-football-outline"></ion-icon><ion-text class="schedule-value">{{goal.Tasks!.length}} Tasks</ion-text><br>
-                <ion-icon name="calendar-outline"></ion-icon><ion-text class="schedule-value">Started: {{goal.startDate}}</ion-text><br>
-                <ion-icon name="alarm-outline"></ion-icon><ion-text class="schedule-value">Ending: {{goal.endDate}}</ion-text><br>
-            </div>
-
-        </ion-card-content>
+                <div style="padding-top: 20px">
+                    <ion-icon name="speedometer-outline"></ion-icon><ion-text class="schedule-value">{{(goal.progress!)}}% Done</ion-text><br>
+                    <ion-icon name="alert-circle-outline"></ion-icon><ion-text class="schedule-value">{{getDaysleft(goal)}} Days Left</ion-text><br>
+                    <ion-icon name="american-football-outline"></ion-icon><ion-text class="schedule-value">{{goal.Tasks!.length}} Tasks</ion-text><br>
+                    <ion-icon name="calendar-outline"></ion-icon><ion-text class="schedule-value">Started: {{goal.startDate}}</ion-text><br>
+                    <ion-icon name="alarm-outline"></ion-icon><ion-text class="schedule-value">Ending: {{goal.endDate}}</ion-text><br>
+                </div>
+            </ion-card-content>
         </ion-card>
-
-
   </ion-content>
 
 <ng-template #loaderContent>

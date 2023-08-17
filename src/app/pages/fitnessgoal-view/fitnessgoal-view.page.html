@@ -10,12 +10,11 @@
 
 <ion-content>
 
+    <ion-item class="goal-name" >
+        <ion-title type = "large">{{goalName}}</ion-title>
+    </ion-item>
+
     <ion-card>
-      <ion-item class="goal-name">
-          <ion-title>{{goalName}}</ion-title>
-      </ion-item>
-
-
           <ion-list>
             <ion-item *ngFor="let task of GOAL.Tasks!">
                 <ion-checkbox [(ngModel)]="task.done" slot="start"></ion-checkbox>
@@ -23,10 +22,17 @@
             </ion-item>
           </ion-list>
 
-
         <div class="ion-padding">
-          <ion-button expand="block" (click)="saveGoal()">Done</ion-button>
-          <ion-button expand="block" routerLink="/fitnessgoals">Cancel</ion-button>
-        </div>
+            <ion-grid>
+                <ion-row>
+                    <ion-col>
+                        <ion-button expand="block" routerLink="/fitnessgoals">Cancel</ion-button>
+                    </ion-col>
+                    <ion-col>
+                        <ion-button expand="block" (click)="saveGoal()">Done</ion-button>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+           </div>
     </ion-card>
   </ion-content>
