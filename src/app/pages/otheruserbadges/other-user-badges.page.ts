@@ -18,6 +18,7 @@ export class OtherUserBadgesPage implements OnInit {
   receivedBadges$!: Observable<IBadges | null>;
   @Select(OtherUserBadgesState.usersName)
   name$!: Observable<String | null>;
+  noOfBadges=0;
   badges=[{
       header:"Starter's Success",
       receivedDescription:"First workout plan completed.",
@@ -64,7 +65,8 @@ export class OtherUserBadgesPage implements OnInit {
     // private badgesApi: BadgesApi,
     private authApi: AuthApi,
     private badgesService: BadgesService,
-    private store: Store
+    private store: Store,
+    // noOfBadges: Number
   ) {}
 
   ngOnInit() {
@@ -73,6 +75,7 @@ export class OtherUserBadgesPage implements OnInit {
       // Use the map operator to transform the observable value
       map((badges: IBadges | null) => {
         if (badges) {
+          this.noOfBadges=badges.receivedBadges.length;
           return badges.receivedBadges;
         } else {
           return []; // Return an empty array if badges is null

@@ -1,20 +1,47 @@
-<ion-header [translucent]="true">
-  <ion-item style="display: flex; align-items: center;" lines="none">
-    <backbutton class="larger-back-button"></backbutton>
-    <ion-title style="margin: 0 auto;" *ngIf="name$ | async as usersName;">{{usersName}}</ion-title>
-    <!-- <ion-title style="margin: 0 auto;">{{user!.name}}'s' Badges</ion-title> -->
-  </ion-item>
+<ion-header style="background-color: #E63946;">
+  <ion-toolbar>
+    <ion-item style="display: flex; align-items: center;" lines="none">
+      <backbutton class="larger-back-button"></backbutton>
+      <ion-title style="margin: 0 auto;" *ngIf="name$ | async as usersName;">{{usersName}}</ion-title>
+      <!-- <ion-title style="margin: 0 auto;">{{user!.name}}'s' Badges</ion-title> -->
+    </ion-item>
+  </ion-toolbar>
 </ion-header>
+
+<!--  -->
+<!-- 
+<ion-content class="badgesContainer">
+  <ion-grid class="loginGrid">
+    <ng-container *ngIf="badges.length == 0; else badgesTemplate">
+      <h2>You have no badges yet.</h2>
+    </ng-container>
+    <ng-template #badgesTemplate>
+      <ng-container *ngFor="let badge of badges">
+        <badge *ngIf="badge.received"
+          [name]="badge.header"
+          [receivedDescription]="badge.receivedDescription"
+          [notReceivedDescription]="badge.notReceivedDescription"
+          [received]="badge.received"
+        ></badge>
+      </ng-container>
+    </ng-template>
+  </ion-grid>
+</ion-content> -->
 
 <ion-content class="badgesContainer">
   <ion-grid class="loginGrid">
-    <ng-container *ngFor="let badge of badges">
-      <badge *ngIf="badge.received"
-        [name]="badge.header"
-        [receivedDescription]="badge.receivedDescription"
-        [notReceivedDescription]="badge.notReceivedDescription"
-        [received]="badge.received"
-      ></badge>
+    <ng-container *ngIf="!noOfBadges; else hasBadges">
+      <h1 *ngIf="name$ | async as usersName;" style="color: grey;">{{usersName}} has no badges.</h1>
     </ng-container>
+    <ng-template #hasBadges>
+      <ng-container *ngFor="let badge of badges">
+        <badge *ngIf="badge.received"
+          [name]="badge.header"
+          [receivedDescription]="badge.receivedDescription"
+          [notReceivedDescription]="badge.notReceivedDescription"
+          [received]="badge.received"
+        ></badge>
+      </ng-container>
+    </ng-template>
   </ion-grid>
 </ion-content>
