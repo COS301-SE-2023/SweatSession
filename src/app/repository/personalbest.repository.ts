@@ -14,6 +14,8 @@ import { getDocs } from "firebase/firestore";
 })
 export class PersonalbestRepository {
   currUserId: string | undefined = undefined;
+  weights: any = [];
+  maxWeight: number;
 
   constructor(private firestore: AngularFirestore, private badgesRepository: BadgesRepository, private angularFireFirestore: Firestore) { }
 
@@ -53,25 +55,39 @@ export class PersonalbestRepository {
     console.table(progress);
 
     if (personalBest.exercise == "Bench Press") {
+      this.maxWeight = 0;
       // alert("Bench Press")
       const personalBestHistoryRef = collection(this.angularFireFirestore, `Personalbests/${this.currUserId}/exercises/Bench Press/exerciseEntries`);
-      const weights:any = [];
+      // weights = [];
       getDocs(personalBestHistoryRef).then((docs) => {
         docs.forEach(document => {
           // alert("In Promise")
           console.log(document.data());
           console.log(document.id);
           const data = document.data() as IPersonalBest;
-          weights.push(data.weight);
-          alert(data.weight)
+          this.weights.push(data.weight);
+          if (data.weight! > this.maxWeight) {
+            this.maxWeight = data.weight!;
+          }
+          console.log("weight")
+          console.log(data.weight)
         })
+        // alert(personalBest.weight)
+        console.log("Weights")
+        console.log(this.weights)
+        console.log("max Weight")
+        console.log(Math.max(this.weights))
+        console.log("max Weight 2")
+        console.log(this.maxWeight)
+        console.log("pb Weight")
+        console.log(personalBest.weight)
+        if (personalBest.weight! > this.maxWeight) {
+          // alert("Bench Press Record")
+          this.badgesRepository.addBadge(this.currUserId!, 3);//Record Breaker Badge
+        }
+        this.weights = [];
+        this.maxWeight = 0;
       });
-      // alert(personalBest.weight)
-      alert(Math.max(weights))
-      if (personalBest.weight! > Math.max(weights)) {
-        // alert("Bench Press Record")
-        this.badgesRepository.addBadge(this.currUserId!, 3);//Record Breaker Badge
-      }
     }
 
     // Add the personal best to the exercise document
