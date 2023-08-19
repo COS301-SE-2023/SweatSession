@@ -71,7 +71,7 @@ export class NotificationsPage implements OnInit {
 
   async presentAlert() {
     const alert = await this.alertController.create({
-      header: 'Alert',
+      header: 'Notifications',
       message: 'You have no new notifications!',
       buttons: ['OK']
     });
