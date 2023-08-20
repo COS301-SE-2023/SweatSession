@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FitnessgoalState} from "../../states";
 import { GoalcardComponent } from "../fitnessgoals/goalcard/goalcard.component";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-fitnessgoals',
@@ -9,10 +10,11 @@ import { GoalcardComponent } from "../fitnessgoals/goalcard/goalcard.component";
 })
 export class FitnessgoalsPage implements OnInit {
 
-  constructor() { }
+  constructor( private router: Router) { }
 
-  ngOnInit() {
+  ngOnInit() {}
 
+  addGoal() {
+    this.router.navigate(['/goalview']);
   }
-
 }

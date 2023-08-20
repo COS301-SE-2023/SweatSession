@@ -1,16 +1,17 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
     <ion-item lines="none">
       <backbutton></backbutton>
       <ion-title>Goals</ion-title>
-
     </ion-item>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <app-goalcard>
-
-
-  </app-goalcard>
+  <app-goalcard></app-goalcard>
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button (click)="addGoal()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

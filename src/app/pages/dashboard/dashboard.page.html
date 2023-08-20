@@ -7,53 +7,53 @@
         </div>
         <swiper-container [slidesPerView]="2" centered-slides="true"  pagination="{hideOnClick: true}">
           <swiper-slide>
-            <ion-card>
+            <ion-card routerLink="/workout-scheduling">
               <ion-card-content>
                 <ion-card-title>
                   <ion-icon name="receipt-outline"></ion-icon>
                 </ion-card-title>
                <ion-item lines="none">
                 <ion-text>Sessions</ion-text>
-                <ion-icon name="chevron-forward" slot="end" routerLink="/workout-scheduling"></ion-icon>
+                <ion-icon name="chevron-forward" slot="end"></ion-icon>
                </ion-item>
               </ion-card-content>
             </ion-card>
           </swiper-slide>
           <swiper-slide>
-            <ion-card>
+            <ion-card routerLink="/fitnessgoals">
               <ion-card-content>
                 <ion-card-title>
                   <ion-icon name="american-football-outline"></ion-icon>
                 </ion-card-title>
                <ion-item lines="none">
                 <ion-text slot="start">Goals</ion-text>
-                <ion-icon name="chevron-forward" slot="end"  routerLink="/fitnessgoals"></ion-icon>
+                <ion-icon name="chevron-forward" slot="end"></ion-icon>
                </ion-item>
               </ion-card-content>
             </ion-card>
           </swiper-slide>
           <swiper-slide>
-            <ion-card>
+            <ion-card routerLink="/home/leaderboard">
               <ion-card-content>
                 <ion-card-title>
                   <ion-icon name="bar-chart-outline"></ion-icon>
                 </ion-card-title>
                 <ion-item lines="none">
                   <ion-text slot="start">Rank</ion-text>
-                  <ion-icon name="chevron-forward" slot="end" routerLink="/home/leaderboard"></ion-icon>
+                  <ion-icon name="chevron-forward" slot="end"></ion-icon>
                  </ion-item>
               </ion-card-content>
             </ion-card>
           </swiper-slide>
           <swiper-slide>
-            <ion-card>
+            <ion-card routerLink="/view-personalbests">
               <ion-card-content>
                 <ion-card-title>
                   <ion-icon name="analytics-outline"></ion-icon>
                 </ion-card-title>
                 <ion-item lines="none">
                   Performance
-                  <ion-icon name="chevron-forward" slot="end" routerLink="/view-personalbests"></ion-icon>
+                  <ion-icon name="chevron-forward" slot="end"></ion-icon>
                  </ion-item>
               </ion-card-content>
             </ion-card>
