@@ -16,18 +16,24 @@ export class PersonalBestsChartComponent implements OnInit {
   chartType: ChartType = 'line';
   showExercise: string = 'Squats';
   showReps = 'reps';
-
+  radioButtons = document.getElementsByName("radioButton") as NodeListOf<HTMLInputElement>;
   personalBestsData: IPersonalBest[] = [];
 
   constructor(private personalbestService: PersonalbestService,
               private alertController: AlertController) { }
 
 
-  ngOnInit() {
+  ngOnInit(){
     
-    this.retrieveExercisesByName(this.showExercise); 
+    this.retrieveExercisesByName(this.showExercise);
      
   }
+
+  handleRadioChange(event: Event) {
+    const selectedValue = (event.target as HTMLInputElement).value;
+    console.log(`Changed radio button `);
+  }
+
 
     retrieveExercisesByName(name: string) {
       this.personalbestService.getExercisesByName(name).subscribe((exercises) => {
@@ -102,7 +108,7 @@ deleteItem(personalBest: IPersonalBest) {
       this.personalBestsData.forEach(element => {
         this.chartLabels.push(element.date!)
 
-        //sort Chart labesls by date
+
         this.chartLabels.sort((a, b) => {
           return new Date(a).getTime() - new Date(b).getTime();
         }

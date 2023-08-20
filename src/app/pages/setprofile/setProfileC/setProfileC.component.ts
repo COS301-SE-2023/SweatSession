@@ -41,6 +41,8 @@ export class SetprofileCComponent  implements OnInit {
   getUser : IGetProfile = {userId: 'na'};
   UpadateP? : IProfileModel;
   file: File | null = null;
+  isEditMode = false;
+
   constructor
   (
     private store: Store,
@@ -52,6 +54,8 @@ export class SetprofileCComponent  implements OnInit {
     this.profileForm.controls.bio.valueChanges.subscribe(() => {
       this.updateCharacterCount();
     });
+
+
 
   }
 
@@ -74,39 +78,17 @@ export class SetprofileCComponent  implements OnInit {
       }
       this.setprofileservices.updateProfile(this.UpadateP);
       this.DetailsSaved();
-      // this.userprofilepage.updateprofileinfor();
 
     }
-
-  openPicturePopup()
-  {
-    // this.modalController.create({
-    //   component: 'editPictureModal',
-    //   componentProps: {
-    //     selectedPicture: this.profileForm.get('profileURL')?.value as string,
-    //   },
-    // }).then((modal) => {
-    //   modal.present();
-    // });
-  }
-
-  getRemainingCharacters() {
-    return this.remainingCharacters;
-  }
 
   getDp()
   {
     return this.profileForm.get('profileURL')?.value as string; 
   }
 
-  isEditMode = false;
 
-  toggleEditMode() {
-    this.isEditMode = true;
-    //refresh page
-    this.ngOnInit();
 
-  }
+
   updateCharacterCount() {
     const inputText = this.profileForm.value.bio ?? ``;
     this.remainingCharacters = 120 - inputText.length;
@@ -123,6 +105,7 @@ export class SetprofileCComponent  implements OnInit {
 
     console.log(this.profileForm.value.profileURL);
   }
+
 
 
   onFileSelected(event: any) {
@@ -162,7 +145,7 @@ export class SetprofileCComponent  implements OnInit {
             this.profileForm.patchValue( {profileURL: 'src/assets/ProfileSE.jpg'});
           }
             this.navigationSubscription = this.router.events.subscribe((event) => {
-              console.log("Should refresh")
+
               if (event instanceof NavigationStart) {
                 const currentUrl = this.router.routerState.snapshot.url;
 
@@ -175,6 +158,11 @@ export class SetprofileCComponent  implements OnInit {
 
     });
 
+    setTimeout(() => {
+      this.profileForm.valueChanges.subscribe((value) => {
+        this.isEditMode = true;
+      });
+    }, 2000);
 
   }
 

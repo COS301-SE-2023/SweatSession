@@ -17,6 +17,7 @@ export class FitnessgoalViewPage implements OnInit {
 
   goalName: string;
   goalId: string;
+  goalDesc: string;
   GOAL: IGOAL = {};
   currUserId: string | undefined = undefined;
   constructor(private fitnessgaolservive: FitnessgoalService,
@@ -43,6 +44,7 @@ export class FitnessgoalViewPage implements OnInit {
 
     this.fitnessgaolservive.getGoal(this.goalId).subscribe((data) => {
           this.goalName = data.goal.name!;
+          this.goalDesc = data.goal.description!;
           this.GOAL = data.goal;
           console.table(this.GOAL);
     });
