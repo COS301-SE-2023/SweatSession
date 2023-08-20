@@ -48,7 +48,7 @@ export class AddScheduleComponent  implements OnInit {
     this.locationRepository.addGymSession(this.placeId, this.schedule.date!, this.schedule.time!, this.schedule.completeAt!, this.schedule.name!);
     this.date = new Date().toTimeString() ;
    this.shortdate = this.date.split(':' , 2);
-   this.createNotifications("SWEAT-SESSION" , this.shortdate[0] + ':' + this.shortdate[1] , "LETS-GO!! Your workout as been scheduled at " + this.schedule.location )  ;
+   this.createNotifications("SWEATSESSION" , this.shortdate[0] + ':' + this.shortdate[1] , "LETS-GO!! Your workout has been scheduled at " + this.schedule.location )  ;
   }
 
   isDateTimeValid(): boolean {

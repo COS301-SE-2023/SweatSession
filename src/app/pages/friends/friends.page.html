@@ -1,20 +1,39 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-item>
+    <ion-item lines="none">
       <backbutton></backbutton>
       <ion-title>Friends</ion-title>
-      <ion-item class="addFriend-button" slot="end" (click)="addFriend()">
-        <ion-icon name="add-outline"></ion-icon>
-        <ion-icon name="people-outline"></ion-icon>
-      </ion-item>
     </ion-item>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content *ngIf="friends.length > 0; else noFriends">
   <search [data]="friends" [placeholder]="'Search for friends'"></search>
   <user-friend *ngFor ="let friend of friends" 
     [friend] = "friend"
   >
   </user-friend>
+
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button (click)="addFriend()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>
+
+<ng-template #noFriends>
+  <ion-content>
+   <div class="zero-content-container ">
+    <ion-icon class="large-icon" name="people"></ion-icon><br>
+    <ion-text>
+      You have no friends. Click the add button to search and discover new friends.
+    </ion-text>
+   </div>
+
+   <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button (click)="addFriend()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  </ion-content>
+</ng-template>

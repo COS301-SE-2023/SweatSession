@@ -18,10 +18,6 @@ ion-header{
     font-size: 24px; 
 }
 
-.pointsContainer {
-    --ion-background-color: white;
-}
-
 ion-item.userPointsSection::part(native) {
     --background: #1D3557;
     --border-radius: 12px;

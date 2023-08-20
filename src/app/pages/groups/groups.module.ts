@@ -8,6 +8,7 @@ import { GroupsPageRoutingModule } from './groups-routing.module';
 
 import { GroupsPage } from './groups.page';
 import { BackButtonDirectiveModule } from 'src/app/directives';
+import { MessageStateModule } from 'src/app/states';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { BackButtonDirectiveModule } from 'src/app/directives';
     FormsModule,
     IonicModule,
     GroupsPageRoutingModule,
-    BackButtonDirectiveModule
+    BackButtonDirectiveModule,
+    MessageStateModule
   ],
   declarations: [GroupsPage]
 })

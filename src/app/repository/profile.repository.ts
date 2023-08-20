@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import 'firebase/firestore';
-import { Observable, from } from 'rxjs';
+import { Observable, from, lastValueFrom } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { IProfileModel, IGetProfile } from '../models';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
@@ -56,6 +56,13 @@ export class ProfileRepository {
       .collection('profiles')
       .doc<IProfileModel>(request.userId)
       .set(request);
+  }
+
+  async getUser(userId: string) {
+    const profileDoc = this.firestore.doc<IProfileModel>(`profiles/${userId}`).get();
+    const profile: IProfileModel = (await lastValueFrom(profileDoc)).data()!;
+    
+    return profile;
   }
 
 }

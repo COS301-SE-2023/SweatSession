@@ -85,12 +85,6 @@ export class GoalcardComponent  implements OnInit {
         }
     }
 
-    addGoal() {
-        //route to goalview page
-        this.router.navigate(['/goalview']);
-
-    }
-
     getFilteredGoals() {
         if (this.selectedSegment === '0') {
             return this.GOALS.filter(goal => {

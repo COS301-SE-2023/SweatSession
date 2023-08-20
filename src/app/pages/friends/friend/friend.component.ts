@@ -3,7 +3,8 @@ import { NavController } from '@ionic/angular';
 import { Store } from '@ngxs/store';
 import { RemoveFriendAction } from 'src/app/actions';
 import { StageOtheruserInfo } from 'src/app/actions';
-import { IFriendsModel } from 'src/app/models';
+import { IFriendsModel, IProfileModel } from 'src/app/models';
+import { ProfileService } from 'src/app/services';
 
 @Component({
   selector: 'user-friend',
@@ -12,10 +13,18 @@ import { IFriendsModel } from 'src/app/models';
 })
 export class FriendComponent  implements OnInit {
   @Input() friend!:IFriendsModel;
+  profile: IProfileModel;
+  load: boolean = true;
 
-  constructor(private Nav: NavController, private store: Store) { }
+  constructor(private Nav: NavController, private store: Store, private profileService: ProfileService) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+
+    this.profileService.getUser(this.friend.userId!).then((profile)=>{
+      this.profile = profile;
+      this.load = false;
+    })
+  }
 
   viewOtherUser(){
     this.store.dispatch(new StageOtheruserInfo(this.friend));

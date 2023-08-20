@@ -1,25 +1,11 @@
-.friend {
-    ion-text {
-        margin: 20px;
-        font-size: 25px;
-    }
-}
-.friend:focus {
-    zoom: 0.8;
-    background-color: aqua;
-}
-
 ion-item{
-    --highlight-height: 0;
-    --inner-border-width: 0;
-    border-radius: 12px;
+    margin: 8px;
+    margin-bottom: 0px;
+    border-radius: 2px;
     --background: #A8DADC;
+    color: black;
 }
 
-*{
-    font-family: 'Montserrat', 'sans-serrif';
-}
-
-ion-card, ion-item {
-    opacity: 1;
+.loader-wrapper {
+    width: 100%;
 }

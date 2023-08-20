@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Select, Store } from '@ngxs/store';
+import { Observable } from 'rxjs';
+import { GetGroup, GetUserGroups, StageChatGroup } from 'src/app/actions';
+import { IGroup } from 'src/app/models';
+import { MessagesState } from 'src/app/states';
 
 @Component({
   selector: 'app-groups',
@@ -7,67 +12,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GroupsPage implements OnInit {
 
-  Groups$: any[] = [
-    {
-      name: 'Group 1',
-      description: 'This is a group',
-      members: [
-        {
-          name: 'User 1',
-          
-        },
-        {
-          name: 'User 2',
+  @Select(MessagesState.returnChatGroups) groups$: Observable<IGroup[]>;
+  groups: IGroup[] = [];
+  constructor(private store: Store) { }
 
-        }],
-        
-      image: 'https://www.w3schools.com/howto/img_avatar.png',
-      size: 2,
-      workoutType: 'Running',
-      type: 'public'
-    },
-    {
-      name: 'Group 2',
-      description: 'This is a group',
-      members: [
-        {
-          name: 'User 1',
-          
-        },
-        {
-          name: 'User 2',
+  ngOnInit() {
+    this.displayGroups()
+  }
 
-        }],
-      image: 'https://www.w3schools.com/howto/img_avatar.png',
-      size: 2,
-      workoutType: 'Running',
-      type: 'public'
-    },
-    {
-      name: 'Group 3',
-      description: 'This is a group',
-      members: [
-        {
-          name: 'User 1',
-          
-        },
-        {
-          name: 'User 2',
+  displayGroups() {
+    this.store.dispatch(new GetUserGroups())
+    this.groups$.subscribe((response)=>{
+      this.groups=response;
+    })
+  }
 
-        }],
-      image: 'https://www.w3schools.com/howto/img_avatar.png',
-      size: 2,
-      workoutType: 'Running',
-      type: 'public'
-    }
-  ];
-
-  constructor() { }
-
-
-  ngOnInit() 
-  {
-
+  stageGroup(selectedGroup: IGroup) {
+    this.store.dispatch(new GetGroup(selectedGroup.id))
+    this.store.dispatch(new StageChatGroup(selectedGroup));
   }
 
 }
