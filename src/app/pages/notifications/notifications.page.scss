@@ -43,8 +43,9 @@ ion-header{
 }
 
 .Mcard{
-    border: radius 50px;
-    background-color:rgb(144,202,243 , 1)
+    
+    background-color:rgb(73, 197, 238);
+    
     
 }
 .flex-center2{
@@ -53,7 +54,11 @@ ion-header{
     
 }
 .Bcard{
-    background-color:rgb(144,202,243 , 0.9)
+    background-color:rgb(73, 197, 238);
+}
+.Bcard2{
+    background-color:rgb(73, 197, 238);
+    color: #E63946;
 }
 
 .ion-icon1{
@@ -64,9 +69,17 @@ ion-header{
     display: flex;
     justify-content: center;
     align-items: center;
-    
-    
     border: radius 50px;
+    
+
+}
+
+.flex-center4{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: radius 50px;
+    background-color: #E63946;
 
 }
 
@@ -74,4 +87,10 @@ ion-header{
     display: flex;
     justify-content: flex-end; /* Align the content to the right */
     padding-right: 5px;
+  }
+
+  .right-align-label2 {
+    display: flex;
+    justify-content: flex-end; /* Align the content to the right */
+    
   }

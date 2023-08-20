@@ -10,25 +10,25 @@
 
 
 <ion-content class="main" >
-  <ion-title *ngIf="noticeamount > 0"class="flex-center3" style="display:inline-block; background: none; " ><ion-button color="light" size="default" (click)="clearNotifications()">Clear All</ion-button></ion-title>
+  <ion-title *ngIf="noticeamount > 0" style="display:inline-block; background: none; " ><ion-button color="light" size="default" class="flex-center3" (click)="clearNotifications()">Clear All</ion-button></ion-title>
     <br>
     <br>
     
   <div *ngIf="noticeamount > 0" >
   <ion-card class="Mcard" *ngFor="let notice of noticeList2">
-    <div class="right-align-label"><ion-button fill="clear" size="small" (click)="clearNotification(notice.id!)" style="color: black;"><ion-icon name="close-circle-outline" size="default"></ion-icon></ion-button></div>
+    <div class="right-align-label2"><ion-button  fill="clear"  size="small" (click)="clearNotification(notice.id!)" style="color: black; font-size: 17px;"><ion-icon name="close-circle-outline"  ></ion-icon></ion-button></div>
     <ion-card-content style="display:flex ; align-items:center" >
   <ion-avatar slot="start">
     <img alt="Silhouette of a person's head" src={{notice.profileurl}} />
   </ion-avatar>
   <ion-grid>
     <ion-row>
-  <ion-label class="Bcard"><b>&nbsp;{{notice.sendername}}</b></ion-label>
+  <ion-label class="Bcard2"><b>&nbsp;{{notice.sendername}}</b></ion-label>
    </ion-row>  
   <ion-label class="Bcard">&nbsp;{{notice.message}}</ion-label>
 </ion-grid>
 </ion-card-content>
-<div class="flex-center3" *ngIf="notice.message == 'Sent you a Friend Request!'">
+<div class="flex-center4" *ngIf="notice.message == 'Sent you a Friend Request!'">
 <ion-button size="small" (click)="addFriend(notice)">Accept</ion-button>
 <ion-button size="small" (click)="clearNotification(notice.id!); rejectFriendRequest(notice , notice.senderid! , notice.senttoid!);">Reject</ion-button>
 </div>
