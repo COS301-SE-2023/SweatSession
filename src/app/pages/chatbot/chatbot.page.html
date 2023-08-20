@@ -5,7 +5,7 @@
   <br>
   <ion-list class="transparent-list">
     
-    <ion-item lines="none" *ngFor="let message of messages">
+    <ion-item lines="none" class="transparent-list" *ngFor="let message of messages">
      
       <div [ngClass]="{'user-message': message.sender === 'user', 'bot-message': message.sender === 'SS-bot'}">
         {{ message.displayText }}

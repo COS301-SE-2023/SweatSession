@@ -48,15 +48,10 @@ ion-avatar {
     height: 1.2rem;
 }
 
-// ion-spinner {
-//     --color: #A8DADC;
-//     width: 1.2rem;
-//     height: 1.2rem;
-// }
-
-// .loader-wrapper {
-//     display: flex;
-//     justify-content: center;
-//     align-items: center;
-//     height: 100%;
-//   }
+.message-timestamp {
+    position: relative;
+    p {
+        position: relative;
+        right: 0px;
+    }
+}
