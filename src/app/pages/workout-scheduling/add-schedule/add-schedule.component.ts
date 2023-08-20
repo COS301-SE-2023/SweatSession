@@ -51,7 +51,7 @@ export class AddScheduleComponent  implements OnInit {
     this.daynum = new Date().getDay() ;
     this.day = weekday[this.daynum];
     this.date = new Date().toTimeString() ;
-   this.shortdate = this.date.split(':' , 2);
+    this.shortdate = this.date.split(':' , 2);
    this.createNotifications("SWEATSESSION" , this.day + ' ' +this.shortdate[0] + ':' + this.shortdate[1] + ' ' , "LETS-GO!! Your workout has been scheduled at " + this.schedule.location )  ;
   }
 
