@@ -1,18 +1,23 @@
-<ion-card>
-  <ion-item-sliding>
-    <ion-item class="friend">
-      <!-- <ion-button>remove</ion-button> -->
-      <ion-avatar>
-        <img src="{{friend.profileURL}}"/>
-      </ion-avatar>
-      <ion-text>
-        {{friend.name}}
-      </ion-text>
-      <ion-icon name="chevron-forward-outline" slot = "end" (click)="viewOtherUser()"></ion-icon>
-    </ion-item>
+<ion-item-sliding *ngIf="!load; else loaderContent">
+  <ion-item class="friend" lines="none" (click)="viewOtherUser()">
+    <ion-avatar slot="start">
+      <img [src]="profile.profileURL"/>
+    </ion-avatar>
+    <ion-label>
+      <h2> {{profile.displayName}}</h2>
+      <p>{{"~ " + profile.bio}}</p>
+    </ion-label>
+  </ion-item>
 
-    <ion-item-options side="end">
-      <ion-item-option color="danger" (click)="removeFriend()">Unfriend</ion-item-option>
-    </ion-item-options>
-  </ion-item-sliding>
-</ion-card>
+  <ion-item-options side="end">
+    <ion-item-option color="danger" (click)="removeFriend()">Unfriend</ion-item-option>
+  </ion-item-options>
+</ion-item-sliding>
+
+<ng-template #loaderContent>
+  <ion-item lines="none">
+   <div class="loader-wrapper">
+     <ion-spinner></ion-spinner>
+   </div>
+  </ion-item>
+</ng-template>
