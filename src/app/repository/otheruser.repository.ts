@@ -6,42 +6,42 @@ import { map } from 'rxjs/operators';
 @Injectable({
     providedIn: 'root'
   })
-  export class OtheruserRepository {
-     
-    constructor(private firestore: AngularFirestore) { }
+export class OtheruserRepository {
+    
+  constructor(private firestore: AngularFirestore) { }
 
-    async getProfiles() {
-      const collectionRef = this.firestore.collection("profiles")
-      
-      return collectionRef.snapshotChanges().pipe(
-        map((snapshot)=>{
-          let profiles: IProfileModel[] = [];
-  
-          snapshot.forEach((doc)=>{
-            const profile = {
-              ...doc.payload.doc.data() as IProfileModel
-            }
-            profiles.push(profile);
-          })
-          return profiles;
+  async getProfiles() {
+    const collectionRef = this.firestore.collection("profiles")
+    
+    return collectionRef.snapshotChanges().pipe(
+      map((snapshot)=>{
+        let profiles: IProfileModel[] = [];
+
+        snapshot.forEach((doc)=>{
+          const profile = {
+            ...doc.payload.doc.data() as IProfileModel
+          }
+          profiles.push(profile);
         })
-      )
-    }
+        return profiles;
+      })
+    )
+  }
 
-    async getProfile(request: IProfileModel) {
-        const docRef = this.firestore
-            .collection<IProfileModel>("profiles")
-            .doc(request.userId);
+  async getProfile(request: IProfileModel) {
+    const docRef = this.firestore
+        .collection<IProfileModel>("profiles")
+        .doc(request.userId);
 
-        return docRef.snapshotChanges().pipe(
-          map((snapshot) =>{
-            const otheruser: IProfileModel = {
-              ...snapshot.payload.data() as IProfileModel
-            }
-  
-            return otheruser;
-          })
-        )
-    }
+    return docRef.snapshotChanges().pipe(
+      map((snapshot) =>{
+        const otheruser: IProfileModel = {
+          ...snapshot.payload.data() as IProfileModel
+        }
+
+        return otheruser;
+      })
+    )
+  }
 
 }

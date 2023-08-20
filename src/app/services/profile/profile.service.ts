@@ -57,6 +57,9 @@ export class ProfileService {
     );
   }
 
+  async getUser(userId: string) {
+    return this.repository.getUser(userId);
+  }
 }
 
 
