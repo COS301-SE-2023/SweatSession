@@ -1,13 +1,10 @@
-.groupPic
-{
-    height: 200px;
-    width: 100%;
-    background-color: #e9e9e9;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+ion-card {
+    background-color: transparent;
+    // box-shadow: none;
+    max-width: 500px;
 }
-ion-item{
-    --highlight-height: 0;
-    --inner-border-width: 0;
+
+.button-container {
+    width: fit-content;
+    margin: auto;
 }
