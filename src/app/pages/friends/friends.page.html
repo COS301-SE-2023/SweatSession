@@ -8,7 +8,7 @@
 </ion-header>
 
 <ion-content *ngIf="friends.length > 0; else noFriends">
-  <search [data]="friends" [placeholder]="'Search for friends'"></search>
+  <search [data]="friends" [placeholder]="'Search for Friends'"></search>
   <user-friend *ngFor ="let friend of friends" 
     [friend] = "friend"
   >
