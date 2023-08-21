@@ -69,11 +69,11 @@ ion-spinner {
 }
 
 ion-fab-button  {
-    --background: #457B9D;
+    --background: #A8DADC;
     --background-hover: #9ce0be;
     --background-activated: #88f4be;
     --background-focused: #88f4be;
-    --color: white;
+    --color: #457b9d;
     --ripple-color: deeppink;
     opacity: 0.9;
 }
@@ -134,18 +134,22 @@ swiper-container::part(bullet-active) {
     opacity: 0.9;
 }
 
+// colors
+// #A8DADC;
+// #457b9d
+
 ion-button {
-    --background: #457b9d;
-    --background-hover: #A8DADC;
-    --background-activated: #A8DADC;
-    --background-focused: #A8DADC;
+    --background: #A8DADC;
+    --background-hover: #457b9d;
+    --background-activated: #457b9d;
+    --background-focused: #457b9d;
     border-radius: 8px;
   
     --border-style: solid;
     --border-width: 2px;
-    --border-color: #A8DADC;
+    --border-color: #457b9d;
   
-    --color: white;
+    --color: #457b9d;
 }
 
 .zero-content-container {
@@ -155,3 +159,23 @@ ion-button {
     text-align: center;
     font-weight: bolder;
 }
+
+//profile
+
+.slide-headers {
+    color: #457b9d;
+    .first-header {
+        margin-top: 0px;
+    }
+}
+
+.slide-header {
+    padding: 20px;
+}
+
+// .slide-header *{
+//     font-size: 30px;
+//     ion-icon {
+//         font-size: 25px;
+//     }
+// }

@@ -37,9 +37,10 @@
    
     <div class="otheruser-profile-activity">
       <div class="slide-header">
-        <h2 class="slides-headers first-header">
-          <ion-icon name="body"></ion-icon> Activities
-        </h2>
+        <ion-item class="slides-headers first-header">
+          <ion-icon name="body" slot="start"></ion-icon> 
+          <ion-label>Activities</ion-label>
+        </ion-item>
       </div>
       <swiper-container [slidesPerView]="2" centered-slides="true"  pagination="{hideOnClick: true}">
         <swiper-slide>
@@ -75,9 +76,10 @@
       </swiper-container>
       
       <div class="slide-header">
-        <h2 class="slides-headers">
-          <ion-icon name="trophy"></ion-icon> Achievements
-        </h2>
+        <ion-item class="slides-headers">
+          <ion-icon name="trophy" slot="start"></ion-icon> 
+          <ion-label>Achievements</ion-label>
+        </ion-item>
       </div>
       <swiper-container [slidesPerView]="2" centered-slides="true"
         pagination="{hideOnClick: true}"
