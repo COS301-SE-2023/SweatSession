@@ -3,14 +3,15 @@ import { ModalController } from '@ionic/angular';
 import { NavController } from '@ionic/angular';
 import { Select, Store } from '@ngxs/store';
 import {Observable, Subscription, tap} from 'rxjs';
-import { IGetProfile } from 'src/app/models';
+import { IGetProfile, IGroup } from 'src/app/models';
 import { GetFriendsAction } from 'src/app/actions/friend.action';
 import { SetProfileService } from 'src/app/services';
-import { FriendsState } from 'src/app/states';
+import { FriendsState, MessagesState } from 'src/app/states';
 import { AuthApi } from 'src/app/states/auth/auth.api';
 import {getAuth} from "@angular/fire/auth";
 import { register } from 'swiper/element/bundle';
 import {Router, NavigationStart, ActivatedRoute} from '@angular/router';
+import { GetUserGroups } from 'src/app/actions';
 
 register();
 
@@ -20,13 +21,14 @@ register();
   styleUrls: ['./userprofile.page.scss'],
 })
 export class UserprofilePage implements OnInit {
+  @Select(MessagesState.returnChatGroups) groups$: Observable<IGroup[]>;
+  groups: IGroup[] = [];
   @Select(FriendsState.returnFriendsSize) friendsSize$! : Observable<number>;
   ProfilePicture$? = '/assets/ProfileSE.jpg';
   displayName$? = 'na';
   myBio$? = 'na';
   friends$ = 0;
   friendsSize = 0;
-  groups$ = 0;
   getUser : IGetProfile = {userId: 'na'};
   currUserId: string | undefined = undefined;
 
@@ -44,12 +46,17 @@ export class UserprofilePage implements OnInit {
     isLoading :boolean = false;
 
   ngOnInit() {
+    this.displayGroups();
     this.displayFriendsSize();
     this.updateprofileinfor();
   }
 
-
-
+  displayGroups() {
+    this.store.dispatch(new GetUserGroups())
+    this.groups$.subscribe((response)=>{
+      this.groups=response;
+    })
+  }
 
     // Unsubscribe from the router events to avoid memory leaks
 
@@ -106,5 +113,17 @@ export class UserprofilePage implements OnInit {
       this.friendsSize = response;
       // console.log("number of friends: " +response);
     })
+  }
+
+  getFriendsSize(): string {
+    if(this.friendsSize == 1)
+      return `${this.friendsSize} Friend`;
+    return `${this.friendsSize} Friends`;
+  }
+
+  getGroupsSize(): string {
+    if(this.groups.length == 1)
+      return `${this.groups.length} Group`;
+    return `${this.groups.length} Groups`;
   }
 }
