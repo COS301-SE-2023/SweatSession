@@ -9,8 +9,8 @@
 <ion-content *ngIf="groups.length > 0; else noGroups">
   <ion-card *ngFor="let Group of groups">
     <ion-card-header>
-      <ion-card-subtitle>{{Group.bio}}</ion-card-subtitle>
       <ion-card-title>{{Group.displayName}}</ion-card-title>
+      <ion-card-subtitle>{{Group.bio}}</ion-card-subtitle>
     </ion-card-header>
     <ion-card-content>
       <ion-item class = "groupPic" lines="none">

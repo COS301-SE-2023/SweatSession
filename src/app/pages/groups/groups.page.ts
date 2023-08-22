@@ -34,7 +34,7 @@ export class GroupsPage implements OnInit {
   }
 
   addGroup() {
-    this.nav.navigateRoot("/home/search");
+    this.nav.navigateRoot("/creategroup");
   }
 
 }

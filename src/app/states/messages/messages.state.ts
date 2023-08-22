@@ -3,7 +3,7 @@ import { Action, Selector, State, StateContext } from "@ngxs/store";
 import { IMessage, IChatFriend, IGetChatFriends, IGetMessages, ISendMessage, IDeleteMessage, IProfileModel, IFriendsModel, IGroup, IGetGroups, IAddChatGroup, IJoinGroup, IRemoveChatGroup, IExitChatGroup, IGetGroup } from "src/app/models";
 import { DeleteMessage, GetMessages, SendMessage, GetChatFriends, StageChatFriend, GetFriendsProfiles, GetChatFriend, RemoveChatFriendSession, SendGroupMessage, RemoveChatGroupSession, AddChatGroup, JoinChatGroup, RemoveChatGroup, ExitChatGroup, StageChatGroup, GetGroupMessages, GetGroup, GetUserGroups, GetGroups, GetUser } from 'src/app/actions';
 import { AuthApi } from "../auth";
-import { FriendsService, MessagesService, OtheruserService } from "src/app/services";
+import { FriendsService, MessagesService, NavigationService, OtheruserService } from "src/app/services";
 import { tap } from "rxjs";
 import { Navigate } from "@ngxs/router-plugin";
 
@@ -38,7 +38,8 @@ export interface MessagesStateModel {
     providedIn: 'root'
 })
 export class MessagesState {
-    constructor(private authApi:AuthApi, private service: MessagesService, private friendsService: FriendsService, private otheruserService: OtheruserService) {}
+    constructor(private authApi:AuthApi, private service: MessagesService, private friendsService: FriendsService, private otheruserService: OtheruserService,
+        private readonly navigation: NavigationService) {}
 
     @Action(GetChatFriends)
     async getChatFriends (ctx: StateContext<MessagesStateModel>) {
@@ -279,6 +280,7 @@ export class MessagesState {
                 group: payload
             }
             this.service.addChatGroup(request);
+            this.navigation.back();
         }
     }
 

@@ -10,26 +10,45 @@
 </ion-header>
 
 <ion-content>
-  <ion-list>
-    <ion-item lines="none">
-      <ion-label position="floating">Group Name</ion-label>
-      <ion-input type="text" [(ngModel)]="group.displayName"></ion-input>
-    </ion-item>
-    <ion-item lines="none">
-      <ion-label position="floating">Group Description</ion-label>
-      <ion-textarea [(ngModel)]="group.bio"></ion-textarea>
-    </ion-item>
-    <ion-item lines="none">
-      <ion-label position="stacked">Profile Photo</ion-label>
-      <input type="file" (change)="onFileSelected($event)" accept="image/*" />
-    </ion-item>
-    <ion-item lines="none" *ngIf="group.profileURL">
-      <ion-label>Selected Photo:</ion-label>
-      <ion-avatar slot="end">
-        <img [src]="group.profileURL" />
-      </ion-avatar>
-    </ion-item>
-  </ion-list>
 
-  <ion-button expand="full" (click)="createGroup()">Create Group</ion-button>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating">Group Name</ion-label>
+          <ion-input type="text" [(ngModel)]="group.displayName"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row><ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating">Group Description</ion-label>
+          <ion-textarea [(ngModel)]="group.bio"></ion-textarea>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-item lines="none">
+          <ion-label position="stacked">Profile Photo</ion-label>
+          <input type="file" (change)="onFileSelected($event)" accept="image/*" />
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-item *ngIf="group.profileURL" lines="none">
+          <ion-label>Selected Photo:</ion-label>
+          <ion-avatar slot="end">
+            <img [src]="group.profileURL" />
+          </ion-avatar>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-button expand="block" (click)="createGroup()">Create Group</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
