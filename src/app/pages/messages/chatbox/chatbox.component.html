@@ -1,20 +1,34 @@
 <div class="message" 
-[ngClass]="{ 'message-sent': message.senderId === currentUserId, 'message-received': message.senderId !== currentUserId }"
->
+  [ngClass]="{ 'message-sent': message.senderId === currentUserId, 'message-received': message.senderId !== currentUserId }"
+  >
+  <div *ngIf="showUser && profile && currentUserId !== message.senderId">
+    <div *ngIf="profile.profileURL; else loaderContent">
+      <ion-item lines="none" class="smaller-item" (click)="stageUser()">
+        <ion-avatar>
+          <ion-img [src]="profile.profileURL" class="sender-img"></ion-img>
+        </ion-avatar>
+      </ion-item>
+    </div>
+  
+    <ng-template #loaderContent>
+      <div class="loader-wrapper">
+        <ion-spinner></ion-spinner>
+      </div>
+    </ng-template>
+  </div>
+
   <div class="message-content">
     <div class="message-sender" *ngIf="showUser && profile && currentUserId !== message.senderId">
       <div *ngIf="profile.profileURL; else loaderContent">
-        <ion-item lines="none" class="smaller-item" (click)="stageUser()">
-          <ion-avatar>
-            <ion-img [src]="profile.profileURL" class="sender-img"></ion-img>
-          </ion-avatar>
-         {{'~ '+profile.displayName}}.
-        </ion-item>
+       <p class="smaller-item">
+        {{'~ '+profile.displayName}}
+       </p>
       </div>
-
       <ng-template #loaderContent>
         <div class="loader-wrapper">
-          <ion-spinner></ion-spinner>
+          <p class="smaller-item">
+            <ion-skeleton-text></ion-skeleton-text>
+          </p>
         </div>
       </ng-template>
     </div>
@@ -22,7 +36,7 @@
       {{ message.text }}
     </div>
     <div class="message-timestamp">
-      <p>{{ message.date?.toDate() | date:'MMM d, hh:mm a' }}</p>
+      <span>{{ message.date?.toDate() | date:'MMM d, hh:mm a' }}</span>
     </div>
   </div>
 </div>

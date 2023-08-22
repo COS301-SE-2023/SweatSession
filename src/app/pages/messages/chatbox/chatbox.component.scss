@@ -27,6 +27,8 @@
 }
   
 .message-timestamp {
+    display: flex;
+    justify-content: flex-end;
     font-size: 12px;
     color: #999;
     margin-top: 4px;
@@ -39,19 +41,15 @@
 
 .smaller-item {
     --background: transparent;
-    font-size: 0.7rem;
+    font-size: 1rem;
     padding: 0px;
+    padding-top: 2px;
+    margin-top: 0px;
+    margin-bottom: 5px;
+    width: 100%;
 }
 
 ion-avatar {
-    width: 1.2rem;
-    height: 1.2rem;
-}
-
-.message-timestamp {
-    position: relative;
-    p {
-        position: relative;
-        right: 0px;
-    }
+    width: 1.4rem;
+    height: 1.4rem;
 }
