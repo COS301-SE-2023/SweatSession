@@ -1,9 +1,6 @@
 <ion-header>
   <ion-toolbar>
     <ion-item lines="none">
-      <ion-icon name="add-sharp" routerLink="/setprofile" slot="end">
-        <ion-label>add</ion-label>
-      </ion-icon>
       <backbutton></backbutton>
       <ion-title>groups</ion-title>
     </ion-item>
@@ -36,6 +33,12 @@
      </div>
     </ion-card-content>
   </ion-card>
+
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button (click)="addGroup()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>
   
 
