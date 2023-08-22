@@ -4,6 +4,7 @@ import { IPersonalBest } from 'src/app/models/personalbest.model';
 import { PersonalbestService } from 'src/app/services/personalbest/personalbest.service';
 import { AlertController } from '@ionic/angular';
 
+
 @Component({
   selector: 'app-personal-bests-chart',
   templateUrl: './personal-bests-chart.component.html',
@@ -26,12 +27,21 @@ export class PersonalBestsChartComponent implements OnInit {
   ngOnInit(){
     
     this.retrieveExercisesByName(this.showExercise);
-     
+
+  }
+
+  handleExerciseChange(event: Event) {
+    const selectedValue = (event.target as HTMLIonSelectElement).value;
+    this.showExercise = selectedValue;
+    this.showChart();
+    console.log(`Changed exercise: ${this.showExercise}`);
   }
 
   handleRadioChange(event: Event) {
-    const selectedValue = (event.target as HTMLInputElement).value;
-    console.log(`Changed radio button `);
+    const selectedValue = (event.target as HTMLIonRadioElement).value;
+    this.showReps = selectedValue;
+    this.showChart();
+    console.log(`Changed radio button: ${this.showReps}`);
   }
 
 
@@ -71,39 +81,39 @@ export class PersonalBestsChartComponent implements OnInit {
     }
 
     // Component class
-  async confirmDelete(DpersonalBest: any) {
-    const alert = await this.alertController.create({
-      header: 'Confirm Delete',
-      message: 'Are you sure you want to delete this Personal Best ('+ DpersonalBest.exercise +') ?',
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel',
-        },
-        {
-          text: 'Delete',
-          handler: () => {
-            this.deleteItem(DpersonalBest);
+    async confirmDelete(DpersonalBest: any)
+    {
+      const alert = await this.alertController.create({
+        header: 'Confirm Delete',
+        message: 'Are you sure you want to delete this Personal Best ('+ DpersonalBest.exercise +') ?',
+        buttons: [
+          {
+            text: 'Cancel',
+            role: 'cancel',
           },
-        },
-      ],
-    });
+          {
+            text: 'Delete',
+            handler: () => {
+              this.deleteItem(DpersonalBest);
+            },
+          },
+        ],
+      });
 
-    await alert.present();
-  }
+      await alert.present();
+    }
 
-deleteItem(personalBest: IPersonalBest) {
-  this.personalbestService.deletePersonalbest(personalBest);
+    deleteItem(personalBest: IPersonalBest) {
+      this.personalbestService.deletePersonalbest(personalBest);
 
-  const index = this.personalBestsData.indexOf(personalBest);
-  if (index > -1) {
-    this.personalBestsData.splice(index, 1);
-  }
-}
+      const index = this.personalBestsData.indexOf(personalBest);
+      if (index > -1) {
+        this.personalBestsData.splice(index, 1);
+      }
+    }
 
     setChartLabels()
     {
-
       this.chartLabels = [];
       this.personalBestsData.forEach(element => {
         this.chartLabels.push(element.date!)
@@ -127,7 +137,6 @@ deleteItem(personalBest: IPersonalBest) {
           }
         }
       };
-      
     }
 
   }

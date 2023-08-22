@@ -13,7 +13,7 @@
       </ion-col>
 
       <ion-col>
-        <ion-select [(ngModel)]="showExercise">
+        <ion-select [(ngModel)]="showExercise" (ionChange)="handleExerciseChange($event)">
           <ion-select-option value="Bench Press">Bench Press</ion-select-option>
           <ion-select-option value="Squats">Squats</ion-select-option>
           <ion-select-option value="Deadlifts">Deadlifts</ion-select-option>
@@ -24,7 +24,7 @@
       </ion-col>
   </ion-row>
 
-    <ion-radio-group [(ngModel)]="showReps">
+    <ion-radio-group [(ngModel)]="showReps" (ionChange)="handleRadioChange($event)">
       <ion-row>
         <ion-col>
           <ion-radio class="radioButton" name = "radioButton" value="reps"><ion-label>Reps</ion-label></ion-radio>
