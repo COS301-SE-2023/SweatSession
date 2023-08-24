@@ -10,9 +10,7 @@
 
 
 <ion-content class="main" >
-  <ion-title *ngIf="noticeamount > 0" style="display:inline-block; background: none; " ><ion-button color="light" size="default" class="flex-center3" (click)="clearNotifications()">Clear All</ion-button></ion-title>
-    <br>
-    <br>
+  <div *ngIf="noticeamount > 0" class="flex-center3" style=" background: none; " ><ion-button  color="light" size="default"  (click)="clearNotifications()">Clear All</ion-button></div>
     
   <div *ngIf="noticeamount > 0" >
   <ion-card class="Mcard" *ngFor="let notice of noticeList2">
@@ -29,8 +27,8 @@
 </ion-grid>
 </ion-card-content>
 <div class="flex-center4" *ngIf="notice.message == 'Sent you a Friend Request!'">
-<ion-button size="small" (click)="addFriend(notice)">Accept</ion-button>
-<ion-button size="small" (click)="clearNotification(notice.id!); rejectFriendRequest(notice , notice.senderid! , notice.senttoid!);">Reject</ion-button>
+<ion-button color="success" size="small" (click)="addFriend(notice)">Accept</ion-button>
+<ion-button color="danger" size="small" (click)="clearNotification(notice.id!); rejectFriendRequest(notice , notice.senderid! , notice.senttoid!);">Reject</ion-button>
 </div>
 <ion-label class="right-align-label">{{notice.sentdate }}</ion-label>
 
