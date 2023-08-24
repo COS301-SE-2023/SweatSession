@@ -3,6 +3,7 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/comp
 import { IPoints } from 'src/app/models/points.model';
 import { Injectable } from '@angular/core';
 import firebase from 'firebase/compat/app';
+import { BadgesRepository } from './badges.repository';
 
 
 
@@ -11,7 +12,7 @@ import firebase from 'firebase/compat/app';
 })
 export class PointsRepository {
 
-    constructor(private firestore: AngularFirestore) { }
+    constructor(private firestore: AngularFirestore, private badgesRepository: BadgesRepository) { }
 
     async createPointsDocument(currUserId: string) {
         const pointsRef = this.firestore.collection('points').doc(currUserId);
@@ -49,6 +50,9 @@ export class PointsRepository {
                 updatedFields = {
                     workoutSessionsAttended: fieldValue.increment(1)
                 };
+            }
+            if (newWorkoutSessionsAttended == 20){
+                this.badgesRepository.addBadge(currUserId, 4);//Workout Warrior
             }
     
             return pointsDocRef.update(updatedFields);
