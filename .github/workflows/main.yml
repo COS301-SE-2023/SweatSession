@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - main
+  pull_request:
+    branches: 
+      - main
 
 jobs:
   unitTests:
@@ -55,3 +58,9 @@ jobs:
           max_attempts: 5
           command: wait-on http://localhost:4200 --timeout 120000
       - run: npx cypress run
+  reject_if_tests_fail:
+    runs-on: ubuntu-latest
+    needs: [unitTests, integrationTests]
+    if: ${{ !success() }} 
+    steps:
+      - run: exit 1
