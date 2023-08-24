@@ -45,7 +45,7 @@ export class AddScheduleComponent  implements OnInit {
     this.store.dispatch(new AddWorkoutSchedule(this.schedule));
     // this.store.dispatch(new AddGymSessionLocation(this.placeId));
     // this.store.dispatch(new AddWorkoutSchedule(this.placeId));
-    this.locationRepository.addGymSession(this.placeId, this.schedule.date!, this.schedule.time!, this.schedule.completeAt!, this.schedule.name!);
+    this.locationRepository.addGymSession(this.placeId, this.schedule.date!, this.schedule.time!, this.schedule.completeAt!, this.schedule.name!, this.schedule.location!);
     this.date = new Date().toTimeString() ;
    this.shortdate = this.date.split(':' , 2);
    this.createNotifications("SWEAT-SESSION" , this.shortdate[0] + ':' + this.shortdate[1] , "LETS-GO!! Your workout as been scheduled at " + this.schedule.location )  ;

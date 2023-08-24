@@ -22,7 +22,7 @@ export class LocationRepository {
   document$: any
   constructor(private angularFirestore: AngularFirestore, private profileService: ProfileService, private firestore: Firestore) { }
 
-  async addGymSession(placeId: string, sessionDate: Date, time: Time, completedAt: Timestamp, wName: string) {
+  async addGymSession(placeId: string, sessionDate: Date, time: Time, completedAt: Timestamp, wName: string, gymName: string) {
     const auth = getAuth();
     this.currUserId = auth.currentUser?.uid;
     if (this.currUserId != undefined) {
@@ -56,6 +56,12 @@ export class LocationRepository {
       .catch((error) => {
         console.error('Location: Error creating document:', error);
       });
+    const badgeDocRef = this.angularFirestore.collection('badges').doc(this.currUserId!);
+    const fieldValue = firebase.firestore.FieldValue;
+
+    return badgeDocRef.update({
+      gymsVisited: fieldValue.arrayUnion(gymName)
+    });
     return newGymSessionDoc;
     // const fieldValue = firebase.firestore.FieldValue;
 

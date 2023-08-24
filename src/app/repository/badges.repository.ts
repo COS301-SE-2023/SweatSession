@@ -26,7 +26,8 @@ export class BadgesRepository {
         //     });
         const badgesRef = this.firestore.collection('badges').doc(currUserId);
         const newBadgesDocument: IBadges = {
-            receivedBadges: []
+            receivedBadges: [],
+            gymsVisited: []
         };
         badgesRef.set(newBadgesDocument)
             .then((docRef) => {
