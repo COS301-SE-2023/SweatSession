@@ -36,7 +36,7 @@ use the app, location-based services and more
 
 ## Technologies
 
-[![Angular][Angular.io]][Angular-url] [![Node][Node.js]][Node-url] [![TypeScript][typescript-badge]][typescript-url] [![JavaScript][javascript-badge]][javascript-url] [![Ionic][ionic-badge]][ionic-url] [![Firestore][firestore-badge]][firestore-url] [![Git][git-badge]][git-url] [![Jest][jest-badge]][jest-url] [![Cypress][cypress-badge]][cypress-url] [![GitHub Actions][github-actions-badge]][github-actions-url] [![OpenAI API Badge][openai-badge]][openai-url] [![GitHub Actions][google-places-badge]][github-places-url]
+[![Angular][Angular.io]][Angular-url] [![Node][Node.js]][Node-url] [![TypeScript][typescript-badge]][typescript-url] [![JavaScript][javascript-badge]][javascript-url] [![Ionic][ionic-badge]][ionic-url] [![Firestore][firestore-badge]][firestore-url] [![Git][git-badge]][git-url] [![Jest][jest-badge]][jest-url] [![Cypress][cypress-badge]][cypress-url] [![GitHub Actions][github-actions-badge]][github-actions-url] [![OpenAI API Badge][openai-badge]][openai-url] [![GitHub Places API][google-places-badge]][github-places-url]
 
 [Demo 1 Video]()
 [Functional Requirements (SRS) documents](https://github.com/COS301-SE-2023/SweatSession/wiki)
@@ -160,5 +160,5 @@ I am a passionate 3rd year Computer Science student studying at the University o
 [github-actions-url]: https://github.com/features/actions
 [openai-badge]: https://img.shields.io/badge/OpenAI-412991?style=for-the-badge&logo=openai&logoColor=white
 [openai-url]: https://platform.openai.com/docs/guides/gpt
-[google-places-badge]: https://img.shields.io/badge/Google ↗%20Places-4285F4?style=for-the-badge&logo=google&logoColor=white
+[google-places-badge]: https://img.shields.io/badge/Google%20Places-4285F4?style=for-the-badge&logo=google&logoColor=white
 [google-places-url]: https://developers.google.com/maps/documentation/places/web-service/overview
