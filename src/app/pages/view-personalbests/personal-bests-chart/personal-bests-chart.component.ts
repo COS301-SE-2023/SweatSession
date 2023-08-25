@@ -3,8 +3,6 @@ import { ChartDataset, ChartOptions, ChartType } from 'chart.js';
 import { IPersonalBest } from 'src/app/models/personalbest.model';
 import { PersonalbestService } from 'src/app/services/personalbest/personalbest.service';
 import { AlertController } from '@ionic/angular';
-import { DatePipe } from '@angular/common';
-
 @Component({
   selector: 'app-personal-bests-chart',
   templateUrl: './personal-bests-chart.component.html',
@@ -29,6 +27,11 @@ export class PersonalBestsChartComponent implements OnInit {
     this.retrieveExercisesByName(this.showExercise);
 
   }
+
+  // getexerciseDate()
+  // {
+  //   return this.datePipe.transform(this.personalBestsData[0].date!, 'dd/MM/yyyy');
+  // }
 
   handleExerciseChange(event: Event) {
     const selectedValue = (event.target as HTMLIonSelectElement).value;
