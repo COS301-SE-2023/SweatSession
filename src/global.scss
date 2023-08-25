@@ -38,17 +38,18 @@ ion-title {
     text-align: center;
 }
 
-ion-toolbar{
+ion-toolbar {
     --background: #E63946;
 }
 
-ion-toolbar ion-item{
---background: #E63946;
+ion-toolbar ion-item {
+    --background: #E63946;
+    --color: white !important;
 }
 
 * {
-font-family: 'Montserrat', sans-serif;
-transition: .2;
+    font-family: 'Montserrat', sans-serif;
+    transition: .2;
 }
 
 ion-chip {
@@ -56,7 +57,7 @@ ion-chip {
 }
 
 ion-spinner {
-    --color: #E63946;//#A8DADC;
+    --color: #E63946; //#A8DADC;
     width: 1.2rem;
     height: 1.2rem;
 }
@@ -68,7 +69,7 @@ ion-spinner {
     height: 100%;
 }
 
-ion-fab-button  {
+ion-fab-button {
     --background: #457B9D;
     --background-hover: #9ce0be;
     --background-activated: #88f4be;
@@ -89,11 +90,11 @@ ion-segment {
     .input-field-wrapper {
         width: 80%;
     }
-      
-      
+
+
     .message-send-icon {
         color: #A8DADC; //#E63946;
-        
+
     }
 }
 
@@ -106,19 +107,19 @@ ion-segment {
 }
 
 swiper-container::part(bullet-active) {
-    background-color:#E63946 // #A8DADC;
-  }
+    background-color: #E63946 // #A8DADC;
+}
 
-  .message-send-fab-button {
+.message-send-fab-button {
     width: 40px;
     height: 40px;
-  }
+}
 
-  .native-wrapper.sc-ion-textarea-md textarea.sc-ion-textarea-md {
+.native-wrapper.sc-ion-textarea-md textarea.sc-ion-textarea-md {
     -webkit-padding-start: 0px;
     padding-inline-start: 0px;
     -webkit-padding-end: 0px;
     padding-inline-end: 0px;
-    padding-top:18px;
+    padding-top: 18px;
     padding-bottom: 0px;
 }
