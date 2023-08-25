@@ -8,6 +8,7 @@ import { IWorkoutScheduleModel } from 'src/app/models';
 import { PointsRepository } from 'src/app/repository/points.repository';
 import { WorkoutSchedulingState } from 'src/app/states';
 import { getAuth } from '@angular/fire/auth';
+import { BadgesRepository } from 'src/app/repository';
 
 @Component({
   selector: 'schedule-content',
@@ -26,7 +27,8 @@ export class ScheduleContentComponent implements OnInit {
     private actionSheetCtrl: ActionSheetController,
     private firestore: AngularFirestore,
     private navCtrl: NavController,
-    private pointsRepository: PointsRepository) { }
+    private pointsRepository: PointsRepository,
+    private badgesRepository: BadgesRepository) { }
 
   ngOnInit() {
     if (!this.isCompleted()) {
@@ -178,7 +180,9 @@ export class ScheduleContentComponent implements OnInit {
     }
     if (this.currUserId != undefined) {
       this.pointsRepository.workoutSessionPoints(this.currUserId);
+      this.badgesRepository.activeAdventurerBadge(this.currUserId, this.schedule.location!);
     }
+    
   }
 
   joined() {

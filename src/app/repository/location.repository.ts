@@ -56,12 +56,6 @@ export class LocationRepository {
       .catch((error) => {
         console.error('Location: Error creating document:', error);
       });
-    const badgeDocRef = this.angularFirestore.collection('badges').doc(this.currUserId!);
-    const fieldValue = firebase.firestore.FieldValue;
-
-    return badgeDocRef.update({
-      gymsVisited: fieldValue.arrayUnion(gymName)
-    });
     return newGymSessionDoc;
     // const fieldValue = firebase.firestore.FieldValue;
 
