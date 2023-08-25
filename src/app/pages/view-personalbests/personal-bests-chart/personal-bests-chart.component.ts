@@ -3,7 +3,7 @@ import { ChartDataset, ChartOptions, ChartType } from 'chart.js';
 import { IPersonalBest } from 'src/app/models/personalbest.model';
 import { PersonalbestService } from 'src/app/services/personalbest/personalbest.service';
 import { AlertController } from '@ionic/angular';
-
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-personal-bests-chart',
@@ -34,14 +34,14 @@ export class PersonalBestsChartComponent implements OnInit {
     const selectedValue = (event.target as HTMLIonSelectElement).value;
     this.showExercise = selectedValue;
     this.showChart();
-    console.log(`Changed exercise: ${this.showExercise}`);
+    // console.log(`Changed exercise: ${this.showExercise}`);
   }
 
   handleRadioChange(event: Event) {
     const selectedValue = (event.target as HTMLIonRadioElement).value;
     this.showReps = selectedValue;
     this.showChart();
-    console.log(`Changed radio button: ${this.showReps}`);
+    // console.log(`Changed radio button: ${this.showReps}`);
   }
 
 
