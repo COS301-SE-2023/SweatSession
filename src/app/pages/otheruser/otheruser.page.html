@@ -20,7 +20,7 @@
         </div>
       </ion-label>
       <div class="group-buttons">
-        <ion-button fill="outline" *ngIf="friendshipStatus && !isRequested()" (click)="removeFriend()">
+        <ion-button fill="outline" *ngIf="friendshipStatus" (click)="removeFriend()">
           <ion-icon name="person" style="padding-right: 5px;"></ion-icon>
           Remove Friend
         </ion-button>
