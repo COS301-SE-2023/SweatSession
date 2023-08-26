@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FitnessgoalService} from "../../services";
+import {FitnessgoalService, NavigationService} from "../../services";
 import {forEach} from "@angular-devkit/schematics";
 import {ITASK,IGOAL} from "../../models";
 import { AuthApi } from 'src/app/states/auth/auth.api';
@@ -23,10 +23,7 @@ export class FitnessgoalViewPage implements OnInit {
   constructor(private fitnessgaolservive: FitnessgoalService,
               private authApi: AuthApi,
               private router:Router,
-              )
-  {
-
-  }
+              private navigate: NavigationService) {}
 
   getGoal()
   {
@@ -78,14 +75,13 @@ export class FitnessgoalViewPage implements OnInit {
       task.done = true;
     }
   
-    this.router.navigate(['/fitnessgoals']);
+    this.navigate.back();
   }
   
   
 
   cancel() {
-    // Handle the cancel functionality
-    // You can navigate back to the previous page or perform any other necessary actions
+    this.navigate.back();
   }
   
   ngOnInit() {
