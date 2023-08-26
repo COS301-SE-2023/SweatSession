@@ -17,7 +17,7 @@ export class GetFriendsAction {
 
 export class CreateFriendRequest {
     static readonly type = "[friends] create a friend request";
-    constructor(public otheruserId: string){}
+    constructor(public otheruserId: string) {}
 }
 
 export class RemoveFriendRequest {

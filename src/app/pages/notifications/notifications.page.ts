@@ -108,8 +108,6 @@ export class NotificationsPage implements OnInit {
     }
     this.store.dispatch(new RemoveFriendAction(friend))
     this.noticeService.rejectFriend(senderid , senttoid) ;
-    console.log('reject working');
-
   }
 
   sendNotifications(num :number){
@@ -123,7 +121,7 @@ export class NotificationsPage implements OnInit {
       name: notice.sendername,
       profileURL: notice.profileurl,
     }
-    this.store.dispatch(new RemoveFriendRequest(notice.senttoid!))
+    this.store.dispatch(new RemoveFriendRequest(notice.senderid!))
     this.store.dispatch(new AddFriendAction(friend))
     this.clearNotification(notice.id!);
   }

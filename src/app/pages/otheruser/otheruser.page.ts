@@ -79,13 +79,7 @@ export class OtheruserPage implements OnInit {
   }
 
   removeFriend() {
-    this.store.dispatch(new RemoveFriendAction(this.friendModel())) ;
-    const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
-    this.daynum = new Date().getDay() ;
-    this.day = weekday[this.daynum];
-    this.date = new Date().toTimeString() ;
-    this.shortdate = this.date.split(':' , 2);
-    this.createNotifications(this.currusername , this.day + ' ' +this.shortdate[0] + ':' + this.shortdate[1] + ' ' , "Removed you as a Friend!")  ;
+    this.store.dispatch(new RemoveFriendAction(this.friendModel()));
   }
 
   addFriend() {
