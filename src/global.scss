@@ -37,6 +37,11 @@ ion-title {
 
 ion-toolbar {
     --background: #E63946;
+    --color: white !important;
+}
+
+ion-toolbar *{
+    --color: white !important;
 }
 
 ion-toolbar ion-item {
