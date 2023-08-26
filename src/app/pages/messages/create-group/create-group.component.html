@@ -47,7 +47,7 @@
     </ion-row>
     <ion-row>
       <ion-col>
-        <ion-button expand="block" (click)="createGroup()">Create Group</ion-button>
+        <ion-button expand="block" (click)="createGroup()" [disabled]="!isValidInput()">Create Group</ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>
