@@ -1,11 +1,11 @@
 Model Information:
-* title:	Male Base Mesh
-* source:	https://sketchfab.com/3d-models/male-base-mesh-a55c995cadc64b029fadce8072040fb8
-* author:	Alexey (https://sketchfab.com/alexeykurash98)
+* title:	Male base mesh with muscle detail
+* source:	https://sketchfab.com/3d-models/male-base-mesh-with-muscle-detail-244061a0323b4d2e9c60d9aba374c937
+* author:	C.J..Goldman (https://sketchfab.com/C.J..Goldman)
 
 Model License:
 * license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
 * requirements:	Author must be credited. Commercial use is allowed.
 
 If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
-This work is based on "Male Base Mesh" (https://sketchfab.com/3d-models/male-base-mesh-a55c995cadc64b029fadce8072040fb8) by Alexey (https://sketchfab.com/alexeykurash98) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+This work is based on "Male base mesh with muscle detail" (https://sketchfab.com/3d-models/male-base-mesh-with-muscle-detail-244061a0323b4d2e9c60d9aba374c937) by C.J..Goldman (https://sketchfab.com/C.J..Goldman) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
