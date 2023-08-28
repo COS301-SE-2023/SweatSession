@@ -99,10 +99,14 @@
   </ng-container>
 </ng-container>
 
-<ion-item class="nextPage" *ngIf="nextPageToken" (click)="nextPage()">
+
+<ion-item class="nextPage" *ngIf="nextPageToken && gyms.results.length; else noResults" (click)="nextPage()"> 
   <!-- <div class="next-page-content"> -->
     Next Page: <ion-icon name="arrow-forward"></ion-icon> 
   <!-- </div> -->
 </ion-item>
+<ng-template #noResults>
+  No results. Please Reload.
+</ng-template> 
 
 </ion-content>
