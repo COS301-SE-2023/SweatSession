@@ -82,7 +82,7 @@ ion-card-subtitle {
 .ratingIcon {
     color: gold;
     margin-bottom: -2px;
-    filter: drop-shadow(1px 1px 0 black); 
+    filter: drop-shadow(1px 1px 0 black);
 }
 
 .friendDisplayName {
@@ -127,7 +127,7 @@ ion-card-subtitle {
     text-align: center;
     width: 40%;
     margin: 0 auto;
-    
+
     // margin-left: 0 auto;
 }
 
@@ -136,12 +136,40 @@ ion-card-subtitle {
 //     text-align: left;
 // }
 
-.centralize{
+.centralize {
     text-align: center;
     --padding-bottom: 20px;
 }
 
-.li{
+.li {
     list-style-type: none;
     // margin-bottom: 5%;
+}
+
+.input-container {
+    background: #f5f5f5;
+    padding: 0px;
+    height: 40px;
+    border-radius: 30px;
+}
+
+ion-row {
+    align-items: center;
+}
+
+ion-searchbar {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    border-radius: 30px;
+}
+
+ion-input {
+    // height: 100%;
+}
+
+.search-container {
+    height: 50px;
+    border-radius: 30px;
+    overflow: hidden;
 }

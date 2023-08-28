@@ -18,7 +18,7 @@
       >
 </ion-searchbar>    -->
 
-<ion-item>
+<!-- <ion-item>
   <ion-label position="stacked">Search Radius (km): </ion-label>
   <ion-input type="number" [(ngModel)]="maxDistance" (ionInput)="loadData()"></ion-input>
 </ion-item>
@@ -26,8 +26,23 @@
 <ion-item>
   <ion-label position="stacked">Search for a gym by name: </ion-label>
   <ion-input [(ngModel)]="searchTerm" (ionInput)="onSearchInput($event)" placeholder="Enter a gym name" clearInput animated></ion-input>
-</ion-item>
+</ion-item> -->
 
+<ion-grid>
+  <ion-row>
+    <ion-col size="10">
+      <div class="search-container">
+        <ion-searchbar placeholder="Gym Name" [(ngModel)]="searchTerm" (ionInput)="onSearchInput($event)" clearInput animated></ion-searchbar>
+      </div>
+    </ion-col>
+
+    <ion-col size="2">
+      <div class="input-container">
+        <ion-input type="number" [(ngModel)]="maxDistance" (ionInput)="loadData()"></ion-input>
+      </div>
+    </ion-col> 
+  </ion-row>
+</ion-grid>
 <!-- <ion-card *ngFor="let item of filteredData$ | async" (click)="selectGym(item.name)">
   <img [src]="item.image" alt="Silhouette of mountains" />
   <ion-card-header>
@@ -100,13 +115,13 @@
 </ng-container>
 
 
-<ion-item class="nextPage" *ngIf="nextPageToken && gyms.results.length; else noResults" (click)="nextPage()"> 
-  <!-- <div class="next-page-content"> -->
+<ion-item class="nextPage" *ngIf="nextPageToken" (click)="nextPage()">
+  <!-- <div class="next-page-content"> =='' && gyms.results.length; else noResults--> 
     Next Page: <ion-icon name="arrow-forward"></ion-icon> 
   <!-- </div> -->
 </ion-item>
 <ng-template #noResults>
-  No results. Please Reload.
+  No more results. Please Reload.
 </ng-template> 
 
 </ion-content>
