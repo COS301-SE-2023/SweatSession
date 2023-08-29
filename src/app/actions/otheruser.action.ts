@@ -29,3 +29,8 @@ export class GetOtheruserProfile {
     static readonly type = "[otheruser] get other user profile";
     constructor(public payload: IProfileModel) {}
 }
+
+export class CheckIFSendFriendRequest {
+    static readonly type = "[otheruser] check if user send a friend request";
+    constructor() {}
+}

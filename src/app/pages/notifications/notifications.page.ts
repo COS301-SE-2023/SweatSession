@@ -63,8 +63,6 @@ export class NotificationsPage implements OnInit {
       this.noticeamount = this.noticeList2.length ;
       console.log('Number of notices:' ,this.noticeamount);
       this.sendNotifications(this.noticeamount);
-      
-
     });  
 
   }

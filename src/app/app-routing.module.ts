@@ -122,7 +122,7 @@ const routes: Routes = [
   },
   {
     path: "otheruserSchedules",
-    component: SchedulesComponent,
+    loadChildren: () => import('./pages/otheruser/schedules/schedules.module').then(m => m.ScheduleComponentModule),
     pathMatch: 'full',
     canActivate: [AuthGuard],
     data: { authGuardPipe: redirectLoggedOut },
