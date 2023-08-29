@@ -20,17 +20,21 @@
         </div>
       </ion-label>
       <div class="group-buttons">
-        <ion-button fill="outline" *ngIf="friendshipStatus" (click)="removeFriend()">
+        <ion-button fill="outline" *ngIf="friendshipStatus && !isRequested()" (click)="removeFriend()">
           <ion-icon name="person" style="padding-right: 5px;"></ion-icon>
           Remove Friend
         </ion-button>
-        <ion-button fill="outline" *ngIf="!friendshipStatus && !isRequested()" (click)="addFriend()">
+        <ion-button fill="outline" *ngIf="!friendshipStatus && !isRequested() && !friendRequestStatus" (click)="addFriend()">
           <ion-icon name="person" style="padding-right: 5px;"></ion-icon>
           Add friend
         </ion-button>
-        <ion-button fill="outline" *ngIf="isRequested()" [disabled]="true">
+        <ion-button fill="outline" *ngIf="isRequested() && !friendRequestStatus" [disabled]="true">
           <ion-icon name="person" style="padding-right: 5px;"></ion-icon>
           Requested
+        </ion-button>
+        <ion-button fill="ouline" *ngIf="friendRequestStatus" routerLink="/notifications">
+          <ion-icon name="person"></ion-icon>
+          View Request
         </ion-button>
       </div>
     </div>

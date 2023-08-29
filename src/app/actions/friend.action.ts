@@ -3,7 +3,7 @@ import { IFriendsModel} from "../models";
 
 export class AddFriendAction {
     static readonly type = "[friends] Add Friend";
-    constructor(public payload:IFriendsModel){}
+    constructor(public payload:IFriendsModel){ console.log("[friends] Add Friend")}
 }
 
 export class RemoveFriendAction {
