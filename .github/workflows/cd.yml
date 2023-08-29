@@ -24,6 +24,11 @@ jobs:
       - run: echo "${{secrets.ENVIRONMENT_VARIABLES}}" >> src/environments/environment.ts
       - run: yarn
       - run: yarn fix:node_modules
-      - run: firebase login:ci --token "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}"
       - run: ionic build --prod
       - run: firebase deploy
+      - id: decode_key
+        uses: timheuer/base64-to-file@v1
+        with: 
+          encodedString: ${{secrets.FIREBASE_SERVICE_ACCOUNT}}
+          outFile: key.json
+      - run: firebase deploy --project sweatsession --json key.json
