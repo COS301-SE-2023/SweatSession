@@ -22,6 +22,7 @@ jobs:
       - run: npm install -g @ionic/cli
       - run: mkdir src/environments
       - run: touch src/environments/environment.ts
+      - run: touch src/environments/environment.prod.ts
       - run: echo "${{secrets.ENVIRONMENT_VARIABLES}}" >> src/environments/environment.ts
       - run: yarn
       - run: yarn fix:node_modules
