@@ -94,6 +94,7 @@ export class OtheruserState {
     @Action(GetOtheruserFriends)
     async getFriends(ctx: StateContext<OtherUserStateModel>) {
         const currentUserId = await this.authApi.getCurrentUserId();
+        this.request = await JSON.parse(sessionStorage.getItem("otheruser")!);
         return (await this.friendService.getFriends(this.request)).pipe(
             tap((response) => {
                 ctx.patchState({
