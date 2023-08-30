@@ -29,19 +29,13 @@ export class FriendsComponent  implements OnInit {
   displayFriends() {
     this.store.dispatch(new GetOtheruserFriends())
     this.store.dispatch(new SubscribeToAuthState())
-    this.friends$.subscribe((response)=> {
-      this.friends = response;
-    })
 
     this.userId$.subscribe((response)=>{
       this.userId = response;
     })
-  }
 
-  isCurrentUser(friend:IFriendsModel) {
-    if(this.userId && friend.userId){
-      return this.userId === friend.userId;
-    }
-    return false;
+    this.friends$.subscribe((response)=> {
+      this.friends = response;
+    })
   }
 }

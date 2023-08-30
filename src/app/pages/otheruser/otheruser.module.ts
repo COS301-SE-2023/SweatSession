@@ -8,7 +8,6 @@ import { OtheruserPageRoutingModule } from './otheruser-routing.module';
 
 import { OtheruserPage } from './otheruser.page';
 import { AuthModule, FriendsStateModule, OtheruserStateModule } from 'src/app/states';
-import { FriendsComponent } from './friends/friends.component';
 import { WorkoutSchedulingStateModule } from 'src/app/states';
 import { BackButtonDirectiveModule } from 'src/app/directives';
 
@@ -24,7 +23,7 @@ import { BackButtonDirectiveModule } from 'src/app/directives';
     AuthModule,
     FriendsStateModule
   ],
-  declarations: [OtheruserPage, FriendsComponent],
+  declarations: [OtheruserPage],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class OtheruserPageModule {}
