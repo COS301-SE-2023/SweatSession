@@ -1,23 +1,21 @@
-<ng-container>
-  <ion-header>
-    <ion-toolbar>
-      <ion-item>
-        <backbutton class="larger-back-button"></backbutton>
-        <ion-title>Friends</ion-title>
-      </ion-item>
-    </ion-toolbar>
-  </ion-header>
-  
-  <ion-content [fullscreen]="true">
-    <div class = "outer-container">
-      <div class="body-content">
-        <div *ngFor = "let friend of friends">
-          <friends-contents
-            [friend]="friend"
-            [userId]="userId"
-          ></friends-contents>
-        </div>
+<ion-header>
+  <ion-toolbar>
+    <ion-item lines="none">
+      <backbutton></backbutton>
+      <ion-title>Friends</ion-title>
+    </ion-item>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class = "outer-container">
+    <div class="body-content">
+      <div *ngFor = "let friend of friends">
+        <friends-contents
+          [friend]="friend"
+          [userId]="userId"
+        ></friends-contents>
       </div>
     </div>
-  </ion-content>                
-</ng-container>
+  </div>
+</ion-content>
