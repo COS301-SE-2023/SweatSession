@@ -3,7 +3,8 @@
     display: flex;
     align-items: center;
     border-radius: 12px;
-    margin-top: 10%;
+    // margin-top: 10%;
+    margin-top: 2%;
     // padding: 10px;
 }
 
@@ -20,19 +21,19 @@
 }
 
 ion-img {
-    width: 80px;
+    width: 100px;
 }
 
 div {
-    color: white;
+    color: white//#1D3557;
 }
 
 .received {
-    --ion-background-color: #457B9D;
+    --ion-background-color: #1D3557;//#457B9D;
 }
 
 .not-received {
-    --ion-background-color: #A8DADC;
+    --ion-background-color: #457B9D;//#A8DADC;
     opacity: 0.8;
 }
 
