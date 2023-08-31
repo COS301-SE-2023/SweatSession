@@ -2,7 +2,7 @@ ion-text {
     margin: 20px;
 }
 
-ion-item:not(.progress-label){
+ion-item:not(.progress-label) {
     --highlight-height: 0;
     --inner-border-width: 0;
     --background: #A8DADC;
@@ -11,12 +11,13 @@ ion-item:not(.progress-label){
 
 #viewer {
     ion-button {
-      --background: #E63946;
-      --color: black;
+        --background: #E63946;
+        --color: black;
     }
-  }
+}
 
-ion-card, ion-item {
+ion-card,
+ion-item {
     opacity: 1;
 }
 
@@ -25,12 +26,12 @@ ion-button {
     --background-hover: #9ce0be;
     --background-activated: #88f4be;
     --background-focused: #88f4be;
-  
+
     --color: #000;
-  
+
     --border-color: #E63946;
     --border-style: solid;
-  
+
     --ripple-color: deeppink;
 }
 
@@ -40,4 +41,17 @@ ion-icon.active {
 
 ion-icon.inactive {
     color: grey;
+}
+
+.location-container {
+    display: flex;
+    align-items: center;
+}
+
+.location-icon {
+    margin-left: auto;
+    margin-right: 24px;
+    /* Same width as built-in calendar icon */
+    font-size: 20px !important;
+    margin-top: 20px;
 }

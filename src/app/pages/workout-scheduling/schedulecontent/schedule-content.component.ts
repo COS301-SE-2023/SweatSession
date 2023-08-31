@@ -69,9 +69,9 @@ export class ScheduleContentComponent implements OnInit {
         return `You have ${hoursLeft} hours left`;
       }
       else if (daysLeft == 1) {
-        return `your have ${daysLeft} day left`;
+        return `You have ${daysLeft} day left`;
       }
-      return `your have ${daysLeft} days left`;
+      return `You have ${daysLeft} days left`;//spelling fix
     }
 
     if (this.inSession()) {
