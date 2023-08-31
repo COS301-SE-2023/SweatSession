@@ -21,25 +21,37 @@ p {
 
 .last-message {
     font-weight: bold;
-}
-
-ion-segment {
-    border-radius: 0px;
+    width: 100%;
 }
 
 .loader-wrapper {
     height: 80vh;
 }
 
-.user-profile-img {
-    height: 70px;
-    width: 70px;
-}
-
 .messages-list {
     padding: 0.9rem;
 }
 
+.user-name-label {
+    font-weight: bolder;
+    width: 80%;
+    max-width: 80%;
+    overflow: hidden;
+}
+
 .user-name {
     font-weight: bolder;
+}
+
+
+.top-items {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    .timestamp {
+        font-size: x-small;
+        display: inherit;
+        justify-content: end;
+        margin-left: 10px;
+    }
 }
