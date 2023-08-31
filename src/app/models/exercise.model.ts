@@ -11,14 +11,13 @@ export interface Exercise {
 export interface ExerciseList
 {
     MuscleGroup: string;
-    videoUrls:
+    video:
         {
             id?: string;
             url: string;
             exersiseName: string;
             exerciseDescription: string;
-            type: string;
-        }[];
+        };
 }
   
   

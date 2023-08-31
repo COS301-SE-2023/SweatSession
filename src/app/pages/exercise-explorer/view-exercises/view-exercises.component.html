@@ -12,35 +12,21 @@
 <ion-content class="centralize">
 
     <ion-item-divider sticky>
-        <ion-label> MuscleGroup : {{getExerciseDetails().MuscleGroup}} </ion-label>
+        <ion-label> MuscleGroup : MuscleGroupName </ion-label>
     </ion-item-divider>
 
-        <ion-card *ngFor="let video of getExerciseDetails().videoUrls">
+        <ion-card *ngFor="let ExerciseTuple of getExerciseDetails()" style="--ion-background-color: #A8DADCFF">
             <video controls style="width: 100%;">
-                <source src="{{video.url}}" type="video/mp4">
+                <source src="{{ExerciseTuple.video.url}}" type="video/mp4">
             </video>
             <ion-card-header>
-                <ion-card-title>{{video.exersiseName}}</ion-card-title>
+                <ion-card-title>{{ExerciseTuple.video.exersiseName}}</ion-card-title>
             </ion-card-header>
             <ion-card-content>
-                {{video.exerciseDescription}}
+                {{ExerciseTuple.video.exerciseDescription}}
             </ion-card-content>
         </ion-card>
 
-
-<!--    export interface ExerciseList-->
-<!--    {-->
-<!--    ExerciseType: string;-->
-<!--    videoUrls:-->
-<!--    {-->
-<!--    id?: string;-->
-<!--    name: string;-->
-<!--    url: string;-->
-<!--    exersiseName: string;-->
-<!--    exerciseDescription: string;-->
-<!--    type: string;-->
-<!--    }[];-->
-<!--    }-->
 </ion-content>
 
 <!-- <p>View Exercises</p> -->
