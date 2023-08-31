@@ -8,6 +8,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { IPersonalBest } from 'src/app/models';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { PersonalbestService } from 'src/app/services/personalbest/personalbest.service';
+import { GymsearchComponent } from '../search/gymsearch/gymsearch.component';
 
 @Component({
   selector: 'app-view-personalbests',
@@ -98,5 +99,18 @@ export class ViewPersonalbestsPage implements OnInit {
     return `${currentYear}-${currentMonth}-${currentDay}`;
   }
 
+  async openLocationModal() {
+    const modal = await this.modalController.create({
+      component: GymsearchComponent, // Replace LocationModalPage with the name of your modal component
+    });
+    await modal.present();
+  
+    // Handle the location selection event when the modal is dismissed
+    const { data } = await modal.onDidDismiss();
+    // if (data && data.selectedGym && data.placeId) {
+    //   console.log(data);
+    //   this.schedule.location = data.selectedGym;
+    //   this.placeId = data.placeId;    }
+  }
 
 }

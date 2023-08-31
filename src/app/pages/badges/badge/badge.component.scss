@@ -20,8 +20,14 @@
     font-weight: bolder;
 }
 
+.badgeSection{
+    display: flex;
+    align-items: center;
+}
+
 ion-img {
-    width: 100px;
+    height: 80px;
+    // height: 20%;
 }
 
 div {
@@ -29,12 +35,12 @@ div {
 }
 
 .received {
-    --ion-background-color: #1D3557;//#457B9D;
+    --ion-background-color: #457B9D;//#1D3557;//#457B9D;
 }
 
 .not-received {
     --ion-background-color: #457B9D;//#A8DADC;
-    opacity: 0.8;
+    // opacity: 0.8;
 }
 
 .content {
