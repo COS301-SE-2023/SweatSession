@@ -7,5 +7,11 @@ export interface Exercise {
     weight: number;
     hasChanged?: boolean;
 }
+
+export interface ExerciseList {
+    id?: string;
+    name: string;
+    videoUrls: string[];
+}
   
   

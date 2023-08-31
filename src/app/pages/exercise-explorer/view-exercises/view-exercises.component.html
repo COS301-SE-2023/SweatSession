@@ -10,8 +10,19 @@
 </ion-header>
 
 <ion-content class="centralize">
+<!--    Two Os and a V like that Canada Squad-->
+    <ion-list>
+<!--        <ion-item *ngFor="let exercise of exercises" (click)="openExercise(exercise)">-->
+        <ion-label>{{ExerciseDetails.name}}</ion-label>
+        <ion-item *ngFor="let video of ExerciseDetails.videoUrls" >
 
-    Two Os in the middle
+            <ion-item>
+                <video>
+                    <source src="{{video}}" type="video/mp4">
+                </video>
+            </ion-item>
+        </ion-item>
+    </ion-list>
 </ion-content>
 
 <!-- <p>View Exercises</p> -->
