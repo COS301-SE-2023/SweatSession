@@ -11,7 +11,7 @@
 }
 
 .profile-label {
-    color: black;
+    color: white !important;
     .name {
         font-weight: bolder;
     }
@@ -26,10 +26,6 @@
     background-color:#E63946;
     padding-bottom: 20px;
 }
-
-swiper-container::part(bullet-active) {
-    background-color:#E63946 // #A8DADC;
-  }
 
 .otheruser-profile-activity {
     width: 100%;
@@ -64,18 +60,6 @@ ion-title {
     margin-top: 20px;
 }
 
-ion-button {
-    padding: 5px;
-    --color: #A8DADC;
-    --border-color: #A8DADC;
-}
-
-.slide-header {
-    width: 100%;
-    background-color: #457b9d; //#A8DADC;
-    color: #A8DADC;
-    // border: 2px solid #A8DADC;
-    .first-header {
-        margin-top: 0px;
-    }
+ion-icon {
+    color: #457b9d;
 }

@@ -26,7 +26,8 @@ export class AddScheduleComponent  implements OnInit {
   currusername: string;
   profileurl: string;
   sweatsessionurl: string ;
-
+  day : string ;
+  daynum : number ;
   date : string ;
   shortdate : string[] ;
 
@@ -46,9 +47,12 @@ export class AddScheduleComponent  implements OnInit {
     // this.store.dispatch(new AddGymSessionLocation(this.placeId));
     // this.store.dispatch(new AddWorkoutSchedule(this.placeId));
     this.locationRepository.addGymSession(this.placeId, this.schedule.date!, this.schedule.time!, this.schedule.completeAt!, this.schedule.name!);
+    const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+    this.daynum = new Date().getDay() ;
+    this.day = weekday[this.daynum];
     this.date = new Date().toTimeString() ;
-   this.shortdate = this.date.split(':' , 2);
-   this.createNotifications("SWEATSESSION" , this.shortdate[0] + ':' + this.shortdate[1] , "LETS-GO!! Your workout has been scheduled at " + this.schedule.location )  ;
+    this.shortdate = this.date.split(':' , 2);
+   this.createNotifications("SWEATSESSION" , this.day + ' ' +this.shortdate[0] + ':' + this.shortdate[1] + ' ' , "LETS-GO!! Your workout has been scheduled at " + this.schedule.location )  ;
   }
 
   isDateTimeValid(): boolean {
@@ -130,7 +134,7 @@ export class AddScheduleComponent  implements OnInit {
 
 
 createNotifications(sendername: string , sentdate: string , message: string){
-  this.noticeService.createNotices(sendername , sentdate , message , this.currUserId! , this.currUserId! , '/assets/Asset 3.png');
+  this.noticeService.createNotices(sendername , sentdate , message , this.currUserId! , this.currUserId! , '/assets/Asset 5.png');
 }
 
 }

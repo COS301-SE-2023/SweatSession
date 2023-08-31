@@ -25,9 +25,6 @@
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
 
-ion-content {
-    overflow: auto;
-}
 
 // ion-item{
 //     --highlight-height: 0;
@@ -38,17 +35,23 @@ ion-title {
     text-align: center;
 }
 
-ion-toolbar{
+ion-toolbar {
     --background: #E63946;
+    --color: white !important;
 }
 
-ion-toolbar ion-item{
---background: #E63946;
+ion-toolbar *{
+    --color: white !important;
+}
+
+ion-toolbar ion-item {
+    --background: #E63946;
+    --color: white !important;
 }
 
 * {
-font-family: 'Montserrat', sans-serif;
-transition: .2;
+    font-family: 'Montserrat', sans-serif;
+    transition: .2;
 }
 
 ion-chip {
@@ -56,7 +59,7 @@ ion-chip {
 }
 
 ion-spinner {
-    --color: #E63946;//#A8DADC;
+    --color: #E63946; //#A8DADC;
     width: 1.2rem;
     height: 1.2rem;
 }
@@ -69,11 +72,11 @@ ion-spinner {
 }
 
 ion-fab-button  {
-    --background: #457B9D;
+    --background: #A8DADC;
     --background-hover: #9ce0be;
     --background-activated: #88f4be;
     --background-focused: #88f4be;
-    --color: white;
+    --color: #457b9d;
     --ripple-color: deeppink;
     opacity: 0.9;
 }
@@ -89,12 +92,6 @@ ion-segment {
     .input-field-wrapper {
         width: 80%;
     }
-      
-      
-    .message-send-icon {
-        color: #A8DADC; //#E63946;
-        
-    }
 }
 
 .input-field-footer {
@@ -106,20 +103,20 @@ ion-segment {
 }
 
 swiper-container::part(bullet-active) {
-    background-color:#E63946 // #A8DADC;
-  }
+    background-color: #E63946 // #A8DADC;
+}
 
-  .message-send-fab-button {
+.message-send-fab-button {
     width: 40px;
     height: 40px;
-  }
+}
 
-  .native-wrapper.sc-ion-textarea-md textarea.sc-ion-textarea-md {
+.native-wrapper.sc-ion-textarea-md textarea.sc-ion-textarea-md {
     -webkit-padding-start: 0px;
     padding-inline-start: 0px;
     -webkit-padding-end: 0px;
     padding-inline-end: 0px;
-    padding-top:18px;
+    padding-top: 18px;
     padding-bottom: 0px;
 }
 
@@ -134,18 +131,22 @@ swiper-container::part(bullet-active) {
     opacity: 0.9;
 }
 
+// colors
+// #A8DADC;
+// #457b9d
+
 ion-button {
-    --background: #457b9d;
-    --background-hover: #A8DADC;
-    --background-activated: #A8DADC;
-    --background-focused: #A8DADC;
+    --background: #A8DADC;
+    --background-hover: #457b9d;
+    --background-activated: #457b9d;
+    --background-focused: #457b9d;
     border-radius: 8px;
   
     --border-style: solid;
     --border-width: 2px;
-    --border-color: #A8DADC;
+    --border-color: #457b9d;
   
-    --color: white;
+    --color: #457b9d;
 }
 
 .zero-content-container {
@@ -154,4 +155,33 @@ ion-button {
     padding: 10px;
     text-align: center;
     font-weight: bolder;
+}
+
+//profile
+.otheruser-profile {
+    overflow: auto;
+    .slide-header {
+        padding: 20px;
+        .slides-headers {
+            font-weight: bolder;
+            color: #457B9D;
+        }
+    }
+}
+
+swiper-container {
+    position: relative;
+    height: fit-content;
+    padding: 20px;
+}
+
+swiper-container::part(bullet-active) {
+    background-color:#E63946; // #A8DADC;
+    position: relative;
+    bottom: -10px;
+}
+
+swiper-container::part(bullet) {
+    position: relative;
+    bottom: -10px;
 }

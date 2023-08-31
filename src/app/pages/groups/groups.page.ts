@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavController } from '@ionic/angular';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { GetGroup, GetUserGroups, StageChatGroup } from 'src/app/actions';
@@ -14,7 +15,7 @@ export class GroupsPage implements OnInit {
 
   @Select(MessagesState.returnChatGroups) groups$: Observable<IGroup[]>;
   groups: IGroup[] = [];
-  constructor(private store: Store) { }
+  constructor(private store: Store, private nav:NavController) { }
 
   ngOnInit() {
     this.displayGroups()
@@ -30,6 +31,10 @@ export class GroupsPage implements OnInit {
   stageGroup(selectedGroup: IGroup) {
     this.store.dispatch(new GetGroup(selectedGroup.id))
     this.store.dispatch(new StageChatGroup(selectedGroup));
+  }
+
+  addGroup() {
+    this.nav.navigateRoot("/creategroup");
   }
 
 }

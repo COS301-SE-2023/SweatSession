@@ -11,10 +11,10 @@ import { Notice, Profile } from 'src/app/models/notice.model';
 
 export class NoticeService {
 
-   auth = getAuth();
-   currUserId = this.auth.currentUser?.displayName;
+  auth = getAuth();
+  currUserId = this.auth.currentUser?.displayName;
 
-  constructor(private readonly firestore: Firestore) { }
+  constructor(private readonly firestore: Firestore) {}
 
 
   getNotices():Observable<Notice[]> {
@@ -27,8 +27,7 @@ export class NoticeService {
     return collectionData<Profile>(collection(this.firestore, "profiles"), {
     idField: 'id',
    });
-    
-}
+  }
 
   deleteNotices(id :string): Promise<void> {
     const noticeDocRef = doc(this.firestore, `Notifications/${id}`);
@@ -41,7 +40,6 @@ export class NoticeService {
   }
 
   async createNotices(SenderName: string , SentDate: string , Message: string , UserId: string , SenderId: string , ProfileUrl: string){
-    
     await addDoc(collection(this.firestore , 'Notifications'), {
       senttoid: UserId ,
       senderid: SenderId , 
@@ -50,9 +48,5 @@ export class NoticeService {
       sentdate: SentDate , 
       message: Message
     });
-
-
   }
-  
-
 }

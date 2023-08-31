@@ -115,14 +115,14 @@ const routes: Routes = [
   },
   {
     path: "otheruserFriends",
-    component: FriendsComponent,
+    loadChildren: () => import('./pages/otheruser/friends/friends.module').then(m => m.ScheduleComponentModule),
     pathMatch: 'full',
     canActivate: [AuthGuard],
     data: { authGuardPipe: redirectLoggedOut },
   },
   {
     path: "otheruserSchedules",
-    component: SchedulesComponent,
+    loadChildren: () => import('./pages/otheruser/schedules/schedules.module').then(m => m.ScheduleComponentModule),
     pathMatch: 'full',
     canActivate: [AuthGuard],
     data: { authGuardPipe: redirectLoggedOut },

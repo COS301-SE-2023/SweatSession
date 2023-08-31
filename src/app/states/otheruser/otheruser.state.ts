@@ -4,7 +4,7 @@ import { Action, State, StateContext, Store, Selector } from "@ngxs/store";
 import { Navigate } from "@ngxs/router-plugin";
 import { Router } from "@angular/router";
 import { IFriendsModel, IGetFriends, IGetWorkoutSchedules, IGotFriends, IGotWorkoutSchedules, IProfileModel, IWorkoutScheduleModel } from "src/app/models";
-import { GetOtheruserFriends, GetOtheruserProfile, GetOtheruserSchedules, LoadOtherUserProfile, RemoveUser, StageOtheruserInfo } from "src/app/actions";
+import { CheckIFSendFriendRequest, GetOtheruserFriends, GetOtheruserProfile, GetOtheruserSchedules, LoadOtherUserProfile, RemoveUser, StageOtheruserInfo } from "src/app/actions";
 import { NavController } from "@ionic/angular";
 import { FriendsService, OtheruserService,  WorkoutscheduleService } from "src/app/services";
 import { WorkoutscheduleRepository } from "src/app/repository";
@@ -18,6 +18,7 @@ export interface OtherUserStateModel {
     friends: IFriendsModel[];
     workoutSchedules: IWorkoutScheduleModel[];
     profiles?: IProfileModel[];
+    requested?: boolean;
 }
 
 
@@ -28,7 +29,8 @@ export interface OtherUserStateModel {
         friendshipStatus: false,
         friends: [],
         workoutSchedules: [],
-        profiles: []
+        profiles: [],
+        requested: false
     },
 })
 
@@ -92,6 +94,7 @@ export class OtheruserState {
     @Action(GetOtheruserFriends)
     async getFriends(ctx: StateContext<OtherUserStateModel>) {
         const currentUserId = await this.authApi.getCurrentUserId();
+        this.request = await JSON.parse(sessionStorage.getItem("otheruser")!);
         return (await this.friendService.getFriends(this.request)).pipe(
             tap((response) => {
                 ctx.patchState({
@@ -149,6 +152,19 @@ export class OtheruserState {
       );
     }
 
+    @Action(CheckIFSendFriendRequest)
+    async ifRequested(ctx: StateContext<OtherUserStateModel>,) {
+        const currentUser = await this.authApi.getCurrentUserId();
+        const OtherUserId = await JSON.parse(sessionStorage.getItem("otheruser")!).userId;
+        return (await this.otheruserService.getProfile({userId: currentUser})).pipe(
+            tap((response)=> {
+                ctx.patchState({
+                    requested: response.friendRequests?.includes(OtherUserId)
+                })
+            })
+        );
+    }
+
     @Selector()
     static returnOtherUserProfile(state: OtherUserStateModel) {
         return state.otheruser;
@@ -172,5 +188,10 @@ export class OtheruserState {
     @Selector()
     static returnFriendshipStatus(state: OtherUserStateModel){
       return state.friendshipStatus;
+    }
+
+    @Selector()
+    static returnFriendRequestStatus(state: OtherUserStateModel){
+      return state.requested;
     }
 }

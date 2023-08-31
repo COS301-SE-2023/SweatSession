@@ -1,27 +1,21 @@
-<ng-container>
-  <ion-header [translucent]="true">
-    <ion-toolbar>
-      <ion-item>
-        <backbutton class="larger-back-button"></backbutton>
-        <ion-title>Friends</ion-title>
-      </ion-item>
-    </ion-toolbar>
-  </ion-header>
-  
-  <ion-content [fullscreen]="true">
-    <div class = "outer-container">
-      <div class="body-content">
-        <ion-card *ngFor = "let friend of friends">
-          <ion-item>
-            <ion-avatar>
-              <img src = "{{friend.profileURL}}" alt="image here" />
-            </ion-avatar>
-            <ion-text>{{friend.name}}</ion-text>
-            <ion-icon name="chevron-forward-outline" slot = "end"  *ngIf="!isCurrentUser(friend)" (click)="viewOtherUser(friend)"></ion-icon>
-            <ion-text slot="end" *ngIf="isCurrentUser(friend)">you</ion-text>
-          </ion-item>
-        </ion-card>
+<ion-header>
+  <ion-toolbar>
+    <ion-item lines="none">
+      <backbutton></backbutton>
+      <ion-title>Friends</ion-title>
+    </ion-item>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class = "outer-container">
+    <div class="body-content">
+      <div *ngFor = "let friend of friends">
+        <friends-contents
+          [friend]="friend"
+          [userId]="userId"
+        ></friends-contents>
       </div>
     </div>
-  </ion-content>                
-</ng-container>
+  </div>
+</ion-content>

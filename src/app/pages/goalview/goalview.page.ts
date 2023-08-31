@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {IAddGOAL, IGOAL, IGOALS, ITASK} from "../../models";
 import {Store} from "@ngxs/store";
-import {FitnessgoalService} from "../../services";
+import {FitnessgoalService, NavigationService} from "../../services";
 import {AuthApi} from "../../states";
 import {getAuth} from "@angular/fire/auth";
 import {Router} from "@angular/router";
@@ -22,13 +22,8 @@ export class GoalviewPage  implements OnInit {
               private authApi: AuthApi,
               private router: Router,
               private formBuilder: FormBuilder,
-              private firestore: AngularFirestore
-
-              )
-            {
-              
-            }
-
+              private firestore: AngularFirestore,
+              private navigate: NavigationService) {}
 
   goals: IGOALS = {
     goals: []
@@ -67,9 +62,8 @@ export class GoalviewPage  implements OnInit {
 
   }
 
-  goback()
-  {
-    this.router.navigate(['/fitnessgoals']);
+  goback() {
+    this.navigate.back();
   }
 
   remove(i: number): void {
@@ -133,7 +127,7 @@ export class GoalviewPage  implements OnInit {
     }
     this.fitnessgaolservive.addGoal(Iadd);
 
-    this.router.navigate(['/fitnessgoals']);
+    this.navigate.back();
   }
 
   goalForm : FormGroup;

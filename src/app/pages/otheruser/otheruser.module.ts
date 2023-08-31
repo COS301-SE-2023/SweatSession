@@ -8,12 +8,8 @@ import { OtheruserPageRoutingModule } from './otheruser-routing.module';
 
 import { OtheruserPage } from './otheruser.page';
 import { AuthModule, FriendsStateModule, OtheruserStateModule } from 'src/app/states';
-import { FriendsComponent } from './friends/friends.component';
-import { SchedulesComponent } from './schedules/schedules.component';
-//import { ScheduleContentModule } from "../workout-scheduling/schedulecontent/schedule-content.module";
 import { WorkoutSchedulingStateModule } from 'src/app/states';
 import { BackButtonDirectiveModule } from 'src/app/directives';
-import { WorkoutSchedulingPageModule } from '../workout-scheduling/workout-scheduling.module';
 
 @NgModule({
   imports: [
@@ -22,13 +18,12 @@ import { WorkoutSchedulingPageModule } from '../workout-scheduling/workout-sched
     IonicModule,
     OtheruserPageRoutingModule,
     OtheruserStateModule,
-    WorkoutSchedulingPageModule,
     WorkoutSchedulingStateModule,
     BackButtonDirectiveModule,
     AuthModule,
     FriendsStateModule
   ],
-  declarations: [OtheruserPage, FriendsComponent, SchedulesComponent],
+  declarations: [OtheruserPage],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class OtheruserPageModule {}

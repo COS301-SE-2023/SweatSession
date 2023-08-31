@@ -13,7 +13,7 @@
       </div>
       <ion-label class="profile-label">
         <div class="name">
-          <h1>{{user!.displayName}}.</h1>
+          <h1>{{user!.displayName}}</h1>
         </div>
         <div class="bio">
           <p>{{user.bio}}.</p>
@@ -21,32 +21,37 @@
       </ion-label>
       <div class="group-buttons">
         <ion-button fill="outline" *ngIf="friendshipStatus && !isRequested()" (click)="removeFriend()">
-          <ion-icon name="person-outline" style="padding-right: 5px;"></ion-icon>
+          <ion-icon name="person" style="padding-right: 5px;"></ion-icon>
           Remove Friend
         </ion-button>
-        <ion-button fill="outline" *ngIf="!friendshipStatus && !isRequested()" (click)="addFriend()">
-          <ion-icon name="person-outline" style="padding-right: 5px;"></ion-icon>
+        <ion-button fill="outline" *ngIf="!friendshipStatus && !isRequested() && !friendRequestStatus" (click)="addFriend()">
+          <ion-icon name="person" style="padding-right: 5px;"></ion-icon>
           Add friend
         </ion-button>
-        <ion-button fill="outline" *ngIf="isRequested()" [disabled]="true">
-          <ion-icon name="person-outline" style="padding-right: 5px;"></ion-icon>
+        <ion-button fill="outline" *ngIf="isRequested() && !friendRequestStatus" [disabled]="true">
+          <ion-icon name="person" style="padding-right: 5px;"></ion-icon>
           Requested
+        </ion-button>
+        <ion-button fill="ouline" *ngIf="friendRequestStatus" routerLink="/notifications">
+          <ion-icon name="person"></ion-icon>
+          View Request
         </ion-button>
       </div>
     </div>
    
     <div class="otheruser-profile-activity">
       <div class="slide-header">
-        <h2 class="slides-headers first-header">
-          <ion-icon name="body"></ion-icon> Activities
-        </h2>
+        <ion-item class="slides-headers first-header">
+          <ion-icon name="body" slot="start"></ion-icon> 
+          <ion-label>Activities</ion-label>
+        </ion-item>
       </div>
       <swiper-container [slidesPerView]="2" centered-slides="true"  pagination="{hideOnClick: true}">
         <swiper-slide>
           <ion-card (click)="viewFriends()">
             <ion-card-content>
               <ion-card-title>
-                <ion-icon name="people-outline"></ion-icon>
+                <ion-icon name="people"></ion-icon>
               </ion-card-title>
               <h2>{{friends!.length + " Friends"}}</h2>
             </ion-card-content>
@@ -56,7 +61,7 @@
           <ion-card>
             <ion-card-content>
               <ion-card-title>
-                <ion-icon name="people-outline"></ion-icon>
+                <ion-icon name="people"></ion-icon>
               </ion-card-title>
               <h2>0 Groups</h2>
             </ion-card-content>
@@ -66,7 +71,7 @@
           <ion-card (click)="viewSchedules()">
             <ion-card-content>
               <ion-card-title>
-                <ion-icon name="barbell-outline"></ion-icon>
+                <ion-icon name="barbell"></ion-icon>
               </ion-card-title>
               <h2>{{workoutSchedules!.length}} Sessions</h2>
             </ion-card-content>
@@ -75,9 +80,10 @@
       </swiper-container>
       
       <div class="slide-header">
-        <h2 class="slides-headers">
-          <ion-icon name="trophy"></ion-icon> Achievements
-        </h2>
+        <ion-item class="slides-headers">
+          <ion-icon name="trophy" slot="start"></ion-icon> 
+          <ion-label>Achievements</ion-label>
+        </ion-item>
       </div>
       <swiper-container [slidesPerView]="2" centered-slides="true"
         pagination="{hideOnClick: true}"
@@ -101,7 +107,7 @@
           <ion-card>
             <ion-card-content>
               <ion-card-title>
-                <ion-icon name="star-outline"></ion-icon>
+                <ion-icon name="star"></ion-icon>
               </ion-card-title>
               <h2 *ngIf="points$ | async as points; else loaderContent">{{points.userPoints}} Points</h2>
               <ng-template #loaderContent>

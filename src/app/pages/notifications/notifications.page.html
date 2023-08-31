@@ -9,40 +9,39 @@
 <br>
 
 
-<ion-content class="main">
-  <ion-title *ngIf="noticeamount > 0"class="flex-center3" style="display:inline-block; background: none; " ><ion-button color="light" size="default" (click)="clearNotifications()">Clear All</ion-button></ion-title>
-    <br>
-    <br>
+<ion-content class="main" >
+  <div *ngIf="noticeamount > 0" class="flex-center3" style=" background: none; ">
+    <ion-button  color="light" size="default"  (click)="clearNotifications()">Clear All</ion-button>
+  </div>
     
   <div *ngIf="noticeamount > 0" >
-  <ion-card class="Mcard" *ngFor="let notice of noticeList2">
-    <div class="right-align-label"><ion-button fill="clear" size="small" (click)="clearNotification(notice.id!)" style="color: black;"><ion-icon name="close-circle-outline" size="small"></ion-icon></ion-button></div>
-    <ion-card-content style="display:flex ; align-items:center" >
-  <ion-avatar slot="start">
-    <img alt="Silhouette of a person's head" src={{notice.profileurl}} />
-  </ion-avatar>
-  <ion-grid>
-    <ion-row>
-  <ion-label class="Bcard"><b>&nbsp;{{notice.sendername}}</b></ion-label>
-   </ion-row>  
-  <ion-label class="Bcard">&nbsp;{{notice.message}}</ion-label>
-</ion-grid>
-</ion-card-content>
-<div class="flex-center3" *ngIf="notice.message == 'Sent you a Friend Request!'">
-<ion-button size="small" (click)="addFriend(notice)">Accept</ion-button>
-<ion-button size="small" (click)="clearNotification(notice.id!); rejectFriendRequest(notice , notice.senderid! , notice.senttoid!);">Reject</ion-button>
-</div>
-<ion-label class="right-align-label">{{notice.sentdate}}</ion-label>
+    <ion-card class="Mcard" *ngFor="let notice of noticeList2">
+      <div class="right-align-label2">
+        <ion-button  fill="clear" class="delete-button" size="small" (click)="clearNotification(notice.id!)">
+          <ion-icon name="close-circle-outline"  ></ion-icon>
+        </ion-button>
+      </div>
+      <ion-card-content style="display:flex ; align-items:center" >
+        <ion-avatar slot="start">
+          <img alt="Silhouette of a person's head" src={{notice.profileurl}} />
+        </ion-avatar>
+        <ion-grid>
+          <ion-row>
+            <ion-label class="Bcard2"><b>&nbsp;{{notice.sendername}}</b></ion-label>
+          </ion-row>  
+          <ion-label class="Bcard">&nbsp;{{notice.message}}</ion-label>
+        </ion-grid>
+      </ion-card-content>
+      <div class="flex-center4" *ngIf="notice.message == 'Sent you a Friend Request!'">
+        <ion-button color="success" size="small" (click)="addFriend(notice)">Accept</ion-button>
+        <ion-button color="danger" size="small" (click)="clearNotification(notice.id!); rejectFriendRequest(notice , notice.senderid! , notice.senttoid!);">Reject</ion-button>
+      </div>
+      <ion-label class="right-align-label">{{notice.sentdate }}</ion-label>
+    </ion-card>
+  </div>
+  <br>
 
-</ion-card>
-</div>
-<br>
-
-<ion-card *ngIf="noticeamount == 0" class="flex-center">
-  <ion-button (click)="presentAlert()">No Notifications!</ion-button>
+  <ion-card *ngIf="noticeamount == 0" class="flex-center">
+    <ion-button (click)="presentAlert()">No Notifications!</ion-button>
   </ion-card>
-
-
-
-
 </ion-content>

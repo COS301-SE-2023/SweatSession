@@ -127,8 +127,8 @@ export class FriendsState {
         const currentUserId = await this.authApi.getCurrentUserId();
         if(currentUserId) {
             const request: IFriendRequest = {
-                from: currentUserId,
-                to: otheruserId
+                from: otheruserId,
+                to: currentUserId
             }
             return this.friendsService.removeFriendRequest(request)
         }

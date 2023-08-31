@@ -1,4 +1,4 @@
-<ion-header [translucent]="true">
+<ion-header>
     <ion-toolbar>
         <ion-item lines="none">
             <backbutton></backbutton>
@@ -36,7 +36,7 @@
             <ion-grid>
                 <ion-row>
                     <ion-col>
-                        <ion-button expand="block" routerLink="/fitnessgoals">Cancel</ion-button>
+                        <ion-button expand="block" (click)="cancel()">Cancel</ion-button>
                     </ion-col>
                     <ion-col>
                         <ion-button expand="block" (click)="saveGoal()">Done</ion-button>

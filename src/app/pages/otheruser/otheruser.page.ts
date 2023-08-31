@@ -3,7 +3,7 @@ import { NavController } from '@ionic/angular';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import {GetUsersAction} from 'src/app/actions/profile.action'
-import { AddFriendAction, CreateFriendRequest, GetOtheruserFriends, GetOtheruserSchedules, LoadOtherUserProfile, RemoveFriendAction, RemoveUser } from 'src/app/actions';
+import { AddFriendAction, CheckIFSendFriendRequest, CreateFriendRequest, GetOtheruserFriends, GetOtheruserSchedules, LoadOtherUserProfile, RemoveFriendAction, RemoveUser } from 'src/app/actions';
 import { IFriendsModel, IProfileModel, IWorkoutScheduleModel , IGotProfile } from 'src/app/models';
 import { Profile } from 'src/app/models/notice.model';
 import { OtherUserStateModel, OtheruserState } from 'src/app/states';
@@ -28,6 +28,7 @@ register();
 export class OtheruserPage implements OnInit {
 
   friendshipStatus: boolean;
+  friendRequestStatus: boolean;
   user!: IProfileModel;
   currusername: string;
   profileurl: string;
@@ -41,6 +42,8 @@ export class OtheruserPage implements OnInit {
 
   auth = getAuth();
   currUserId = this.auth.currentUser?.uid;
+  day : string ;
+  daynum : number ;
   date : string ;
   shortdate : string[] ;
 
@@ -49,6 +52,7 @@ export class OtheruserPage implements OnInit {
   @Select(OtheruserState.returnOtherUserFriends) friends$!: Observable<IFriendsModel[]>;
   @Select(OtheruserState.returnOtherUserSchedules) schedules$!: Observable<IWorkoutScheduleModel[]>;
   @Select(OtheruserState.returnFriendshipStatus) friendshipStatus$!: Observable<boolean>;
+  @Select(OtheruserState.returnFriendRequestStatus) friendRequestStatus$!: Observable<boolean>;
 
   constructor(private store: Store , private noticeService: NoticeService , private nav: NavController , pointsApi: PointsApi, badgesApi: BadgesApi) {
    
@@ -77,17 +81,17 @@ export class OtheruserPage implements OnInit {
   }
 
   removeFriend() {
-    this.store.dispatch(new RemoveFriendAction(this.friendModel()))
-    this.date = new Date().toTimeString() ;
-    this.shortdate = this.date.split(':' , 2);
-    this.createNotifications(this.currusername , this.shortdate[0] + ':' + this.shortdate[1] , "Removed you as a Friend!")  ;
+    this.store.dispatch(new RemoveFriendAction(this.friendModel()));
   }
 
   addFriend() {
+   const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+   this.daynum = new Date().getDay() ;
+   this.day = weekday[this.daynum];
    this.date = new Date().toTimeString() ;
    this.shortdate = this.date.split(':' , 2);
    this.store.dispatch(new CreateFriendRequest(this.user.userId!))
-   this.createNotifications(this.currusername , this.shortdate[0] + ':' + this.shortdate[1] , "Sent you a Friend Request!");
+   this.createNotifications(this.currusername , this.day + ' ' +this.shortdate[0] + ':' + this.shortdate[1] + ' '  , "Sent you a Friend Request!");
   }
 
   viewSchedules() {
@@ -121,6 +125,7 @@ export class OtheruserPage implements OnInit {
     this.store.dispatch(new LoadOtherUserProfile());
     this.user$.subscribe((response)=>{
       this.user = response;
+      this.ifRequested();
     })
 
     this.friendshipStatus$.subscribe((response)=>{
@@ -173,5 +178,13 @@ export class OtheruserPage implements OnInit {
 
   onSegmentChange(event: any) {
     this.selectedSegment = event.detail.value;
+  }
+
+  ifRequested() {
+    this.store.dispatch(new CheckIFSendFriendRequest())
+
+    this.friendRequestStatus$.subscribe((response)=>{
+      this.friendRequestStatus = response;
+    })
   }
 }

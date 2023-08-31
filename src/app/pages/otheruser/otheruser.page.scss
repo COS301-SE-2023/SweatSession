@@ -11,7 +11,7 @@
 }
 
 .profile-label {
-    color: black;
+    color: white !important;
     .name {
         font-weight: bolder;
     }
@@ -61,19 +61,6 @@ ion-title {
     margin-top: 20px;
 }
 
-ion-button {
-    padding: 5px;
-    --color: #A8DADC;
-    --border-color: #A8DADC;
-}
-
-.slide-header {
-    width: 100%;
-    background-color: #A8DADC;
-    background-color: #457b9d; //#A8DADC;
-    color: #A8DADC;
-
-    .first-header {
-        margin-top: 0px;
-    }
+ion-icon {
+    color: #457b9d;
 }

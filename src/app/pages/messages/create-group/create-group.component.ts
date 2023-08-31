@@ -28,7 +28,18 @@ export class CreateGroupComponent  implements OnInit {
   }
 
   createGroup() {
-   this.store.dispatch(new AddChatGroup(this.group));
+    if(!this.group.profileURL)
+      this.group.profileURL = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png";
+    this.store.dispatch(new AddChatGroup(this.group));
+  }
+
+  isValidInput() {
+    const {displayName, bio, profileURL} = this.group;
+
+    if(bio && displayName) {
+      return true;
+    }
+    return false;
   }
 
 }

@@ -23,10 +23,6 @@ export class SchedulesComponent  implements OnInit {
     this. displayWorkoutSchedules();
   }
 
-  async viewSchedule(schedule: IWorkoutScheduleModel){
-    this.isSlideShow=!this.isSlideShow;
-  }
-
   loadSchedule(schedule: IWorkoutScheduleModel) {
     this.store.dispatch(new LoadSchedule(schedule));
   }

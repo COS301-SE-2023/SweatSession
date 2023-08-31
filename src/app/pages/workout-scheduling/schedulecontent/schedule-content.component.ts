@@ -25,7 +25,8 @@ export class ScheduleContentComponent implements OnInit {
   isSlideShow = false;
   isEditSlide = false;
   ratio: Number = 1;
-
+  day : string ;
+  daynum : number ;
   date : string ;
   shortdate : string[] ;
 
@@ -82,16 +83,21 @@ export class ScheduleContentComponent implements OnInit {
 
           if(daysLeft < 1 ){
             if(hoursLeft >= 1){
+              const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+              this.daynum = new Date().getDay() ;
+              this.day = weekday[this.daynum];
               this.date = new Date().toTimeString() ;
               this.shortdate = this.date.split(':' , 2);
-              this.createNotifications("SWEAT-SESSION" , this.shortdate[0] + ':' + this.shortdate[1] , "Your workout begins at " + this.schedule.location + " in " + hoursLeft + " hours")  ;
+              this.createNotifications("SWEAT-SESSION" , this.day + ' ' +this.shortdate[0] + ':' + this.shortdate[1] + ' ' , "Your workout begins at " + this.schedule.location + " in " + hoursLeft + " hours")  ;
 
               
             }else{
-
+              const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+              this.daynum = new Date().getDay() ;
+              this.day = weekday[this.daynum];
               this.date = new Date().toTimeString() ;
               this.shortdate = this.date.split(':' , 2);
-              this.createNotifications("SWEAT-SESSION" , this.shortdate[0] + ':' + this.shortdate[1] , "Your workout begins at " + this.schedule.location + "in " + minutes + " minutes")  ;
+              this.createNotifications("SWEAT-SESSION" , this.day + ' ' +this.shortdate[0] + ':' + this.shortdate[1] + ' ' , "Your workout begins at " + this.schedule.location + "in " + minutes + " minutes")  ;
 
               
           }

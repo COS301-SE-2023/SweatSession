@@ -1,6 +1,12 @@
 .main{
     --background: none;
     --background: url('/assets/Asset 2.png') no-repeat center/contain fixed;
+    
+}
+
+.main2{
+    --background: none;
+    
 }
 
 .flex-center{
@@ -37,8 +43,9 @@ ion-header{
 }
 
 .Mcard{
-    border: radius 50px;
-    background-color:rgb(144,202,243 , 1)
+    
+    background-color:rgb(249, 253, 254);
+    
     
 }
 .flex-center2{
@@ -47,7 +54,11 @@ ion-header{
     
 }
 .Bcard{
-    background-color:rgb(144,202,243 , 0.9)
+    background-color:rgb(249, 253, 254);
+}
+.Bcard2{
+    background-color:rgb(249, 253, 254);
+    color: #E63946;
 }
 
 .ion-icon1{
@@ -58,13 +69,36 @@ ion-header{
     display: flex;
     justify-content: center;
     align-items: center;
-    
-    
     border: radius 50px;
+    
+
+}
+
+.flex-center4{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: radius 50px;
+   
 
 }
 
 .right-align-label {
     display: flex;
     justify-content: flex-end; /* Align the content to the right */
+    padding-right: 5px;
   }
+
+  .right-align-label2 {
+    display: flex;
+    justify-content: flex-end; /* Align the content to the right */
+    
+  }
+
+.delete-button {
+    --background: transparent;
+    font-size: 17px;
+    --border-color: transparent;
+}
+
+  
