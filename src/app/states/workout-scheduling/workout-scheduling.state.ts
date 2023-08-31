@@ -95,15 +95,7 @@ export class WorkoutSchedulingState {
             }
             const response: IRemovedWorkoutSchedule = await this.service.removeSchedule(request);
             if(response.validate){
-                const schedules = ctx.getState().schedules.filter((schedule)=>{
-                    if(schedule.id! === request.schedule.id!)
-                        return false;
-                    else
-                        return true;
-                })
-                ctx.patchState({
-                    schedules: schedules
-                })
+                /////
             }else {
                 alert("Sorry, You are no logged in");
                 ctx.dispatch(new Navigate(['login']));
@@ -120,9 +112,6 @@ export class WorkoutSchedulingState {
                 schedule: payload
             }
             const response = await this.service.addSchedule(request);
-            ctx.patchState({
-                schedules: [response.schedule!,...ctx.getState().schedules]
-            })
             this.navigation.back();
         }else {
             alert("Sorry, You are no logged in");
@@ -139,9 +128,6 @@ export class WorkoutSchedulingState {
                 schedule: payload
             }
             const response =await this.service.updateSchedule(request);
-            ctx.patchState({
-                schedules: [response.schedule!,...ctx.getState().schedules]
-            })
         }else {
             alert("failed to update");
         }
