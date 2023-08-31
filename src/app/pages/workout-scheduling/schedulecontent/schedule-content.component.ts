@@ -206,7 +206,7 @@ export class ScheduleContentComponent implements OnInit {
   counter() {
     setInterval(() => {
       this.fraction()
-    }, 1000 * 60)
+    }, 1000 * 5)
   }
 
 
