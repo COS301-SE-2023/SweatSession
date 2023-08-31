@@ -149,6 +149,14 @@ ion-button {
     --color: #457b9d;
 }
 
+ion-segment {
+    border-radius: 0px;
+}
+
+ion-segment-button {
+    --color: #457b9d;
+}
+
 .zero-content-container {
     width: 80%;
     margin: auto;
