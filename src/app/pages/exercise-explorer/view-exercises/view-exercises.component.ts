@@ -9,23 +9,46 @@ import { ExerciseList } from 'src/app/models/exercise.model';
 })
 export class ViewExercisesComponent  implements OnInit {
 
-  ExerciseDetails: ExerciseList;
+  ExerciseDetails: ExerciseList = {
+
+      MuscleGroup: "",
+      videoUrls:
+        [
+            {
+                id: "",
+                url: "",
+                exersiseName: "",
+                exerciseDescription: "",
+                type: ""
+            }
+        ]
+  };
 
   constructor(private modalController: ModalController) { }
 
   ngOnInit() {
-      console.log("ViewExercisesComponent.ngOnInit()");
-      this.populateExerciseDetails("Bicept");
+
   }
 
   populateExerciseDetails(MuscleGroup: string) {
 
-    this.ExerciseDetails.name = MuscleGroup;
-    this.ExerciseDetails.videoUrls = ["https://www.youtube.com/watch?v=2yjwXTZQDDI",
-                                      "https://www.youtube.com/watch?v=2yjwXTZQDDI",
-                                      "https://www.youtube.com/watch?v=2yjwXTZQDDI"];
+      //Fetch data frm the API and populate the ExerciseDetails object
+    this.ExerciseDetails.MuscleGroup = MuscleGroup;
+
+    this.ExerciseDetails.description = "This is a description of the exercise";
+    this.ExerciseDetails.name = "Breathe Air";
+    this.ExerciseDetails.videoUrls = [
+                                      "../../../../assets/BreatheAir.mp4",
+                                      "../../../../assets/BreatheAir.mp4",
+                                    ];
   }
+
+  getExerciseDetails() {
+      this.populateExerciseDetails("Chest");
+      return this.ExerciseDetails;
+  }
+
   dismissModal() {
-    this.modalController.dismiss();
- }
+      this.modalController.dismiss();
+  }
 }

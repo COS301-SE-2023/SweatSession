@@ -10,19 +10,37 @@
 </ion-header>
 
 <ion-content class="centralize">
-<!--    Two Os and a V like that Canada Squad-->
-    <ion-list>
-<!--        <ion-item *ngFor="let exercise of exercises" (click)="openExercise(exercise)">-->
-        <ion-label>{{ExerciseDetails.name}}</ion-label>
-        <ion-item *ngFor="let video of ExerciseDetails.videoUrls" >
 
-            <ion-item>
-                <video>
-                    <source src="{{video}}" type="video/mp4">
-                </video>
-            </ion-item>
-        </ion-item>
-    </ion-list>
+    <ion-item-divider sticky>
+        <ion-label> MuscleGroup : {{getExerciseDetails().MuscleGroup}} </ion-label>
+    </ion-item-divider>
+
+        <ion-card *ngFor="let video of getExerciseDetails().videoUrls">
+            <video controls style="width: 100%;">
+                <source src="{{video.url}}" type="video/mp4">
+            </video>
+            <ion-card-header>
+                <ion-card-title>{{video.exersiseName}}</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+                {{video.exerciseDescription}}
+            </ion-card-content>
+        </ion-card>
+
+
+<!--    export interface ExerciseList-->
+<!--    {-->
+<!--    ExerciseType: string;-->
+<!--    videoUrls:-->
+<!--    {-->
+<!--    id?: string;-->
+<!--    name: string;-->
+<!--    url: string;-->
+<!--    exersiseName: string;-->
+<!--    exerciseDescription: string;-->
+<!--    type: string;-->
+<!--    }[];-->
+<!--    }-->
 </ion-content>
 
 <!-- <p>View Exercises</p> -->

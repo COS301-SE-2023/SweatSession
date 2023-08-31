@@ -8,10 +8,17 @@ export interface Exercise {
     hasChanged?: boolean;
 }
 
-export interface ExerciseList {
-    id?: string;
-    name: string;
-    videoUrls: string[];
+export interface ExerciseList
+{
+    MuscleGroup: string;
+    videoUrls:
+        {
+            id?: string;
+            url: string;
+            exersiseName: string;
+            exerciseDescription: string;
+            type: string;
+        }[];
 }
   
   
