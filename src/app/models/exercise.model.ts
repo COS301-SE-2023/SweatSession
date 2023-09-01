@@ -7,5 +7,17 @@ export interface Exercise {
     weight: number;
     hasChanged?: boolean;
 }
+
+export interface ExerciseList
+{
+    MuscleGroup: string;
+    video:
+        {
+            id?: string;
+            url: string;
+            exersiseName: string;
+            exerciseDescription: string;
+        };
+}
   
   
