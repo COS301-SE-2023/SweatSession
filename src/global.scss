@@ -124,6 +124,10 @@ swiper-container::part(bullet-active) {
     background-color: transparent;
 }
 
+.transparent-item {
+    --background: transparent;
+}
+
 .large-icon {
     width: 200px;
     height: 200px;
@@ -173,6 +177,7 @@ ion-segment-button {
         .slides-headers {
             font-weight: bolder;
             color: #457B9D;
+            --background: transparent;
         }
     }
 }
