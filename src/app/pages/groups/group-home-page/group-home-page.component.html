@@ -44,7 +44,7 @@
     </ion-segment>
 
     <div class="content" [hidden]="selectedSegment !== 'members'">
-      <ion-list>
+      <ion-list class="transparent-list">
         <group-user *ngFor="let userId of selectedGroup.members"
         [userId]="userId"
         [currentUserId]="currentUserId"
