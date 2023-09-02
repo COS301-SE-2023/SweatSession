@@ -169,11 +169,15 @@ ion-segment-button {
 }
 
 .zero-content-container {
-    width: 80%;
-    margin: auto;
-    padding: 10px;
-    text-align: center;
-    font-weight: bolder;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .inner-zero-content-wrapper {
+        padding: 10px;
+        text-align: center;
+        font-weight: bolder;
+    }
 }
 
 //profile
