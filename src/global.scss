@@ -31,6 +31,13 @@
 //     --inner-border-width: 0;
 // }
 
+.larger-back-button {
+    --padding-start: 12px; 
+    --padding-end: 12px; 
+    font-size: 24px; 
+    color: white !important;
+}
+
 ion-title {
     text-align: center;
 }
