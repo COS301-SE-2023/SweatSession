@@ -52,7 +52,7 @@ export class BadgesPage implements OnInit {
       header:"Dynamic Duo",
       receivedDescription:"Congratulations! You have completed 50 workout sessions with a friend",
       notReceivedDescription:"Complete 50 workout sessions with a friend to earn this badge",
-      imageName:"assets/badges/.png",
+      imageName:"assets/badges/dynamicduo.png",
       received:false
     },{
       header:"Push-Up Pro",
