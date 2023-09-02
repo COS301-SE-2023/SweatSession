@@ -77,10 +77,12 @@ ion-card-subtitle {
 
 .filled {
     color: gold;
+    --border-color: grey;
 }
 
 .unfilled {
     color: grey;
+    --border-color: grey;
 }
 
 .ratingIcon {
@@ -187,7 +189,7 @@ ion-input {
 
 #distance-input input{
     padding-bottom: 5px;
-    padding-right: 10px;
+    padding-right: 15px;
 }
 
 // .native-input.sc-ion-input-ios {

@@ -380,4 +380,12 @@ export class GymsearchComponent implements OnInit {
    viewProfile(id: string) {
       // this.store.dispatch(new StageOtheruserInfo(user));
    }
+
+   calcShape(r: number, i: number){
+      if (r-i>0.25 && r-i<0.75){
+         return "star-half";
+      }else{
+         return "star";
+      }
+   }
 }

@@ -38,7 +38,8 @@
 
     <ion-col size="2">
       <div class="input-container">
-        <ion-input id="distance-input" type="number" [(ngModel)]="maxDistance" (ionInput)="loadData()" style="--padding-bottom: 5px;--padding-right: 10px;"></ion-input>
+        <ion-input id="distance-input" type="number" [(ngModel)]="maxDistance" (ionInput)="loadData()" style="--padding-bottom: 6px;--padding-right: 20px;"></ion-input>
+        <ion-text>km</ion-text>
       </div>
     </ion-col> 
   </ion-row>
@@ -68,7 +69,7 @@
         <ion-card-subtitle class="blackText" >{{ gym.vicinity }}</ion-card-subtitle>
         <br>
         <!-- <ion-card-subtitle class="blackText" >Rating: {{ gym.rating ? gym.rating : 'No Rating' }}<ion-icon name="star" class="ratingIcon"></ion-icon></ion-card-subtitle> -->
-        <ion-card-subtitle class="blackText" >{{ gym.rating ? gym.rating : 'No Rating' }}<ng-container *ngIf="gym.rating"><ng-container *ngFor="let i of [1,2,3,4,5]"> <ion-icon name="star" class="ratingIcon" [ngClass]="{'filled': i <= gym.rating, 'unfilled': i > gym.rating}" ></ion-icon> </ng-container></ng-container></ion-card-subtitle>
+        <ion-card-subtitle class="blackText" >{{ gym.rating ? gym.rating : 'No Rating' }}<ng-container *ngIf="gym.rating"><ng-container *ngFor="let i of [1,2,3,4,5]"> <ion-icon [name]="calcShape(gym.rating, i)" class="ratingIcon" [ngClass]="{'filled': i <= gym.rating+0.5, 'unfilled': i > gym.rating+0.5}" ></ion-icon> </ng-container></ng-container></ion-card-subtitle>
       </ion-card-header>
       
         <ion-card-content class="friend-container">
