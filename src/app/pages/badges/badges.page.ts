@@ -58,13 +58,13 @@ export class BadgesPage implements OnInit {
       header:"Push-Up Pro",
       receivedDescription:"Congratulations! You did 100 push-ups in a day",
       notReceivedDescription:"Do 100 push-ups in a day to earn this badge",
-      imageName:"assets/badges/.png",
+      imageName:"assets/badges/pushupspro.png",
       received:false
     },{
       header:"Active Adventurer",
       receivedDescription:"Congratulations! You did a workout session at 5 gyms",
       notReceivedDescription:"Do a workout session at 5 gyms to earn this badge",
-      imageName:"assets/badges/.png",
+      imageName:"assets/badges/activeadventurer.png",
       received:false
     }
   ];
