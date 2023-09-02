@@ -189,3 +189,15 @@ ion-input {
     padding-bottom: 5px;
     padding-right: 10px;
 }
+
+// .native-input.sc-ion-input-ios {
+//     padding-right: 6px;
+//     padding-bottom: 10px;
+// }
+
+.larger-back-button {
+    --padding-start: 12px; 
+    --padding-end: 12px; 
+    font-size: 24px;
+    color: white;
+}

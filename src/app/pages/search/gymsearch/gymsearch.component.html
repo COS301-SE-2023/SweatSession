@@ -2,8 +2,8 @@
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet">
   <ion-toolbar>
     <ion-title>Select Location</ion-title>
-    <ion-buttons slot="end">
-      <ion-button (click)="dismissModal()">Close</ion-button>
+    <ion-buttons slot="start">
+      <ion-icon class="larger-back-button" name="arrow-back" (click)="dismissModal()"></ion-icon>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -38,7 +38,7 @@
 
     <ion-col size="2">
       <div class="input-container">
-        <ion-input id="distance-input" type="number" [(ngModel)]="maxDistance" (ionInput)="loadData()" style="padding-bottom: 5px;padding-right: 10px;"></ion-input>
+        <ion-input id="distance-input" type="number" [(ngModel)]="maxDistance" (ionInput)="loadData()" style="--padding-bottom: 5px;--padding-right: 10px;"></ion-input>
       </div>
     </ion-col> 
   </ion-row>
