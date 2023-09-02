@@ -34,7 +34,7 @@ export class BadgesPage implements OnInit {
       header: "Stretching Star",
       receivedDescription: "Congratulations! You have incorporated stretching exercises into your workout plan",
       notReceivedDescription: "Incorporate stretching exercises into your workout plan",
-      imageName:"assets/badges/.png",
+      imageName:"assets/badges/stretchingstarnotext.png",
       received: false
     },{
       header:"Record Breaker",

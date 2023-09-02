@@ -3,7 +3,7 @@ WARNING: Illegal reflective access by io.netty.util.internal.ReflectionUtil (fil
 WARNING: Please consider reporting this to the maintainers of io.netty.util.internal.ReflectionUtil
 WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
 WARNING: All illegal access operations will be denied in a future release
-19:01:58.020 [NamespaceSystem-akka.actor.default-dispatcher-5] INFO akka.event.slf4j.Slf4jLogger - Slf4jLogger started
-19:01:58.245 [main] INFO com.firebase.server.forge.App$ - Listening at 127.0.0.1:5004
-19:02:12.001 [NamespaceSystem-akka.actor.default-dispatcher-5] INFO com.firebase.core.namespace.NamespaceActor - sweatsession-default-rtdb successfully activated FBKV (SurveyIdle(0)) wait: 130ms, init: 0ms
-19:02:12.048 [NamespaceSystem-blocking-namespace-operation-dispatcher-8] INFO com.firebase.core.namespace.StateManager - Namespace sweatsession-default-rtdb status Active to Active
+11:29:23.921 [NamespaceSystem-akka.actor.default-dispatcher-5] INFO akka.event.slf4j.Slf4jLogger - Slf4jLogger started
+11:29:24.456 [main] INFO com.firebase.server.forge.App$ - Listening at 127.0.0.1:5004
+11:29:47.079 [NamespaceSystem-akka.actor.default-dispatcher-5] INFO com.firebase.core.namespace.NamespaceActor - sweatsession-default-rtdb successfully activated FBKV (SurveyIdle(0)) wait: 247ms, init: 0ms
+11:29:47.174 [NamespaceSystem-blocking-namespace-operation-dispatcher-7] INFO com.firebase.core.namespace.StateManager - Namespace sweatsession-default-rtdb status Active to Active
