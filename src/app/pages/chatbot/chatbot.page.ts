@@ -42,7 +42,7 @@ export class ChatbotPage implements OnInit {
       return null;
     } else {
       const data:any = snapshot.docs[0].data();
-      const formattedData = `The user's height is ${data['height']} cm, weight is ${data?.['weight']} kg, diet is ${data?.['diet']}, and the medical conditions are ${data?.['medicalConditions']}.`;
+      const formattedData = `The user's height is ${data['height']} cm, weight is ${data?.['weight']} kg, diet is ${data?.['diet']}, and the medical conditions are ${data?.['medicalConditions']} and their workout comittment level is ${data?.['workoutCommitment']}.`;
       return formattedData;
     }
   }
@@ -81,7 +81,6 @@ export class ChatbotPage implements OnInit {
     }
   }
   
-
   isHealthRelated(text: string): boolean {
     const healthKeywords = ['health', 'medical', 'veg', 'nutrition' , 'fit' , 'exercise' , 'diet' , 'calories' , 'food' , 'fruit' , 'gym'  , 'kilojoule' , 'routine' , 'workout' , 'Hi' , 'work-out' ];
     text = text.toLowerCase();
