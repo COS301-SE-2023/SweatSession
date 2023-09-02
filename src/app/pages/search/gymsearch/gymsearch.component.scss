@@ -155,9 +155,11 @@ ion-card-subtitle {
 .input-container {
     background: #00000012;
     // padding-bottom: 1px;
-    padding: 0px 0px 0px 10px;
+    padding: 3px 0px 0px 10px;
     height: 36px;
     border-radius: 30px;
+    display: flex; 
+    align-items: center;
 }
 
 ion-row {
@@ -187,7 +189,7 @@ ion-input {
 //   margin-bottom: 0px;
 // }
 
-#distance-input input{
+#distance-input{
     padding-bottom: 5px;
     padding-right: 15px;
 }

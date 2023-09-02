@@ -71,7 +71,7 @@
                   <div class="location-container">
                     <ion-item class="location-item">   
                       <ion-label position="stacked">Location</ion-label>  
-                      <ion-input type="text" formcontrolname="location" placeholder="Click on the location icon"></ion-input>      
+                      <ion-input type="text" formcontrolname="location" placeholder="Click on the location icon" [(ngModel)]="location"></ion-input>      
                     </ion-item>
                   
                     <ion-icon name="location" slot="end" (click)="openLocationModal()" class="location-icon"></ion-icon>

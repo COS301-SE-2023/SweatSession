@@ -19,6 +19,8 @@ export class ViewPersonalbestsPage implements OnInit {
   
   PersonalBestForm: FormGroup;
   showForm: boolean = false;
+  placeId: string;
+  location: string;
   constructor(private modalController: ModalController,
         private formBuilder: FormBuilder,
         private firestore : AngularFirestore,
@@ -107,10 +109,16 @@ export class ViewPersonalbestsPage implements OnInit {
   
     // Handle the location selection event when the modal is dismissed
     const { data } = await modal.onDidDismiss();
-    // if (data && data.selectedGym && data.placeId) {
-    //   console.log(data);
-    //   this.schedule.location = data.selectedGym;
-    //   this.placeId = data.placeId;    }
+    if (data && data.selectedGym && data.placeId) {
+      console.log(data);
+      // this.schedule.location = data.selectedGym;
+      this.PersonalBestForm.clearValidators(); 
+      this.PersonalBestForm.updateValueAndValidity();
+      // this.PersonalBestForm.setValue({"location": data.selectedGym});
+      this.PersonalBestForm.get('location')!.reset(data.selectedGym);
+      // this.PersonalBestForm.patchValue({
+      //   location: data.selectedGym
+      // });
+      this.placeId = data.placeId;    }
   }
-
 }
