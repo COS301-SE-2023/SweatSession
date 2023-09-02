@@ -21,6 +21,7 @@ export class ViewPersonalbestsPage implements OnInit {
   showForm: boolean = false;
   placeId: string;
   location: string;
+  myVariable: string = "Click on the location icon";
   constructor(private modalController: ModalController,
         private formBuilder: FormBuilder,
         private firestore : AngularFirestore,
@@ -116,6 +117,7 @@ export class ViewPersonalbestsPage implements OnInit {
       this.PersonalBestForm.updateValueAndValidity();
       // this.PersonalBestForm.setValue({"location": data.selectedGym});
       this.PersonalBestForm.get('location')!.reset(data.selectedGym);
+      // this.myVariable=data.selectedGym;
       // this.PersonalBestForm.patchValue({
       //   location: data.selectedGym
       // });

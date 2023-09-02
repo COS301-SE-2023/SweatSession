@@ -1,8 +1,8 @@
-<ion-header style="background-color: #E63946;">
+<ion-header style="background-color: #E63946; margin-bottom:10px;">
   <ion-toolbar>
     <ion-item style="display: flex; align-items: center;" lines="none">
       <backbutton class="larger-back-button"></backbutton>
-      <ion-title style="margin: 0 auto;" *ngIf="name$ | async as usersName;">{{usersName}}</ion-title>
+      <ion-title style="margin-left: 20px;" *ngIf="name$ | async as usersName;">{{usersName}}</ion-title>
       <!-- <ion-title style="margin: 0 auto;">{{user!.name}}'s' Badges</ion-title> -->
     </ion-item>
   </ion-toolbar>
@@ -40,6 +40,7 @@
           [receivedDescription]="badge.receivedDescription"
           [notReceivedDescription]="badge.notReceivedDescription"
           [received]="badge.received"
+          [imageName]="badge.imageName"
         ></badge>
       </ng-container>
     </ng-template>
