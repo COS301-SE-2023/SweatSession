@@ -46,7 +46,7 @@ export class BadgesPage implements OnInit {
       header:"Workout Warrior",
       receivedDescription:"Congratulations! You have attended 20 workout sessions",
       notReceivedDescription:"Attend 20 workout sessions to earn this badge",
-      imageName:"assets/badges/.png",
+      imageName:"assets/badges/workoutwarrior.png",
       received:false
     },{
       header:"Dynamic Duo",
