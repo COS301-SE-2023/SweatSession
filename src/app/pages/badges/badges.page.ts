@@ -40,7 +40,7 @@ export class BadgesPage implements OnInit {
       header:"Record Breaker",
       receivedDescription:"Congratulations! You have reached a new personal best for bench presses",
       notReceivedDescription:"Reach a new personal best for bench presses to earn this badge",
-      imageName:"assets/badges/.png",
+      imageName:"assets/badges/recordbreaker.png",
       received:false
     },{
       header:"Workout Warrior",
