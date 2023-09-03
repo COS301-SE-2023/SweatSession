@@ -61,7 +61,9 @@ export class FitnessgoalViewPage implements OnInit {
 
   async saveGoal() {
     const updatedTasks: ITASK[] = [];
-  
+
+    this.navigate.back(); // return to the previous page on save
+
     // Update the tasks and collect the updated ones
     for (const task of this.GOAL.Tasks!) {
       if (task.done) {
@@ -74,8 +76,7 @@ export class FitnessgoalViewPage implements OnInit {
     for (const task of updatedTasks) {
       task.done = true;
     }
-  
-    this.navigate.back();
+
   }
   
   

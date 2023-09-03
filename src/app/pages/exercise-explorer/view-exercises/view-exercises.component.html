@@ -3,11 +3,14 @@
   <ion-toolbar>
       <ion-icon name="arrow-back" aria-hidden="true" class="bb" slot="start" (click)="dismissModal()"></ion-icon>
     <ion-title>View Exercises</ion-title>
-    <!-- <ion-buttons slot="end">
-      <ion-button (click)="dismissModal()">Close</ion-button>
-    </ion-buttons> -->
+
+<!--      <ion-buttons slot="end">-->
+<!--      <ion-button (click)="dismissModal()">Close</ion-button>-->
+<!--    </ion-buttons>-->
+
   </ion-toolbar>
 </ion-header>
+
 
 <ion-content class="centralize">
 
@@ -16,9 +19,11 @@
     </ion-item-divider>
 
         <ion-card *ngFor="let ExerciseTuple of getExerciseDetails()" style="--ion-background-color: #A8DADCFF">
-            <video controls style="width: 100%;">
-                <source src="{{ExerciseTuple.video.url}}" type="video/mp4">
-            </video>
+            <ion-card style="border-style: solid; border-width: thick;">
+                <video controls style="width: 100%;">
+                    <source src="{{ExerciseTuple.video.url}}" type="video/mp4">
+                </video>
+            </ion-card>
             <ion-card-header>
                 <ion-card-title>{{ExerciseTuple.video.exersiseName}}</ion-card-title>
             </ion-card-header>
@@ -26,7 +31,6 @@
                 {{ExerciseTuple.video.exerciseDescription}}
             </ion-card-content>
         </ion-card>
-
 </ion-content>
 
 <!-- <p>View Exercises</p> -->
