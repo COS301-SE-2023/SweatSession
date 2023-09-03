@@ -33,8 +33,6 @@ export class FriendsContentsComponent  implements OnInit {
   isCurrentUser() {
     if(this.userId && this.friend.userId){
       if(this.userId === this.friend.userId)
-        console.log("True");
-      console.log("False");
       return this.userId === this.friend.userId;
     }
     console.log(this.userId);

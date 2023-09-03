@@ -289,7 +289,7 @@ export class MessagesState {
         sessionStorage.removeItem('chatFriend');
     }
 
-    @Action(RemoveChatFriendSession)
+    @Action(RemoveChatGroupSession)
     async removeChatGroupSession() {
         sessionStorage.removeItem('chatGroup');
     }

@@ -46,6 +46,16 @@
           <ion-input formControlName="medicalConditions" type="text"></ion-input>
         </div>
       </ion-item>
+      <ion-item class="full-width">
+
+      <label for="workoutCommitment">Workout Commitment:</label>
+        <select formControlName="workoutCommitment" class="form-control">
+          <option value="Low Commitment (0-1 days/week)">Low Commitment (0-1 days/week)</option>
+          <option value="Medium Commitment (2-3 days/week)">Medium Commitment (2-3 days/week)</option>
+          <option value="High Commitment (4-5 days/week)">High Commitment (4-5 days/week)</option>
+          <option value="Extreme Commitment (6+ days/week)">Extreme Commitment (6+ days/week)</option>
+        </select>
+      </ion-item>
       
       <ion-item>
         <ion-button class="submit" expand="full" type="submit" [disabled]="!healthDataForm.valid">Submit</ion-button>

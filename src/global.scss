@@ -31,6 +31,13 @@
 //     --inner-border-width: 0;
 // }
 
+.larger-back-button {
+    --padding-start: 12px; 
+    --padding-end: 12px; 
+    font-size: 24px; 
+    color: white !important;
+}
+
 ion-title {
     text-align: center;
 }
@@ -124,6 +131,10 @@ swiper-container::part(bullet-active) {
     background-color: transparent;
 }
 
+.transparent-item {
+    --background: transparent;
+}
+
 .large-icon {
     width: 200px;
     height: 200px;
@@ -158,11 +169,15 @@ ion-segment-button {
 }
 
 .zero-content-container {
-    width: 80%;
-    margin: auto;
-    padding: 10px;
-    text-align: center;
-    font-weight: bolder;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .inner-zero-content-wrapper {
+        padding: 10px;
+        text-align: center;
+        font-weight: bolder;
+    }
 }
 
 //profile
@@ -173,6 +188,7 @@ ion-segment-button {
         .slides-headers {
             font-weight: bolder;
             color: #457B9D;
+            --background: transparent;
         }
     }
 }

@@ -11,7 +11,7 @@
       <ion-list class="messages-list" class="transparent-list">
         <div [hidden]="selectedSegment!=='chats'">
           <div *ngIf="chatFriends.length !== 0; else loaderContent" class="chatFriends-container">
-            <ion-item *ngFor="let chatFriend of chatFriends" (click)="stageUser(chatFriend.user)" lines="none" class="transparent-list">
+            <ion-item *ngFor="let chatFriend of chatFriends" (click)="stageUser(chatFriend.user)" lines="none" class="transparent-item">
               <ion-avatar slot="start" class="user-profile-img">
                 <img alt="Silhouette of a person's head" [src]="chatFriend.user.profileURL!" />
               </ion-avatar>
@@ -29,7 +29,7 @@
         </div>
 
         <div [hidden]="selectedSegment!=='groups'">
-          <ion-item *ngFor="let group of groups" lines="none" (click)="stageGroup(group)" class="transparent-list">
+          <ion-item *ngFor="let group of groups" lines="none" (click)="stageGroup(group)" class="transparent-item">
             <ion-avatar slot="start">
               <img alt="Silhouette of a person's head" [src]="group.profileURL"/>
             </ion-avatar>

@@ -22,18 +22,20 @@
 </ion-content>
 
 <ng-template #noFriends>
-  <ion-content>
+  <ion-content [fullscreen]="true">
    <div class="zero-content-container ">
-    <ion-icon class="large-icon" name="people"></ion-icon><br>
-    <ion-text>
-      You have no friends. Click the add button to search and discover new friends.
-    </ion-text>
+    <div class="inner-zero-content-wrapper">
+      <ion-icon class="large-icon" name="people"></ion-icon><br>
+      <ion-text>
+        You have no friends. Click the add button to search and discover new friends.
+      </ion-text>
+    </div>
    </div>
 
    <ion-fab slot="fixed" vertical="bottom" horizontal="end">
     <ion-fab-button (click)="addFriend()">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
-  </ion-fab>
+   </ion-fab>
   </ion-content>
 </ng-template>

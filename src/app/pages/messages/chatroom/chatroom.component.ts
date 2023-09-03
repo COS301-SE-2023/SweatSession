@@ -54,7 +54,7 @@ export class ChatroomComponent  implements OnInit {
     if(this.message.text.trim()!== '') {
       this.message.date = Timestamp.now();
       this.store.dispatch(new SendMessage(this.message))
-      this.message = {};
+      this.message = {text: ""};
       this.scrollToBottom()
     }
   }

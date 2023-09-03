@@ -21,6 +21,7 @@ export class HealthDataPage implements OnInit {
       weight: ['', Validators.required],
       diet: ['', Validators.required],
       medicalConditions: ['', Validators.required],
+      workoutCommitment: ['', Validators.required],
       displayName: ['']
     });
   }
