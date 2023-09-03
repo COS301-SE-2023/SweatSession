@@ -20,9 +20,13 @@ ion-item {
     max-height: 250px;
     overflow-y: auto; 
   }
+.max-height-card-content-chart {
+  max-height: 300px;
+}
 
   .chart-card {
     padding: 20px;
+    color: #0d0d0d;
   }
 
 .rounded-button
@@ -30,4 +34,24 @@ ion-item {
   //border-radius: 20px;
   //display: inline-block;
 
+}
+
+ion-radio {
+  --border-radius: 4px;
+  --inner-border-radius: 4px;
+
+  --color: #ddd;
+  --color-checked: #E63946;
+}
+
+ion-radio.ios {
+  width: 20px;
+  height: 20px;
+
+  border: 2px solid #ddd;
+  border-radius: 4px;
+}
+
+.radio-checked.ios {
+  border-color: #E63946;
 }
