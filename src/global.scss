@@ -31,6 +31,10 @@
 //     --inner-border-width: 0;
 // }
 
+ion-content {
+    overflow-y: auto;
+}
+
 .larger-back-button {
     --padding-start: 12px; 
     --padding-end: 12px; 

@@ -2,29 +2,53 @@ ion-text {
     margin: 20px;
 }
 
-ion-item:not(.progress-label){
+.schedule-header{
     --highlight-height: 0;
     --inner-border-width: 0;
     --background: #A8DADC;
     border-radius: 12px;
 }
 
-#viewer {
-    ion-button {
-      --background: #E63946;
-      --color: white;
-      --border-color: #E63946;
-    }
-  }
-
 ion-card, ion-item {
     opacity: 1;
 }
 
 ion-icon.active {
-    color: blue;
+    color: #457b9d;
 }
 
 ion-icon.inactive {
     color: grey;
+}
+
+ion-progress-bar {
+    --progress-background: #457b9d;
+}
+
+.add-icon {
+    color: #E63946;
+    height: 35px;
+    width: 35px;
+}
+
+.add-icon:hover {
+    zoom: 1.05;
+}
+
+.add-friends-title {
+    font-size: small;
+}
+
+ion-button {
+    --background: #A8DADC;
+    --background-hover: #457b9d;
+    --background-activated: #457b9d;
+    --background-focused: #457b9d;
+    border-radius: 8px;
+  
+    --border-style: solid;
+    --border-width: 2px;
+    --border-color: #457b9d;
+  
+    --color: #457b9d;
 }

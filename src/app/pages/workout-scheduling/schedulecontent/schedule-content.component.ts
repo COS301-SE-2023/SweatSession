@@ -29,6 +29,8 @@ export class ScheduleContentComponent implements OnInit {
   daynum : number ;
   date : string ;
   shortdate : string[] ;
+  @Input() id:string;
+  selectedFriends:any[] = [];
 
   constructor(private store: Store, private nav: NavController,
     private actionSheetCtrl: ActionSheetController,
@@ -256,6 +258,8 @@ export class ScheduleContentComponent implements OnInit {
     this.noticeService.createNotices(sendername , sentdate , message , this.currUserId! , this.currUserId! , '/assets/Asset 3.png');
   }
 
+  confirmSelection() {
 
+  }
 
 }
