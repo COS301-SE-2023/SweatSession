@@ -33,9 +33,10 @@ export class EditScheduleComponent  implements OnInit {
   
     // Handle the location selection event when the modal is dismissed
     const { data } = await modal.onDidDismiss();
-    // if (data && data.selectedGym && data.placeId) {
-    //   console.log(data);
-    //   this.schedule.location = data.selectedGym;
-    //   this.placeId = data.placeId;    }
+    if (data && data.selectedGym && data.placeId) {
+      console.log(data);
+      this.schedule.location = data.selectedGym;
+      // this. = data.placeId;    
+    }
   }
 }

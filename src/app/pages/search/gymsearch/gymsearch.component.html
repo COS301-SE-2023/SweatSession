@@ -101,7 +101,7 @@
               Friends that have workout sessions scheduled here:
             </ion-card-header>
             <ul class="no-bullet">
-              <li *ngFor="let friend of gym.friendsLocationInfo" (click)="viewProfile(friend.id)">
+              <li *ngFor="let friend of currentFriendsInfo" (click)="viewProfile(friend.id)">
                 <div class="friend-details">
                 <img [src]="friend[0].profilePhoto" alt="Profile Photo" class="friend-photo"/>
                 <div>
@@ -119,7 +119,7 @@
           </ion-modal>
 
           <ng-template #dontShowFriends>
-            <ion-card-header class="whiteText friendsHeader showFriendsOrNot" (click)="modal.present()">
+            <ion-card-header class="whiteText friendsHeader showFriendsOrNot" (click)="modal.present(); toggleFriends(gym.place_id, gym.friendsLocationInfo)">
               <!-- ; toggleFriends(gym.place_id) -->
               {{showFriends[gym.place_id] ? 'Hide' : 'Show'}} Friends Workout Sessions
             </ion-card-header>
