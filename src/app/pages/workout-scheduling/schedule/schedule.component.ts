@@ -12,4 +12,8 @@ export class ScheduleComponent  implements OnInit {
   constructor() { }
 
   ngOnInit() {}
+
+  returnID(index: Number) { 
+    return `${this.categoryName}_schecule_${index}`
+  }
 }

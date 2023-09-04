@@ -1,7 +1,10 @@
 <search class="custom-search" [data]="schedules" [placeholder]="'Find Scheduled Sessions'">Find schedule</search>
 
-<div *ngFor="let schedule of schedules" class="schedules">
-  <schedule-content [schedule]="schedule"></schedule-content>
+<div *ngFor="let schedule of schedules;  let i=index" class="schedules">
+  <schedule-content 
+    [schedule]="schedule" 
+    [id]="returnID(i)"
+  ></schedule-content>
 </div>
 
 <div [hidden]="schedules.length > 0">
