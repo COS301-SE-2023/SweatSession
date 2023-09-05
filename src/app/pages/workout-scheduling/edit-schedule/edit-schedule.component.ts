@@ -13,7 +13,11 @@ import { ModalController } from '@ionic/angular';
 export class EditScheduleComponent  implements OnInit {
   @Input() schedule:IWorkoutScheduleModel;
   isChange = false;
-  constructor(private store:Store, private modalController: ModalController) { }
+  placeId = null;
+  constructor(private store:Store, 
+              private modalController: ModalController,
+              // private cdr: ChangeDetectorRef
+              ) { }
 
   ngOnInit() {}
 
@@ -35,8 +39,26 @@ export class EditScheduleComponent  implements OnInit {
     const { data } = await modal.onDidDismiss();
     if (data && data.selectedGym && data.placeId) {
       console.log(data);
-      this.schedule.location = data.selectedGym;
-      // this. = data.placeId;    
+
+      this.schedule.location=data.selectedGym
+
+      // if (locationControl) {
+      //   // alert("IN location Control");
+      //   // Update the value of the 'location' control
+      //   locationControl.setValue(data.selectedGym);
+  
+      //   // Clear validators (if needed)
+      //   locationControl.clearValidators();
+  
+      //   // Update validity (if needed)
+      //   locationControl.updateValueAndValidity();
+  
+      //   // Trigger change detection
+      //   this.cdr.detectChanges();
+      // }
+  
+      // Assign placeId
+      this.placeId = data.placeId; 
     }
   }
 }
