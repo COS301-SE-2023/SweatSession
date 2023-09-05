@@ -38,10 +38,10 @@ export class ChatbotPage implements OnInit {
 
   private async getUserHealthData(displayName: string) {
     const snapshot = await this.firestore.collection('healthdata', ref => ref.where('displayName', '==', displayName)).get().toPromise();
-    if (!snapshot) {
+    if (snapshot?.empty) {
       return null;
     } else {
-      const data:any = snapshot.docs[0].data();
+      const data:any = snapshot?.docs[0].data();
       const formattedData = `The user's height is ${data['height']} cm, weight is ${data?.['weight']} kg, diet is ${data?.['diet']}, and the medical conditions are ${data?.['medicalConditions']} and their workout comittment level is ${data?.['workoutCommitment']}.`;
       return formattedData;
     }
@@ -59,12 +59,20 @@ export class ChatbotPage implements OnInit {
         healthData = await this.getUserHealthData(displayName);
       }
       let newMessage = { text: this.userMessage, sender: 'user', displayText: this.userMessage };
-  
+      this.messages.push(newMessage);
+
       if(healthData) {
         newMessage.text += '\nUser Health Data: ' + healthData;
+      } else {
+        this.messages.push({
+          text: 'Please fill in the health data form before asking any health-related queries.',
+          sender: 'SS-bot',
+          displayText: 'Please fill in the health data form before asking any health-related queries. This can be done on your profile underneath the "Health Data" widget.'
+        });
+        this.userMessage = '';
+        return;
       }
       
-      this.messages.push(newMessage);
       this.loading = true;
       this.chatbotService.sendMessage(newMessage).subscribe((response: any) => {
         this.loading = false;
@@ -75,7 +83,6 @@ export class ChatbotPage implements OnInit {
         }else{
           this.messages.push({ text: 'Sorry, I can only answer health-related questions.', sender: 'SS-bot' , displayText: 'Sorry, I can only answer health-related questions.'});
         }
-        
       });
       this.userMessage = '';
     }
