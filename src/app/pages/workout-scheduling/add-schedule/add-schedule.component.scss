@@ -1,15 +1,5 @@
-ion-card {
-  width: inherit;
-  height: 100%;
-  margin: 0 auto;
-}
-
-* {
-  font-family: 'Montserrat', sans-serif;
-}
-
-.schedule-card {
-  margin-bottom: 100px;
+.grid-content {
+  height: inherit;
 }
 
 .logo {
@@ -56,8 +46,30 @@ ion-toolbar ion-item {
 }
 
 .location-icon {
-  margin-left: auto;  
-  margin-right: 24px; /* Same width as built-in calendar icon */
   font-size: 20px !important; 
-  margin-top: 20px;
 }
+
+.top-img {
+  width: 100%;
+}
+
+.wrapper {
+  display: flex;
+  width: 100%;
+  box-sizing: border-box;
+  .input {
+    width: 100%;
+    .location {
+      padding-right: 0px;
+    }
+  }
+  .icon {
+    display: flex;
+    align-items: center;
+    ion-icon {
+      margin-left: 0px;
+    }
+  }
+}
+
+

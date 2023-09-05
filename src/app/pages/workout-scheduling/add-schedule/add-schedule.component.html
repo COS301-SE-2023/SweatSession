@@ -7,68 +7,61 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <ion-grid>
+  <ion-grid class="grid-content">
     <ion-row>
       <ion-col>
-        <div>
-        <ion-item>
-          <br>
-          <ion-label position="stacked" style="font-size:x-large">Time</ion-label>
-          <ion-input type="time" [(ngModel)]="schedule.time" [min]="getMinTime()"></ion-input>
-          <br>
-        </ion-item>
-      </div>
+        <ion-img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7vUDCWL_IbJb5lV5KbQTC-eUNmBTtwJjciw&usqp=CAU"></ion-img>
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col>
-        <div>
         <ion-item>
-          <br>
+          <ion-label position="stacked" style="font-size:x-large">Time</ion-label>
+          <ion-input type="time" [(ngModel)]="schedule.time" [min]="getMinTime()"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-item>
           <ion-label position="stacked" style="font-size:x-large">Date</ion-label>
           <ion-input type="date" [(ngModel)]="schedule.date" [min]="getMinDate()"></ion-input>
-          <br>
         </ion-item>
-      </div>
       </ion-col>
     </ion-row>        
     <ion-row>
       <ion-col>
-        <div class="location-container">
-          <ion-item class="location-item">  
-            <br> 
-            <ion-label position="stacked" style="font-size:x-large">Location</ion-label>  
-            <ion-input type="text" [(ngModel)]="schedule.location" placeholder="Click on the location icon"></ion-input> 
-            <br>     
-          </ion-item>
-          <ion-icon name="location" slot="end" (click)="openLocationModal()" class="location-icon"></ion-icon>
-        </div>
+        <ion-item>
+          <ion-label position="stacked" style="font-size: x-large">Location</ion-label>
+          <div class="wrapper">
+            <div class="input">
+              <ion-input type="text" class="location" [(ngModel)]="schedule.location" placeholder="Click on the location icon"></ion-input>
+            </div>
+            <div class="icon"> 
+              <ion-icon name="location-outline" (click)="openLocationModal()" class="location-icon"></ion-icon>
+            </div>
+          </div>
+        </ion-item>
       </ion-col>
-    </ion-row>
+    </ion-row>    
     <ion-row>
       <ion-col>
         <ion-item>
-          <br>
           <ion-label position="floating" style="font-size:x-large">Duration (min)</ion-label>
           <ion-input type="number" [(ngModel)]="schedule.duration" [min]="10"></ion-input>
-          <br>
         </ion-item>
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col>
         <ion-item>
-          <br>
           <ion-label position="floating" style="font-size:x-large">Workout Name</ion-label>
           <ion-input type="text" [(ngModel)]="schedule.name" autofocus="false"></ion-input>
-          <br>
         </ion-item>
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col>
-        
-          <br>
         <ion-button expand="block" (click)="addSchedule()" [disabled]="!isValidInput()">Save</ion-button>
       </ion-col>
     </ion-row>

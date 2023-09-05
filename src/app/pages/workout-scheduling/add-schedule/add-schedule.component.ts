@@ -109,7 +109,6 @@ export class AddScheduleComponent  implements OnInit {
     // Handle the location selection event when the modal is dismissed
     const { data } = await modal.onDidDismiss();
     if (data && data.selectedGym && data.placeId) {
-      console.log(data);
       this.schedule.location = data.selectedGym;
       this.placeId = data.placeId;    }
   }
@@ -117,18 +116,13 @@ export class AddScheduleComponent  implements OnInit {
   displayCurrentUser(id:string){
     this.noticeService.getTheNoticeProfile().subscribe((profiles: Profile[]) => {
     this.profileList = profiles;
-    console.log('Number of PROFILES:', this.profileList.length);
     for(let i = 0 ; i<this.profileList.length ; i++){
       if(this.profileList[i].id == this.currUserId ){
         this.currusername = this.profileList[i].displayName! ;
         this.profileurl = this.profileList[i].profileURL! ;
         this.sweatsessionurl = "SweatSession/src/assets/Asset 3.png"
-        console.log(this.profileurl);
-        console.log(this.currusername);
       }
     }
-
-      
   });
 }
 
