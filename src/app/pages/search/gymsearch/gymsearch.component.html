@@ -119,7 +119,7 @@
           </ion-modal>
 
           <ng-template #dontShowFriends>
-            <ion-card-header class="whiteText friendsHeader showFriendsOrNot" (click)="modal.present(); toggleFriends(gym.place_id, gym.friendsLocationInfo)">
+            <ion-card-header class="whiteText friendsHeader showFriendsOrNot" (click)="toggleFriends(gym.place_id, gym.friendsLocationInfo); modal.present()">
               <!-- ; toggleFriends(gym.place_id) -->
               {{showFriends[gym.place_id] ? 'Hide' : 'Show'}} Friends Workout Sessions
             </ion-card-header>
