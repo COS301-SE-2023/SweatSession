@@ -95,28 +95,6 @@
               </li>
             </ul>
           </ion-card-content>
-          
-          <ion-modal #modal trigger="open-modal" [initialBreakpoint]="0.5" [breakpoints]="[0, 0.25, 0.5, 0.75]">
-            <ion-card-header class="blackText friendsHeader">
-              Friends that have workout sessions scheduled here:
-            </ion-card-header>
-            <ul class="no-bullet">
-              <li *ngFor="let friend of currentFriendsInfo" (click)="viewProfile(friend.id)">
-                <div class="friend-details">
-                <img [src]="friend[0].profilePhoto" alt="Profile Photo" class="friend-photo"/>
-                <div>
-                  <p class="friendDisplayName">{{ friend[0].friendDisplayName }}</p>
-                  <ul>
-                    <li *ngFor="let gymSession of friend">
-                      <h1 class="workoutName">{{ gymSession.workoutName }}</h1>
-                      <p class="dateAndTime">{{ formatDate(gymSession.date) }}: {{ gymSession.startTime }}-{{ formatTime(gymSession.endTime) }}</p>
-                    </li>
-                  </ul>
-                </div>
-                </div>
-              </li>
-            </ul>
-          </ion-modal>
 
           <ng-template #dontShowFriends>
             <ion-card-header class="whiteText friendsHeader showFriendsOrNot" (click)="toggleFriends(gym.place_id, gym.friendsLocationInfo); modal.present()">
@@ -124,6 +102,27 @@
               {{showFriends[gym.place_id] ? 'Hide' : 'Show'}} Friends Workout Sessions
             </ion-card-header>
             <ion-icon name="chevron-down-outline"></ion-icon>
+            <ion-modal #modal trigger="open-modal" [initialBreakpoint]="0.5" [breakpoints]="[0, 0.25, 0.5, 0.75]">
+              <ion-card-header class="blackText friendsHeader">
+                Friends that have workout sessions scheduled here:
+              </ion-card-header>
+              <ul class="no-bullet">
+                <li *ngFor="let friend of currentFriendsInfo" (click)="viewProfile(friend.id)">
+                  <div class="friend-details">
+                  <img [src]="friend[0].profilePhoto" alt="Profile Photo" class="friend-photo"/>
+                  <div>
+                    <p class="friendDisplayName">{{ friend[0].friendDisplayName }}</p>
+                    <ul>
+                      <li *ngFor="let gymSession of friend">
+                        <h1 class="workoutName">{{ gymSession.workoutName }}</h1>
+                        <p class="dateAndTime">{{ formatDate(gymSession.date) }}: {{ gymSession.startTime }}-{{ formatTime(gymSession.endTime) }}</p>
+                      </li>
+                    </ul>
+                  </div>
+                  </div>
+                </li>
+              </ul>
+            </ion-modal>
           </ng-template>
           </ng-container>
           <ng-template #noFriends>

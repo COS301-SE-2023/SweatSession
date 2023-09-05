@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 // import { AddPersonalBestComponent } from './add-personal-best/add-personal-best.component';
 import { FormBuilder, FormGroup } from '@angular/forms';
@@ -25,7 +25,8 @@ export class ViewPersonalbestsPage implements OnInit {
   constructor(private modalController: ModalController,
         private formBuilder: FormBuilder,
         private firestore : AngularFirestore,
-        private personalbestService: PersonalbestService) { }
+        private personalbestService: PersonalbestService,
+        private cdr: ChangeDetectorRef) { }
 
   async openPopup() {
     this.showForm = true;
@@ -112,15 +113,25 @@ export class ViewPersonalbestsPage implements OnInit {
     const { data } = await modal.onDidDismiss();
     if (data && data.selectedGym && data.placeId) {
       console.log(data);
-      // this.schedule.location = data.selectedGym;
-      this.PersonalBestForm.clearValidators(); 
-      this.PersonalBestForm.updateValueAndValidity();
-      // this.PersonalBestForm.setValue({"location": data.selectedGym});
-      this.PersonalBestForm.get('location')!.reset(data.selectedGym);
-      // this.myVariable=data.selectedGym;
-      // this.PersonalBestForm.patchValue({
-      //   location: data.selectedGym
-      // });
+      // Assuming PersonalBestForm is correctly initialized and has a 'location' control
+    const locationControl = this.PersonalBestForm.get('location');
+
+    if (locationControl) {
+      // alert("IN location Control");
+      // Update the value of the 'location' control
+      locationControl.setValue(data.selectedGym);
+
+      // Clear validators (if needed)
+      locationControl.clearValidators();
+
+      // Update validity (if needed)
+      locationControl.updateValueAndValidity();
+
+      // Trigger change detection
+      this.cdr.detectChanges();
+    }
+
+    // Assign placeId
       this.placeId = data.placeId;    }
   }
 }

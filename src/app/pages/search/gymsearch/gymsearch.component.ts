@@ -45,7 +45,7 @@ export class GymsearchComponent implements OnInit {
    currLongitude: Number;
    MAPS_API_KEY = environment.mapsApiKey;
    gymsSubscription: Subscription;
-   currentFriendsInfo: any = [[]];
+   currentFriendsInfo: any = [[{profilePhoto: null, friendDisplayName: null, workoutName: null, date: "02-02-2023", startTime: Timestamp.now(), endTime: Timestamp.now()}]];
    gyms: any = {
       results: [
          { name: "default", business_status: "default", photos: [{ photo_reference: "default" }], rating: "default", vicinity: "default", place_id: "default", friendsLocationInfo: [[]] }, { friendsLocationInfo: [] }
@@ -375,6 +375,8 @@ export class GymsearchComponent implements OnInit {
 
    toggleFriends(place_id: string, fInfo: any) {
       // this.showFriends[place_id] = true;
+      console.log(fInfo);
+      console.log(place_id);
       this.currentFriendsInfo = fInfo;
    }
 
