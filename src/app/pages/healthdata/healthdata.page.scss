@@ -1,3 +1,20 @@
+@keyframes beat {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.heart-beat {
+  animation: beat 0.5s infinite;
+}
+
+
 .larger-back-button{
     --padding-start: 12px; 
     --padding-end: 12px; 
