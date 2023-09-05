@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { PopoverController, LoadingController, NavController } from '@ionic/angular';
 // import { PopoutAddScheduleComponent } from './popout-add-schedule/popout-add-schedule.component';
 import { Select, Store } from '@ngxs/store';
-import { WorkoutSchedulingState } from 'src/app/states';
-import { Observable } from 'rxjs';
-import { ISearchTerms, IWorkoutScheduleModel } from 'src/app/models';
-import { GetWorkoutSchedules } from 'src/app/actions';
+import { MessagesState, WorkoutSchedulingState } from 'src/app/states';
+import { Observable, tap } from 'rxjs';
+import { IProfileModel, ISearchTerms, IWorkoutScheduleModel } from 'src/app/models';
+import { GetChatFriends, GetFriendsProfiles, GetWorkoutSchedules } from 'src/app/actions';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 
@@ -24,7 +24,9 @@ export class WorkoutSchedulingPage {
   selectedSegment: string = '0';
  
   @Select(WorkoutSchedulingState.returnSchedules) schedules$!: Observable<IWorkoutScheduleModel[]>;
+  @Select(MessagesState.returnFriendsProfiles) friends$: Observable<IProfileModel[]>;
   isAddSlide = false;
+  friends: IProfileModel[] = [];
 
   constructor(private popoverController: PopoverController, 
       private store : Store, 
@@ -40,6 +42,7 @@ export class WorkoutSchedulingPage {
 
   ngOnInit() {
     this.displayWorkoutSchedule();
+    this.loadFriends();
   }
 
   async addSchedule(){
@@ -70,5 +73,12 @@ export class WorkoutSchedulingPage {
 
   onSegmentChange(event: any) {
     this.selectedSegment = event.detail.value;
+  }
+
+  loadFriends() {
+    this.store.dispatch(new GetFriendsProfiles());
+    this.friends$.subscribe((response)=>{
+      this.friends = response
+    })
   }
 }

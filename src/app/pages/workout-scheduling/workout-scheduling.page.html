@@ -18,21 +18,25 @@
   <workout-schedule id="0" [hidden]="selectedSegment !== '0'"
   [categoryName]="''"  
   [schedules] = "schedules"
+  [friends]="friends"
   ></workout-schedule>
 
   <workout-schedule id="1" [hidden]="selectedSegment !== '1'"
   [categoryName]="'in session'"  
   [schedules] = "inSessionSchedules"
+  [friends]="friends"
   ></workout-schedule>
 
   <workout-schedule id="2" [hidden]="selectedSegment !== '2'"
   [categoryName]="'completed'"  
   [schedules] = "completedSchedules"
+  [friends]="friends"
   ></workout-schedule>
 
   <workout-schedule id="3" [hidden]="selectedSegment !== '3'"
   [categoryName]="'uncompleted'"  
   [schedules] = "uncompletedSchedules"
+  [friends]="friends"
   ></workout-schedule>
 
   <ion-fab slot="fixed" vertical="bottom" horizontal="end">
