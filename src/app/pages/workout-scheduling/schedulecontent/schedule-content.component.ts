@@ -1,12 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { NavController, ActionSheetController } from '@ionic/angular';
-import { Select, Store } from '@ngxs/store';
-import { Observable, Subscription } from 'rxjs';
+import { Store } from '@ngxs/store';
+import { Subscription, tap } from 'rxjs';
 import { RemoveWorkoutSchedule, UpdateWorkoutAdded, UpdateWorkoutSchedule } from 'src/app/actions';
-import { IWorkoutScheduleModel } from 'src/app/models';
+import { IProfileModel, IWorkoutScheduleModel } from 'src/app/models';
 import { PointsRepository } from 'src/app/repository/points.repository';
-import { WorkoutSchedulingState } from 'src/app/states';
 import { getAuth } from '@angular/fire/auth';
 import { NoticeService } from 'src/app/services/notifications/notice.service';
 import { AlertController } from '@ionic/angular';
@@ -31,6 +30,7 @@ export class ScheduleContentComponent implements OnInit {
   shortdate : string[] ;
   @Input() id:string;
   selectedFriends:any[] = [];
+  @Input() friends: IProfileModel[] = [];
 
   constructor(private store: Store, private nav: NavController,
     private actionSheetCtrl: ActionSheetController,
@@ -261,5 +261,4 @@ export class ScheduleContentComponent implements OnInit {
   confirmSelection() {
 
   }
-
 }

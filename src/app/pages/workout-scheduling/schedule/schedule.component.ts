@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { IWorkoutScheduleModel } from 'src/app/models';
+import { IProfileModel, IWorkoutScheduleModel } from 'src/app/models';
 
 @Component({
   selector: 'workout-schedule',
@@ -9,6 +9,7 @@ import { IWorkoutScheduleModel } from 'src/app/models';
 export class ScheduleComponent  implements OnInit {
   @Input() schedules: IWorkoutScheduleModel[]=[];
   @Input() categoryName:string;
+  @Input() friends: IProfileModel[] = [];
   constructor() { }
 
   ngOnInit() {}
