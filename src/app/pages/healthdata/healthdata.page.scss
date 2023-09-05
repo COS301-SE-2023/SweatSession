@@ -10,10 +10,14 @@
   }
 }
 
+.form-control{
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+
 .heart-beat {
   animation: beat 0.5s infinite;
 }
-
 
 .larger-back-button{
     --padding-start: 12px; 
@@ -25,6 +29,11 @@
     font-family: 'Montserrat', sans-serif;
 }
 
+.customlabel{
+  margin-top: 5%;
+  font-size: 1.2rem;
+}
+
 ion-content {
     display: flex;
     flex-direction: column;
@@ -33,7 +42,7 @@ ion-content {
   }
   
   .health-icon {
-    font-size: 8rem;
+    font-size: 10rem;
     color: #E63946;
     margin: 4rem 0 1rem;
   }
@@ -55,9 +64,17 @@ ion-content {
   }
 
   .submit{
+    margin-top: 5%;
     --background: #E63946;
     --color: white;
-    --size: large;
+    width: 30%;
+    height: 50px;
+    --border: 0;
+  }
+
+  .cont{
+    height: 200px;
+    width: 100%;
   }
 
   .full-width {
@@ -69,7 +86,6 @@ ion-content {
     flex-direction: column;
     align-items: center;
     text-align: center;
-    margin-bottom: 1rem;
     align-self: center;
     width: 100%;
   }
