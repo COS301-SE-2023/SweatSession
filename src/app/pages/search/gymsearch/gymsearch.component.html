@@ -97,7 +97,7 @@
           </ion-card-content>
 
           <ng-template #dontShowFriends>
-            <ion-card-header class="whiteText showFriendsOrNot" style="font-size: 16px; font-weight: 700; text-align: center;" (click)="toggleFriends(gym.place_id, gym.friendsLocationInfo)">
+            <ion-card-header class="whiteText showFriendsOrNot" style="font-size: 16px; font-weight: 700; text-align: center;" (click)="toggleFriends(gym.place_id, gym.friendsLocationInfo, gymChosen)">
               <!-- ; toggleFriends(gym.place_id) -->
               {{showFriends[gym.place_id] ? 'Hide' : 'Show'}} Friends Workout Sessions
             </ion-card-header>
@@ -121,7 +121,7 @@
                               <p class="dateAndTime">{{ formatDate(gymSession.date) }}</p>
                               <p class="dateAndTime" style="margin-top: -10px;">{{ gymSession.startTime }}-{{ formatTime(gymSession.endTime) }}</p>
                             </div>
-                            <ion-button style="--background: #A8DADC; --color: black; margin: auto; padding-right: 10px;">Join <br>Session</ion-button>
+                            <ion-button style="--background: #A8DADC; --color: black; margin: auto; padding-right: 10px;" (click)="joinSession()">Join <br>Session</ion-button>
                           </div>
                         </li>
                       </ul>

@@ -30,6 +30,8 @@ import { profile } from 'console';
 export class GymsearchComponent implements OnInit {
    currUserId: string | undefined | null;
    showFriends: any = {};
+   gymChosen: string;
+   chosenPlaceId: string;
    constructor(private store: Store, private modalController: ModalController, private geolocation: Geolocation, private httpClient: HttpClient, private locationRepository: LocationRepository, private friendsRepository: FriendsRepository, private friendsState: FriendsState, private datePipe: DatePipe) {
       this.data.filter(item => item.name.includes(''));
    }
@@ -293,6 +295,12 @@ export class GymsearchComponent implements OnInit {
       // alert("gym with name: "+name+"place id: "+place_id);
    }
 
+   async joinSession() {
+      await this.modalController.dismiss({ selectedGym: this.gymChosen, placeId: this.chosenPlaceId });
+      await this.modalController.dismiss({ selectedGym: this.gymChosen, placeId: this.chosenPlaceId });
+      // alert("gym with name: "+name+"place id: "+place_id);
+   }
+
    getCurrentLocation(): Promise<GeolocationCoordinates> {
       return this.geolocation.getCurrentPosition().then((position: GeolocationPosition) => {
          const { latitude, longitude } = position.coords;
@@ -375,13 +383,14 @@ export class GymsearchComponent implements OnInit {
       return this.datePipe.transform(date, 'dd MMMM yyyy')!;
    }
 
-   toggleFriends(place_id: string, fInfo: any) {
+   toggleFriends(place_id: string, fInfo: any, gymChosen: string) {
       // this.showFriends[place_id] = true;
       //console.log(fInfo);
       console.log(place_id);
       this.currentFriendsInfo = fInfo;
       console.log(this.currentFriendsInfo);
-
+      this.gymChosen=gymChosen;
+      this.chosenPlaceId=place_id;
       this.modal.present()
    }
 
