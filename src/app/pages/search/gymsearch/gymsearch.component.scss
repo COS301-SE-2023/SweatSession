@@ -38,11 +38,13 @@ ion-toolbar {
 
 .friend-details {
     // margin-top: 5%;
-    background: #1D3557;
+    background: #00000012;
     border-radius: 15px;
     display: flex;
     align-items: center;
     margin-bottom: 5%;
+    margin-right: 5%;
+    margin-left: 5%;
     // padding: 5%;
 }
 
@@ -67,7 +69,8 @@ ion-toolbar {
 }
 
 .friendsHeader {
-    font-size: 18px;
+    font-size: 25px;
+    text-align: center;
     font-weight: 700;
 }
 

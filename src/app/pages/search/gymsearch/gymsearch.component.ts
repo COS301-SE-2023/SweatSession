@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { IonContent, ModalController } from '@ionic/angular';
+import { IonContent, IonModal, ModalController } from '@ionic/angular';
 import { of, Observable, Subject, Subscription, firstValueFrom } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map, startWith } from 'rxjs/operators';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
@@ -18,6 +18,7 @@ import { LocationRepository } from 'src/app/repository/location.repository';
 import { Timestamp } from 'firebase/firestore';
 import { take } from 'rxjs/operators';
 import { DatePipe } from '@angular/common';
+import { profile } from 'console';
 
 
 @Component({
@@ -35,6 +36,7 @@ export class GymsearchComponent implements OnInit {
 
    @Select(FriendsState.returnFriends) friends$!: Observable<IFriendsModel[]>;
    @ViewChild(IonContent) content: IonContent;
+   @ViewChild('modal') modal: IonModal;
    searchTerm: string = "";
    filteredData$: Observable<any[]> = of([]);
    nextPageToken = "";
@@ -379,6 +381,8 @@ export class GymsearchComponent implements OnInit {
       console.log(place_id);
       this.currentFriendsInfo = fInfo;
       console.log(this.currentFriendsInfo);
+
+      this.modal.present()
    }
 
 
@@ -393,4 +397,19 @@ export class GymsearchComponent implements OnInit {
          return "star";
       }
    }
+
+   // onModalPresent(event: Event) {
+
+   //    console.log('Modal presented');
+      
+   //    console.log(this.currentFriendsInfo);
+
+   //    for (let friend of this.currentFriendsInfo){
+   //       console.log("friend")
+   //       console.log(friend)
+   //       console.log("profilephoto")
+   //       console.log(friend[0].profilePhoto)
+   //    }
+    
+   //  }
 }
