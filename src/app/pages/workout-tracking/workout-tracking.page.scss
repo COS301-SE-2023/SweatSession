@@ -47,16 +47,10 @@ input {
   --color: white;
 }
 
-.heading-container h1 {
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 10px;
-}
-
 .heading-container h2 {
-  font-size: 18px;
-  font-weight: normal;
-  color: grey;
+  font-size: 1.4rem;
+  font-weight: 100;
+  color:  #E63946; 
 }
 
 .image-container {
@@ -70,9 +64,6 @@ input {
   margin:  5% auto; 
   display: block; 
 }
-
-
-
 
 .exercise-number,
 input[formControlName="name"],
