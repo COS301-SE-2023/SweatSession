@@ -67,7 +67,7 @@
     <ion-content>
       <ion-searchbar placeholder="Search" (click)="modal.setCurrentBreakpoint(0.75)"></ion-searchbar>
       <ion-list class="transparent-list">
-        <ion-item lines="none" *ngFor="let friend of friends; let i=index" >
+        <ion-item lines="none" class="transparent-item" *ngFor="let friend of friends; let i=index" >
           <ion-checkbox [(ngModel)]="selectedFriends[i]" labelPlacement="end" justify="start">
             <ion-item class="transparent-item" lines="none">
               <ion-avatar slot="start">
