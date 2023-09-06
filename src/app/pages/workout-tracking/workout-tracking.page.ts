@@ -71,9 +71,9 @@
     addExercise() {
       const exerciseControl = this.formBuilder.group({
         name: [''],
-        sets: [0],
-        reps: [0],
-        weight: [0],
+        sets: [''],
+        reps: [''],
+        weight: [''],
       });
       (this.workoutForm.get('exercises') as FormArray).push(exerciseControl);
     }
