@@ -1,14 +1,6 @@
 ion-content {
   height: 100%;
-  position: relative; // Add position: relative to ion-content
-}
-
-.center-container {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100%; 
+  position: relative; 
 }
 
 .form-container {
@@ -17,23 +9,25 @@ ion-content {
   padding: 20px;
   width: 80%;
   text-align: center;
-  margin: auto; // Add margin: 0 auto to center the form-container horizontally
+  margin: auto; 
 }
-
 input {
   display: block;
   width: 100%;
+  align-self: center;
   margin-bottom: 10px;
 }
 
 .exercise-number {
   font-weight: bold;
+  font-size: 1.2rem;
   margin-top: 10px;
+  margin-bottom: 1%;
 }
 
 .heading-container {
   text-align: center;
-  margin-top: 100px;
+  margin-top: 5%;
   margin-bottom: 20px;
 }
 
@@ -43,19 +37,33 @@ input {
   margin: 0;
 }
 
-.heading-container h1 {
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 10px;
+.submit{
+  --background: #E63946;
+  --color: white;
+}
+
+.adder{
+  --background: #457B9D;
+  --color: white;
 }
 
 .heading-container h2 {
-  font-size: 18px;
-  font-weight: normal;
-  color: grey;
+  font-size: 1.4rem;
+  font-weight: 100;
+  color:  #E63946; 
 }
 
+.image-container {
+  text-align: center;
+  margin: 0; 
+}
 
+.centered-image {
+  max-width: 40%; 
+  max-height: 40%; 
+  margin:  5% auto; 
+  display: block; 
+}
 
 .exercise-number,
 input[formControlName="name"],
