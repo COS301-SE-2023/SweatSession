@@ -90,7 +90,7 @@ export class ScheduleContentComponent implements OnInit {
               this.day = weekday[this.daynum];
               this.date = new Date().toTimeString() ;
               this.shortdate = this.date.split(':' , 2);
-              this.createNotifications("SWEAT-SESSION" , this.day + ' ' +this.shortdate[0] + ':' + this.shortdate[1] + ' ' , "Your workout begins at " + this.schedule.location + " in " + hoursLeft + " hours")  ;
+              this.createNotifications("SWEATSESSION" , this.day + ' ' +this.shortdate[0] + ':' + this.shortdate[1] + ' ' , "Your workout begins at " + this.schedule.location + " in " + hoursLeft + " hours")  ;
 
               
             }else{
@@ -99,7 +99,7 @@ export class ScheduleContentComponent implements OnInit {
               this.day = weekday[this.daynum];
               this.date = new Date().toTimeString() ;
               this.shortdate = this.date.split(':' , 2);
-              this.createNotifications("SWEAT-SESSION" , this.day + ' ' +this.shortdate[0] + ':' + this.shortdate[1] + ' ' , "Your workout begins at " + this.schedule.location + "in " + minutes + " minutes")  ;
+              this.createNotifications("SWEATSESSION" , this.day + ' ' +this.shortdate[0] + ':' + this.shortdate[1] + ' ' , "Your workout begins at " + this.schedule.location + " in " + minutes + " minutes")  ;
 
               
           }
