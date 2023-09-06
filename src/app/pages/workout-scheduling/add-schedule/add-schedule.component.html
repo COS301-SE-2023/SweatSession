@@ -1,16 +1,18 @@
 <ion-header>
   <ion-toolbar>
     <ion-item lines="none">
-      <backbutton class="larger-back-button"></backbutton>
-      <ion-title class="ion-text-center">Add Gym Session</ion-title>
+      <backbutton></backbutton>
+      <ion-title>Add Gym Session</ion-title>
     </ion-item>
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <ion-grid class="grid-content">
+  <ion-grid>
     <ion-row>
       <ion-col>
-        <ion-img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7vUDCWL_IbJb5lV5KbQTC-eUNmBTtwJjciw&usqp=CAU"></ion-img>
+       <div class="icon-container">
+        <ion-icon name="barbell-outline"></ion-icon>
+       </div>
       </ion-col>
     </ion-row>
     <ion-row>
@@ -47,16 +49,16 @@
     <ion-row>
       <ion-col>
         <ion-item>
-          <ion-label position="floating" style="font-size:x-large">Duration (min)</ion-label>
-          <ion-input type="number" [(ngModel)]="schedule.duration" [min]="10"></ion-input>
+          <ion-label position="stacked" style="font-size:x-large">Duration (min)</ion-label>
+          <ion-input type="number" [(ngModel)]="schedule.duration" placeholder="Enter workout duration in minutes" [min]="10"></ion-input>
         </ion-item>
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col>
         <ion-item>
-          <ion-label position="floating" style="font-size:x-large">Workout Name</ion-label>
-          <ion-input type="text" [(ngModel)]="schedule.name" autofocus="false"></ion-input>
+          <ion-label position="stacked" style="font-size:x-large">Workout Name</ion-label>
+          <ion-input type="text" [(ngModel)]="schedule.name" placeholder="Enter the name of the workout"  autofocus="false"></ion-input>
         </ion-item>
       </ion-col>
     </ion-row>
