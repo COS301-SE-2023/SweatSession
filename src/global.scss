@@ -169,7 +169,7 @@ ion-segment {
 }
 
 ion-segment-button {
-    --color: #457b9d;
+    --color:  #1D3557;
 }
 
 .zero-content-container {
@@ -213,3 +213,15 @@ swiper-container::part(bullet) {
     position: relative;
     bottom: -10px;
 }
+
+.clickable:hover {
+    zoom:1.05;
+    color: #1D3557;
+}
+
+// color theme
+// 0% {color: #1D3557;}
+// 25% {color: #457B9D;}
+// 50% {color: #A8DADC;}
+// 75% {color: #E63946;}
+// 100% {color: #F1FAEE;}
