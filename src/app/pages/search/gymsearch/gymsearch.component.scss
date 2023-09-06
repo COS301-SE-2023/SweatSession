@@ -114,7 +114,7 @@ ion-card-subtitle {
     background: #1D3557;
     border-radius: 25px;
     color: white !important;
-    font-size: 15px;
+    font-size: 20px;
     font-weight: 700;
     text-align: center;
     box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5);
@@ -161,7 +161,7 @@ ion-card-subtitle {
     padding: 3px 0px 0px 10px;
     height: 36px;
     border-radius: 30px;
-    display: flex; 
+    display: flex;
     align-items: center;
 }
 
@@ -192,7 +192,7 @@ ion-input {
 //   margin-bottom: 0px;
 // }
 
-#distance-input{
+#distance-input {
     padding-bottom: 5px;
     padding-right: 15px;
 }
@@ -203,8 +203,12 @@ ion-input {
 // }
 
 .larger-back-button {
-    --padding-start: 12px; 
-    --padding-end: 12px; 
+    --padding-start: 12px;
+    --padding-end: 12px;
     font-size: 24px;
     color: white;
+}
+
+li {
+    list-style-type: none;
 }
