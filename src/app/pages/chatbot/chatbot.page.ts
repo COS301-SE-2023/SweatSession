@@ -14,6 +14,7 @@ export class ChatbotPage implements OnInit {
 
   loading: boolean = false;
   currUserId: string | undefined | null;
+  isBlurred: boolean = false;
 
   userMessage = '';
   messages: { text: string, sender: string, displayText?: string }[] = [];
@@ -50,7 +51,7 @@ export class ChatbotPage implements OnInit {
 
   async sendUserMessage() {
     if (this.userMessage.trim() !== '') {
-
+      this.toggleBlurEffect();
       const userProfile = await this.profileService.getProfile({ userId: this.currUserId! }).toPromise();
       const displayName = userProfile?.profile.displayName;
       var healthData = null;
@@ -100,5 +101,9 @@ export class ChatbotPage implements OnInit {
 
   isText() {
     return this.userMessage.trim()!== '';
+  }
+
+  toggleBlurEffect() {
+    this.isBlurred = !this.isBlurred;
   }
 }

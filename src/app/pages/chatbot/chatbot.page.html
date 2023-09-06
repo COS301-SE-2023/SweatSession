@@ -1,6 +1,7 @@
 <ion-header></ion-header>
 <br><br><br>
-<ion-content class="main">
+<ion-content>
+  <div [ngClass]="{'blur-background': isBlurred, 'default-background': !isBlurred}"></div>
   <h1 class="center2">SweatSession-Bot</h1>
   <br>
   <ion-list class="transparent-list">
