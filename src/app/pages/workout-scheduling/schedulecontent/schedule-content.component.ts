@@ -9,6 +9,7 @@ import { PointsRepository } from 'src/app/repository/points.repository';
 import { getAuth } from '@angular/fire/auth';
 import { NoticeService } from 'src/app/services/notifications/notice.service';
 import { AlertController } from '@ionic/angular';
+import { BadgesRepository } from 'src/app/repository';
 
 
 @Component({
@@ -38,7 +39,8 @@ export class ScheduleContentComponent implements OnInit {
     private navCtrl: NavController,
     private pointsRepository: PointsRepository , 
     private noticeService: NoticeService ,
-    private alertController: AlertController) { }
+    private alertController: AlertController,
+    private badgesRepository: BadgesRepository) { }
 
   ngOnInit() {
     if (!sessionStorage.getItem('siteInit')) {
