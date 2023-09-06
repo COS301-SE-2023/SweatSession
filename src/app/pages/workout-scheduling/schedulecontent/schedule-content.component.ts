@@ -76,12 +76,16 @@ export class ScheduleContentComponent implements OnInit {
     const currentTime = new Date().getTime();
     const targetTime = new Date(`${this.schedule.date}T${this.schedule.time}`).getTime();
     const timeDiff = targetTime - currentTime;
+    console.log(currentTime);
+    console.log(targetTime);
+    console.log(timeDiff);
+    
     if (timeDiff > 0) {
      const hoursLeft = Math.floor(timeDiff / (1000 * 60 * 60));
      const daysLeft = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
      const minutes = Math.floor(timeDiff / (1000 * 60));
-      
-        if(timeDiff > 0){
+     
+        
 
           if(daysLeft < 1 ){
             if(hoursLeft >= 1){
@@ -106,7 +110,7 @@ export class ScheduleContentComponent implements OnInit {
           }
          
           
-        }  
+          
 
   }
 }
