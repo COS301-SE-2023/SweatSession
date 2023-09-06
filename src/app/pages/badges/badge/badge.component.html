@@ -2,8 +2,14 @@
   <ion-item>
     <ion-grid>
       <ion-row>
-        <ion-col size="auto">
-          <ion-img src="assets/badge0.png"></ion-img>
+        <ion-col size="auto" class="badgeSection">
+          <div style="position: relative">
+
+            <ion-img [src]="imageName"></ion-img>
+          
+            <ion-img *ngIf="!received" src="assets/lock.png" style="position: absolute; top: 10%; left: 17px; width: 50px; height: 50px"></ion-img>
+          
+          </div>
         </ion-col>
         <ion-col class="content">
           <div class="badgeHeader">{{name}}</div>

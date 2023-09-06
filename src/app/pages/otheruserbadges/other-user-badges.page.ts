@@ -18,53 +18,63 @@ export class OtherUserBadgesPage implements OnInit {
   receivedBadges$!: Observable<IBadges | null>;
   @Select(OtherUserBadgesState.usersName)
   name$!: Observable<String | null>;
+  noOfBadges=0;
   badges=[{
-      header:"Starter's Success",
-      receivedDescription:"First workout plan completed.",
-      notReceivedDescription:"Complete a workout plan to earn this badge",
-      received:false
-    },{
-      header:"Socialite",
-      receivedDescription:"Made 5 workout partners.",
-      notReceivedDescription:"Make 5 friends to earn this badge",
-      received:false
-    },{
-      header: "Stretching Star",
-      receivedDescription: "Stretching exercises incorporated into workout plan.",
-      notReceivedDescription: "Incorporate stretching exercises into your workout plan",
-      received: false
-    },{
-      header:"Record Breaker",
-      receivedDescription:"New personal best reached for bench presses.",
-      notReceivedDescription:"Reach a new personal best for bench presses to earn this badge",
-      received:false
-    },{
-      header:"Workout Warrior",
-      receivedDescription:"20 workout sessions attended.",
-      notReceivedDescription:"Attend 20 workout sessions to earn this badge",
-      received:false
-    },{
-      header:"Dynamic Duo",
-      receivedDescription:"50 workout sessions completed with a friend.",
-      notReceivedDescription:"Complete 50 workout sessions with a friend to earn this badge",
-      received:false
-    },{
-      header:"Push-Up Pro",
-      receivedDescription:"100 push-ups done in a day",
-      notReceivedDescription:"Do 100 push-ups in a day to earn this badge.",
-      received:false
-    },{
-      header:"Active Adventurer",
-      receivedDescription:"Workout sessions done at 5 different gyms.",
-      notReceivedDescription:"Do a workout session at 5 gyms to earn this badge",
-      received:false
-    }
+    header:"Starter's Success",
+    receivedDescription:"Congratulations! You have completed your first workout plan",
+    notReceivedDescription:"Complete a workout plan to earn this badge",
+    imageName:"assets/badges/starterssuccess.png",
+    received:false
+  },{
+    header:"Socialite",
+    receivedDescription:"Congratulations! You have made 5 workout partners",
+    notReceivedDescription:"Make 5 friends to earn this badge",
+    imageName:"assets/badges/socialite.png",
+    received:false
+  },{
+    header: "Stretching Star",
+    receivedDescription: "Congratulations! You have incorporated stretching exercises into your workout plan",
+    notReceivedDescription: "Incorporate stretching exercises into your workout plan",
+    imageName:"assets/badges/stretchingstarnotext.png",
+    received: false
+  },{
+    header:"Record Breaker",
+    receivedDescription:"Congratulations! You have reached a new personal best for bench presses",
+    notReceivedDescription:"Reach a new personal best for bench presses to earn this badge",
+    imageName:"assets/badges/recordbreaker.png",
+    received:false
+  },{
+    header:"Workout Warrior",
+    receivedDescription:"Congratulations! You have attended 20 workout sessions",
+    notReceivedDescription:"Attend 20 workout sessions to earn this badge",
+    imageName:"assets/badges/workoutwarrior.png",
+    received:false
+  },{
+    header:"Dynamic Duo",
+    receivedDescription:"Congratulations! You have completed 50 workout sessions with a friend",
+    notReceivedDescription:"Complete 50 workout sessions with a friend to earn this badge",
+    imageName:"assets/badges/dynamicduo.png",
+    received:false
+  },{
+    header:"Push-Up Pro",
+    receivedDescription:"Congratulations! You did 100 push-ups in a day",
+    notReceivedDescription:"Do 100 push-ups in a day to earn this badge",
+    imageName:"assets/badges/pushupspro.png",
+    received:false
+  },{
+    header:"Active Adventurer",
+    receivedDescription:"Congratulations! You did a workout session at 5 gyms",
+    notReceivedDescription:"Do a workout session at 5 gyms to earn this badge",
+    imageName:"assets/badges/activeadventurer.png",
+    received:false
+  }
   ];
   constructor(
     // private badgesApi: BadgesApi,
     private authApi: AuthApi,
     private badgesService: BadgesService,
-    private store: Store
+    private store: Store,
+    // noOfBadges: Number
   ) {}
 
   ngOnInit() {
@@ -73,6 +83,7 @@ export class OtherUserBadgesPage implements OnInit {
       // Use the map operator to transform the observable value
       map((badges: IBadges | null) => {
         if (badges) {
+          this.noOfBadges=badges.receivedBadges.length;
           return badges.receivedBadges;
         } else {
           return []; // Return an empty array if badges is null

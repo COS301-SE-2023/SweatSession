@@ -1,3 +1,4 @@
 export interface IBadges{
-    receivedBadges: Number[]
+    receivedBadges: Number[],
+    gymsVisited?: string[]
 }

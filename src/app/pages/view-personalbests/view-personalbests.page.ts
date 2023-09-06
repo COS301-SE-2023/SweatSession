@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 // import { AddPersonalBestComponent } from './add-personal-best/add-personal-best.component';
 import { FormBuilder, FormGroup } from '@angular/forms';
@@ -8,6 +8,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { IPersonalBest } from 'src/app/models';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { PersonalbestService } from 'src/app/services/personalbest/personalbest.service';
+import { GymsearchComponent } from '../search/gymsearch/gymsearch.component';
 
 @Component({
   selector: 'app-view-personalbests',
@@ -18,10 +19,14 @@ export class ViewPersonalbestsPage implements OnInit {
   
   PersonalBestForm: FormGroup;
   showForm: boolean = false;
+  placeId: string;
+  location: string;
+  myVariable: string = "Click on the location icon";
   constructor(private modalController: ModalController,
         private formBuilder: FormBuilder,
         private firestore : AngularFirestore,
-        private personalbestService: PersonalbestService) { }
+        private personalbestService: PersonalbestService,
+        private cdr: ChangeDetectorRef) { }
 
   async openPopup() {
     this.showForm = true;
@@ -98,5 +103,35 @@ export class ViewPersonalbestsPage implements OnInit {
     return `${currentYear}-${currentMonth}-${currentDay}`;
   }
 
+  async openLocationModal() {
+    const modal = await this.modalController.create({
+      component: GymsearchComponent, // Replace LocationModalPage with the name of your modal component
+    });
+    await modal.present();
+  
+    // Handle the location selection event when the modal is dismissed
+    const { data } = await modal.onDidDismiss();
+    if (data && data.selectedGym && data.placeId) {
+      console.log(data);
+      // Assuming PersonalBestForm is correctly initialized and has a 'location' control
+    const locationControl = this.PersonalBestForm.get('location');
 
+    if (locationControl) {
+      // alert("IN location Control");
+      // Update the value of the 'location' control
+      locationControl.setValue(data.selectedGym);
+
+      // Clear validators (if needed)
+      locationControl.clearValidators();
+
+      // Update validity (if needed)
+      locationControl.updateValueAndValidity();
+
+      // Trigger change detection
+      this.cdr.detectChanges();
+    }
+
+    // Assign placeId
+      this.placeId = data.placeId;    }
+  }
 }

@@ -1,7 +1,7 @@
 <ion-header>
  <ion-toolbar>
-  <ion-item style="display: flex; align-items: center;" lines="none">
-    <backbutton class="larger-back-button"></backbutton>
+  <ion-item lines="none">
+    <backbutton></backbutton>
     <ion-title style="margin: 0 auto;" *ngIf="name$ | async as usersName;">{{usersName}}</ion-title>
     <!-- <ion-title style="margin: 0 auto;">{{user!.name}}'s' Badges</ion-title> -->
   </ion-item>
@@ -10,13 +10,19 @@
 
 <ion-content class="badgesContainer">
   <ion-grid class="loginGrid">
-    <ng-container *ngFor="let badge of badges">
-      <badge *ngIf="badge.received"
-        [name]="badge.header"
-        [receivedDescription]="badge.receivedDescription"
-        [notReceivedDescription]="badge.notReceivedDescription"
-        [received]="badge.received"
-      ></badge>
+    <ng-container *ngIf="!noOfBadges; else hasBadges">
+      <h1 *ngIf="name$ | async as usersName;" style="color: grey;">{{usersName}} has no badges.</h1>
     </ng-container>
+    <ng-template #hasBadges>
+      <ng-container *ngFor="let badge of badges">
+        <badge *ngIf="badge.received"
+          [name]="badge.header"
+          [receivedDescription]="badge.receivedDescription"
+          [notReceivedDescription]="badge.notReceivedDescription"
+          [received]="badge.received"
+          [imageName]="badge.imageName"
+        ></badge>
+      </ng-container>
+    </ng-template>
   </ion-grid>
 </ion-content>

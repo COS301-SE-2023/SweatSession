@@ -134,10 +134,9 @@ export class ScheduleContentComponent implements OnInit {
        
       }
       else if (daysLeft == 1) {
-        
-        return `your have ${daysLeft} day left`;
+        return `You have ${daysLeft} day left`;
       }
-      return `your have ${daysLeft} days left`;
+      return `You have ${daysLeft} days left`;//spelling fix
     }
 
     if (this.inSession()) {
@@ -249,7 +248,9 @@ export class ScheduleContentComponent implements OnInit {
     }
     if (this.currUserId != undefined) {
       this.pointsRepository.workoutSessionPoints(this.currUserId);
+      this.badgesRepository.activeAdventurerBadge(this.currUserId, this.schedule.location!);
     }
+    
   }
 
   joined() {

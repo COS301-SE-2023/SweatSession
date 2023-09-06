@@ -26,7 +26,8 @@ export class BadgesRepository {
         //     });
         const badgesRef = this.firestore.collection('badges').doc(currUserId);
         const newBadgesDocument: IBadges = {
-            receivedBadges: []
+            receivedBadges: [],
+            gymsVisited: []
         };
         badgesRef.set(newBadgesDocument)
             .then((docRef) => {
@@ -53,6 +54,44 @@ export class BadgesRepository {
 
         return badgeDocRef.update({
             receivedBadges: fieldValue.arrayUnion(2)
+        });
+    }
+
+    async activeAdventurerBadge(currUserId: string, gymName: string){
+        const badgeDocRef = this.firestore.collection('badges').doc(currUserId);
+        const fieldValue = firebase.firestore.FieldValue;
+
+        await badgeDocRef.update({
+            gymsVisited: fieldValue.arrayUnion(gymName)
+        });
+
+        const updatedBadgeDocRef = this.firestore.collection('badges').doc(currUserId);
+        const docSnapshot = await updatedBadgeDocRef.get().toPromise(); // Convert Observable to Promise
+    
+        if (docSnapshot && docSnapshot.exists) {
+            const data = docSnapshot.data() as { [key: string]: any }; // Typecast data as an object with any keys
+            const gymsVisited = data?.['gymsVisited'] || [];
+    
+            if (gymsVisited.length==5) {
+                this.addBadge(currUserId, 7);//7 Active Adventurer badge
+            }
+        }
+    }
+
+    async addBadge(currUserId: string, badgeNo: number) {
+        //0 Starter's Success
+        //1 socialite
+        //2 Stretching Star
+        //3 Record Breaker
+        //4 Workout Warrior
+        //5 Dynamic Duo
+        //6 Push-ups Pro
+        //7 Active Adventurer
+        const badgeDocRef = this.firestore.collection('badges').doc(currUserId);
+        const fieldValue = firebase.firestore.FieldValue;
+
+        return badgeDocRef.update({
+            receivedBadges: fieldValue.arrayUnion(badgeNo)
         });
     }
 }
