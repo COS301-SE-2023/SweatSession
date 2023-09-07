@@ -196,6 +196,10 @@ const routes: Routes = [
     path: 'exercise-explorer',
     loadChildren: () => import('./pages/exercise-explorer/exercise-explorer.module').then( m => m.ExerciseExplorerPageModule)
   },
+  {
+    path: 'download',
+    loadChildren: () => import('./pages/download/download.module').then( m => m.DownloadPageModule)
+  },
 ];
 @NgModule({
   imports: [
