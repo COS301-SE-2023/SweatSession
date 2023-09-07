@@ -1,13 +1,30 @@
 .show-form {
-    display: block;
+  display: block;
 }
 
 ion-content {
-    height: 100%;
-    overflow-y: auto;
+  height: 100%;
+  overflow-y: auto;
 }
 
+
 ion-item {
-    text-decoration: none !important;
+  text-decoration: none !important;
 }
-  
+
+.location-container {
+  display: flex;
+  align-items: center;
+}
+
+.location-icon {
+  margin-left: auto;
+  margin-right: 24px;
+  /* Same width as built-in calendar icon */
+  font-size: 20px !important;
+  margin-top: 20px;
+}
+
+.location-item {
+  width: 90%;
+}

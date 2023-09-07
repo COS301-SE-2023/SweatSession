@@ -8,6 +8,7 @@ import {considerSettingUpAutocompletion} from "@angular/cli/src/utilities/comple
 import {collection} from "@angular/fire/firestore";
 import { AuthApi } from 'src/app/states/auth/auth.api';
 import {getAuth} from "@angular/fire/auth";
+import { PointsRepository } from './points.repository';
 
 @Injectable({
     providedIn: 'root'
@@ -18,7 +19,8 @@ export class goalsRepository {
     currUserId: string | undefined = undefined;
 
     constructor(private firestore: AngularFirestore,
-                private auth: AuthApi
+                private auth: AuthApi,
+                private pointsRepository: PointsRepository
                 ) { }
 
     creategoalsDocument(currUserId: string) {
@@ -219,6 +221,9 @@ export class goalsRepository {
       
                 // Update the progress of the goal
                 await goalsDoc.update({ progress });
+                if (progress==100){
+                    this.pointsRepository.fitnessGoalsPoints(this.currUserId);
+                }
               }
             }
           }

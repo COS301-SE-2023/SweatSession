@@ -34,10 +34,15 @@
     </ion-buttons>
     <ion-title>
       <ion-chip class="clickable" routerLink="/userprofile">
-        {{DisplayName$}}
-        <ion-avatar>
-          <img src={{ProfilePicture$}}/>
-        </ion-avatar>
+        <ion-item>
+          <ion-avatar>
+            <img src={{ProfilePicture$}}/> 
+          </ion-avatar>
+        
+          <div class="name">
+            {{DisplayName$}}
+          </div>
+        </ion-item>
       </ion-chip>
     </ion-title>
     <ion-icon name="receipt-outline" 
