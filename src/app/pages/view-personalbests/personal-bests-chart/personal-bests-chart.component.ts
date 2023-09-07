@@ -20,8 +20,10 @@ export class PersonalBestsChartComponent implements OnInit {
   radioButtons = document.getElementsByName("radioButton") as NodeListOf<HTMLInputElement>;
   personalBestsData: IPersonalBest[] = [];
 
-  constructor(private personalbestService: PersonalbestService,
-              private alertController: AlertController) { }
+  constructor(
+              private personalbestService: PersonalbestService,
+              private alertController: AlertController
+             ) { }
 
 
   ngOnInit(){

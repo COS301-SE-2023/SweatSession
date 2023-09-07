@@ -27,10 +27,11 @@ export class ViewExercisesComponent  implements OnInit {
         video:
             {
                 id: "1",
-                url: "../../../../assets/BreatheAir.mp4",
+                url: "https://media.musclewiki.com/media/uploads/videos/branded/male-barbell-bench-press-front.mp4#t=0.1",
                 exersiseName: "Breathe Air",
                 exerciseDescription: "This is a description of the exercise"
             }
+
       };
 
       const mock2 :  ExerciseList = {
@@ -38,7 +39,7 @@ export class ViewExercisesComponent  implements OnInit {
         video:
             {
                 id: "2",
-                url: "../../../../assets/BreatheAir.mp4",
+                url: "https://media.musclewiki.com/media/uploads/videos/branded/male-barbell-bench-press-front.mp4#t=0.1",
                 exersiseName: "Breathe Air 2",
                 exerciseDescription: "This is a description of the exercise"
             }
@@ -49,7 +50,7 @@ export class ViewExercisesComponent  implements OnInit {
           video:
               {
                   id: "3",
-                  url: "../../../../assets/BreatheAir.mp4",
+                  url: "https://media.musclewiki.com/media/uploads/videos/branded/male-barbell-bench-press-front.mp4#t=0.1",
                   exersiseName: "Breathe Air 3",
                   exerciseDescription: "This is a description of the exercise"
               }

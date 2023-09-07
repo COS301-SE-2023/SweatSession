@@ -19,7 +19,7 @@
 
         <ion-card *ngFor="let ExerciseTuple of getExerciseDetails()" style="--ion-background-color: #A8DADCFF">
             <ion-card style="border-style: solid; border-width: thick;">
-                <video controls style="width: 100%;">
+                <video controls style="width: 100%;" playsinline="" preload="metadata" muted="" autoplay="" loop="">
                     <source src="{{ExerciseTuple.video.url}}" type="video/mp4">
                 </video>
             </ion-card>
