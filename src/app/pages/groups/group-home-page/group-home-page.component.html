@@ -38,9 +38,9 @@
   </div>
   <div>
     <ion-segment (ionChange)="onSegmentChange($event)" value="members" [scrollable]="true">
-      <ion-segment-button value="members">members</ion-segment-button>
-      <ion-segment-button value="schedules">workout Sessions</ion-segment-button>
-      <ion-segment-button value="leaderboard">leaderboard</ion-segment-button>
+      <ion-segment-button value="members">Members</ion-segment-button>
+      <ion-segment-button value="schedules">Workout Sessions</ion-segment-button>
+      <ion-segment-button value="leaderboard">Leaderboard</ion-segment-button>
     </ion-segment>
 
     <div class="content" [hidden]="selectedSegment !== 'members'">
