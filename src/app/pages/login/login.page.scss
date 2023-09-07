@@ -47,5 +47,8 @@ img[src="/assets/Asset 1.png"] {
 
 .loginButton {
     --background: #E63946;
-    border: none;
+    --color: white !important;
+    --border-style: solid;
+    --border-width: 2px;
+    --border-color: #E63946;
 }

@@ -29,12 +29,15 @@ ion-card-header {
 
 .signIn-buttons {
   margin-bottom: 10px;
-  --background: #E63946;
 }
 
 ion-button {
   --background: #E63946;;
   --margin: 20px;
+  --color: white !important;
+  --border-style: solid;
+  --border-width: 2px;
+  --border-color: #E63946;
 }
 
 .input-item{
