@@ -1,4 +1,4 @@
-<ion-header style="background-color: #E63946;">
+<ion-header>
   <ion-toolbar>
     <ion-item lines="none">
       <backbutton></backbutton>
@@ -7,7 +7,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="ion-padding">
   <div class="spinner-container" *ngIf="isLoading">
     <ion-spinner></ion-spinner>
   </div>
@@ -15,7 +15,10 @@
   <div class="icon-container" [class.heart-beat]="isBeating">
     <ion-icon name="heart" class="health-icon"></ion-icon>
   </div>  
-  <ion-text class="subtext">Enter all your health data here for catered results</ion-text>
+  
+  <div class="subtext">
+    Enter all your health data here for catered results
+  </div>
 
   <form [formGroup]="healthDataForm" *ngIf="!isLoading" (ngSubmit)="saveHealthData()">
     <ion-list class="centered">
@@ -58,7 +61,7 @@
             </select>
         </div>
       </ion-item>
-      <ion-button class="submit" expand="full" type="submit" [disabled]="!healthDataForm.valid" (click)="startBeating()">Submit</ion-button>
+      <ion-button class="submit"  expand="block" type="submit" [disabled]="!healthDataForm.valid" (click)="startBeating()">Submit</ion-button>
     </ion-list>
   </form>
 </ion-content>
