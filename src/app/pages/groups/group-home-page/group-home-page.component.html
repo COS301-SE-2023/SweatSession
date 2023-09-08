@@ -1,8 +1,10 @@
 <div class="group-page-container">
   <div class="group-page-profile">
-    <ion-buttons slot="start">
-      <ion-icon name="arrow-back" class="larger-back-button" (click)="closeModal()"></ion-icon>
-    </ion-buttons>
+    <div>
+      <ion-item lines="none" class="transparent-item">
+        <ion-icon name="arrow-back" slot="start" class="larger-back-button" (click)="closeModal()"></ion-icon>
+      </ion-item>
+    </div>
     <div class="profile-inner-wrapper">
       <div class="profile-img-container">
         <ion-avatar class="profile-image">
