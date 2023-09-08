@@ -7,22 +7,24 @@
       </ion-segment>
 
       <ng-container *ngIf="users.length > 0; else loaderContent">
-        <div [hidden]="selectedSegment!=='everyone'">
-          <leaderboard-user *ngFor="let user of users; let i=index"
+        <div [hidden]="selectedSegment!=='everyone'" class="ion-padding">
+          <ion-grid>
+            <leaderboard-user *ngFor="let user of users; let i=index"
             [user]="user"
             [position]="i+1"
             [isCurrentUser]="isCurrentUser(user)"
-          >
-          </leaderboard-user>
+          ></leaderboard-user>
+          </ion-grid>
         </div>
   
-        <div [hidden]="selectedSegment!=='friends'">
-          <leaderboard-user *ngFor="let user of friends; let i=index"
+        <div [hidden]="selectedSegment!=='friends'" class="ion-padding">
+          <ion-grid>
+            <leaderboard-user *ngFor="let user of friends; let i=index"
             [user]="user"
             [position]="i+1"
             [isCurrentUser]="isCurrentUser(user)"
-          >
-          </leaderboard-user>
+            ></leaderboard-user>
+          </ion-grid>
         </div>
       </ng-container>
       <ng-template #loaderContent>

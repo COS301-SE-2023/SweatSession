@@ -39,11 +39,19 @@ ion-button {
 }
 
 @keyframes color-change {
-  0% {color: #1D3557;}
-  25% {color: #457B9D;}
-  50% {color: #A8DADC;}
-  75% {color: #E63946;}
-  100% {color: #F1FAEE;}
+  0% {color: #1D3557; rotate: 0deg;}
+  25% {color: #457B9D; rotate: 90deg;}
+  50% {color: #A8DADC; rotate: 180deg;}
+  75% {color: #E63946; rotate: 270deg;}
+  100% {color: #F1FAEE; rotate: 360deg;}
+}
+
+@keyframes rotate {
+  0% {rotate: 0deg;}
+  25% {rotate: 90deg; }
+  50% {rotate: 180deg;}
+  75% {rotate: 270deg;}
+  100% {rotate: 360deg;}
 }
 
 .icon-container {
@@ -52,6 +60,6 @@ ion-button {
   height: 100%;
   width: 100%;
   color: #457B9D;
-  animation: color-changer 30s infinite;
+  animation: color-change 30s infinite;
  }
 }
