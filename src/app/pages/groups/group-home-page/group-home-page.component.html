@@ -11,7 +11,7 @@
           <ion-img [src]="selectedGroup.profileURL"></ion-img>
         </ion-avatar>
       </div>
-      <ion-label class="profile-label">
+      <ion-label class="profile-label" style="color: white">
         <div class="name">
           <h1>{{selectedGroup.displayName}}</h1>
         </div>
@@ -19,7 +19,7 @@
           <p>{{selectedGroup.members?.length}} Members</p>
         </div>
         <div class="bio">
-          <p>{{selectedGroup.bio}}.</p>
+          <p>{{selectedGroup.bio}}</p>
         </div>
       </ion-label>
       <div class="group-buttons">
