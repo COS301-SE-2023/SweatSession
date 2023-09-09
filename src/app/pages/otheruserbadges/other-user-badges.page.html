@@ -11,7 +11,16 @@
 <ion-content class="badgesContainer">
   <ion-grid class="loginGrid">
     <ng-container *ngIf="!noOfBadges; else hasBadges">
-      <h1 *ngIf="name$ | async as usersName;" style="color: grey;">{{usersName}} has no badges.</h1>
+      <!-- <h1 *ngIf="name$ | async as usersName;" style="color: grey;">{{usersName}} has no badges.</h1> -->
+
+      <div class="zero-content-container" *ngIf="name$ | async as usersName;">
+        <div class="inner-zero-content-wrapper">
+          <ion-icon class="large-icon" name="medal"></ion-icon><br>
+          <ion-text>
+            {{usersName}} has no badges.
+          </ion-text>
+        </div>
+      </div>
     </ng-container>
     <ng-template #hasBadges>
       <ng-container *ngFor="let badge of badges">
