@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
    <ion-item lines="none">
-    <ion-title>Select Location</ion-title>
+    <ion-title style="margin-left: -7%">Select Location</ion-title>
     <ion-buttons slot="start">
       <ion-icon class="larger-back-button" name="arrow-back" (click)="dismissModal()"></ion-icon>
     </ion-buttons>
@@ -92,7 +92,7 @@
                               <p class="dateAndTime">{{ formatDate(gymSession.date) }}</p>
                               <p class="dateAndTime" style="margin-top: -10px;">{{ gymSession.startTime }}-{{ formatTime(gymSession.endTime) }}</p>
                             </div>
-                            <ion-button style="--background: #A8DADC; --color: black; margin: auto; padding-right: 10px;" (click)="joinSession()">Join <br>Session</ion-button>
+                            <!-- <ion-button style="--background: #A8DADC; --color: black; margin: auto; padding-right: 10px;" (click)="joinSession()">Join <br>Session</ion-button> temporary removal-->
                           </div>
                         </li>
                       </ul>
