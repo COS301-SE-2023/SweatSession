@@ -7,6 +7,8 @@ ion-text {
     --inner-border-width: 0;
     --background: #A8DADC;
     border-radius: 12px;
+    border-end-end-radius: 0px;
+    border-end-start-radius: 0px;
 }
 
 ion-card, ion-item {
