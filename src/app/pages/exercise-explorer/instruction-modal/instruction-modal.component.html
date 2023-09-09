@@ -11,12 +11,13 @@
             <ion-card-title>Name of the exercise</ion-card-title>
             <ion-card-subtitle>Instructions</ion-card-subtitle>
         </ion-card-header>
-        <ion-card-content *ngFor="let instruction of Instructions">
+    </ion-card>
+    <ion-card *ngFor="let instruction of Instructions">
+        <ion-card-content>
             <div class="circle">{{ Instructions.indexOf(instruction) + 1 }}</div>
                 <ion-label>
                     <p>{{ instruction }}</p>
                 </ion-label>
-
         </ion-card-content>
     </ion-card>
 </ion-content>
