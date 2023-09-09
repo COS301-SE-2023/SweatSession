@@ -35,7 +35,6 @@ export class FriendsContentsComponent  implements OnInit {
       if(this.userId === this.friend.userId)
       return this.userId === this.friend.userId;
     }
-    console.log(this.userId);
     return false;
   }
 }

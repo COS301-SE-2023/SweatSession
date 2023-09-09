@@ -183,6 +183,12 @@ const routes: Routes = [
     loadChildren: () => import('./pages/view-personalbests/view-personalbests.module').then( m => m.ViewPersonalbestsPageModule)
   },
   {
+    path: 'add-personal-best',
+    canActivate: [AuthGuard],
+    data: { authGuardPipe: redirectLoggedOut },
+    loadChildren: () => import('./pages/view-personalbests/add-personal-best/add-personal-best.module').then( m => m.AddPersonalbestsPageModule)
+  },
+  {
     path: 'chatbot',
     canActivate: [AuthGuard],
     data: { authGuardPipe: redirectLoggedOut },
@@ -195,6 +201,10 @@ const routes: Routes = [
   {
     path: 'exercise-explorer',
     loadChildren: () => import('./pages/exercise-explorer/exercise-explorer.module').then( m => m.ExerciseExplorerPageModule)
+  },
+  {
+    path: 'download',
+    loadChildren: () => import('./pages/download/download.module').then( m => m.DownloadPageModule)
   },
 ];
 @NgModule({

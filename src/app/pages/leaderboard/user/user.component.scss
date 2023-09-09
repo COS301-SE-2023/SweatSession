@@ -1,6 +1,5 @@
 .user {
     margin: 8px;
-    background-color: #A8DADC;
     border-radius: 2px;
     .user-name {
         font-weight: bolder;
@@ -10,13 +9,6 @@
         display: flex;
         justify-content: center;
         color: #457B9D;
-    }
-
-    .position {
-        color: #E63946;
-        font-weight: bolder;
-        font-style: italic;
-        font-size: 20px;
     }
     
     ion-item {
@@ -28,4 +20,38 @@
         margin: 10px;
         font-style: italic;
     }
+}
+
+ion-col {
+    text-align: center;
+}
+
+.user-col {
+    margin-left: 0px;
+}
+
+@keyframes borderAnimation {
+    0% {border-color: #A8DADC; color: #A8DADC;}
+    25% {border-color: #457B9D; color: #457B9D;}
+    50% {border-color: #1D3557; color: #1D3557;}
+    75% {border-color: #E63946; color: #E63946;}
+    100% {border-color: #F1FAEE; color: #F1FAEE;}
+} 
+
+.position-container {
+    padding: 5px;
+    width: 100%;
+    border-bottom: 5px solid;
+    animation: borderAnimation 10s infinite linear;
+    transition: 5s;
+    .position {
+        text-shadow: 1px 1px 5px;
+        font-weight: bolder;
+        font-style: italic;
+        padding: 5px;
+    }
+}
+
+ion-row {
+    margin: 0px;
 }

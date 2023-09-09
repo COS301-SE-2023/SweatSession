@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { IonContent, ModalController } from '@ionic/angular';
+import { IonContent, IonModal, ModalController } from '@ionic/angular';
 import { of, Observable, Subject, Subscription, firstValueFrom } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map, startWith } from 'rxjs/operators';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
@@ -18,6 +18,7 @@ import { LocationRepository } from 'src/app/repository/location.repository';
 import { Timestamp } from 'firebase/firestore';
 import { take } from 'rxjs/operators';
 import { DatePipe } from '@angular/common';
+import { profile } from 'console';
 
 
 @Component({
@@ -29,12 +30,15 @@ import { DatePipe } from '@angular/common';
 export class GymsearchComponent implements OnInit {
    currUserId: string | undefined | null;
    showFriends: any = {};
+   gymChosen: string;
+   chosenPlaceId: string;
    constructor(private store: Store, private modalController: ModalController, private geolocation: Geolocation, private httpClient: HttpClient, private locationRepository: LocationRepository, private friendsRepository: FriendsRepository, private friendsState: FriendsState, private datePipe: DatePipe) {
       this.data.filter(item => item.name.includes(''));
    }
 
    @Select(FriendsState.returnFriends) friends$!: Observable<IFriendsModel[]>;
    @ViewChild(IonContent) content: IonContent;
+   @ViewChild('modal') modal: IonModal;
    searchTerm: string = "";
    filteredData$: Observable<any[]> = of([]);
    nextPageToken = "";
@@ -45,6 +49,7 @@ export class GymsearchComponent implements OnInit {
    currLongitude: Number;
    MAPS_API_KEY = environment.mapsApiKey;
    gymsSubscription: Subscription;
+   currentFriendsInfo: any = [[{profilePhoto: "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png", friendDisplayName: "testfdn", workoutName: "testWN", date: "02-02-2023", startTime: Timestamp.now(), endTime: Timestamp.now()}]];
    gyms: any = {
       results: [
          { name: "default", business_status: "default", photos: [{ photo_reference: "default" }], rating: "default", vicinity: "default", place_id: "default", friendsLocationInfo: [[]] }, { friendsLocationInfo: [] }
@@ -290,6 +295,12 @@ export class GymsearchComponent implements OnInit {
       // alert("gym with name: "+name+"place id: "+place_id);
    }
 
+   async joinSession() {
+      await this.modalController.dismiss({ selectedGym: this.gymChosen, placeId: this.chosenPlaceId });
+      await this.modalController.dismiss({ selectedGym: this.gymChosen, placeId: this.chosenPlaceId });
+      // alert("gym with name: "+name+"place id: "+place_id);
+   }
+
    getCurrentLocation(): Promise<GeolocationCoordinates> {
       return this.geolocation.getCurrentPosition().then((position: GeolocationPosition) => {
          const { latitude, longitude } = position.coords;
@@ -372,12 +383,42 @@ export class GymsearchComponent implements OnInit {
       return this.datePipe.transform(date, 'dd MMMM yyyy')!;
    }
 
-   toggleFriends(place_id: string) {
-      this.showFriends[place_id] = true;
+   toggleFriends(place_id: string, fInfo: any, gymChosen: string) {
+      // this.showFriends[place_id] = true;
+      //console.log(fInfo);
+      console.log(place_id);
+      this.currentFriendsInfo = fInfo;
+      console.log(this.currentFriendsInfo);
+      this.gymChosen=gymChosen;
+      this.chosenPlaceId=place_id;
+      this.modal.present()
    }
 
 
    viewProfile(id: string) {
       // this.store.dispatch(new StageOtheruserInfo(user));
    }
+
+   calcShape(r: number, i: number){
+      if (r-i>0.25 && r-i<0.75){
+         return "star-half";
+      }else{
+         return "star";
+      }
+   }
+
+   // onModalPresent(event: Event) {
+
+   //    console.log('Modal presented');
+      
+   //    console.log(this.currentFriendsInfo);
+
+   //    for (let friend of this.currentFriendsInfo){
+   //       console.log("friend")
+   //       console.log(friend)
+   //       console.log("profilephoto")
+   //       console.log(friend[0].profilePhoto)
+   //    }
+    
+   //  }
 }

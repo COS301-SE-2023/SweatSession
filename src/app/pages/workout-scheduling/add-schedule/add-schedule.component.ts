@@ -46,7 +46,7 @@ export class AddScheduleComponent  implements OnInit {
     this.store.dispatch(new AddWorkoutSchedule(this.schedule));
     // this.store.dispatch(new AddGymSessionLocation(this.placeId));
     // this.store.dispatch(new AddWorkoutSchedule(this.placeId));
-    this.locationRepository.addGymSession(this.placeId, this.schedule.date!, this.schedule.time!, this.schedule.completeAt!, this.schedule.name!);
+    this.locationRepository.addGymSession(this.placeId, this.schedule.date!, this.schedule.time!, this.schedule.completeAt!, this.schedule.name!, this.schedule.location!);
     const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
     this.daynum = new Date().getDay() ;
     this.day = weekday[this.daynum];
@@ -109,7 +109,6 @@ export class AddScheduleComponent  implements OnInit {
     // Handle the location selection event when the modal is dismissed
     const { data } = await modal.onDidDismiss();
     if (data && data.selectedGym && data.placeId) {
-      console.log(data);
       this.schedule.location = data.selectedGym;
       this.placeId = data.placeId;    }
   }
@@ -117,18 +116,13 @@ export class AddScheduleComponent  implements OnInit {
   displayCurrentUser(id:string){
     this.noticeService.getTheNoticeProfile().subscribe((profiles: Profile[]) => {
     this.profileList = profiles;
-    console.log('Number of PROFILES:', this.profileList.length);
     for(let i = 0 ; i<this.profileList.length ; i++){
       if(this.profileList[i].id == this.currUserId ){
         this.currusername = this.profileList[i].displayName! ;
         this.profileurl = this.profileList[i].profileURL! ;
         this.sweatsessionurl = "SweatSession/src/assets/Asset 3.png"
-        console.log(this.profileurl);
-        console.log(this.currusername);
       }
     }
-
-      
   });
 }
 

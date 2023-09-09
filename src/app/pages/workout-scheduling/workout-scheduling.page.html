@@ -12,27 +12,31 @@
     <ion-segment-button value="0">All</ion-segment-button>
     <ion-segment-button value="1">In Session</ion-segment-button>
     <ion-segment-button value="2">Completed</ion-segment-button>
-    <ion-segment-button value="3">Uncompleted</ion-segment-button>
+    <ion-segment-button value="3">Overdue</ion-segment-button>
   </ion-segment>
 
   <workout-schedule id="0" [hidden]="selectedSegment !== '0'"
   [categoryName]="''"  
   [schedules] = "schedules"
+  [friends]="friends"
   ></workout-schedule>
 
   <workout-schedule id="1" [hidden]="selectedSegment !== '1'"
   [categoryName]="'in session'"  
   [schedules] = "inSessionSchedules"
+  [friends]="friends"
   ></workout-schedule>
 
   <workout-schedule id="2" [hidden]="selectedSegment !== '2'"
   [categoryName]="'completed'"  
   [schedules] = "completedSchedules"
+  [friends]="friends"
   ></workout-schedule>
 
   <workout-schedule id="3" [hidden]="selectedSegment !== '3'"
   [categoryName]="'uncompleted'"  
   [schedules] = "uncompletedSchedules"
+  [friends]="friends"
   ></workout-schedule>
 
   <ion-fab slot="fixed" vertical="bottom" horizontal="end">

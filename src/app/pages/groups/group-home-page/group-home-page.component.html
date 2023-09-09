@@ -1,8 +1,10 @@
 <div class="group-page-container">
   <div class="group-page-profile">
-    <ion-buttons slot="start">
-      <ion-icon name="arrow-back" class="larger-back-button" (click)="closeModal()"></ion-icon>
-    </ion-buttons>
+    <div>
+      <ion-item lines="none" class="transparent-item">
+        <ion-icon name="arrow-back" slot="start" class="larger-back-button" (click)="closeModal()"></ion-icon>
+      </ion-item>
+    </div>
     <div class="profile-inner-wrapper">
       <div class="profile-img-container">
         <ion-avatar class="profile-image">
@@ -38,9 +40,9 @@
   </div>
   <div>
     <ion-segment (ionChange)="onSegmentChange($event)" value="members" [scrollable]="true">
-      <ion-segment-button value="members">members</ion-segment-button>
-      <ion-segment-button value="schedules">workout Sessions</ion-segment-button>
-      <ion-segment-button value="leaderboard">leaderboard</ion-segment-button>
+      <ion-segment-button value="members">Members</ion-segment-button>
+      <ion-segment-button value="schedules">Workout Sessions</ion-segment-button>
+      <ion-segment-button value="leaderboard">Leaderboard</ion-segment-button>
     </ion-segment>
 
     <div class="content" [hidden]="selectedSegment !== 'members'">
@@ -50,6 +52,28 @@
         [currentUserId]="currentUserId"
         [modal]="modal"></group-user>
       </ion-list>
+    </div>
+
+    <div class="content" [hidden]="selectedSegment !== 'schedules'">
+      <div class="zero-content-container ">
+        <div class="inner-zero-content-wrapper">
+          <ion-icon class="large-icon" name="receipt"></ion-icon><br>
+          <ion-text>
+            Group has no workout schedules.
+          </ion-text>
+        </div>
+       </div>
+    </div>
+
+    <div class="content" [hidden]="selectedSegment !== 'leaderboard'">
+      <div class="zero-content-container ">
+        <div class="inner-zero-content-wrapper">
+          <ion-icon class="large-icon" name="bar-chart"></ion-icon><br>
+          <ion-text>
+            Ranking under construction.
+          </ion-text>
+        </div>
+       </div>
     </div>
   </div>
 </div>

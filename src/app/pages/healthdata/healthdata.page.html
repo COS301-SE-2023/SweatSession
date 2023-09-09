@@ -1,4 +1,4 @@
-<ion-header style="background-color: #E63946;">
+<ion-header>
   <ion-toolbar>
     <ion-item lines="none">
       <backbutton></backbutton>
@@ -7,59 +7,61 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="ion-padding">
   <div class="spinner-container" *ngIf="isLoading">
     <ion-spinner></ion-spinner>
   </div>
 
-  <div class="icon-container">
+  <div class="icon-container" [class.heart-beat]="isBeating">
     <ion-icon name="heart" class="health-icon"></ion-icon>
+  </div>  
+  
+  <div class="subtext">
+    Enter all your health data here for catered results
   </div>
-  <ion-text class="subtext">Enter all your health data here for catered results</ion-text>
 
   <form [formGroup]="healthDataForm" *ngIf="!isLoading" (ngSubmit)="saveHealthData()">
     <ion-list class="centered">
       <ion-item class="full-width">
         <div class="input-field">
-          <ion-label>Height</ion-label>
+          <ion-label class="customlabel">Height (cm)</ion-label>
           <ion-input formControlName="height" type="text"></ion-input>
         </div>
       </ion-item>
 
       <ion-item class="full-width">
         <div class="input-field">
-          <ion-label>Weight</ion-label>
+          <ion-label class="customlabel">Weight (kg)</ion-label>
           <ion-input formControlName="weight" type="text"></ion-input>
         </div>
       </ion-item>
 
       <ion-item class="full-width">
         <div class="input-field">
-          <ion-label>Diet</ion-label>
+          <ion-label class="customlabel">Diet</ion-label>
           <ion-input formControlName="diet" type="text"></ion-input>
         </div>
       </ion-item>
 
       <ion-item class="full-width">
         <div class="input-field">
-          <ion-label>Medical Conditions</ion-label>
+          <ion-label class="customlabel">Medical Conditions</ion-label>
           <ion-input formControlName="medicalConditions" type="text"></ion-input>
         </div>
       </ion-item>
-      <ion-item class="full-width">
-
-      <label for="workoutCommitment">Workout Commitment:</label>
-        <select formControlName="workoutCommitment" class="form-control">
-          <option value="Low Commitment (0-1 days/week)">Low Commitment (0-1 days/week)</option>
-          <option value="Medium Commitment (2-3 days/week)">Medium Commitment (2-3 days/week)</option>
-          <option value="High Commitment (4-5 days/week)">High Commitment (4-5 days/week)</option>
-          <option value="Extreme Commitment (6+ days/week)">Extreme Commitment (6+ days/week)</option>
-        </select>
-      </ion-item>
       
-      <ion-item>
-        <ion-button class="submit" expand="full" type="submit" [disabled]="!healthDataForm.valid">Submit</ion-button>
+      <ion-item class="full-width">
+        <div class="input-field">
+          <ion-label class="customlabel" for="workoutCommitment">Workout Commitment:</ion-label>
+            <select formControlName="workoutCommitment" class="form-control">
+              <option value="Low Commitment (0-1 days/week)">Low Commitment (0-1 days/week)</option>
+              <option value="Medium Commitment (2-3 days/week)">Medium Commitment (2-3 days/week)</option>
+              <option value="High Commitment (4-5 days/week)">High Commitment (4-5 days/week)</option>
+              <option value="Extreme Commitment (6+ days/week)">Extreme Commitment (6+ days/week)</option>
+            </select>
+        </div>
       </ion-item>
+      <ion-button class="submit"  expand="block" type="submit" [disabled]="!healthDataForm.valid" (click)="startBeating()">Submit</ion-button>
     </ion-list>
   </form>
 </ion-content>

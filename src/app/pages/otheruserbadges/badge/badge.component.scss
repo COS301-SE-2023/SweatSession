@@ -2,23 +2,32 @@
     // --ion-background-color: #457B9D;
     display: flex;
     align-items: center;
-    border-radius: 20px;
-    margin-top: 10%;
+    border-radius: 12px;
+    // margin-top: 10%;
+    margin-top: 2%;
     // padding: 10px;
 }
 
 .badgeHeader {
-    font-size: x-large;
+    font-size: 22px;
+    font-weight: 900;
     margin-bottom: 7px;
     // margin-bottom: 100%;
 }
 
 .badgeDescription {
-    font-size: large;
+    font-size: medium;
+    font-weight: bolder;
+}
+
+.badgeSection{
+    display: flex;
+    align-items: center;
 }
 
 ion-img {
-    width: 80px;
+    width: 85px;
+    // height: 20%;
 }
 
 div {
@@ -39,7 +48,7 @@ div {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    font-weight: 700;
+    font-weight: 500;
 }
 
 .badgeDescription {

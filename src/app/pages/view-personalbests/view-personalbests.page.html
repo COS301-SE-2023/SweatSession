@@ -1,89 +1,17 @@
 <ion-header>
-    <ion-toolbar>
-      <ion-item lines="none">
-        <backbutton></backbutton>
-        <ion-title> Personal Bests </ion-title>
-      </ion-item>
-    </ion-toolbar>
+  <ion-toolbar>
+    <ion-item lines="none">
+      <backbutton></backbutton>
+      <ion-title> Personal Bests </ion-title>
+    </ion-item>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
-    <app-personal-bests-chart *ngIf="!showForm"></app-personal-bests-chart>
-
-    <ion-fab slot="fixed" vertical="bottom" horizontal="end">
-      <ion-fab-button *ngIf="!showForm" (click)="openPopup()">
-        <ion-icon name="add"></ion-icon>
-      </ion-fab-button>
-    </ion-fab>
-
-    <ion-content *ngIf="showForm">
-
-        <ion-card style="background-color: #A8DADC; padding: 5px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
-            <ion-grid>
-                <ion-row>
-                    <ion-col>
-                        <ion-card-title>Add Personal best</ion-card-title>
-                    </ion-col>
-                </ion-row>
-                <ion-row>
-                    <ion-col>
-                        <ion-card>
-<!--                            Todo: Change the image-->
-                            <ion-img src="../../../assets/goalsBanner.jpg"></ion-img>
-                        </ion-card>
-                    </ion-col>
-                </ion-row>
-            </ion-grid>
-        </ion-card>
-
-
-        <form [formGroup]="PersonalBestForm" (ngSubmit)="onSubmit()" >
-
-                    <ion-item>
-                        <ion-label>Select Exercise</ion-label>
-                            <ion-select formControlName="exercise" placeholder="EXERCISE">
-                                <ion-select-option value="Bench Press">Bench Press</ion-select-option>
-                                <ion-select-option value="Squats">Squats</ion-select-option>
-                                <ion-select-option value="Deadlifts">Deadlifts</ion-select-option>
-                                <ion-select-option value="Overhead Press">Overhead Press</ion-select-option>
-                                <ion-select-option value="Barbell Rows">Barbell Rows</ion-select-option>
-                                <ion-select-option value="Push ups">Push ups</ion-select-option>
-                            </ion-select>
-                    </ion-item>
-
-
-                    <ion-item>
-                      <ion-label position="stacked">Weight</ion-label>
-                      <ion-input placeholder="Enter Weight (kg)" formControlName="weight" type="number"></ion-input>
-                    </ion-item>
-
-                    <ion-item>
-                        <ion-label position="stacked">Repetitions</ion-label>
-                        <ion-input placeholder="Enter Reps" formControlName="reps" type="number"></ion-input>
-                    </ion-item>
-
-
-
-                    <ion-item>
-                        <ion-label position="stacked">Date</ion-label>
-                        <ion-input type="date" displayFormat="YYYY/MM/DD" formControlName="date"></ion-input>
-                    </ion-item>
-
-
-                    <ion-item>
-                        <ion-label position="stacked">Location</ion-label>
-                        <ion-input placeholder="Enter Location" formControlName="location" type="txt"></ion-input>
-                      </ion-item>
-
-                    <ion-item>
-                      <ion-label position="stacked">Notes</ion-label>
-                      <ion-input placeholder="Enter Notes" formControlName="notes" type="txt"></ion-input>
-                    </ion-item>
-                        <ion-button type="submit" expand="full" [disabled]="!isValid(PersonalBestForm.value)"><ion-icon slot="start" name="checkmark"></ion-icon>Submit</ion-button>
-                </form>
-
-    </ion-content>
-
-  
+  <app-personal-bests-chart></app-personal-bests-chart>
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button (click)="addBest()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

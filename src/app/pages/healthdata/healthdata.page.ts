@@ -11,9 +11,21 @@ import { getAuth } from '@angular/fire/auth';
 })
 export class HealthDataPage implements OnInit {
   currUserId: string | undefined | null;
+  isBeating: boolean = false;
 
   healthDataForm: FormGroup;
-  isLoading: boolean = true;  
+  isLoading: boolean = true;
+  
+  startBeating() {
+    this.isBeating = true;
+    setTimeout(() => {
+      this.stopBeating();
+    }, 1000);
+  }
+
+  stopBeating() {
+    this.isBeating = false;
+  }
 
   constructor(private formBuilder: FormBuilder, private profileService: ProfileService, private firestore: AngularFirestore) {
     this.healthDataForm = this.formBuilder.group({

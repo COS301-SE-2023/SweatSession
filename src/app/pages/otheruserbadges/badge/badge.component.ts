@@ -10,6 +10,7 @@ export class BadgeComponent  implements OnInit {
   @Input() receivedDescription!:string;
   @Input() notReceivedDescription!:string;
   @Input() received!:boolean;
+  @Input() imageName!:string;
 
   constructor() { }
 

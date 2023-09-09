@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { AddPersonalBestComponent } from './add-personal-best.component';
 import { BackButtonDirectiveModule } from 'src/app/directives';
+import { AddPersonalBestpageRoutingModule } from './add-personal-best.routing.module';
 //custom module imports
 
 @NgModule({
@@ -14,6 +15,7 @@ import { BackButtonDirectiveModule } from 'src/app/directives';
     IonicModule,
     ReactiveFormsModule,
     BackButtonDirectiveModule,
+    AddPersonalBestpageRoutingModule
   ],
   declarations: [AddPersonalBestComponent]
 })

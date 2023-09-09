@@ -55,5 +55,26 @@ exports.checkScheduledWorkouts = functions.pubsub
   });
 
 async function sendNotificationToUser(schedule, message) {
-  //implement the notification logic here....
+  console.log("Notifications alert");
+
+  
+  const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+  var daynum = new Date().getDay() ;
+  var day = weekday[daynum];
+  var date = new Date().toTimeString() ;
+  var shortdate = date.split(':' , 2);
+  
+  const firestore = admin.firestore();
+  auth = firestore.getAuth();
+  currUserId = this.auth.currentUser?.displayName;
+  //console.log('sent notification');
+  await addDoc(collection(firestore , 'Notifications'), {
+    senttoid: currUserId ,
+    senderid: currUserId , 
+    sendername: 'SWEATSESSION' ,
+    profileurl: '/assets/Asset 5.png' , 
+    sentdate: day + ' ' +shortdate[0] + ':' + shortdate[1] + ' ' , 
+    message: message
+  });
+  
 }

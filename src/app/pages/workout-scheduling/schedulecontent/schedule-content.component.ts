@@ -1,15 +1,15 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { NavController, ActionSheetController } from '@ionic/angular';
-import { Select, Store } from '@ngxs/store';
-import { Observable, Subscription } from 'rxjs';
+import { Store } from '@ngxs/store';
+import { Subscription, tap } from 'rxjs';
 import { RemoveWorkoutSchedule, UpdateWorkoutAdded, UpdateWorkoutSchedule } from 'src/app/actions';
-import { IWorkoutScheduleModel } from 'src/app/models';
+import { IProfileModel, IWorkoutScheduleModel } from 'src/app/models';
 import { PointsRepository } from 'src/app/repository/points.repository';
-import { WorkoutSchedulingState } from 'src/app/states';
 import { getAuth } from '@angular/fire/auth';
 import { NoticeService } from 'src/app/services/notifications/notice.service';
 import { AlertController } from '@ionic/angular';
+import { BadgesRepository } from 'src/app/repository';
 
 
 @Component({
@@ -29,6 +29,9 @@ export class ScheduleContentComponent implements OnInit {
   daynum : number ;
   date : string ;
   shortdate : string[] ;
+  @Input() id:string;
+  selectedFriends:any[] = [];
+  @Input() friends: IProfileModel[] = [];
 
   constructor(private store: Store, private nav: NavController,
     private actionSheetCtrl: ActionSheetController,
@@ -36,7 +39,8 @@ export class ScheduleContentComponent implements OnInit {
     private navCtrl: NavController,
     private pointsRepository: PointsRepository , 
     private noticeService: NoticeService ,
-    private alertController: AlertController) { }
+    private alertController: AlertController,
+    private badgesRepository: BadgesRepository) { }
 
   ngOnInit() {
     if (!sessionStorage.getItem('siteInit')) {
@@ -74,12 +78,16 @@ export class ScheduleContentComponent implements OnInit {
     const currentTime = new Date().getTime();
     const targetTime = new Date(`${this.schedule.date}T${this.schedule.time}`).getTime();
     const timeDiff = targetTime - currentTime;
+    console.log(currentTime);
+    console.log(targetTime);
+    console.log(timeDiff);
+    
     if (timeDiff > 0) {
      const hoursLeft = Math.floor(timeDiff / (1000 * 60 * 60));
      const daysLeft = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
      const minutes = Math.floor(timeDiff / (1000 * 60));
-      
-        if(timeDiff > 0){
+     
+        
 
           if(daysLeft < 1 ){
             if(hoursLeft >= 1){
@@ -88,7 +96,7 @@ export class ScheduleContentComponent implements OnInit {
               this.day = weekday[this.daynum];
               this.date = new Date().toTimeString() ;
               this.shortdate = this.date.split(':' , 2);
-              this.createNotifications("SWEAT-SESSION" , this.day + ' ' +this.shortdate[0] + ':' + this.shortdate[1] + ' ' , "Your workout begins at " + this.schedule.location + " in " + hoursLeft + " hours")  ;
+              this.createNotifications("SWEATSESSION" , this.day + ' ' +this.shortdate[0] + ':' + this.shortdate[1] + ' ' , "Your workout begins at " + this.schedule.location + " in " + hoursLeft + " hours")  ;
 
               
             }else{
@@ -97,14 +105,14 @@ export class ScheduleContentComponent implements OnInit {
               this.day = weekday[this.daynum];
               this.date = new Date().toTimeString() ;
               this.shortdate = this.date.split(':' , 2);
-              this.createNotifications("SWEAT-SESSION" , this.day + ' ' +this.shortdate[0] + ':' + this.shortdate[1] + ' ' , "Your workout begins at " + this.schedule.location + "in " + minutes + " minutes")  ;
+              this.createNotifications("SWEATSESSION" , this.day + ' ' +this.shortdate[0] + ':' + this.shortdate[1] + ' ' , "Your workout begins at " + this.schedule.location + " in " + minutes + " minutes")  ;
 
               
           }
           }
          
           
-        }  
+          
 
   }
 }
@@ -128,10 +136,9 @@ export class ScheduleContentComponent implements OnInit {
        
       }
       else if (daysLeft == 1) {
-        
-        return `your have ${daysLeft} day left`;
+        return `You have ${daysLeft} day left`;
       }
-      return `your have ${daysLeft} days left`;
+      return `You have ${daysLeft} days left`;//spelling fix
     }
 
     if (this.inSession()) {
@@ -243,7 +250,9 @@ export class ScheduleContentComponent implements OnInit {
     }
     if (this.currUserId != undefined) {
       this.pointsRepository.workoutSessionPoints(this.currUserId);
+      this.badgesRepository.activeAdventurerBadge(this.currUserId, this.schedule.location!);
     }
+    
   }
 
   joined() {
@@ -256,6 +265,7 @@ export class ScheduleContentComponent implements OnInit {
     this.noticeService.createNotices(sendername , sentdate , message , this.currUserId! , this.currUserId! , '/assets/Asset 3.png');
   }
 
+  confirmSelection() {
 
-
+  }
 }

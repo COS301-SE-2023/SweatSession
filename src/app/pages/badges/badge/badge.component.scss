@@ -3,36 +3,44 @@
     display: flex;
     align-items: center;
     border-radius: 12px;
-    margin-top: 10%;
+    // margin-top: 10%;
+    margin-top: 5%;
     // padding: 10px;
 }
 
 .badgeHeader {
-    font-size: x-large;
-    font-weight: bold;
+    font-size: 22px;
+    font-weight: 900;
     margin-bottom: 7px;
     // margin-bottom: 100%;
 }
 
 .badgeDescription {
     font-size: medium;
+    font-weight: bolder;
+}
+
+.badgeSection{
+    display: flex;
+    align-items: center;
 }
 
 ion-img {
-    width: 80px;
+    width: 85px;
+    // height: 20%;
 }
 
 div {
-    color: white;
+    color: white//#1D3557;
 }
 
 .received {
-    --ion-background-color: #457B9D;
+    --ion-background-color: #457B9D;//#1D3557;//#457B9D;
 }
 
 .not-received {
-    --ion-background-color: #A8DADC;
-    opacity: 0.8;
+    --ion-background-color: #457B9D;//#A8DADC;
+    // opacity: 0.8;
 }
 
 .content {

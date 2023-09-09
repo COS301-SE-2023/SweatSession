@@ -1,44 +1,47 @@
-<div class="user">
-  <ion-item lines="none" (click)="viewOtherUser()">
-    <ion-avatar slot="start">
-      <ion-img [src]='user.profileURL'></ion-img>
-    </ion-avatar>
-    <ion-label>
-      <ion-text class="user-name" *ngIf="!isCurrentUser">
-        {{user.displayName}}
-      </ion-text>
-      <ion-text class="user-name" *ngIf="isCurrentUser">
-        {{user.displayName}}(You)
-      </ion-text>
-
-      <p>{{"~ " + user.bio}}</p>
-    </ion-label>
-  
-    <ion-item slot="end" lines="none">
+<ion-row class="ion-align-items-center">
+  <ion-col size="2">
+    <div class="position-container">
       <ion-text class="position">{{position}}</ion-text>
-    </ion-item>
-  </ion-item>
-  
-  <div class="stats">
-    <ion-item lines="none" class="stats">
-      <div class="user-pr">
-        <ion-text>Points</ion-text><br>
-        <ion-text>{{user.points}}</ion-text>
+    </div>
+  </ion-col>
+  <ion-col size="10" class="user-col">
+    <div class="user">
+      <ion-item lines="none" (click)="viewOtherUser()">
+        <ion-avatar slot="start">
+          <ion-img [src]='user.profileURL'></ion-img>
+        </ion-avatar>
+        <ion-label>
+          <ion-text class="user-name" *ngIf="!isCurrentUser">
+            {{user.displayName}}
+          </ion-text>
+          <ion-text class="user-name" *ngIf="isCurrentUser">
+            {{user.displayName}} (You)
+          </ion-text>
+    
+          <p>{{"~ " + user.bio}}</p>
+        </ion-label>
+      </ion-item>
+
+      <div class="stats">
+        <div class="user-pr">
+          <ion-text>Points</ion-text><br>
+          <ion-text>{{user.points}}</ion-text>
+        </div>
+        <div class="user-pr">
+          <ion-text>Badges</ion-text><br>
+          <!-- <ion-text *ngIf="badges$ | async as badges; else loaderContent">{{badges.receivedBadges.length}}</ion-text> -->
+          <ion-text>{{user.badgesNumber}}</ion-text>
+          <ng-template #loaderContent>
+            <div class="loader-wrapper">
+              <ion-spinner></ion-spinner>
+            </div>
+          </ng-template>
+        </div>
+        <div class="user-pr">
+          <ion-text>Sessions</ion-text><br>
+          <ion-text>{{user.sessionsCompleted}}</ion-text>
+        </div>
       </div>
-      <div class="user-pr">
-        <ion-text>Badges</ion-text><br>
-        <!-- <ion-text *ngIf="badges$ | async as badges; else loaderContent">{{badges.receivedBadges.length}}</ion-text> -->
-        <ion-text>{{user.badgesNumber}}</ion-text>
-        <ng-template #loaderContent>
-          <div class="loader-wrapper">
-            <ion-spinner></ion-spinner>
-          </div>
-        </ng-template>
-      </div>
-      <div class="user-pr">
-        <ion-text>Sessions</ion-text><br>
-        <ion-text>{{user.sessionsCompleted}}</ion-text>
-      </div>
-    </ion-item>
-  </div>
-</div>
+    </div>
+  </ion-col>
+</ion-row>

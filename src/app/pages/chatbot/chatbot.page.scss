@@ -50,7 +50,32 @@ ion-footer{
     display: flex;
   }
 
-  .main{
-    --background: none;
-    --background: url('/assets/Asset 2.png') no-repeat center/contain fixed;
-}
+  .default-background::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('../../../assets/Asset 2.png') no-repeat center/contain fixed;
+    pointer-events: none;
+    background-size: 90% auto;
+    background-position: center;
+  }
+  
+  .blur-background::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('../../../assets/Asset 2.png') no-repeat center/contain fixed; 
+    z-index: -1;
+    pointer-events: none;
+    transition: filter 0.3s;
+    filter: blur(5px);
+    background-size: 95% auto;
+    background-position: center;
+  }
+

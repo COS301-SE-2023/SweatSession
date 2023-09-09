@@ -1,73 +1,78 @@
-.larger-back-button{
-    --padding-start: 12px; 
-    --padding-end: 12px; 
-    font-size: 24px; 
+@keyframes beat {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
-* {
-    font-family: 'Montserrat', sans-serif;
+.form-control{
+  margin-top: 5%;
+  margin-bottom: 5%;
 }
 
-ion-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
+.heart-beat {
+  animation: beat 0.5s infinite;
+}
+
+.customlabel{
+  margin-top: 5%;
+  font-size: 1.2rem;
+}
+
+.health-icon {
+  font-size: 10rem;
+  color: #E63946;
+  margin: 1rem;
+}
+
+.subtext {
+  text-align: center;
+}
+
+.submit{
+  margin-top: 15px;
+  --background: #E63946;
+  --color: white;
+  --border: none;
+  --border-style: solid;
+  --border-width: 2px;
+  --border-color: #E63946;
+}
+
+.cont{
+  height: 200px;
+  width: 100%;
+}
+
+.full-width {
+  width: 100%;
+}
   
-  .health-icon {
-    font-size: 8rem;
-    color: #E63946;
-    margin: 4rem 0 1rem;
-  }
-  
-  .subtext {
-    text-align: center;
-    margin-bottom: 2rem;
-    align-self: center;
-    width: 100%;
-    padding-left: 0.6rem;
-  }
+.input-field {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  align-self: center;
+  width: 100%;
+}
 
-  .centered {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin: 2rem 0 1rem;
-  }
+.icon-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}  
 
-  .submit{
-    --background: #E63946;
-    --color: white;
-    --size: large;
-  }
-
-  .full-width {
-    width: 100%;
-  }
-    
-  .input-field {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    margin-bottom: 1rem;
-    align-self: center;
-    width: 100%;
-  }
-
-  .icon-container {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-  }  
-
-  .spinner-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-  }
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
   
   

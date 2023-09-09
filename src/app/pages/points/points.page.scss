@@ -2,22 +2,6 @@
     --custom-red: #FF0000; /* Replace with your desired shade of red */
 }
 
-ion-header{
-    ion-item{
-        --background: #E63946;
-        ion-title{
-            --background: #E63946;
-        }
-    }
-    --background: #E63946;
-}
-
-.larger-back-button {
-    --padding-start: 12px; 
-    --padding-end: 12px; 
-    font-size: 24px; 
-}
-
 ion-item.userPointsSection::part(native) {
     --background: #1D3557;
     --border-radius: 12px;
@@ -39,7 +23,7 @@ ion-item.userPointsSection::part(native) {
 
 .userPointsNumber {
     font-size: 40px;
-    padding-bottom: 12px;
+    //padding-bottom: 12px;
 }
 
 .userPointsNumberValue {
@@ -153,13 +137,4 @@ ion-item.workoutSessionPointsSection::part(native) {
     display: flex;
     flex-direction: column;
     text-align: center;
-}
-
-ion-item{
-    --highlight-height: 0;
-    --inner-border-width: 0;
-}
-
-* {
-    font-family: 'Montserrat', sans-serif;
 }
