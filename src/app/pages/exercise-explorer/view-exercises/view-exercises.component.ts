@@ -31,7 +31,8 @@ export class ViewExercisesComponent  implements OnInit {
                 id: "1",
                 url: "https://media.musclewiki.com/media/uploads/videos/branded/male-barbell-bench-press-front.mp4#t=0.1",
                 exersiseName: "Breathe Air",
-                exerciseDescription: "This is a description of the exercise"
+                exerciseDescription: "This is a description of the exercise",
+                instructions: [" Do this", "Do that", "Do this other thing"]
             }
 
       };
@@ -43,7 +44,8 @@ export class ViewExercisesComponent  implements OnInit {
                 id: "2",
                 url: "https://media.musclewiki.com/media/uploads/videos/branded/male-barbell-bench-press-front.mp4#t=0.1",
                 exersiseName: "Breathe Air 2",
-                exerciseDescription: "This is a description of the exercise"
+                exerciseDescription: "This is a description of the exercise",
+                instructions: [" Do this", "Do that", "Do this other thing"]
             }
       }
 
@@ -54,7 +56,8 @@ export class ViewExercisesComponent  implements OnInit {
                   id: "3",
                   url: "https://media.musclewiki.com/media/uploads/videos/branded/male-barbell-bench-press-front.mp4#t=0.1",
                   exersiseName: "Breathe Air 3",
-                  exerciseDescription: "This is a description of the exercise"
+                  exerciseDescription: "This is a description of the exercise",
+                  instructions: [" Do this", "Do that", "Do this other thing"]
               }
       }
 
@@ -68,22 +71,14 @@ export class ViewExercisesComponent  implements OnInit {
       return this.ExerciseDetails;
   }
 
-  presentModal() {
-      // this.modalController.create({
-      //     component: ViewExercisesComponent,
-      //     componentProps: {
-      //         ExerciseDetails: this.ExerciseDetails
-      //     }
-      // }).then((modal) => modal.present());
-  }
-
-
     async openModal(ExerciseTuple:ExerciseList) {
+
+      // console.log("ExerciseTuple: " + ExerciseTuple.video.instructions[0]);
         const modal = await this.modalController.create({
-            component: InstructionModalComponent, // Replace with the name of your modal component
+            component: InstructionModalComponent,
             componentProps: {
-                // Pass any data you need to the modal here
-                ExerciseTuple: ExerciseTuple,
+
+                Exersisedata: ExerciseTuple,
             },
         });
         return await modal.present();

@@ -24,9 +24,6 @@ export class InstructionModalComponent  implements OnInit {
 
   private populateInstructions() {
     // popuilate with mock data
-    this.Instructions.push(" Do this and that and this and that");
-    this.Instructions.push(" Do that Do this and that and this and that");
-    this.Instructions.push(" Do this Do this and that and this and that");
-    this.Instructions.push(" Do that Do this and that and this and that");
+    this.Instructions = this.Exersisedata.video.instructions;
   }
 }
