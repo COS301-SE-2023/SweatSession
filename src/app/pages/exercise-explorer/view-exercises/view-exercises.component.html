@@ -1,33 +1,32 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-item lines="none">
-        <ion-icon name="arrow-back" aria-hidden="true" class="bb" slot="start" (click)="dismissModal()"></ion-icon>
-    <ion-title>View Exercises</ion-title>
-    </ion-item>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-item lines="none">
+            <ion-icon name="arrow-back" aria-hidden="true" class="bb" slot="start" (click)="dismissModal()"></ion-icon>
+            <ion-title>View Exercises</ion-title>
+        </ion-item>
+    </ion-toolbar>
 </ion-header>
 
-
 <ion-content class="centralize">
-
     <ion-item-divider sticky>
         <ion-label> MuscleGroup : MuscleGroupName </ion-label>
     </ion-item-divider>
 
-        <ion-card *ngFor="let ExerciseTuple of getExerciseDetails()" style="--ion-background-color: #A8DADCFF">
-            <ion-card style="border-style: solid; border-width: thick;">
-                <video controls style="width: 100%;" playsinline="" preload="metadata" muted="" autoplay="" loop="">
-                    <source src="{{ExerciseTuple.video.url}}" type="video/mp4">
-                </video>
-            </ion-card>
-            <ion-card-header>
-                <ion-card-title>{{ExerciseTuple.video.exersiseName}}</ion-card-title>
-            </ion-card-header>
-            <ion-card-content>
-                {{ExerciseTuple.video.exerciseDescription}}
-            </ion-card-content>
+    <ion-card *ngFor="let ExerciseTuple of getExerciseDetails()" style="--ion-background-color: #A8DADCFF">
+        <ion-card style="border-style: solid; border-width: thick;">
+            <video controls style="width: 100%;" playsinline="" preload="metadata" muted="" autoplay="" loop="">
+                <source [src]="ExerciseTuple.video.url" type="video/mp4">
+            </video>
         </ion-card>
-</ion-content>
+        <ion-card-header>
+            <ion-card-title>{{ ExerciseTuple.video.exersiseName }}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+            {{ ExerciseTuple.video.exerciseDescription }}
+        </ion-card-content>
+        <!-- Open new page when the button is clicked -->
 
-<!-- <p>View Exercises</p> -->
+        <ion-button redirect  >View Instructions</ion-button>
+    </ion-card>
+</ion-content>
 

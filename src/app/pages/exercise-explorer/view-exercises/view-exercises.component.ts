@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { ExerciseList } from 'src/app/models/exercise.model';
+import { InstructionModalComponent } from '../instruction-modal/instruction-modal.component';
+
 
 @Component({
   selector: 'app-view-exercises',
@@ -66,6 +68,26 @@ export class ViewExercisesComponent  implements OnInit {
       return this.ExerciseDetails;
   }
 
+  presentModal() {
+      // this.modalController.create({
+      //     component: ViewExercisesComponent,
+      //     componentProps: {
+      //         ExerciseDetails: this.ExerciseDetails
+      //     }
+      // }).then((modal) => modal.present());
+  }
+
+
+    async openModal(ExerciseTuple:ExerciseList) {
+        const modal = await this.modalController.create({
+            component: InstructionModalComponent, // Replace with the name of your modal component
+            componentProps: {
+                // Pass any data you need to the modal here
+                ExerciseTuple: ExerciseTuple,
+            },
+        });
+        return await modal.present();
+    }
 
   dismissModal() {
       this.modalController.dismiss();

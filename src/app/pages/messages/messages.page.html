@@ -7,7 +7,7 @@
           <ion-segment-button value="groups">Groups</ion-segment-button>
         </ion-segment>
       </ion-header>
-      
+
       <ion-list class="messages-list" class="transparent-list">
         <div [hidden]="selectedSegment!=='chats'">
           <div *ngIf="chatFriends.length !== 0; else loaderContent" class="chatFriends-container">
@@ -18,7 +18,7 @@
               <ion-label>
                 <div class="top-items">
                   <ion-label class="user-name-label">
-                    <h2 class="user-name">{{ chatFriend.user.displayName! }}</h2> 
+                    <h2 class="user-name">{{ chatFriend.user.displayName! }}</h2>
                   </ion-label>
                   <p class="timestamp">{{ chatFriend.lastChat!.date?.toDate() | date:'MMM d, hh:mm a' }}</p>
                 </div>
