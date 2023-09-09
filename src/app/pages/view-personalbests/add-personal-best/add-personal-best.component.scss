@@ -1,0 +1,29 @@
+
+.location-container {
+  display: flex;
+  align-items: center;  
+}
+
+.location-icon {
+  font-size: 20px !important;
+}
+
+.wrapper {
+    display: flex;
+    width: 100%;
+    box-sizing: border-box;
+    .input {
+      width: 100%;
+      .location {
+        padding-right: 0px;
+        --padding-end: 0px;
+      }
+    }
+    .icon {
+      display: flex;
+      align-items: start;
+      ion-icon {
+        margin-left: 0px;
+      }
+    }
+  }
