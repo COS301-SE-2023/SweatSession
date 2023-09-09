@@ -5,6 +5,7 @@ import { IPersonalBest } from 'src/app/models';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { PersonalbestService } from 'src/app/services/personalbest/personalbest.service';
 import { GymsearchComponent } from '../../search/gymsearch/gymsearch.component';
+import { NavigationService } from 'src/app/services';
 
 @Component({
   selector: 'add-personal-best',
@@ -22,7 +23,8 @@ export class AddPersonalBestComponent implements OnInit {
         private formBuilder: FormBuilder,
         private firestore : AngularFirestore,
         private personalbestService: PersonalbestService,
-        private cdr: ChangeDetectorRef) { }
+        private cdr: ChangeDetectorRef,
+        private navigate: NavigationService) { }
 
   isValid(formData :any) {
     if (
@@ -65,8 +67,7 @@ export class AddPersonalBestComponent implements OnInit {
 
     this.PersonalBestForm.reset();
     this.showForm = false;
-
-    
+    this.navigate.back();
   }
 
   ngOnInit() 
