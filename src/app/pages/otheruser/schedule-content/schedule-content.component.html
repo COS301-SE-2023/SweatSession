@@ -4,7 +4,8 @@
     <ion-text>
       {{schedule.name}}
     </ion-text>
-    <ion-button fill="outline" slot="end" (click)="viewSchedule()">{{ isSlideShow ? "Close" : "View" }}</ion-button>
+    <ion-icon name="chevron-down-outline" slot="end" (click)="viewSchedule()" *ngIf="!isSlideShow"></ion-icon>
+    <ion-icon name="chevron-up-outline" slot="end" (click)="viewSchedule()" *ngIf="isSlideShow"></ion-icon>
   </ion-item>
   <div *ngIf="isSlideShow">
     <ion-card-content>
