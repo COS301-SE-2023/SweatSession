@@ -9,7 +9,7 @@ import { ExerciseExplorerPageRoutingModule } from './exercise-explorer-routing.m
 import { ExerciseExplorerPage } from './exercise-explorer.page';
 import { BackButtonDirectiveModule } from 'src/app/directives/backbutton.module';
 import { ViewExercisesComponent } from './view-exercises/view-exercises.component';
-
+import { InstructionModalComponent } from './instruction-modal/instruction-modal.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -18,7 +18,7 @@ import { ViewExercisesComponent } from './view-exercises/view-exercises.componen
     ExerciseExplorerPageRoutingModule,
     BackButtonDirectiveModule,
   ],
-  declarations: [ExerciseExplorerPage, ViewExercisesComponent],
-  exports: [ViewExercisesComponent]
+  declarations: [ExerciseExplorerPage, ViewExercisesComponent, InstructionModalComponent],
+  exports: [ViewExercisesComponent, InstructionModalComponent]
 })
 export class ExerciseExplorerPageModule {}

@@ -1,0 +1,12 @@
+/* Add this CSS to your component's SCSS file or global CSS file */
+.circle {
+  width: 30px; /* Adjust the width and height to your desired size */
+  height: 30px;
+  background-color: #3daad7; /* Change the background color as needed */
+  color: white;
+  border-radius: 50%; /* Makes the div a circle */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
