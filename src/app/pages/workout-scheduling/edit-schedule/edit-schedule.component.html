@@ -42,4 +42,4 @@
     <ion-input type = "number" value="{{schedule.duration}}" [(ngModel)]="schedule.duration" (ionChange)="checkChange()"></ion-input>
   </ion-item>
 
-  <ion-button expand="block" (click) = "editSchedule()" [disabled]="!isChange">Save</ion-button>
+  <ion-button expand="block" (click) = "editSchedule()" [disabled]="!isChange" style="padding-top: 5px">Save</ion-button>
