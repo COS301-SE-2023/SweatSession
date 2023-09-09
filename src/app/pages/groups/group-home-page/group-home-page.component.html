@@ -53,5 +53,27 @@
         [modal]="modal"></group-user>
       </ion-list>
     </div>
+
+    <div class="content" [hidden]="selectedSegment !== 'schedules'">
+      <div class="zero-content-container ">
+        <div class="inner-zero-content-wrapper">
+          <ion-icon class="large-icon" name="receipt"></ion-icon><br>
+          <ion-text>
+            Group has no workout schedules.
+          </ion-text>
+        </div>
+       </div>
+    </div>
+
+    <div class="content" [hidden]="selectedSegment !== 'leaderboard'">
+      <div class="zero-content-container ">
+        <div class="inner-zero-content-wrapper">
+          <ion-icon class="large-icon" name="bar-chart"></ion-icon><br>
+          <ion-text>
+            Ranking under construction.
+          </ion-text>
+        </div>
+       </div>
+    </div>
   </div>
 </div>
