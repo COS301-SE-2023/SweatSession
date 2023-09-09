@@ -29,9 +29,7 @@ ion-button {
   .icon {
     display: flex;
     align-items: center;
-    ion-icon {
-      margin-right: 8px;
-    }
+    width: fit-content;
   }
 }
 
@@ -59,4 +57,9 @@ ion-button {
   color: #457B9D;
   animation: color-change 30s infinite;
  }
+}
+
+ion-input {
+  padding-right: 0px;
+  margin-right: 0px;
 }

@@ -22,12 +22,16 @@
     .icon {
       display: flex;
       align-items: center;
-      ion-icon {
-        margin-right: 8px;
-      }
+      margin-right: 0px;
+      width: fit-content;
     }
   }
 
   .submit-button {
     margin-top: 15px;
+  }
+
+  ion-input {
+    padding-right: 0px;
+    margin-right: 0px;
   }
