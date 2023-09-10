@@ -206,6 +206,12 @@ const routes: Routes = [
     path: 'download',
     loadChildren: () => import('./pages/download/download.module').then( m => m.DownloadPageModule)
   },
+  {
+    path: 'calories-calculator',
+    loadChildren: () => import('./pages/calories-calculator/calories-calculator.module').then( m => m.CaloriesCalculatorPageModule)
+  },
+
+
 ];
 @NgModule({
   imports: [

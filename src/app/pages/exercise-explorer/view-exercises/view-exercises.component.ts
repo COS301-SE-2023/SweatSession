@@ -73,7 +73,6 @@ export class ViewExercisesComponent  implements OnInit {
 
     async openModal(ExerciseTuple:ExerciseList) {
 
-      // console.log("ExerciseTuple: " + ExerciseTuple.video.instructions[0]);
         const modal = await this.modalController.create({
             component: InstructionModalComponent,
             componentProps: {
