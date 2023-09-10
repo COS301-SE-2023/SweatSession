@@ -10,11 +10,12 @@ import {ToastController} from "@ionic/angular";
 
 
 
-export class CaloriesCalculatorPage implements OnInit  {
+export class CaloriesCalculatorPage implements OnInit {
   BMIValue: number;
   TDEEValue: number;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
   }
@@ -55,4 +56,21 @@ export class CaloriesCalculatorPage implements OnInit  {
     this.TDEEValue = parseFloat(tdee.toFixed(2));
   }
 
+  CalculateCaloriesConsumption() {
+
+  }
+
+  calculateTargetCalories(tdee: number, goal: string, deficitOrSurplus: number): number {
+    let targetCalories: number;
+
+    if (goal === 'weight loss') {
+      targetCalories = tdee - deficitOrSurplus;
+    } else if (goal === 'weight gain') {
+      targetCalories = tdee + deficitOrSurplus;
+    } else {
+      targetCalories = tdee;
+    }
+
+    return targetCalories;
+  }
 }
