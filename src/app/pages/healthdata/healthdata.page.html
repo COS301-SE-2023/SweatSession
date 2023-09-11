@@ -36,6 +36,24 @@
 
       <ion-item class="full-width">
         <div class="input-field">
+          <ion-label class="customlabel">Gender</ion-label>
+          <ion-select formControlName="gender">
+            <ion-select-option value="Male">Male</ion-select-option>
+            <ion-select-option value="Female">Female</ion-select-option>
+            <ion-select-option value="Prefer not to say">Prefer not to say</ion-select-option>
+          </ion-select>
+        </div>
+      </ion-item>
+      
+      <ion-item class="full-width">
+        <div class="input-field">
+          <ion-label class="customlabel">Age</ion-label>
+          <ion-input formControlName="age" type="text"></ion-input>
+        </div>
+      </ion-item>      
+
+      <ion-item class="full-width">
+        <div class="input-field">
           <ion-label class="customlabel">Diet</ion-label>
           <ion-input formControlName="diet" type="text"></ion-input>
         </div>
