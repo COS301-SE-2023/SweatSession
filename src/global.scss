@@ -150,7 +150,7 @@ swiper-container::part(bullet-active) {
 // #A8DADC;
 // #457b9d
 
-ion-button {
+ion-button:not(.backbutton) {
     --background: #A8DADC;
     --background-hover: #457b9d;
     --background-activated: #457b9d;

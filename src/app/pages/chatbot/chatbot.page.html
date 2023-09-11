@@ -22,10 +22,8 @@
     <div class="input-field-container">
       <ion-textarea placeholder="Enter your Question" [(ngModel)]="userMessage"></ion-textarea>
     </div>
-    <ion-fab-button class="message-send-fab-button custom-icon-color" [color]="isText() ? 'primary' : 'medium'" [disabled]="!isText()" (click)="sendUserMessage()">
+    <ion-fab-button class="message-send-fab-button custom-icon-color" [color]="isText() ? '' : 'medium'" [disabled]="!isText()" (click)="sendUserMessage()">
       <ion-icon name="send"></ion-icon>
     </ion-fab-button>
   </ion-item>
 </ion-footer>
-
-

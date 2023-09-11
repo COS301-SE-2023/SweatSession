@@ -1,10 +1,7 @@
 <ion-header>
  <ion-toolbar>
-  <ion-item lines="none">
-    <backbutton></backbutton>
-    <ion-title style="margin: 0 auto;" *ngIf="name$ | async as usersName;">{{usersName}}</ion-title>
-    <!-- <ion-title style="margin: 0 auto;">{{user!.name}}'s' Badges</ion-title> -->
-  </ion-item>
+  <backbutton></backbutton>
+  <ion-title *ngIf="name$ | async as usersName;">{{usersName}}</ion-title>
  </ion-toolbar>
 </ion-header>
 
