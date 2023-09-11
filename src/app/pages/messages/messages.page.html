@@ -28,9 +28,9 @@
 
             <div class="zero-content-container" *ngIf="chatFriends.length === 0">
               <div class="inner-zero-content-wrapper">
-                <ion-icon class="large-icon" name="people"></ion-icon><br>
+                <ion-icon class="large-icon" name="person"></ion-icon><br>
                 <ion-text>
-                  You don't have any friends at the moment. You need to make new friends in order to begin chatting.
+                  You don't have any chatting friends at the moment.
                 </ion-text>
               </div>
             </div>
@@ -54,7 +54,7 @@
             <div class="inner-zero-content-wrapper">
               <ion-icon class="large-icon" name="people"></ion-icon><br>
               <ion-text>
-                You don't have any groups at the moment. You can either create a new group or search for a new group and join.
+                You don't have any groups at the moment.
               </ion-text>
             </div>
           </div>
@@ -70,9 +70,18 @@
   </ion-fab>
 
   <ion-fab slot="fixed" vertical="bottom" horizontal="end" [hidden]="selectedSegment!=='groups'">
-    <ion-fab-button routerLink="/creategroup">
+    <ion-fab-button>
       <ion-icon name="people-outline"></ion-icon>
     </ion-fab-button>
+    <ion-fab-list side="start">
+      <ion-fab-button routerLink="/creategroup">
+        <ion-icon name="add-circle"></ion-icon>
+        <!-- create -->
+      </ion-fab-button>
+      <ion-fab-button routerLink="/home/search">
+        <ion-icon name="person-add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
   </ion-fab>
 
   <ion-modal #modal trigger="open-modal" [initialBreakpoint]="0.5" [breakpoints]="[0, 0.25, 0.5, 0.75]">
