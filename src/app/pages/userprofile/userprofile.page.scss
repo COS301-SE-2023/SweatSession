@@ -34,6 +34,7 @@
 .back-button {
     width: 100%;
     padding: 10px;
+    display: flex;
     ion-item {
         --background: transparent;
     }
@@ -62,4 +63,9 @@ ion-title {
 
 ion-icon {
     color: #457b9d;
+}
+
+.edit-button {
+   position: absolute;
+   right: 10px;
 }

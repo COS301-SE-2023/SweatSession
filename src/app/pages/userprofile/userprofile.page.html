@@ -2,12 +2,15 @@
   <ion-card class="otheruser-profile" *ngIf="isLoading; else loaderContent">
     <div class="profile-outer-container">
       <div class="back-button">
-        <ion-item lines="none">
-          <ion-buttons slot="start">
-            <backbutton></backbutton>
-          </ion-buttons>
-          <ion-icon name="create-outline" routerLink="/setprofile" slot="end" style="color: white !important;"></ion-icon>
-        </ion-item>
+       <ion-buttons slot="start">
+        <backbutton class></backbutton>
+       </ion-buttons>
+
+       <ion-buttons class="edit-button">
+        <ion-button class="default-button"  routerLink="/setprofile" >
+          <ion-icon name="create-outline" style="color: white !important;"></ion-icon>
+        </ion-button>
+       </ion-buttons>
       </div>
       <div class="profile-img-container">
         <ion-avatar class="profile-image">
