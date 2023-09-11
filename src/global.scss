@@ -104,7 +104,7 @@ ion-segment {
         width: 85%;
         padding: 0px;
         ion-textarea {
-            padding-top: 8px;
+            padding-top: 0px;
             padding-bottom: 0px;
             margin: 0px;
         }
@@ -147,7 +147,7 @@ swiper-container::part(bullet-active) {
 // #A8DADC;
 // #457b9d
 
-ion-button:not(.backbutton) {
+ion-button:not(.backbutton,.default-button) {
     --background: #A8DADC;
     --background-hover: #457b9d;
     --background-activated: #457b9d;
