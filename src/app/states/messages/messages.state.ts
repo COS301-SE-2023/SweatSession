@@ -1,10 +1,10 @@
 import { Injectable } from "@angular/core";
-import { Action, Selector, State, StateContext } from "@ngxs/store";
+import { Action, Selector, State, StateContext, Store } from "@ngxs/store";
 import { IMessage, IChatFriend, IGetChatFriends, IGetMessages, ISendMessage, IDeleteMessage, IProfileModel, IFriendsModel, IGroup, IGetGroups, IAddChatGroup, IJoinGroup, IRemoveChatGroup, IExitChatGroup, IGetGroup } from "src/app/models";
-import { DeleteMessage, GetMessages, SendMessage, GetChatFriends, StageChatFriend, GetFriendsProfiles, GetChatFriend, RemoveChatFriendSession, SendGroupMessage, RemoveChatGroupSession, AddChatGroup, JoinChatGroup, RemoveChatGroup, ExitChatGroup, StageChatGroup, GetGroupMessages, GetGroup, GetUserGroups, GetGroups, GetUser } from 'src/app/actions';
+import { DeleteMessage, GetMessages, SendMessage, GetChatFriends, StageChatFriend, GetFriendsProfiles, GetChatFriend, RemoveChatFriendSession, SendGroupMessage, RemoveChatGroupSession, AddChatGroup, JoinChatGroup, RemoveChatGroup, ExitChatGroup, StageChatGroup, GetGroupMessages, GetGroup, GetUserGroups, GetGroups, GetUser, StopChatFriendsLoading } from 'src/app/actions';
 import { AuthApi } from "../auth";
 import { FriendsService, MessagesService, NavigationService, OtheruserService } from "src/app/services";
-import { tap } from "rxjs";
+import { delay, of, switchMap, tap } from "rxjs";
 import { Navigate } from "@ngxs/router-plugin";
 
 export interface MessagesStateModel {
@@ -17,6 +17,7 @@ export interface MessagesStateModel {
     chatGroups?: IGroup[];
     chatGroup?: IGroup;
     groups?: IGroup[];
+    loading?: boolean;
 }
 
 @State<MessagesStateModel>({
@@ -30,7 +31,8 @@ export interface MessagesStateModel {
         chatFriendProfile: {},
         chatGroups: [],
         chatGroup: {},
-        groups: []
+        groups: [],
+        loading: true
     }
 })
 
@@ -39,7 +41,7 @@ export interface MessagesStateModel {
 })
 export class MessagesState {
     constructor(private authApi:AuthApi, private service: MessagesService, private friendsService: FriendsService, private otheruserService: OtheruserService,
-        private readonly navigation: NavigationService) {}
+        private readonly navigation: NavigationService, private readonly store: Store) {}
 
     @Action(GetChatFriends)
     async getChatFriends (ctx: StateContext<MessagesStateModel>) {
@@ -216,8 +218,10 @@ export class MessagesState {
 
                     ctx.setState({
                         ...ctx.getState(),
-                        friendProfiles: friendsProfiles
+                        friendProfiles: friendsProfiles,
                     })
+                    // delay(1000);
+                    ctx.dispatch(new StopChatFriendsLoading());
                 })
             );
         }
@@ -244,6 +248,13 @@ export class MessagesState {
            )
         }
         return;
+    }
+
+    @Action(StopChatFriendsLoading)
+    async stopChatFriendLoading (ctx: StateContext<MessagesStateModel>) {
+        ctx.patchState({
+            loading: false
+        })
     }
 
     @Action(GetGroups)
@@ -378,5 +389,10 @@ export class MessagesState {
     @Selector()
     static returnGroup(state: MessagesStateModel) {
         return state.chatGroup;
+    }
+
+    @Selector()
+    static returnLoadingState(state: MessagesStateModel) {
+        return state.loading;
     }
 }
