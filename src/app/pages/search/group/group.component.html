@@ -26,6 +26,37 @@
       </ion-item>
     </ion-list>
   </div>
+
+  <div *ngIf="!searchTerms.showSuggestions">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12">
+          <div class="slide-header">
+            <ion-item class="header">
+              <ion-icon name="people" slot="start"></ion-icon> 
+              <ion-label>Suggested Groups</ion-label>
+            </ion-item>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngFor="let row of rows">
+        <ion-col *ngFor="let item of row" size="6">
+          <ion-item class="groups-recommendations" lines="none">
+            <ion-avatar slot="start">
+              <ion-img [src]="item.profileURL"></ion-img>
+            </ion-avatar>
+            <ion-label class="label">
+              <h2>{{item.displayName}}</h2>
+              <p>{{item.bio}}</p>
+            </ion-label>
+          </ion-item>
+          <ion-buttons>
+            <ion-button class="view-button" expand="block" (click)="selectGroup(item)">View Group</ion-button>
+          </ion-buttons>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
 </div>
 
 <ion-modal #modal [isOpen]="showGroupPage">

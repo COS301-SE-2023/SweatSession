@@ -17,8 +17,14 @@ export class GroupSearchComponent  implements OnInit {
   userId:string;
   selectedGroup: IGroup = {};
   showGroupPage = false;
+
+  items: IGroup[] = [];
+  selectedItems: IGroup[] = [];
+  rows: IGroup[][] = [];
+
   @Select(MessagesState.returnGroups) groups$!: Observable<IGroup[]>;
   @Select(AuthState.getCurrUserId) userId$!: Observable<string>;
+
   constructor(private store:Store) {
     this.initialiseSearchTerms();
   }
@@ -61,6 +67,7 @@ export class GroupSearchComponent  implements OnInit {
     }) 
     this.groups$.subscribe((response)=>{
       this.groups = response;
+      this.selectRandomItems();
     })
   }
 
@@ -75,4 +82,36 @@ export class GroupSearchComponent  implements OnInit {
     modal.dismiss();
     this.store.dispatch(new StageChatGroup(group));
   }
+
+  selectRandomItems() {
+    if(this.groups.length>=10){
+      const randomIndexes = this.getRandomIndexes(this.groups.length, 10);
+      this.selectedItems = randomIndexes.map((index) => this.groups[index]);
+      this.rows = this.chunkArray(this.selectedItems, 2);
+    }else{
+      const randomIndexes = this.getRandomIndexes(this.groups.length, this.groups.length);
+      this.selectedItems = randomIndexes.map((index) => this.groups[index]);
+      this.rows = this.chunkArray(this.selectedItems, 2);
+    }
+  }
+
+  getRandomIndexes(max: number, count: number): number[] {
+    const indexes: number[] = [];
+    while (indexes.length < count) {
+      const randomIndex = Math.floor(Math.random() * max);
+      if (!indexes.includes(randomIndex)) {
+        indexes.push(randomIndex);
+      }
+    }
+    return indexes;
+  }
+
+  chunkArray(array: IGroup[], chunkSize: number): IGroup[][] {
+    const result = [];
+    for (let i = 0; i < array.length; i += chunkSize) {
+      result.push(array.slice(i, i + chunkSize));
+    }
+    return result;
+  }
+
 }
