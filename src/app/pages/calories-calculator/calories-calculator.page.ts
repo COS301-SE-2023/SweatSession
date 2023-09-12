@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {  ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import {ToastController} from "@ionic/angular";
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { getAuth } from '@angular/fire/auth';
+import {AngularFirestore} from "@angular/fire/compat/firestore";
+import {ProfileService} from "../../services";
 
 @Component({
   selector: 'app-calories-calculator',
@@ -13,63 +17,85 @@ import {ToastController} from "@ionic/angular";
 export class CaloriesCalculatorPage implements OnInit {
   BMIValue: number;
   TDEEValue: number;
+  healthDataForm: FormGroup;
+  currUserId: string | undefined | null;
+  commitmentLevel: number;
+  weightGoals: number;
 
-  constructor() {
+  constructor(private formBuilder: FormBuilder,private firestore: AngularFirestore, private profileService: ProfileService)
+  {
+    this.healthDataForm = this.formBuilder.group({
+      height: ['', Validators.required],
+      weight: ['', Validators.required],
+      diet: ['', Validators.required],
+      medicalConditions: ['', Validators.required],
+      workoutCommitment: ['', Validators.required],
+      displayName: ['']
+    });
+    this.commitmentLevel = 0;
+    this.weightGoals = 0;
   }
+
 
   ngOnInit() {
   }
 
-  getBMIValue() {
-    this.calculateBMI();
-    return this.BMIValue;
-  }
 
-  getTDEEValue() {
-    this.calculateTDEE();
-    return this.TDEEValue;
-  }
-
-  calculateBMI() {
-    let height = 5;
-    let weight = 5;
-    let bmi = weight / (height / 100 * height / 100);
-    this.BMIValue = parseFloat(bmi.toFixed(2));
-  }
-
-  calculateTDEE() {
-    let height = 5;
-    let weight = 5;
-    let age = 5;
-    let tdee = 0;
-    if (this.BMIValue < 18.5) {
-      tdee = 1.2 * (10 * weight + 6.25 * height - 5 * age + 5);
-    } else if (this.BMIValue >= 18.5 && this.BMIValue < 25) {
-      tdee = 1.375 * (10 * weight + 6.25 * height - 5 * age + 5);
-    } else if (this.BMIValue >= 25 && this.BMIValue < 30) {
-      tdee = 1.55 * (10 * weight + 6.25 * height - 5 * age + 5);
-    } else if (this.BMIValue >= 30 && this.BMIValue < 35) {
-      tdee = 1.725 * (10 * weight + 6.25 * height - 5 * age + 5);
-    } else if (this.BMIValue >= 35) {
-      tdee = 1.9 * (10 * weight + 6.25 * height - 5 * age + 5);
+  async fetchHealthData() {
+    if(this.currUserId) {
+      const userProfile = await this.profileService.getProfile({ userId: this.currUserId }).toPromise();
+      const displayName = userProfile?.profile.displayName;
+      this.firestore.collection('healthdata', ref => ref.where('displayName', '==', displayName))
+          .valueChanges()
+          .subscribe(data => {
+            if (data.length > 0) {
+              this.healthDataForm.patchValue(data[0]!);
+            }
+          });
     }
-    this.TDEEValue = parseFloat(tdee.toFixed(2));
   }
 
-  CalculateCaloriesConsumption() {
+  calculateandGet_BMR() { //using  Harris-Benedict Equation (Revised Harris-Benedict Equation)
+    this.fetchHealthData();
+    let height = 180;
+    let weight = 60;
+    let age = 25;
+    let gender = "male"
+    let bmr = 0;
 
-  }
-
-  calculateTargetCalories(tdee: number, goal: string, deficitOrSurplus: number): number {
-    let targetCalories: number;
-
-    if (goal === 'weight loss') {
-      targetCalories = tdee - deficitOrSurplus;
-    } else if (goal === 'weight gain') {
-      targetCalories = tdee + deficitOrSurplus;
-    } else {
-      targetCalories = tdee;
+    if(gender == "male")
+    {
+        let step1 = 13.397 * weight;
+        let step2 = 4.799 * height;
+        let step3 = 5.677 * age;
+        let step4 = 88.362;
+        bmr = step1 + step2 - step3 + step4;
     }
+    else
+    {
+        let step1 = 9.247 * weight;
+        let step2 = 3.098 * height;
+        let step3 = 4.330 * age;
+        let step4 = 447.593;
+        bmr = step1 + step2 - step3 + step4;
+    }
+      return bmr;
+  }
+
+  calculateandGet_TDEE() {
+
+    this.fetchHealthData();
+    let TDEE = 0;
+    let bmr = this.calculateandGet_BMR();
+    TDEE = bmr * this.commitmentLevel;
+
+    return TDEE;
+  }
+
+
+  calculateTargetCalories(): number {
+
+    let targetCalories = this.calculateandGet_TDEE() * this.weightGoals;
 
     return targetCalories;
   }

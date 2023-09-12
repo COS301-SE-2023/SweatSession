@@ -20,14 +20,14 @@
                     </div>
                 </ion-item>
                 <ion-item lines="none">
-                    <ion-label>BMI Value: {{getBMIValue()}}</ion-label>
+                    <ion-label>BMR Value: {{calculateandGet_BMR()}}</ion-label>
                 </ion-item>
                 <ion-item lines="none">
-                    <ion-label>TDEE Value: {{getTDEEValue()}} calories per day</ion-label>
+                    <ion-label>TDEE Value: {{calculateandGet_TDEE()}} calories per day</ion-label>
                 </ion-item>
                 <ion-item lines="none">
                     <ion-label>Commitment Level</ion-label>
-                    <ion-select>
+                    <ion-select [(ngModel)]="commitmentLevel">
                         <ion-select-option value="1.2">Little to no exercise</ion-select-option>
                         <ion-select-option value="1.375">Light exercise (1–3 days per week)</ion-select-option>
                         <ion-select-option value="1.55">Moderate exercise (3–5 days per week)</ion-select-option>
@@ -37,17 +37,16 @@
                 </ion-item>
                 <ion-item lines="none">
                     <ion-label>Weight Goals</ion-label>
-                    <ion-select>
+                    <ion-select [(ngModel)]="weightGoals">
                         <ion-select-option value="0.8">Lose Weight</ion-select-option>
                         <ion-select-option value="1">Maintain Weight</ion-select-option>
                         <ion-select-option value="1.2">Gain Weight</ion-select-option>
                     </ion-select>
                 </ion-item>
                 <ion-item lines="none">
-                    <ion-label>Calories Consumption: {{calculateTargetCalories}}</ion-label>
+                    <ion-label>Calories Consumption: {{calculateTargetCalories()}}</ion-label>
                 </ion-item>
-
-                <ion-button>Calculate</ion-button>
+<!--                <ion-button>Calculate</ion-button>-->
             </ion-list>
         </ion-card-content>
     </ion-card>
