@@ -42,3 +42,14 @@ module.exports = (config:any, options:any, context:any) => {
   ];
   return config;
 };
+module.exports = {
+  // ... other configuration options
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
+      },
+    ],
+  },
+};

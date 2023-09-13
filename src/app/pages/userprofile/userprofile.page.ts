@@ -1,5 +1,4 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import { ModalController } from '@ionic/angular';
 import { NavController } from '@ionic/angular';
 import { Select, Store } from '@ngxs/store';
 import {Observable, Subscription, tap} from 'rxjs';
@@ -12,6 +11,8 @@ import {getAuth} from "@angular/fire/auth";
 import { register } from 'swiper/element/bundle';
 import {Router, NavigationStart, ActivatedRoute} from '@angular/router';
 import { GetUserGroups } from 'src/app/actions';
+import {ImageModalComponent } from './image-modal/image-modal.component';
+import { AnimationController, ModalController } from '@ionic/angular';
 
 register();
 
@@ -39,7 +40,8 @@ export class UserprofilePage implements OnInit {
     private setprofileservices: SetProfileService, 
     private authApi: AuthApi,
     private activatedRoute: ActivatedRoute,
-
+    private modalController: ModalController,
+    private animationCtrl: AnimationController,
     )
     {}
     @ViewChild('loaderContent') loaderContentTemplate: any;
@@ -57,6 +59,21 @@ export class UserprofilePage implements OnInit {
       this.groups=response;
     })
   }
+
+
+  async openProfileModal(imageSrc: string) {
+    const modal = await this.modalController.create({
+      component: ImageModalComponent,
+      componentProps: {
+        imageSrc: imageSrc,
+      },
+        cssClass: 'custom-max-size-modal',
+    });
+
+    return await modal.present();
+  }
+
+
 
     // Unsubscribe from the router events to avoid memory leaks
 
@@ -91,6 +108,11 @@ export class UserprofilePage implements OnInit {
       });
 
   }
+
+  isPopOut: boolean = false;
+
+
+
   Leaderboard() {
     this.Nav.navigateRoot('/home/leaderboard');
   }
