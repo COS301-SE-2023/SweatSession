@@ -22,7 +22,7 @@ export class CaloriesCalculatorPage implements OnInit {
   commitmentLevel: number;
   weightGoals: number;
 
-  selectedSegment: string = 'exercise';
+  selectedSegment: string = 'target';
 
   constructor(private formBuilder: FormBuilder,private firestore: AngularFirestore, private profileService: ProfileService)
   {
