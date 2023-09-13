@@ -37,8 +37,8 @@
           <ion-card-title >Tasks</ion-card-title>
           <ion-icon name = "add" size="large" (click)="addControl()" slot = "end" ></ion-icon>
         </ion-item-divider>
-        <ion-card>
-          <ion-item *ngFor="let control of Taskses.controls; index as i;" formArrayName="Taskses" class="form-group">
+
+          <ion-item *ngFor="let control of Taskses.controls; index as i;" formArrayName="Taskses" class="form-group" lines="none">
             <ion-item [formGroupName]="i" lines="none">
               <ion-input type="text" placeholder="Name Task" formControlName="content"></ion-input>
               <ion-button (click)="remove(i)" color = "danger">
@@ -47,18 +47,31 @@
               </ion-button>
             </ion-item>
           </ion-item>
-        </ion-card>
+
       </form>
     </ion-card>
 
 
 
+<!--    <div class="ion-padding">-->
+<!--      <ion-grid>-->
+<!--        <ion-row>-->
+<!--          <ion-col>-->
+<!--            <ion-button expand="block" (click)="cancel()">Cancel</ion-button>-->
+<!--          </ion-col>-->
+<!--          <ion-col>-->
+<!--            <ion-button expand="block" (click)="saveGoal()">Done</ion-button>-->
+<!--          </ion-col>-->
+<!--        </ion-row>-->
+<!--      </ion-grid>-->
+<!--    </div>-->
+
     <ion-row>
       <ion-col>
-        <ion-button fill="outline" expand="block" size="small" (click)="goback()">Cancel</ion-button>
+        <ion-button fill="outline" expand="block" (click)="goback()">Cancel</ion-button>
       </ion-col>
       <ion-col>
-        <ion-button fill="outline" expand="block" size="small" type="submit" [disabled]="!isValid(goalForm.value)">Save Goal</ion-button>
+        <ion-button fill="outline" expand="block" type="submit" [disabled]="!isValid(goalForm.value)">Save Goal</ion-button>
       </ion-col>
     </ion-row>
   </form>
