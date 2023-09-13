@@ -22,8 +22,8 @@ export class BadgesService {
   badges$() {
     const auth = getAuth();
     const currUserId = auth.currentUser?.uid;
-    alert("In badges$");
-    alert(currUserId);
+    // alert("In badges$");
+    // alert(currUserId);
     const docRef = doc(
       this.firestore,
       `badges/${currUserId}`

@@ -3,7 +3,7 @@ import {IGOAL,IGOALS} from "../../models/fitnessgoals.model";
 export class AddGoalAction {
     static readonly type = "[fitnessgoals] Add Goal";
     constructor(public payload:IGOAL){
-        alert('AddGoalAction in actions');
+        // alert('AddGoalAction in actions');
     }
 }
 
