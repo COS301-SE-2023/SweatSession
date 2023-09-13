@@ -8,6 +8,7 @@ import { CaloriesCalculatorPageRoutingModule } from './calories-calculator-routi
 
 import { CaloriesCalculatorPage } from './calories-calculator.page';
 import {BackButtonDirectiveModule} from "../../directives";
+import { ExerciseCalculatorComponent } from './exercise-calculator/exercise-calculator.component';
 
 @NgModule({
     imports: [
@@ -17,6 +18,6 @@ import {BackButtonDirectiveModule} from "../../directives";
         CaloriesCalculatorPageRoutingModule,
         BackButtonDirectiveModule
     ],
-  declarations: [CaloriesCalculatorPage]
+  declarations: [CaloriesCalculatorPage, ExerciseCalculatorComponent]
 })
 export class CaloriesCalculatorPageModule {}

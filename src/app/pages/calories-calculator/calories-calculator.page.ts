@@ -22,6 +22,8 @@ export class CaloriesCalculatorPage implements OnInit {
   commitmentLevel: number;
   weightGoals: number;
 
+  selectedSegment: string = 'exercise';
+
   constructor(private formBuilder: FormBuilder,private firestore: AngularFirestore, private profileService: ProfileService)
   {
     this.healthDataForm = this.formBuilder.group({
@@ -98,5 +100,9 @@ export class CaloriesCalculatorPage implements OnInit {
     let targetCalories = this.calculateandGet_TDEE() * this.weightGoals;
 
     return targetCalories;
+  }
+
+  onSegmentChange(event: any) {
+    this.selectedSegment = event.detail.value;
   }
 }

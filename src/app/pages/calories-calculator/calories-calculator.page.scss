@@ -126,3 +126,11 @@
 .slider:hover .level {
   height: calc(var(--slider-height) * 2);
 }
+
+.outer-container {
+  height: 20vh;
+}
+
+.inner-container {
+  padding-top: 50px;
+}
