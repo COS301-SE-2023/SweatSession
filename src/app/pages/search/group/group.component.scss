@@ -1,7 +1,6 @@
 ion-avatar {
-    height: 50px;
-    width: 50px;
-    margin: 10px;
+    height: 30px;
+    width: 30px;
 }
 
 ion-item:hover {
@@ -13,9 +12,14 @@ ion-item{
 }
 
 ion-item {
-    --background: #A8DADC;
+    // --background: #A8DADC;
     opacity: 1;
     border-radius: 2px;
+    --padding-start: 0px;
+    --padding-end: 0px;
+    --padding-bottom: 0px;
+    --padding-top: 0px;
+    --padding-inline-end: 0px;
 }
 
 .groups-recommendations {
@@ -23,7 +27,7 @@ ion-item {
 }
 
 ion-row {
-    margin-bottom: 20px;
+    margin-bottom: 0px;
     ion-col {
         margin: 0px;
         padding: 0px;
@@ -44,11 +48,30 @@ ion-row {
     font-size: x-large;
 }
 
-
-ion-button {
-    --background: #E63946;
-    color: white;
-    --border-style: none;
-    // --border-width: 2px;
-    // --border-color: #457b9d;
+ion-buttons {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
 }
+
+.view-button {
+    color: #E63946;// #457b9d; #
+}
+
+.overflow-hidden {
+    white-space:nowrap;
+    overflow: hidden; 
+    text-overflow: ellipsis;
+    // animation: moveText 10s linear infinite alternate;
+}
+  
+@keyframes moveText {
+0% {
+    transform: translateX(0);
+}
+100% {
+    transform: translateX(-100%);
+}
+}
+  
