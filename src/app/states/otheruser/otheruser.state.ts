@@ -167,7 +167,7 @@ export class OtheruserState {
         }
         sessionStorage.removeItem("otherUserBadgesName");
         sessionStorage.removeItem("otherUserBadgesId");
-        this.navigation.back();
+        // this.navigation.back();
     }
 
     @Action(GetUsersAction)
