@@ -1,6 +1,6 @@
 export class StageGroup {
     static readonly type= "[Groups] stage a group in session storage";
-    constructor(public groupId: string) {console.log("[Groups] stage a group in session storage")}
+    constructor(public groupId: string) {}
 }
 
 export class LoadGroupHompage {
