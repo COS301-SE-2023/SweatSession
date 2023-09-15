@@ -8,10 +8,26 @@
 </ion-header>
 
 <ion-content>
-  <app-goalcard></app-goalcard>
-  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
-    <ion-fab-button (click)="addGoal()">
-      <ion-icon name="add"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
+
+
+    <ng-container *ngIf="GOALS.length > 0; else noGoalsTemplate">
+        <app-goalcard></app-goalcard>
+    </ng-container>
+
+    <ng-template #noGoalsTemplate>
+        <ion-card>
+            <ion-card-header>
+                <ion-card-title>There are no goals yet</ion-card-title>
+            </ion-card-header>
+        </ion-card>
+    </ng-template>
+
+
+
+
+    <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+      <ion-fab-button (click)="addGoal()">
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
 </ion-content>

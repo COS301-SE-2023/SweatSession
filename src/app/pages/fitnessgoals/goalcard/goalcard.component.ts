@@ -85,7 +85,10 @@ export class GoalcardComponent  implements OnInit {
         }
     }
 
-    getFilteredGoals() {
+
+
+    getFilteredGoals()
+    {
         if (this.selectedSegment === '0') {
             return this.GOALS.filter(goal => {
               if (goal.progress! < 100) {
@@ -127,7 +130,6 @@ export class GoalcardComponent  implements OnInit {
             }
             ); 
         }
-
         return this.GOALS;
     }
       
@@ -139,7 +141,8 @@ export class GoalcardComponent  implements OnInit {
         // this.ngOnInit();
     }
 
-    confirmDelete(id: string) {
+    confirmDelete(id: string)
+    {
         const alert = document.createElement('ion-alert');
         alert.header = 'Confirm';
         alert.message = 'Are you sure you want to delete this Goal?';
@@ -148,14 +151,12 @@ export class GoalcardComponent  implements OnInit {
                 text: 'Cancel',
                 role: 'cancel',
                 handler: () => {
-                    console.log('Confirm Cancel');
                     this.router.navigate(['/goals']);
                 }
             },
             {
                 text: 'Confirm',
                 handler: () => {
-                    console.log('Confirm Okay');
                     this.removeGoal(id);
                 }
             }
