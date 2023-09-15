@@ -4,7 +4,7 @@
       <backbutton (click)="removeSession()"></backbutton>
     </ion-buttons>
     <ion-title>
-      <ion-chip id="group-name">
+      <ion-chip>
         <ion-avatar>
           <ion-img alt="Silhouette of a person's head" [src]="group.profileURL"/>
         </ion-avatar>
@@ -32,7 +32,7 @@
     </div>
   </div>
 
-  <ion-modal #modal trigger="group-name">
+  <!-- <ion-modal #modal trigger="group-name">
     <ng-template>
       <ion-content>
         <group-home-page
@@ -40,7 +40,7 @@
           [modal]="modal"></group-home-page>
       </ion-content>
     </ng-template>
-  </ion-modal>
+  </ion-modal> -->
 </ion-content> 
 
 <ion-footer class="input-field-footer">

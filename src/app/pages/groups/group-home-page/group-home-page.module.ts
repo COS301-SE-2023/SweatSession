@@ -7,8 +7,9 @@ import { IonicModule } from '@ionic/angular';
 import { BackButtonDirectiveModule } from 'src/app/directives';
 import { GroupHomePageComponent } from './group-home-page.component';
 import { AuthModule } from '@angular/fire/auth';
-import { MessageStateModule, OtheruserStateModule } from 'src/app/states';
+import { GroupStateModule, MessageStateModule, OtheruserStateModule } from 'src/app/states';
 import { GroupUserComponentModule } from '../../messages/group-user/group-user.module';
+import { GroupHomePageRoutingModule } from './group-home-routing.module';
 
 @NgModule({
   imports: [
@@ -19,9 +20,10 @@ import { GroupUserComponentModule } from '../../messages/group-user/group-user.m
     MessageStateModule,
     AuthModule,
     OtheruserStateModule,
-    GroupUserComponentModule
+    GroupUserComponentModule,
+    GroupStateModule,
+    GroupHomePageRoutingModule
   ],
   declarations: [GroupHomePageComponent],
-  exports: [GroupHomePageComponent]
 })
 export class GroupsHomePageModule {}

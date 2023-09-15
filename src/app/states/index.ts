@@ -14,3 +14,5 @@ export * from "./fitnessgoal/fitnessgoal.module";
 export * from "./points/points.api";
 export * from "./messages/messages.state";
 export * from "./messages/messages.module";
+export * from "./group/group.module";
+export * from "./group/group.state";

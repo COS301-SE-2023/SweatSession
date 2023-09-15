@@ -39,22 +39,6 @@
         </ion-col>
       </ion-row>
       <ion-row *ngFor="let row of rows">
-        <!-- <ion-col *ngFor="let item of row" size="6">
-          <ion-item>
-            <ion-avatar slot="start">
-              <ion-img [src]="item.profileURL"></ion-img>
-            </ion-avatar>
-            <ion-label class="label">
-              <h5>{{item.displayName}}</h5>
-              <p>{{item.bio}}</p>
-              <ion-buttons>
-                <ion-button class="default-button" expand="block" (click)="selectGroup(item)">
-                  <ion-icon name="chevron-forward-outline" class="view-button"></ion-icon>
-                </ion-button>
-              </ion-buttons>
-            </ion-label>
-          </ion-item>
-        </ion-col> -->
         <ion-col *ngFor="let item of row" size="6">
           <ion-item>
             <ion-avatar slot="start">
@@ -71,18 +55,18 @@
             </ion-label>
           </ion-item>
         </ion-col>
-        
       </ion-row>
     </ion-grid>
   </div>
 </div>
 
-<ion-modal #modal [isOpen]="showGroupPage">
+<!-- <ion-modal #modal [isOpen]="showGroupPage">
   <ng-template>
     <ion-content>
       <group-home-page
         [selectedGroup]="selectedGroup"
-        [modal]="modal"></group-home-page>
+        [modal]="modal">
+      </group-home-page>
     </ion-content>
   </ng-template>
-</ion-modal>
+</ion-modal> -->
