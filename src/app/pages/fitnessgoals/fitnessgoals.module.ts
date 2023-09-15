@@ -18,8 +18,10 @@ import { BackButtonDirectiveModule } from 'src/app/directives';
         IonicModule,
         FitnessgoalsPageRoutingModule,
         ReactiveFormsModule,
-        BackButtonDirectiveModule
+        BackButtonDirectiveModule,
+
     ],
-  declarations: [FitnessgoalsPage,GoalcardComponent ]
+  declarations: [FitnessgoalsPage,GoalcardComponent ],
+    providers: [GoalcardComponent]
 })
 export class FitnessgoalsPageModule {}

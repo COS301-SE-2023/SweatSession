@@ -6,11 +6,13 @@
           <backbutton slot="start" (click)="backtoPreviousPage()"></backbutton>
         </ion-buttons>
       </div>
+
       <div class="profile-img-container">
         <ion-avatar class="profile-image">
-          <ion-img [src]="user!.profileURL"></ion-img>
+          <ion-img [src]="user!.profileURL" (click)="openProfileModal(user!.profileURL!)"></ion-img>
         </ion-avatar>
       </div>
+
       <ion-label class="profile-label">
         <div class="name">
           <h1>{{user!.displayName}}</h1>

@@ -11,6 +11,7 @@ import { Auth } from '@angular/fire/auth';
 import { AuthApi } from 'src/app/states/auth/auth.api';
 import { BackButtonDirectiveModule } from 'src/app/directives';
 import { FriendsStateModule, MessageStateModule } from 'src/app/states';
+import {ImageModalComponent} from "./image-modal/image-modal.component";
 
 @NgModule({
   imports: [
@@ -20,9 +21,10 @@ import { FriendsStateModule, MessageStateModule } from 'src/app/states';
     UserprofilePageRoutingModule,
     BackButtonDirectiveModule,
     FriendsStateModule,
-    MessageStateModule
+    MessageStateModule,
+
   ],
-  declarations: [UserprofilePage],
+  declarations: [UserprofilePage, ImageModalComponent],
   providers: [AuthApi],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

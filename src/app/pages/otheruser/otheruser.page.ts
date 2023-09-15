@@ -17,7 +17,8 @@ import { IBadges } from 'src/app/models/badges.model';
 import { BadgesApi } from 'src/app/states/badges/badges.api';
 import { DocumentSnapshot } from 'firebase/firestore';
 import { register } from 'swiper/element/bundle';
-
+import {ImageModalComponent} from "../userprofile/image-modal/image-modal.component";
+import { AnimationController, ModalController } from '@ionic/angular';
 register();
 
 @Component({
@@ -54,7 +55,11 @@ export class OtheruserPage implements OnInit {
   @Select(OtheruserState.returnFriendshipStatus) friendshipStatus$!: Observable<boolean>;
   @Select(OtheruserState.returnFriendRequestStatus) friendRequestStatus$!: Observable<boolean>;
 
-  constructor(private store: Store , private noticeService: NoticeService , private nav: NavController , pointsApi: PointsApi, badgesApi: BadgesApi) {
+  constructor(private store: Store ,
+              private noticeService: NoticeService ,
+              private nav: NavController , pointsApi: PointsApi, badgesApi: BadgesApi,
+              private modalController: ModalController,
+              ) {
    
     this.displayUserInfo();
     const id = this.user?.userId;
@@ -120,6 +125,17 @@ export class OtheruserPage implements OnInit {
   });
 }
 
+  async openProfileModal(imageSrc: string) {
+    const modal = await this.modalController.create({
+      component: ImageModalComponent,
+      componentProps: {
+        imageSrc: imageSrc,
+      },
+      cssClass: 'custom-max-size-modal',
+    });
+
+    return await modal.present();
+  }
 
   displayUserInfo() {
     this.store.dispatch(new LoadOtherUserProfile());

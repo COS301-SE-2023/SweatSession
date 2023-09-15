@@ -10,53 +10,68 @@
 <ion-content [fullscreen]="true" class="form-content">
   <form [formGroup]="goalForm" (ngSubmit)="onSubmit()" class="ion-padding">
 
-    <ion-item-divider style="background-color: #A8DADC; border-radius: 7px; padding: 5px">
-      <ion-card-title>Goal details</ion-card-title>
-    </ion-item-divider>
+
     <ion-card>
+      <ion-item-divider style="background-color: #A8DADC; border-radius: 7px; padding: 5px">
+        <ion-card-title>Goal details</ion-card-title>
+      </ion-item-divider>
       <ion-item>
-        <ion-label position="stacked"><h2>Name</h2></ion-label>
+        <ion-label position="stacked"><h2 style="font-weight: bold">Name</h2></ion-label>
         <ion-input type="text" placeholder="Name your goal" formControlName="name"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label position="stacked"><h2>Description</h2></ion-label>
+        <ion-label position="stacked"><h2 style="font-weight: bold">Description</h2></ion-label>
         <ion-input type="text" placeholder="Describe your goal" formControlName="description"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label position="stacked"><h2>Start date</h2></ion-label>
+        <ion-label position="stacked"><h2 style="font-weight: bold">Start date</h2></ion-label>
         <ion-input type="date" formControlName="start"></ion-input>
       </ion-item>
       <ion-item lines = "none">
-        <ion-label position="stacked"><h2>End date</h2></ion-label>
+        <ion-label position="stacked"><h2 style="font-weight: bold">End date</h2></ion-label>
         <ion-input type="date" formControlName="end"></ion-input>
       </ion-item>
+
+      <form [formGroup]="TaskForm">
+        <ion-item-divider style="background-color: #A8DADC; border-radius: 7px">
+          <ion-card-title >Tasks</ion-card-title>
+          <ion-icon name = "add" size="large" (click)="addControl()" slot = "end" ></ion-icon>
+        </ion-item-divider>
+
+          <ion-item *ngFor="let control of Taskses.controls; index as i;" formArrayName="Taskses" class="form-group" lines="none">
+            <ion-item [formGroupName]="i" lines="none">
+              <ion-input type="text" placeholder="Name Task" formControlName="content"></ion-input>
+              <ion-button (click)="remove(i)" color = "danger">
+                <ion-icon name="close-circle-outline"></ion-icon>
+                Remove
+              </ion-button>
+            </ion-item>
+          </ion-item>
+
+      </form>
     </ion-card>
 
-    <form [formGroup]="TaskForm">
-      <ion-item-divider style="background-color: #A8DADC; border-radius: 7px">
-        <ion-card-title >Tasks</ion-card-title>
-        <ion-icon name = "add" size="large" (click)="addControl()" slot = "end" ></ion-icon>
-        </ion-item-divider>
-      <ion-card>
-        <ion-item *ngFor="let control of Taskses.controls; index as i;" formArrayName="Taskses" class="form-group">
-          <ion-item [formGroupName]="i" lines="none">
-            <ion-input type="text" placeholder="task name" formControlName="content"></ion-input>
-            <ion-button (click)="remove(i)" color = "danger">
-              <ion-icon name="close-circle-outline"></ion-icon>
-              Remove
-            </ion-button>
-          </ion-item>
-        </ion-item>
-      </ion-card>
 
-    </form>
+
+<!--    <div class="ion-padding">-->
+<!--      <ion-grid>-->
+<!--        <ion-row>-->
+<!--          <ion-col>-->
+<!--            <ion-button expand="block" (click)="cancel()">Cancel</ion-button>-->
+<!--          </ion-col>-->
+<!--          <ion-col>-->
+<!--            <ion-button expand="block" (click)="saveGoal()">Done</ion-button>-->
+<!--          </ion-col>-->
+<!--        </ion-row>-->
+<!--      </ion-grid>-->
+<!--    </div>-->
 
     <ion-row>
       <ion-col>
-        <ion-button fill="outline" expand="block" size="small" (click)="goback()">Cancel</ion-button>
+        <ion-button fill="outline" expand="block" (click)="goback()">Cancel</ion-button>
       </ion-col>
       <ion-col>
-        <ion-button fill="outline" expand="block" size="small" type="submit" [disabled]="!isValid(goalForm.value)">Save Goal</ion-button>
+        <ion-button fill="outline" expand="block" type="submit" [disabled]="!isValid(goalForm.value)">Save Goal</ion-button>
       </ion-col>
     </ion-row>
   </form>

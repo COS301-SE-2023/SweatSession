@@ -14,9 +14,11 @@
       </div>
       <div class="profile-img-container">
         <ion-avatar class="profile-image">
-          <ion-img [src]="ProfilePicture$"></ion-img>
+          <ion-img [src]="ProfilePicture$" (click)="openProfileModal(ProfilePicture$!)"></ion-img>
         </ion-avatar>
       </div>
+
+
       <ion-label class="profile-label">
         <div class="name">
           <h1>{{displayName$}}</h1>

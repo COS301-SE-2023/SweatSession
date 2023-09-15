@@ -6,6 +6,9 @@
 
   <ion-content [scrollEvents]="true" *ngIf="isLoading; else loaderContent">
 
+      <ng-container *ngIf="GOALS.length > 0; else ngemptyTemp">
+
+
         <ion-card *ngFor="let goal of getFilteredGoals()">
             <ion-item-sliding>
             <ion-item id="viewer">
@@ -34,6 +37,17 @@
                 </div>
             </ion-card-content>
         </ion-card>
+      </ng-container>
+
+      <ng-template #ngemptyTemp>
+        <ion-card>
+            <ion-card-content>
+                <ion-card-title>
+                    <ion-text color="danger">Zero Templates</ion-text>
+                </ion-card-title>
+            </ion-card-content>
+        </ion-card>
+        </ng-template>
   </ion-content>
 
 <ng-template #loaderContent>
