@@ -3,7 +3,7 @@ import { IonContent } from '@ionic/angular';
 import { Select, Store } from '@ngxs/store';
 import { Timestamp } from 'firebase/firestore';
 import { Observable, switchMap, tap } from 'rxjs';
-import { GetGroup, GetGroupMessages, RemoveChatGroupSession, SendGroupMessage, SubscribeToAuthState } from 'src/app/actions';
+import { GetGroup, GetGroupMessages, RemoveChatGroupSession, SendGroupMessage, StageGroup, SubscribeToAuthState } from 'src/app/actions';
 import { IGroup, IMessage } from 'src/app/models';
 import { AuthState, MessagesState } from 'src/app/states';
 
@@ -68,5 +68,9 @@ export class GroupChatroomComponent  implements OnInit {
 
   isText() {
     return this.message.text?.trim() != '';
+  }
+
+  selectGroup() {
+    this.store.dispatch(new StageGroup(this.group.id!))
   }
 }
