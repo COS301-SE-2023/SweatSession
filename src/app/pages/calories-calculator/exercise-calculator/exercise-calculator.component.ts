@@ -11,4 +11,12 @@ export class ExerciseCalculatorComponent  implements OnInit {
 
   ngOnInit() {}
 
+  deleteExercise(i: number){
+
+  }
+
+  addExercise(){
+
+  }
+
 }
