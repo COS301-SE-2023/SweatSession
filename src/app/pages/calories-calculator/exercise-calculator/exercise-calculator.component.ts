@@ -36,17 +36,8 @@ export class ExerciseCalculatorComponent  implements OnInit {
     // });
   }
 
-  deleteExercise(i: number){
-    const exercisesFormArray = this.workoutForm.get('exercises') as FormArray;
-      this.exercisesArray.forEach((exercise) => {
-        const exerciseControl = this.formBuilder.group({
-          name: [exercise.name],
-          sets: [exercise.sets],
-          reps: [exercise.reps],
-          weight: [exercise.weight],
-        });
-        exercisesFormArray.push(exerciseControl);
-      });
+  deleteExercise(index: number){
+    this.exercises.removeAt(index);
   }
 
   addExercise(){

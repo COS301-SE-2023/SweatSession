@@ -3,27 +3,35 @@
     <h1>Exercise Calculator</h1>
   </ion-card-title>
   <ion-card-content>
-    <form [formGroup]="workoutForm">
-      <div formArrayName="exercises" *ngFor="let exercise of exercises.controls; index as i">
-        <div class="exercise-number">Exercise {{ i+1 }}</div>
-        <div>
-          <input placeholder="Name" />
-          <input placeholder="Sets" />
-          <input placeholder="Repetitions" />
-          <input placeholder="Weight (kg)" />
-          <!-- [(ngModel)]="name" [(ngModel)]="sets" [(ngModel)]="reps" [(ngModel)]="weight" -->
-        </div>
-        <ion-button color="danger" type="button" (click)="deleteExercise(1)">
-          <ion-icon name="trash"></ion-icon>
-        </ion-button>
+    <div class="grid-container">
+      <div class="form-container">
+        <form [formGroup]="workoutForm">
+          <div
+            formArrayName="exercises"
+            *ngFor="let exercise of exercises.controls; index as i"
+          >
+            <div class="exercise-number">Exercise {{ i + 1 }}</div>
+            <div>
+              <input placeholder="Name" />
+              <input placeholder="Sets" />
+              <input placeholder="Repetitions" />
+              <input placeholder="Weight (kg)" />
+              <!-- [(ngModel)]="name" [(ngModel)]="sets" [(ngModel)]="reps" [(ngModel)]="weight" -->
+            </div>
+            <ion-button
+              color="danger"
+              type="button"
+              (click)="deleteExercise(i)"
+            >
+              <ion-icon name="trash"></ion-icon>
+            </ion-button>
+          </div>
+
+          <ion-button class="adder" type="button" (click)="addExercise()">
+            <ion-icon name="add"></ion-icon>
+          </ion-button>
+        </form>
       </div>
-  
-      <ion-button
-        class="adder"
-        type="button"
-        (click)="addExercise()">
-        <ion-icon name="add"></ion-icon>
-      </ion-button>
-    </form>
+    </div>
   </ion-card-content>
 </ion-card>
