@@ -36,6 +36,7 @@
     "@capacitor/keyboard": "5.0.6",
     "@capacitor/status-bar": "5.0.6",
     "@ionic-native/core": "^5.36.0",
+    "@ionic-native/file": "^5.36.0",
     "@ionic-native/geolocation": "^5.36.0",
     "@ionic/angular": "^7.0.0",
     "@ngxs-labs/actions-executing": "^1.0.3",
