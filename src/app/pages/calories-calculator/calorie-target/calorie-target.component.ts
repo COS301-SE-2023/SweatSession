@@ -50,12 +50,13 @@ export class CalorieTargetComponent  implements OnInit {
     }
   }
 
-  calculateandGet_BMR() { //using  Harris-Benedict Equation (Revised Harris-Benedict Equation)
+  calculateandGet_BMR() { //using  the Revised Harris-Benedict Equation
     this.fetchHealthData();
-    let height = 180;
-    let weight = 60;
-    let age = 25;
-    let gender = "male"
+
+    let height = this.healthDataForm.value.height;
+    let weight = this.healthDataForm.value.weight;
+    let age = this.healthDataForm.value.age;
+    let gender = this.healthDataForm.value.gender;
     let bmr = 0;
 
     if(gender == "male")
@@ -82,13 +83,36 @@ export class CalorieTargetComponent  implements OnInit {
     this.fetchHealthData();
     let TDEE = 0;
     let bmr = this.calculateandGet_BMR();
+
+    if(this.healthDataForm.value.workoutCommitment == "Low Commitment (0-1 days/week)")
+    {
+      this.commitmentLevel = 1.2;
+    }
+    else if(this.healthDataForm.value.workoutCommitment == "Medium Commitment (2-3 days/week)")
+    {
+        this.commitmentLevel = 1.375;
+    }
+    else if (this.healthDataForm.value.workoutCommitment == "High Commitment (4-5 days/week)")
+    {
+        this.commitmentLevel = 1.55;
+    }
+    else if (this.healthDataForm.value.workoutCommitment == "Extreme Commitment (6+ days/week)")
+    {
+        this.commitmentLevel = 1.725;
+    }
+
     TDEE = bmr * this.commitmentLevel;
 
     return TDEE;
   }
 
+//   Low Commitment (0-1 days/week)">Low Commitment (0-1 days/week)</option>
+//   <option value="Medium Commitment (2-3 days/week)">Medium Commitment (2-3 days/week)</option>
+// <option value="High Commitment (4-5 days/week)">High Commitment (4-5 days/week)</option>
+// <option value="Extreme Commitment (6+ days/week)
 
   calculateTargetCalories(): number {
+
 
     let targetCalories = this.calculateandGet_TDEE() * this.weightGoals;
 
