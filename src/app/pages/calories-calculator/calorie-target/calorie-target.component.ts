@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProfileService } from 'src/app/services/profile/profile.service';
+import {healthData} from "../../../models/exercise.model";
 
 @Component({
   selector: 'calorie-target',
@@ -12,27 +13,32 @@ export class CalorieTargetComponent  implements OnInit {
 
   BMIValue: number;
   TDEEValue: number;
-  healthDataForm: FormGroup;
+  healthDataForm: healthData;
   currUserId: string | undefined | null;
   commitmentLevel: number;
   weightGoals: number;
+  bmr: number;
   
   constructor(private formBuilder: FormBuilder,private firestore: AngularFirestore, private profileService: ProfileService)
   {
-    this.healthDataForm = this.formBuilder.group({
-      height: ['', Validators.required],
-      weight: ['', Validators.required],
-      diet: ['', Validators.required],
-      medicalConditions: ['', Validators.required],
-      workoutCommitment: ['', Validators.required],
-      displayName: ['']
-    });
+    this.healthDataForm = {
+        age: 0,
+        diet: "",
+        displayName: "",
+        gender: "",
+        height: 0,
+        medicalConditions: "",
+        weight: 0,
+        workoutCommitment: ""
+    }
+
     this.commitmentLevel = 0;
     this.weightGoals = 0;
   }
 
 
   ngOnInit() {
+      this.calculateandGet_BMR()
   }
 
 
@@ -44,7 +50,7 @@ export class CalorieTargetComponent  implements OnInit {
           .valueChanges()
           .subscribe(data => {
             if (data.length > 0) {
-              this.healthDataForm.patchValue(data[0]!);
+                this.healthDataForm = data[0] as healthData;
             }
           });
     }
@@ -53,10 +59,12 @@ export class CalorieTargetComponent  implements OnInit {
   calculateandGet_BMR() { //using  the Revised Harris-Benedict Equation
     this.fetchHealthData();
 
-    let height = this.healthDataForm.value.height;
-    let weight = this.healthDataForm.value.weight;
-    let age = this.healthDataForm.value.age;
-    let gender = this.healthDataForm.value.gender;
+    let height = this.healthDataForm.height;
+    let weight = this.healthDataForm.weight;
+    let age = this.healthDataForm.age;
+    let gender = this.healthDataForm.gender;
+
+    console.log("height: " + height);
     let bmr = 0;
 
     if(gender == "male")
@@ -75,41 +83,35 @@ export class CalorieTargetComponent  implements OnInit {
         let step4 = 447.593;
         bmr = step1 + step2 - step3 + step4;
     }
-      return bmr;
+     this.bmr = bmr;
   }
 
   calculateandGet_TDEE() {
 
     this.fetchHealthData();
     let TDEE = 0;
-    let bmr = this.calculateandGet_BMR();
 
-    if(this.healthDataForm.value.workoutCommitment == "Low Commitment (0-1 days/week)")
+    if(this.healthDataForm.workoutCommitment == "Low Commitment (0-1 days/week)")
     {
       this.commitmentLevel = 1.2;
     }
-    else if(this.healthDataForm.value.workoutCommitment == "Medium Commitment (2-3 days/week)")
+    else if(this.healthDataForm.workoutCommitment == "Medium Commitment (2-3 days/week)")
     {
         this.commitmentLevel = 1.375;
     }
-    else if (this.healthDataForm.value.workoutCommitment == "High Commitment (4-5 days/week)")
+    else if (this.healthDataForm.workoutCommitment == "High Commitment (4-5 days/week)")
     {
         this.commitmentLevel = 1.55;
     }
-    else if (this.healthDataForm.value.workoutCommitment == "Extreme Commitment (6+ days/week)")
+    else if (this.healthDataForm.workoutCommitment == "Extreme Commitment (6+ days/week)")
     {
         this.commitmentLevel = 1.725;
     }
 
-    TDEE = bmr * this.commitmentLevel;
+    TDEE = this.bmr;
 
     return TDEE;
   }
-
-//   Low Commitment (0-1 days/week)">Low Commitment (0-1 days/week)</option>
-//   <option value="Medium Commitment (2-3 days/week)">Medium Commitment (2-3 days/week)</option>
-// <option value="High Commitment (4-5 days/week)">High Commitment (4-5 days/week)</option>
-// <option value="Extreme Commitment (6+ days/week)
 
   calculateTargetCalories(): number {
 

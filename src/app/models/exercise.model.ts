@@ -21,4 +21,13 @@ export interface ExerciseList
         };
 }
   
-  
+export interface healthData {
+    age: number;
+    diet: string;
+    displayName: string;
+    gender: string;
+    height: number;
+    medicalConditions: string;
+    weight: number;
+    workoutCommitment: string;
+}
