@@ -1,14 +1,14 @@
 <ion-header>
   <ion-toolbar>
-    <ion-item lines="none">
+    <ion-buttons slot="start">
       <backbutton></backbutton>
-      <ion-title>Friends</ion-title>
-    </ion-item>
+    </ion-buttons>
+    <ion-title>Friends</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content *ngIf="friends.length > 0; else noFriends">
-  <search [data]="friends" [placeholder]="'Search for Friends'"></search>
+  <!-- <search [data]="friends" [placeholder]="'Search for Friends'"></search> -->
   <user-friend *ngFor ="let friend of friends" 
     [friend] = "friend"
   >

@@ -47,7 +47,7 @@ export class FriendsState {
                     })
                 }),
                 catchError((error) => {
-                    alert(error)
+                    // alert(error)
                     ctx.setState({
                         friends: [],
                         length: 0

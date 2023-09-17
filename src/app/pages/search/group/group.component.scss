@@ -1,7 +1,6 @@
 ion-avatar {
-    height: 50px;
-    width: 50px;
-    margin: 10px;
+    height: 30px;
+    width: 30px;
 }
 
 ion-item:hover {
@@ -12,8 +11,67 @@ ion-item{
     margin: 8px;
 }
 
-ion-card, ion-item {
-    --background: #A8DADC;
+ion-item {
+    // --background: #A8DADC;
     opacity: 1;
     border-radius: 2px;
+    --padding-start: 0px;
+    --padding-end: 0px;
+    --padding-bottom: 0px;
+    --padding-top: 0px;
+    --padding-inline-end: 0px;
 }
+
+.groups-recommendations {
+    margin: 5px;
+}
+
+ion-row {
+    margin-bottom: 0px;
+    ion-col {
+        margin: 0px;
+        padding: 0px;
+    }
+}
+
+.transparent-item {
+    --background: transparent;
+}
+
+.header {
+    ion-icon {
+        color: #E63946;
+    }
+    color: #E63946;
+    text-decoration: solid;
+    text-shadow: 0px 2px 10px;
+    font-size: x-large;
+}
+
+ion-buttons {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+.view-button {
+    color: #E63946;// #457b9d; #
+}
+
+.overflow-hidden {
+    white-space:nowrap;
+    overflow: hidden; 
+    text-overflow: ellipsis;
+    // animation: moveText 10s linear infinite alternate;
+}
+  
+@keyframes moveText {
+0% {
+    transform: translateX(0);
+}
+100% {
+    transform: translateX(-100%);
+}
+}
+  

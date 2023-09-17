@@ -1,14 +1,11 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { FriendsComponent } from './pages/otheruser/friends/friends.component';
-import { SchedulesComponent } from './pages/otheruser/schedules/schedules.component';
 import {
   AuthGuard,
   redirectLoggedInTo,
   redirectUnauthorizedTo
 } from '@angular/fire/auth-guard';
 import { AddScheduleComponent } from './pages/workout-scheduling/add-schedule/add-schedule.component';
-import { ChatroomComponent } from './pages/messages/chatroom/chatroom.component';
 
 const redirectLoggedOut = () => redirectUnauthorizedTo(['login']);
 const redirectLoggedIn = () => redirectLoggedInTo(['home']);
@@ -196,22 +193,34 @@ const routes: Routes = [
   },
   {
     path: 'healthdata',
+    canActivate: [AuthGuard],
+    data: { authGuardPipe: redirectLoggedOut },
     loadChildren: () => import('./pages/healthdata/healthdata.module').then( m => m.HealthDataPageModule)
   },
   {
     path: 'exercise-explorer',
+    canActivate: [AuthGuard],
+    data: { authGuardPipe: redirectLoggedOut },
     loadChildren: () => import('./pages/exercise-explorer/exercise-explorer.module').then( m => m.ExerciseExplorerPageModule)
   },
   {
     path: 'download',
+    canActivate: [AuthGuard],
+    data: { authGuardPipe: redirectLoggedOut },
     loadChildren: () => import('./pages/download/download.module').then( m => m.DownloadPageModule)
   },
   {
     path: 'calories-calculator',
+    canActivate: [AuthGuard],
+    data: { authGuardPipe: redirectLoggedOut },
     loadChildren: () => import('./pages/calories-calculator/calories-calculator.module').then( m => m.CaloriesCalculatorPageModule)
   },
-
-
+  {
+    path: 'group-homepage',
+    canActivate: [AuthGuard],
+    data: { authGuardPipe: redirectLoggedOut },
+    loadChildren: () => import('./pages/groups/group-home-page/group-home-page.module').then(m => m.GroupsHomePageModule)
+  }
 ];
 @NgModule({
   imports: [

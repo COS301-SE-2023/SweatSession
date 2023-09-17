@@ -21,8 +21,7 @@ import { GroupsHomePageModule } from '../../groups/group-home-page/group-home-pa
     GroupChatroomComponentRoutingModule,
     OtheruserStateModule,
     ChatroomComponentModule,
-    GroupUserComponentModule,
-    GroupsHomePageModule
+    GroupUserComponentModule
   ],
   declarations: [GroupChatroomComponent],
 })

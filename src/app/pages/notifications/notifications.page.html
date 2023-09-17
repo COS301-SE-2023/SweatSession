@@ -1,9 +1,9 @@
 <ion-header>
   <ion-toolbar>
-    <ion-item lines="none">
+    <ion-buttons slot="start">
       <backbutton></backbutton>
-      <ion-title>Notifications</ion-title>
-    </ion-item>
+    </ion-buttons>
+    <ion-title>Notifications</ion-title>
   </ion-toolbar>
 </ion-header>
 <br>
@@ -21,17 +21,17 @@
           <ion-icon name="close-circle-outline"  ></ion-icon>
         </ion-button>
       </div>
-      <ion-card-content style="display:flex ; align-items:center" >
+      <div style="display:flex ; align-items:center" >
         <ion-avatar slot="start">
           <img alt="Silhouette of a person's head" src={{notice.profileurl}} />
         </ion-avatar>
         <ion-grid>
           <ion-row>
-            <ion-label class="Bcard2"><b>&nbsp;{{notice.sendername}}</b></ion-label>
+            <ion-label class="Bcard2"><b style="font-size: 20px;">&nbsp;{{notice.sendername}}</b></ion-label>
           </ion-row>  
           <ion-label class="Bcard">&nbsp;{{notice.message}}</ion-label>
         </ion-grid>
-      </ion-card-content>
+      </div>
       <div class="flex-center4" *ngIf="notice.message == 'Sent you a Friend Request!'">
         <ion-button color="success" size="small" (click)="addFriend(notice)">Accept</ion-button>
         <ion-button color="danger" size="small" (click)="clearNotification(notice.id!); rejectFriendRequest(notice , notice.senderid! , notice.senttoid!);">Reject</ion-button>

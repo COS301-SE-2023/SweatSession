@@ -50,7 +50,7 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { CUSTOM_ELEMENTS_SCHEMA, isDevMode } from '@angular/core';
 import { HttpClient, HttpHandler } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
-import { ServiceWorkerModule } from '@angular/service-worker';
+// import { ServiceWorkerModule } from '@angular/service-worker';
 
  
 
@@ -115,12 +115,12 @@ import { ServiceWorkerModule } from '@angular/service-worker';
       }
       return functions;
     }),
-    ServiceWorkerModule.register('ngsw-worker.js', {
-      enabled: !isDevMode(),
-      // Register the ServiceWorker as soon as the application is stable
-      // or after 30 seconds (whichever comes first).
-      registrationStrategy: 'registerWhenStable:30000'
-    }),
+    // ServiceWorkerModule.register('ngsw-worker.js', {
+    //   enabled: !isDevMode(),
+    //   // Register the ServiceWorker as soon as the application is stable
+    //   // or after 30 seconds (whichever comes first).
+    //   registrationStrategy: 'registerWhenStable:30000'
+    // }),
 
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

@@ -15,8 +15,7 @@ import { GroupUserComponent } from '../group-user/group-user.component';
     BackButtonDirectiveModule,
     MessageStateModule,
     AuthModule,
-    OtheruserStateModule,
-    ChatroomComponentModule
+    OtheruserStateModule
   ],
   declarations: [GroupUserComponent],
   exports: [GroupUserComponent]

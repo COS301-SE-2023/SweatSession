@@ -1,9 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
-import { Observable, tap } from 'rxjs';
-import { ExitChatGroup, GetGroup, JoinChatGroup, StageChatGroup } from 'src/app/actions';
+import { Observable, switchMap, tap } from 'rxjs';
+import { ExitChatGroup, GetGroup, JoinChatGroup, LoadGroupHompage, RemoveGroup, StageChatGroup, StageGroup } from 'src/app/actions';
 import { IGroup } from 'src/app/models';
 import { AuthState, MessagesState } from 'src/app/states';
+import { GroupState } from 'src/app/states/group/group.state';
 
 @Component({
   selector: 'group-home-page',
@@ -12,29 +13,31 @@ import { AuthState, MessagesState } from 'src/app/states';
 })
 export class GroupHomePageComponent  implements OnInit {
   @Select(AuthState.getCurrUserId) userId$!: Observable<string>;
-  @Select(MessagesState.returnGroup) group$!: Observable<IGroup>;
-  @Input() selectedGroup: IGroup;
-  @Input() modal:any;
+  @Select(GroupState.getGroupId) groupId$!: Observable<string>;
+  @Select(GroupState.getGroup) group$!: Observable<IGroup>;
+  selectedGroup: IGroup;
   selectedSegment = "members"
   currentUserId = '';
+  groupid: string;
 
   constructor(private store: Store) { }
 
   ngOnInit() {this.initialize()}
 
   stageGroup() {
-    this.modal.dismiss();
-    this.store.dispatch(new GetGroup(this.selectedGroup.id))
-    this.store.dispatch(new StageChatGroup(this.selectedGroup));
-  }
-
-  closeModal() {
-    this.modal.dismiss();
+    this.store.dispatch(new GetGroup(this.groupid))
+    this.store.dispatch(new StageChatGroup({id: this.groupid}));
   }
 
   initialize() {
-    this.userId$.pipe(
+    this.store.dispatch(new LoadGroupHompage());
+
+    this.groupId$.pipe(
+      tap((response)=> this.groupid = response),
+      switchMap(()=> this.userId$),
       tap((response)=> this.currentUserId = response),
+      switchMap(()=> this.group$),
+      tap((response)=> this.selectedGroup = response)
     ).subscribe()
   }
 
@@ -52,5 +55,9 @@ export class GroupHomePageComponent  implements OnInit {
 
   exitGroup() {
     this.store.dispatch(new ExitChatGroup(this.selectedGroup))
+  }
+
+  removeGroupSession() {
+    this.store.dispatch(new RemoveGroup())
   }
 }

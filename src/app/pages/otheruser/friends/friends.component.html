@@ -1,13 +1,13 @@
 <ion-header>
   <ion-toolbar>
-    <ion-item lines="none">
+    <ion-buttons slot="start">
       <backbutton></backbutton>
-      <ion-title>Friends</ion-title>
-    </ion-item>
+    </ion-buttons>
+    <ion-title>Friends</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content *ngIf="friends.length > 0; else noFriends">
   <div class = "outer-container">
     <div class="body-content">
       <div *ngFor = "let friend of friends">
@@ -19,3 +19,16 @@
     </div>
   </div>
 </ion-content>
+
+<ng-template #noFriends>
+  <ion-content [fullscreen]="true">
+   <div class="zero-content-container ">
+    <div class="inner-zero-content-wrapper">
+      <ion-icon class="large-icon" name="people"></ion-icon><br>
+      <ion-text>
+       No friends
+      </ion-text>
+    </div>
+   </div>
+  </ion-content>
+</ng-template>

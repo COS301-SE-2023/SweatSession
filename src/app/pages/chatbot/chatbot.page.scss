@@ -79,3 +79,85 @@ ion-footer{
     background-position: center;
   }
 
+  .message-input-field .message-send-icon {
+    filter: grayscale(100%);
+  }
+  
+  .message-input-field .message-send-icon.active {
+    filter: none;
+  }
+
+  // .input-field-container {
+  //   display: flex;
+  //   align-items: center;
+  //   flex: 1; 
+  // }
+  
+  // .message-input-field {
+  //   margin-right: 10px; 
+  //   flex: 1; 
+  // }
+    
+  .typing-indicator{
+    background-color: #e2e6e9; 
+    color: #000;
+    border-radius: 15px;
+    padding: 10px;
+    margin-left: auto; 
+    max-width: 70%; 
+    align-self: flex-end; 
+    white-space: pre-line;
+    margin-bottom: 10px;
+  }
+
+  @keyframes ellipsis {
+    0% {
+      content: '.';
+    }
+    50% {
+      content: '..';
+    }
+    100% {
+      content: '...';
+    }
+  }
+  
+  .typing-indicator {
+    background-color: #e2e6e9;
+    color: #000;
+    border-radius: 15px;
+    padding: 10px;
+    margin-left: auto;
+    max-width: 70%;
+    align-self: flex-end;
+    white-space: pre-line;
+    margin-bottom: 10px;
+    position: relative;
+    min-height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .typing-indicator::before {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    left: 5px;
+    bottom: -3px;
+    border-style: solid;
+    border-width: 10px 10px 0;
+    border-color: #e2e6e9 transparent transparent;
+  }
+  
+  .typing-indicator::after {
+    content: '...';
+    font-size: 20px;
+    animation: ellipsis 0.75s infinite;
+  }
+
+  // .input-field-footer .message-input-field .input-field-container ion-textarea{
+  //   padding-top: 4%;
+  // }
+  

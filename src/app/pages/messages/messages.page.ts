@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { Select, Store } from '@ngxs/store';
-import { Observable, switchMap, tap } from 'rxjs';
-import { GetChatFriends, GetFriendsProfiles, GetUserGroups, StageChatFriend, StageChatGroup } from 'src/app/actions';
+import { Observable, forkJoin, switchMap, tap } from 'rxjs';
+import { GetChatFriends, GetFriendsProfiles, GetUserGroups, StageChatFriend, StageChatGroup, StopChatFriendsLoading } from 'src/app/actions';
 import { IChatFriend, IGroup, IProfileModel } from 'src/app/models';
 import { MessagesState } from 'src/app/states';
 
@@ -15,12 +15,13 @@ export class MessagesPage implements OnInit {
  @Select(MessagesState.returnChatFriends) chatFriends$: Observable<IChatFriend[]>;
  @Select(MessagesState.returnFriendsProfiles) friends$: Observable<IProfileModel[]>;
  @Select(MessagesState.returnChatGroups) groups$: Observable<IGroup[]>;
+ @Select(MessagesState.returnLoadingState) load$: Observable<boolean>;
   groups: IGroup[] = [];
  chatFriends: IChatFriend[] = [];
  friends: IProfileModel[] = [];
- loading: boolean = false;
  noFriends: boolean = true;
  selectedSegment = 'chats';
+ loading: boolean = true;
   
 
   constructor(private nav:NavController, private store:Store) { }
@@ -35,7 +36,6 @@ export class MessagesPage implements OnInit {
   }
 
   displayChatFriends() {
-    this.loading = false;
     this.store.dispatch(new GetChatFriends());
     this.store.dispatch(new GetFriendsProfiles());
     
@@ -47,8 +47,12 @@ export class MessagesPage implements OnInit {
     this.friends$.subscribe((response)=>{
         this.friends = response
     })
-  }
 
+    this.load$.subscribe((response)=>{
+      this.loading = response;
+    })
+  }
+  
   displayGroups() {
     this.store.dispatch(new GetUserGroups())
     this.groups$.subscribe((response)=>{

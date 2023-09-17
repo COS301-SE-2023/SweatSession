@@ -1,6 +1,5 @@
 <ion-header>
   <ion-toolbar>
-   <ion-item lines="none">
     <ion-buttons slot="start">
       <backbutton (click)="removeSession()"></backbutton>
     </ion-buttons>
@@ -14,17 +13,18 @@
         </ion-label> 
       </ion-chip>
     </ion-title>
-    <!-- <ion-buttons slot="end">
-      <ion-icon name="ellipsis-vertical-outline" id="trigger"></ion-icon>
-    </ion-buttons> -->
-    <ion-popover trigger="trigger" triggerAction="click">
+    <!--<ion-buttons slot="end">
+       <ion-button class="default-button">
+        <ion-icon name="ellipsis-vertical" id="trigger"></ion-icon>
+      </ion-button> temporarily commented out
+    </ion-buttons> --> 
+    <!-- <ion-popover trigger="trigger" triggerAction="click">
       <ng-template>
         <ion-item lines="none">
           clear chat
         </ion-item>
       </ng-template>
-    </ion-popover>
-   </ion-item>
+    </ion-popover> -->
   </ion-toolbar>
 </ion-header>
 
@@ -44,8 +44,8 @@
     <div class="input-field-wrapper">
       <ion-textarea placeholder="Type a message" [(ngModel)]="message.text"></ion-textarea>
     </div>
-    <ion-fab horizontal="end" *ngIf="isText()">
-      <ion-fab-button class="message-send-fab-button">
+    <ion-fab horizontal="end" vertical ="bottom">
+      <ion-fab-button class="message-send-fab-button" [color]="isText() ? '' : 'medium'" [disabled]="!isText()">
         <ion-icon name="send" (click)="sendMessage()" class="message-send-icon"></ion-icon>
       </ion-fab-button>
     </ion-fab>

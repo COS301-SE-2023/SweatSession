@@ -91,3 +91,7 @@ export class GetUser {
     static readonly type = "[chatGroup] get group user";
     constructor(public payload: string) {}
 }
+
+export class StopChatFriendsLoading {
+    static readonly type = "[messages] stop loading";
+}

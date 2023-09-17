@@ -104,6 +104,8 @@ export class ChatbotPage implements OnInit {
   }
 
   toggleBlurEffect() {
-    this.isBlurred = !this.isBlurred;
+    if (!this.isBlurred) {
+      this.isBlurred = true;
+    }
   }
 }
