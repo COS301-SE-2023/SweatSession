@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import 'firebase/firestore';
 import { Observable, from, lastValueFrom } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import {catchError, map, take} from 'rxjs/operators';
 import { IProfileModel, IGetProfile } from '../models';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 
@@ -64,5 +64,30 @@ export class ProfileRepository {
     
     return profile;
   }
+
+  gethealthdata(userId: string | undefined | null) {
+    return this.firestore.collection('healthdata', ref => ref.where('displayName', '==', userId))
+        .valueChanges()
+        .pipe(
+            take(1) // Optionally, take only one emission to complete the observable after receiving data
+        )
+        .toPromise() // Convert the observable to a promise
+        .then(data => {
+          if (data && data.length > 0) {
+            console.log("I returned data");
+            // console.table(data);
+            return data; // Or some other appropriate value
+          } else {
+            // Handle the case where there is no data
+            return null; // Or some other appropriate value
+          }
+        })
+        .catch(error => {
+          // Handle errors here
+          console.error('Error fetching health data:', error);
+          throw error; // Rethrow the error or handle it as needed
+        });
+  }
+
 
 }

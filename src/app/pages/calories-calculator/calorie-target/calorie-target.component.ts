@@ -3,6 +3,8 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProfileService } from 'src/app/services/profile/profile.service';
 import {healthData} from "../../../models/exercise.model";
+import {SetProfileService} from "../../../services";
+import {wait} from "nx-cloud/lib/utilities/waiter";
 
 @Component({
   selector: 'calorie-target',
@@ -13,14 +15,30 @@ export class CalorieTargetComponent  implements OnInit {
 
   BMIValue: number;
   TDEEValue: number;
+  bmr: number;
   healthDataForm: healthData;
+    healthDataFORM: FormGroup;
   currUserId: string | undefined | null;
   commitmentLevel: number;
   weightGoals: number;
-  bmr: number;
+
   
-  constructor(private formBuilder: FormBuilder,private firestore: AngularFirestore, private profileService: ProfileService)
+  constructor(private formBuilder: FormBuilder,
+              private firestore: AngularFirestore,
+              private profileService: ProfileService,
+              private setProfileService: SetProfileService)
   {
+      this.healthDataFORM = this.formBuilder.group({
+            height: ['', Validators.required],
+            weight: ['', Validators.required],
+            diet: ['', Validators.required],
+            medicalConditions: ['', Validators.required],
+            workoutCommitment: ['', Validators.required],
+            age: ['', Validators.required],
+            gender: ['', Validators.required],
+            displayName: ['']
+      });
+
     this.healthDataForm = {
         age: 0,
         diet: "",
@@ -37,58 +55,88 @@ export class CalorieTargetComponent  implements OnInit {
   }
 
 
-  ngOnInit() {
-      this.calculateandGet_BMR()
+  ngOnInit()
+  {
+
+    this.calculateandGet_BMR();
   }
 
+    fetchHealthData() {
 
-  async fetchHealthData() {
-    if(this.currUserId) {
-      const userProfile = await this.profileService.getProfile({ userId: this.currUserId }).toPromise();
-      const displayName = userProfile?.profile.displayName;
-      this.firestore.collection('healthdata', ref => ref.where('displayName', '==', displayName))
-          .valueChanges()
-          .subscribe(data => {
-            if (data.length > 0) {
-                this.healthDataForm = data[0] as healthData;
-            }
-          });
     }
-  }
 
-  calculateandGet_BMR() { //using  the Revised Harris-Benedict Equation
-    this.fetchHealthData();
+    calculateandGet_BMR()
+    { //using  the Revised Harris-Benedict Equation
 
-    let height = this.healthDataForm.height;
-    let weight = this.healthDataForm.weight;
-    let age = this.healthDataForm.age;
-    let gender = this.healthDataForm.gender;
+        let height = 0;
+        let weight = 0;
+        let age = 0;
+        let gender = "none";
 
-    console.log("height: " + height);
-    let bmr = 0;
+        this.setProfileService.gethealthdata("Boldy")
+            .then((res: unknown) => {
+                const healthDataArray = res as healthData[];
+                if (healthDataArray.length > 0) {
+                    this.healthDataForm.age = healthDataArray[0].age;
+                    this.healthDataForm.diet = healthDataArray[0].diet;
+                    this.healthDataForm.displayName = healthDataArray[0].displayName;
+                    this.healthDataForm.gender = healthDataArray[0].gender;
+                    this.healthDataForm.height = healthDataArray[0].height;
+                    this.healthDataForm.medicalConditions = healthDataArray[0].medicalConditions;
+                    this.healthDataForm.weight = healthDataArray[0].weight;
+                    this.healthDataForm.workoutCommitment = healthDataArray[0].workoutCommitment;
 
-    if(gender == "male")
-    {
-        let step1 = 13.397 * weight;
-        let step2 = 4.799 * height;
-        let step3 = 5.677 * age;
-        let step4 = 88.362;
-        bmr = step1 + step2 - step3 + step4;
-    }
-    else
-    {
-        let step1 = 9.247 * weight;
-        let step2 = 3.098 * height;
-        let step3 = 4.330 * age;
-        let step4 = 447.593;
-        bmr = step1 + step2 - step3 + step4;
-    }
-     this.bmr = bmr;
+
+                     height = this.healthDataForm.height;
+                     weight = this.healthDataForm.weight;
+                     age = this.healthDataForm.age;
+                     gender = this.healthDataForm.gender;
+
+                    let bmr = 0;
+
+                    if(gender == "Male")
+                    {
+                        let step1 = 13.397 * weight;
+                        let step2 = 4.799 * height;
+                        let step3 = 5.677 * age;
+                        let step4 = 88.362;
+                        bmr = step1 + step2 - step3 + step4;
+                    }
+                    else
+                    {
+                        let step1 = 9.247 * weight;
+                        let step2 = 3.098 * height;
+                        let step3 = 4.330 * age;
+                        let step4 = 447.593;
+                        bmr = step1 + step2 - step3 + step4;
+                    }
+                    this.bmr = bmr;
+
+
+                    //calculate BMI
+                    let BMI = 0;
+                    let heightM = height / 100;
+                    BMI = weight / (heightM * heightM);
+                    this.BMIValue = BMI;
+
+
+                } else {
+                    // Handle the case where there is no data
+                    console.log("No health data available.");
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+
+
+
+
+
   }
 
   calculateandGet_TDEE() {
 
-    this.fetchHealthData();
     let TDEE = 0;
 
     if(this.healthDataForm.workoutCommitment == "Low Commitment (0-1 days/week)")
@@ -108,7 +156,7 @@ export class CalorieTargetComponent  implements OnInit {
         this.commitmentLevel = 1.725;
     }
 
-    TDEE = this.bmr;
+    TDEE = this.bmr * this.commitmentLevel;
 
     return TDEE;
   }

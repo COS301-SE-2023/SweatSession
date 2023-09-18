@@ -102,6 +102,9 @@ export class SetProfileService {
     }
     );
   }
+  gethealthdata(userId: string | null | undefined) {
+   return this.repository.gethealthdata(userId);
+  }
 }
 
 
