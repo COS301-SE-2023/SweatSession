@@ -20,7 +20,8 @@ export class CalorieTargetComponent  implements OnInit {
     healthDataFORM: FormGroup;
   currUserId: string | undefined | null;
   commitmentLevel: number;
-  weightGoals: number;
+    weightGoals: number;
+    targetCalories: number;
 
   
   constructor(private formBuilder: FormBuilder,
@@ -36,7 +37,8 @@ export class CalorieTargetComponent  implements OnInit {
             workoutCommitment: ['', Validators.required],
             age: ['', Validators.required],
             gender: ['', Validators.required],
-            displayName: ['']
+            displayName: [''],
+            weightGoals: ['']
       });
 
     this.healthDataForm = {
@@ -47,11 +49,13 @@ export class CalorieTargetComponent  implements OnInit {
         height: 0,
         medicalConditions: "",
         weight: 0,
-        workoutCommitment: ""
+        workoutCommitment: "",
+        weightGoals: ""
     }
 
     this.commitmentLevel = 0;
     this.weightGoals = 0;
+    this.targetCalories = 0;
   }
 
 
@@ -85,12 +89,14 @@ export class CalorieTargetComponent  implements OnInit {
                     this.healthDataForm.medicalConditions = healthDataArray[0].medicalConditions;
                     this.healthDataForm.weight = healthDataArray[0].weight;
                     this.healthDataForm.workoutCommitment = healthDataArray[0].workoutCommitment;
+                    this.healthDataForm.weightGoals = healthDataArray[0].weightGoals;
 
 
                      height = this.healthDataForm.height;
                      weight = this.healthDataForm.weight;
                      age = this.healthDataForm.age;
                      gender = this.healthDataForm.gender;
+
 
                     let bmr = 0;
 
@@ -121,6 +127,7 @@ export class CalorieTargetComponent  implements OnInit {
 
                     //calculate TDEE
                     this.calculateandGet_TDEE();
+                    this.calculateTargetCalories();
 
                 } else {
                     // Handle the case where there is no data
@@ -167,6 +174,7 @@ export class CalorieTargetComponent  implements OnInit {
 
     let targetCalories = this.TDEEValue * this.weightGoals;
 
+    this.targetCalories = targetCalories;
     return targetCalories;
   }
 
