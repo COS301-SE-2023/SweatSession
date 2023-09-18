@@ -25,6 +25,7 @@ exports.checkScheduledWorkouts = functions.pubsub
   .onRun(async (context) => {
     const firestore = admin.firestore();
     const Snapshot = await firestore.collection('WorkoutSchedule').get();
+    console.log('running');
     Snapshot.forEach(async (doc)=>{
         const now = new Date();
         const scheduledWorkoutsRef = firestore.collection(`WorkoutSchedule/${doc.id}/userSchedules`);
