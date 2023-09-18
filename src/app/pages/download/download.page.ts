@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-//import { File, FileOpener } from '@ionic-native/file';//will uncomment stuff
+import { File } from '@ionic-native/file';
 
 @Component({
   selector: 'app-download',
@@ -14,12 +14,12 @@ export class DownloadPage implements OnInit {
     this.downloadAPK();
   }
 
-  downloadAPK(){
-    const url = 'https://ourapklink.apk';//change
-    
+  downloadAPK() {
+    const url = './SweatSession.apk';
+
     // File.downloadFile(url, {}, url.split('/').pop())
-    // .then(file => {
-    //   FileOpener.open(file.toURL(), 'application/vnd.android.package-archive'); 
-    // });
+    //   .then(file => {
+    //     FileOpener.open(file.toURL(), 'application/vnd.android.package-archive');
+    //   });
   }
 }

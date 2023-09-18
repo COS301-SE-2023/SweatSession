@@ -101,7 +101,13 @@ ion-segment {
     border-radius: 10px;
 
     .input-field-wrapper {
-        width: 80%;
+        width: 85%;
+        padding: 0px;
+        ion-textarea {
+            padding-top: 0px;
+            padding-bottom: 0px;
+            margin: 0px;
+        }
     }
 }
 
@@ -120,15 +126,6 @@ swiper-container::part(bullet-active) {
 .message-send-fab-button {
     width: 40px;
     height: 40px;
-}
-
-.native-wrapper.sc-ion-textarea-md textarea.sc-ion-textarea-md {
-    -webkit-padding-start: 0px;
-    padding-inline-start: 0px;
-    -webkit-padding-end: 0px;
-    padding-inline-end: 0px;
-    padding-top: 18px;
-    padding-bottom: 0px;
 }
 
 .transparent-list {
@@ -150,7 +147,7 @@ swiper-container::part(bullet-active) {
 // #A8DADC;
 // #457b9d
 
-ion-button {
+ion-button:not(.backbutton,.default-button) {
     --background: #A8DADC;
     --background-hover: #457b9d;
     --background-activated: #457b9d;

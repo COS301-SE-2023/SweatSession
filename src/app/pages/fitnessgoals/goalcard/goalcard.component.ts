@@ -91,6 +91,7 @@ export class GoalcardComponent  implements OnInit {
     {
         if (this.selectedSegment === '0') {
             return this.GOALS.filter(goal => {
+
               if (goal.progress! < 100) {
                 const time: Time = { hours: 11, minutes: 59 };
                 const endDay = new Date(`${goal.endDate}.${time.hours}:${time.minutes}`).getTime();

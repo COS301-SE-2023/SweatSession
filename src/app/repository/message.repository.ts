@@ -190,7 +190,7 @@ import { Observable,lastValueFrom, map, tap } from "rxjs";
 
         return response;
        }catch(error) {
-        alert("alert: "+error);
+        // alert("alert: "+error);
         const response:IDeletedMessage = {
             validate: false
         }
@@ -210,7 +210,7 @@ import { Observable,lastValueFrom, map, tap } from "rxjs";
         .doc(groupDocument.id)
         .set(request.group);
       }catch(error){
-        alert("ERROR: "+error)
+        // alert("ERROR: "+error)
       }
     }
 
@@ -234,7 +234,7 @@ import { Observable,lastValueFrom, map, tap } from "rxjs";
           })
         ).subscribe();
       } catch (error) {
-        alert("ERROR: " + error);
+        // alert("ERROR: " + error);
       }
     }
 
@@ -258,7 +258,7 @@ import { Observable,lastValueFrom, map, tap } from "rxjs";
           })
         );
       }catch(error){
-        alert("ERROR: "+error)
+        // alert("ERROR: "+error)
       }
     }
 
@@ -282,7 +282,7 @@ import { Observable,lastValueFrom, map, tap } from "rxjs";
           })
         );
       }catch(error){
-        alert("error: "+error);
+        // alert("error: "+error);
       }
     }
 

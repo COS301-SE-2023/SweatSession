@@ -54,3 +54,12 @@ p {
         margin-left: 10px;
     }
 }
+
+.add-buttons {
+    width: fit-content;
+    margin: auto;
+    .add-friend {
+        color: #457b9d; 
+        padding-right: 5px;
+    }
+}

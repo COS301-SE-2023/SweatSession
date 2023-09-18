@@ -144,6 +144,10 @@ export class ScheduleContentComponent implements OnInit {
     if (this.inSession()) {
       return "Workout Session Has Begun";
     }
+
+    if(this.isCompleted()) {
+      return "completed";
+    }
     return "Workout Session Overdue";
   }
 
@@ -203,8 +207,11 @@ export class ScheduleContentComponent implements OnInit {
           this.schedule.status = "inSession";
           this.store.dispatch(new UpdateWorkoutSchedule(this.schedule));
         }
-      } else if (this.schedule.status !== "completed") {
+      } else if (this.schedule.status !== "completed" && this.joined()) {
         this.schedule.status = "completed";
+        this.store.dispatch(new UpdateWorkoutSchedule(this.schedule))
+      } else {
+        this.schedule.status = "uncompleted";
         this.store.dispatch(new UpdateWorkoutSchedule(this.schedule))
       }
     }

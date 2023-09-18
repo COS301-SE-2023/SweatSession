@@ -1,15 +1,14 @@
 <ion-header>
  <ion-toolbar>
-  <ion-item lines="none">
+  <ion-buttons slot="start">
     <backbutton></backbutton>
-    <ion-title style="margin: 0 auto;" *ngIf="name$ | async as usersName;">{{usersName}}</ion-title>
-    <!-- <ion-title style="margin: 0 auto;">{{user!.name}}'s' Badges</ion-title> -->
-  </ion-item>
+  </ion-buttons>
+  <ion-title *ngIf="name$ | async as usersName;">{{usersName}}</ion-title>
  </ion-toolbar>
 </ion-header>
 
 <ion-content class="badgesContainer">
-  <ion-grid class="loginGrid">
+  <ion-grid class="badgeGrid">
     <ng-container *ngIf="!noOfBadges; else hasBadges">
       <!-- <h1 *ngIf="name$ | async as usersName;" style="color: grey;">{{usersName}} has no badges.</h1> -->
 
@@ -34,4 +33,14 @@
       </ng-container>
     </ng-template>
   </ion-grid>
+  <div class="footer" class="ion-text-center" style="margin-top: auto;">
+    <p>
+      Badge Images:<br>
+      <a
+        href="https://www.freepik.com/free-vector/badge-designs-collection_972250.htm#query=badge%20svg&position=4&from_view=keyword&track=ais"
+        >Image by anindyanfitri</a
+      >
+      on Freepik
+    </p>
+  </div>
 </ion-content>

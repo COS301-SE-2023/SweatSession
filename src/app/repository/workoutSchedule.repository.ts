@@ -76,7 +76,7 @@ export class WorkoutscheduleRepository {
       
         return response;
     } catch (error) {
-        alert('Error adding schedule:'+error);
+        // alert('Error adding schedule:'+error);
       
         const response: IAddedWorkoutSchedule = {
           userId: request.userId,
@@ -144,7 +144,7 @@ export class WorkoutscheduleRepository {
         return response;
     } catch (error) {
         console.log('Error updating schedule:', error);
-        alert(error);
+        // alert(error);
       
         const response: IUpdatedWorkoutSchedule = {
           userId: request.userId,

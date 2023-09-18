@@ -13,22 +13,20 @@
       </div>
     </ion-item><br>
   </ion-list>
-  <div *ngIf="loading" class="loading-container">
-    <ion-spinner color="secondary" class="center"></ion-spinner>
-  </div>
+  <div *ngIf="loading" class="typing-indicator"></div>
   <br><br>
 </ion-content>
 
 <ion-footer class="input-field-footer">
   <ion-item lines="none" class="message-input-field">
-    <div class="input-field-wrapper">
-      <ion-textarea placeholder="Enter your Question" [(ngModel)]="userMessage"></ion-textarea>
+    <div class="input-field-container input-field-wrapper">
+      <ion-textarea [autoGrow]="true" placeholder="Enter your Question" [(ngModel)]="userMessage"></ion-textarea>
     </div>
-    <ion-fab horizontal="end" *ngIf="isText()">
-      <ion-fab-button class="message-send-fab-button" (click)="sendUserMessage()">
-        <ion-icon name="send" class="message-send-icon"></ion-icon>
+
+    <ion-fab horizontal="end" vertical ="bottom">
+      <ion-fab-button class="message-send-fab-button custom-icon-color" [color]="isText() ? '' : 'medium'" [disabled]="!isText()" (click)="sendUserMessage()">
+        <ion-icon name="send"></ion-icon>
       </ion-fab-button>
     </ion-fab>
   </ion-item>
 </ion-footer>
-

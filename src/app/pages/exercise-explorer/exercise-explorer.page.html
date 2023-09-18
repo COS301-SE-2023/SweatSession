@@ -1,15 +1,20 @@
 <ion-header>
   <ion-toolbar>
-    <ion-item lines="none">
-      <backbutton class="larger-back-button"></backbutton>
-      <ion-title>Exercise Explorer</ion-title>
-    </ion-item>
+    <ion-buttons slot="start">
+      <backbutton></backbutton>
+    </ion-buttons>
+    <ion-title>Exercise Explorer</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-button (click)="openExerciseModal()">
-    Test Modal
-    <!-- I just made this button to test the modal. It will be deleted -->
-  </ion-button>
-</ion-content>
+
+  
+  <ion-content>
+    <ion-button (click)="openExerciseModal()">
+      Test Modal
+      <!-- I just made this button to test the modal. It will be deleted -->
+    </ion-button>
+  </ion-content>
+ 
+<canvas #canvas id="canvas" style="height: 50vh; width: 50vw;" class="flex-center" ></canvas>
+

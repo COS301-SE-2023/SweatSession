@@ -37,7 +37,7 @@ export class FitnessgoalState {
 
     @Action(AddGoalAction)
     async addGoal(ctx: StateContext<FitnessgoalStateModel>, { payload }: AddGoalAction) {
-        alert('addGoal in State');
+        // alert('addGoal in State');
         // const currentUserId = await this.authApi.getCurrentUserId();
         //
         // if(currentUserId!=null) {

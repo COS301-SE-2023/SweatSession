@@ -1,20 +1,23 @@
 <ion-header>
   <ion-toolbar>
-    <ion-item lines="none">
-      <ion-buttons>
-        <backbutton (click)="removeSession()"></backbutton>
-      </ion-buttons>
-      <ion-title>
-        <ion-chip id="group-name">
-          <ion-avatar>
-            <ion-img alt="Silhouette of a person's head" [src]="group.profileURL"/>
-          </ion-avatar>
-          <ion-label>
-            {{group.displayName}}
-          </ion-label>
-        </ion-chip>
-      </ion-title>
-    </ion-item>
+    <ion-buttons slot="start">
+      <backbutton (click)="removeSession()"></backbutton>
+    </ion-buttons>
+    <ion-title>
+      <ion-chip (click)="selectGroup()">
+        <ion-avatar>
+          <ion-img alt="Silhouette of a person's head" [src]="group.profileURL"/>
+        </ion-avatar>
+        <ion-label>
+          {{group.displayName}}
+        </ion-label>
+      </ion-chip>
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button class="default-button">
+        <ion-icon name="ellipsis-vertical"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -28,25 +31,15 @@
       ></chatbox>
     </div>
   </div>
-
-  <ion-modal #modal trigger="group-name">
-    <ng-template>
-      <ion-content>
-        <group-home-page
-          [selectedGroup]="group"
-          [modal]="modal"></group-home-page>
-      </ion-content>
-    </ng-template>
-  </ion-modal>
 </ion-content> 
 
 <ion-footer class="input-field-footer">
   <ion-item lines="none" class="message-input-field">
     <div class="input-field-wrapper">
-      <ion-textarea placeholder="Type a message" [(ngModel)]="message.text"></ion-textarea>
+      <ion-textarea [autoGrow]="true" placeholder="Type a message" [(ngModel)]="message.text"></ion-textarea>
     </div>
-    <ion-fab horizontal="end" *ngIf="isText()">
-      <ion-fab-button class="message-send-fab-button">
+    <ion-fab horizontal="end" vertical ="bottom">
+      <ion-fab-button class="message-send-fab-button" [color]="isText() ? '' : 'medium'" [disabled]="isText()">
         <ion-icon name="send" (click)="sendMessage()" class="message-send-icon"></ion-icon>
       </ion-fab-button>
     </ion-fab>

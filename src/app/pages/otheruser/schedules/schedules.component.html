@@ -1,13 +1,13 @@
 <ion-header>
   <ion-toolbar>
-    <ion-item lines="none">
-      <backbutton class="larger-back-button"></backbutton>
-      <ion-title>Workout Schedule</ion-title>
-    </ion-item>
+    <ion-buttons slot="start">
+      <backbutton></backbutton>
+    </ion-buttons>
+    <ion-title>Workout Schedule</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content *ngIf="schedules.length > 0; else noSchedules">
   <div class = "outer-container">
     <div class="body-content">
       <div *ngFor = "let schedule of schedules">
@@ -18,3 +18,16 @@
     </div>
   </div>
 </ion-content>
+
+<ng-template #noSchedules>
+  <ion-content [fullscreen]="true">
+   <div class="zero-content-container ">
+    <div class="inner-zero-content-wrapper">
+      <ion-icon class="large-icon" name="receipt-outline"></ion-icon><br>
+      <ion-text>
+       No schedules
+      </ion-text>
+    </div>
+   </div>
+  </ion-content>
+</ng-template>
