@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { File } from '@ionic-native/file';
+//import { File } from '@ionic-native/file';
 
 @Component({
   selector: 'app-download',
