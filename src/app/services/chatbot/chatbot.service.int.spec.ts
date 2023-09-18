@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { of } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { ChatbotService } from './chatbot.service';
-import { environment } from 'src/environments/environment';
+import { environment } from 'src/environments/environment'; 
 
 describe('ChatbotService', () => {
   let service: ChatbotService;
