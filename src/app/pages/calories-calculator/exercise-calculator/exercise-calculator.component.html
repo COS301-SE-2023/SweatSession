@@ -3,6 +3,9 @@
     <h1>Exercise Calculator</h1>
   </ion-card-title>
   <ion-card-content>
+    <div class="heading-container">
+      <h2>Add your workout plan here</h2>
+    </div>
     <div class="grid-container">
       <div class="form-container">
         <form [formGroup]="workoutForm">
@@ -12,10 +15,10 @@
           >
             <div class="exercise-number">Exercise {{ i + 1 }}</div>
             <div>
-              <input placeholder="Name" />
-              <input placeholder="Sets" />
-              <input placeholder="Repetitions" />
-              <input placeholder="Weight (kg)" />
+              <input formControlName="name" placeholder="Name" />
+              <input formControlName="sets" placeholder="Sets" />
+              <input formControlName="reps" placeholder="Repetitions" />
+              <input formControlName="weight" placeholder="Weight (kg)" />
               <!-- [(ngModel)]="name" [(ngModel)]="sets" [(ngModel)]="reps" [(ngModel)]="weight" -->
             </div>
             <ion-button

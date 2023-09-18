@@ -1,0 +1,76 @@
+.form-container {
+    background-color: #A8DADC;
+    border-radius: 25px;
+    padding: 20px;
+    width: 80%;
+    text-align: center;
+    margin: auto; 
+  }
+  input {
+    display: block;
+    width: 100%;
+    align-self: center;
+    margin-bottom: 10px;
+  }
+  
+  .exercise-number {
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-top: 10px;
+    margin-bottom: 1%;
+  }
+  
+  .heading-container {
+    text-align: center;
+    margin-top: 5%;
+    margin-bottom: 20px;
+  }
+  
+  .heading-container h1,
+  .heading-container h2 {
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+  }
+  
+  .submit{
+    --background: #E63946;
+    --color: white;
+  }
+  
+  .adder{
+    --background: #457B9D;
+    --color: white;
+  }
+  
+  .heading-container h2 {
+    font-size: 1.4rem;
+    font-weight: 100;
+    color:  #E63946; 
+  }
+  
+  .image-container {
+    text-align: center;
+    margin: 0; 
+  }
+  
+  .centered-image {
+    max-width: 40%; 
+    max-height: 40%; 
+    margin:  5% auto; 
+    display: block; 
+  }
+  
+  .exercise-number,
+  input[formControlName="name"],
+  input[formControlName="sets"],
+  input[formControlName="reps"],
+  input[formControlName="weight"] {
+    font-family: 'Montserrat', sans-serif;
+  }
+  
+  input[formControlName="name"],
+  input[formControlName="sets"],
+  input[formControlName="reps"],
+  input[formControlName="weight"] {
+    border-radius: 12px;
+  }

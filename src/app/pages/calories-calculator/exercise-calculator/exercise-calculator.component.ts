@@ -18,6 +18,7 @@ export class ExerciseCalculatorComponent implements OnInit {
   scheduleId: string;
   currUserId: string | undefined;
   plannedWorkouts: any;
+  selectedWorkout: Exercise[];
 
   constructor(
     private exerciseService: ExerciseService,
@@ -29,7 +30,7 @@ export class ExerciseCalculatorComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     // this.exerciseService.getExerciseByScheduleId(this.scheduleId).pipe(take(1)).subscribe((exercises) => {
     //   this.exercisesArray = exercises.map((exercise) => ({
     //     ...exercise,
@@ -38,7 +39,9 @@ export class ExerciseCalculatorComponent implements OnInit {
     //   console.log('Fetched exercises:', this.exercisesArray);
     this.populateFormWithExercises();
     // });
-    this.getUserWorkouts();
+    await this.getUserWorkouts();
+    await this.getSessionWorkout("QSR1W4sMCU487Rncx8gB");
+    console.log(this.selectedWorkout);
   }
 
   deleteExercise(index: number) {
@@ -88,5 +91,16 @@ export class ExerciseCalculatorComponent implements OnInit {
         console.log(this.plannedWorkouts);
       }
     )
+  }
+
+  async getSessionWorkout(sessionId: string){
+    try {
+      const response = await this.exerciseService.getExerciseByScheduleId(sessionId).toPromise();
+      this.selectedWorkout = response!;
+      return response;
+    } catch (error) {
+      console.error('Error fetching session workout:', error);
+      return "Error fetching session workout:";
+    }
   }
 }
