@@ -30,5 +30,5 @@ export interface healthData {
     medicalConditions: string;
     weight: number;
     workoutCommitment: string;
-    weightGoals: string;
+    weightGoals: number;
 }

@@ -50,7 +50,7 @@ export class CalorieTargetComponent  implements OnInit {
         medicalConditions: "",
         weight: 0,
         workoutCommitment: "",
-        weightGoals: ""
+        weightGoals: 0
     }
 
     this.commitmentLevel = 0;
@@ -169,12 +169,62 @@ export class CalorieTargetComponent  implements OnInit {
     return TDEE;
   }
 
-  calculateTargetCalories(): number {
+  calculateTargetCalories(): number
+  {
+      let targetCalories = this.TDEEValue;
 
+      if(this.healthDataForm.weightGoals == 0)
+      {
+          this.targetCalories = targetCalories;
+      }
+      else if(this.healthDataForm.weightGoals > 0)
+      {
+          if(this.healthDataForm.weightGoals == 1)
+          {
+                targetCalories = targetCalories + 1100;
+                this.targetCalories = targetCalories;
+          }
+          else if(this.healthDataForm.weightGoals == 0.75)
+          {
+              targetCalories = targetCalories + 825;
+              this.targetCalories = targetCalories;
+          }
+          else if(this.healthDataForm.weightGoals == 0.5)
+          {
+              targetCalories = targetCalories + 550;
+              this.targetCalories = targetCalories;
+          }
+          else if(this.healthDataForm.weightGoals == 0.25)
+          {
+                targetCalories = targetCalories + 275;
+                this.targetCalories = targetCalories;
+          }
 
-    let targetCalories = this.TDEEValue * this.weightGoals;
+      }
+      else if(this.healthDataForm.weightGoals < 0)
+      {
+          if (this.healthDataForm.weightGoals == -1)
+          {
+              targetCalories = targetCalories - 1100;
+              this.targetCalories = targetCalories;
+          }
+          else if (this.healthDataForm.weightGoals == -0.75)
+          {
+              targetCalories = targetCalories - 825;
+              this.targetCalories = targetCalories;
+          }
+          else if (this.healthDataForm.weightGoals == -0.5)
+          {
+                targetCalories = targetCalories - 550;
+                this.targetCalories = targetCalories;
+          }
+          else if (this.healthDataForm.weightGoals == -0.25)
+          {
+                targetCalories = targetCalories - 275;
+                this.targetCalories = targetCalories;
+          }
+      }
 
-    this.targetCalories = targetCalories;
     return targetCalories;
   }
 
