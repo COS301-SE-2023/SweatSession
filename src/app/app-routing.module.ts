@@ -210,7 +210,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/download/download.module').then( m => m.DownloadPageModule)
   },
   {
-    path: 'calories-calculator',
+    path: 'calories-calculator', 
     canActivate: [AuthGuard],
     data: { authGuardPipe: redirectLoggedOut },
     loadChildren: () => import('./pages/calories-calculator/calories-calculator.module').then( m => m.CaloriesCalculatorPageModule)
@@ -220,7 +220,12 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     data: { authGuardPipe: redirectLoggedOut },
     loadChildren: () => import('./pages/groups/group-home-page/group-home-page.module').then(m => m.GroupsHomePageModule)
+  },
+  {
+    path: 'user-manual',
+    loadChildren: () => import('./pages/user-manual/user-manual.module').then( m => m.UserManualPageModule)
   }
+
 ];
 @NgModule({
   imports: [
