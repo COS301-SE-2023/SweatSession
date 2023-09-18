@@ -119,6 +119,8 @@ export class CalorieTargetComponent  implements OnInit {
                     BMI = weight / (heightM * heightM);
                     this.BMIValue = BMI;
 
+                    //calculate TDEE
+                    this.calculateandGet_TDEE();
 
                 } else {
                     // Handle the case where there is no data
@@ -128,10 +130,6 @@ export class CalorieTargetComponent  implements OnInit {
             .catch((error) => {
                 console.log(error);
             });
-
-
-
-
 
   }
 
@@ -156,15 +154,18 @@ export class CalorieTargetComponent  implements OnInit {
         this.commitmentLevel = 1.725;
     }
 
+    console.log("The value: " + this.commitmentLevel);
+
     TDEE = this.bmr * this.commitmentLevel;
 
+    this.TDEEValue = TDEE;
     return TDEE;
   }
 
   calculateTargetCalories(): number {
 
 
-    let targetCalories = this.calculateandGet_TDEE() * this.weightGoals;
+    let targetCalories = this.TDEEValue * this.weightGoals;
 
     return targetCalories;
   }

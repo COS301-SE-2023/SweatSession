@@ -9,17 +9,21 @@
           <ion-icon name="calculator" class="calculator-icon"></ion-icon>
         </div>
       </ion-item>
+
       <ion-item lines="none">
-        <ion-label>BMI Value: {{BMIValue.toFixed(2)}} Calories per day</ion-label>
+        <ion-label>BMI Value: {{BMIValue}} </ion-label>
       </ion-item>
+
       <ion-item lines="none">
-        <ion-label>BMR Value: {{bmr.toFixed(2)}} Calories per day</ion-label>
+        <ion-label>BMR Value: {{bmr}} Calories per day </ion-label>
       </ion-item>
+
       <ion-item lines="none">
         <ion-label>
-          TDEE Value:  calories per day
+          TDEE Value: {{TDEEValue}} calories per day
         </ion-label>
       </ion-item>
+
 <!--      <ion-item lines="none">-->
 <!--        <ion-label>Commitment Level</ion-label>-->
 <!--        <ion-select [(ngModel)]="commitmentLevel">-->
