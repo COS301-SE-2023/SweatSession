@@ -6,6 +6,7 @@ export interface Exercise {
     reps: number;
     weight: number;
     hasChanged?: boolean;
+    duration: number;
 }
 
 export interface ExerciseList

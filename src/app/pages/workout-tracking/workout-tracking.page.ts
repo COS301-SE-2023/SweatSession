@@ -58,6 +58,7 @@
           sets: [exercise.sets],
           reps: [exercise.reps],
           weight: [exercise.weight],
+          duration: [exercise.duration]
         });
         exercisesFormArray.push(exerciseControl);
       });
@@ -74,6 +75,7 @@
         sets: [''],
         reps: [''],
         weight: [''],
+        duration: ['']
       });
       (this.workoutForm.get('exercises') as FormArray).push(exerciseControl);
     }
@@ -112,6 +114,7 @@
           sets: exerciseControl.get('sets')?.value ?? 0,
           reps: exerciseControl.get('reps')?.value ?? 0,
           weight: exerciseControl.get('weight')?.value ?? 0,
+          duration: exerciseControl.get('duration')?.value ?? 0,
         };
     
         return this.saveExercise(exerciseData, index);

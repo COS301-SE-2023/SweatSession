@@ -19,6 +19,10 @@ export class ExerciseCalculatorComponent implements OnInit {
   currUserId: string | undefined;
   plannedWorkouts: any;
   selectedWorkout: Exercise[];
+  userWeight: number;
+  metValues : { [key: string]: number } = {
+    "stretching": 2.3,
+  }
 
   constructor(
     private exerciseService: ExerciseService,
@@ -54,8 +58,10 @@ export class ExerciseCalculatorComponent implements OnInit {
       sets: [''],
       reps: [''],
       weight: [''],
+      duration: ['']
     });
     (this.workoutForm.get('exercises') as FormArray).push(exerciseControl);
+    console.log(this.workoutForm);
   }
 
   get exercises(): FormArray {
@@ -70,6 +76,7 @@ export class ExerciseCalculatorComponent implements OnInit {
         sets: [exercise.sets],
         reps: [exercise.reps],
         weight: [exercise.weight],
+        duration: [exercise.duration]
       });
       exercisesFormArray.push(exerciseControl);
     });
@@ -102,5 +109,9 @@ export class ExerciseCalculatorComponent implements OnInit {
       console.error('Error fetching session workout:', error);
       return "Error fetching session workout:";
     }
+  }
+
+  calculateCaloriesBurnedForExercise(exerciseName: string, duration: number){
+    return this.userWeight*this.metValues[exerciseName]*duration;
   }
 }
