@@ -58,6 +58,10 @@ export class HomePage implements OnInit {
     this.nav.navigateRoot("/settings");
   }
 
+  openhelpwebsite() {
+    window.location.href = 'https://drive.google.com/file/d/1QVv3vk6EiRsO7b123LUXclGO4n4Fs5ML/view?usp=sharing';
+  }
+
   // async displayProfile() {
   //   // this.userId$.subscribe(async (response)=>{
   //   //   if(response) {
