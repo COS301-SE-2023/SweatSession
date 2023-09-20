@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { getAuth } from '@angular/fire/auth';
-import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray, AbstractControl } from '@angular/forms';
 import { take, tap } from 'rxjs';
 import { Exercise } from 'src/app/models/exercise.model';
 import { ExerciseService, WorkoutscheduleService } from 'src/app/services';
@@ -19,7 +19,7 @@ export class ExerciseCalculatorComponent implements OnInit {
   currUserId: string | undefined;
   plannedWorkouts: any;
   selectedWorkout: Exercise[];
-  userWeight: number;
+  userWeight: number = 70;
   metValues : { [key: string]: number } = {
     "stretches": 2.3,
     "pushUps": 8,
@@ -73,7 +73,8 @@ export class ExerciseCalculatorComponent implements OnInit {
       duration: ['']
     });
     (this.workoutForm.get('exercises') as FormArray).push(exerciseControl);
-    console.log(this.workoutForm);
+    this.saveExercises();
+    this.calculateTotalCaloriesBurned();
   }
 
   get exercises(): FormArray {
@@ -124,6 +125,71 @@ export class ExerciseCalculatorComponent implements OnInit {
   }
 
   calculateCaloriesBurnedForExercise(exerciseName: string, duration: number){
-    return this.userWeight*this.metValues[exerciseName]*duration;
+    let calories = this.userWeight*this.metValues[exerciseName]*duration;
+    console.log("calories");
+    console.log(calories);
+    console.log(this.userWeight);
+    console.log(exerciseName);
+    console.log(this.metValues[exerciseName]);
+    console.log(duration);
+    return calories;
+  }
+
+  calculateTotalCaloriesBurned(){
+    let totalCaloriesBurned = 0;
+    const exercisesArray = this.workoutForm.get('exercises') as FormArray;
+    const userEnteredValues: any[] = [];
+
+    // exercisesArray.controls.forEach((control: FormGroup) => {
+    //   const exercise = {
+    //     name: control.get('name').value,
+    //     sets: control.get('sets').value,
+    //     reps: control.get('reps').value,
+    //     weight: control.get('weight').value,
+    //     duration: control.get('duration').value,
+    //   };
+    //   enteredValues.push(exercise);
+    // });
+    
+    for (let ex of this.workoutForm.value.exercises){
+      console.log("exer");
+      console.log(ex);
+      let caloriesBurnedForExercise = this.calculateCaloriesBurnedForExercise(ex.name, ex.duration);
+      totalCaloriesBurned += caloriesBurnedForExercise;
+      console.log("caloriesBurnedForExercise");
+      console.log(caloriesBurnedForExercise);
+    }
+    console.log("total");
+    console.log(totalCaloriesBurned);
+  }
+
+  public async saveExercise(exerciseData: Exercise, index: number) {
+    let exercise = this.exercisesArray[index];
+  
+    if (exercise) {
+      Object.assign(exercise, exerciseData);
+    }
+  }
+
+  public async saveExercises() { 
+    console.log('Initial exercisesArray:', this.exercisesArray);
+    console.log('Form exercises:', this.exercises.controls);
+    console.log('Deleted exercises:', this.deletedExercises);   
+    const promises = this.exercises.controls.map((exerciseControl: AbstractControl, index: number) => {
+      const exerciseData = {
+        scheduleId: this.scheduleId,
+        name: exerciseControl.get('name')?.value ?? "",
+        sets: exerciseControl.get('sets')?.value ?? 0,
+        reps: exerciseControl.get('reps')?.value ?? 0,
+        weight: exerciseControl.get('weight')?.value ?? 0,
+        duration: exerciseControl.get('duration')?.value ?? 0,
+      };
+  
+      return this.saveExercise(exerciseData, index);
+    });
+  
+    await Promise.all(promises);
+  
+    console.log('All exercises saved.');
   }
 }
