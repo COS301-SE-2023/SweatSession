@@ -21,8 +21,20 @@ export class ExerciseCalculatorComponent implements OnInit {
   selectedWorkout: Exercise[];
   userWeight: number;
   metValues : { [key: string]: number } = {
-    "stretching": 2.3,
+    "stretches": 2.3,
+    "pushUps": 8,
+    "sitUps": 8,
+    "jumpingJacks": 7.7,
+    "lunges": 4,
+    "planks": 6,
+    "burpees": 8,
+    "crunches": 5,
+    // "lunges": 4,
+    // "pushUps": 8,
+    // "pushUps": 8,
+    // "pushUps": 8,
   }
+  // exerciseOptions: string[] = ["Exercise 1", "Exercise 2", "Exercise 3", "Exercise 4"];
 
   constructor(
     private exerciseService: ExerciseService,

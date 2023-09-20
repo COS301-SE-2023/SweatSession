@@ -15,7 +15,20 @@
           >
             <div class="exercise-number">Exercise {{ i + 1 }}</div>
             <div>
-              <input formControlName="name" placeholder="Name" />
+              <select formControlName="name" placeholder="name">
+                <!-- <option value="" disabled selected>Select an exercise</option> -->
+                <!-- <option *ngFor="let option of exerciseOptions" [value]="option">{{ option }}</option> -->
+                <option value="" hidden selected>Select an exercise</option>
+                <option value="streches">Stretches</option>
+                <option value="pushUps">Push-Ups</option>
+                <option value="sitUps">Sit-Ups</option>
+                <option value="jumpingJacks">Jumping Jacks</option>
+                <option value="lunges">Lunges</option>
+                <option value="planks">Planks</option>
+                <option value="burpees">Burpees</option>
+                <option value="crunches">Crunches</option>
+                <!-- <option value="pushUps">Push-Ups</option> -->
+              </select>
               <input formControlName="sets" placeholder="Sets" />
               <input formControlName="reps" placeholder="Repetitions" />
               <input formControlName="weight" placeholder="Weight (kg)" />
