@@ -2,33 +2,68 @@
   <ion-card-title>
     <h1>Calories Calculator</h1>
   </ion-card-title>
-  <ion-card-content>
-    <ion-list>
-      <ion-item lines="none">
-        <div class="icon-container">
-          <ion-icon name="calculator" class="calculator-icon"></ion-icon>
-        </div>
-      </ion-item>
 
-      <ion-item lines="none">
-        <ion-label>BMI Value: {{BMIValue}} </ion-label>
-      </ion-item>
+  <ng-template *ngIf="filledOuthealth; else healthfilloutPrompt">
+    <ion-card-content>
+      <ion-list>
+        <ion-item lines="none">
+          <div class="icon-container">
+            <ion-icon name="calculator" class="calculator-icon"></ion-icon>
+          </div>
+        </ion-item>
 
-      <ion-item lines="none">
-        <ion-label>BMR Value: {{bmr}} Calories per day </ion-label>
-      </ion-item>
+        <ion-item lines="none">
+          <ion-label>BMI Value: {{BMIValue}} </ion-label>
+        </ion-item>
 
-      <ion-item lines="none">
-        <ion-label>
-          TDEE Value: {{TDEEValue}} calories per day
-        </ion-label>
-      </ion-item>
+        <ion-item lines="none">
+          <ion-label>BMR Value: {{bmr}} Calories per day </ion-label>
+        </ion-item>
 
-      <ion-item lines="none">
-        <ion-label>
-          Weekly Calories Consumption: {{targetCalories}}
-        </ion-label>
-      </ion-item>
-    </ion-list>
-  </ion-card-content>
+        <ion-item lines="none">
+          <ion-label>
+            TDEE Value: {{TDEEValue}} calories per day
+          </ion-label>
+        </ion-item>
+
+        <ion-item lines="none">
+          <ion-label>
+            Weekly Calories Consumption: {{targetCalories}}
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ng-template>
+
+  <ng-template #healthfilloutPrompt>
+    <ion-card-content>
+      <ion-list>
+        <ion-item lines="none">
+          <div class="icon-container">
+            <ion-icon name="calculator" class="calculator-icon"></ion-icon>
+          </div>
+        </ion-item>
+
+        <ion-item lines="none">
+          <ion-row>
+            <ion-label>Please fill out your health information first</ion-label>
+          </ion-row>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-row>
+            <ion-col>
+              <ion-button
+                expand="block"
+                fill="outline"
+                color="primary"
+                routerLink="/healthdata">
+                Health form
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-item>
+
+      </ion-list>
+    </ion-card-content>
+  </ng-template>
 </ion-card>
