@@ -17,11 +17,12 @@ export class CalorieTargetComponent  implements OnInit {
   TDEEValue: number;
   bmr: number;
   healthDataForm: healthData;
-    healthDataFORM: FormGroup;
+  healthDataFORM: FormGroup;
   currUserId: string | undefined | null;
   commitmentLevel: number;
-    weightGoals: number;
-    targetCalories: number;
+  weightGoals: number;
+  targetCalories: number;
+  filledOuthealth: boolean = false;
 
   
   constructor(private formBuilder: FormBuilder,
@@ -81,6 +82,7 @@ export class CalorieTargetComponent  implements OnInit {
             .then((res: unknown) => {
                 const healthDataArray = res as healthData[];
                 if (healthDataArray.length > 0) {
+                    this.filledOuthealth = true;
                     this.healthDataForm.age = healthDataArray[0].age;
                     this.healthDataForm.diet = healthDataArray[0].diet;
                     this.healthDataForm.displayName = healthDataArray[0].displayName;
@@ -131,10 +133,12 @@ export class CalorieTargetComponent  implements OnInit {
 
                 } else {
                     // Handle the case where there is no data
+                    this.filledOuthealth = false;
                     console.log("No health data available.");
                 }
             })
             .catch((error) => {
+                this.filledOuthealth = false;
                 console.log(error);
             });
 
