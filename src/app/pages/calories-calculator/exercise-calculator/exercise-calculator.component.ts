@@ -14,7 +14,6 @@ export class ExerciseCalculatorComponent implements OnInit {
 
   workoutForm: FormGroup;
   exercisesArray: Exercise[] = [];
-  deletedExercises: string[] = [];
   scheduleId: string;
   currUserId: string | undefined;
   plannedWorkouts: any;
@@ -64,7 +63,7 @@ export class ExerciseCalculatorComponent implements OnInit {
     this.exercises.removeAt(index);
   }
 
-  addExercise() {
+  async addExercise() {
     const exerciseControl = this.formBuilder.group({
       name: [''],
       sets: [''],
@@ -73,8 +72,8 @@ export class ExerciseCalculatorComponent implements OnInit {
       duration: ['']
     });
     (this.workoutForm.get('exercises') as FormArray).push(exerciseControl);
-    this.saveExercises();
-    this.calculateTotalCaloriesBurned();
+    // await this.calculateTotalCaloriesBurned();
+    console.log(this.workoutForm.get('exercises') as FormArray);
   }
 
   get exercises(): FormArray {
@@ -125,7 +124,7 @@ export class ExerciseCalculatorComponent implements OnInit {
   }
 
   calculateCaloriesBurnedForExercise(exerciseName: string, duration: number){
-    let calories = this.userWeight*this.metValues[exerciseName]*duration;
+    let calories = this.userWeight*this.metValues[exerciseName]*(duration/60);
     console.log("calories");
     console.log(calories);
     console.log(this.userWeight);
@@ -135,7 +134,7 @@ export class ExerciseCalculatorComponent implements OnInit {
     return calories;
   }
 
-  calculateTotalCaloriesBurned(){
+  async calculateTotalCaloriesBurned(){
     let totalCaloriesBurned = 0;
     const exercisesArray = this.workoutForm.get('exercises') as FormArray;
     const userEnteredValues: any[] = [];
@@ -163,33 +162,33 @@ export class ExerciseCalculatorComponent implements OnInit {
     console.log(totalCaloriesBurned);
   }
 
-  public async saveExercise(exerciseData: Exercise, index: number) {
-    let exercise = this.exercisesArray[index];
+  // public async saveExercise(exerciseData: Exercise, index: number) {
+  //   let exercise = this.exercisesArray[index];
   
-    if (exercise) {
-      Object.assign(exercise, exerciseData);
-    }
-  }
+  //   if (exercise) {
+  //     Object.assign(exercise, exerciseData);
+  //   }
+  // }
 
-  public async saveExercises() { 
-    console.log('Initial exercisesArray:', this.exercisesArray);
-    console.log('Form exercises:', this.exercises.controls);
-    console.log('Deleted exercises:', this.deletedExercises);   
-    const promises = this.exercises.controls.map((exerciseControl: AbstractControl, index: number) => {
-      const exerciseData = {
-        scheduleId: this.scheduleId,
-        name: exerciseControl.get('name')?.value ?? "",
-        sets: exerciseControl.get('sets')?.value ?? 0,
-        reps: exerciseControl.get('reps')?.value ?? 0,
-        weight: exerciseControl.get('weight')?.value ?? 0,
-        duration: exerciseControl.get('duration')?.value ?? 0,
-      };
+  // public async saveExercises() { 
+  //   console.log('Initial exercisesArray:', this.exercisesArray);
+  //   console.log('Form exercises:', this.exercises.controls);
+  //   const promises = this.exercises.controls.map((exerciseControl: AbstractControl, index: number) => {
+  //     const exerciseData = {
+  //       scheduleId: this.scheduleId,
+  //       name: exerciseControl.get('name')?.value ?? "",
+  //       sets: exerciseControl.get('sets')?.value ?? 0,
+  //       reps: exerciseControl.get('reps')?.value ?? 0,
+  //       weight: exerciseControl.get('weight')?.value ?? 0,
+  //       duration: exerciseControl.get('duration')?.value ?? 0,
+  //     };
+  //     console.log(exerciseData)
+  //     return this.saveExercise(exerciseData, index);
+  //   });
   
-      return this.saveExercise(exerciseData, index);
-    });
+  //   await Promise.all(promises);
   
-    await Promise.all(promises);
-  
-    console.log('All exercises saved.');
-  }
+  //   console.log('All exercises saved.');
+  //   console.log(this.exercisesArray);
+  // }
 }

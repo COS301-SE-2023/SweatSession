@@ -14,12 +14,12 @@
             *ngFor="let exercise of exercises.controls; index as i"
           >
             <div class="exercise-number">Exercise {{ i + 1 }}</div>
-            <div>
+            <div [formGroupName]="i">
               <select formControlName="name" placeholder="name">
                 <!-- <option value="" disabled selected>Select an exercise</option> -->
                 <!-- <option *ngFor="let option of exerciseOptions" [value]="option">{{ option }}</option> -->
                 <option value="" hidden selected>Select an exercise</option>
-                <option value="streches">Stretches</option>
+                <option value="stretches">Stretches</option>
                 <option value="pushUps">Push-Ups</option>
                 <option value="sitUps">Sit-Ups</option>
                 <option value="jumpingJacks">Jumping Jacks</option>
@@ -50,5 +50,8 @@
         </form>
       </div>
     </div>
+    <ion-button class="submit" type="button" (click)="calculateTotalCaloriesBurned()">
+      Calculate Calories Burned
+    </ion-button>
   </ion-card-content>
 </ion-card>
