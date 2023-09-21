@@ -4,36 +4,8 @@
   </ion-card-title>
 
 
-<!--  <ng-template *ngIf="filledOuthealth; else healthfilloutPrompt">-->
-<!--    <ion-label>I have health details</ion-label>-->
     <ion-card-content>
-<!--      <ion-list>-->
-<!--        <ion-item lines="none">-->
-<!--          <div class="icon-container">-->
-<!--            <ion-icon name="calculator" class="calculator-icon"></ion-icon>-->
-<!--          </div>-->
-<!--        </ion-item>-->
 
-<!--        <ion-item lines="none">-->
-<!--          <ion-label>BMI Value: {{BMIValue}} </ion-label>-->
-<!--        </ion-item>-->
-
-<!--        <ion-item lines="none">-->
-<!--          <ion-label>BMR Value: {{bmr}} Calories per day </ion-label>-->
-<!--        </ion-item>-->
-
-<!--        <ion-item lines="none">-->
-<!--          <ion-label>-->
-<!--            TDEE Value: {{TDEEValue}} calories per day-->
-<!--          </ion-label>-->
-<!--        </ion-item>-->
-
-<!--        <ion-item lines="none">-->
-<!--          <ion-label>-->
-<!--            Weekly Calories Consumption: {{targetCalories}}-->
-<!--          </ion-label>-->
-<!--        </ion-item>-->
-<!--      </ion-list>-->
       <ion-item lines="none">
                   <div class="icon-container">
                     <ion-icon name="calculator" class="calculator-icon"></ion-icon>
@@ -43,26 +15,26 @@
       <ion-list>
         <ion-item>
           <ion-label>Calculation</ion-label>
-          <ion-label>Value</ion-label>
+          <ion-label>Calories/X</ion-label>
         </ion-item>
       </ion-list>
 
       <ion-list>
         <ion-item>
           <ion-label>BMI Value</ion-label>
-          <ion-label>{{BMIValue}}</ion-label>
+          <ion-label>{{BMIValue | number: '1.2-2'}}</ion-label>
         </ion-item>
         <ion-item>
           <ion-label>BMR Value</ion-label>
-          <ion-label>{{bmr}}</ion-label>
+          <ion-label>{{bmr | number: '1.2-2'}} day</ion-label>
         </ion-item>
         <ion-item>
           <ion-label>TDEE Value</ion-label>
-          <ion-label>{{TDEEValue}}</ion-label>
+          <ion-label>{{TDEEValue | number: '1.2-2'}} day</ion-label>
         </ion-item>
         <ion-item>
           <ion-label>Target Calories</ion-label>
-          <ion-label>{{targetCalories}}</ion-label>
+          <ion-label>{{targetCalories | number: '1.2-2'}} 7-days</ion-label>
         </ion-item>
       </ion-list>
 
@@ -81,39 +53,4 @@
         </ion-item>
 
   </ion-card-content>
-<!--  </ng-template>-->
-
-<!--  <ng-template #healthfilloutPrompt>-->
-<!--    <ion-label>I don't have health details</ion-label>-->
-<!--        <ion-card-content>-->
-<!--      <ion-list>-->
-<!--        <ion-item lines="none">-->
-<!--          <div class="icon-container">-->
-<!--            <ion-icon name="calculator" class="calculator-icon"></ion-icon>-->
-<!--          </div>-->
-<!--        </ion-item>-->
-
-<!--        <ion-item lines="none">-->
-<!--          <ion-row>-->
-<!--            <ion-label>Please fill out your health information first</ion-label>-->
-<!--          </ion-row>-->
-<!--        </ion-item>-->
-<!--        <ion-item lines="none">-->
-<!--          <ion-row>-->
-<!--            <ion-col>-->
-<!--              <ion-button-->
-<!--                expand="block"-->
-<!--                fill="outline"-->
-<!--                color="primary"-->
-<!--                routerLink="/healthdata">-->
-<!--                Health form-->
-<!--              </ion-button>-->
-<!--            </ion-col>-->
-<!--          </ion-row>-->
-<!--        </ion-item>-->
-
-<!--      </ion-list>-->
-<!--  </ion-card-content>-->
-<!--  </ng-template>-->
-
 </ion-card>
