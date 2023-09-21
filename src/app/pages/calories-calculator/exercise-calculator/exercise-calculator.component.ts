@@ -20,15 +20,16 @@ export class ExerciseCalculatorComponent implements OnInit {
   plannedWorkouts: any;
   selectedWorkout: Exercise[];
   userWeight: number;
+  message: string = "Enter your workout and press the Calculate Calories Burned button.";
   metValues : { [key: string]: number } = {
-    "stretches": 2.3,
-    "pushUps": 8,
-    "sitUps": 8,
-    "jumpingJacks": 7.7,
-    "lunges": 4,
-    "planks": 6,
-    "burpees": 8,
-    "crunches": 5,
+    "Stretches": 2.3,
+    "Push-Ups": 8,
+    "Sit-Ups": 8,
+    "Jumping Jacks": 7.7,
+    "Lunges": 4,
+    "Planks": 6,
+    "Burpees": 8,
+    "Crunches": 5,
     // "lunges": 4,
     // "pushUps": 8,
     // "pushUps": 8,
@@ -140,6 +141,7 @@ export class ExerciseCalculatorComponent implements OnInit {
   }
 
   async calculateTotalCaloriesBurned(){
+    this.message = "";
     let totalCaloriesBurned = 0;
     const exercisesArray = this.workoutForm.get('exercises') as FormArray;
     const userEnteredValues: any[] = [];
@@ -162,9 +164,11 @@ export class ExerciseCalculatorComponent implements OnInit {
       totalCaloriesBurned += caloriesBurnedForExercise;
       console.log("caloriesBurnedForExercise");
       console.log(caloriesBurnedForExercise);
+      this.message += `${ex.name}: ${caloriesBurnedForExercise}calories\n`;
     }
     console.log("total");
     console.log(totalCaloriesBurned);
+    this.message += `Total Calories Burned: ${totalCaloriesBurned}calories`;
   }
 
   // public async saveExercise(exerciseData: Exercise, index: number) {
