@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, FormArray, AbstractControl } from '@angular/for
 import { take, tap } from 'rxjs';
 import { Exercise } from 'src/app/models/exercise.model';
 import { ExerciseService, WorkoutscheduleService } from 'src/app/services';
+import { HealthDataService } from 'src/app/services/healthDataService/healthData.service';
 
 @Component({
   selector: 'exercise-calculator',
@@ -38,7 +39,8 @@ export class ExerciseCalculatorComponent implements OnInit {
   constructor(
     private exerciseService: ExerciseService,
     private formBuilder: FormBuilder,
-    private workoutscheduleService: WorkoutscheduleService
+    private workoutscheduleService: WorkoutscheduleService,
+    private healthDataService: HealthDataService
   ) {
     this.workoutForm = this.formBuilder.group({
       exercises: this.formBuilder.array([])
@@ -54,9 +56,18 @@ export class ExerciseCalculatorComponent implements OnInit {
     //   console.log('Fetched exercises:', this.exercisesArray);
     this.populateFormWithExercises();
     // });
-    await this.getUserWorkouts();
-    await this.getSessionWorkout("QSR1W4sMCU487Rncx8gB");
+    this.getUserWorkouts();
+    this.getSessionWorkout("QSR1W4sMCU487Rncx8gB");
     console.log(this.selectedWorkout);
+    const auth = getAuth();
+    this.currUserId = auth.currentUser?.uid;
+    if (this.currUserId != undefined) {
+      sessionStorage.setItem('currUserId', this.currUserId);
+    } else {
+      this.currUserId = sessionStorage.getItem('currUserId')!;
+    }
+    const healthdata = await this.healthDataService.getHealthData(this.currUserId);
+    console.log(healthdata);
   }
 
   deleteExercise(index: number) {
@@ -95,14 +106,7 @@ export class ExerciseCalculatorComponent implements OnInit {
   }
 
   async getUserWorkouts() {
-    const auth = getAuth();
-    this.currUserId = auth.currentUser?.uid;
-    if (this.currUserId != undefined) {
-      sessionStorage.setItem('currUserId', this.currUserId);
-    } else {
-      this.currUserId = sessionStorage.getItem('currUserId')!;
-    }
-    (await this.workoutscheduleService.getSchedules({ userId: this.currUserId })).subscribe(
+    (await this.workoutscheduleService.getSchedules({ userId: this.currUserId! })).subscribe(
       (response) => {
         // alert(response)
         this.plannedWorkouts = response;
