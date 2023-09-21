@@ -11,6 +11,12 @@
   <div class="outer-container">
     <ion-content>
       <div class="inner-container">
+        <ion-card class="summary ion-text-center">
+          <h2>Calories Summary</h2>
+          <h3>You Require X calories per day.</h3>
+          <h3>You consume X calories per day.</h3>
+          <h3>Your workout burns X calories.</h3>
+        </ion-card>
         <ion-segment value="target" (ionChange)="onSegmentChange($event)">
           <ion-segment-button value="target">
           <ion-label>Calorie Target</ion-label>
@@ -18,16 +24,16 @@
           <ion-segment-button value="exercise">
             <ion-label>Exercise Calculator</ion-label>
           </ion-segment-button>
-          <!-- <ion-segment-button value="group">
-            <ion-label>Groups</ion-label>
-          </ion-segment-button> -->
+          <ion-segment-button value="diet">
+            <ion-label>Diet</ion-label>
+          </ion-segment-button>
         </ion-segment>
 
         <calorie-target [hidden]="selectedSegment !=='target'"></calorie-target>
         <exercise-calculator
           [hidden]="selectedSegment !=='exercise'"
         ></exercise-calculator>
-        <!-- <usersearch [hidden]="selectedSegment !=='user'"></usersearch> -->
+        <diet-calculator [hidden]="selectedSegment !=='diet'"></diet-calculator>
       </div>
     </ion-content>
   </div>
