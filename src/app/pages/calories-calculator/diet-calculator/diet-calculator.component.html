@@ -1,0 +1,19 @@
+<ion-card class="ion-text-center">
+  <ion-card-content>
+    <ion-item>
+      <ion-label position="floating">Enter your meal:</ion-label>
+      <ion-textarea [(ngModel)]="meal" rows="5"></ion-textarea>
+    </ion-item>
+    <ion-button expand="full" (click)="calculateNutrition()">Calculate</ion-button>
+
+    <ion-card *ngIf="nutrition">
+      <ion-card-header>Nutritional Information</ion-card-header>
+      <ion-card-content>
+        <p>Total Calories: {{ nutrition.calories }}</p>
+        <p>Protein: {{ nutrition.protein }}g</p>
+        <p>Carbohydrates: {{ nutrition.carbohydrates }}g</p>
+        <p>Fats: {{ nutrition.fats }}g</p>
+      </ion-card-content>
+    </ion-card>
+  </ion-card-content>
+</ion-card>
