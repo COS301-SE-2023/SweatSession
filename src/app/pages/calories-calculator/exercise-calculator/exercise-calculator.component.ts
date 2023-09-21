@@ -19,7 +19,7 @@ export class ExerciseCalculatorComponent implements OnInit {
   currUserId: string | undefined;
   plannedWorkouts: any;
   selectedWorkout: Exercise[];
-  userWeight: number = 70;
+  userWeight: number;
   metValues : { [key: string]: number } = {
     "stretches": 2.3,
     "pushUps": 8,
@@ -67,7 +67,8 @@ export class ExerciseCalculatorComponent implements OnInit {
       this.currUserId = sessionStorage.getItem('currUserId')!;
     }
     const healthdata = await this.healthDataService.getHealthData(this.currUserId);
-    console.log(healthdata);
+    this.userWeight = healthdata[0].weight;
+    console.log(this.userWeight);
   }
 
   deleteExercise(index: number) {
