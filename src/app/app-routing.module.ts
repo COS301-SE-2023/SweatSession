@@ -221,10 +221,10 @@ const routes: Routes = [
     data: { authGuardPipe: redirectLoggedOut },
     loadChildren: () => import('./pages/groups/group-home-page/group-home-page.module').then(m => m.GroupsHomePageModule)
   },
-  {
-    path: 'user-manual',
-    loadChildren: () => import('./pages/user-manual/user-manual.module').then( m => m.UserManualPageModule)
-  }
+  // {
+  //   path: 'user-manual',
+  //   loadChildren: () => import('./pages/user-manual/user-manual.module').then( m => m.UserManualPageModule)
+  // }
 
 ];
 @NgModule({
