@@ -55,3 +55,11 @@ ion-col {
 ion-row {
     margin: 0px;
 }
+
+.user-name {
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(90deg, #1D3557, black);
+    background-clip: text; 
+    -webkit-text-fill-color: transparent;
+}
