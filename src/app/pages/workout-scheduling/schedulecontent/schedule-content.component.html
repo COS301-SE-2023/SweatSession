@@ -2,7 +2,7 @@
   <ion-item-sliding>
     <ion-item class="schedule-header" id="viewer" lines="none">
       <ion-icon name="receipt-outline"></ion-icon>
-      <ion-text>
+      <ion-text class="schedule-name">
         {{schedule.name}}
       </ion-text>
       <ion-button slot="end" (click)="join()" *ngIf="inSession()" [disabled]="joined()">{{ joined() ? "Joined" : "Join" }}</ion-button>

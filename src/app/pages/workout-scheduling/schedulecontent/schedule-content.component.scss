@@ -2,6 +2,15 @@ ion-text {
     margin: 20px;
 }
 
+.schedule-name {
+    font-weight: bold;
+    font-size: 1.5rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(90deg, #1D3557, black);
+    background-clip: text; 
+    -webkit-text-fill-color: transparent;
+}
+  
 .schedule-header{
     --highlight-height: 0;
     --inner-border-width: 0;
