@@ -24,14 +24,17 @@ ion-icon.inactive {
     color: grey;
 }
 
+.schedule-value-icon {
+    color: #1D3557;
+    font-weight: bolder;
+}
+
 ion-progress-bar {
     --progress-background: #457b9d;
 }
 
 .add-icon {
     color: #E63946;
-    height: 35px;
-    width: 35px;
 }
 
 .add-icon:hover {
@@ -41,3 +44,31 @@ ion-progress-bar {
 .add-friends-title {
     font-size: small;
 }
+
+.weightlifting-animation {
+    animation: weightlifting 1s infinite;
+}
+
+@keyframes weightlifting {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.exercise-button {
+    background-color: #E63946;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  .exercise-button:hover {
+    background-color: #457b9d;
+  }

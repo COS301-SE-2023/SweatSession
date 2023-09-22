@@ -13,25 +13,33 @@
     <ion-item-options side="start" *ngIf="!isCompleted()">
       <ion-item-option color="success" (click)="toggleEditSlide()">{{ isEditSlide ? "Cancel" : "Edit" }}</ion-item-option>
     </ion-item-options>
-
     <ion-item-options side="end">
-      <ion-item-option
-      (click)="schedule.workoutAdded ? viewWorkout(schedule) : addWorkout(schedule)"
-      *ngIf="!isCompleted()"
-    >
-      {{ schedule.workoutAdded ? 'View Workout' : 'Add Workout' }}
-    </ion-item-option>
       <ion-item-option color="danger" (click)="presentActionSheet()">Delete</ion-item-option>
     </ion-item-options>
   </ion-item-sliding>
 
   <div class="content" *ngIf="isSlideShow">
     <ion-card-content>
-      <ion-icon name="barbell-outline"></ion-icon><ion-text class="schedule-value">{{schedule.name}}</ion-text><br>
-      <ion-icon name="calendar-outline"></ion-icon><ion-text class="schedule-value">{{schedule.date}}</ion-text><br>
-      <ion-icon name="time-outline"></ion-icon><ion-text class="schedule-value">{{schedule.time}}</ion-text><br>
-      <ion-icon name="location-outline"></ion-icon><ion-text class="schedule-value">{{schedule.location}}</ion-text><br>
-      <ion-icon name="timer-outline"></ion-icon><ion-text class="schedule-value">{{schedule.duration}} minutes</ion-text><br>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="8">
+            <ion-icon class="schedule-value-icon" name="barbell-outline"></ion-icon><ion-text class="schedule-value">{{schedule.name}}</ion-text><br>
+            <ion-icon class="schedule-value-icon" name="calendar-outline"></ion-icon><ion-text class="schedule-value">{{schedule.date}}</ion-text><br>
+            <ion-icon class="schedule-value-icon" name="time-outline"></ion-icon><ion-text class="schedule-value">{{schedule.time}}</ion-text><br>
+            <ion-icon class="schedule-value-icon" name="location-outline"></ion-icon><ion-text class="schedule-value">{{schedule.location}}</ion-text><br>
+            <ion-icon class="schedule-value-icon" name="timer-outline"></ion-icon><ion-text class="schedule-value">{{schedule.duration}} minutes</ion-text><br>
+          </ion-col>
+          <ion-col size="4">
+            <div class="weightlifting-animation">
+              <ion-icon src="/assets/dumbbell-exercise-svgrepo-com.svg" size="large" *ngFor="let i of [1,2,3]"></ion-icon>
+            </div>
+            <button class="exercise-button" (click)="schedule.workoutAdded ? viewWorkout(schedule) : addWorkout(schedule)"
+            *ngIf="!isCompleted()">
+              <ion-icon name="add-circle"></ion-icon> {{ schedule.workoutAdded ? 'View Workout' : 'Add Workout' }}
+            </button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>      
     </ion-card-content>
   </div>
 
@@ -43,7 +51,11 @@
     <ion-item class="progress-label" lines="none">
       <ion-label>{{timeLeft()}}</ion-label>
       <ion-icon name="checkmark-done-outline" slot="end" [ngClass]="{'active': joined(), 'inactive': !joined()}"></ion-icon>
-      <!-- <ion-icon name="add-circle" slot="end" [id]="id" class="add-icon"></ion-icon> -->
+      <ion-buttons slot="end">
+        <ion-button class="default-button" [id]="id">
+          <ion-icon name="person-add" class="add-icon"></ion-icon>
+        </ion-button>
+      </ion-buttons>
     </ion-item>
     <ion-progress-bar [value]="ratio"></ion-progress-bar>
   </div>
@@ -54,11 +66,11 @@
     <ion-header>
       <ion-toolbar>
         <ion-buttons slot="start">
-          <ion-button slot="start" fill="outline" (click)="modal.dismiss()">Cancel</ion-button>
+          <ion-button slot="start" class="default-button" (click)="modal.dismiss()">Cancel</ion-button>
         </ion-buttons>
         <ion-title class="add-friends-title">{{"Select Friends"}}</ion-title>
         <ion-buttons slot="end">
-          <ion-button fill="outline" (click)="confirmSelection()">Confirm</ion-button>
+          <ion-button class="default-button" (click)="confirmSelection()">Confirm</ion-button>
         </ion-buttons>
       </ion-toolbar>
     </ion-header>
