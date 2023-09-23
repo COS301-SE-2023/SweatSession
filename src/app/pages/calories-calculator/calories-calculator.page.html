@@ -25,9 +25,9 @@
 
         <ion-card class="summary ion-text-center">
           <h2>Calories Summary</h2>
-          <h3>You require {{ targetCalories() }} calories per day.</h3>
-          <h3>You consume {{ totalDietCalories }} calories per day.</h3>
-          <h3>Your workout burns {{ totalWorkoutCalories }} calories.</h3>
+          <h4>You require {{ targetCalories$ | async }} calories per day.</h4>
+          <h4>You consume {{ dietCalories$ | async }} calories per day.</h4>
+          <h4>Your workout burns {{ workoutCalories$ | async }} calories.</h4>
         </ion-card>
 
         <calorie-target [hidden]="selectedSegment !=='target'"></calorie-target>

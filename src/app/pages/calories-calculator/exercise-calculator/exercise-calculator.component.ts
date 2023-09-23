@@ -5,6 +5,7 @@ import { take, tap } from 'rxjs';
 import { Exercise } from 'src/app/models/exercise.model';
 import { ExerciseService, WorkoutscheduleService } from 'src/app/services';
 import { HealthDataService } from 'src/app/services/healthDataService/healthData.service';
+import {CalorieSummary} from "../calorie-summary";
 
 @Component({
   selector: 'exercise-calculator',
@@ -181,6 +182,7 @@ export class ExerciseCalculatorComponent implements OnInit {
     console.log("total");
     console.log(totalCaloriesBurned);
     this.message += `Total Calories Burned: ${totalCaloriesBurned}calories`;
+    CalorieSummary.workoutCalories=totalCaloriesBurned;
   }
 
   // public async saveExercise(exerciseData: Exercise, index: number) {

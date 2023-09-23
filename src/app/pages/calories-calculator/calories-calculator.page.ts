@@ -6,6 +6,7 @@ import { getAuth } from '@angular/fire/auth';
 import {AngularFirestore} from "@angular/fire/compat/firestore";
 import {ProfileService} from "../../services";
 import {CalorieSummary} from "./calorie-summary";
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-calories-calculator',
@@ -25,9 +26,12 @@ export class CaloriesCalculatorPage implements OnInit {
   totalTargetCalories: number;
   totalDietCalories: number;
   totalWorkoutCalories: number;
+  targetCalories$: Observable<number> = CalorieSummary.targetCalories$;
+  dietCalories$: Observable<number> = CalorieSummary.dietCalories$;
+  workoutCalories$: Observable<number> = CalorieSummary.workoutCalories$;
 
   selectedSegment: string = 'target';
-  // calorieSummary: any;
+  calorieSummary: any;
 
   constructor(private formBuilder: FormBuilder,private firestore: AngularFirestore, private profileService: ProfileService)
   {
@@ -45,10 +49,8 @@ export class CaloriesCalculatorPage implements OnInit {
 
 
   ngOnInit() {
-    this.totalTargetCalories = CalorieSummary.targetCalories;
-    this.totalDietCalories = CalorieSummary.dietCalories;
-    this.totalWorkoutCalories = CalorieSummary.workoutCalories;
-    // CalorieSummary.targetCalories=1500;// this is how you would update the values
+    this.calorieSummary = new CalorieSummary();
+    // CalorieSummary.targetCalories=1500.96;// this is how you would update the values
   }
 
 
@@ -117,5 +119,13 @@ export class CaloriesCalculatorPage implements OnInit {
 
   targetCalories(){
     return CalorieSummary.targetCalories;
+  }
+
+  dietCalories(){
+    return CalorieSummary.dietCalories;
+  }
+
+  workoutCalories(){
+    return CalorieSummary.workoutCalories;
   }
 }
