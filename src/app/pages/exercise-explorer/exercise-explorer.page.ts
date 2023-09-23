@@ -52,6 +52,8 @@ export class ExerciseExplorerPage implements OnInit, AfterViewInit {
 
   private clickableMeshes: THREE.Mesh[] = [];
 
+  private materialClickHandlers = {}; 
+
   //? Helper Properties (Private Properties);
 
   private get canvas(): HTMLCanvasElement {
@@ -147,12 +149,13 @@ export class ExerciseExplorerPage implements OnInit, AfterViewInit {
 
      this.model.traverse((child: THREE.Mesh) => {
       if (child instanceof THREE.Mesh) {
-        // Add the mesh to the clickableMeshes array
-        this.clickableMeshes.push(child);
         
-        // Attach a click event listener to each mesh
+        
+        this.clickableMeshes.push(child);
         child.userData['clickable'] = true;
-      
+       
+
+  
       }
       
     });
@@ -162,16 +165,20 @@ export class ExerciseExplorerPage implements OnInit, AfterViewInit {
 
      const onMouseClick = (event: MouseEvent) => {
       raycaster.setFromCamera(mouse, this.camera);
+      //console.log(raycaster);
       const intersects = raycaster.intersectObjects(this.clickableMeshes);
-      console.log(intersects);
+      //console.log(intersects);
       if (intersects.length > 0) {
         const clickedMesh = intersects[0].object; 
         console.log(intersects[0].object.name);
-        if (clickedMesh.userData['clickable']) {
+        if (intersects[0].object.name == "Object_16"){
+          console.log('head clicked');
+        }
+       /* if (clickedMesh.userData['clickable']) {
           console.log('Mesh clicked!', clickedMesh);
           // Handle the click event for the clicked mesh here
           // You can use `clickedMesh` to identify the specific mesh clicked.
-        }
+        }*/
       }
     };
     function onMouseMove( event: { clientX: number; clientY: number; } ) {
