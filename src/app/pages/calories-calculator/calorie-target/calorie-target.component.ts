@@ -78,7 +78,7 @@ export class CalorieTargetComponent  implements OnInit {
         let age = 0;
         let gender = "none";
 
-        this.setProfileService.gethealthdata("Boldy")
+        this.setProfileService.gethealthdata("BoldyJames")//did this manually for now
             .then((res: unknown) => {
                 const healthDataArray = res as healthData[];
                 if (healthDataArray.length > 0) {
