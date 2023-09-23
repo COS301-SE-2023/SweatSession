@@ -4,7 +4,7 @@
     padding: 20px;
     width: 80%;
     text-align: center;
-    margin: auto; 
+    margin: auto;
   }
   input, select {
     display: block;
@@ -22,7 +22,7 @@
   
   .heading-container {
     text-align: center;
-    margin-top: 5%;
+    margin-top: -5%;
     margin-bottom: 20px;
   }
   
@@ -76,3 +76,11 @@
   input[formControlName="duration"] {
     border-radius: 12px;
   }
+
+.message{
+  // padding-bottom: 10%;
+}
+
+.grid-container {
+  padding-bottom: 5%;
+}

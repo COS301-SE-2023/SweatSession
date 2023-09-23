@@ -21,7 +21,7 @@ export class ExerciseCalculatorComponent implements OnInit {
   plannedWorkouts: any;
   selectedWorkout: Exercise[];
   userWeight: number;
-  message: string = "Enter your workout and press the Calculate Calories Burned button.";
+  message: string = "Enter your workout\nand\npress the Calculate Calories Burned button.";
   metValues : { [key: string]: number } = {
     "Stretches": 2.3,
     "Push-Ups": 8,
