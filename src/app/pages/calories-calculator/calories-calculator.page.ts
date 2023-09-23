@@ -27,7 +27,7 @@ export class CaloriesCalculatorPage implements OnInit {
   totalWorkoutCalories: number;
 
   selectedSegment: string = 'target';
-  calorieSummary: any;
+  // calorieSummary: any;
 
   constructor(private formBuilder: FormBuilder,private firestore: AngularFirestore, private profileService: ProfileService)
   {
@@ -41,14 +41,14 @@ export class CaloriesCalculatorPage implements OnInit {
     });
     this.commitmentLevel = 0;
     this.weightGoals = 0;
-    this.calorieSummary = new CalorieSummary();
   }
 
 
   ngOnInit() {
-    this.totalTargetCalories = this.calorieSummary.targetCalories;
-    this.totalDietCalories = this.calorieSummary.dietCalories;
-    this.totalWorkoutCalories = this.calorieSummary.workoutCalories;
+    this.totalTargetCalories = CalorieSummary.targetCalories;
+    this.totalDietCalories = CalorieSummary.dietCalories;
+    this.totalWorkoutCalories = CalorieSummary.workoutCalories;
+    // CalorieSummary.targetCalories=1500;// this is how you would update the values
   }
 
 
@@ -113,5 +113,9 @@ export class CaloriesCalculatorPage implements OnInit {
 
   onSegmentChange(event: any) {
     this.selectedSegment = event.detail.value;
+  }
+
+  targetCalories(){
+    return CalorieSummary.targetCalories;
   }
 }

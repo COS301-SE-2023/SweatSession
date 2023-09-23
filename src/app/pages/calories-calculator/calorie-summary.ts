@@ -1,39 +1,40 @@
 export class CalorieSummary {
-  private _targetCalories: number;
-  private _dietCalories: number;
-  private _workoutCalories: number;
-
-  constructor(){
-    this._targetCalories = 0;
-    this._dietCalories = 0;
-    this._workoutCalories = 0;
+    // Static variables
+    private static _targetCalories: number;
+    private static _dietCalories: number;
+    private static _workoutCalories: number;
+  
+    constructor(){
+        CalorieSummary._targetCalories = 0;
+        CalorieSummary._dietCalories = 0;
+        CalorieSummary._workoutCalories = 0;
+      }
+    
+    // Getter and Setter for targetCalories
+    public static get targetCalories(): number {
+      return this._targetCalories;
+    }
+  
+    public static set targetCalories(value: number) {
+      this._targetCalories = value;
+    }
+  
+    // Getter and Setter for dietCalories
+    public static get dietCalories(): number {
+      return this._dietCalories;
+    }
+  
+    public static set dietCalories(value: number) {
+      this._dietCalories = value;
+    }
+  
+    // Getter and Setter for workoutCalories
+    public static get workoutCalories(): number {
+      return this._workoutCalories;
+    }
+  
+    public static set workoutCalories(value: number) {
+      this._workoutCalories = value;
+    }
   }
-
-  // Getter and Setter for targetCalories
-  get targetCalories(): number {
-    // alert(this._targetCalories);
-    return this._targetCalories;
-  }
-
-  set targetCalories(value: number) {
-    this._targetCalories = value;
-  }
-
-  // Getter and Setter for dietCalories
-  get dietCalories(): number {
-    return this._dietCalories;
-  }
-
-  set dietCalories(value: number) {
-    this._dietCalories = value;
-  }
-
-  // Getter and Setter for workoutCalories
-  get workoutCalories(): number {
-    return this._workoutCalories;
-  }
-
-  set workoutCalories(value: number) {
-    this._workoutCalories = value;
-  }
-}
+  

@@ -19,30 +19,30 @@
                 <!-- <option value="" disabled selected>Select an exercise</option> -->
                 <!-- <option *ngFor="let option of exerciseOptions" [value]="option">{{ option }}</option> -->
                 <option value="" hidden selected>Select an exercise</option>
-                <option value="Stretches">Stretches</option>
-                <option value="Push-Ups">Push-Ups</option>
-                <option value="Sit-Ups">Sit-Ups</option>
-                <option value="Jumping Jacks">Jumping Jacks</option>
-                <option value="Lunges">Lunges</option>
-                <option value="Planks">Planks</option>
-                <option value="Burpees">Burpees</option>
-                <option value="Crunches">Crunches</option>
-                <option value="Squats">Squats</option>
-                <option value="Deadlifts">Deadlifts</option>
-                <option value="Bench Presses">Bench Presses</option>
-                <option value="Pull-Ups">Pull-Ups</option>
-                <option value="Dumbbell Rows">Dumbbell Rows</option>
-                <option value="Leg Presses">Leg Presses</option>
-                <option value="Leg Curls">Leg Curls</option>
-                <option value="Bicep Curls">Bicep Curls</option>
-                <option value="Tricep Curls">Tricep Curls</option>
-                <option value="Barbell Rows">Barbell Rows</option>
-                <option value="Seated Cable Rows">Seated Cable Rows</option>
                 <option value="Barbell Curls">Barbell Curls</option>
+                <option value="Barbell Rows">Barbell Rows</option>
+                <option value="Bench Presses">Bench Presses</option>
+                <option value="Bicep Curls">Bicep Curls</option>
+                <option value="Burpees">Burpees</option>
                 <option value="Calf Raises">Calf Raises</option>
                 <option value="Chest Press">Chest Press</option>
-                <option value="Cycling">Cycling</option>
-                <option value="TreadMill">Treadmill</option>
+                <option value="Crunches">Crunches</option>
+                <option value="Deadlifts">Deadlifts</option>
+                <option value="Dumbbell Rows">Dumbbell Rows</option>
+                <option value="Jumping Jacks">Jumping Jacks</option>
+                <option value="Leg Curls">Leg Curls</option>
+                <option value="Leg Presses">Leg Presses</option>
+                <option value="Lunges">Lunges</option>
+                <option value="Planks">Planks</option>
+                <option value="Pull-Ups">Pull-Ups</option>
+                <option value="Push-Ups">Push-Ups</option>
+                <option value="Seated Cable Rows">Seated Cable Rows</option>
+                <option value="Sit-Ups">Sit-Ups</option>
+                <option value="Squats">Squats</option>
+                <option value="Stretches">Stretches</option>
+                <option value="Tricep Curls">Tricep Curls</option>
+                <!-- <option value="Cycling">Cycling</option>
+                <option value="TreadMill">Treadmill</option> -->
                 <!-- <option value="Crunches">Crunches</option> -->
                 <!-- <option value="pushUps">Push-Ups</option> -->
               </select>
@@ -67,7 +67,11 @@
         </form>
       </div>
     </div>
-    <ion-button class="submit" type="button" (click)="calculateTotalCaloriesBurned()">
+    <ion-button
+      class="submit"
+      type="button"
+      (click)="calculateTotalCaloriesBurned()"
+    >
       Calculate Calories Burned
     </ion-button>
     <pre><h3>{{ message }}</h3></pre>
