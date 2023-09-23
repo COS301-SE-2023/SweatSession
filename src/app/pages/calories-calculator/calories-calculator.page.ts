@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { getAuth } from '@angular/fire/auth';
 import {AngularFirestore} from "@angular/fire/compat/firestore";
 import {ProfileService} from "../../services";
+import {CalorieSummary} from "./calorie-summary";
 
 @Component({
   selector: 'app-calories-calculator',
@@ -21,8 +22,12 @@ export class CaloriesCalculatorPage implements OnInit {
   currUserId: string | undefined | null;
   commitmentLevel: number;
   weightGoals: number;
+  totalTargetCalories: number;
+  totalDietCalories: number;
+  totalWorkoutCalories: number;
 
   selectedSegment: string = 'target';
+  calorieSummary: any;
 
   constructor(private formBuilder: FormBuilder,private firestore: AngularFirestore, private profileService: ProfileService)
   {
@@ -36,10 +41,14 @@ export class CaloriesCalculatorPage implements OnInit {
     });
     this.commitmentLevel = 0;
     this.weightGoals = 0;
+    this.calorieSummary = new CalorieSummary();
   }
 
 
   ngOnInit() {
+    this.totalTargetCalories = this.calorieSummary.targetCalories;
+    this.totalDietCalories = this.calorieSummary.dietCalories;
+    this.totalWorkoutCalories = this.calorieSummary.workoutCalories;
   }
 
 

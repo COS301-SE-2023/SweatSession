@@ -11,35 +11,36 @@
   <div class="outer-container">
     <ion-content>
       <div class="inner-container">
-        <ion-card class="summary ion-text-center">
-          <h2>Calories Summary</h2>
-          <h3>You Require X calories per day.</h3>
-          <h3>You consume X calories per day.</h3>
-          <h3>Your workout burns X calories.</h3>
-        </ion-card>
         <ion-segment value="target" (ionChange)="onSegmentChange($event)">
           <ion-segment-button value="target">
-          <ion-label>Calorie Target</ion-label>
-        </ion-segment-button>
-          <ion-segment-button value="exercise">
-            <ion-label>Exercise Calculator</ion-label>
+            <ion-label>Target</ion-label>
           </ion-segment-button>
           <ion-segment-button value="diet">
-            <ion-label>Diet</ion-label>
+            <ion-label>Intake</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="exercise">
+            <ion-label>Workout</ion-label>
           </ion-segment-button>
         </ion-segment>
 
+        <ion-card class="summary ion-text-center">
+          <h2>Calories Summary</h2>
+          <h3>You require {{ totalTargetCalories }} calories per day.</h3>
+          <h3>You consume {{ totalDietCalories }} calories per day.</h3>
+          <h3>Your workout burns {{ totalWorkoutCalories }} calories.</h3>
+        </ion-card>
+        
         <calorie-target [hidden]="selectedSegment !=='target'"></calorie-target>
+        <diet-calculator [hidden]="selectedSegment !=='diet'"></diet-calculator>
         <exercise-calculator
           [hidden]="selectedSegment !=='exercise'"
         ></exercise-calculator>
-        <diet-calculator [hidden]="selectedSegment !=='diet'"></diet-calculator>
       </div>
     </ion-content>
   </div>
 
   <!-- make the code from here until -->
-  <ion-card class="ion-text-center">
+  <!-- <ion-card class="ion-text-center">
     <ion-card-title>
       <h1>Calories Calculator</h1>
     </ion-card-title>
@@ -92,9 +93,9 @@
             >Calories Consumption: {{calculateTargetCalories()}}</ion-label
           >
         </ion-item>
-        <!--                <ion-button>Calculate</ion-button>-->
-      </ion-list>
+                       <ion-button>Calculate</ion-button>-->
+  <!-- </ion-list>
     </ion-card-content>
-  </ion-card>
+  </ion-card> -->
   <!-- here into a component -->
 </ion-content>
