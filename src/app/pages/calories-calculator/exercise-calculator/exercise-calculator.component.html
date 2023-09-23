@@ -15,10 +15,14 @@
           >
             <div class="exercise-number">Exercise {{ i + 1 }}</div>
             <div [formGroupName]="i">
-              <select formControlName="name" placeholder="name" (change)="exerciseSelected($event, i)">
+              <select
+                formControlName="name"
+                placeholder="name"
+                (change)="exerciseSelected($event, i)"
+              >
                 <!-- <option value="" disabled selected>Select an exercise</option> -->
                 <!-- <option *ngFor="let option of exerciseOptions" [value]="option">{{ option }}</option> -->
-                <option value="" hidden selected >Select an exercise</option>
+                <option value="" hidden selected>Select an exercise</option>
                 <option value="Barbell Curls">Barbell Curls</option>
                 <option value="Barbell Rows">Barbell Rows</option>
                 <option value="Bench Presses">Bench Presses</option>
@@ -46,9 +50,21 @@
                 <!-- <option value="Crunches">Crunches</option> -->
                 <!-- <option value="pushUps">Push-Ups</option> -->
               </select>
-              <input formControlName="sets" placeholder="Sets" *ngIf="hasSets(i)"/>
-              <input formControlName="reps" placeholder="Repetitions" *ngIf="hasReps(i)"/>
-              <input formControlName="weight" placeholder="Weight (kg)" *ngIf="hasWeight(i)"/>
+              <input
+                formControlName="sets"
+                placeholder="Sets"
+                *ngIf="hasSets(i)"
+              />
+              <input
+                formControlName="reps"
+                placeholder="Repetitions"
+                *ngIf="hasReps(i)"
+              />
+              <input
+                formControlName="weight"
+                placeholder="Weight (kg)"
+                *ngIf="hasWeight(i)"
+              />
               <input formControlName="duration" placeholder="Duration (min)" />
               <!-- [(ngModel)]="name" [(ngModel)]="sets" [(ngModel)]="reps" [(ngModel)]="weight" -->
             </div>
@@ -64,16 +80,16 @@
           <ion-button class="adder" type="button" (click)="addExercise()">
             <ion-icon name="add"></ion-icon>
           </ion-button>
+          <ion-button
+            class="submit"
+            type="button"
+            (click)="calculateTotalCaloriesBurned()"
+          >
+            Calculate Calories Burned
+          </ion-button>
         </form>
       </div>
     </div>
-    <ion-button
-      class="submit"
-      type="button"
-      (click)="calculateTotalCaloriesBurned()"
-    >
-      Calculate Calories Burned
-    </ion-button>
     <pre class="message"><h3>{{ message }}</h3></pre>
   </ion-card-content>
 </ion-card>
