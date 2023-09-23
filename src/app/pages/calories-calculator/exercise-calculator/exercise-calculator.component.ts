@@ -43,8 +43,8 @@ export class ExerciseCalculatorComponent implements OnInit {
     "Seated Cable Rows": 5,
     "Barbell Curls": 4,
     "Calf Raises": 4,
-    // "pushUps": 8,
-    // "pushUps": 8,
+    // "Cycling": 6,
+    // "TreadMill": 8,
     // "pushUps": 8,
   }
   // exerciseOptions: string[] = ["Exercise 1", "Exercise 2", "Exercise 3", "Exercise 4"];
