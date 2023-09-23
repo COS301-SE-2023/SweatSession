@@ -48,6 +48,7 @@ export class ExerciseCalculatorComponent implements OnInit {
     // "TreadMill": 8,
     // "pushUps": 8,
   }
+  selectedExercises: any = {};
   // exerciseOptions: string[] = ["Exercise 1", "Exercise 2", "Exercise 3", "Exercise 4"];
 
   constructor(
@@ -183,6 +184,47 @@ export class ExerciseCalculatorComponent implements OnInit {
     console.log(totalCaloriesBurned);
     this.message += `Total Calories Burned: ${totalCaloriesBurned}calories`;
     CalorieSummary.workoutCalories=totalCaloriesBurned;
+  }
+
+  exerciseSelected(event: Event, exerciseNo: number) {
+    const selectedValue = (event.target as HTMLSelectElement).value;
+    this.selectedExercises[exerciseNo] = selectedValue;
+  }
+
+  hasWeight(exerciseNo: number){
+    console.log(this.selectedExercises);
+    const exercise = this.selectedExercises[exerciseNo];
+    const exercisesWithoutWeight = ["Burpees", "Calf Raises", "Crunches", "Jumping Jacks", "Lunges", "Planks", "Pull-Ups", "Push-Ups", "Sit-Ups", "Stretches"];
+
+    if (exercisesWithoutWeight.includes(exercise)) {
+        return false;
+    }
+
+    return true;
+  }
+
+  hasSets(exerciseNo: number){
+    console.log(this.selectedExercises);
+    const exercise = this.selectedExercises[exerciseNo];
+    const exercisesWithoutWeight = ["Stretches"];
+
+    if (exercisesWithoutWeight.includes(exercise)) {
+        return false;
+    }
+
+    return true;
+  }
+
+  hasReps(exerciseNo: number){
+    console.log(this.selectedExercises);
+    const exercise = this.selectedExercises[exerciseNo];
+    const exercisesWithoutWeight = ["Stretches"];
+
+    if (exercisesWithoutWeight.includes(exercise)) {
+        return false;
+    }
+
+    return true;
   }
 
   // public async saveExercise(exerciseData: Exercise, index: number) {
