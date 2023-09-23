@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, FormArray, AbstractControl } from '@angular/for
 import { take, tap } from 'rxjs';
 import { Exercise } from 'src/app/models/exercise.model';
 import { ExerciseService, WorkoutscheduleService } from 'src/app/services';
+import { HealthDataService } from 'src/app/services/healthDataService/healthData.service';
 
 @Component({
   selector: 'exercise-calculator',
@@ -18,17 +19,30 @@ export class ExerciseCalculatorComponent implements OnInit {
   currUserId: string | undefined;
   plannedWorkouts: any;
   selectedWorkout: Exercise[];
-  userWeight: number = 70;
+  userWeight: number;
+  message: string = "Enter your workout and press the Calculate Calories Burned button.";
   metValues : { [key: string]: number } = {
-    "stretches": 2.3,
-    "pushUps": 8,
-    "sitUps": 8,
-    "jumpingJacks": 7.7,
-    "lunges": 4,
-    "planks": 6,
-    "burpees": 8,
-    "crunches": 5,
-    // "lunges": 4,
+    "Stretches": 2.3,
+    "Push-Ups": 8,
+    "Sit-Ups": 8,
+    "Jumping Jacks": 7.7,
+    "Lunges": 4,
+    "Planks": 6,
+    "Burpees": 8,
+    "Crunches": 5,
+    "Squats": 3.5,
+    "Deadlifts": 6,
+    "Bench Presses": 6,
+    "Pull-Ups": 3.8,
+    "Dumbbell Rows": 6,
+    "Leg Presses": 6,
+    "Leg Curls": 4,
+    "Bicep Curls": 4,
+    "Tricep Curls": 4,
+    "Barbell Rows": 6,
+    "Seated Cable Rows": 5,
+    "Barbell Curls": 4,
+    "Calf Raises": 4,
     // "pushUps": 8,
     // "pushUps": 8,
     // "pushUps": 8,
@@ -38,7 +52,8 @@ export class ExerciseCalculatorComponent implements OnInit {
   constructor(
     private exerciseService: ExerciseService,
     private formBuilder: FormBuilder,
-    private workoutscheduleService: WorkoutscheduleService
+    private workoutscheduleService: WorkoutscheduleService,
+    private healthDataService: HealthDataService
   ) {
     this.workoutForm = this.formBuilder.group({
       exercises: this.formBuilder.array([])
@@ -54,9 +69,19 @@ export class ExerciseCalculatorComponent implements OnInit {
     //   console.log('Fetched exercises:', this.exercisesArray);
     this.populateFormWithExercises();
     // });
-    await this.getUserWorkouts();
-    await this.getSessionWorkout("QSR1W4sMCU487Rncx8gB");
+    this.getUserWorkouts();
+    this.getSessionWorkout("QSR1W4sMCU487Rncx8gB");
     console.log(this.selectedWorkout);
+    const auth = getAuth();
+    this.currUserId = auth.currentUser?.uid;
+    if (this.currUserId != undefined) {
+      sessionStorage.setItem('currUserId', this.currUserId);
+    } else {
+      this.currUserId = sessionStorage.getItem('currUserId')!;
+    }
+    const healthdata = await this.healthDataService.getHealthData(this.currUserId);
+    this.userWeight = healthdata[0].weight;
+    console.log(this.userWeight);
   }
 
   deleteExercise(index: number) {
@@ -95,14 +120,7 @@ export class ExerciseCalculatorComponent implements OnInit {
   }
 
   async getUserWorkouts() {
-    const auth = getAuth();
-    this.currUserId = auth.currentUser?.uid;
-    if (this.currUserId != undefined) {
-      sessionStorage.setItem('currUserId', this.currUserId);
-    } else {
-      this.currUserId = sessionStorage.getItem('currUserId')!;
-    }
-    (await this.workoutscheduleService.getSchedules({ userId: this.currUserId })).subscribe(
+    (await this.workoutscheduleService.getSchedules({ userId: this.currUserId! })).subscribe(
       (response) => {
         // alert(response)
         this.plannedWorkouts = response;
@@ -135,6 +153,7 @@ export class ExerciseCalculatorComponent implements OnInit {
   }
 
   async calculateTotalCaloriesBurned(){
+    this.message = "";
     let totalCaloriesBurned = 0;
     const exercisesArray = this.workoutForm.get('exercises') as FormArray;
     const userEnteredValues: any[] = [];
@@ -157,9 +176,11 @@ export class ExerciseCalculatorComponent implements OnInit {
       totalCaloriesBurned += caloriesBurnedForExercise;
       console.log("caloriesBurnedForExercise");
       console.log(caloriesBurnedForExercise);
+      this.message += `${ex.name}: ${caloriesBurnedForExercise}calories\n`;
     }
     console.log("total");
     console.log(totalCaloriesBurned);
+    this.message += `Total Calories Burned: ${totalCaloriesBurned}calories`;
   }
 
   // public async saveExercise(exerciseData: Exercise, index: number) {
