@@ -127,13 +127,17 @@ export class ExerciseExplorerPage implements OnInit, AfterViewInit {
     this.scene.background = new THREE.Color(0xd4d4d8)
     this.loaderGLTF.load('assets/male_base_mesh.glb', (gltf: GLTF) => {
       this.model = gltf.scene.children[0];
-      const scaleFactor = 1;
-      this.model.scale.set(scaleFactor, scaleFactor, scaleFactor);
+      //const scaleFactor = 1;
+      //this.model.scale.set(scaleFactor, scaleFactor, scaleFactor);
+      const scale = Math.min(75 / 100, 75 / 100); 
+      this.model.scale.set(scale, scale, scale);
   
       console.log(this.model);
       var box = new THREE.Box3().setFromObject(this.model);
       box.getCenter(this.model.position); // this re-sets the mesh position
       this.model.position.multiplyScalar(-1);
+     
+     
       this.scene.add(this.model);
 
       
@@ -150,6 +154,7 @@ export class ExerciseExplorerPage implements OnInit, AfterViewInit {
         child.userData['clickable'] = true;
       
       }
+      
     });
 
 
@@ -190,7 +195,7 @@ export class ExerciseExplorerPage implements OnInit, AfterViewInit {
     )
     this.camera.position.x = 100;
     this.camera.position.y = 100;
-    this.camera.position.z = 100;
+    this.camera.position.z = 2;
     this.ambientLight = new THREE.AmbientLight(0xffffff, 0.5); // Adjust color and intensity
     this.scene.add(this.ambientLight);
 
