@@ -27,7 +27,7 @@
         </ion-avatar>
         <ion-grid>
           <ion-row>
-            <ion-label class="Bcard2"><b style="font-size: 20px;">&nbsp;{{notice.sendername}}</b></ion-label>
+            <ion-label class="Bcard2"><b style="font-size: 18px;">&nbsp;{{notice.sendername}}</b></ion-label>
           </ion-row>  
           <ion-label class="Bcard">&nbsp;{{notice.message}}</ion-label>
         </ion-grid>
@@ -36,6 +36,7 @@
         <ion-button color="success" size="small" (click)="addFriend(notice)">Accept</ion-button>
         <ion-button color="danger" size="small" (click)="clearNotification(notice.id!); rejectFriendRequest(notice , notice.senderid! , notice.senttoid!);">Reject</ion-button>
       </div>
+      <br>
       <ion-label class="right-align-label" style="margin-bottom: 5px;margin-right: 5px;">{{notice.sentdate }}</ion-label>
     </ion-card>
   </div>
