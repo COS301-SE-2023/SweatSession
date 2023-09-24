@@ -37,13 +37,13 @@ export class ChatbotPage implements OnInit {
     });
   }
 
-  private async getUserHealthData(displayName: string) {
-    const snapshot = await this.firestore.collection('healthdata', ref => ref.where('displayName', '==', displayName)).get().toPromise();
+  private async getUserHealthData(userId: string) {
+    const snapshot = await this.firestore.collection('healthdata', ref => ref.where('userId', '==', userId)).get().toPromise();
     if (snapshot?.empty) {
       return null;
     } else {
-      const data:any = snapshot?.docs[0].data();
-      const formattedData = `The user's height is ${data['height']} cm, weight is ${data?.['weight']} kg, diet is ${data?.['diet']}, and the medical conditions are ${data?.['medicalConditions']} and their workout comittment level is ${data?.['workoutCommitment']}.`;
+      const data: any = snapshot?.docs[0].data();
+      const formattedData = `The user's height is ${data['height']} cm, weight is ${data?.['weight']} kg, diet is ${data?.['diet']}, and the medical conditions are ${data?.['medicalConditions']} and their workout commitment level is ${data?.['workoutCommitment']}.`;
       return formattedData;
     }
   }
@@ -53,11 +53,10 @@ export class ChatbotPage implements OnInit {
     if (this.userMessage.trim() !== '') {
       this.toggleBlurEffect();
       const userProfile = await this.profileService.getProfile({ userId: this.currUserId! }).toPromise();
-      const displayName = userProfile?.profile.displayName;
       var healthData = null;
 
-      if (displayName){
-        healthData = await this.getUserHealthData(displayName);
+      if (this.currUserId){
+        healthData = await this.getUserHealthData(this.currUserId);
       }
       let newMessage = { text: this.userMessage, sender: 'user', displayText: this.userMessage };
       this.messages.push(newMessage);
