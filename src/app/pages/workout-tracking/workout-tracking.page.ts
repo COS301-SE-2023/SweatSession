@@ -143,7 +143,7 @@
     }
   
     hasWeight(exerciseNo: number){
-      console.log(this.selectedExercises);
+      // console.log(this.selectedExercises);
       const exercise = this.selectedExercises[exerciseNo];
       const exercisesWithoutWeight = ["Burpees", "Calf Raises", "Crunches", "Jumping Jacks", "Lunges", "Planks", "Pull-Ups", "Push-Ups", "Sit-Ups", "Stretches"];
   
@@ -155,7 +155,7 @@
     }
   
     hasSets(exerciseNo: number){
-      console.log(this.selectedExercises);
+      // console.log(this.selectedExercises);
       const exercise = this.selectedExercises[exerciseNo];
       const exercisesWithoutWeight = ["Stretches"];
   
@@ -167,7 +167,7 @@
     }
   
     hasReps(exerciseNo: number){
-      console.log(this.selectedExercises);
+      // console.log(this.selectedExercises);
       const exercise = this.selectedExercises[exerciseNo];
       const exercisesWithoutWeight = ["Stretches"];
   

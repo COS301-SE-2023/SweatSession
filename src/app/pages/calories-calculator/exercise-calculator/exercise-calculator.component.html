@@ -7,6 +7,13 @@
       <h2>Add your workout plan here</h2>
     </div>
     <div class="grid-container">
+      <select
+        class="submit"
+        (change)="workoutSelected($event)"
+      >
+        <option value="" hidden selected>Import a Workout</option>
+        <option *ngFor="let workout of plannedWorkouts" [value]="workout.id">{{ workout.name }}</option>
+      </select>
       <div class="form-container">
         <form [formGroup]="workoutForm">
           <div
