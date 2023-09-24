@@ -86,18 +86,7 @@ export class ExerciseExplorerPage implements OnInit, AfterViewInit {
    * @private
    * @memberof ExerciseExplorerPage
    */
- /* private createControls = () => {
-    const renderer = new CSS2DRenderer();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.domElement.style.position = 'absolute';
-    renderer.domElement.style.top = '0px';
-    document.body.appendChild(renderer.domElement);
-    this.controls = new OrbitControls(this.camera, renderer.domElement);
-    this.controls.autoRotate = true;
-    this.controls.enableZoom = true;
-    this.controls.enablePan = false;
-    this.controls.update();
-  };*/
+
   private createControls = () => {
     const renderer = new CSS2DRenderer();
     renderer.setSize(window.innerWidth, window.innerHeight);
@@ -131,7 +120,7 @@ export class ExerciseExplorerPage implements OnInit, AfterViewInit {
       this.model = gltf.scene.children[0];
       //const scaleFactor = 1;
       //this.model.scale.set(scaleFactor, scaleFactor, scaleFactor);
-      const scale = Math.min(75 / 100, 75 / 100); 
+      const scale = Math.min(90 / 100, 90 / 100); 
       this.model.scale.set(scale, scale, scale);
   
       console.log(this.model);
@@ -167,18 +156,48 @@ export class ExerciseExplorerPage implements OnInit, AfterViewInit {
       raycaster.setFromCamera(mouse, this.camera);
       //console.log(raycaster);
       const intersects = raycaster.intersectObjects(this.clickableMeshes);
-      //console.log(intersects);
+      console.log(intersects);
+      console.log(raycaster);
       if (intersects.length > 0) {
         const clickedMesh = intersects[0].object; 
+        console.log('Mesh clicked!', clickedMesh);
         console.log(intersects[0].object.name);
+
         if (intersects[0].object.name == "Object_16"){
           console.log('head clicked');
         }
-       /* if (clickedMesh.userData['clickable']) {
-          console.log('Mesh clicked!', clickedMesh);
-          // Handle the click event for the clicked mesh here
-          // You can use `clickedMesh` to identify the specific mesh clicked.
-        }*/
+        else if (intersects[0].object.name == "Object_14" && raycaster.ray.direction.x < 0 ){
+          console.log('chest clicked');
+        }
+        else if (intersects[0].object.name == "Object_21" && raycaster.ray.direction.x < 0 ){
+          console.log('stomach clicked');
+          console.log(raycaster.ray.direction.x );
+        }
+        else if (intersects[0].object.name == "Object_20"){
+          console.log('thighs clicked');
+        }
+        else if (intersects[0].object.name == "Object_5"){
+          console.log('legs clicked');
+        }
+        else if (intersects[0].object.name == "Object_14"){
+          console.log('upperback clicked');
+        }
+        else if (intersects[0].object.name == "Object_21"){
+          console.log('lowerback clicked');
+        }
+        else if (intersects[0].object.name == "Object_18"){
+          console.log('gluteal muscle clicked');
+        }
+        else if (intersects[0].object.name == "Object_11"){
+          console.log('upperarm clicked');
+        }
+        else if (intersects[0].object.name == "Object_22"){
+          console.log('midarm clicked');
+        }
+        else if (intersects[0].object.name == "Object_8"){
+          console.log('shoulders clicked');
+        }
+       
       }
     };
     function onMouseMove( event: { clientX: number; clientY: number; } ) {
