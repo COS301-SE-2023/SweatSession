@@ -208,7 +208,7 @@ export class ExerciseCalculatorComponent implements OnInit {
     console.log("total");
     console.log(totalCaloriesBurned);
     this.message += `Total Calories Burned: ${totalCaloriesBurned.toFixed(2)} calories`;
-    CalorieSummary.workoutCalories = totalCaloriesBurned;
+    CalorieSummary.workoutCalories = parseFloat(totalCaloriesBurned.toFixed(2));
   }
 
   exerciseSelected(event: Event, exerciseNo: number) {
