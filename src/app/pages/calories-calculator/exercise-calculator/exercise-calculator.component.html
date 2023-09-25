@@ -6,9 +6,10 @@
     <div class="heading-container">
       <h2>Add your workout plan here</h2>
     </div>
-    <div class="grid-container">
+    <div class="grid-container ion-text-center">
       <select
         class="submit"
+        placeholder="name"
         (change)="workoutSelected($event)"
       >
         <option value="" hidden selected>Import a Workout</option>
@@ -88,7 +89,7 @@
             <ion-icon name="add"></ion-icon>
           </ion-button>
           <ion-button
-            class="submit"
+            class="submitbutton"
             type="button"
             (click)="calculateTotalCaloriesBurned()"
           >
@@ -97,6 +98,9 @@
         </form>
       </div>
     </div>
-    <pre class="message"><h3>{{ message }}</h3></pre>
+    <div class="grid-container">
+      <pre>{{ message }}</pre>
+      <!-- <pre class="message"><h3>{{ message }}</h3></pre> -->
+    </div>
   </ion-card-content>
 </ion-card>

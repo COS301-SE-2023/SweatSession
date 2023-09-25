@@ -66,6 +66,19 @@
         this.selectedExercises[i] = exercise.name;
         i++;
       });
+      console.log(this.selectedExercises)
+    }
+
+    updateSelectedExerciseValues() {
+      this.selectedExercises = {};
+      // console.log(this.selectedExercises)
+      // const exercisesFormArray = this.workoutForm.get('exercises') as FormArray;
+      // let i = 0;
+      // this.exercisesArray.forEach((exercise) => {
+      //   this.selectedExercises[i] = exercise.name;
+      //   console.log(exercise.name)
+      //   i++;
+      // });
     }
       
       
@@ -90,6 +103,7 @@
         this.deletedExercises.push(exercise.id);
       }
       this.exercises.removeAt(index);
+      this.updateSelectedExerciseValues();
     }
     public async saveExercise(exerciseData: Exercise, index: number) {
       let exercise = this.exercisesArray[index];

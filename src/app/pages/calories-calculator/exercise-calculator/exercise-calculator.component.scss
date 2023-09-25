@@ -33,7 +33,7 @@
     margin: 0;
   }
   
-  .submit{
+  .submitbutton{
     --background: #E63946;
     --color: white;
   }
@@ -84,4 +84,15 @@
 
 .grid-container {
   padding-bottom: 5%;
+}
+
+.results {
+  width:80%;
+  padding: 100%;
+}
+
+.submit {
+  width:80%;
+  margin: 0 auto;
+  margin-bottom: 15px;
 }
