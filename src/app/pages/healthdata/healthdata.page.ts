@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { ProfileService } from '../../services';
 import { getAuth } from '@angular/fire/auth';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-healthdata',
@@ -15,12 +17,18 @@ export class HealthDataPage implements OnInit {
 
   healthDataForm: FormGroup;
   isLoading: boolean = true;
+  private ngUnsubscribe = new Subject();
   
   startBeating() {
     this.isBeating = true;
     setTimeout(() => {
       this.stopBeating();
     }, 1000);
+  }
+
+  ngOnDestroy() {
+    this.ngUnsubscribe.next(true);
+    this.ngUnsubscribe.complete();
   }
 
   stopBeating() {
@@ -67,6 +75,7 @@ export class HealthDataPage implements OnInit {
       this.firestore
         .collection('healthdata', (ref) => ref.where('userId', '==', this.currUserId))
         .valueChanges()
+        .pipe(takeUntil(this.ngUnsubscribe))
         .subscribe((data) => {
           if (data.length > 0) {
             this.healthDataForm.patchValue(data[0]!);

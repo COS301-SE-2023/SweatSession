@@ -3,6 +3,8 @@ import { ChatbotService } from 'src/app/services/chatbot/chatbot.service';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { ProfileService } from '../../services';
 import { getAuth } from '@angular/fire/auth';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 
 @Component({
@@ -15,6 +17,7 @@ export class ChatbotPage implements OnInit {
   loading: boolean = false;
   currUserId: string | undefined | null;
   isBlurred: boolean = false;
+  private ngUnsubscribe = new Subject();
 
   userMessage = '';
   messages: { text: string, sender: string, displayText?: string }[] = [];
@@ -23,6 +26,11 @@ export class ChatbotPage implements OnInit {
 
   ngOnInit() {
     this.setupProfile();
+  }
+
+  ngOnDestroy() {
+    this.ngUnsubscribe.next(true);
+    this.ngUnsubscribe.complete();
   }
 
   async setupProfile() {
@@ -74,7 +82,7 @@ export class ChatbotPage implements OnInit {
       }
       
       this.loading = true;
-      this.chatbotService.sendMessage(newMessage).subscribe((response: any) => {
+      this.chatbotService.sendMessage(newMessage).pipe(takeUntil(this.ngUnsubscribe)).subscribe((response: any) => {
         this.loading = false;
         const botMessage = response.choices[0].message.content;
         console.log(botMessage);
