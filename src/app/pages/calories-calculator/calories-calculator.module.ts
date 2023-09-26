@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
+import { HttpClientModule } from '@angular/common/http';
+
 
 import { CaloriesCalculatorPageRoutingModule } from './calories-calculator-routing.module';
 
@@ -10,6 +12,7 @@ import { CaloriesCalculatorPage } from './calories-calculator.page';
 import {BackButtonDirectiveModule} from "../../directives";
 import { ExerciseCalculatorComponent } from './exercise-calculator/exercise-calculator.component';
 import { CalorieTargetComponent } from './calorie-target/calorie-target.component';
+import { DietCalculatorComponent } from './diet-calculator/diet-calculator.component';
 
 @NgModule({
     imports: [
@@ -17,8 +20,10 @@ import { CalorieTargetComponent } from './calorie-target/calorie-target.componen
         FormsModule,
         IonicModule,
         CaloriesCalculatorPageRoutingModule,
-        BackButtonDirectiveModule
+        BackButtonDirectiveModule,
+        HttpClientModule,
+        ReactiveFormsModule
     ],
-  declarations: [CaloriesCalculatorPage, ExerciseCalculatorComponent, CalorieTargetComponent]
+  declarations: [CaloriesCalculatorPage, ExerciseCalculatorComponent, CalorieTargetComponent, DietCalculatorComponent]
 })
 export class CaloriesCalculatorPageModule {}

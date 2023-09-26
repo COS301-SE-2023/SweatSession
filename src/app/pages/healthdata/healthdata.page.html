@@ -67,7 +67,22 @@
           <ion-input formControlName="medicalConditions" type="text"></ion-input>
         </div>
       </ion-item>
-      
+      <ion-item class="full-width">
+        <div class="input-field">
+          <ion-label class="customlabel" for="weightGoals">Weight Goals:</ion-label>
+          <select formControlName="weightGoals" class="form-control">
+            <option value="-1">Lose 1Kg per Week</option>
+            <option value="-0.75">Lose 0.75kg per week</option>
+            <option value="-0.5">Lose 0.5kg per week</option>
+            <option value="-0.25">Lose 0.25kg per week</option>
+            <option value="0">Maintain Weight</option>
+            <option value="0.25">Gain 0.25kg per week</option>
+            <option value="0.5">Gain 0.5kg per week</option>
+            <option value="0.75">Gain 0.75kg per week</option>
+            <option value="1">Gain 1kg per week</option>
+          </select>
+        </div>
+      </ion-item>
       <ion-item class="full-width">
         <div class="input-field">
           <ion-label class="customlabel" for="workoutCommitment">Workout Commitment:</ion-label>
@@ -79,6 +94,8 @@
             </select>
         </div>
       </ion-item>
+
+
       <ion-button class="submit"  expand="block" type="submit" [disabled]="!healthDataForm.valid" (click)="startBeating()">Submit</ion-button>
     </ion-list>
   </form>

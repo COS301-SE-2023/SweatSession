@@ -5,6 +5,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { getAuth } from '@angular/fire/auth';
 import {AngularFirestore} from "@angular/fire/compat/firestore";
 import {ProfileService} from "../../services";
+import {CalorieSummary} from "./calorie-summary";
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-calories-calculator',
@@ -21,8 +23,15 @@ export class CaloriesCalculatorPage implements OnInit {
   currUserId: string | undefined | null;
   commitmentLevel: number;
   weightGoals: number;
+  totalTargetCalories: number;
+  totalDietCalories: number;
+  totalWorkoutCalories: number;
+  targetCalories$: Observable<number> = CalorieSummary.targetCalories$;
+  dietCalories$: Observable<number> = CalorieSummary.dietCalories$;
+  workoutCalories$: Observable<number> = CalorieSummary.workoutCalories$;
 
   selectedSegment: string = 'target';
+  calorieSummary: any;
 
   constructor(private formBuilder: FormBuilder,private firestore: AngularFirestore, private profileService: ProfileService)
   {
@@ -40,69 +49,85 @@ export class CaloriesCalculatorPage implements OnInit {
 
 
   ngOnInit() {
+    this.calorieSummary = new CalorieSummary();
+    // CalorieSummary.targetCalories=1500.96;// this is how you would update the values
   }
 
 
-  async fetchHealthData() {
-    if(this.currUserId) {
-      const userProfile = await this.profileService.getProfile({ userId: this.currUserId }).toPromise();
-      const displayName = userProfile?.profile.displayName;
-      this.firestore.collection('healthdata', ref => ref.where('displayName', '==', displayName))
-          .valueChanges()
-          .subscribe(data => {
-            if (data.length > 0) {
-              this.healthDataForm.patchValue(data[0]!);
-            }
-          });
-    }
-  }
+  //moved to component
+  
+  // async fetchHealthData() {
+  //   if(this.currUserId) {
+  //     const userProfile = await this.profileService.getProfile({ userId: this.currUserId }).toPromise();
+  //     const displayName = userProfile?.profile.displayName;
+  //     this.firestore.collection('healthdata', ref => ref.where('displayName', '==', displayName))
+  //         .valueChanges()
+  //         .subscribe(data => {
+  //           if (data.length > 0) {
+  //             this.healthDataForm.patchValue(data[0]!);
+  //           }
+  //         });
+  //   }
+  // }
 
-  calculateandGet_BMR() { //using  Harris-Benedict Equation (Revised Harris-Benedict Equation)
-    this.fetchHealthData();
-    let height = 180;
-    let weight = 60;
-    let age = 25;
-    let gender = "male"
-    let bmr = 0;
+  // calculateandGet_BMR() { //using  Harris-Benedict Equation (Revised Harris-Benedict Equation)
+  //   this.fetchHealthData();
+  //   let height = 180;
+  //   let weight = 60;
+  //   let age = 25;
+  //   let gender = "male"
+  //   let bmr = 0;
 
-    if(gender == "male")
-    {
-        let step1 = 13.397 * weight;
-        let step2 = 4.799 * height;
-        let step3 = 5.677 * age;
-        let step4 = 88.362;
-        bmr = step1 + step2 - step3 + step4;
-    }
-    else
-    {
-        let step1 = 9.247 * weight;
-        let step2 = 3.098 * height;
-        let step3 = 4.330 * age;
-        let step4 = 447.593;
-        bmr = step1 + step2 - step3 + step4;
-    }
-      return bmr;
-  }
+  //   if(gender == "male")
+  //   {
+  //       let step1 = 13.397 * weight;
+  //       let step2 = 4.799 * height;
+  //       let step3 = 5.677 * age;
+  //       let step4 = 88.362;
+  //       bmr = step1 + step2 - step3 + step4;
+  //   }
+  //   else
+  //   {
+  //       let step1 = 9.247 * weight;
+  //       let step2 = 3.098 * height;
+  //       let step3 = 4.330 * age;
+  //       let step4 = 447.593;
+  //       bmr = step1 + step2 - step3 + step4;
+  //   }
+  //     return bmr;
+  // }
 
-  calculateandGet_TDEE() {
+  // calculateandGet_TDEE() {
 
-    this.fetchHealthData();
-    let TDEE = 0;
-    let bmr = this.calculateandGet_BMR();
-    TDEE = bmr * this.commitmentLevel;
+  //   this.fetchHealthData();
+  //   let TDEE = 0;
+  //   let bmr = this.calculateandGet_BMR();
+  //   TDEE = bmr * this.commitmentLevel;
 
-    return TDEE;
-  }
+  //   return TDEE;
+  // }
 
 
-  calculateTargetCalories(): number {
+  // calculateTargetCalories(): number {
 
-    let targetCalories = this.calculateandGet_TDEE() * this.weightGoals;
+  //   let targetCalories = this.calculateandGet_TDEE() * this.weightGoals;
 
-    return targetCalories;
-  }
+  //   return targetCalories;
+  // }
 
   onSegmentChange(event: any) {
     this.selectedSegment = event.detail.value;
+  }
+
+  targetCalories(){
+    return CalorieSummary.targetCalories;
+  }
+
+  dietCalories(){
+    return CalorieSummary.dietCalories;
+  }
+
+  workoutCalories(){
+    return CalorieSummary.workoutCalories;
   }
 }
