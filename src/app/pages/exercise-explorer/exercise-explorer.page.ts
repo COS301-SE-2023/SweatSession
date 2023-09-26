@@ -1,6 +1,5 @@
 
 import { ModalController } from '@ionic/angular';
-import { ViewExercisesComponent } from './view-exercises/view-exercises.component';
 
 import { Component, OnInit, AfterViewInit, Input, ViewChild, ElementRef } from '@angular/core';
 import * as THREE from "three";
@@ -8,6 +7,7 @@ import  MouseMeshInteraction  from 'src/app/services/exercise-explorer/exercise-
 import { GLTFLoader, GLTF } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { CSS2DRenderer } from 'three/examples/jsm/renderers/CSS2DRenderer.js';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-exercise-explorer',
@@ -18,7 +18,8 @@ import { CSS2DRenderer } from 'three/examples/jsm/renderers/CSS2DRenderer.js';
 
 export class ExerciseExplorerPage implements OnInit, AfterViewInit {
 
-  constructor(private modalController: ModalController) { }
+  constructor(private modalController: ModalController,
+              private router:Router) { }
 
 
   @ViewChild('canvas') private canvasRef: ElementRef;
@@ -175,6 +176,10 @@ export class ExerciseExplorerPage implements OnInit, AfterViewInit {
         }
         else if (intersects[0].object.name == "Object_20"){
           console.log('thighs clicked');
+          //Thighs
+            // navigate to instruction modal page
+            this.openExercisePage('thighs');
+
         }
         else if (intersects[0].object.name == "Object_5"){
           console.log('legs clicked');
@@ -315,21 +320,20 @@ export class ExerciseExplorerPage implements OnInit, AfterViewInit {
 
   }
 
-  async openExerciseModal() {
-    const modal = await this.modalController.create({
-      component: ViewExercisesComponent, // Replace LocationModalPage with the name of your modal component
-    });
-    await modal.present();
-  
-    // Handle the location selection event when the modal is dismissed
-    const { data } = await modal.onDidDismiss();
+  async openExercisePage(bodypart: string) {
+        this.model.traverse((child: THREE.Mesh) => {
+         if (child instanceof THREE.Mesh) {
+              child.userData['clickable'] = false;
+         }
+        });
+    await this.router.navigate(['/view-exercise'], { queryParams: { bodypart: bodypart } });
   }
 
   ngAfterViewInit() {
     this.createScene();
     this.startRenderingLoop();
     this.createControls();
-    
+
   }
 
 
