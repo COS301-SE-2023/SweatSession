@@ -1,4 +1,4 @@
-import { ModalController } from '@ionic/angular';
+import { ModalController, Platform } from '@ionic/angular';
 
 import { Component, OnInit, AfterViewInit, Input, ViewChild, ElementRef } from '@angular/core';
 import * as THREE from "three";
@@ -18,7 +18,8 @@ import { Router } from '@angular/router';
 export class ExerciseExplorerPage implements OnInit, AfterViewInit {
 
   constructor(private modalController: ModalController,
-              private router:Router) { }
+              private router:Router,
+              private platform: Platform) { }
 
 
   @ViewChild('canvas') private canvasRef: ElementRef;
@@ -66,6 +67,11 @@ export class ExerciseExplorerPage implements OnInit, AfterViewInit {
 
   private scene: THREE.Scene;
 
+  private flag: boolean = true ;
+
+    private raycaster = new THREE.Raycaster();
+    private mouse = new THREE.Vector2();
+
   
 
   /**
@@ -80,6 +86,110 @@ export class ExerciseExplorerPage implements OnInit, AfterViewInit {
       this.model.rotation.z += 0.005;
     }
   }
+
+  private stopRenderingLoop() {
+    if (this.renderer) {
+      // Dispose of the renderer to stop rendering
+      this.renderer.dispose();
+      this.ambientLight.dispose();
+      this.controls.dispose();
+      
+  
+      // Remove the model from the scene
+      if (this.model) {
+        this.scene.remove(this.model);
+        this.model.traverse((child: THREE.Mesh) => {
+         
+        });
+        this.model = null;
+       
+      }
+  
+      // Clear the clickable meshes and materialClickHandlers
+      this.clickableMeshes = [];
+      this.materialClickHandlers = {};
+      window.removeEventListener('click', this.onMouseClick,false);
+      window.removeEventListener('mousemove', this.onMouseMove, false);
+  
+      console.log("renderstop");
+    }
+  }
+  //////
+  private onMouseClick = (event: MouseEvent ) => {
+    
+
+    this.raycaster.setFromCamera(this.mouse, this.camera);
+    //console.log(raycaster);
+    console.log('Mouse Click Coordinates:', this.mouse.x, this.mouse.y);
+    const intersects = this.raycaster.intersectObjects(this.clickableMeshes);
+    //console.log(intersects);
+    console.log(this.raycaster);
+    if (this.mouse.x <= -0.8 && this.mouse.y >= 0.94){
+      console.log('backarrow clicked');
+      this.flag = false ;
+      this.stopRenderingLoop();
+    }
+    if (intersects.length > 0) {
+      const clickedMesh = intersects[0].object; 
+      console.log('Mesh clicked!', clickedMesh);
+      console.log(intersects[0].object.name);
+
+
+      if (intersects[0].object.name == "Object_16"){
+        console.log('head clicked');
+      }
+      else if (intersects[0].object.name == "Object_14" && this.raycaster.ray.direction.x < 0){
+        console.log('upperback clicked');
+      }
+      else if (intersects[0].object.name == "Object_21" && this.raycaster.ray.direction.x < 0){
+        console.log('lowerback clicked');
+        console.log(this.raycaster.ray.direction.x );
+      }
+      else if (intersects[0].object.name == "Object_20"){
+        console.log('thighs clicked');
+        //Thighs
+          // navigate to instruction modal page
+         this.stopRenderingLoop();
+         this.openExercisePage('thighs');
+
+      }
+      else if (intersects[0].object.name == "Object_5"){
+        console.log('legs clicked');
+      }
+      else if (intersects[0].object.name == "Object_14"){
+        console.log('chest clicked');
+      }
+      else if (intersects[0].object.name == "Object_21"){
+        console.log('stomach clicked');
+      }
+      else if (intersects[0].object.name == "Object_18"){
+        console.log('gluteal muscle clicked');
+      }
+      else if (intersects[0].object.name == "Object_11"){
+        console.log('upperarm clicked');
+      }
+      else if (intersects[0].object.name == "Object_22"){
+        console.log('midarm clicked');
+      }
+      else if (intersects[0].object.name == "Object_8"){
+        console.log('shoulders clicked');
+      }
+     
+    }
+  };
+  private onMouseMove = ( event: { clientX: number; clientY: number; } ) => {
+  
+  this.mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+  this.mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+}
+  
+ //this.canvas.addEventListener('click', onMouseClick, false);
+ //this.canvas.addEventListener('mousemove', onMouseMove, false);
+
+
+
+  /////
+  
 
   /**
    *create controls
@@ -134,9 +244,10 @@ export class ExerciseExplorerPage implements OnInit, AfterViewInit {
       this.scene.add(this.model); 
 
       
-     const raycaster = new THREE.Raycaster();
-     const mouse = new THREE.Vector2();
+     //const raycaster = new THREE.Raycaster();
+     //const mouse = new THREE.Vector2();
      const targetMesh = this.model ;
+     
 
      this.model.traverse((child: THREE.Mesh) => {
       if (child instanceof THREE.Mesh) {
@@ -151,74 +262,12 @@ export class ExerciseExplorerPage implements OnInit, AfterViewInit {
       
     });
 
+    window.addEventListener('click', this.onMouseClick, false);
+    window.addEventListener( 'mousemove', this.onMouseMove, false );
 
 
 
-     const onMouseClick = (event: MouseEvent) => {
-      raycaster.setFromCamera(mouse, this.camera);
-      //console.log(raycaster);
-      console.log('Mouse Click Coordinates:', mouse.x, mouse.y);
-      const intersects = raycaster.intersectObjects(this.clickableMeshes);
-      //console.log(intersects);
-      console.log(raycaster);
-      if (intersects.length > 0) {
-        const clickedMesh = intersects[0].object; 
-        console.log('Mesh clicked!', clickedMesh);
-        console.log(intersects[0].object.name);
-
-        if (intersects[0].object.name == "Object_16"){
-          console.log('head clicked');
-        }
-        else if (intersects[0].object.name == "Object_14" && raycaster.ray.direction.x < 0){
-          console.log('upperback clicked');
-        }
-        else if (intersects[0].object.name == "Object_21" && raycaster.ray.direction.x < 0){
-          console.log('lowerback clicked');
-          console.log(raycaster.ray.direction.x );
-        }
-        else if (intersects[0].object.name == "Object_20"){
-          console.log('thighs clicked');
-          //Thighs
-            // navigate to instruction modal page
-            this.openExercisePage('thighs');
-
-        }
-        else if (intersects[0].object.name == "Object_5"){
-          console.log('legs clicked');
-        }
-        else if (intersects[0].object.name == "Object_14"){
-          console.log('chest clicked');
-        }
-        else if (intersects[0].object.name == "Object_21"){
-          console.log('stomach clicked');
-        }
-        else if (intersects[0].object.name == "Object_18"){
-          console.log('gluteal muscle clicked');
-        }
-        else if (intersects[0].object.name == "Object_11"){
-          console.log('upperarm clicked');
-        }
-        else if (intersects[0].object.name == "Object_22"){
-          console.log('midarm clicked');
-        }
-        else if (intersects[0].object.name == "Object_8"){
-          console.log('shoulders clicked');
-        }
-       
-      }
-    };
-    function onMouseMove( event: { clientX: number; clientY: number; } ) {
-    mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
-    mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
-}
-    window.addEventListener( 'click', onMouseClick, false );
-    window.addEventListener( 'mousemove', onMouseMove, false );
-   //this.canvas.addEventListener('click', onMouseClick, false);
-   //this.canvas.addEventListener('mousemove', onMouseMove, false);
-  
-  
-
-
+     
     });
     //*Camera
     let aspectRatio = this.getAspectRatio();
@@ -281,12 +330,7 @@ export class ExerciseExplorerPage implements OnInit, AfterViewInit {
     }());
   }
 
-  ////////
-  /*
   
-
-  ///////
-*/
  
 
   ngOnInit(): void {
@@ -294,18 +338,21 @@ export class ExerciseExplorerPage implements OnInit, AfterViewInit {
   }
 
   async openExercisePage(bodypart: string) {
-        this.model.traverse((child: THREE.Mesh) => {
-         if (child instanceof THREE.Mesh) {
-              child.userData['clickable'] = false;
-         }
-        });
+        
     await this.router.navigate(['/view-exercise'], { queryParams: { bodypart: bodypart } });
   }
 
   ngAfterViewInit() {
+    if(this.flag == true){
     this.createScene();
     this.startRenderingLoop();
     this.createControls();
+    
+    }
+    else{
+      this.stopRenderingLoop();
+      console.log("rendercancel");
+    }
 
   }
 
