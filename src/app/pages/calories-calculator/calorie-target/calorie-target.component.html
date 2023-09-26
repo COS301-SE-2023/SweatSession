@@ -2,56 +2,55 @@
   <ion-card-title>
     <h1>Calories Calculator</h1>
   </ion-card-title>
-  <ion-card-content>
-    <ion-list>
+
+
+    <ion-card-content>
+
       <ion-item lines="none">
-        <div class="icon-container">
-          <ion-icon name="calculator" class="calculator-icon"></ion-icon>
-        </div>
+                  <div class="icon-container">
+                    <ion-icon name="calculator" class="calculator-icon"></ion-icon>
+                  </div>
       </ion-item>
-      <ion-item lines="none">
-        <ion-label>BMR Value: {{calculateandGet_BMR()}}</ion-label>
-      </ion-item>
-      <ion-item lines="none">
-        <ion-label
-          >TDEE Value: {{calculateandGet_TDEE()}} calories per day</ion-label
-        >
-      </ion-item>
-      <ion-item lines="none">
-        <ion-label>Commitment Level</ion-label>
-        <ion-select [(ngModel)]="commitmentLevel">
-          <ion-select-option value="1.2"
-            >Little to no exercise</ion-select-option
-          >
-          <ion-select-option value="1.375"
-            >Light exercise (1–3 days per week)</ion-select-option
-          >
-          <ion-select-option value="1.55"
-            >Moderate exercise (3–5 days per week)</ion-select-option
-          >
-          <ion-select-option value="1.725"
-            >Heavy exercise (6–7 days per week)</ion-select-option
-          >
-          <ion-select-option value="1.9"
-            >Very heavy exercise (twice per day, extra heavy
-            workouts)</ion-select-option
-          >
-        </ion-select>
-      </ion-item>
-      <ion-item lines="none">
-        <ion-label>Weight Goals</ion-label>
-        <ion-select [(ngModel)]="weightGoals">
-          <ion-select-option value="0.8">Lose Weight</ion-select-option>
-          <ion-select-option value="1">Maintain Weight</ion-select-option>
-          <ion-select-option value="1.2">Gain Weight</ion-select-option>
-        </ion-select>
-      </ion-item>
-      <ion-item lines="none">
-        <ion-label
-          >Calories Consumption: {{calculateTargetCalories()}}</ion-label
-        >
-      </ion-item>
-      <!--                <ion-button>Calculate</ion-button>-->
-    </ion-list>
+
+      <ion-list>
+        <ion-item>
+          <ion-label>Calculation</ion-label>
+          <ion-label>Calories</ion-label>
+        </ion-item>
+      </ion-list>
+
+      <ion-list>
+        <ion-item>
+          <ion-label>BMI Value</ion-label>
+          <ion-label>{{BMIValue | number: '1.2-2'}}</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>BMR Value</ion-label>
+          <ion-label>{{bmr | number: '1.2-2'}} per day</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>TDEE Value</ion-label>
+          <ion-label>{{TDEEValue | number: '1.2-2'}} per day</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>Target Calories</ion-label>
+          <ion-label>{{targetCalories | number: '1.2-2'}} per week</ion-label>
+        </ion-item>
+      </ion-list>
+
+        <ion-item lines="none">
+                      <ion-row>
+                        <ion-col>
+                          <ion-button
+                            expand="block"
+                            fill="outline"
+                            color="primary"
+                            routerLink="/healthdata">
+                              Update health Form
+                          </ion-button>
+                        </ion-col>
+                      </ion-row>
+        </ion-item>
+
   </ion-card-content>
 </ion-card>

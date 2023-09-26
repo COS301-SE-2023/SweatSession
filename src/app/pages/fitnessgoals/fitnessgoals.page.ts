@@ -17,6 +17,8 @@ export class FitnessgoalsPage implements OnInit {
   GOALS : IGOAL[] = [];
   constructor( private router: Router,
                 private fitnessgaolservive: FitnessgoalService,
+               private goalcardComponent:GoalcardComponent
+
              )
         { }
 
@@ -31,6 +33,7 @@ export class FitnessgoalsPage implements OnInit {
 
       CheckContent()
       {
+
         const auth = getAuth();
         this.currUserId = auth.currentUser?.uid;
 
@@ -48,6 +51,14 @@ export class FitnessgoalsPage implements OnInit {
                 {
                     this.GOALS = data.goals;
                 });
+
+          this.goalcardComponent.selectedSegment
+          if ( this.goalcardComponent.selectedSegment == '1')
+          {
+
+                console.log("this.goalcardComponent.selectedSegment == '1'");
+                this.GOALS = this.GOALS.filter((goal) =>goal.progress == 100);
+          }
     }
 
 }

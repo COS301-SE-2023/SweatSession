@@ -18,6 +18,7 @@
     workoutForm: FormGroup;
     exercisesArray: Exercise[] = [];
     deletedExercises: string[] = [];
+    selectedExercises: any = {};
 
     constructor(
       private formBuilder: FormBuilder,
@@ -52,15 +53,32 @@
     
     populateFormWithExercises() {
       const exercisesFormArray = this.workoutForm.get('exercises') as FormArray;
+      let i = 0;
       this.exercisesArray.forEach((exercise) => {
         const exerciseControl = this.formBuilder.group({
           name: [exercise.name],
           sets: [exercise.sets],
           reps: [exercise.reps],
           weight: [exercise.weight],
+          duration: [exercise.duration]
         });
         exercisesFormArray.push(exerciseControl);
+        this.selectedExercises[i] = exercise.name;
+        i++;
       });
+      console.log(this.selectedExercises)
+    }
+
+    updateSelectedExerciseValues() {
+      this.selectedExercises = {};
+      // console.log(this.selectedExercises)
+      // const exercisesFormArray = this.workoutForm.get('exercises') as FormArray;
+      // let i = 0;
+      // this.exercisesArray.forEach((exercise) => {
+      //   this.selectedExercises[i] = exercise.name;
+      //   console.log(exercise.name)
+      //   i++;
+      // });
     }
       
       
@@ -74,6 +92,7 @@
         sets: [''],
         reps: [''],
         weight: [''],
+        duration: ['']
       });
       (this.workoutForm.get('exercises') as FormArray).push(exerciseControl);
     }
@@ -84,6 +103,7 @@
         this.deletedExercises.push(exercise.id);
       }
       this.exercises.removeAt(index);
+      this.updateSelectedExerciseValues();
     }
     public async saveExercise(exerciseData: Exercise, index: number) {
       let exercise = this.exercisesArray[index];
@@ -112,6 +132,7 @@
           sets: exerciseControl.get('sets')?.value ?? 0,
           reps: exerciseControl.get('reps')?.value ?? 0,
           weight: exerciseControl.get('weight')?.value ?? 0,
+          duration: exerciseControl.get('duration')?.value ?? 0,
         };
     
         return this.saveExercise(exerciseData, index);
@@ -128,6 +149,47 @@
       this.deletedExercises = [];
     
       console.log('All exercises saved.');
+    }
+
+    exerciseSelected(event: Event, exerciseNo: number) {
+      const selectedValue = (event.target as HTMLSelectElement).value;
+      this.selectedExercises[exerciseNo] = selectedValue;
+    }
+  
+    hasWeight(exerciseNo: number){
+      // console.log(this.selectedExercises);
+      const exercise = this.selectedExercises[exerciseNo];
+      const exercisesWithoutWeight = ["Burpees", "Calf Raises", "Crunches", "Jumping Jacks", "Lunges", "Planks", "Pull-Ups", "Push-Ups", "Sit-Ups", "Stretches"];
+  
+      if (exercisesWithoutWeight.includes(exercise)) {
+          return false;
+      }
+  
+      return true;
+    }
+  
+    hasSets(exerciseNo: number){
+      // console.log(this.selectedExercises);
+      const exercise = this.selectedExercises[exerciseNo];
+      const exercisesWithoutWeight = ["Stretches"];
+  
+      if (exercisesWithoutWeight.includes(exercise)) {
+          return false;
+      }
+  
+      return true;
+    }
+  
+    hasReps(exerciseNo: number){
+      // console.log(this.selectedExercises);
+      const exercise = this.selectedExercises[exerciseNo];
+      const exercisesWithoutWeight = ["Stretches"];
+  
+      if (exercisesWithoutWeight.includes(exercise)) {
+          return false;
+      }
+  
+      return true;
     }
     
   }

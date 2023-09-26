@@ -32,6 +32,7 @@ export class GymsearchComponent implements OnInit {
    showFriends: any = {};
    gymChosen: string;
    chosenPlaceId: string;
+   friendsSubscription: Subscription;
    constructor(private store: Store, private modalController: ModalController, private geolocation: Geolocation, private httpClient: HttpClient, private locationRepository: LocationRepository, private friendsRepository: FriendsRepository, private friendsState: FriendsState, private datePipe: DatePipe) {
       this.data.filter(item => item.name.includes(''));
    }
@@ -119,7 +120,7 @@ export class GymsearchComponent implements OnInit {
       //      this.userFriendIds.push(element.userId!);
       //    });
       //  });
-      this.friends$.subscribe(async (response) => {
+      this.friendsSubscription = this.friends$.subscribe(async (response) => {
          if (this.userFriends.length === 0) {
             this.userFriends = response;
             this.userFriends.forEach(element => {
@@ -201,6 +202,10 @@ export class GymsearchComponent implements OnInit {
       // const nearbyGymProxyRequest = httpsCallable(functions, 'nearbyGymProxyRequest');
       // nearbyGymProxyRequest()
    }
+
+   ngOnDestroy() {
+      this.friendsSubscription.unsubscribe();
+    }
 
    async searchNearbyGyms() {
       this.getCurrentLocation().then((coordinates: GeolocationCoordinates) => {

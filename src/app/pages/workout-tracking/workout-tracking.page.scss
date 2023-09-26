@@ -11,7 +11,7 @@ ion-content {
   text-align: center;
   margin: auto; 
 }
-input {
+input, select {
   display: block;
   width: 100%;
   align-self: center;
@@ -66,17 +66,19 @@ input {
 }
 
 .exercise-number,
-input[formControlName="name"],
+select[formControlName="name"],
 input[formControlName="sets"],
 input[formControlName="reps"],
-input[formControlName="weight"] {
+input[formControlName="weight"],
+input[formControlName="duration"] {
   font-family: 'Montserrat', sans-serif;
 }
 
-input[formControlName="name"],
+select[formControlName="name"],
 input[formControlName="sets"],
 input[formControlName="reps"],
-input[formControlName="weight"] {
+input[formControlName="weight"],
+input[formControlName="duration"] {
   border-radius: 12px;
 }
 

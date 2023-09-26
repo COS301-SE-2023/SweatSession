@@ -66,6 +66,10 @@
   display: flex;
   justify-content: center;
   width: 100%;
+
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }  
 
 .spinner-container {

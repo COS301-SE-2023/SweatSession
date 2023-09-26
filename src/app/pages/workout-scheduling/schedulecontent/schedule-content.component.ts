@@ -32,6 +32,7 @@ export class ScheduleContentComponent implements OnInit {
   @Input() id:string;
   selectedFriends:any[] = [];
   @Input() friends: IProfileModel[] = [];
+  showOptions = false;
 
   constructor(private store: Store, private nav: NavController,
     private actionSheetCtrl: ActionSheetController,
@@ -274,5 +275,9 @@ export class ScheduleContentComponent implements OnInit {
 
   confirmSelection() {
 
+  }
+
+  toogleOptions () {
+    this.showOptions = !this.showOptions;
   }
 }

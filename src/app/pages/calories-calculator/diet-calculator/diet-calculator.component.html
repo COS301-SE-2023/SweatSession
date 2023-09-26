@@ -1,0 +1,46 @@
+<ion-card class="ion-text-center">
+  <ion-card-content>
+    <ion-item>
+      <ion-label position="floating">Enter your meal:</ion-label>
+      <ion-textarea [(ngModel)]="meal" rows="5"></ion-textarea>
+    </ion-item>
+    <ion-button expand="full" (click)="calculateNutrition()">Calculate</ion-button>
+
+    <ion-card *ngIf="totalNutrition">
+      <ion-card-header>Summary of Nutritional Information</ion-card-header>
+      <ion-card-content>
+        <p>Total Calories: {{ totalNutrition.calories }}</p>
+        <p>Protein: {{ totalNutrition.protein }}g</p>
+        <p>Carbohydrates: {{ totalNutrition.carbohydrates }}g</p>
+        <p>Fats: {{ totalNutrition.fats }}g</p>
+        <p>Dietary Fiber: {{ totalNutrition.fiber }}g</p>
+        <p>Sugars: {{ totalNutrition.sugars }}g</p>
+        <p>Sodium: {{ totalNutrition.sodium }}mg</p>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-list *ngIf="foods">
+      <ion-item *ngFor="let food of foods">
+        <ion-row class="flex-container">
+          <ion-col size="6" size-md="3">
+            <ion-thumbnail>
+              <ion-img [src]="food.photo.thumb"></ion-img>
+            </ion-thumbnail>
+          </ion-col>
+          <ion-col size="6" size-md="9" class="food-info">
+            <ion-label class="ion-text-wrap">
+              <h2 class="capitalize">{{ food.food_name }}</h2>
+              <p>Total Calories: {{ food.nf_calories }}</p>
+              <p>Protein: {{ food.nf_protein }}g</p>
+              <p>Carbohydrates: {{ food.nf_total_carbohydrate }}g</p>
+              <p>Fats: {{ food.nf_total_fat }}g</p>
+              <p>Dietary Fiber: {{ food.nf_dietary_fiber }}g</p>
+              <p>Sugars: {{ food.nf_sugars }}g</p>
+              <p>Sodium: {{ food.nf_sodium }}mg</p>
+            </ion-label>
+          </ion-col>
+        </ion-row>
+      </ion-item>
+    </ion-list>    
+  </ion-card-content>
+</ion-card>
