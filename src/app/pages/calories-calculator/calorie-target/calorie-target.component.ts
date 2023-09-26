@@ -8,6 +8,7 @@ import {HealthDataService} from "../../../services/healthDataService/healthData.
 import {wait} from "nx-cloud/lib/utilities/waiter";
 import {auth} from "firebase-admin";
 import {getAuth} from "@angular/fire/auth";
+import { CalorieSummary } from '../calorie-summary';
 
 @Component({
   selector: 'calorie-target',
@@ -247,6 +248,8 @@ export class CalorieTargetComponent  implements OnInit {
           }
       }
 
+
+    CalorieSummary.targetCalories = parseFloat((targetCalories/7).toFixed(2));
     return targetCalories;
   }
 
