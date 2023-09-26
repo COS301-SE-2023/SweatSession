@@ -38,32 +38,9 @@
     <edit-schedule [schedule]="schedule"></edit-schedule>
   </ion-card-content>
 
-  <!-- <div class="info">
-    <ion-item class="progress-label custom-item" lines="none">
-      <ion-label>{{timeLeft()}}</ion-label>
-      <ion-fab horizontal="end">
-        <ion-fab-button>
-          <ion-icon name="ellipsis-vertical"></ion-icon>
-        </ion-fab-button>
-        <ion-fab-list side="start" class="custom-fab-list">
-          <ion-fab-button (click)="toggleEditSlide()">
-            <ion-icon [name]="isEditSlide ? 'close' : 'create'" color="success"></ion-icon>
-          </ion-fab-button>
-          <ion-fab-button (click)="presentActionSheet()">
-            <ion-icon name="trash" class="add-icon"></ion-icon>
-          </ion-fab-button>
-          <ion-fab-button [id]="id">
-            <ion-icon name="person-add" class="add-icon"></ion-icon>
-          </ion-fab-button>
-        </ion-fab-list>
-      </ion-fab>      
-    </ion-item>
-    <ion-progress-bar [value]="ratio"></ion-progress-bar>
-  </div> -->
-
   <div class="info">
     <ion-item class="progress-label custom-item" lines="none">
-      <ion-label>{{timeLeft()}}</ion-label>
+      <ion-label *ngIf="!showOptions">{{timeLeft()}}</ion-label>
       <ion-buttons slot="end" *ngIf="showOptions">
         <ion-button class="default-button" (click)="toggleEditSlide()">
           <ion-icon [name]="isEditSlide ? 'close' : 'create'" color="success"></ion-icon>
