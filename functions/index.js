@@ -20,62 +20,62 @@ exports.nearbyGymProxyRequest = functions.https.onRequest(async (req, res) => {
 
 // const firestore = admin.firestore();
 
-exports.checkScheduledWorkouts = functions.pubsub
-  .schedule('every 1 minutes')
-  .onRun(async (context) => {
-    const firestore = admin.firestore();
-    const Snapshot = await firestore.collection('WorkoutSchedule').get();
-    console.log('running');
-    Snapshot.forEach(async (doc)=>{
-        const now = new Date();
-        const scheduledWorkoutsRef = firestore.collection(`WorkoutSchedule/${doc.id}/userSchedules`);
-        const snapshot = await scheduledWorkoutsRef.get();
+// exports.checkScheduledWorkouts = functions.pubsub
+//   .schedule('every 1 minutes')
+//   .onRun(async (context) => {
+//     const firestore = admin.firestore();
+//     const Snapshot = await firestore.collection('WorkoutSchedule').get();
+//     console.log('running');
+//     Snapshot.forEach(async (doc)=>{
+//         const now = new Date();
+//         const scheduledWorkoutsRef = firestore.collection(`WorkoutSchedule/${doc.id}/userSchedules`);
+//         const snapshot = await scheduledWorkoutsRef.get();
 
-        snapshot.forEach(async (innerDoc) => {
-          const workout = innerDoc.data();
-          const scheduledDateTime = workout.notifyAt;
+//         snapshot.forEach(async (innerDoc) => {
+//           const workout = innerDoc.data();
+//           const scheduledDateTime = workout.notifyAt;
 
 
-          if (scheduledDateTime <= now && workout.status !== 'completed' && !workout.notified) {
-            console.log(workout.completeAt);
-            console.log(now);
-            // Send a notification to the user userId == doc.id
-            await innerDoc.ref.update({notified: true});
-            await sendNotificationToUser(workout, "You have a session in 5 minutes");
+//           if (scheduledDateTime <= now && workout.status !== 'completed' && !workout.notified) {
+//             console.log(workout.completeAt);
+//             console.log(now);
+//             // Send a notification to the user userId == doc.id
+//             await innerDoc.ref.update({notified: true});
+//             await sendNotificationToUser(workout, "You have a session in 5 minutes");
 
-            if(workout.completeAt <= now) {
-              // Send a notification to the user userId == doc.id
-              await sendNotificationToUser(workout, "Workout Session Completed");//changed from schedule to Workout Session
-              await innerDoc.ref.update({ status: 'completed' });
-            }
-          }
-        });
-    })
+//             if(workout.completeAt <= now) {
+//               // Send a notification to the user userId == doc.id
+//               await sendNotificationToUser(workout, "Workout Session Completed");//changed from schedule to Workout Session
+//               await innerDoc.ref.update({ status: 'completed' });
+//             }
+//           }
+//         });
+//     })
        
-    return null;
-  });
+//     return null;
+//   });
 
-async function sendNotificationToUser(schedule, message) {
-  console.log("Notifications alert");
+// async function sendNotificationToUser(schedule, message) {
+//   console.log("Notifications alert");
 
   
-  const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
-  var daynum = new Date().getDay() ;
-  var day = weekday[daynum];
-  var date = new Date().toTimeString() ;
-  var shortdate = date.split(':' , 2);
+//   const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+//   var daynum = new Date().getDay() ;
+//   var day = weekday[daynum];
+//   var date = new Date().toTimeString() ;
+//   var shortdate = date.split(':' , 2);
   
-  const firestore = admin.firestore();
-  auth = firestore.getAuth();
-  currUserId = this.auth.currentUser?.displayName;
-  //console.log('sent notification');
-  await addDoc(collection(firestore , 'Notifications'), {
-    senttoid: currUserId ,
-    senderid: currUserId , 
-    sendername: 'SWEATSESSION' ,
-    profileurl: '/assets/Asset 5.png' , 
-    sentdate: day + ' ' +shortdate[0] + ':' + shortdate[1] + ' ' , 
-    message: message
-  });
+//   const firestore = admin.firestore();
+//   auth = firestore.getAuth();
+//   currUserId = this.auth.currentUser?.displayName;
+//   //console.log('sent notification');
+//   await addDoc(collection(firestore , 'Notifications'), {
+//     senttoid: currUserId ,
+//     senderid: currUserId , 
+//     sendername: 'SWEATSESSION' ,
+//     profileurl: '/assets/Asset 5.png' , 
+//     sentdate: day + ' ' +shortdate[0] + ':' + shortdate[1] + ' ' , 
+//     message: message
+//   });
   
-}
+// }

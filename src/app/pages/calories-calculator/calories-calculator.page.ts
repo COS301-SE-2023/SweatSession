@@ -50,10 +50,6 @@ export class CaloriesCalculatorPage implements OnInit {
 
   ngOnInit() {
     this.calorieSummary = new CalorieSummary();
-
-    CalorieSummary.targetCalories = this.targetCalories();
-    CalorieSummary.dietCalories = this.dietCalories();
-    CalorieSummary.workoutCalories = this.workoutCalories();
   }
 
   onSegmentChange(event: any) {
