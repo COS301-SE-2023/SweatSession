@@ -1,4 +1,3 @@
-
 import { ModalController } from '@ionic/angular';
 import { ViewExercisesComponent } from './view-exercises/view-exercises.component';
 
@@ -74,6 +73,7 @@ export class ExerciseExplorerPage implements OnInit, AfterViewInit {
    * @private
    * @memberof ExerciseExplorerPage
    */
+  
   private animateModel() {
     if (this.model) {
       this.model.rotation.z += 0.005;
@@ -90,13 +90,14 @@ export class ExerciseExplorerPage implements OnInit, AfterViewInit {
   private createControls = () => {
     const renderer = new CSS2DRenderer();
     renderer.setSize(window.innerWidth, window.innerHeight);
+    //renderer.setSize(this.canvas.clientWidth , this.canvas.clientHeight);
     renderer.domElement.style.position = 'absolute';
     renderer.domElement.style.top = '0px';
     document.body.appendChild(renderer.domElement);
   
     this.controls = new OrbitControls(this.camera, renderer.domElement);
     this.controls.autoRotate = true;
-    this.controls.enableZoom = true;
+    this.controls.enableZoom = false;
     this.controls.enablePan = false;
   
     // Set the limits for vertical rotation (in radians)
@@ -120,7 +121,7 @@ export class ExerciseExplorerPage implements OnInit, AfterViewInit {
       this.model = gltf.scene.children[0];
       //const scaleFactor = 1;
       //this.model.scale.set(scaleFactor, scaleFactor, scaleFactor);
-      const scale = Math.min(90 / 100, 90 / 100); 
+      const scale = Math.min(100 / 100, 100 / 100); 
       this.model.scale.set(scale, scale, scale);
   
       console.log(this.model);
@@ -129,7 +130,7 @@ export class ExerciseExplorerPage implements OnInit, AfterViewInit {
       this.model.position.multiplyScalar(-1);
      
      
-      this.scene.add(this.model);
+      this.scene.add(this.model); 
 
       
      const raycaster = new THREE.Raycaster();
@@ -155,8 +156,9 @@ export class ExerciseExplorerPage implements OnInit, AfterViewInit {
      const onMouseClick = (event: MouseEvent) => {
       raycaster.setFromCamera(mouse, this.camera);
       //console.log(raycaster);
+      console.log('Mouse Click Coordinates:', mouse.x, mouse.y);
       const intersects = raycaster.intersectObjects(this.clickableMeshes);
-      console.log(intersects);
+      //console.log(intersects);
       console.log(raycaster);
       if (intersects.length > 0) {
         const clickedMesh = intersects[0].object; 
@@ -166,11 +168,11 @@ export class ExerciseExplorerPage implements OnInit, AfterViewInit {
         if (intersects[0].object.name == "Object_16"){
           console.log('head clicked');
         }
-        else if (intersects[0].object.name == "Object_14" && raycaster.ray.direction.x < 0 ){
-          console.log('chest clicked');
+        else if (intersects[0].object.name == "Object_14" && raycaster.ray.direction.x < 0){
+          console.log('upperback clicked');
         }
-        else if (intersects[0].object.name == "Object_21" && raycaster.ray.direction.x < 0 ){
-          console.log('stomach clicked');
+        else if (intersects[0].object.name == "Object_21" && raycaster.ray.direction.x < 0){
+          console.log('lowerback clicked');
           console.log(raycaster.ray.direction.x );
         }
         else if (intersects[0].object.name == "Object_20"){
@@ -180,10 +182,10 @@ export class ExerciseExplorerPage implements OnInit, AfterViewInit {
           console.log('legs clicked');
         }
         else if (intersects[0].object.name == "Object_14"){
-          console.log('upperback clicked');
+          console.log('chest clicked');
         }
         else if (intersects[0].object.name == "Object_21"){
-          console.log('lowerback clicked');
+          console.log('stomach clicked');
         }
         else if (intersects[0].object.name == "Object_18"){
           console.log('gluteal muscle clicked');
@@ -206,7 +208,9 @@ export class ExerciseExplorerPage implements OnInit, AfterViewInit {
 }
     window.addEventListener( 'click', onMouseClick, false );
     window.addEventListener( 'mousemove', onMouseMove, false );
-    
+   //this.canvas.addEventListener('click', onMouseClick, false);
+   //this.canvas.addEventListener('mousemove', onMouseMove, false);
+  
   
 
 
@@ -221,7 +225,7 @@ export class ExerciseExplorerPage implements OnInit, AfterViewInit {
     )
     this.camera.position.x = 100;
     this.camera.position.y = 100;
-    this.camera.position.z = 2;
+    this.camera.position.z = 50;
     this.ambientLight = new THREE.AmbientLight(0xffffff, 0.5); // Adjust color and intensity
     this.scene.add(this.ambientLight);
 
@@ -267,45 +271,14 @@ export class ExerciseExplorerPage implements OnInit, AfterViewInit {
     let component: ExerciseExplorerPage = this;
     (function render() {
       component.renderer.render(component.scene, component.camera);
-      component.animateModel();
+      //component.animateModel();
       requestAnimationFrame(render);
     }());
   }
 
   ////////
   /*
-  private handleMeshClick(mesh: THREE.Mesh) {
-    // This function will be called when a mesh is clicked.
-    // You can perform actions specific to the clicked mesh here.
-    console.log('Mesh clicked:', mesh);
-
-    // Example: Change the color of the clicked mesh
-    const newColor = new THREE.Color(0xff0000); // Red color
-    const material = new THREE.MeshBasicMaterial({ color: newColor });
-
-  // Assign the new material to the mesh
-    mesh.material = material;
-  }
-
-  // Function to add click event listeners to meshes
-  private addClickEventListeners() {
-    const component = this;
-    console.log('starting onclick');
-    if (this.model) {
-      // Iterate through the children of the loaded GLTF model
-      this.model.traverse(function (child: THREE.Mesh<THREE.BufferGeometry<THREE.NormalBufferAttributes>, THREE.Material | THREE.Material[]>) {
-        if (child instanceof THREE.Mesh) {
-          // Attach a click event listener to each mesh
-          child.userData = { clickable: true };
-          child.addEventListener('click', function () {
-            if (child.userData['clickable']) {
-              component.handleMeshClick(child);
-            }
-          });
-        }
-      });
-    }
-  }
+  
 
   ///////
 */
@@ -334,7 +307,4 @@ export class ExerciseExplorerPage implements OnInit, AfterViewInit {
 
 
 }
-
-
-
 
