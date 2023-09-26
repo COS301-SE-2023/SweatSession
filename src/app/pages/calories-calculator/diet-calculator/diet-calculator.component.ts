@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { CalorieSummary } from '../calorie-summary';
 
 @Component({
   selector: 'diet-calculator',
@@ -32,6 +33,7 @@ export class DietCalculatorComponent implements OnInit {
       (response: any) => {
         this.foods = response.foods;
         this.calculateTotalNutrition();
+        CalorieSummary.dietCalories = parseFloat((this.totalNutrition.calories).toFixed(2));
       },
       (error) => {
         console.error('Error calculating nutrition:', error);
