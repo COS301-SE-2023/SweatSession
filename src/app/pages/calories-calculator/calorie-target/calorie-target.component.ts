@@ -4,7 +4,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProfileService } from 'src/app/services/profile/profile.service';
 import {healthData} from "../../../models/exercise.model";
 import {SetProfileService} from "../../../services";
+import {HealthDataService} from "../../../services/healthDataService/healthData.service";
 import {wait} from "nx-cloud/lib/utilities/waiter";
+import {auth} from "firebase-admin";
+import {getAuth} from "@angular/fire/auth";
 
 @Component({
   selector: 'calorie-target',
@@ -28,7 +31,10 @@ export class CalorieTargetComponent  implements OnInit {
   constructor(private formBuilder: FormBuilder,
               private firestore: AngularFirestore,
               private profileService: ProfileService,
-              private setProfileService: SetProfileService)
+              private setProfileService: SetProfileService,
+              private healthDataService: HealthDataService
+
+  )
   {
       this.healthDataFORM = this.formBuilder.group({
             height: ['', Validators.required],
@@ -78,7 +84,19 @@ export class CalorieTargetComponent  implements OnInit {
         let age = 0;
         let gender = "none";
 
-        this.setProfileService.gethealthdata("Boldy")
+        const auth = getAuth();
+        this.currUserId = auth.currentUser?.uid;
+
+        if (this.currUserId!=undefined)
+        {
+            sessionStorage.setItem('currUserId', this.currUserId);
+        }
+        else
+        {
+            this.currUserId = sessionStorage.getItem('currUserId') ?? "";
+        }
+
+        this.healthDataService.getHealthData(this.currUserId)
             .then((res: unknown) => {
                 const healthDataArray = res as healthData[];
                 if (healthDataArray.length > 0) {

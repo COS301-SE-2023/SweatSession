@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { finalize } from 'rxjs/operators';
+
 
 @Injectable({
   providedIn: 'root'
@@ -10,18 +12,27 @@ export class HealthDataService {
 
   async getHealthData(userId: string) {
     return new Promise<any[]>((resolve, reject) => {
-        const ref = this.firestore.collection('healthdata', (query) =>
-          query.where('userId', '==', userId)
-        ).valueChanges().subscribe(
-          (data) => {
-            resolve(data);
-            ref.unsubscribe(); // Unsubscribe to prevent memory leaks
-          },
-          (error) => {
-            reject(error);
-            ref.unsubscribe(); // Unsubscribe on error as well
+      let subscription: any;
+      const ref = this.firestore.collection('healthdata', (query) =>
+        query.where('userId', '==', userId)
+      )
+      .valueChanges()
+      .pipe(
+        finalize(() => {
+          if (subscription) {
+            subscription.unsubscribe(); 
           }
-        );
-      });
+        })
+      )
+      .subscribe(
+        (data) => {
+          resolve(data);
+        },
+        (error) => {
+          reject(error);
+        }
+      );
+      subscription = ref;
+    });
   }
 }

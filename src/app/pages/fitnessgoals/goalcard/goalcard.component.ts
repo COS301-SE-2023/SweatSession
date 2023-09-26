@@ -46,6 +46,10 @@ export class GoalcardComponent  implements OnInit {
         this.getGoals();
     }
 
+    isSelected(seg : string)
+    {
+        return seg == this.selectedSegment;
+    }
     getGoals()
     {
 

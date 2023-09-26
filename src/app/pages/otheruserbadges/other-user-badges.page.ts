@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { map, Observable, of } from 'rxjs';
 import { IBadges } from 'src/app/models/badges.model';
 import { AuthApi } from 'src/app/states/auth/auth.api';
-import { BadgesService } from 'src/app/services/badges/badges.service';
+// import { BadgesService } from 'src/app/services/badges/badges.service';
 import { SubscribeToOtherUserBadges } from 'src/app/actions/otheruserbadges.actions';
 import { Select, Store } from '@ngxs/store';
 import { OtherUserBadgesState } from 'src/app/states/otheruserbadges/otheruserbadges.state';
@@ -69,17 +69,18 @@ export class OtherUserBadgesPage implements OnInit {
     received:false
   }
   ];
+  receivedBadgesSubscription: any;
   constructor(
     // private badgesApi: BadgesApi,
     private authApi: AuthApi,
-    private badgesService: BadgesService,
+    // private badgesService: BadgesService,
     private store: Store,
     // noOfBadges: Number
   ) {}
 
   ngOnInit() {
     this.store.dispatch(new SubscribeToOtherUserBadges());
-    this.receivedBadges$.pipe(
+    this.receivedBadgesSubscription = this.receivedBadges$.pipe(
       // Use the map operator to transform the observable value
       map((badges: IBadges | null) => {
         if (badges) {
@@ -101,4 +102,9 @@ export class OtherUserBadgesPage implements OnInit {
 
     // )
   }
+
+  ngOnDestroy() {
+    this.receivedBadgesSubscription.unsubscribe();
+  }
+  
 }

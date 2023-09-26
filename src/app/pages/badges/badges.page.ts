@@ -3,7 +3,7 @@ import { map, Observable, of } from 'rxjs';
 import { IBadges } from 'src/app/models/badges.model';
 import { AuthApi } from 'src/app/states/auth/auth.api';
 // import { BadgesApi } from 'src/app/states/badges/badges.api';
-import { BadgesService } from 'src/app/services/badges/badges.service';
+// import { BadgesService } from 'src/app/services/badges/badges.service';
 import { SubscribeToBadges } from 'src/app/actions/badges.actions';
 import { Select, Store } from '@ngxs/store';
 import { BadgesState } from 'src/app/states/badges/badges.state';
@@ -68,16 +68,17 @@ export class BadgesPage implements OnInit {
       received:false
     }
   ];
+  receivedBadgesSubscription: any;
   constructor(
     // private badgesApi: BadgesApi,
     private authApi: AuthApi,
-    private badgesService: BadgesService,
+    // private badgesService: BadgesService,
     private store: Store
   ) {}
 
   ngOnInit() {
     this.store.dispatch(new SubscribeToBadges());
-    this.receivedBadges$.pipe(
+    this.receivedBadgesSubscription=this.receivedBadges$.pipe(
       // Use the map operator to transform the observable value
       map((badges: IBadges | null) => {
         if (badges) {
@@ -94,5 +95,9 @@ export class BadgesPage implements OnInit {
         // Perform any other operations with each badge number
       });
     });
+  }
+
+  ngOnDestroy() {
+    this.receivedBadgesSubscription.unsubscribe();
   }
 }

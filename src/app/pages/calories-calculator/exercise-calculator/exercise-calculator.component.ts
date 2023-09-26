@@ -5,6 +5,7 @@ import { take, tap } from 'rxjs';
 import { Exercise } from 'src/app/models/exercise.model';
 import { ExerciseService, WorkoutscheduleService } from 'src/app/services';
 import { HealthDataService } from 'src/app/services/healthDataService/healthData.service';
+import { CalorieSummary } from "../calorie-summary";
 
 @Component({
   selector: 'exercise-calculator',
@@ -19,9 +20,10 @@ export class ExerciseCalculatorComponent implements OnInit {
   currUserId: string | undefined;
   plannedWorkouts: any;
   selectedWorkout: Exercise[];
+  selectedWorkoutId: string;
   userWeight: number;
-  message: string = "Enter your workout and press the Calculate Calories Burned button.";
-  metValues : { [key: string]: number } = {
+  message: string = " ";//Enter your workout\nand\npress the Calculate Calories Burned button.
+  metValues: { [key: string]: number } = {
     "Stretches": 2.3,
     "Push-Ups": 8,
     "Sit-Ups": 8,
@@ -30,11 +32,24 @@ export class ExerciseCalculatorComponent implements OnInit {
     "Planks": 6,
     "Burpees": 8,
     "Crunches": 5,
-    // "lunges": 4,
-    // "pushUps": 8,
-    // "pushUps": 8,
+    "Squats": 3.5,
+    "Deadlifts": 6,
+    "Bench Presses": 6,
+    "Pull-Ups": 3.8,
+    "Dumbbell Rows": 6,
+    "Leg Presses": 6,
+    "Leg Curls": 4,
+    "Bicep Curls": 4,
+    "Tricep Curls": 4,
+    "Barbell Rows": 6,
+    "Seated Cable Rows": 5,
+    "Barbell Curls": 4,
+    "Calf Raises": 4,
+    // "Cycling": 6,
+    // "TreadMill": 8,
     // "pushUps": 8,
   }
+  selectedExercises: any = {};
   // exerciseOptions: string[] = ["Exercise 1", "Exercise 2", "Exercise 3", "Exercise 4"];
 
   constructor(
@@ -49,17 +64,6 @@ export class ExerciseCalculatorComponent implements OnInit {
   }
 
   async ngOnInit() {
-    // this.exerciseService.getExerciseByScheduleId(this.scheduleId).pipe(take(1)).subscribe((exercises) => {
-    //   this.exercisesArray = exercises.map((exercise) => ({
-    //     ...exercise,
-    //     id: exercise.id,
-    //   }));
-    //   console.log('Fetched exercises:', this.exercisesArray);
-    this.populateFormWithExercises();
-    // });
-    this.getUserWorkouts();
-    this.getSessionWorkout("QSR1W4sMCU487Rncx8gB");
-    console.log(this.selectedWorkout);
     const auth = getAuth();
     this.currUserId = auth.currentUser?.uid;
     if (this.currUserId != undefined) {
@@ -67,6 +71,17 @@ export class ExerciseCalculatorComponent implements OnInit {
     } else {
       this.currUserId = sessionStorage.getItem('currUserId')!;
     }
+    // this.exerciseService.getExerciseByScheduleId(this.scheduleId).pipe(take(1)).subscribe((exercises) => {
+    //   this.exercisesArray = exercises.map((exercise) => ({
+    //     ...exercise,
+    //     id: exercise.id,
+    //   }));
+    //   console.log('Fetched exercises:', this.exercisesArray);
+    // this.populateFormWithExercises();
+    // });
+    this.getUserWorkouts();
+    // this.getSessionWorkout("QSR1W4sMCU487Rncx8gB");
+    console.log(this.selectedWorkout);
     const healthdata = await this.healthDataService.getHealthData(this.currUserId);
     this.userWeight = healthdata[0].weight;
     console.log(this.userWeight);
@@ -74,6 +89,7 @@ export class ExerciseCalculatorComponent implements OnInit {
 
   deleteExercise(index: number) {
     this.exercises.removeAt(index);
+    this.updateSelectedExerciseValues();
   }
 
   async addExercise() {
@@ -95,6 +111,7 @@ export class ExerciseCalculatorComponent implements OnInit {
 
   populateFormWithExercises() {
     const exercisesFormArray = this.workoutForm.get('exercises') as FormArray;
+    let i = 0;
     this.exercisesArray.forEach((exercise) => {
       const exerciseControl = this.formBuilder.group({
         name: [exercise.name],
@@ -104,33 +121,55 @@ export class ExerciseCalculatorComponent implements OnInit {
         duration: [exercise.duration]
       });
       exercisesFormArray.push(exerciseControl);
+      this.selectedExercises[i] = exercise.name;
+      i++;
     });
+  }
+
+  updateSelectedExerciseValues() {
+    this.selectedExercises = {};
+    // console.log(this.selectedExercises)
+    // const exercisesFormArray = this.workoutForm.get('exercises') as FormArray;
+    // let i = 0;
+    // this.exercisesArray.forEach((exercise) => {
+    //   this.selectedExercises[i] = exercise.name;
+    //   console.log(exercise.name)
+    //   i++;
+    // });
   }
 
   async getUserWorkouts() {
     (await this.workoutscheduleService.getSchedules({ userId: this.currUserId! })).subscribe(
       (response) => {
         // alert(response)
-        this.plannedWorkouts = response;
+        this.plannedWorkouts = response.schedules;
         console.log("Planned workouts");
         console.log(this.plannedWorkouts);
       }
     )
   }
 
-  async getSessionWorkout(sessionId: string){
-    try {
-      const response = await this.exerciseService.getExerciseByScheduleId(sessionId).toPromise();
-      this.selectedWorkout = response!;
-      return response;
-    } catch (error) {
-      console.error('Error fetching session workout:', error);
-      return "Error fetching session workout:";
-    }
+  async getSessionWorkout(sessionId: string) {
+    // try {
+    //   const response = await this.exerciseService.getExerciseByScheduleId(sessionId).toPromise();
+    //   this.selectedWorkout = response!;
+    //   return response;
+    // } catch (error) {
+    //   console.error('Error fetching session workout:', error);
+    //   return "Error fetching session workout:";
+    // }
+    this.exerciseService.getExerciseByScheduleId(sessionId).pipe(take(1)).subscribe((exercises) => {
+      this.exercisesArray = exercises.map((exercise) => ({
+        ...exercise,
+        id: exercise.id,
+      }));
+      console.log('Fetched exercises:', this.exercisesArray);
+      this.populateFormWithExercises();
+    });
   }
 
-  calculateCaloriesBurnedForExercise(exerciseName: string, duration: number){
-    let calories = this.userWeight*this.metValues[exerciseName]*(duration/60);
+  calculateCaloriesBurnedForExercise(exerciseName: string, duration: number) {
+    let calories = this.userWeight * this.metValues[exerciseName] * (duration / 60);
     console.log("calories");
     console.log(calories);
     console.log(this.userWeight);
@@ -140,7 +179,7 @@ export class ExerciseCalculatorComponent implements OnInit {
     return calories;
   }
 
-  async calculateTotalCaloriesBurned(){
+  async calculateTotalCaloriesBurned() {
     this.message = "";
     let totalCaloriesBurned = 0;
     const exercisesArray = this.workoutForm.get('exercises') as FormArray;
@@ -156,24 +195,75 @@ export class ExerciseCalculatorComponent implements OnInit {
     //   };
     //   enteredValues.push(exercise);
     // });
-    
-    for (let ex of this.workoutForm.value.exercises){
+
+    for (let ex of this.workoutForm.value.exercises) {
       console.log("exer");
       console.log(ex);
       let caloriesBurnedForExercise = this.calculateCaloriesBurnedForExercise(ex.name, ex.duration);
       totalCaloriesBurned += caloriesBurnedForExercise;
       console.log("caloriesBurnedForExercise");
       console.log(caloriesBurnedForExercise);
-      this.message += `${ex.name}: ${caloriesBurnedForExercise}calories\n`;
+      this.message += `${ex.name}: ${caloriesBurnedForExercise.toFixed(2)} calories\n`;
     }
     console.log("total");
     console.log(totalCaloriesBurned);
-    this.message += `Total Calories Burned: ${totalCaloriesBurned}calories`;
+    this.message += `Total Calories Burned: ${totalCaloriesBurned.toFixed(2)} calories`;
+    CalorieSummary.workoutCalories = parseFloat(totalCaloriesBurned.toFixed(2));
+  }
+
+  exerciseSelected(event: Event, exerciseNo: number) {
+    const selectedValue = (event.target as HTMLSelectElement).value;
+    this.selectedExercises[exerciseNo] = selectedValue;
+  }
+
+  async workoutSelected(event: Event) {
+    const selectedValue = (event.target as HTMLSelectElement).value;
+    this.selectedWorkoutId = selectedValue;
+    console.log(this.selectedWorkoutId);
+    await this.getSessionWorkout(this.selectedWorkoutId);
+
+    console.log(this.selectedWorkout);
+  }
+
+  hasWeight(exerciseNo: number) {
+    // console.log(this.selectedExercises);
+    const exercise = this.selectedExercises[exerciseNo];
+    const exercisesWithoutWeight = ["Burpees", "Calf Raises", "Crunches", "Jumping Jacks", "Lunges", "Planks", "Pull-Ups", "Push-Ups", "Sit-Ups", "Stretches"];
+
+    if (exercisesWithoutWeight.includes(exercise)) {
+      return false;
+    }
+
+    return true;
+  }
+
+  hasSets(exerciseNo: number) {
+    // console.log(this.selectedExercises);
+    const exercise = this.selectedExercises[exerciseNo];
+    const exercisesWithoutWeight = ["Stretches"];
+
+    if (exercisesWithoutWeight.includes(exercise)) {
+      return false;
+    }
+
+    return true;
+  }
+
+  hasReps(exerciseNo: number) {
+    // console.log(this.selectedExercises);
+    const exercise = this.selectedExercises[exerciseNo];
+    const exercisesWithoutWeight = ["Stretches"];
+
+    if (exercisesWithoutWeight.includes(exercise)) {
+      return false;
+    }
+
+    return true;
   }
 
   // public async saveExercise(exerciseData: Exercise, index: number) {
   //   let exercise = this.exercisesArray[index];
-  
+
   //   if (exercise) {
   //     Object.assign(exercise, exerciseData);
   //   }
@@ -194,9 +284,9 @@ export class ExerciseCalculatorComponent implements OnInit {
   //     console.log(exerciseData)
   //     return this.saveExercise(exerciseData, index);
   //   });
-  
+
   //   await Promise.all(promises);
-  
+
   //   console.log('All exercises saved.');
   //   console.log(this.exercisesArray);
   // }

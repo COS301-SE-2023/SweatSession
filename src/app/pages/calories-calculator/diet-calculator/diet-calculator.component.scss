@@ -1,0 +1,38 @@
+ion-card {
+  margin: 10px;
+}
+
+ion-card-content {
+  padding: 10px;
+}
+
+ion-label {
+  font-weight: bold;
+}
+
+ion-thumbnail {
+  width: 100px; /* Adjust the image width as needed */
+  height: 100px; /* Adjust the image height as needed */
+  margin-right: 10px; /* Add some spacing between the image and text */
+}
+
+.food-info {
+  display: flex;
+  align-items: center;
+}
+
+.flex-container {
+  display: flex;
+  align-items: center;
+}
+
+.capitalize {
+  text-transform: capitalize;
+}
+
+.food-info ion-label {
+  flex-grow: 1; /* Allow the label to expand and take available space */
+  white-space: normal; /* Allow text to wrap */
+  overflow: hidden; /* Prevent text overflow */
+  text-overflow: ellipsis;
+}

@@ -6,7 +6,7 @@
 
   <ion-content [scrollEvents]="true" *ngIf="isLoading; else loaderContent">
 
-      <ng-container *ngIf="GOALS.length > 0; else ngemptyTemp">
+      <ng-container *ngIf="getFilteredGoals().length > 0; else ngemptyTemp ">
 
 
         <ion-card *ngFor="let goal of getFilteredGoals()">
@@ -40,17 +40,33 @@
       </ng-container>
 
       <ng-template #ngemptyTemp>
-        <ion-card>
-            <ion-card-content>
-                <ion-card-title>
-<<<<<<< Updated upstream
-                    <ion-text color="danger">No Goals yet</ion-text>
-=======
-                    <ion-text color="danger">No Goals Yet</ion-text>
->>>>>>> Stashed changes
-                </ion-card-title>
-            </ion-card-content>
+
+        <ion-card *ngIf="isSelected('0')" class="zero-content-container">
+            <div class="inner-zero-content-wrapper">
+                <ion-icon class="large-icon" name="walk-sharp"></ion-icon><br>
+                <ion-text>
+                    No Active goals
+                </ion-text>
+            </div>
         </ion-card>
+          <ion-card *ngIf="isSelected('1')" class="zero-content-container">
+              <div class="inner-zero-content-wrapper">
+                  <ion-icon class="large-icon" name="checkmark-circle-sharp"></ion-icon><br>
+                  <ion-text>
+                      No Completed goals
+                  </ion-text>
+              </div>
+          </ion-card>
+          <ion-card *ngIf="isSelected('2')" class="zero-content-container">
+              <div class="inner-zero-content-wrapper">
+                  <ion-icon class="large-icon" name="time"></ion-icon><br>
+                  <ion-text>
+                      No Overdue goals
+                  </ion-text>
+              </div>
+          </ion-card>
+
+
         </ng-template>
   </ion-content>
 

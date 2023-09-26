@@ -4,7 +4,8 @@
     padding: 20px;
     width: 80%;
     text-align: center;
-    margin: auto; 
+    margin: auto;
+    color: black;
   }
   input, select {
     display: block;
@@ -22,7 +23,7 @@
   
   .heading-container {
     text-align: center;
-    margin-top: 5%;
+    margin-top: -5%;
     margin-bottom: 20px;
   }
   
@@ -32,7 +33,7 @@
     margin: 0;
   }
   
-  .submit{
+  .submitbutton{
     --background: #E63946;
     --color: white;
   }
@@ -76,3 +77,22 @@
   input[formControlName="duration"] {
     border-radius: 12px;
   }
+
+.message{
+  // padding-bottom: 10%;
+}
+
+.grid-container {
+  padding-bottom: 5%;
+}
+
+.results {
+  width:80%;
+  padding: 100%;
+}
+
+.submit {
+  width:80%;
+  margin: 0 auto;
+  margin-bottom: 15px;
+}
