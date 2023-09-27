@@ -90,6 +90,8 @@ export class AddScheduleComponent  implements OnInit {
     this.schedule.notifyAt = Timestamp.fromDate(notifyAt);
     this.schedule.status = "uncompleted";
     this.schedule.joined = false;
+    this.schedule.sweatbuddies = [];
+    this.schedule.sweatbuddiesJoinRequest = [];
   }
 
   isValidInput() {

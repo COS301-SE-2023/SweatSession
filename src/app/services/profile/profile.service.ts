@@ -33,7 +33,8 @@ export class ProfileService {
               phoneNumber: profile.phoneNumber,
               height: profile.height,
               weight: profile.weight,
-              profileURL: profile.profileURL  
+              profileURL: profile.profileURL,
+              scheduleParticipationRequested: []
             }
           };
           return gotProfile;
@@ -48,7 +49,8 @@ export class ProfileService {
               phoneNumber: 'undefined',
               height: '0',
               weight: '0',
-              profileURL: 'undefined'  
+              profileURL: 'undefined',
+              scheduleParticipationRequested: []
             }
           };
           return notFoundProfile;
