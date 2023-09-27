@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { ViewExercisePageRoutingModule } from './view-exercise-routing.module';
 
 import { ViewExercisePage } from './view-exercise.page';
+import {BackButtonDirectiveModule} from "../../directives";
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ViewExercisePageRoutingModule
+    ViewExercisePageRoutingModule,
+    BackButtonDirectiveModule
   ],
   declarations: [ViewExercisePage]
 })

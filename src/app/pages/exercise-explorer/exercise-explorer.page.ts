@@ -149,6 +149,7 @@ export class ExerciseExplorerPage implements  AfterViewInit  {
       }
       else if (intersects[0].object.name == "Object_18"){
         console.log('gluteal muscle clicked');
+        this.openExercisePage('glutes');
       }
       else if (intersects[0].object.name == "Object_11"){
         console.log('upperarm clicked');
