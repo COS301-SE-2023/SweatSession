@@ -221,12 +221,18 @@ const routes: Routes = [
     data: { authGuardPipe: redirectLoggedOut },
     loadChildren: () => import('./pages/groups/group-home-page/group-home-page.module').then(m => m.GroupsHomePageModule)
   },
-  // {
-  //   path: 'user-manual',
-  //   loadChildren: () => import('./pages/user-manual/user-manual.module').then( m => m.UserManualPageModule)
-  // }
+  {
+    path: 'user-manual',
+    loadChildren: () => import('./pages/user-manual/user-manual.module').then( m => m.UserManualPageModule)
+  },
+  {
+    path: 'view-exercise',
+    loadChildren: () => import('./pages/view-exercise/view-exercise.module').then( m => m.ViewExercisePageModule)
+  }
+
 
 ];
+
 @NgModule({
   imports: [
     RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
