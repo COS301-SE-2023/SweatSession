@@ -8,9 +8,15 @@ import { IAddWorkoutSchedule,
     IAddedWorkoutSchedule,
     IRemovedWorkoutSchedule,
     IUpdatedWorkoutSchedule,
-    IWorkoutScheduleModel} 
+    IWorkoutScheduleModel,
+    IAddSweatbuddies,
+    IAddSweatbuddy,
+    IRequestToJoin,
+    IRequestToAdd,
+    IProfileModel,
+    IScheduleRequest} 
     from '../models';
-import { Observable, map } from 'rxjs';
+import { Observable, lastValueFrom, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -127,9 +133,6 @@ export class WorkoutscheduleRepository {
           .collection("userSchedules")
           .doc(request.schedule.id)
           .update(request.schedule)
-          
-        // console.log('Schedule updated successfully');
-        // alert(request.schedule.id);
 
         const schedule = {
           ...request.schedule,
@@ -192,5 +195,41 @@ export class WorkoutscheduleRepository {
     
     //   // return response;
     // }
+  }
+
+  async addSweatBuddies(request: IAddSweatbuddies) {
+    
+  }
+
+  async addSweatBuddy(request: IAddSweatbuddy) {
+    try {
+      let docref = this.firestore.doc<IWorkoutScheduleModel>(`WorkoutSchedule/${request.ownerId}/userSchedules/${request.scheduleId}`);
+      let doc: IWorkoutScheduleModel = (await lastValueFrom(docref.get())).data()!;
+      doc.sweatbuddies = [...doc.sweatbuddies!, ...request.userId!]
+      docref.update({sweatbuddies: doc.sweatbuddies})
+    } catch(error) {
+      console.log(error);
+    }
+  }
+
+  async sendAddRequest(request: IRequestToAdd) {
+    try {
+      const docRef =this.firestore.doc<IProfileModel>(`profiles/${request.receiverId}`)
+      let doc: IProfileModel = (await lastValueFrom(docRef.get())).data()!;
+      let requests: IScheduleRequest[] = [];
+      doc.scheduleParticipationRequested ? requests = doc.scheduleParticipationRequested : requests = [];
+      requests.push({ userId: request.scheduleId, scheduleId: request.scheduleId});
+      // docRef.update({scheduleParticipationRequested: requests});
+    } catch(error) {
+      // console.log(error);
+    }
+  }
+
+  async requestToJoin(request: IRequestToJoin) {
+    try {
+
+    } catch(error) {
+      console.log(error);
+    }
   }
 }
