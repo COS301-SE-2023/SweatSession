@@ -22,34 +22,31 @@
       <ion-list>
         <ion-item>
           <ion-label>BMI Value</ion-label>
-          <ion-label>{{BMIValue | number: '1.0-0'}}</ion-label>
+          <ion-label [class]="getValueColor(BMIValue, 'BMI')">{{ BMIValue | number: '1.0-0' }}</ion-label>
         </ion-item>
         <ion-item>
           <ion-label>BMR Value</ion-label>
-          <ion-label>{{bmr | number: '1.0-0'}}</ion-label>
+          <ion-label [class]="getValueColor(bmr, 'BMR')">{{ bmr | number: '1.0-0' }}</ion-label>
         </ion-item>
         <ion-item>
           <ion-label>TDEE Value</ion-label>
-          <ion-label>{{TDEEValue | number: '1.0-0'}}</ion-label>
+          <ion-label [class]="getValueColor(TDEEValue, 'TDEE')">{{ TDEEValue | number: '1.0-0' }}</ion-label>
         </ion-item>
         <ion-item>
           <ion-label>Target Calories</ion-label>
-          <ion-label>{{targetCalories | number: '1.0-0'}}</ion-label>
+          <ion-label [class]="getValueColor(targetCalories, 'target')">{{ targetCalories | number: '1.0-0' }}</ion-label>
         </ion-item>
       </ion-list>
 
-        <ion-item lines="none">
-                      <ion-row>
-                        <ion-col>
+
+      <ion-item lines="none">
                           <ion-button
-                            expand="block"
+                            expand="expanded"
                             fill="outline"
                             color="primary"
                             routerLink="/healthdata">
                               Update health Form
                           </ion-button>
-                        </ion-col>
-                      </ion-row>
         </ion-item>
 
   </ion-card-content>
