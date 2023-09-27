@@ -7,6 +7,7 @@ import { GLTFLoader, GLTF } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { CSS2DRenderer } from 'three/examples/jsm/renderers/CSS2DRenderer.js';
 import { Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 import {BehaviorSubject} from "rxjs";
 import {ViewExerciseComponent} from "./view-exercise/view-exercise.component";
 
@@ -21,7 +22,8 @@ export class ExerciseExplorerPage implements  AfterViewInit  {
 
   constructor(private modalController: ModalController,
               private router:Router,
-              private platform: Platform) { }
+              private platform: Platform,
+              private alertController: AlertController) { }
 
 
   @ViewChild('canvas') private canvasRef: ElementRef;
@@ -60,6 +62,7 @@ export class ExerciseExplorerPage implements  AfterViewInit  {
   }
 
   private init() {
+    this.presentAlert();
     const canvas = this.canvasRef.nativeElement;
     this.renderer = new THREE.WebGLRenderer({ canvas });
     this.renderer.setSize(canvas.clientWidth, canvas.clientHeight);
@@ -171,6 +174,16 @@ export class ExerciseExplorerPage implements  AfterViewInit  {
     }
   }
 
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      header: '3D-Model',
+      message: 'Click on the model to view exercises!',
+      buttons: ['OK']
+    });
+    
+
+    await alert.present();
+  }
 
   async openExercisePage(bodypart: string)
   {
