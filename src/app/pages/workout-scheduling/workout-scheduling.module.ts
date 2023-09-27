@@ -11,6 +11,7 @@ import { SearchComponentModule } from '../search/search/search.module';
 import { AddScheduleComponent } from './add-schedule/add-schedule.component';
 import { ScheduleContentComponent } from './schedulecontent/schedule-content.component';
 import { EditScheduleComponent } from './edit-schedule/edit-schedule.component';
+import { FriendsListComponent } from './friends-list/friends-list.component';
 
 @NgModule({
   imports: [
@@ -23,7 +24,7 @@ import { EditScheduleComponent } from './edit-schedule/edit-schedule.component';
     SearchComponentModule,
     MessageStateModule
   ],
-  declarations: [WorkoutSchedulingPage, ScheduleComponent, AddScheduleComponent, ScheduleContentComponent,EditScheduleComponent],
+  declarations: [WorkoutSchedulingPage, ScheduleComponent, AddScheduleComponent, ScheduleContentComponent,EditScheduleComponent, FriendsListComponent],
   exports: [ScheduleComponent, AddScheduleComponent, ScheduleContentComponent,EditScheduleComponent]
 })
 export class WorkoutSchedulingPageModule {}

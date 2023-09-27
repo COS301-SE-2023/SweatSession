@@ -48,7 +48,7 @@
         <ion-button class="default-button" (click)="presentActionSheet()">
           <ion-icon name="trash" class="add-icon"></ion-icon>
         </ion-button>
-        <ion-button class="default-button" [id]="id">
+        <ion-button class="default-button" (click)="openFriendSelectionModal()">
           <ion-icon name="person-add" class="add-icon"></ion-icon>
         </ion-button>
       </ion-buttons>
@@ -63,37 +63,3 @@
     <ion-progress-bar [value]="ratio"></ion-progress-bar>
   </div>  
 </ion-card>
-
-<ion-modal #modal [trigger]="id" [initialBreakpoint]="0.5" [breakpoints]="[0, 0.25, 0.5, 0.75]">
-  <ng-template>
-    <ion-header>
-      <ion-toolbar>
-        <ion-buttons slot="start">
-          <ion-button slot="start" class="default-button" (click)="modal.dismiss()">Cancel</ion-button>
-        </ion-buttons>
-        <ion-title class="add-friends-title">{{"Select Friends"}}</ion-title>
-        <ion-buttons slot="end">
-          <ion-button class="default-button" (click)="confirmSelection()">Confirm</ion-button>
-        </ion-buttons>
-      </ion-toolbar>
-    </ion-header>
-    <ion-content>
-      <ion-searchbar placeholder="Search" (click)="modal.setCurrentBreakpoint(0.75)"></ion-searchbar>
-      <ion-list class="transparent-list">
-        <ion-item lines="none" class="transparent-item" *ngFor="let friend of friends; let i=index" >
-          <ion-checkbox [(ngModel)]="selectedFriends[i]" labelPlacement="end" justify="start">
-            <ion-item class="transparent-item" lines="none">
-              <ion-avatar slot="start">
-                <ion-img [src]="friend.profileURL"></ion-img>
-              </ion-avatar>
-              <ion-label>
-                <h2>{{friend.displayName}}</h2>
-                <p>{{friend.bio}}</p>
-              </ion-label>
-            </ion-item>
-          </ion-checkbox>
-        </ion-item>
-      </ion-list>
-    </ion-content>
-  </ng-template>
-</ion-modal>
