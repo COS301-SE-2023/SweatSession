@@ -1,4 +1,6 @@
-import { IRemoveWorkoutSchedule,
+import { IAddSweatbuddies, IAddSweatbuddy, IRemoveWorkoutSchedule,
+        IRequestToAdd,
+        IRequestToJoin,
         IUpdateWorkoutSchedule,
         IWorkoutScheduleModel } 
         from "../models";
@@ -35,15 +37,20 @@ export class LoadSchedule {
 
 export class AddSweatBuddy {
     static readonly type = "[workoutSchedule] add sweat buddy to workout schedule";
-    constructor(public userId: string) {}
+    constructor(public payload: IAddSweatbuddy) {}
 }
 
 export class AddSweatBuddies {
     static readonly type = "[workoutSchedule] add sweat buddies to a schedule";
-    constructor(public userIds: string[]) {}
+    constructor(public payload: IAddSweatbuddies) {}
 }
 
 export class RequestToJoinWorkout {
-    static readonly type = "[workoutSchedule] request to join a workout schedule";
-    constructor(public userId: string) {}
+    static readonly type = "[workoutSchedule] request to join a workout session";
+    constructor(public payload: IRequestToJoin) {}
+}
+
+export class SendAddRequest {
+    static readonly type = "[workoutSchedule] request to add a user to a workout session";
+    constructor(public payload: IRequestToAdd) {}
 }
