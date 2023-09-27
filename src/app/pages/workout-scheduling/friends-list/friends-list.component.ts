@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { Store } from '@ngxs/store';
 import { AddSweatBuddies, AddSweatBuddy } from 'src/app/actions';
-import { IProfileModel } from 'src/app/models';
+import { IProfileModel, IWorkoutScheduleModel } from 'src/app/models';
 
 @Component({
   selector: 'app-friends-list',
@@ -11,24 +11,25 @@ import { IProfileModel } from 'src/app/models';
 })
 export class FriendsListComponent  implements OnInit {
   @Input() friends: any[] = [];
+  @Input() schedule: IWorkoutScheduleModel;
   friendss = [
     {
       userId: "user_1",
       displayName: "John",
       bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-      profileURL: "https://ionicframework.com/docs/img/demos/avatar1.svg"
+      profileURL: "https://ionicframework.com/docs/img/demos/avatar.svg"
     },
     {
       userId: "user_2",
       displayName: "Alice",
       bio: "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      profileURL: "https://ionicframework.com/docs/img/demos/avatar2.svg"
+      profileURL: "https://ionicframework.com/docs/img/demos/avatar.svg"
     },
     {
       userId: "user_3",
       displayName: "Bob",
       bio: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-      profileURL: "https://ionicframework.com/docs/img/demos/avatar3.svg"
+      profileURL: "https://ionicframework.com/docs/img/demos/avatar.svg"
     }
   ];
   selectedFriends: string[] = [];
@@ -42,12 +43,7 @@ export class FriendsListComponent  implements OnInit {
 
   confirmSelection() {
     if(this.selectedFriends.length !== 0) {
-      console.table(this.selectedFriends)
-      this.selectedFriends.forEach(user => {
-        this.store.dispatch(new AddSweatBuddy(user))
-      })
-
-      this.store.dispatch(new AddSweatBuddies(this.selectedFriends))
+      this.store.dispatch(new AddSweatBuddies({userIds: this.selectedFriends, scheduleId: this.schedule.id!}))
     }
   }
 

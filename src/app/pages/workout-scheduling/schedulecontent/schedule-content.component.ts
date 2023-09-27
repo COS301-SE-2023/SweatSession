@@ -46,22 +46,18 @@ export class ScheduleContentComponent implements OnInit {
     private badgesRepository: BadgesRepository) { }
 
   ngOnInit() {
-    // if (!sessionStorage.getItem('siteInit')) {
-    //   this.sendReminder();
-    //   sessionStorage.setItem('siteInit', 'true');
+    if (!sessionStorage.getItem('siteInit')) {
+      this.sendReminder();
+      sessionStorage.setItem('siteInit', 'true');
 
-    // }
-    // if (!this.isCompleted()) {
-    //   this.fraction();
-    //   this.counter();
-    // }
+    }
+    if (!this.isCompleted()) {
+      this.counter();
+    }
   }
-
- 
 
   async viewSchedule() {
     this.isSlideShow = !this.isSlideShow;
-    this.fraction();
   }
 
   removeSchedule() {
@@ -130,7 +126,7 @@ export class ScheduleContentComponent implements OnInit {
       else if (daysLeft == 1) {
         return `You have ${daysLeft} day left`;
       }
-      return `You have ${daysLeft} days left`;//spelling fix
+      return `You have ${daysLeft} days left`;
     }
 
     if (this.inSession()) {
@@ -202,9 +198,10 @@ export class ScheduleContentComponent implements OnInit {
       } else if (this.schedule.status !== "completed" && this.joined()) {
         this.schedule.status = "completed";
         this.store.dispatch(new UpdateWorkoutSchedule(this.schedule))
-      } else {
+      } else if(this.schedule.status !== "uncompleted") {
         this.schedule.status = "uncompleted";
         this.store.dispatch(new UpdateWorkoutSchedule(this.schedule))
+        console.log("uncompleted");
       }
     }
     this.ratio = timeDiff / diff;
@@ -277,6 +274,7 @@ export class ScheduleContentComponent implements OnInit {
       component: FriendsListComponent,
       componentProps: {
         friends: this.friends,
+        schedule: this.schedule
       },
     });
   
