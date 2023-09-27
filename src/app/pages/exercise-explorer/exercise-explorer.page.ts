@@ -67,8 +67,9 @@ export class ExerciseExplorerPage implements  AfterViewInit  {
     this.scene = new THREE.Scene();
     this.scene.background = new THREE.Color(0xd4d4d8);
     this.camera = new THREE.PerspectiveCamera(75, canvas.clientWidth / canvas.clientHeight, 0.1, 1000);
-    this.camera.position.z = 5;
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+    this.camera.position.set(10, 10, 5);
+    //this.camera.position.z = 5;
+    const ambientLight = new THREE.AmbientLight(0xffffff, 1);
     this.scene.add(ambientLight);
 
    const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
@@ -77,11 +78,14 @@ export class ExerciseExplorerPage implements  AfterViewInit  {
 
    this.controls = new OrbitControls(this.camera, this.canvas);
    this.controls.enableRotate = true; // Enable rotation
+   this.controls.enablePan = false; // Disable panning
+   this.controls.minPolarAngle = Math.PI / 2 ; // Set the minimum polar angle to restrict vertical rotation
+   this.controls.maxPolarAngle = Math.PI / 2 ; // Set the maximum polar angle to restrict vertical rotation
 
     const loader = new GLTFLoader();
     loader.load('assets/male_base_mesh.glb', (gltf) => {
       this.gltfModel = gltf.scene;
-      const scale = 3; 
+      const scale = 8; 
       this.gltfModel.scale.set(scale, scale, scale);
       this.scene.add(this.gltfModel);
       this.animate();
@@ -126,27 +130,19 @@ export class ExerciseExplorerPage implements  AfterViewInit  {
       console.log('Clicked on mesh:', mesh);
 
       if (intersects[0].object.name == "Object_16"){
-        console.log('head clicked');
+        this.openExercisePage('pectoral');
+        //console.log('chest clicked');
       }
-      else if (intersects[0].object.name == "Object_14" ){
+      else if (intersects[0].object.name == "Object_8" ){
         this.openExercisePage('traps');
         // console.log('upperback clicked');
       }
-      else if (intersects[0].object.name == "Object_21" ){
-        console.log('lowerback clicked');
-        console.log(this.raycaster.ray.direction.x );
-      }
       else if (intersects[0].object.name == "Object_20"){
         // console.log('thighs clicked');
-        this.openExercisePage('thighs');
-
+        this.openExercisePage('glutes');
       }
       else if (intersects[0].object.name == "Object_5"){
         this.openExercisePage('calves');
-      }
-      else if (intersects[0].object.name == "Object_14"){
-        this.openExercisePage('pectoral')
-        // console.log('chest clicked');
       }
       else if (intersects[0].object.name == "Object_21"){
         this.openExercisePage('abdominal');
@@ -164,8 +160,12 @@ export class ExerciseExplorerPage implements  AfterViewInit  {
         this.openExercisePage('forearms');
         // console.log('midarm clicked');
       }
-      else if (intersects[0].object.name == "Object_8"){
+      else if (intersects[0].object.name == "Object_10"){
         this.openExercisePage('deltoids');
+        // console.log('shoulders clicked');
+      }
+      else if (intersects[0].object.name == "Object_14"){
+        this.openExercisePage('abdominal');
         // console.log('shoulders clicked');
       }
     }
