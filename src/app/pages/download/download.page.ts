@@ -11,7 +11,7 @@ export class DownloadPage implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.downloadAPK();
+    // this.downloadAPK();
   }
 
   downloadAPK() {
