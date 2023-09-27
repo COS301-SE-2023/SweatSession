@@ -1,4 +1,4 @@
-import { LoadSchedule } from './../../actions/workoutSchedule.action';
+import { LoadSchedule, AddSweatBuddies, AddSweatBuddy, RequestToJoinWorkout, SendAddRequest } from 'src/app/actions';
 import { Injectable } from "@angular/core";
 import { Action, State, StateContext, Store, Selector } from "@ngxs/store";
 import { Navigate } from "@ngxs/router-plugin";
@@ -9,12 +9,13 @@ import { AddWorkoutSchedule,
         RemoveWorkoutSchedule,
         UpdateWorkoutSchedule } 
         from "src/app/actions";
-import { IAddWorkoutSchedule, 
+import { IAddSweatbuddy, IAddWorkoutSchedule, 
         IAddedWorkoutSchedule,
         IGetWorkoutSchedules,
         IGotWorkoutSchedules,
         IRemoveWorkoutSchedule,
         IRemovedWorkoutSchedule,
+        IRequestToAdd,
         IUpdateWorkoutSchedule,
         IUpdatedWorkoutSchedule,
         IWorkoutScheduleModel } 
@@ -23,6 +24,7 @@ import { NavigationService, WorkoutscheduleService } from "src/app/services";
 import { time } from "console";
 import { AuthApi } from '../auth/auth.api';
 import { catchError, of, tap } from 'rxjs';
+import { forEach } from 'cypress/types/lodash';
 
 export interface WorkoutSchedulingStateModel {
     schedules: IWorkoutScheduleModel[];
@@ -138,6 +140,37 @@ export class WorkoutSchedulingState {
         ctx.setState({
             ...ctx.getState(), schedule: payload
         })
+    }
+
+    @Action(AddSweatBuddies)
+    async addSweatBuddies(ctx: StateContext<WorkoutSchedulingStateModel>, {payload}: AddSweatBuddies) {
+        const currentUserId = await this.authApi.getCurrentUserId();
+        if(currentUserId!=null) {
+            payload.userIds.forEach(async (userId)=> {
+                const request: IRequestToAdd = {
+                    senderId: currentUserId,
+                    receiverId: userId,
+                    scheduleId: payload.scheduleId
+                };
+                this.store.dispatch(new SendAddRequest(request));
+            })
+        }
+    }
+
+    @Action(AddSweatBuddy)
+    async addSweatBuddy(ctx: StateContext<WorkoutSchedulingStateModel>, {payload}: AddSweatBuddy) {
+        this.service.addSweatBuddy(payload);
+    }
+
+    @Action(RequestToJoinWorkout)
+    async requestToJoinWorkout(ctx: StateContext<WorkoutSchedulingStateModel>, {payload}: RequestToJoinWorkout) {
+
+    }
+
+    @Action(SendAddRequest)
+    async sendAddRequest(ctx: StateContext<WorkoutSchedulingStateModel>, {payload}: SendAddRequest) {
+        this.service.sendAddRequest(payload);
+        console.table(payload);
     }
 
     @Selector()
