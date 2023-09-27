@@ -114,12 +114,11 @@ export class ExerciseExplorerPage implements OnInit, AfterViewInit {
       console.log("renderstop");
     }
   }
-  //////
+  
+
   private onMouseClick = (event: MouseEvent ) => {
     
-
     this.raycaster.setFromCamera(this.mouse, this.camera);
-    //console.log(raycaster);
     console.log('Mouse Click Coordinates:', this.mouse.x, this.mouse.y);
     const intersects = this.raycaster.intersectObjects(this.clickableMeshes);
     //console.log(intersects);
@@ -128,6 +127,7 @@ export class ExerciseExplorerPage implements OnInit, AfterViewInit {
       console.log('backarrow clicked');
       this.flag = false ;
       this.stopRenderingLoop();
+      this.router.navigate(['/home']);
     }
     if (intersects.length > 0) {
       const clickedMesh = intersects[0].object; 
@@ -183,12 +183,7 @@ export class ExerciseExplorerPage implements OnInit, AfterViewInit {
   this.mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
 }
   
- //this.canvas.addEventListener('click', onMouseClick, false);
- //this.canvas.addEventListener('mousemove', onMouseMove, false);
 
-
-
-  /////
   
 
   /**
@@ -264,11 +259,9 @@ export class ExerciseExplorerPage implements OnInit, AfterViewInit {
 
     window.addEventListener('click', this.onMouseClick, false);
     window.addEventListener( 'mousemove', this.onMouseMove, false );
-
-
-
-     
+   
     });
+
     //*Camera
     let aspectRatio = this.getAspectRatio();
     this.camera = new THREE.PerspectiveCamera(
