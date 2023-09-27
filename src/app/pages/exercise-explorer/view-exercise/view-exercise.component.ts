@@ -22,12 +22,8 @@ export class ViewExerciseComponent  implements OnInit {
   }
 
   populateExerciseDetails() {
-    //Fetch data frm the API and populate the ExerciseDetails object
-
     for (let i = 0; i < Object.keys(MUSCLE_GROUP_DATA).length; i++) {
-      console.log("This: " + Object.keys(MUSCLE_GROUP_DATA)[i] + " == " + this.receivedBodypart);
       if (Object.keys(MUSCLE_GROUP_DATA)[i] == this.receivedBodypart) {
-        console.log("I got here Bruhh");
         for (let j = 0; j < Object.keys(MUSCLE_GROUP_DATA)[i].length; j++) {
 
           const mock1: ExerciseList = {
@@ -40,7 +36,6 @@ export class ViewExerciseComponent  implements OnInit {
                   difficulty: Object.values(MUSCLE_GROUP_DATA)[i][j].difficulty,
                   instructions: Object.values(MUSCLE_GROUP_DATA)[i][j].instructions,
                 }
-
           };
 
           this.ExerciseDetails.push(mock1);
