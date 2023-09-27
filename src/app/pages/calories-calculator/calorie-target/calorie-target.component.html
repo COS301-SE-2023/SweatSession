@@ -6,29 +6,29 @@
 
     <ion-card-content>
 
-      <ion-item lines="none">
+      <ion-item>
                   <div class="icon-container">
                     <ion-icon name="calculator" class="calculator-icon"></ion-icon>
                   </div>
       </ion-item>
 
       <ion-list>
-        <ion-item>
-          <ion-label>Calculation</ion-label>
+        <ion-item class="custom-label">
+          <ion-label >Calculation</ion-label>
           <ion-label>Calories/day</ion-label>
         </ion-item>
       </ion-list>
 
       <ion-list>
-        <ion-item>
+        <ion-item lines="none">
           <ion-label>BMI Value</ion-label>
           <ion-label [class]="getValueColor(BMIValue, 'BMI')">{{ BMIValue | number: '1.0-0' }}</ion-label>
         </ion-item>
-        <ion-item>
+        <ion-item lines="none">
           <ion-label>BMR Value</ion-label>
           <ion-label [class]="getValueColor(bmr, 'BMR')">{{ bmr | number: '1.0-0' }}</ion-label>
         </ion-item>
-        <ion-item>
+        <ion-item lines="none">
           <ion-label>TDEE Value</ion-label>
           <ion-label [class]="getValueColor(TDEEValue, 'TDEE')">{{ TDEEValue | number: '1.0-0' }}</ion-label>
         </ion-item>
@@ -39,7 +39,7 @@
       </ion-list>
 
 
-      <ion-item lines="none">
+      <ion-item>
                           <ion-button
                             expand="expanded"
                             fill="outline"
