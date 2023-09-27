@@ -63,3 +63,34 @@ export interface IUpdatedWorkoutSchedule {
     schedule?: IWorkoutScheduleModel;
     validate: boolean;
 }
+
+export interface IAddSweatbuddies {
+    scheduleId: string;
+    userIds: string[];
+    ownerId?: string;
+}
+
+export interface IAddSweatbuddy {
+    scheduleId: string;
+    userId: string;
+    ownerId: string[];
+}
+
+export interface IScheduleRequest {
+    userId: string;
+    scheduleId: string;
+}
+
+export interface IRequestToJoin {
+    userId: string;
+    scheduleId: string;
+    ownerId: string;
+}
+
+export interface IRequestToAdd {
+    senderId: string;
+    scheduleId: string;
+    receiverId: string;
+}
+
+// export interface 

@@ -1,4 +1,5 @@
 import { Timestamp } from "@angular/fire/firestore";
+import { IScheduleRequest } from "./workoutSchedule.model";
 
 export interface IProfileModel {
     userId?: string;
@@ -15,7 +16,7 @@ export interface IProfileModel {
     friendRequests?: string[];
     sessionsCompleted?: number;
     badgesNumber?: number;
-    scheduleParticipationRequested?: string[];
+    scheduleParticipationRequested?: IScheduleRequest[];
 }
 
 //requests
