@@ -15,6 +15,7 @@ export interface IProfileModel {
     friendRequests?: string[];
     sessionsCompleted?: number;
     badgesNumber?: number;
+    scheduleParticipationRequested?: string[];
 }
 
 //requests

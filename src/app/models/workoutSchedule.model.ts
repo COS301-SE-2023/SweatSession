@@ -16,6 +16,8 @@ export interface IWorkoutScheduleModel {
     completeAt?: Timestamp;
     workoutAdded?: boolean;
     joined?: boolean;
+    sweatbuddies?: string[];
+    sweatbuddiesJoinRequest?: string[];
 }
 
 //request
