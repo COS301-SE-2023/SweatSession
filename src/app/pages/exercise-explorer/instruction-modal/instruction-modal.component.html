@@ -8,15 +8,14 @@
 <ion-content>
     <ion-card>
         <ion-card-header>
-            <ion-card-title>Name of the exercise</ion-card-title>
+            <ion-card-title>{{exerciseName}}</ion-card-title>
             <ion-card-subtitle>Instructions</ion-card-subtitle>
         </ion-card-header>
-    </ion-card>
-    <ion-card *ngFor="let instruction of Instructions">
-        <ion-card-content>
+        <ion-card-content *ngFor="let instruction of Instructions">
             <div class="circle">{{ Instructions.indexOf(instruction) + 1 }}</div>
-                <ion-label>
-                    <p>{{ instruction }}</p>
+            <br>
+            <ion-label>
+                    {{ instruction }}
                 </ion-label>
         </ion-card-content>
     </ion-card>

@@ -7,6 +7,8 @@ import { GLTFLoader, GLTF } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { CSS2DRenderer } from 'three/examples/jsm/renderers/CSS2DRenderer.js';
 import { Router } from '@angular/router';
+import {BehaviorSubject} from "rxjs";
+import {ViewExerciseComponent} from "./view-exercise/view-exercise.component";
 
 @Component({
   selector: 'app-exercise-explorer',
@@ -23,7 +25,7 @@ export class ExerciseExplorerPage implements  AfterViewInit  {
 
 
   @ViewChild('canvas') private canvasRef: ElementRef;
-
+  bodypart$: string = "null";
   //* Stage Properties
 
  
@@ -63,10 +65,11 @@ export class ExerciseExplorerPage implements  AfterViewInit  {
     this.renderer.setSize(canvas.clientWidth, canvas.clientHeight);
 
     this.scene = new THREE.Scene();
-    this.scene.background = new THREE.Color(0xd4d4d8);
+    this.scene.background = new THREE.Color(0xffffff);
     this.camera = new THREE.PerspectiveCamera(75, canvas.clientWidth / canvas.clientHeight, 0.1, 1000);
-    this.camera.position.z = 5;
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+    this.camera.position.set(10, 10, 5);
+    //this.camera.position.z = 5;
+    const ambientLight = new THREE.AmbientLight(0xffffff, 1);
     this.scene.add(ambientLight);
 
    const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
@@ -75,11 +78,14 @@ export class ExerciseExplorerPage implements  AfterViewInit  {
 
    this.controls = new OrbitControls(this.camera, this.canvas);
    this.controls.enableRotate = true; // Enable rotation
+   this.controls.enablePan = false; // Disable panning
+   this.controls.minPolarAngle = Math.PI / 2 ; // Set the minimum polar angle to restrict vertical rotation
+   this.controls.maxPolarAngle = Math.PI / 2 ; // Set the maximum polar angle to restrict vertical rotation
 
     const loader = new GLTFLoader();
     loader.load('assets/male_base_mesh.glb', (gltf) => {
       this.gltfModel = gltf.scene;
-      const scale = 3; 
+      const scale = 8; 
       this.gltfModel.scale.set(scale, scale, scale);
       this.scene.add(this.gltfModel);
       this.animate();
@@ -124,49 +130,63 @@ export class ExerciseExplorerPage implements  AfterViewInit  {
       console.log('Clicked on mesh:', mesh);
 
       if (intersects[0].object.name == "Object_16"){
-        console.log('head clicked');
+        this.openExercisePage('pectoral');
+        //console.log('chest clicked');
       }
-      else if (intersects[0].object.name == "Object_14" ){
-        console.log('upperback clicked');
-      }
-      else if (intersects[0].object.name == "Object_21" ){
-        console.log('lowerback clicked');
-        console.log(this.raycaster.ray.direction.x );
+      else if (intersects[0].object.name == "Object_8" ){
+        this.openExercisePage('traps');
+        // console.log('upperback clicked');
       }
       else if (intersects[0].object.name == "Object_20"){
-        console.log('thighs clicked');
-        this.openExercisePage('thighs');
-
+        // console.log('thighs clicked');
+        this.openExercisePage('glutes');
       }
       else if (intersects[0].object.name == "Object_5"){
-        console.log('legs clicked');
-      }
-      else if (intersects[0].object.name == "Object_14"){
-        console.log('chest clicked');
+        this.openExercisePage('calves');
       }
       else if (intersects[0].object.name == "Object_21"){
-        console.log('stomach clicked');
+        this.openExercisePage('abdominal');
+        // console.log('stomach clicked');
       }
       else if (intersects[0].object.name == "Object_18"){
-        console.log('gluteal muscle clicked');
+        // console.log('gluteal muscle clicked');
+        this.openExercisePage('glutes');
       }
       else if (intersects[0].object.name == "Object_11"){
-        console.log('upperarm clicked');
+        this.openExercisePage('biceps');
+        // console.log('upperarm clicked');
       }
       else if (intersects[0].object.name == "Object_22"){
-        console.log('midarm clicked');
+        this.openExercisePage('forearms');
+        // console.log('midarm clicked');
       }
-      else if (intersects[0].object.name == "Object_8"){
-        console.log('shoulders clicked');
+      else if (intersects[0].object.name == "Object_10"){
+        this.openExercisePage('deltoids');
+        // console.log('shoulders clicked');
+      }
+      else if (intersects[0].object.name == "Object_14"){
+        this.openExercisePage('abdominal');
+        // console.log('shoulders clicked');
       }
     }
   }
 
-async openExercisePage(bodypart: string) {
-        
-    await this.router.navigate(['/view-exercise'], { queryParams: { bodypart: bodypart } });
+
+  async openExercisePage(bodypart: string)
+  {
+    this.bodypart$ = bodypart;
+    this.openModal();
   }
 
+  async openModal() {
+    const modal = await this.modalController.create({
+      component: ViewExerciseComponent,
+        componentProps: {
+            receivedBodypart: this.bodypart$,
+        }
+    });
+    return await modal.present();
+  }
 
 
 

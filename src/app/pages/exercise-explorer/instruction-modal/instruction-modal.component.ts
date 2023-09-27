@@ -10,6 +10,7 @@ import {ExerciseList} from "../../../models/exercise.model";
 export class InstructionModalComponent  implements OnInit {
   @Input() Exersisedata: ExerciseList;
   Instructions: string[] = [];
+  exerciseName: string = "";
 
   constructor(private modalController: ModalController) { }
 
@@ -25,5 +26,6 @@ export class InstructionModalComponent  implements OnInit {
   private populateInstructions() {
     // popuilate with mock data
     this.Instructions = this.Exersisedata.video.instructions;
+    this.exerciseName = this.Exersisedata.video.exersiseName;
   }
 }
