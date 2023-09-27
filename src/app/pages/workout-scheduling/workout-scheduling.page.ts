@@ -79,6 +79,7 @@ export class WorkoutSchedulingPage {
     this.store.dispatch(new GetFriendsProfiles());
     this.friends$.subscribe((response)=>{
       this.friends = response
+      console.table(response);
     })
   }
 }

@@ -3,7 +3,6 @@
 <div *ngFor="let schedule of schedules;  let i=index" class="schedules">
   <schedule-content 
     [schedule]="schedule" 
-    [id]="returnID(i)"
     [friends]="friends"
   ></schedule-content>
 </div>

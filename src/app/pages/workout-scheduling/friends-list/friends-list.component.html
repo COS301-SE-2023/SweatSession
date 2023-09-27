@@ -1,10 +1,12 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-button slot="start" class="default-button" (click)="close()">Cancel</ion-button>
+      <ion-button class="default-button" (click)="close()">
+        <ion-icon name="arrow-back-outline" class="larger-back-button clickable"></ion-icon>
+      </ion-button>
     </ion-buttons>
     <ion-title class="add-friends-title">{{"Select Friends"}}</ion-title>
-    <ion-buttons slot="end">
+    <ion-buttons slot="end" *ngIf="showConfirm()">
       <ion-button class="default-button" (click)="confirmSelection()">Confirm</ion-button>
     </ion-buttons>
   </ion-toolbar>
@@ -12,8 +14,12 @@
 <ion-content>
   <ion-searchbar placeholder="Search"></ion-searchbar>
   <ion-list class="transparent-list">
-    <ion-item lines="none" class="transparent-item" *ngFor="let friend of friends; let i=index" >
-      <ion-checkbox [(ngModel)]="selectedFriends[i]" labelPlacement="end" justify="start">
+    <ion-item lines="none" class="transparent-item" *ngFor="let friend of friendss; let i=index" >
+      <ion-checkbox 
+        [value]="friend.userId"
+        (ionChange)="toggleFriendSelection(friend)"
+        labelPlacement="end" 
+        justify="start">
         <ion-item class="transparent-item" lines="none">
           <ion-avatar slot="start">
             <ion-img [src]="friend.profileURL"></ion-img>

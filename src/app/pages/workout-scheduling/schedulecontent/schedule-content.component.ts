@@ -46,15 +46,15 @@ export class ScheduleContentComponent implements OnInit {
     private badgesRepository: BadgesRepository) { }
 
   ngOnInit() {
-    if (!sessionStorage.getItem('siteInit')) {
-      this.sendReminder();
-      sessionStorage.setItem('siteInit', 'true');
+    // if (!sessionStorage.getItem('siteInit')) {
+    //   this.sendReminder();
+    //   sessionStorage.setItem('siteInit', 'true');
 
-    }
-    if (!this.isCompleted()) {
-      this.fraction();
-      this.counter();
-    }
+    // }
+    // if (!this.isCompleted()) {
+    //   this.fraction();
+    //   this.counter();
+    // }
   }
 
  
@@ -277,7 +277,6 @@ export class ScheduleContentComponent implements OnInit {
       component: FriendsListComponent,
       componentProps: {
         friends: this.friends,
-        selectedFriends: this.selectedFriends,
       },
     });
   
