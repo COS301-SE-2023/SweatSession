@@ -129,38 +129,44 @@ export class ExerciseExplorerPage implements  AfterViewInit  {
         console.log('head clicked');
       }
       else if (intersects[0].object.name == "Object_14" ){
-        console.log('upperback clicked');
+        this.openExercisePage('traps');
+        // console.log('upperback clicked');
       }
       else if (intersects[0].object.name == "Object_21" ){
         console.log('lowerback clicked');
         console.log(this.raycaster.ray.direction.x );
       }
       else if (intersects[0].object.name == "Object_20"){
-        console.log('thighs clicked');
+        // console.log('thighs clicked');
         this.openExercisePage('thighs');
 
       }
       else if (intersects[0].object.name == "Object_5"){
-        console.log('legs clicked');
+        this.openExercisePage('calves');
       }
       else if (intersects[0].object.name == "Object_14"){
-        console.log('chest clicked');
+        this.openExercisePage('pectoral')
+        // console.log('chest clicked');
       }
       else if (intersects[0].object.name == "Object_21"){
-        console.log('stomach clicked');
+        this.openExercisePage('abdominal');
+        // console.log('stomach clicked');
       }
       else if (intersects[0].object.name == "Object_18"){
-        console.log('gluteal muscle clicked');
+        // console.log('gluteal muscle clicked');
         this.openExercisePage('glutes');
       }
       else if (intersects[0].object.name == "Object_11"){
-        console.log('upperarm clicked');
+        this.openExercisePage('biceps');
+        // console.log('upperarm clicked');
       }
       else if (intersects[0].object.name == "Object_22"){
-        console.log('midarm clicked');
+        this.openExercisePage('forearms');
+        // console.log('midarm clicked');
       }
       else if (intersects[0].object.name == "Object_8"){
-        console.log('shoulders clicked');
+        this.openExercisePage('deltoids');
+        // console.log('shoulders clicked');
       }
     }
   }
