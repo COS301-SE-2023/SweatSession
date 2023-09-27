@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { DownloadPageRoutingModule } from './download-routing.module';
 
 import { DownloadPage } from './download.page';
+// import { FileOpener } from '@ionic-native/file-opener/ngx';
 
 @NgModule({
   imports: [
@@ -15,6 +16,10 @@ import { DownloadPage } from './download.page';
     IonicModule,
     DownloadPageRoutingModule
   ],
-  declarations: [DownloadPage]
+  declarations: [DownloadPage],
+  // providers: [
+  //   // ... other providers
+  //   FileOpener, // Add the FileOpener here
+  // ],
 })
 export class DownloadPageModule {}
