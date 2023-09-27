@@ -19,7 +19,7 @@
       <ion-col>
         <ion-item>
           <ion-label position="stacked" style="font-size:x-large">Time</ion-label>
-          <ion-input type="time" [(ngModel)]="schedule.time" [min]="getMinTime()"></ion-input>
+          <ion-input type="time" [(ngModel)]="schedule.time" [min]="getMinTime()" (ionChange)="valueChanged($event)"></ion-input>
         </ion-item>
       </ion-col>
     </ion-row>
@@ -27,7 +27,7 @@
       <ion-col>
         <ion-item>
           <ion-label position="stacked" style="font-size:x-large">Date</ion-label>
-          <ion-input type="date" [(ngModel)]="schedule.date" [min]="getMinDate()"></ion-input>
+          <ion-input type="date" [(ngModel)]="schedule.date" [min]="getMinDate()" (ionChange)="valueChanged($event)"></ion-input>
         </ion-item>
       </ion-col>
     </ion-row>        
@@ -50,7 +50,7 @@
       <ion-col>
         <ion-item>
           <ion-label position="stacked" style="font-size:x-large">Duration (min)</ion-label>
-          <ion-input type="number" [(ngModel)]="schedule.duration" placeholder="Enter workout duration in minutes" [min]="10"></ion-input>
+          <ion-input type="number" [(ngModel)]="schedule.duration" placeholder="Enter workout duration in minutes" [min]="10" (ionChange)="valueChanged($event)"></ion-input>
         </ion-item>
       </ion-col>
     </ion-row>
@@ -58,7 +58,7 @@
       <ion-col>
         <ion-item>
           <ion-label position="stacked" style="font-size:x-large">Workout Name</ion-label>
-          <ion-input type="text" [(ngModel)]="schedule.name" placeholder="Enter the name of the workout"  autofocus="false"></ion-input>
+          <ion-input type="text" [(ngModel)]="schedule.name" placeholder="Enter the name of the workout"  autofocus="false" (ionChange)="valueChanged($event)"></ion-input>
         </ion-item>
       </ion-col>
     </ion-row>

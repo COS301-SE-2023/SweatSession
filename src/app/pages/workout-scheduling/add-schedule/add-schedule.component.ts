@@ -108,9 +108,31 @@ export class AddScheduleComponent  implements OnInit {
   
     // Handle the location selection event when the modal is dismissed
     const { data } = await modal.onDidDismiss();
+    console.log(data);
     if (data && data.selectedGym && data.placeId) {
       this.schedule.location = data.selectedGym;
-      this.placeId = data.placeId;    }
+      this.placeId = data.placeId;
+      if (data.selectedTime!=""){
+        this.schedule.time = data.selectedTime;
+      }
+      if (data.selectedWorkoutName!=""){
+        this.schedule.name = data.selectedWorkoutName;
+      }
+      if (data.selectedDate!=""){
+        this.schedule.date = data.selectedDate;
+      }
+      if (data.selectedDuration!=""){
+        const selectedStartDate = new Date(data.selectedDate+"T"+data.selectedTime+":00");
+        console.log(selectedStartDate);
+        const selectedEndDate = new Date(data.selectedDuration.seconds * 1000);
+        console.log(selectedEndDate);
+        const timeDifference = selectedEndDate.getTime() - selectedStartDate.getTime();
+        console.log(timeDifference);
+        const minutes = Math.floor(timeDifference / (1000 * 60)); // 1 minute = 60,000 milliseconds
+        console.log(minutes);
+        this.schedule.duration = minutes;
+      }
+    }
   }
 
   displayCurrentUser(id:string){
@@ -131,4 +153,8 @@ createNotifications(sendername: string , sentdate: string , message: string){
   this.noticeService.createNotices(sendername , sentdate , message , this.currUserId! , this.currUserId! , '/assets/Asset 5.png');
 }
 
+valueChanged(event: any) {
+  const newTimeValue = event.detail.value;
+  console.log(newTimeValue);
+}
 }

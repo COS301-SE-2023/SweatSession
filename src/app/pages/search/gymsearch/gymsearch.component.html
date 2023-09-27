@@ -92,7 +92,7 @@
                               <p class="dateAndTime">{{ formatDate(gymSession.date) }}</p>
                               <p class="dateAndTime" style="margin-top: -10px;">{{ gymSession.startTime }}-{{ formatTime(gymSession.endTime) }}</p>
                             </div>
-                            <!-- <ion-button style="--background: #A8DADC; --color: black; margin: auto; padding-right: 10px;" (click)="joinSession()">Join <br>Session</ion-button> temporary removal-->
+                            <ion-button style="--background: #A8DADC; --color: black; margin: auto; padding-right: 10px;" (click)="joinSession(gym.name, gym.place_id, gymSession.startTime, gymSession.date, gymSession.endTime, gymSession.workoutName)">Join <br>Session</ion-button>
                           </div>
                         </li>
                       </ul>
