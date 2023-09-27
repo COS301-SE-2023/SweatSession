@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { IAddWorkoutSchedule,
+import { IAddSweatbuddies, IAddSweatbuddy, IAddWorkoutSchedule,
          IGetWorkoutSchedules,
          IRemoveWorkoutSchedule,
+         IRequestToAdd,
          IUpdateWorkoutSchedule }
          from 'src/app/models';
 import { WorkoutscheduleRepository } from '../../repository';
@@ -27,5 +28,17 @@ export class WorkoutscheduleService {
 
   async getSchedules(request: IGetWorkoutSchedules) {
     return this.repository.getSchedules(request);
+  }
+
+  async addSweatBuddies(request: IAddSweatbuddies) {
+    this.repository.addSweatBuddies(request);
+  }
+
+  async addSweatBuddy(request: IAddSweatbuddy) {
+    this.repository.addSweatBuddy(request);
+  }
+
+  async sendAddRequest(request: IRequestToAdd) {
+    this.repository.sendAddRequest(request);
   }
 }
