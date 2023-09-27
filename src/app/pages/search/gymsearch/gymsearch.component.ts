@@ -313,14 +313,18 @@ export class GymsearchComponent implements OnInit {
       this.nextPageToken = "";
    }
 
-   selectGym(name: string, chosenPlaceId: string) {
-      this.modalController.dismiss({ selectedGym: name, placeId: chosenPlaceId });
+   selectGym(name: string, chosenPlaceId: string, time: string = "", date: string = "", duration: string = "", workoutName: string = "") {
+      console.log(name, chosenPlaceId, time, date, duration, workoutName);
+      this.modalController.dismiss({ selectedGym: name, placeId: chosenPlaceId, selectedTime: time, selectedDate: date, selectedDuration:duration, selectedWorkoutName: workoutName });
       // alert("gym with name: "+name+"place id: "+place_id);
    }
 
-   async joinSession() {
-      await this.modalController.dismiss({ selectedGym: this.gymChosen, placeId: this.chosenPlaceId });
-      await this.modalController.dismiss({ selectedGym: this.gymChosen, placeId: this.chosenPlaceId });
+   async joinSession(name: string, id: string, time: string, date: string, endTime: string, workoutName: string) {
+      console.log(name, id, time, date, endTime, workoutName);
+      this.selectGym(name, id, time, date, endTime, workoutName);
+      await this.modalController.dismiss({ selectedGym: name, placeId: id, selectedTime: time, selectedDate: date, selectedDuration:endTime, selectedWorkoutName: workoutName });
+      this.selectGym(name, id, time, date, endTime, workoutName);
+      await this.modalController.dismiss({ selectedGym: name, placeId: id, selectedTime: time, selectedDate: date, selectedDuration:endTime, selectedWorkoutName: workoutName });
       // alert("gym with name: "+name+"place id: "+place_id);
    }
 
