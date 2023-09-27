@@ -249,7 +249,7 @@ export class CalorieTargetComponent  implements OnInit {
       }
 
 
-    CalorieSummary.targetCalories = parseFloat((targetCalories/7).toFixed(2));
+    CalorieSummary.targetCalories = parseFloat((targetCalories).toFixed(0));
     return targetCalories;
   }
 
