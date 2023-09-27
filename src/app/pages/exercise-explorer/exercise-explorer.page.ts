@@ -8,6 +8,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { CSS2DRenderer } from 'three/examples/jsm/renderers/CSS2DRenderer.js';
 import { Router } from '@angular/router';
 import {BehaviorSubject} from "rxjs";
+import {ViewExerciseComponent} from "./view-exercise/view-exercise.component";
 
 @Component({
   selector: 'app-exercise-explorer',
@@ -24,8 +25,7 @@ export class ExerciseExplorerPage implements  AfterViewInit  {
 
 
   @ViewChild('canvas') private canvasRef: ElementRef;
-  private bodypartSubject = new BehaviorSubject<string>("null");
-  bodypart$ = this.bodypartSubject.asObservable();
+  bodypart$: string = "null";
   //* Stage Properties
 
  
@@ -166,18 +166,21 @@ export class ExerciseExplorerPage implements  AfterViewInit  {
   }
 
 
-
-  setBodypart(bodypart: string) {
-    this.bodypartSubject.next(bodypart);
-  }
-
   async openExercisePage(bodypart: string)
   {
-    this.setBodypart(bodypart)
-    //open the view exercise component
-
+    this.bodypart$ = bodypart;
+    this.openModal();
   }
 
+  async openModal() {
+    const modal = await this.modalController.create({
+      component: ViewExerciseComponent,
+        componentProps: {
+            receivedBodypart: this.bodypart$,
+        }
+    });
+    return await modal.present();
+  }
 
 
 
