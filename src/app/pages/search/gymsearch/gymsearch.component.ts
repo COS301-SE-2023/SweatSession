@@ -207,58 +207,72 @@ export class GymsearchComponent implements OnInit {
       this.friendsSubscription.unsubscribe();
     }
 
-   async searchNearbyGyms() {
-      this.getCurrentLocation().then((coordinates: GeolocationCoordinates) => {
-         this.currLatitude = coordinates.latitude;
-         this.currLongitude = coordinates.longitude;
-         console.log('Latitude:', this.currLatitude);
-         console.log('Longitude:', this.currLongitude);
-         console.log('maxDistance:', this.maxDistance);
-         const url = `https://us-central1-sweatsession.cloudfunctions.net/nearbyGymProxyRequest?latitude=${this.currLatitude}&longitude=${this.currLongitude}&radius=${this.maxDistance * 1000}&key=${this.MAPS_API_KEY}` + (this.nextPageToken ? `&nextPageToken=${this.nextPageToken}` : '');
-         // const url = `http://127.0.0.1:5005/sweatsession/us-central1/nearbyGymProxyRequest?latitude=${this.currLatitude}&longitude=${this.currLongitude}&radius=${this.maxDistance * 1000}&key=${this.MAPS_API_KEY}`;
-         fetch(url)
-            .then((response) => response.json())
-            .then(async (data) => {
-               console.log(data);
-               console.log(data.results);
-               this.gyms = data;
-               // this.nextPageToken=data.next_page_token;
-               await this.getGymUsersForGyms(this.userFriendIds);
-               console.log(this.gyms);
-            })
-            .catch((error) => {
-               console.error(error);
-            });
-      }).catch((error) => {
-         console.log('Error getting current location:', error);
-      });
+   // async searchNearbyGyms() {
+   //    this.getCurrentLocation().then((coordinates: GeolocationCoordinates) => {
+   //       this.currLatitude = coordinates.latitude;
+   //       this.currLongitude = coordinates.longitude;
+   //       console.log('Latitude:', this.currLatitude);
+   //       console.log('Longitude:', this.currLongitude);
+   //       console.log('maxDistance:', this.maxDistance);
+   //       const url = `https://us-central1-sweatsession.cloudfunctions.net/nearbyGymProxyRequest?latitude=${this.currLatitude}&longitude=${this.currLongitude}&radius=${this.maxDistance * 1000}&key=${this.MAPS_API_KEY}` + (this.nextPageToken ? `&nextPageToken=${this.nextPageToken}` : '');
+   //       // const url = `http://127.0.0.1:5005/sweatsession/us-central1/nearbyGymProxyRequest?latitude=${this.currLatitude}&longitude=${this.currLongitude}&radius=${this.maxDistance * 1000}&key=${this.MAPS_API_KEY}`;
+   //       fetch(url)
+   //          .then((response) => response.json())
+   //          .then(async (data) => {
+   //             console.log(data);
+   //             console.log(data.results);
+   //             this.gyms = data;
+   //             // this.nextPageToken=data.next_page_token;
+   //             await this.getGymUsersForGyms(this.userFriendIds);
+   //             console.log(this.gyms);
+   //          })
+   //          .catch((error) => {
+   //             console.error(error);
+   //          });
+   //    }).catch((error) => {
+   //       console.log('Error getting current location:', error);
+   //    });
 
-   }
+   // }
 
    async loadData() {
       try {
-         const nextPageToken = this.nextPageToken || "";
-         // const url = `http://127.0.0.1:5005/sweatsession/us-central1/nearbyGymProxyRequest?latitude=${this.currLatitude}&longitude=${this.currLongitude}&radius=${this.maxDistance * 1000}&key=${this.MAPS_API_KEY}&nextPageToken=${nextPageToken}`;
-         // console.log(url)
-         let responseStatus = "";
-         while (responseStatus != "OK") {
-            const url = `https://us-central1-sweatsession.cloudfunctions.net/nearbyGymProxyRequest?latitude=${this.currLatitude}&longitude=${this.currLongitude}&radius=${this.maxDistance * 1000}&key=${this.MAPS_API_KEY}&nextPageToken=${nextPageToken}`;
-            console.log(url)
-            const response = await fetch(url);
-            const data = await response.json();
-            console.log(data);
-            console.log(data.results);
-            responseStatus = data.status;
-            this.gyms = data;
-            await this.getGymUsersForGyms(this.userFriendIds);
-            this.nextPageToken = data.next_page_token; // Get the new nextPageToken
-         }
-         return this.gyms;
+        const maxRetries = 5;
+        let nextPageToken = this.nextPageToken || "";
+    
+        for (let retryCount = 0; retryCount < maxRetries; retryCount++) {
+         //  const url = `https://us-central1-sweatsession.cloudfunctions.net/nearbyGymProxyRequest?latitude=${this.currLatitude}&longitude=${this.currLongitude}&radius=${this.maxDistance * 1000}&key=${this.MAPS_API_KEY}&nextPageToken=${nextPageToken}`;
+          const url = `http://127.0.0.1:5005/sweatsession/us-central1/nearbyGymProxyRequest?latitude=${this.currLatitude}&longitude=${this.currLongitude}&radius=${this.maxDistance * 1000}&key=${this.MAPS_API_KEY}&nextPageToken=${nextPageToken}`;
+          console.log(url);
+    
+          const response = await fetch(url);
+          const data = await response.json();
+    
+          console.log(data);
+          console.log(data.results);
+    
+          let responseStatus = data.status;
+          this.gyms = data;
+    
+          await this.getGymUsersForGyms(this.userFriendIds);
+          this.nextPageToken = data.next_page_token; // Get the new nextPageToken
+
+          if (responseStatus == "OK") {
+            break; // Exit the loop if the response status is "OK"
+          }
+    
+          if (retryCount < maxRetries - 1) {
+            // If this is not the last retry, wait for a while before retrying.
+            await new Promise((resolve) => setTimeout(resolve, 1000)); // Wait for 1 second before retrying.
+          }
+        } 
+        return this.gyms;
       } catch (error) {
-         console.error(error);
-         return this.gyms;
+        console.error(error);
+        return this.gyms;
       }
-   }
+    }
+    
 
    triggerfilter() {
       this.filteredData$ = this.searchTerm$.pipe(
