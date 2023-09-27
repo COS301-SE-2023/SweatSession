@@ -7,6 +7,7 @@ import { GLTFLoader, GLTF } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { CSS2DRenderer } from 'three/examples/jsm/renderers/CSS2DRenderer.js';
 import { Router } from '@angular/router';
+import {BehaviorSubject} from "rxjs";
 
 @Component({
   selector: 'app-exercise-explorer',
@@ -23,7 +24,8 @@ export class ExerciseExplorerPage implements  AfterViewInit  {
 
 
   @ViewChild('canvas') private canvasRef: ElementRef;
-
+  private bodypartSubject = new BehaviorSubject<string>("null");
+  bodypart$ = this.bodypartSubject.asObservable();
   //* Stage Properties
 
  
@@ -163,9 +165,17 @@ export class ExerciseExplorerPage implements  AfterViewInit  {
     }
   }
 
-async openExercisePage(bodypart: string) {
-        
-    await this.router.navigate(['/view-exercise'], { queryParams: { bodypart: bodypart } });
+
+
+  setBodypart(bodypart: string) {
+    this.bodypartSubject.next(bodypart);
+  }
+
+  async openExercisePage(bodypart: string)
+  {
+    this.setBodypart(bodypart)
+    //open the view exercise component
+
   }
 
 

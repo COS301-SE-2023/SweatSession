@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <backbutton></backbutton>
+    </ion-buttons>
+    <ion-title>View Exercise</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card *ngFor="let ExerciseTuple of ExerciseDetails" style="--ion-background-color: #A8DADCFF">
+    <ion-card style="border-style: solid; border-width: thick;">
+      <video controls style="width: 100%;" playsinline="" preload="metadata" muted="" autoplay="" loop="">
+        <source [src]="ExerciseTuple.video.url" type="video/mp4">
+      </video>
+    </ion-card>
+    <ion-card-header>
+      <ion-card-title>{{ ExerciseTuple.video.exersiseName }}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      {{ ExerciseTuple.video.difficulty }}
+    </ion-card-content>
+    <!-- Open new page when the button is clicked -->
+
+    <ion-button (click)="openModal(ExerciseTuple)"  >View Instructions</ion-button>
+  </ion-card>
+</ion-content>
+

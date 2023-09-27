@@ -3,6 +3,7 @@ import { ModalController } from '@ionic/angular';
 import { ExerciseList } from 'src/app/models/exercise.model';
 import { InstructionModalComponent } from '../exercise-explorer/instruction-modal/instruction-modal.component'
 import {MUSCLE_GROUP_DATA, MuscleGroup} from "../../models/muscleGroup.model";
+import {ExerciseExplorerPage} from "../exercise-explorer/exercise-explorer.page";
 
 
 @Component({
@@ -13,27 +14,29 @@ import {MUSCLE_GROUP_DATA, MuscleGroup} from "../../models/muscleGroup.model";
 
 export class ViewExercisePage  implements OnInit {
 
-  bodypart: string;
+  receivedBodypart: string;
 
   ExerciseDetails: ExerciseList[] = [];
 
   constructor(private modalController: ModalController,
+              private ExerciseExplorerPage: ExerciseExplorerPage
   ) { }
 
   ngOnInit() {
 
-    this.bodypart = window.location.href.split("=")[1];
+    this.ExerciseExplorerPage.bodypart$.subscribe((bodypart) => {
+      this.receivedBodypart = bodypart;
+    });
     this.populateExerciseDetails();
   }
 
   populateExerciseDetails() {
     //Fetch data frm the API and populate the ExerciseDetails object
 
-
     for (let i = 0; i < Object.keys(MUSCLE_GROUP_DATA).length; i++)
     {
-      console.log("This: " + Object.keys(MUSCLE_GROUP_DATA)[i] + " == " + this.bodypart);
-      if (Object.keys(MUSCLE_GROUP_DATA)[i] == this.bodypart)
+      console.log("This: " + Object.keys(MUSCLE_GROUP_DATA)[i] + " == " + this.receivedBodypart);
+      if (Object.keys(MUSCLE_GROUP_DATA)[i] == this.receivedBodypart)
       {
         console.log("I got here Bruhh");
         for (let j = 0; j < Object.keys(MUSCLE_GROUP_DATA)[i].length; j++)
