@@ -9,13 +9,13 @@
     <ion-card *ngIf="totalNutrition">
       <ion-card-header>Summary of Nutritional Information</ion-card-header>
       <ion-card-content>
-        <p>Total Calories: {{ totalNutrition.calories }}</p>
-        <p>Protein: {{ totalNutrition.protein }}g</p>
-        <p>Carbohydrates: {{ totalNutrition.carbohydrates }}g</p>
-        <p>Fats: {{ totalNutrition.fats }}g</p>
-        <p>Dietary Fiber: {{ totalNutrition.fiber }}g</p>
-        <p>Sugars: {{ totalNutrition.sugars }}g</p>
-        <p>Sodium: {{ totalNutrition.sodium }}mg</p>
+        <p>Total Calories: {{ totalNutrition.calories | number:'1.2-2' }}</p>
+        <p>Protein: {{ totalNutrition.protein | number:'1.2-2' }}g</p>
+        <p>Carbohydrates: {{ totalNutrition.carbohydrates | number:'1.2-2' }}g</p>
+        <p>Fats: {{ totalNutrition.fats | number:'1.2-2' }}g</p>
+        <p>Dietary Fiber: {{ totalNutrition.fiber | number:'1.2-2' }}g</p>
+        <p>Sugars: {{ totalNutrition.sugars | number:'1.2-2' }}g</p>
+        <p>Sodium: {{ totalNutrition.sodium | number:'1.2-2' }}mg</p>
       </ion-card-content>
     </ion-card>
 
@@ -30,13 +30,13 @@
           <ion-col size="6" size-md="9" class="food-info">
             <ion-label class="ion-text-wrap">
               <h2 class="capitalize">{{ food.food_name }}</h2>
-              <p>Total Calories: {{ food.nf_calories }}</p>
-              <p>Protein: {{ food.nf_protein }}g</p>
-              <p>Carbohydrates: {{ food.nf_total_carbohydrate }}g</p>
-              <p>Fats: {{ food.nf_total_fat }}g</p>
-              <p>Dietary Fiber: {{ food.nf_dietary_fiber }}g</p>
-              <p>Sugars: {{ food.nf_sugars }}g</p>
-              <p>Sodium: {{ food.nf_sodium }}mg</p>
+              <p>Total Calories: {{ food.nf_calories | number:'1.2-2' }}</p>
+              <p>Protein: {{ food.nf_protein | number:'1.2-2' }}g</p>
+              <p>Carbohydrates: {{ food.nf_total_carbohydrate | number:'1.2-2' }}g</p>
+              <p>Fats: {{ food.nf_total_fat | number:'1.2-2' }}g</p>
+              <p>Dietary Fiber: {{ food.nf_dietary_fiber | number:'1.2-2' }}g</p>
+              <p>Sugars: {{ food.nf_sugars | number:'1.2-2' }}g</p>
+              <p>Sodium: {{ food.nf_sodium | number:'1.2-2' }}mg</p>
             </ion-label>
           </ion-col>
         </ion-row>

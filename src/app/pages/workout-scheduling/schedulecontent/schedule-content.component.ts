@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { NavController, ActionSheetController } from '@ionic/angular';
+import { NavController, ActionSheetController, ModalController } from '@ionic/angular';
 import { Store } from '@ngxs/store';
 import { Subscription, tap } from 'rxjs';
 import { RemoveWorkoutSchedule, UpdateWorkoutAdded, UpdateWorkoutSchedule } from 'src/app/actions';
@@ -10,6 +10,7 @@ import { getAuth } from '@angular/fire/auth';
 import { NoticeService } from 'src/app/services/notifications/notice.service';
 import { AlertController } from '@ionic/angular';
 import { BadgesRepository } from 'src/app/repository';
+import { FriendsListComponent } from '../friends-list/friends-list.component';
 
 
 @Component({
@@ -35,6 +36,7 @@ export class ScheduleContentComponent implements OnInit {
   showOptions = false;
 
   constructor(private store: Store, private nav: NavController,
+    private modalController: ModalController,
     private actionSheetCtrl: ActionSheetController,
     private firestore: AngularFirestore,
     private navCtrl: NavController,
@@ -86,8 +88,7 @@ export class ScheduleContentComponent implements OnInit {
     if (timeDiff > 0) {
      const hoursLeft = Math.floor(timeDiff / (1000 * 60 * 60));
      const daysLeft = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
-     const minutes = Math.floor(timeDiff / (1000 * 60));
-     
+     const minutes = Math.floor(timeDiff / (1000 * 60));     
         
 
           // if(daysLeft < 1 ){
@@ -114,9 +115,9 @@ export class ScheduleContentComponent implements OnInit {
          
           
           
+    }
 
   }
-}
 
   timeLeft() {
     const currentTime = new Date().getTime();
@@ -130,11 +131,11 @@ export class ScheduleContentComponent implements OnInit {
       const seconds = Math.floor(timeDiff / (1000));
       if(daysLeft<1){
         if(hoursLeft<1){
-         
+          
           return `You have ${minutes} minutes left`;
         }
         return `You have ${hoursLeft} hours left`;
-       
+        
       }
       else if (daysLeft == 1) {
         return `You have ${daysLeft} day left`;
@@ -273,5 +274,16 @@ export class ScheduleContentComponent implements OnInit {
 
   toogleOptions () {
     this.showOptions = !this.showOptions;
+  }
+
+  async openFriendSelectionModal() {
+    const modal = await this.modalController.create({
+      component: FriendsListComponent,
+      componentProps: {
+        friends: this.friends,
+      },
+    });
+  
+    await modal.present();
   }
 }

@@ -32,3 +32,18 @@ export class LoadSchedule {
     static readonly type = "[workoutSchedule] load workout schedule";
     constructor(public payload: IWorkoutScheduleModel) {}
 }
+
+export class AddSweatBuddy {
+    static readonly type = "[workoutSchedule] add sweat buddy to workout schedule";
+    constructor(public userId: string) {}
+}
+
+export class AddSweatBuddies {
+    static readonly type = "[workoutSchedule] add sweat buddies to a schedule";
+    constructor(public userIds: string[]) {}
+}
+
+export class RequestToJoinWorkout {
+    static readonly type = "[workoutSchedule] request to join a workout schedule";
+    constructor(public userId: string) {}
+}
