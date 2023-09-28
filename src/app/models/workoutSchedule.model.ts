@@ -18,6 +18,7 @@ export interface IWorkoutScheduleModel {
     joined?: boolean;
     sweatbuddies?: string[];
     sweatbuddiesJoinRequest?: string[];
+    filledExerciseList?: boolean;
 }
 
 //request

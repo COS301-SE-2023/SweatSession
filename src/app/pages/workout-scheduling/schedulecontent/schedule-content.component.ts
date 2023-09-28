@@ -13,6 +13,7 @@ import { BadgesRepository } from 'src/app/repository';
 import { FriendsListComponent } from '../friends-list/friends-list.component';
 import { register } from 'swiper/element/bundle';
 import { ExerciseService } from 'src/app/services';
+import { Exercise } from 'src/app/models/exercise.model';
 
 register();
 
@@ -38,8 +39,9 @@ export class ScheduleContentComponent implements OnInit {
   selectedFriends:any[] = [];
   @Input() friends: IProfileModel[] = [];
   showOptions = false;
-  exercises: any;
-  completedExercises: number[] = [];
+  exercises:  Exercise[]= [];
+  completedExercises: Exercise[] = [];
+  selectAll: boolean = false;
 
   constructor(private store: Store, private nav: NavController,
     private modalController: ModalController,
@@ -299,20 +301,36 @@ export class ScheduleContentComponent implements OnInit {
     })
   }
 
-  toggleExerciseCompletion(exerciseId: number) {
-    const index = this.completedExercises.indexOf(exerciseId);
+  toggleExerciseCompletion(exercise: Exercise) {
+    const index = this.completedExercises.findIndex((completedExercise) => completedExercise.id === exercise.id);
+
     if (index !== -1) {
       this.completedExercises.splice(index, 1);
     } else {
-      this.completedExercises.push(exerciseId);
+      this.completedExercises.push(exercise);
     }
-  }
+}
 
-  isExerciseCompleted(exerciseId: number): boolean {
-    return this.completedExercises.includes(exerciseId);
+  isExerciseCompleted(exercise: Exercise): boolean {
+    return exercise.completed;
   }
 
   submit() {
-    console.log('Completed Exercises:', this.completedExercises);
+    if(!this.schedule.filledExerciseList) {
+      this.completedExercises.forEach((exercise)=>{
+        exercise.completed = true;
+        this.exerciseService.updateExercise(exercise.id! , exercise)
+        this.schedule.filledExerciseList = true;
+        this.store.dispatch(new UpdateWorkoutSchedule(this.schedule))
+      })
+    }
+  }
+
+  toggleSelectAll() {
+    if (this.selectAll) {
+      this.completedExercises = this.exercises
+    } else {
+      this.completedExercises = [];
+    }
   }
 }

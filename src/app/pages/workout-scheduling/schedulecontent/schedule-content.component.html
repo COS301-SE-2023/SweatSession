@@ -32,17 +32,20 @@
         </ion-row>
       </ion-grid>
       <!-- <div *ngIf="isCompleted()"> -->
-      <div>
-        <h3>Your session has ended. Which exercises were you able to finish</h3>
+      <div *ngIf="isCompleted()">
+        <h2 *ngIf="!schedule.filledExerciseList">Your session has ended. Which exercises were you able to finish</h2>
+        <h2 *ngIf="schedule.filledExerciseList">Exercise checklist completed</h2>
         <swiper-container pagination="{hideOnClick: true}">
           <swiper-slide *ngFor="let exercise of exercises">
-            <ion-card [ngClass]="{ 'completed': isExerciseCompleted(exercise.id) }">
+            <ion-card [ngClass]="{ 'completed': exercise.completed }">
               <ion-card-content>
-                <ion-checkbox [ngClass]="{ 'completed': isExerciseCompleted(exercise.id) }"
+                <ion-checkbox [ngClass]="{ 'completed':  exercise.completed  }"
                   [value]="exercise.id"
                   labelPlacement="end" 
                   justify="start"
-                  (ionChange)="toggleExerciseCompletion(exercise.id)">
+                  [checked]="exercise.completed"
+                  [disabled]="exercise.completed"
+                  (ionChange)="toggleExerciseCompletion(exercise)">
                   <ion-label>
                     {{exercise.name}}
                   </ion-label>
@@ -51,7 +54,8 @@
             </ion-card>
           </swiper-slide>
         </swiper-container>
-        <ion-button (click)="submit()">Submit</ion-button>
+        <ion-button (click)="submit()" [disabled]="schedule.filledExerciseList">{{ schedule.filledExerciseList ? 'submitted' : 'submit' }}</ion-button>
+
       </div>
       
     </ion-card-content>

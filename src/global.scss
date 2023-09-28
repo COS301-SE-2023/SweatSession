@@ -148,7 +148,7 @@ swiper-container::part(bullet-active) {
 // #457b9d
 
 ion-button:not(.backbutton,.default-button) {
-    --background: #A8DADC;
+    --background: linear-gradient(135deg, #A8DADC 10%, #457b9d 100%); //#A8DADC;
     --background-hover: #457b9d;
     --background-activated: #457b9d;
     --background-focused: #457b9d;
@@ -158,7 +158,7 @@ ion-button:not(.backbutton,.default-button) {
     --border-width: 2px;
     --border-color: #457b9d;
   
-    --color: #457b9d;
+    --color: white !important;//#457b9d;
 }
 
 ion-segment {

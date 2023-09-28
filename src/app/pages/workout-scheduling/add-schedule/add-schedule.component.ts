@@ -92,6 +92,7 @@ export class AddScheduleComponent  implements OnInit {
     this.schedule.joined = false;
     this.schedule.sweatbuddies = [];
     this.schedule.sweatbuddiesJoinRequest = [];
+    this.schedule.filledExerciseList = false;
   }
 
   isValidInput() {
