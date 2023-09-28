@@ -17,27 +17,25 @@ import { CalorieSummary } from '../calorie-summary';
 })
 export class CalorieTargetComponent  implements OnInit {
 
-  BMIValue: number;
-  TDEEValue: number;
-  bmr: number;
-  healthDataForm: healthData;
-  healthDataFORM: FormGroup;
-  currUserId: string | undefined | null;
-  commitmentLevel: number;
-  weightGoals: number;
-  targetCalories: number;
-  filledOuthealth: boolean = false;
+    BMIValue: number;
+    TDEEValue: number;
+    bmr: number;
+    healthDataForm: healthData;
+    healthDataFORM: FormGroup;
+    currUserId: string | undefined | null;
+    commitmentLevel: number;
+    weightGoals: number;
+    targetCalories: number;
+    filledOuthealth: boolean = false;
 
-  
-  constructor(private formBuilder: FormBuilder,
-              private firestore: AngularFirestore,
-              private profileService: ProfileService,
-              private setProfileService: SetProfileService,
-              private healthDataService: HealthDataService
 
-  )
-  {
-      this.healthDataFORM = this.formBuilder.group({
+    constructor(private formBuilder: FormBuilder,
+                private firestore: AngularFirestore,
+                private profileService: ProfileService,
+                private setProfileService: SetProfileService,
+                private healthDataService: HealthDataService
+    ) {
+        this.healthDataFORM = this.formBuilder.group({
             height: ['', Validators.required],
             weight: ['', Validators.required],
             diet: ['', Validators.required],
@@ -47,38 +45,36 @@ export class CalorieTargetComponent  implements OnInit {
             gender: ['', Validators.required],
             displayName: [''],
             weightGoals: ['']
-      });
+        });
 
-    this.healthDataForm = {
-        age: 0,
-        diet: "",
-        displayName: "",
-        gender: "",
-        height: 0,
-        medicalConditions: "",
-        weight: 0,
-        workoutCommitment: "",
-        weightGoals: 0
+        this.healthDataForm = {
+            age: 0,
+            diet: "",
+            displayName: "",
+            gender: "",
+            height: 0,
+            medicalConditions: "",
+            weight: 0,
+            workoutCommitment: "",
+            weightGoals: 0
+        }
+
+        this.commitmentLevel = 0;
+        this.weightGoals = 0;
+        this.targetCalories = 0;
     }
 
-    this.commitmentLevel = 0;
-    this.weightGoals = 0;
-    this.targetCalories = 0;
-  }
 
+    ngOnInit() {
 
-  ngOnInit()
-  {
-
-    this.calculateandGet_BMR();
-  }
+        this.calculateandGet_BMR();
+    }
 
     fetchHealthData() {
 
     }
 
-    calculateandGet_BMR()
-    { //using  the Revised Harris-Benedict Equation
+    calculateandGet_BMR() { //using  the Revised Harris-Benedict Equation
 
         let height = 0;
         let weight = 0;
@@ -88,12 +84,9 @@ export class CalorieTargetComponent  implements OnInit {
         const auth = getAuth();
         this.currUserId = auth.currentUser?.uid;
 
-        if (this.currUserId!=undefined)
-        {
+        if (this.currUserId != undefined) {
             sessionStorage.setItem('currUserId', this.currUserId);
-        }
-        else
-        {
+        } else {
             this.currUserId = sessionStorage.getItem('currUserId') ?? "";
         }
 
@@ -113,24 +106,21 @@ export class CalorieTargetComponent  implements OnInit {
                     this.healthDataForm.weightGoals = healthDataArray[0].weightGoals;
 
 
-                     height = this.healthDataForm.height;
-                     weight = this.healthDataForm.weight;
-                     age = this.healthDataForm.age;
-                     gender = this.healthDataForm.gender;
+                    height = this.healthDataForm.height;
+                    weight = this.healthDataForm.weight;
+                    age = this.healthDataForm.age;
+                    gender = this.healthDataForm.gender;
 
 
                     let bmr = 0;
 
-                    if(gender == "Male")
-                    {
+                    if (gender == "Male") {
                         let step1 = 13.397 * weight;
                         let step2 = 4.799 * height;
                         let step3 = 5.677 * age;
                         let step4 = 88.362;
                         bmr = step1 + step2 - step3 + step4;
-                    }
-                    else
-                    {
+                    } else {
                         let step1 = 9.247 * weight;
                         let step2 = 3.098 * height;
                         let step3 = 4.330 * age;
@@ -161,96 +151,103 @@ export class CalorieTargetComponent  implements OnInit {
                 console.log(error);
             });
 
-  }
-
-  calculateandGet_TDEE() {
-
-    let TDEE = 0;
-
-    if(this.healthDataForm.workoutCommitment == "Low Commitment (0-1 days/week)")
-    {
-      this.commitmentLevel = 1.2;
-    }
-    else if(this.healthDataForm.workoutCommitment == "Medium Commitment (2-3 days/week)")
-    {
-        this.commitmentLevel = 1.375;
-    }
-    else if (this.healthDataForm.workoutCommitment == "High Commitment (4-5 days/week)")
-    {
-        this.commitmentLevel = 1.55;
-    }
-    else if (this.healthDataForm.workoutCommitment == "Extreme Commitment (6+ days/week)")
-    {
-        this.commitmentLevel = 1.725;
     }
 
-    console.log("The value: " + this.commitmentLevel);
+    calculateandGet_TDEE() {
 
-    TDEE = this.bmr * this.commitmentLevel;
+        let TDEE = 0;
 
-    this.TDEEValue = TDEE;
-    return TDEE;
-  }
+        if (this.healthDataForm.workoutCommitment == "Low Commitment (0-1 days/week)") {
+            this.commitmentLevel = 1.2;
+        } else if (this.healthDataForm.workoutCommitment == "Medium Commitment (2-3 days/week)") {
+            this.commitmentLevel = 1.375;
+        } else if (this.healthDataForm.workoutCommitment == "High Commitment (4-5 days/week)") {
+            this.commitmentLevel = 1.55;
+        } else if (this.healthDataForm.workoutCommitment == "Extreme Commitment (6+ days/week)") {
+            this.commitmentLevel = 1.725;
+        }
 
-  calculateTargetCalories(): number
-  {
-      let targetCalories = this.TDEEValue;
+        console.log("The value: " + this.commitmentLevel);
 
-      if(this.healthDataForm.weightGoals == 0)
-      {
-          this.targetCalories = targetCalories;
-      }
-      else if(this.healthDataForm.weightGoals > 0)
-      {
-          if(this.healthDataForm.weightGoals == 1)
-          {
+        TDEE = this.bmr * this.commitmentLevel;
+
+        this.TDEEValue = TDEE;
+        return TDEE;
+    }
+
+    calculateTargetCalories(): number {
+        let targetCalories = this.TDEEValue;
+
+        if (this.healthDataForm.weightGoals == 0) {
+            this.targetCalories = targetCalories;
+        } else if (this.healthDataForm.weightGoals > 0) {
+            if (this.healthDataForm.weightGoals == 1) {
                 targetCalories = targetCalories + 1100;
                 this.targetCalories = targetCalories;
-          }
-          else if(this.healthDataForm.weightGoals == 0.75)
-          {
-              targetCalories = targetCalories + 825;
-              this.targetCalories = targetCalories;
-          }
-          else if(this.healthDataForm.weightGoals == 0.5)
-          {
-              targetCalories = targetCalories + 550;
-              this.targetCalories = targetCalories;
-          }
-          else if(this.healthDataForm.weightGoals == 0.25)
-          {
+            } else if (this.healthDataForm.weightGoals == 0.75) {
+                targetCalories = targetCalories + 825;
+                this.targetCalories = targetCalories;
+            } else if (this.healthDataForm.weightGoals == 0.5) {
+                targetCalories = targetCalories + 550;
+                this.targetCalories = targetCalories;
+            } else if (this.healthDataForm.weightGoals == 0.25) {
                 targetCalories = targetCalories + 275;
                 this.targetCalories = targetCalories;
-          }
+            }
 
-      }
-      else if(this.healthDataForm.weightGoals < 0)
-      {
-          if (this.healthDataForm.weightGoals == -1)
-          {
-              targetCalories = targetCalories - 1100;
-              this.targetCalories = targetCalories;
-          }
-          else if (this.healthDataForm.weightGoals == -0.75)
-          {
-              targetCalories = targetCalories - 825;
-              this.targetCalories = targetCalories;
-          }
-          else if (this.healthDataForm.weightGoals == -0.5)
-          {
+        } else if (this.healthDataForm.weightGoals < 0) {
+            if (this.healthDataForm.weightGoals == -1) {
+                targetCalories = targetCalories - 1100;
+                this.targetCalories = targetCalories;
+            } else if (this.healthDataForm.weightGoals == -0.75) {
+                targetCalories = targetCalories - 825;
+                this.targetCalories = targetCalories;
+            } else if (this.healthDataForm.weightGoals == -0.5) {
                 targetCalories = targetCalories - 550;
                 this.targetCalories = targetCalories;
-          }
-          else if (this.healthDataForm.weightGoals == -0.25)
-          {
+            } else if (this.healthDataForm.weightGoals == -0.25) {
                 targetCalories = targetCalories - 275;
                 this.targetCalories = targetCalories;
-          }
-      }
+            }
+        }
 
 
-    CalorieSummary.targetCalories = parseFloat((targetCalories/7).toFixed(2));
-    return targetCalories;
-  }
+        CalorieSummary.targetCalories = parseFloat((targetCalories).toFixed(0));
+        return targetCalories;
+    }
 
+    getValueColor(value: number, calculation: string): string {
+
+        if (calculation == "BMI") {
+            if (value < 18.5) {
+                return 'low-value';
+            } else if (value >= 18.5 && value < 25) {
+                return 'medium-value';
+            } else {
+                return 'high-value';
+            }
+        }
+        if (calculation == "BMR") {
+            if (value < 1500) {
+                return 'low-value';
+            } else if (value >= 1500 && value < 2000) {
+                return 'medium-value';
+            } else {
+                return 'high-value';
+            }
+        }
+        else if (calculation == "TDEE") {
+            if (value < 2000) {
+                return 'low-value';
+            } else if (value >= 2000 && value < 2500) {
+                return 'medium-value';
+            } else {
+                return 'high-value';
+            }
+        }
+        else
+        {
+            return 'TARGET';
+        }
+    }
 }

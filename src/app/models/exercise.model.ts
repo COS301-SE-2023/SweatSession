@@ -17,7 +17,7 @@ export interface ExerciseList
             id?: string;
             url: string;
             exersiseName: string;
-            exerciseDescription: string;
+            difficulty: string;
             instructions: string[];
         };
 }

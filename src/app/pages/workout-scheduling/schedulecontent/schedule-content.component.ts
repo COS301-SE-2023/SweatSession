@@ -84,25 +84,35 @@ export class ScheduleContentComponent implements OnInit {
     if (timeDiff > 0) {
      const hoursLeft = Math.floor(timeDiff / (1000 * 60 * 60));
      const daysLeft = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
-     const minutes = Math.floor(timeDiff / (1000 * 60));
-      if(daysLeft < 1 ){
-        if(hoursLeft >= 1){
-          const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
-          this.daynum = new Date().getDay() ;
-          this.day = weekday[this.daynum];
-          this.date = new Date().toTimeString() ;
-          this.shortdate = this.date.split(':' , 2);
-          this.createNotifications("SWEATSESSION" , this.day + ' ' +this.shortdate[0] + ':' + this.shortdate[1] + ' ' , "Your workout begins at " + this.schedule.location + " in " + hoursLeft + " hours");
-        }else{
-          const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
-          this.daynum = new Date().getDay() ;
-          this.day = weekday[this.daynum];
-          this.date = new Date().toTimeString() ;
-          this.shortdate = this.date.split(':' , 2);
-          this.createNotifications("SWEATSESSION" , this.day + ' ' +this.shortdate[0] + ':' + this.shortdate[1] + ' ' , "Your workout begins at " + this.schedule.location + " in " + minutes + " minutes");
-        }
-      }
+     const minutes = Math.floor(timeDiff / (1000 * 60));     
+        
+
+          // if(daysLeft < 1 ){
+          //   if(hoursLeft >= 1){
+          //     const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+          //     this.daynum = new Date().getDay() ;
+          //     this.day = weekday[this.daynum];
+          //     this.date = new Date().toTimeString() ;
+          //     this.shortdate = this.date.split(':' , 2);
+          //     this.createNotifications("SWEATSESSION" , this.day + ' ' +this.shortdate[0] + ':' + this.shortdate[1] + ' ' , "Your workout begins at " + this.schedule.location + " in " + hoursLeft + " hours")  ;
+
+              
+          //   }else{
+          //     const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+          //     this.daynum = new Date().getDay() ;
+          //     this.day = weekday[this.daynum];
+          //     this.date = new Date().toTimeString() ;
+          //     this.shortdate = this.date.split(':' , 2);
+          //     this.createNotifications("SWEATSESSION" , this.day + ' ' +this.shortdate[0] + ':' + this.shortdate[1] + ' ' , "Your workout begins at " + this.schedule.location + " in " + minutes + " minutes")  ;
+
+              
+          // }
+          // }
+         
+          
+          
     }
+
   }
 
   timeLeft() {
@@ -205,12 +215,6 @@ export class ScheduleContentComponent implements OnInit {
       }
     }
     this.ratio = timeDiff / diff;
-  }
-
-  counter() {
-    setInterval(() => {
-      this.fraction()
-    }, 1000 * 5)
   }
 
 

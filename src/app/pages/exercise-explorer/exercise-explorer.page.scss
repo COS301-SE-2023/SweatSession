@@ -18,3 +18,8 @@ body {
     height: 100vh; /* Optional: This centers the container vertically as well */
   }
   
+  .center{
+    align-items: center;
+    justify-content: center;
+    display: flex;
+  }
