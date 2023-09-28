@@ -42,6 +42,7 @@ export class ScheduleContentComponent implements OnInit {
   exercises:  Exercise[]= [];
   completedExercises: Exercise[] = [];
   selectAll: boolean = false;
+  count:any;
 
   constructor(private store: Store, private nav: NavController,
     private modalController: ModalController,
@@ -55,15 +56,15 @@ export class ScheduleContentComponent implements OnInit {
     private exerciseService: ExerciseService) { }
 
   ngOnInit() {
-    // if (!sessionStorage.getItem('siteInit')) {
-    //   this.sendReminder();
-    //   sessionStorage.setItem('siteInit', 'true');
+    if (!sessionStorage.getItem('siteInit')) {
+      this.sendReminder();
+      sessionStorage.setItem('siteInit', 'true');
 
-    // }
+    }
     // if (!this.isCompleted()) {
     //   this.counter();
     // }
-    this.getExercises();
+    // this.getExercises();
   }
 
   async viewSchedule() {
@@ -95,34 +96,14 @@ export class ScheduleContentComponent implements OnInit {
      const hoursLeft = Math.floor(timeDiff / (1000 * 60 * 60));
      const daysLeft = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
      const minutes = Math.floor(timeDiff / (1000 * 60));     
-        
-
-          // if(daysLeft < 1 ){
-          //   if(hoursLeft >= 1){
-          //     const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
-          //     this.daynum = new Date().getDay() ;
-          //     this.day = weekday[this.daynum];
-          //     this.date = new Date().toTimeString() ;
-          //     this.shortdate = this.date.split(':' , 2);
-          //     this.createNotifications("SWEATSESSION" , this.day + ' ' +this.shortdate[0] + ':' + this.shortdate[1] + ' ' , "Your workout begins at " + this.schedule.location + " in " + hoursLeft + " hours")  ;
-
-              
-          //   }else{
-          //     const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
-          //     this.daynum = new Date().getDay() ;
-          //     this.day = weekday[this.daynum];
-          //     this.date = new Date().toTimeString() ;
-          //     this.shortdate = this.date.split(':' , 2);
-          //     this.createNotifications("SWEATSESSION" , this.day + ' ' +this.shortdate[0] + ':' + this.shortdate[1] + ' ' , "Your workout begins at " + this.schedule.location + " in " + minutes + " minutes")  ;
-
-              
-          // }
-          // }
-         
-          
-          
     }
 
+  }
+
+  counter() {
+    let l =setInterval(() => {
+      this.fraction()
+    }, 1000 * 10)
   }
 
   timeLeft() {
@@ -218,7 +199,8 @@ export class ScheduleContentComponent implements OnInit {
       } else if (this.schedule.status !== "completed" && this.joined()) {
         this.schedule.status = "completed";
         this.store.dispatch(new UpdateWorkoutSchedule(this.schedule))
-      } else if(this.schedule.status !== "uncompleted") {
+        this.count.t
+      } else if(this.schedule.status !== "uncompleted" && !this.joined()) {
         this.schedule.status = "uncompleted";
         this.store.dispatch(new UpdateWorkoutSchedule(this.schedule))
         console.log("uncompleted");
