@@ -77,7 +77,7 @@ export class PointsRepository {
         const fieldValue = firebase.firestore.FieldValue;
 
         return pointsDocRef.update({
-            userPoints: fieldValue.increment(50);
+            userPoints: fieldValue.increment(50)
         });
     }
 }
