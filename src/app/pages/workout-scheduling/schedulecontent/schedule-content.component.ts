@@ -323,6 +323,15 @@ export class ScheduleContentComponent implements OnInit {
         this.schedule.filledExerciseList = true;
         this.store.dispatch(new UpdateWorkoutSchedule(this.schedule))
       })
+
+      const auth = getAuth();
+      this.currUserId = auth.currentUser?.uid;
+      if (this.currUserId != undefined) {
+        sessionStorage.setItem('currUserId', this.currUserId);
+      } else {
+        this.currUserId = sessionStorage.getItem('currUserId')!;
+      }
+      this.pointsRepository.completeWorkoutPlanPoints(this.currUserId);
     }
   }
 
