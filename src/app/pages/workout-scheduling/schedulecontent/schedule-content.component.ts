@@ -64,7 +64,7 @@ export class ScheduleContentComponent implements OnInit {
     // if (!this.isCompleted()) {
     //   this.counter();
     // }
-    // this.getExercises();
+    this.getExercises();
   }
 
   async viewSchedule() {
