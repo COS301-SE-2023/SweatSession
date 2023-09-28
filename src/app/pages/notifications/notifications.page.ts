@@ -4,8 +4,8 @@ import { NoticehomeService } from 'src/app/services/notifications/noticehome.ser
 import { Notice } from 'src/app/models/notice.model';
 import { AlertController, NavController } from '@ionic/angular';
 import { getAuth } from 'firebase/auth';
-import { IFriendsModel } from 'src/app/models';
-import { AddFriendAction, RemoveFriendAction, RemoveFriendRequest } from 'src/app/actions';
+import { IFriendsModel, IRequestToAdd, IScheduleRequest } from 'src/app/models';
+import { AddFriendAction, AddSweatBuddy, RemoveFriendAction, RemoveFriendRequest } from 'src/app/actions';
 import { Store } from '@ngxs/store';
 // import { HomePage } from '../home/home.page';
 // import { Router } from '@angular/router';
@@ -124,4 +124,13 @@ export class NotificationsPage implements OnInit {
     this.clearNotification(notice.id!);
   }
 
+  acceptToJoinWorkout(notice: Notice) {
+    let request: IRequestToAdd = notice.scheduleRequest!;
+    this.store.dispatch(new AddSweatBuddy({userId: notice.senttoid!, ownerId: request.senderId, scheduleId: request.scheduleId!}))
+    this.clearNotification(notice.id!);
+  }
+
+  rejectToJoinWorkou(notice: Notice) {
+    this.clearNotification(notice.id!);
+  }
 }
