@@ -154,6 +154,7 @@ export class WorkoutSchedulingState {
                     receiverId: userId,
                     scheduleId: payload.scheduleId
                 };
+                payload.ownerId = currentUserId;
                 this.service.addSweatBuddies(payload);
                 this.store.dispatch(new SendAddRequest(request));
             })

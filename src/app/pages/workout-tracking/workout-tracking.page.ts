@@ -133,6 +133,7 @@
           reps: exerciseControl.get('reps')?.value ?? 0,
           weight: exerciseControl.get('weight')?.value ?? 0,
           duration: exerciseControl.get('duration')?.value ?? 0,
+          completed: false,
         };
     
         return this.saveExercise(exerciseData, index);
