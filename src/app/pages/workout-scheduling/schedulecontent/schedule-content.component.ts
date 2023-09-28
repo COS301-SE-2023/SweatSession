@@ -314,5 +314,13 @@ export class ScheduleContentComponent implements OnInit {
 
   submit() {
     console.log('Completed Exercises:', this.completedExercises);
+    const auth = getAuth();
+    this.currUserId = auth.currentUser?.uid;
+    if (this.currUserId != undefined) {
+      sessionStorage.setItem('currUserId', this.currUserId);
+    } else {
+      this.currUserId = sessionStorage.getItem('currUserId')!;
+    }
+    this.pointsRepository.completeWorkoutPlanPoints(this.currUserId);
   }
 }
