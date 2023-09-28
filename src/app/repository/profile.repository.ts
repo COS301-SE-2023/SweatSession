@@ -89,5 +89,11 @@ export class ProfileRepository {
         });
   }
 
+  async getUserProfile(userId: string) {
+    const profileDoc = this.firestore.doc<IProfileModel>(`profiles/${userId}`).get();
+    const profile: IProfileModel = (await lastValueFrom(profileDoc)).data()!;
+
+    return profile;
+  }
 
 }

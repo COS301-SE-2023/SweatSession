@@ -14,7 +14,8 @@ import { IAddWorkoutSchedule,
     IRequestToJoin,
     IRequestToAdd,
     IProfileModel,
-    IScheduleRequest} 
+    IScheduleRequest,
+    IGetSchedule} 
     from '../models';
 import { Observable, lastValueFrom, map } from 'rxjs';
 
@@ -198,15 +199,30 @@ export class WorkoutscheduleRepository {
   }
 
   async addSweatBuddies(request: IAddSweatbuddies) {
-    
+    try {
+      let docref = this.firestore.doc<IWorkoutScheduleModel>(`WorkoutSchedule/${request.ownerId}/userSchedules/${request.scheduleId}`);
+      let doc: IWorkoutScheduleModel = (await lastValueFrom(docref.get())).data()!;
+      request.userIds.forEach((userId)=>{
+        doc.sweatbuddiesJoinRequest?.push(userId);
+      })
+      docref.update({sweatbuddies: doc.sweatbuddies})
+    } catch(error) {
+      console.log(error);
+    }
+  }
+
+ async getSchedule(request: IGetSchedule) {
+    return (await lastValueFrom(this.firestore.doc<IWorkoutScheduleModel>(`WorkoutSchedule/${request.userId}/userSchedules/${request.scheduleId}`).get())).data()!;
   }
 
   async addSweatBuddy(request: IAddSweatbuddy) {
     try {
       let docref = this.firestore.doc<IWorkoutScheduleModel>(`WorkoutSchedule/${request.ownerId}/userSchedules/${request.scheduleId}`);
       let doc: IWorkoutScheduleModel = (await lastValueFrom(docref.get())).data()!;
-      doc.sweatbuddies = [...doc.sweatbuddies!, ...request.userId!]
+      doc.sweatbuddies?.push(request.userId!);
       docref.update({sweatbuddies: doc.sweatbuddies})
+      let schedule: IWorkoutScheduleModel =await this.getSchedule({userId: request.ownerId, scheduleId: request.scheduleId});
+      this.addSchedule({userId: request.userId, schedule: schedule})
     } catch(error) {
       console.log(error);
     }
