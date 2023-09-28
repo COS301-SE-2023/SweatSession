@@ -1,3 +1,5 @@
+import { IRequestToAdd } from "./workoutSchedule.model";
+
 export class Notice{
     id?: string;
     sentdate?: string;
@@ -6,6 +8,7 @@ export class Notice{
     senttoid?: string;
     senderid?: string;
     profileurl?: string;
+    scheduleRequest?: IRequestToAdd;
 }
 
 export class Profile{
