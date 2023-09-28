@@ -25,6 +25,7 @@ import { time } from "console";
 import { AuthApi } from '../auth/auth.api';
 import { catchError, of, tap } from 'rxjs';
 import { forEach } from 'cypress/types/lodash';
+import { NoticeService } from 'src/app/services/notifications/notice.service';
 
 export interface WorkoutSchedulingStateModel {
     schedules: IWorkoutScheduleModel[];
@@ -49,7 +50,8 @@ export class WorkoutSchedulingState {
         private readonly service: WorkoutscheduleService,
         private readonly store: Store,
         private readonly authApi: AuthApi,
-        private readonly navigation: NavigationService
+        private readonly navigation: NavigationService,
+        private readonly notification: NoticeService
     ){}
 
     @Action(UpdateWorkoutAdded)
@@ -152,6 +154,7 @@ export class WorkoutSchedulingState {
                     receiverId: userId,
                     scheduleId: payload.scheduleId
                 };
+                this.service.addSweatBuddies(payload);
                 this.store.dispatch(new SendAddRequest(request));
             })
         }
@@ -160,6 +163,7 @@ export class WorkoutSchedulingState {
     @Action(AddSweatBuddy)
     async addSweatBuddy(ctx: StateContext<WorkoutSchedulingStateModel>, {payload}: AddSweatBuddy) {
         this.service.addSweatBuddy(payload);
+        this.store.dispatch(new Navigate(['workout-scheduling']));
     }
 
     @Action(RequestToJoinWorkout)
@@ -170,6 +174,7 @@ export class WorkoutSchedulingState {
     @Action(SendAddRequest)
     async sendAddRequest(ctx: StateContext<WorkoutSchedulingStateModel>, {payload}: SendAddRequest) {
         this.service.sendAddRequest(payload);
+        this.notification.requestToJoinWorkout(payload);
         console.table(payload);
     }
 

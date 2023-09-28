@@ -34,7 +34,7 @@ export class ProfileService {
               height: profile.height,
               weight: profile.weight,
               profileURL: profile.profileURL,
-              scheduleParticipationRequested: []
+              scheduleParticipationRequested: [],
             }
           };
           return gotProfile;
