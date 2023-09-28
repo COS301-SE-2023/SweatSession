@@ -92,7 +92,7 @@ export class FitnessgoalViewPage implements OnInit {
     this.day = weekday[this.daynum];
     this.date = new Date().toTimeString() ;
     this.shortdate = this.date.split(':' , 2);
-    this.createNotifications("SWEATSESSION" , this.day + ' ' +this.shortdate[0] + ':' + this.shortdate[1] + ' ' , "Keep Going!, Task " + lasttask.content + " Completed. " + " You have completed " + this.GOAL.progress + " of your GOAL." )  ;
+    this.createNotifications("SWEATSESSION" , this.day + ' ' +this.shortdate[0] + ':' + this.shortdate[1] + ' ' , "Keep Going!, Task: " + lasttask.content + " of Goal: "+ this.GOAL.name + " is now Complete! " )  ;
 
 
   }

@@ -71,4 +71,13 @@ export class PointsRepository {
             userPoints: fieldValue.increment(100)
         });
     }
+
+    async completeWorkoutPlanPoints(currUserId: string) {
+        const pointsDocRef = this.firestore.collection('points').doc(currUserId);
+        const fieldValue = firebase.firestore.FieldValue;
+
+        return pointsDocRef.update({
+            userPoints: fieldValue.increment(50)
+        });
+    }
 }
