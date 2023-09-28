@@ -200,12 +200,13 @@ export class WorkoutscheduleRepository {
 
   async addSweatBuddies(request: IAddSweatbuddies) {
     try {
+      console.table(request);
       let docref = this.firestore.doc<IWorkoutScheduleModel>(`WorkoutSchedule/${request.ownerId}/userSchedules/${request.scheduleId}`);
       let doc: IWorkoutScheduleModel = (await lastValueFrom(docref.get())).data()!;
       request.userIds.forEach((userId)=>{
         doc.sweatbuddiesJoinRequest?.push(userId);
       })
-      docref.update({sweatbuddies: doc.sweatbuddies})
+      docref.update({sweatbuddiesJoinRequest: doc.sweatbuddiesJoinRequest})
     } catch(error) {
       console.log(error);
     }

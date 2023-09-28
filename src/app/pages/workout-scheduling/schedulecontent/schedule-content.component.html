@@ -20,17 +20,40 @@
             <ion-icon class="schedule-value-icon" name="location-outline"></ion-icon><ion-text class="schedule-value">{{schedule.location}}</ion-text><br>
             <ion-icon class="schedule-value-icon" name="timer-outline"></ion-icon><ion-text class="schedule-value">{{schedule.duration}} minutes</ion-text><br>
           </ion-col>
-          <ion-col size="4">
+          <ion-col size="4" *ngIf="!isCompleted()">
             <div class="weightlifting-animation">
               <ion-icon src="/assets/dumbbell-exercise-svgrepo-com.svg" size="large" *ngFor="let i of [1,2,3]"></ion-icon>
             </div>
             <button class="exercise-button" (click)="schedule.workoutAdded ? viewWorkout(schedule) : addWorkout(schedule)"
-            *ngIf="!isCompleted()">
+            >
               <ion-icon name="add-circle"></ion-icon> {{ schedule.workoutAdded ? 'View Workout' : 'Add Workout' }}
             </button>
           </ion-col>
         </ion-row>
-      </ion-grid>      
+      </ion-grid>
+      <!-- <div *ngIf="isCompleted()"> -->
+      <div>
+        <h3>Your session has ended. Which exercises were you able to finish</h3>
+        <swiper-container pagination="{hideOnClick: true}">
+          <swiper-slide *ngFor="let exercise of exercises">
+            <ion-card [ngClass]="{ 'completed': isExerciseCompleted(exercise.id) }">
+              <ion-card-content>
+                <ion-checkbox [ngClass]="{ 'completed': isExerciseCompleted(exercise.id) }"
+                  [value]="exercise.id"
+                  labelPlacement="end" 
+                  justify="start"
+                  (ionChange)="toggleExerciseCompletion(exercise.id)">
+                  <ion-label>
+                    {{exercise.name}}
+                  </ion-label>
+                </ion-checkbox>
+              </ion-card-content>
+            </ion-card>
+          </swiper-slide>
+        </swiper-container>
+        <ion-button (click)="submit()">Submit</ion-button>
+      </div>
+      
     </ion-card-content>
   </div>
 

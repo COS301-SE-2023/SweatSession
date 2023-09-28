@@ -19,7 +19,8 @@
         [value]="friend.userId"
         (ionChange)="toggleFriendSelection(friend)"
         labelPlacement="end" 
-        justify="start">
+        justify="start"
+        [disabled]="isAdded(friend)">
         <ion-item class="transparent-item" lines="none">
           <ion-avatar slot="start">
             <ion-img [src]="friend.profileURL"></ion-img>

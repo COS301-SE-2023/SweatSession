@@ -11,6 +11,10 @@ import { NoticeService } from 'src/app/services/notifications/notice.service';
 import { AlertController } from '@ionic/angular';
 import { BadgesRepository } from 'src/app/repository';
 import { FriendsListComponent } from '../friends-list/friends-list.component';
+import { register } from 'swiper/element/bundle';
+import { ExerciseService } from 'src/app/services';
+
+register();
 
 
 @Component({
@@ -34,6 +38,8 @@ export class ScheduleContentComponent implements OnInit {
   selectedFriends:any[] = [];
   @Input() friends: IProfileModel[] = [];
   showOptions = false;
+  exercises: any;
+  completedExercises: number[] = [];
 
   constructor(private store: Store, private nav: NavController,
     private modalController: ModalController,
@@ -43,7 +49,8 @@ export class ScheduleContentComponent implements OnInit {
     private pointsRepository: PointsRepository , 
     private noticeService: NoticeService ,
     private alertController: AlertController,
-    private badgesRepository: BadgesRepository) { }
+    private badgesRepository: BadgesRepository,
+    private exerciseService: ExerciseService) { }
 
   ngOnInit() {
     // if (!sessionStorage.getItem('siteInit')) {
@@ -54,6 +61,7 @@ export class ScheduleContentComponent implements OnInit {
     // if (!this.isCompleted()) {
     //   this.counter();
     // }
+    this.getExercises();
   }
 
   async viewSchedule() {
@@ -283,5 +291,28 @@ export class ScheduleContentComponent implements OnInit {
     });
   
     await modal.present();
+  }
+
+  getExercises() {
+    this.exerciseService.getExerciseByScheduleId(this.schedule.id!).subscribe((exercises)=>{
+      this.exercises = exercises
+    })
+  }
+
+  toggleExerciseCompletion(exerciseId: number) {
+    const index = this.completedExercises.indexOf(exerciseId);
+    if (index !== -1) {
+      this.completedExercises.splice(index, 1);
+    } else {
+      this.completedExercises.push(exerciseId);
+    }
+  }
+
+  isExerciseCompleted(exerciseId: number): boolean {
+    return this.completedExercises.includes(exerciseId);
+  }
+
+  submit() {
+    console.log('Completed Exercises:', this.completedExercises);
   }
 }

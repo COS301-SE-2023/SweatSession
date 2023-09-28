@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
@@ -25,6 +25,7 @@ import { FriendsListComponent } from './friends-list/friends-list.component';
     MessageStateModule
   ],
   declarations: [WorkoutSchedulingPage, ScheduleComponent, AddScheduleComponent, ScheduleContentComponent,EditScheduleComponent, FriendsListComponent],
-  exports: [ScheduleComponent, AddScheduleComponent, ScheduleContentComponent,EditScheduleComponent]
+  exports: [ScheduleComponent, AddScheduleComponent, ScheduleContentComponent,EditScheduleComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class WorkoutSchedulingPageModule {}
