@@ -38,7 +38,7 @@
           <swiper-slide *ngFor="let exercise of exercises">
             <ion-card [ngClass]="{ 'completed': isExerciseCompleted(exercise.id) }">
               <ion-card-content>
-                <ion-checkbox 
+                <ion-checkbox [ngClass]="{ 'completed': isExerciseCompleted(exercise.id) }"
                   [value]="exercise.id"
                   labelPlacement="end" 
                   justify="start"
