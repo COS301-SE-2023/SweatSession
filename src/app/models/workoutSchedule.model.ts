@@ -73,7 +73,7 @@ export interface IAddSweatbuddies {
 export interface IAddSweatbuddy {
     scheduleId: string;
     userId: string;
-    ownerId: string[];
+    ownerId: string;
 }
 
 export interface IScheduleRequest {
@@ -93,4 +93,7 @@ export interface IRequestToAdd {
     receiverId: string;
 }
 
-// export interface 
+export interface IGetSchedule {
+    userId: string;
+    scheduleId: string;
+}

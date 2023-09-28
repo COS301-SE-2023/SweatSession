@@ -14,7 +14,7 @@
 <ion-content>
   <ion-searchbar placeholder="Search"></ion-searchbar>
   <ion-list class="transparent-list">
-    <ion-item lines="none" class="transparent-item" *ngFor="let friend of friendss; let i=index" >
+    <ion-item lines="none" class="transparent-item" *ngFor="let friend of friends; let i=index" >
       <ion-checkbox 
         [value]="friend.userId"
         (ionChange)="toggleFriendSelection(friend)"
