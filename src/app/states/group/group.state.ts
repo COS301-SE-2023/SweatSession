@@ -36,7 +36,6 @@ export class GroupState {
             let groupIds : string[] = [groupId];
             sessionStorage.setItem("groupIds",JSON.stringify(groupIds));
         }
-        console.log("hello");
         this.store.dispatch(new Navigate(['group-homepage']));
     }
 
