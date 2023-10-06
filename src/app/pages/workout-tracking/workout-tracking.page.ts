@@ -6,6 +6,8 @@
   import { Exercise } from '../../models/exercise.model';
   import { NavController } from '@ionic/angular';
   import { Router } from '@angular/router';
+import { NotifyService } from 'src/app/services/notify/notify.service';
+import { NavigationService } from 'src/app/services';
 
 
   @Component({
@@ -24,8 +26,9 @@
       private formBuilder: FormBuilder,
       private exerciseService: ExerciseService,
       private navCtrl: NavController,
-      private router: Router
-    ) {
+      private router: Router,
+      private notify: NotifyService,
+      private navService: NavigationService) {
       this.workoutForm = this.formBuilder.group({
         exercises: this.formBuilder.array([])
       });
@@ -150,6 +153,8 @@
       this.deletedExercises = [];
     
       console.log('All exercises saved.');
+      this.notify.presentSuccessToast("Exercises saved");
+      this.navService.back();
     }
 
     exerciseSelected(event: Event, exerciseNo: number) {

@@ -9,6 +9,7 @@ import {collection} from "@angular/fire/firestore";
 import { AuthApi } from 'src/app/states/auth/auth.api';
 import {getAuth} from "@angular/fire/auth";
 import { PointsRepository } from './points.repository';
+import { NotifyService } from '../services/notify/notify.service';
 
 @Injectable({
     providedIn: 'root'
@@ -20,7 +21,8 @@ export class goalsRepository {
 
     constructor(private firestore: AngularFirestore,
                 private auth: AuthApi,
-                private pointsRepository: PointsRepository
+                private pointsRepository: PointsRepository,
+                private notify: NotifyService
                 ) { }
 
     creategoalsDocument(currUserId: string) {
@@ -65,11 +67,8 @@ export class goalsRepository {
 
     }
 
-     addGoal(request: IAddGOAL) {
-
-
-        const goal =
-            {
+    addGoal(request: IAddGOAL) {
+        const goal = {
                 id: request.goal.id,
                 name: request.goal.name,
                 description: request.goal.description,
@@ -80,14 +79,13 @@ export class goalsRepository {
                 Tasks: request.goal.Tasks,
             }
 
-             this.firestore
-                .collection('fitnessgoals')
-                .doc(request.userId)
-                .collection('goals')
-                .doc(request.goal.id)
-                .set(goal);
-
-
+        this.firestore
+        .collection('fitnessgoals')
+        .doc(request.userId)
+        .collection('goals')
+        .doc(request.goal.id)
+        .set(goal);
+        this.notify.presentSuccessToast("Goal added successfully.");
     }
 
     getGoal(goalid: string)

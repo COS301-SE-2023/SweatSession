@@ -1,6 +1,10 @@
 <ion-header>
     <ion-toolbar>
-        <ion-icon name="arrow-back" slot="start" (click)="dismissModal()"></ion-icon>
+        <ion-buttons slot="start">
+            <ion-button class="default-button" (click)="dismissModal()">
+              <ion-icon name="arrow-back-outline"></ion-icon>
+            </ion-button>
+        </ion-buttons>
         <ion-title>Exercise Instructions</ion-title>
     </ion-toolbar>
 </ion-header>

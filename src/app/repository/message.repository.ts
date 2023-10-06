@@ -18,13 +18,14 @@ import { IMessage,
    IGetGroup} from "../models";
 import { AngularFirestore, AngularFirestoreCollection } from "@angular/fire/compat/firestore";
 import { Observable,lastValueFrom, map, tap } from "rxjs";
+import { NotifyService } from "../services/notify/notify.service";
 
 @Injectable({
     providedIn: 'root'
   })
   export class MessageRepository {
 
-    constructor(private firestore: AngularFirestore) {}
+    constructor(private firestore: AngularFirestore, private notify: NotifyService) {}
 
     async sendMessage(request: ISendMessage) {
       //add to current user collection
@@ -209,7 +210,9 @@ import { Observable,lastValueFrom, map, tap } from "rxjs";
         .collection<IGroup>(`users/${request.userId}/userGroups`)
         .doc(groupDocument.id)
         .set(request.group);
+        this.notify.presentSuccessToast("group added successfully.");
       }catch(error){
+        this.notify.presentFailureToast("group creation failed.");
         // alert("ERROR: "+error)
       }
     }

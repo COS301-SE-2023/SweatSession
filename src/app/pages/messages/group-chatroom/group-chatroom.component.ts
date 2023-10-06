@@ -52,9 +52,9 @@ export class GroupChatroomComponent  implements OnInit {
   sendMessage() {
     if(this.message.text.trim()!== '') {
       this.message.date = Timestamp.now();
-      this.store.dispatch(new SendGroupMessage(this.message))
+      this.store.dispatch(new SendGroupMessage(this.message));
       this.message = {text: ""};
-      this.scrollToBottom()
+      this.scrollToBottom();
     }
   }
 

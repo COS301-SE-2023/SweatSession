@@ -15,50 +15,39 @@ export class FitnessgoalsPage implements OnInit {
 
   currUserId: string | undefined = undefined;
   GOALS : IGOAL[] = [];
-  constructor( private router: Router,
-                private fitnessgaolservive: FitnessgoalService,
-               private goalcardComponent:GoalcardComponent
+  constructor(private router: Router,
+              private fitnessgaolservive: FitnessgoalService,
+              private goalcardComponent:GoalcardComponent) { }
 
-             )
-        { }
-
-  ngOnInit()
-  {
-      this.CheckContent();
+  ngOnInit() {
+    this.CheckContent();
   }
 
   addGoal() {
     this.router.navigate(['/goalview']);
   }
 
-      CheckContent()
-      {
+  CheckContent() {
+    const auth = getAuth();
+    this.currUserId = auth.currentUser?.uid;
 
-        const auth = getAuth();
-        this.currUserId = auth.currentUser?.uid;
-
-        if (this.currUserId!=undefined)
-        {
-          sessionStorage.setItem('currUserId', this.currUserId);
-        }
-        else
-        {
-          this.currUserId = sessionStorage.getItem('currUserId') ?? "";
-        }
-
-        this.fitnessgaolservive.getGoals(this.currUserId)
-            .subscribe((data: { goals: IGOAL[]; }) =>
-                {
-                    this.GOALS = data.goals;
-                });
-
-          this.goalcardComponent.selectedSegment
-          if ( this.goalcardComponent.selectedSegment == '1')
-          {
-
-                console.log("this.goalcardComponent.selectedSegment == '1'");
-                this.GOALS = this.GOALS.filter((goal) =>goal.progress == 100);
-          }
+    if (this.currUserId!=undefined) {
+      sessionStorage.setItem('currUserId', this.currUserId);
+    } else {
+      this.currUserId = sessionStorage.getItem('currUserId') ?? "";
     }
 
+    this.fitnessgaolservive.getGoals(this.currUserId)
+        .subscribe((data: { goals: IGOAL[]; }) =>
+            {
+                this.GOALS = data.goals;
+            });
+
+      this.goalcardComponent.selectedSegment
+      if ( this.goalcardComponent.selectedSegment == '1') {
+
+            console.log("this.goalcardComponent.selectedSegment == '1'");
+            this.GOALS = this.GOALS.filter((goal) =>goal.progress == 100);
+      }
+  }
 }

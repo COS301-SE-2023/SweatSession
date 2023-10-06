@@ -302,9 +302,9 @@ export class ScheduleContentComponent implements OnInit {
       this.completedExercises.forEach((exercise)=>{
         exercise.completed = true;
         this.exerciseService.updateExercise(exercise.id! , exercise)
-        this.schedule.filledExerciseList = true;
         this.store.dispatch(new UpdateWorkoutSchedule(this.schedule))
       })
+      this.schedule.filledExerciseList = true;
 
       const auth = getAuth();
       this.currUserId = auth.currentUser?.uid;
