@@ -12,7 +12,7 @@ export class NotifyService {
     const toast = await this.toastController.create({
       message: message,
       color: 'success',
-      duration: 2000,
+      duration: 1000,
       position: 'top',
       buttons: [
         {

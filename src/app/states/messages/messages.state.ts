@@ -1,11 +1,12 @@
 import { Injectable } from "@angular/core";
 import { Action, Selector, State, StateContext, Store } from "@ngxs/store";
 import { IMessage, IChatFriend, IGetChatFriends, IGetMessages, ISendMessage, IDeleteMessage, IProfileModel, IFriendsModel, IGroup, IGetGroups, IAddChatGroup, IJoinGroup, IRemoveChatGroup, IExitChatGroup, IGetGroup } from "src/app/models";
-import { DeleteMessage, GetMessages, SendMessage, GetChatFriends, StageChatFriend, GetFriendsProfiles, GetChatFriend, RemoveChatFriendSession, SendGroupMessage, RemoveChatGroupSession, AddChatGroup, JoinChatGroup, RemoveChatGroup, ExitChatGroup, StageChatGroup, GetGroupMessages, GetGroup, GetUserGroups, GetGroups, GetUser, StopChatFriendsLoading } from 'src/app/actions';
+import { DeleteMessage, GetMessages, SendMessage, GetChatFriends, StageChatFriend, GetFriendsProfiles, GetChatFriend, RemoveChatFriendSession, SendGroupMessage, RemoveChatGroupSession, AddChatGroup, JoinChatGroup, RemoveChatGroup, ExitChatGroup, StageChatGroup, GetGroupMessages, GetGroup, GetUserGroups, GetGroups, GetUser, StopChatFriendsLoading, RemoveChatGroupUser } from 'src/app/actions';
 import { AuthApi } from "../auth";
 import { FriendsService, MessagesService, NavigationService, OtheruserService } from "src/app/services";
 import { delay, of, switchMap, tap } from "rxjs";
 import { Navigate } from "@ngxs/router-plugin";
+import { GroupService } from "src/app/services/group/group.service";
 
 export interface MessagesStateModel {
     chats?: IMessage[];
@@ -41,7 +42,7 @@ export interface MessagesStateModel {
 })
 export class MessagesState {
     constructor(private authApi:AuthApi, private service: MessagesService, private friendsService: FriendsService, private otheruserService: OtheruserService,
-        private readonly navigation: NavigationService, private readonly store: Store) {}
+        private readonly navigation: NavigationService, private readonly store: Store, private readonly groupService: GroupService) {}
 
     @Action(GetChatFriends)
     async getChatFriends (ctx: StateContext<MessagesStateModel>) {
@@ -328,6 +329,7 @@ export class MessagesState {
             }
 
             this.service.removeChatGroup(request);
+            console.log('remove here...')
         }
     }
 
@@ -346,14 +348,27 @@ export class MessagesState {
     @Action(GetGroup)
     async getGroup(ctx: StateContext<MessagesStateModel>) {
         const group: IGroup = JSON.parse(sessionStorage.getItem("chatGroup")!);
-        ctx.patchState({
-            chatGroup: group
-        })
+        (await this.groupService.getGroup(group.id!)).pipe(
+            tap((response)=>{
+                console.table(response);
+                ctx.patchState({
+                    chatGroup: response
+                })
+        }))
     }
 
     @Action(GetUser)
     getUser(userId: string) {
         return this.service.getUser(userId);
+    }
+
+    @Action(RemoveChatGroupUser)
+    async removeChatGroupUser(ctx: StateContext<MessagesStateModel>, {payload}: RemoveChatGroupUser) {
+        const currentUserId = await this.authApi.getCurrentUserId()
+        if(currentUserId) {
+            payload.adminId = currentUserId;
+            this.service.removeChatGroupUser(payload);
+        }
     }
 
     @Selector()
