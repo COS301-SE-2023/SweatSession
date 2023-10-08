@@ -241,15 +241,17 @@ export class GymsearchComponent implements OnInit {
         let nextPageToken = this.nextPageToken || "";
     
         for (let retryCount = 0; retryCount < maxRetries; retryCount++) {
-         if (this.maxDistance>50){
-            alert("Search Radius must be less than 50km");
+         if (this.maxDistance>50 || this.maxDistance<0){
+            alert("Search Radius must be positive and less than 50km");
             break;
          }
           const url = `https://us-central1-synapsesolutions-b4c95.cloudfunctions.net/nearbyGymProxyRequest?latitude=${this.currLatitude}&longitude=${this.currLongitude}&radius=${this.maxDistance * 1000}&key=${this.MAPS_API_KEY}&nextPageToken=${nextPageToken}`;
          //  const url = `http://127.0.0.1:5005/sweatsession/us-central1/nearbyGymProxyRequest?latitude=${this.currLatitude}&longitude=${this.currLongitude}&radius=${this.maxDistance * 1000}&key=${this.MAPS_API_KEY}&nextPageToken=${nextPageToken}`;
-          console.log(url);
+         //  const url = `http://127.0.0.1:5005/synapsesolutions-b4c95/us-central1/nearbyGymProxyRequest?latitude=${this.currLatitude}&longitude=${this.currLongitude}&radius=${this.maxDistance * 1000}&key=${this.MAPS_API_KEY}&nextPageToken=${nextPageToken}`;
+         console.log(url);
     
           const response = await fetch(url);
+          console.log(response)
           const data = await response.json();
     
           console.log(data);
@@ -258,7 +260,6 @@ export class GymsearchComponent implements OnInit {
           let responseStatus = data.status;
           this.gyms = data;
     
-          await this.getGymUsersForGyms(this.userFriendIds);
           this.nextPageToken = data.next_page_token; // Get the new nextPageToken
 
           if (responseStatus == "OK") {
@@ -269,7 +270,8 @@ export class GymsearchComponent implements OnInit {
             // If this is not the last retry, wait for a while before retrying.
             await new Promise((resolve) => setTimeout(resolve, 1000)); // Wait for 1 second before retrying.
           }
-        } 
+        }
+        await this.getGymUsersForGyms(this.userFriendIds);
         return this.gyms;
       } catch (error) {
         console.error(error);
