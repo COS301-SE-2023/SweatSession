@@ -89,11 +89,11 @@ ion-spinner {
 }
 
 ion-fab-button  {
-    --background: #A8DADC;
-    --background-hover: #9ce0be;
-    --background-activated: #88f4be;
-    --background-focused: #88f4be;
-    --color: #457b9d;
+    --background: var(--main-color);
+    --background-hover: var(--ripple-main-color);
+    --background-activated: var(--ripple-main-color);
+    --background-focused: var(--ripple-main-color);
+    --color: white !important;
     --ripple-color: deeppink;
     opacity: 0.9;
 }
@@ -152,16 +152,17 @@ swiper-container::part(bullet-active) {
 
 ion-button:not(.backbutton,.default-button, .white-button) {
     --background: var(--main-color);
-    --background-hover: #f1a785;
-    --background-activated: #f1a785;
-    --background-focused: #f1a785;
+    --background-hover: var(--ripple-main-color);
+    --background-activated: var(--ripple-main-color);
+    --background-focused: var(--ripple-main-color);
     --border-radius: 10px;
+    --padding: 10px;
   
     // --border-style: solid;
     // --border-width: 2px;
     // --border-color: var(--main-color);
   
-    --color: white !important;//#457b9d;
+    --color: white !important;
 }
 
 .white-button {

@@ -10,7 +10,7 @@
           .welcome-title {
               font-size: x-large;
               font-weight: bolder;
-              color: var(--primary-color);
+              color: var(--secondary-color);
           }
       }
       
@@ -33,12 +33,13 @@
           }
       
           .button-container {
-              margin-top: 20px;
+              margin-top: 40px;
           }
       }
 
       .bottom-message-container {
-          text-align: center;
+        margin-top: 20px;
+        text-align: center;
       }
 
       .register-link, .forgot-password {

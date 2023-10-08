@@ -121,8 +121,8 @@ export class AuthApi {
         },
         {
           text: 'Yes',
-          handler: () => {
-            this.LogoutConfirmed();
+          handler: async () => {
+           await this.LogoutConfirmed();
           },
         },
       ],
