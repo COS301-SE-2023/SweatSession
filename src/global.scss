@@ -24,22 +24,27 @@
 @import "@ionic/angular/css/text-alignment.css";
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
-
+@import "theme/colortheme.scss";
 
 // ion-item{
 //     --highlight-height: 0;
 //     --inner-border-width: 0;
 // }
+ion-header {
+  --ion-header-border-width: 0;
+  --ion-header-box-shadow: none;
+}
 
 ion-content {
     overflow-y: auto;
+    --background: var(--background-color);
 }
 
 .larger-back-button {
     --padding-start: 12px; 
     --padding-end: 12px; 
     font-size: 24px; 
-    color: white !important;
+    color: var(--primary-color) !important;
 }
 
 ion-title {
@@ -47,22 +52,23 @@ ion-title {
 }
 
 ion-toolbar {
-    --background: #E63946;
-    --color: white !important;
+    --background: var(--background-color);
+    --color: var(--primay-color) !important;
 }
 
 ion-toolbar *{
-    --color: white !important;
+    --color: var(--primay-color) !important;
 }
 
 ion-toolbar ion-item {
-    --background: #E63946;
-    --color: white !important;
+    --background: transparent;
+    --color: var(--primay-color) !important;
 }
 
 * {
     font-family: 'Montserrat', sans-serif;
     transition: .2;
+    --color: var(--secondary-color) !important;
 }
 
 ion-chip {
@@ -94,6 +100,7 @@ ion-fab-button  {
 
 ion-segment {
     border-radius: 0px;
+    background-color: var(--primary-color);
 }
 
 .message-input-field {
@@ -143,22 +150,27 @@ swiper-container::part(bullet-active) {
     opacity: 0.9;
 }
 
-// colors
-// #A8DADC;
-// #457b9d
-
-ion-button:not(.backbutton,.default-button) {
-    --background: linear-gradient(135deg, #A8DADC 10%, #457b9d 100%); //#A8DADC;
-    --background-hover: #457b9d;
-    --background-activated: #457b9d;
-    --background-focused: #457b9d;
-    border-radius: 8px;
+ion-button:not(.backbutton,.default-button, .white-button) {
+    --background: var(--main-color);
+    --background-hover: #f1a785;
+    --background-activated: #f1a785;
+    --background-focused: #f1a785;
+    --border-radius: 10px;
   
-    --border-style: solid;
-    --border-width: 2px;
-    --border-color: #457b9d;
+    // --border-style: solid;
+    // --border-width: 2px;
+    // --border-color: var(--main-color);
   
     --color: white !important;//#457b9d;
+}
+
+.white-button {
+    --background: white;
+    --color: var(--primary-color);
+    --border-radius: 10px;
+    --background-hover: whitesmoke;
+    --background-activated: whitesmoke;
+    --background-focused: whitesmoke;
 }
 
 ion-segment {

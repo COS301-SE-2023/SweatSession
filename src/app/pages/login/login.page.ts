@@ -7,7 +7,7 @@ import { ContinueWithGoogleAction } from 'src/app/actions';
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
-  styleUrls: ['./login.page.scss','../register/register.page.scss'],
+  styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
 

@@ -1,4 +1,4 @@
-<div class="outerContainer" style="background-color: #A8DADC;">
+<!-- <div class="outerContainer" style="background-color: #A8DADC;">
   <ion-card style="background-color: #A8DADC;">
     
     <div class="inner-container" style="background-color: white;">
@@ -39,4 +39,55 @@
       <h5>Forgot password?</h5>
     </div>
   </ion-card>
-</div>
+</div> -->
+<ion-content [fullscreen]="true" class="outer-container">
+  <div class="auth-container">
+    <ion-grid>
+      <ion-row >
+        <ion-col size="12" size-md="6" size-lg="4" class="welcome-container">
+          <h1 class="welcome-title">Welcome back</h1>
+          <p class="welcome-subtitle">Login to your account</p>
+        </ion-col>
+      </ion-row>
+      <ion-row class="form-container">
+        <ion-col size="12" size-md="6" size-lg="4">
+          <form  
+            [formGroup]="loginForm"
+            ngxsForm="login.loginForm"
+            (submit)="userLogin()">
+            <div class="input-field-container">
+              <ion-label>Email</ion-label>
+              <ion-item class="input-field" lines="none">
+                <ion-input type="email" placeholder="Enter your email"  formControlName="email" required></ion-input>
+              </ion-item>
+            </div>
+            <div class="input-field-container">
+              <ion-label>Password</ion-label>
+              <ion-item class="input-field" lines="none">
+                <ion-input type="password" placeholder="Enter your password"  formControlName="password" required></ion-input>
+              </ion-item>
+            </div>
+
+            <div class="forgot-password">
+              <ion-text>Forgot password?</ion-text>
+            </div>
+
+            <div class="button-container">
+              <ion-button id="loginButton" expand="block" type="submit">Login</ion-button>
+              <hr>or<hr>
+              <ion-button class="loginButton" expand="block" (click)="continueWithGoogleAuth()" class="white-button">
+                <ion-icon name="logo-google" style="padding-right:5%;"></ion-icon>
+                <ion-text>Continue with Google</ion-text>
+              </ion-button>
+            </div>
+          </form>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="12" size-md="6" size-lg="4" class="bottom-message-container">
+          <ion-text>Don't have an account? <span class="register-link" routerLink="/register">Register</span></ion-text>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>
