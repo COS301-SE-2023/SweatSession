@@ -111,3 +111,9 @@ export interface IRemoveChatGroup {
 export interface IGetGroup {
     groupId: string;
 }
+
+export interface IRemoveChatGroupUser {
+    adminId: string;
+    userId: string;
+    groupId: string;
+}

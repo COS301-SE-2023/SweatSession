@@ -1,4 +1,4 @@
-import { IGetMessages, IGroup, IMessage } from "../models";
+import { IGetMessages, IGroup, IMessage, IRemoveChatGroupUser } from "../models";
 
 export class GetChatFriends {
     static readonly type = "[messages] get chat friends";
@@ -94,4 +94,9 @@ export class GetUser {
 
 export class StopChatFriendsLoading {
     static readonly type = "[messages] stop loading";
+}
+
+export class RemoveChatGroupUser {
+    static readonly type = '[chatGroup] remove a user from a group';
+    constructor(public payload: IRemoveChatGroupUser) {}
 }

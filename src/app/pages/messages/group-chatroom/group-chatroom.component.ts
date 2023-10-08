@@ -3,8 +3,10 @@ import { IonContent } from '@ionic/angular';
 import { Select, Store } from '@ngxs/store';
 import { Timestamp } from 'firebase/firestore';
 import { Observable, switchMap, tap } from 'rxjs';
-import { GetGroup, GetGroupMessages, RemoveChatGroupSession, SendGroupMessage, StageGroup, SubscribeToAuthState } from 'src/app/actions';
+import { ExitChatGroup, GetGroup, GetGroupMessages, RemoveChatGroup, RemoveChatGroupSession, SendGroupMessage, StageGroup, SubscribeToAuthState } from 'src/app/actions';
 import { IGroup, IMessage } from 'src/app/models';
+import { NavigationService } from 'src/app/services';
+import { NotifyService } from 'src/app/services/notify/notify.service';
 import { AuthState, MessagesState } from 'src/app/states';
 
 @Component({
@@ -20,11 +22,12 @@ export class GroupChatroomComponent  implements OnInit {
   currentUserId = '';
   group: IGroup = {}
   isShowMembers = false;
+  showOptions = false;
 
   @ViewChild('contentElement', { static: false }) contentElement: IonContent;
   message: IMessage = {text: ''};
   
-  constructor(private store: Store) { }
+  constructor(private store: Store, private navigation: NavigationService, private notify: NotifyService) { }
 
   ngOnInit() {this.displayChats()}
 
@@ -52,9 +55,9 @@ export class GroupChatroomComponent  implements OnInit {
   sendMessage() {
     if(this.message.text.trim()!== '') {
       this.message.date = Timestamp.now();
-      this.store.dispatch(new SendGroupMessage(this.message))
+      this.store.dispatch(new SendGroupMessage(this.message));
       this.message = {text: ""};
-      this.scrollToBottom()
+      this.scrollToBottom();
     }
   }
 
@@ -72,5 +75,37 @@ export class GroupChatroomComponent  implements OnInit {
 
   selectGroup() {
     this.store.dispatch(new StageGroup(this.group.id!))
+  }
+
+  showGroupOptions() {
+    this.showOptions = !this.showOptions;
+  }
+
+  exitGroup() {
+    this.store.dispatch(new ExitChatGroup(this.group))
+    this.showOptions = false;
+    this.navigation.back();
+  }
+
+  deleteGroup() {
+    this.store.dispatch(new RemoveChatGroup(this.group))
+    this.showOptions = false;
+  }
+
+  editGroup() {
+    this.showOptions = false;
+  }
+
+  reportGroup() {
+    console.log('report');
+    this.showOptions = false;
+  }
+
+  isAdmin() {
+    return this.group.admin?.includes(this.currentUserId);
+  }
+
+  isOwner() {
+    return this.group?.createBy == this.currentUserId;
   }
 }

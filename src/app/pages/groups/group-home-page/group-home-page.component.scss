@@ -4,7 +4,8 @@
     // border-bottom-right-radius: 24px;
     padding: 10px;
     // background: #A8DADC;
-    background: #E63946
+    background: #E63946;
+    position: relative;
 }
 
 .profile-inner-wrapper {
@@ -51,4 +52,21 @@ ion-segment {
 
 .name, .bio{
     padding-bottom: 10px;
+}
+
+.top-buttons {
+    width: 100%;
+    display: flex;
+    .end-buttons {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        .default-button {
+            color: white !important;
+        }
+    }
+}
+
+.group-options {
+    margin-top: 10px;
 }

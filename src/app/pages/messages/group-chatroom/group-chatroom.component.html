@@ -14,8 +14,9 @@
       </ion-chip>
     </ion-title>
     <ion-buttons slot="end">
-      <ion-button class="default-button">
-        <ion-icon name="ellipsis-vertical"></ion-icon>
+      <ion-button class="default-button" (click)="showGroupOptions()">
+        <ion-icon *ngIf="!showOptions" name="ellipsis-vertical"></ion-icon>
+        <ion-icon *ngIf="showOptions" name="close"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
@@ -23,6 +24,26 @@
 
 <ion-content #contentElement>
   <div class="chat-container">
+    <div class="group-options" *ngIf="showOptions">
+      <ion-list class="transparent-list">
+        <ion-item class="transparent-item" (click)="exitGroup()" *ngIf="!isOwner()">
+          <ion-icon name="exit-outline" slot="start"></ion-icon>
+          <ion-label>Exit Group</ion-label>
+        </ion-item>
+        <ion-item class="transparent-item" (click)="deleteGroup()" *ngIf="isOwner()">
+          <ion-icon name="trash-outline" slot="start"></ion-icon>
+          <ion-label>Delete Group</ion-label>
+        </ion-item>
+        <ion-item class="transparent-item" (click)="editGroup()" *ngIf="isAdmin()">
+          <ion-icon name="create-outline" slot="start"></ion-icon>
+          <ion-label>Edit Group</ion-label>
+        </ion-item>
+        <ion-item class="transparent-item" (click)="reportGroup()">
+          <ion-icon name="alert-outline" slot="start"></ion-icon>
+          <ion-label>Report</ion-label>
+        </ion-item>
+      </ion-list>
+    </div>
     <div *ngFor="let message of chats">
       <chatbox
         [message]="message"
@@ -36,11 +57,11 @@
 <ion-footer class="input-field-footer">
   <ion-item lines="none" class="message-input-field">
     <div class="input-field-wrapper">
-      <ion-textarea [autoGrow]="true" placeholder="Type a message" [(ngModel)]="message.text"></ion-textarea>
+      <ion-textarea autoGrow="true" placeholder="Type a message" [(ngModel)]="message.text"></ion-textarea>
     </div>
     <ion-fab horizontal="end" vertical ="bottom">
-      <ion-fab-button class="message-send-fab-button" [color]="isText() ? '' : 'medium'" [disabled]="isText()">
-        <ion-icon name="send" (click)="sendMessage()" class="message-send-icon"></ion-icon>
+      <ion-fab-button class="message-send-fab-button" [color]="isText() ? '' : 'medium'" [disabled]="!isText()" (click)="sendMessage()">
+        <ion-icon name="send" class="message-send-icon"></ion-icon>
       </ion-fab-button>
     </ion-fab>
   </ion-item>

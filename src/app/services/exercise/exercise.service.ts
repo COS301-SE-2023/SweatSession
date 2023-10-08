@@ -6,13 +6,16 @@ import { Exercise } from '../../models/exercise.model';
 import { map } from 'rxjs/operators';
 import { BadgesRepository } from 'src/app/repository';
 import { getAuth } from '@angular/fire/auth';
+import { NavigationService } from '../navigation/navigation.service';
+import { NotifyService } from '../notify/notify.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ExerciseService {
   currUserId: string | undefined | null;
-  constructor(private firestore: AngularFirestore, private badgesRepository: BadgesRepository) { }
+  constructor(private firestore: AngularFirestore, 
+    private badgesRepository: BadgesRepository) { }
 
   addExercise(exercise: Exercise) {
     const auth = getAuth();
@@ -60,7 +63,7 @@ export class ExerciseService {
 
   updateExercise(exerciseId: string, exercise: Exercise) {
     console.log('Updating exercise:', exerciseId, exercise);
-    return this.firestore.collection('exercises').doc(exerciseId).update(exercise);
+    this.firestore.collection('exercises').doc(exerciseId).update(exercise);
   }
 
   async deleteExerciseFromDatabase(exerciseId: string) {

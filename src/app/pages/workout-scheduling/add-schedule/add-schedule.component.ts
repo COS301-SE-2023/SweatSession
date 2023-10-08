@@ -147,17 +147,15 @@ export class AddScheduleComponent  implements OnInit {
         this.profileurl = this.profileList[i].profileURL! ;
         this.sweatsessionurl = "SweatSession/src/assets/Asset 3.png"
       }
-    }
-  });
-}
+    }});
+  }
 
+  createNotifications(sendername: string , sentdate: string , message: string){
+    this.noticeService.createNotices(sendername , sentdate , message , this.currUserId! , this.currUserId! , '/assets/Asset 5.png');
+  }
 
-createNotifications(sendername: string , sentdate: string , message: string){
-  this.noticeService.createNotices(sendername , sentdate , message , this.currUserId! , this.currUserId! , '/assets/Asset 5.png');
-}
-
-valueChanged(event: any) {
-  const newTimeValue = event.detail.value;
-  console.log(newTimeValue);
-}
+  valueChanged(event: any) {
+    const newTimeValue = event.detail.value;
+    console.log(newTimeValue);
+  }
 }

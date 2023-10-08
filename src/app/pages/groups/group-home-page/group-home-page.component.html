@@ -1,11 +1,38 @@
 <ion-content>
   <div class="group-page-container">
     <div class="group-page-profile">
-      <div>
-        <ion-buttons>
+      <div class="top-buttons">
+        <ion-buttons class="start-buttons">
           <backbutton (click)="removeGroupSession()"></backbutton>
         </ion-buttons>
+
+        <ion-buttons class="end-buttons" *ngIf="isMember()">
+          <ion-button class="default-button" (click)="showGroupOptions()">
+            <ion-icon *ngIf="!showOptions" name="ellipsis-vertical"></ion-icon>
+            <ion-icon *ngIf="showOptions" name="close"></ion-icon>
+          </ion-button>
+        </ion-buttons>
       </div>
+      <div class="group-options" *ngIf="showOptions">
+        <ion-list class="transparent-list">
+          <ion-item class="transparent-item" (click)="exitGroup()" *ngIf="!isOwner()">
+            <ion-icon name="exit-outline" slot="start"></ion-icon>
+            <ion-label>Exit Group</ion-label>
+          </ion-item>
+          <ion-item class="transparent-item" (click)="deleteGroup()" *ngIf="isOwner()">
+            <ion-icon name="trash-outline" slot="start"></ion-icon>
+            <ion-label>Delete Group</ion-label>
+          </ion-item>
+          <ion-item class="transparent-item" (click)="editGroup()" *ngIf="isAdmin()">
+            <ion-icon name="create-outline" slot="start"></ion-icon>
+            <ion-label>Edit Group</ion-label>
+          </ion-item>
+          <ion-item class="transparent-item" (click)="reportGroup()">
+            <ion-icon name="alert-outline" slot="start"></ion-icon>
+            <ion-label>Report</ion-label>
+          </ion-item>
+        </ion-list>
+      </div>      
       <div class="profile-inner-wrapper">
         <div class="profile-img-container">
           <ion-avatar class="profile-image">

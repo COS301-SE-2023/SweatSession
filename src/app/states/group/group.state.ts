@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Navigate } from "@ngxs/router-plugin";
 import { Action, Selector, State, StateContext, Store } from "@ngxs/store";
+import { tap } from "rxjs";
 import { LoadGroupHompage, RemoveGroup, StageGroup } from "src/app/actions";
 import { IGroup } from "src/app/models";
 import { GroupService } from "src/app/services/group/group.service";
@@ -36,7 +37,6 @@ export class GroupState {
             let groupIds : string[] = [groupId];
             sessionStorage.setItem("groupIds",JSON.stringify(groupIds));
         }
-        console.log("hello");
         this.store.dispatch(new Navigate(['group-homepage']));
     }
 
@@ -45,11 +45,14 @@ export class GroupState {
         if(sessionStorage.getItem("groupIds")) {
             let groupIds: string[] = JSON.parse(sessionStorage.getItem("groupIds")!)
             let groupId = groupIds[groupIds.length-1];
-            const group: IGroup = (await this.service.getGroup(groupId));
-            ctx.patchState({
-                id: groupId,
-                group: group
-            })
+            (await this.service.getGroup(groupId)).pipe(
+                tap((group)=> {
+                    ctx.patchState({
+                        id: groupId,
+                        group: group
+                    })
+                })
+            ).subscribe();
         }
     }
 

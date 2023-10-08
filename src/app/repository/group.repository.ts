@@ -10,10 +10,19 @@ export class GroupRepository {
 
     constructor(private firestore: AngularFirestore) {}
 
-    async getGroup(groupId: string) {
-        const groupDoc = this.firestore.doc<IGroup>(`groups/${groupId}`).get();
-        const group: IGroup = (await lastValueFrom(groupDoc)).data()!;
-        
-        return group;
+    getGroup(groupId: string) {
+        const groupRef = this.firestore.doc<IGroup>(`groups/${groupId}`);
+
+       return groupRef.snapshotChanges().pipe(
+            map((snapshot)=>{
+                const doc = snapshot.payload.data()
+                let group: IGroup = {
+                    ...snapshot.payload.data() as IGroup,
+                    id: groupRef.ref.id
+                }
+
+                return group;
+            })
+        )
     }
 }

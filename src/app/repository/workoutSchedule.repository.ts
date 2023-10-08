@@ -18,26 +18,14 @@ import { IAddWorkoutSchedule,
     IGetSchedule} 
     from '../models';
 import { Observable, lastValueFrom, map } from 'rxjs';
+import { NotifyService } from '../services/notify/notify.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WorkoutscheduleRepository {
 
-  constructor(private firestore: AngularFirestore) { }
-
-    //How user schedules are store....
-   /**
-     * collection//workout schedule {
-     *  document//user id {
-     *      subcollection//schedule {
-     *          document//schedule is<IWorkoutSchedule> {
-     *              
-     *          }
-     *      }
-     *  }
-     * }
-     */
+  constructor(private firestore: AngularFirestore, private notify: NotifyService) { }
 
    getScheduleById(userId: string, scheduleId: string): Observable<IWorkoutScheduleModel | null> {
     const scheduleDoc = this.firestore
@@ -61,7 +49,6 @@ export class WorkoutscheduleRepository {
     );
   }
   
-
   async addSchedule(request: IAddWorkoutSchedule) {
     try {
         const docRef = await this.firestore
@@ -80,10 +67,9 @@ export class WorkoutscheduleRepository {
           schedule: schedule,
           validate: true,
         };
-      
+        await this.notify.presentSuccessToast("schedule added successfully");
         return response;
     } catch (error) {
-        // alert('Error adding schedule:'+error);
       
         const response: IAddedWorkoutSchedule = {
           userId: request.userId,
@@ -102,9 +88,6 @@ export class WorkoutscheduleRepository {
           .collection("userSchedules")
           .doc(request.schedule.id)
           .delete()
-          
-        // console.log('Schedule deleted successfully');
-        // alert('Schedule removed successfully');
       
         const response: IRemovedWorkoutSchedule = {
           userId: request.userId!,
@@ -148,7 +131,6 @@ export class WorkoutscheduleRepository {
         return response;
     } catch (error) {
         console.log('Error updating schedule:', error);
-        // alert(error);
       
         const response: IUpdatedWorkoutSchedule = {
           userId: request.userId,
@@ -160,8 +142,6 @@ export class WorkoutscheduleRepository {
   }
 
   getSchedules(request: IGetWorkoutSchedules): Observable<IGotWorkoutSchedules> {
-    // try {
-      
       const friendsCollection = this.firestore.collection<IWorkoutScheduleModel>(
       `WorkoutSchedule/${request.userId}/userSchedules`
       );
@@ -185,17 +165,6 @@ export class WorkoutscheduleRepository {
         };
       
       }))
-    // }catch (error) {
-    //   console.log('Error fetching schedules:', error);
-    //   alert(error);
-    
-    //   const response: IGotWorkoutSchedules = {
-    //     userId: request.userId,
-    //     schedules: [],
-    //   };
-    
-    //   // return response;
-    // }
   }
 
   async addSweatBuddies(request: IAddSweatbuddies) {
@@ -236,9 +205,8 @@ export class WorkoutscheduleRepository {
       let requests: IScheduleRequest[] = [];
       doc.scheduleParticipationRequested ? requests = doc.scheduleParticipationRequested : requests = [];
       requests.push({ userId: request.scheduleId, scheduleId: request.scheduleId});
-      // docRef.update({scheduleParticipationRequested: requests});
     } catch(error) {
-      // console.log(error);
+      
     }
   }
 
