@@ -19,7 +19,7 @@
   <div class="group-options" *ngIf="showOptions">
     <ion-list class="transparent-list">
       <ion-item class="transparent-item" (click)="clearNotifications()">
-        <ion-icon name="exit-outline" slot="start"></ion-icon>
+        <ion-icon name="trash-outline" slot="start"></ion-icon>
         <ion-label>Clear All</ion-label>
       </ion-item>
     </ion-list>
@@ -29,7 +29,7 @@
     <ion-card class="Mcard" *ngFor="let notice of noticeList2">
       <div class="right-align-label2">
         <ion-button  fill="clear" class="delete-button" size="small" (click)="clearNotification(notice.id!)">
-          <ion-icon name="close-circle-outline"  ></ion-icon>
+          <ion-icon name="close-circle-outline"></ion-icon>
         </ion-button>
       </div>
       <div style="display:flex ; align-items:center" >
