@@ -4,7 +4,7 @@
       <ion-label position="floating">Enter your meal:</ion-label>
       <ion-textarea [(ngModel)]="meal" rows="5"></ion-textarea>
     </ion-item>
-    <ion-button expand="full" (click)="calculateNutrition()">Calculate</ion-button>
+    <ion-button expand="block" (click)="calculateNutrition()">Calculate</ion-button>
 
     <ion-card *ngIf="totalNutrition">
       <ion-card-header>Summary of Nutritional Information</ion-card-header>
@@ -19,8 +19,8 @@
       </ion-card-content>
     </ion-card>
 
-    <ion-list *ngIf="foods">
-      <ion-item *ngFor="let food of foods">
+    <ion-list class="transparent-list" *ngIf="foods">
+      <ion-item class="transparent-item" *ngFor="let food of foods">
         <ion-row class="flex-container">
           <ion-col size="6" size-md="3">
             <ion-thumbnail>
