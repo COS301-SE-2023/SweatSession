@@ -253,3 +253,7 @@ swiper-container::part(bullet) {
     border-radius: 2px;
     background-color: #A8DADC;
 }
+
+canvas {
+    background-color: var(--background-color);
+}
