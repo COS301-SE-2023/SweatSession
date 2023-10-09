@@ -62,16 +62,16 @@ ion-title {
 
 ion-toolbar {
     --background: var(--background-color);
-    --color: var(--primay-color) !important;
+    --color: var(--primary-color) !important;
 }
 
 ion-toolbar *{
-    --color: var(--primay-color) !important;
+    --color: var(--primary-color) !important;
 }
 
 ion-toolbar ion-item {
     --background: transparent;
-    --color: var(--primay-color) !important;
+    --color: var(--primary-color) !important;
 }
 
 * {
@@ -189,6 +189,7 @@ ion-button:not(.backbutton,.default-button, .white-button) {
 
 ion-segment {
     border-radius: 0px;
+    background-color: transparent;
 }
 
 .zero-content-container {
