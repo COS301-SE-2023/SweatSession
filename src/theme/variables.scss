@@ -196,19 +196,19 @@
 .ios body[color-theme="light"] {
   --ion-background-color: #ffffff;
 
-  --ion-text-color: #ffffff;
+  --ion-text-color: #0077ff;
 
-  --ion-color-step-50: #001b34;
-  --ion-color-step-100: #172a43;
-  --ion-color-step-150: #2b3b52;
-  --ion-color-step-200: #3f4c62;
-  --ion-color-step-250: #525e72;
-  --ion-color-step-300: #667082;
-  --ion-color-step-350: #00081a;
-  --ion-color-step-400: #001b34;
-  --ion-color-step-450: #737373;
-  --ion-color-step-500: #808080;
-  --ion-color-step-550: #8c8c8c;
+  --ion-color-step-50: #274c77;
+  --ion-color-step-100: #204d9a;
+  --ion-color-step-150: #1e6eda;
+  --ion-color-step-200: #3a7cee;
+  --ion-color-step-250: #588cec;
+  --ion-color-step-300: #72a1ef;
+  --ion-color-step-350: #274c77;
+  --ion-color-step-400: #b0d4ff;
+  --ion-color-step-450: #c7e2f8;
+  --ion-color-step-500: #fcf7f7;
+  --ion-color-step-550: #f5f5f5;
   --ion-color-step-600: #999999;
   --ion-color-step-650: #a6a6a6;
   --ion-color-step-700: #b3b3b3;
@@ -230,6 +230,15 @@
   --ion-item-divider-color: #274c77;
   --ion-modal-background-color: #274c77;
   --ion-label-color: #ffffff;
+
+  h2
+  {
+    color: #ffffff;
+  }
+  p
+  {
+    color: #ffffff;
+  }
 }
 
   .ios ion-modal {

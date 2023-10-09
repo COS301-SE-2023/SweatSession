@@ -31,7 +31,7 @@
       <ion-row>
         <ion-col size="12">
           <div class="slide-header">
-            <ion-item class="header">
+            <ion-item class="header" lines="none">
               <ion-icon name="people" slot="start"></ion-icon> 
               <ion-label>Suggested Groups</ion-label>
             </ion-item>
@@ -40,7 +40,7 @@
       </ion-row>
       <ion-row *ngFor="let row of rows">
         <ion-col *ngFor="let item of row" size="6">
-          <ion-item>
+          <ion-item lines="none">
             <ion-avatar slot="start">
               <ion-img [src]="item.profileURL"></ion-img>
             </ion-avatar>
