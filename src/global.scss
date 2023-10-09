@@ -35,8 +35,17 @@ ion-header {
   --ion-header-box-shadow: none;
 }
 
+ion-footer {
+    background-color: var(--background-color);
+    --border: none;
+}
+
 ion-content {
     overflow-y: auto;
+    --background: var(--background-color);
+}
+
+ion-card {
     --background: var(--background-color);
 }
 
@@ -158,9 +167,9 @@ ion-button:not(.backbutton,.default-button, .white-button) {
     --border-radius: 10px;
     --padding: 10px;
   
-    // --border-style: solid;
-    // --border-width: 2px;
-    // --border-color: var(--main-color);
+    --border-style: solid;
+    --border-width: 2px;
+    --border-color: var(--main-color);
   
     --color: white !important;
 }
@@ -172,6 +181,10 @@ ion-button:not(.backbutton,.default-button, .white-button) {
     --background-hover: whitesmoke;
     --background-activated: whitesmoke;
     --background-focused: whitesmoke;
+
+    --border-style: solid;
+    --border-width: 2px;
+    --border-color: white;
 }
 
 ion-segment {
@@ -210,7 +223,7 @@ swiper-container {
 }
 
 swiper-container::part(bullet-active) {
-    background-color:#E63946; // #A8DADC;
+    background-color: var(--main-color);
     position: relative;
     bottom: -10px;
 }
@@ -235,10 +248,3 @@ swiper-container::part(bullet) {
     border-radius: 2px;
     background-color: #A8DADC;
 }
-
-// color theme
-// 0% {color: #1D3557;}
-// 25% {color: #457B9D;}
-// 50% {color: #A8DADC;}
-// 75% {color: #E63946;}
-// 100% {color: #F1FAEE;}
