@@ -4,16 +4,27 @@
       <backbutton></backbutton>
     </ion-buttons>
     <ion-title>Notifications</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button class="default-button" (click)="showGroupOptions()">
+        <ion-icon *ngIf="!showOptions" name="ellipsis-vertical"></ion-icon>
+        <ion-icon *ngIf="showOptions" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
-<br>
 
 
 <ion-content class="main" >
-  <div *ngIf="noticeamount > 0" class="flex-center3" style=" background: none; ">
-    <ion-button  color="light" size="default"  (click)="clearNotifications()">Clear All</ion-button>
+  <div class="group-options" *ngIf="showOptions">
+    <ion-list class="transparent-list">
+      <ion-item class="transparent-item" (click)="clearNotifications()">
+        <ion-icon name="exit-outline" slot="start"></ion-icon>
+        <ion-label>Clear All</ion-label>
+      </ion-item>
+    </ion-list>
   </div>
-    
+
   <div *ngIf="noticeamount > 0" >
     <ion-card class="Mcard" *ngFor="let notice of noticeList2">
       <div class="right-align-label2">

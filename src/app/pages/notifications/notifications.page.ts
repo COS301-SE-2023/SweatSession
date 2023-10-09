@@ -28,6 +28,7 @@ export class NotificationsPage implements OnInit {
   sendamount: string ;
   auth = getAuth();
   currUserId = this.auth.currentUser?.uid;
+  showOptions = false;
  
   
   
@@ -45,6 +46,10 @@ export class NotificationsPage implements OnInit {
   ngOnInit() {
     this.getNotifications() ;
       
+  }
+
+  showGroupOptions() {
+    this.showOptions = !this.showOptions;
   }
    
   getNotifications(){
