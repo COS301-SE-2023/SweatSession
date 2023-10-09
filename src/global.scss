@@ -26,10 +26,6 @@
 @import "@ionic/angular/css/flex-utils.css";
 
 
-// ion-item{
-//     --highlight-height: 0;
-//     --inner-border-width: 0;
-// }
 
 ion-content {
     overflow-y: auto;
@@ -46,19 +42,6 @@ ion-title {
     text-align: center;
 }
 
-ion-toolbar {
-    --background: #E63946;
-    --color: white !important;
-}
-
-ion-toolbar *{
-    --color: white !important;
-}
-
-ion-toolbar ion-item {
-    --background: #E63946;
-    --color: white !important;
-}
 
 * {
     font-family: 'Montserrat', sans-serif;
@@ -70,7 +53,7 @@ ion-chip {
 }
 
 ion-spinner {
-    --color: #E63946; //#A8DADC;
+    --color: #001b34; //#A8DADC;
     width: 1.2rem;
     height: 1.2rem;
 }
@@ -82,15 +65,15 @@ ion-spinner {
     height: 100%;
 }
 
-ion-fab-button  {
-    --background: #A8DADC;
-    --background-hover: #9ce0be;
-    --background-activated: #88f4be;
-    --background-focused: #88f4be;
-    --color: #457b9d;
-    --ripple-color: deeppink;
-    opacity: 0.9;
-}
+//ion-fab-button  {
+//    --background: #A8DADC;
+//    --background-hover: #9ce0be;
+//    --background-activated: #88f4be;
+//    --background-focused: #88f4be;
+//    --color: #457b9d;
+//    --ripple-color: deeppink;
+//    opacity: 0.9;
+//}
 
 ion-segment {
     border-radius: 0px;
@@ -120,7 +103,7 @@ ion-segment {
 }
 
 swiper-container::part(bullet-active) {
-    background-color: #E63946 // #A8DADC;
+    background-color: #001b34 // #A8DADC;
 }
 
 .message-send-fab-button {
@@ -148,16 +131,16 @@ swiper-container::part(bullet-active) {
 // #457b9d
 
 ion-button:not(.backbutton,.default-button) {
-    --background: linear-gradient(135deg, #A8DADC 10%, #457b9d 100%); //#A8DADC;
-    --background-hover: #457b9d;
-    --background-activated: #457b9d;
-    --background-focused: #457b9d;
+    //--background: linear-gradient(135deg, #A8DADC 10%, #457b9d 100%); //#A8DADC;
+    //--background-hover: #457b9d;
+    //--background-activated: #457b9d;
+    //--background-focused: #457b9d;
     border-radius: 8px;
-  
+
     --border-style: solid;
     --border-width: 2px;
-    --border-color: #457b9d;
-  
+    //--border-color: #457b9d;
+
     --color: white !important;//#457b9d;
 }
 

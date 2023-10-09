@@ -54,6 +54,20 @@ export class HomePage implements OnInit {
     )
   }
 
+  onToggletheme(event: any)
+  {
+    console.log(event.detail.checked);
+    if(event.detail.checked)
+    {
+      document.body.setAttribute('color-theme','dark');
+    }
+    else
+    {
+      document.body.setAttribute('color-theme','light');
+    }
+
+  }
+
   goToSettings() {
     this.nav.navigateRoot("/settings");
   }
