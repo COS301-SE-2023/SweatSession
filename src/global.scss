@@ -122,7 +122,6 @@ swiper-container::part(bullet-active) {
 .large-icon {
     width: 200px;
     height: 200px;
-    color: #457B9D;
     opacity: 0.9;
 }
 
@@ -141,7 +140,7 @@ ion-button:not(.backbutton,.default-button) {
     --border-width: 2px;
     //--border-color: #457b9d;
 
-    --color: white !important;//#457b9d;
+    //--color: white !important;//#457b9d;
 }
 
 ion-segment {
@@ -167,8 +166,8 @@ ion-segment {
         padding: 20px;
         .slides-headers {
             font-weight: bolder;
-            color: #457B9D;
-            --background: transparent;
+            //color: #457B9D;
+            //--background: transparent;
         }
     }
 }
@@ -180,7 +179,7 @@ swiper-container {
 }
 
 swiper-container::part(bullet-active) {
-    background-color:#E63946; // #A8DADC;
+    background-color: #155ff8; // #A8DADC;
     position: relative;
     bottom: -10px;
 }
@@ -200,10 +199,10 @@ swiper-container::part(bullet) {
     position: absolute;
     right: 10px;
     z-index: 999;
-    box-shadow: 0px 4px 20px 0px #31460457;
+    //box-shadow: 0px 4px 20px 0px #31460457;
     padding: 5px;
     border-radius: 2px;
-    background-color: #A8DADC;
+    //background-color: #A8DADC;
 }
 
 /* Hide scrollbars for Webkit browsers (e.g., Chrome, Safari) */
