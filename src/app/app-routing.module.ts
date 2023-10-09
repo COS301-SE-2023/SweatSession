@@ -205,7 +205,6 @@ const routes: Routes = [
   },
   {
     path: 'download',
-    canActivate: [AuthGuard],
     data: { authGuardPipe: redirectLoggedOut },
     loadChildren: () => import('./pages/download/download.module').then( m => m.DownloadPageModule)
   },

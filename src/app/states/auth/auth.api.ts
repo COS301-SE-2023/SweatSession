@@ -8,9 +8,10 @@ import {
   GoogleAuthProvider,
   signInWithPopup
 } from '@angular/fire/auth';
-
+import { Navigate } from '@ngxs/router-plugin';
 import { signOut } from '@firebase/auth';
 import { AlertController, NavController } from '@ionic/angular';
+import { Store } from '@ngxs/store';
 // import { AuthState } from 'src/app/states/auth';
 //import { RegisterRepository } from 'src/app/repository/register.repository';
 
@@ -23,7 +24,8 @@ import { AlertController, NavController } from '@ionic/angular';
 export class AuthApi {
   constructor(private readonly authObject: Auth,
      private Nav: NavController,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private store: Store
     ) {}//, private repository: RegisterRepository         //, private service: RegisterService
 
   auth$() {
@@ -107,7 +109,9 @@ export class AuthApi {
     sessionStorage.removeItem("otheruser");
     sessionStorage.removeItem("otherUserBadgesName");
     sessionStorage.removeItem("otherUserBadgesId");
-    return await signOut(this.authObject);
+    await signOut(this.authObject);
+    // context.dispatch(new Navigate(['login']));
+    this.store.dispatch(new Navigate(['login']));
   }
 
   async logout() { // Do not want to refactor the code will switch content

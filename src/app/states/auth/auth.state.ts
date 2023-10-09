@@ -86,6 +86,6 @@ export class AuthState {
   @Action(Logout)
   async logout(context: StateContext<AuthenticationStateModel>) {
     await this.authenticationApi.logout();
-    context.dispatch(new Navigate(['login']));
+    // context.dispatch(new Navigate(['login']));
   }
 }

@@ -16,6 +16,8 @@ import {AngularFirestore} from "@angular/fire/compat/firestore";
 })
 export class GoalviewPage  implements OnInit {
 
+  today: string;
+  tommorow: string;
   constructor(private fb: FormBuilder,
               private store: Store,
               private fitnessgaolservive: FitnessgoalService,
@@ -23,7 +25,23 @@ export class GoalviewPage  implements OnInit {
               private router: Router,
               private formBuilder: FormBuilder,
               private firestore: AngularFirestore,
-              private navigate: NavigationService) {}
+              private navigate: NavigationService)
+  {
+    const currentDate = new Date();
+    const year = currentDate.getFullYear();
+    const month = String(currentDate.getMonth() + 1).padStart(2, '0'); // Add 1 to month as it is 0-based
+    const day = String(currentDate.getDate()).padStart(2, '0');
+    this.today = `${year}-${month}-${day}`
+
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+
+    const year2 = tomorrow.getFullYear();
+    const month2 = String(tomorrow.getMonth() + 1).padStart(2, '0'); // Add 1 to month as it is 0-based
+    const day2 = String(tomorrow.getDate()).padStart(2, '0');
+
+    this.tommorow = `${year2}-${month2}-${day2}`;
+  }
 
   goals: IGOALS = {
     goals: []
@@ -35,9 +53,6 @@ export class GoalviewPage  implements OnInit {
   TaskForm = this.formBuilder.group({
     Taskses: this.formBuilder.array([])
   });
-
-
-
 
 
   onSegmentChange(event: any) {

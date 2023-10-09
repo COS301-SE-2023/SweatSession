@@ -25,11 +25,11 @@
       </ion-item>
       <ion-item>
         <ion-label position="stacked"><h2 style="font-weight: bold">Start date</h2></ion-label>
-        <ion-input type="date" formControlName="start"></ion-input>
+        <ion-input type="date" formControlName="start" min="{{today}}"></ion-input>
       </ion-item>
       <ion-item lines = "none">
         <ion-label position="stacked"><h2 style="font-weight: bold">End date</h2></ion-label>
-        <ion-input type="date" formControlName="end"></ion-input>
+        <ion-input type="date" formControlName="end" min="{{tommorow}}"></ion-input>
       </ion-item>
 
       <form [formGroup]="TaskForm">
