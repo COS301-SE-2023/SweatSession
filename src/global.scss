@@ -215,7 +215,7 @@ ion-segment {
         padding: 20px;
         .slides-headers {
             font-weight: bolder;
-            color: #457B9D;
+            // color: #457B9D;
             --background: transparent;
         }
     }
@@ -240,7 +240,7 @@ swiper-container::part(bullet) {
 
 .clickable:hover {
     zoom:1.05;
-    color: #1D3557;
+    color: var(--secondary-variant-color);
 }
 
 .group-options {
@@ -251,7 +251,7 @@ swiper-container::part(bullet) {
     box-shadow: 0px 4px 20px 0px #31460457;
     padding: 5px;
     border-radius: 2px;
-    background-color: #A8DADC;
+    // background-color: #A8DADC;
 }
 
 canvas {
