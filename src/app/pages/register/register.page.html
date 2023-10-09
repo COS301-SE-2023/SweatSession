@@ -43,13 +43,18 @@
                 ></ion-input>
               </ion-item>
             </div>
-            <div class="forgot-password">
-              <ion-text>Forgot password?</ion-text>
-            </div>
+            <div class="remember-me-input">
+              <ion-checkbox class="custom-checkbox"></ion-checkbox>
+              <ion-label class="r-label">Remember me</ion-label>
+            </div>           
 
             <div class="button-container">
               <ion-button id="loginButton" expand="block" type="submit">Register</ion-button>
-              <hr>OR<hr>
+              <div class="division-section">
+                <div class="line"></div>
+                <div class="or">OR</div>
+                <div class="line"></div>
+              </div>
               <ion-button class="loginButton" expand="block" (click)="continueWithGoogleAuth()" class="white-button">
                 <ion-icon name="logo-google" style="padding-right:5%;"></ion-icon>
                 <ion-text>Continue with Google</ion-text>

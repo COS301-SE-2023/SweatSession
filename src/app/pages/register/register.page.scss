@@ -1,51 +1,84 @@
 .outer-container {
   .auth-container {
-      height: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-      .welcome-container {
-          text-align: center;
-          .welcome-title {
-              font-size: x-large;
-              font-weight: bolder;
-              color: var(--secondary-color);
-          }
-      }
-      
-      .form-container {
-          margin-top: 20px;
-          .input-field-container {
-              margin-top: 20px;
-              .input-field {
-                  background-color: white;
-                  margin-top: 10px;
-                  border-radius: 10px;
-              }
-          }
-      
-          .forgot-password {
-              margin-top: 20px;
-              margin-bottom: 20px;
-              display: flex;
-              justify-content: flex-end;
-          }
-      
-          .button-container {
-              margin-top: 40px;
-          }
-      }
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
 
-      .bottom-message-container {
+    .welcome-container {
+        text-align: center;
+        .welcome-title {
+            font-size: x-large;
+            font-weight: bolder;
+            color: var(--main-color);
+        }
+
+        .welcome-subtitle {
+            color: var(--primary-color);
+        }
+    }
+    
+    .form-container {
+        margin-top: 20px;
+        .input-field-container {
+            margin-top: 20px;
+            .input-field {
+                background-color: var(--input-field-color);
+                margin-top: 10px;
+                border-radius: 10px;
+            }
+        }
+    
+        .remember-me-input {
+            margin-top: 20px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            .custom-checkbox::part(checkbox-background-checked) {
+                background-color: var(--main-color);
+                border-color: var(--main-color);
+            }
+
+            .r-label {
+                margin-left: 10px;
+            }
+        }
+    
+        .button-container {
+            margin-top: 40px;
+        }
+    }
+
+    .bottom-message-container {
         margin-top: 20px;
         text-align: center;
-      }
+    }
 
-      .register-link, .forgot-password {
-          color: var(--primary-color);
-          font-weight: bold;
-      }
+    .register-link, .forgot-password {
+        color: var(--primary-color);
+        font-weight: bold;
+    }
+
+    .division-section {
+        display: flex;
+        align-items: center;
+        margin: 20px 0;
+
+        .line {
+            flex: 1;
+            height: 1px;
+            background-color: #ccc;
+            margin: 0 10px;
+        }
+            
+        .or {
+            font-weight: bold;
+            font-size: 16px;
+            padding: 0 10px;
+            color: var(--primary-color)
+        }
+    }
   }
 }
 
