@@ -1,7 +1,14 @@
-ion-avatar {
+ion-avatar:not(.search-results-avatars) {
     height: 30px;
     width: 30px;
 }
+
+.search-results-avatars {
+    height: 50px;
+    width: 50px;
+    margin: 10px;
+}
+
 
 ion-item:hover {
     background-color: whitesmoke;
@@ -40,9 +47,9 @@ ion-row {
 
 .header {
     ion-icon {
-        color: #E63946;
+        color: var(--main-color);
     }
-    color: #E63946;
+    color: var(--main-color);
     text-decoration: solid;
     text-shadow: 0px 2px 10px;
     font-size: x-large;

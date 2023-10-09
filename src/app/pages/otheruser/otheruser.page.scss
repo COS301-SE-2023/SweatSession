@@ -8,10 +8,11 @@
     height: 100%;
     margin:0px;
     border-radius: 0px;
+    background-color: transparent;
 }
 
 .profile-label {
-    color: white !important;
+    // color: white !important;
     .name {
         font-weight: bolder;
     }
@@ -23,13 +24,9 @@
 
 .profile-outer-container {
     width: 100%;
-    background-color:#E63946;
+    // background-color:#E63946;
     padding-bottom: 20px;
 }
-
-swiper-container::part(bullet-active) {
-    background-color:#E63946 // #A8DADC;
-  }
 
 .otheruser-profile-activity {
     width: 100%;
