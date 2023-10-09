@@ -22,6 +22,24 @@ ion-avatar {
     font-family: 'Montserrat', sans-serif;
 }
 
+ion-badge {
+    position: absolute;
+    font-size: 8pt;
+    right: -1px;
+    top: -3px;
+    z-index: 99;
+}
+
+.button-div {
+    position: relative;
+    //width: fit-content;
+    //ion-badge {
+    //    position: absolute;
+    //    z-index: 99;
+    //    top: 0;
+    //    right: %;
+    //}
+}
 .menu-label{
     margin-left: 10px;
 }

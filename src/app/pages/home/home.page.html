@@ -65,11 +65,36 @@
               routerLink="/workout-scheduling"
               class="clickable" slot="end">
     </ion-icon>
-    <ion-badge color="success" slot="end">{{noticeamount}}</ion-badge>
-    <ion-icon name="notifications-outline" 
-              routerLink="/notifications"
-              class="clickable" slot="end">
-    </ion-icon>
+
+
+<!--    <ion-button  class="custom-class theIcon" color="primary" fill="solid">-->
+<!--      1-->
+<!--      <ion-badge color="dark" >2</ion-badge>-->
+<!--    </ion-button>-->
+
+<!--    <ion-badge slot="end" >-->
+<!--      {{noticeamount}}-->
+<!--    </ion-badge>-->
+<!--    <ion-icon name="notifications-outline"-->
+<!--              routerLink="/notifications"-->
+<!--              class="clickable"-->
+<!--              class="custom-class theIcon"-->
+<!--              slot="end">-->
+<!--          <ion-badge slot="end" color="danger">-->
+<!--&lt;!&ndash;            {{noticeamount}}&ndash;&gt;-->
+<!--            333-->
+<!--          </ion-badge>-->
+<!--    </ion-icon>-->
+
+    <div class="button-div" style="padding-right: 10px" slot="end">
+      <ion-badge color="dark">{{noticeamount}}</ion-badge>
+      <ion-icon name="notifications-outline"
+      routerLink="/notifications"
+
+      >
+      </ion-icon>
+    </div>
+
   </ion-toolbar>
 </ion-header>
 
