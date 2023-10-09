@@ -1,9 +1,9 @@
 <ion-content>
   <ion-card class="otheruser-profile" *ngIf="isLoading; else loaderContent">
-    <div class="profile-outer-container">
+    <ion-toolbar class="profile-outer-container">
       <div class="back-button">
        <ion-buttons slot="start">
-        <backbutton class></backbutton>
+        <backbutton ></backbutton>
        </ion-buttons>
 
        <ion-buttons class="edit-button">
@@ -24,7 +24,7 @@
           <h1>{{displayName$}}</h1>
         </div>
               <ion-row>
-                <ion-col class = "theCol">{{myBio$}}</ion-col>
+                <ion-col>{{myBio$}}</ion-col>
               </ion-row>
       </ion-label>
       <div class="group-buttons">
@@ -37,9 +37,9 @@
           {{getGroupsSize()}}
         </ion-button>
       </div>
-    </div>
+    </ion-toolbar>
    
-    <div class="otheruser-profile-activity">
+    <ion-content class="otheruser-profile-activity">
       <div class="slide-header">
         <ion-item class="slides-headers first-header">
           <ion-icon name="body" slot="start"></ion-icon> 
@@ -109,7 +109,7 @@
           </ion-card>
         </swiper-slide>
       </swiper-container>
-    </div>
+    </ion-content>
    </ion-card>
 
   <ng-template #loaderContent>

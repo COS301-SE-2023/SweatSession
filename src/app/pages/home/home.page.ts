@@ -22,7 +22,7 @@ export class HomePage implements OnInit {
   DisplayName$? = "na";
   ProfilePicture$? = "na";
   getU : IGetProfile = {userId: 'na'};
-
+  darkmode : boolean = false;
   constructor(private nav:NavController,private noticehomeService: NoticehomeService ,
     private authAPI: AuthApi,
     private setpr: SetProfileService,
@@ -30,6 +30,18 @@ export class HomePage implements OnInit {
 
   ngOnInit() 
   {
+
+    if(localStorage.getItem('darkmode')=='true')
+    {
+        document.body.setAttribute('color-theme','dark');
+        this.darkmode = true;
+
+    }else
+    {
+        document.body.setAttribute('color-theme','light');
+        this.darkmode = false;
+    }
+
     this.authAPI.getCurrentUserId().then((id) => {
       this.getU.userId = id;
       this.setpr.getProfile(this.getU).subscribe((profile) => {
@@ -56,14 +68,16 @@ export class HomePage implements OnInit {
 
   onToggletheme(event: any)
   {
-    console.log(event.detail.checked);
+
     if(event.detail.checked)
     {
       document.body.setAttribute('color-theme','dark');
+      localStorage.setItem('darkmode','true');
     }
     else
     {
       document.body.setAttribute('color-theme','light');
+        localStorage.setItem('darkmode','false');
     }
 
   }

@@ -1,8 +1,10 @@
 <ion-header>
   <ion-toolbar>
+
     <ion-buttons slot="start">
       <backbutton (click)="removeSession()"></backbutton>
     </ion-buttons>
+
     <ion-title>
       <ion-chip (click)="selectGroup()">
         <ion-avatar>
@@ -13,12 +15,12 @@
         </ion-label>
       </ion-chip>
     </ion-title>
-    <ion-buttons slot="end">
-      <ion-button class="default-button" (click)="showGroupOptions()">
+
+      <ion-button slot="end" (click)="showGroupOptions()">
         <ion-icon *ngIf="!showOptions" name="ellipsis-vertical"></ion-icon>
         <ion-icon *ngIf="showOptions" name="close"></ion-icon>
       </ion-button>
-    </ion-buttons>
+
   </ion-toolbar>
 </ion-header>
 

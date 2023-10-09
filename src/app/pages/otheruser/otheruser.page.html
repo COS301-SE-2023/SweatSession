@@ -1,6 +1,6 @@
 <ion-content [fullscreen]="true" *ngIf="user!=null">
   <ion-card class="otheruser-profile">
-    <div class="profile-outer-container">
+    <ion-toolbar class="profile-outer-container">
       <div class="back-button">
         <ion-buttons>
           <backbutton slot="start" (click)="backtoPreviousPage()"></backbutton>
@@ -39,9 +39,9 @@
           View Request
         </ion-button>
       </div>
-    </div>
-   
-    <div class="otheruser-profile-activity">
+    </ion-toolbar>
+
+  <ion-content class="otheruser-profile-activity">
       <div class="slide-header">
         <ion-item class="slides-headers first-header">
           <ion-icon name="body" slot="start"></ion-icon> 
@@ -112,15 +112,16 @@
                 <ion-icon name="star"></ion-icon>
               </ion-card-title>
               <h2 *ngIf="points$ | async as points; else loaderContent">{{points.userPoints}} Points</h2>
-              <ng-template #loaderContent>
-                <div class="loader-wrapper">
-                  <ion-spinner></ion-spinner>
-                </div>
-              </ng-template>
             </ion-card-content>
           </ion-card>
         </swiper-slide>
       </swiper-container>
+  </ion-content>
+    </ion-card>
+
+  <ng-template #loaderContent>
+    <div class="loader-wrapper">
+      <ion-spinner></ion-spinner>
     </div>
-   </ion-card>
+  </ng-template>
 </ion-content>

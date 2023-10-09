@@ -14,12 +14,16 @@
     max-width: 70%;
     padding: 8px;
     border-radius: 8px;
-    background-color: #e2e6e9;
-    color: #000;
 }
-  
+
+.message .message-content
+{
+    background-color: rgba(255, 255, 255, 0.21);
+    color: #ffffff;
+}
 .message-sent .message-content {
-    background-color: #A8DADC; // #dcf8c6;
+    background-color: #001f54; // #dcf8c6;
+    color: #ffffff;
 }
   
 .message-bubble {

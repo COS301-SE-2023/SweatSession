@@ -11,7 +11,6 @@
 }
 
 .profile-label {
-    color: white !important;
     .name {
         font-weight: bolder;
     }
@@ -23,12 +22,10 @@
 
 .profile-outer-container {
     width: 100%;
-    background-color:#E63946;
     padding-bottom: 20px;
 }
 
 swiper-container::part(bullet-active) {
-    background-color:#E63946 // #A8DADC;
   }
 
 .otheruser-profile-activity {
@@ -62,5 +59,4 @@ ion-title {
 }
 
 ion-icon {
-    color: #457b9d;
 }

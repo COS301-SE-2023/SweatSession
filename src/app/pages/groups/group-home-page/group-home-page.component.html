@@ -1,5 +1,5 @@
 <ion-content>
-  <div class="group-page-container">
+  <ion-toolbar class="group-page-container">
     <div class="group-page-profile">
       <div class="top-buttons">
         <ion-buttons class="start-buttons">
@@ -66,6 +66,7 @@
         </div>
       </div>
     </div>
+  </ion-toolbar>
     <div>
       <ion-segment (ionChange)="onSegmentChange($event)" value="members" [scrollable]="true">
         <ion-segment-button value="members">Members</ion-segment-button>
@@ -104,5 +105,5 @@
          </div>
       </div>
     </div>
-  </div>
+
 </ion-content>

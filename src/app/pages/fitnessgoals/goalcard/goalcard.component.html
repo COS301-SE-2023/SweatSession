@@ -17,6 +17,7 @@
                     {{goal.name}}
                 </ion-text>
                 <ion-icon slot="end" name="chevron-forward-outline" (click)="viewGoal(goal.id)"></ion-icon>
+
             </ion-item>
 
             <ion-item-options>
@@ -39,6 +40,8 @@
       </ng-container>
 
       <ng-template #ngemptyTemp>
+          <ion-content scroll-y="false">
+
 
         <ion-card *ngIf="isSelected('0')" class="zero-content-container">
             <div class="inner-zero-content-wrapper">
@@ -65,7 +68,7 @@
               </div>
           </ion-card>
 
-
+          </ion-content>
         </ng-template>
   </ion-content>
 
