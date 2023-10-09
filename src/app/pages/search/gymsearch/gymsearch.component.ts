@@ -1,8 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { IonContent, IonModal, ModalController } from '@ionic/angular';
+import { IonContent, IonModal, ModalController, ToastController } from '@ionic/angular';
 import { of, Observable, Subject, Subscription, firstValueFrom } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map, startWith } from 'rxjs/operators';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { Geolocation as GeolocationCapacitor } from '@capacitor/geolocation';
 import { environment } from 'src/environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { LocationsService } from 'src/app/services/location/location.services';
@@ -33,7 +34,7 @@ export class GymsearchComponent implements OnInit {
    gymChosen: string;
    chosenPlaceId: string;
    friendsSubscription: Subscription;
-   constructor(private store: Store, private modalController: ModalController, private geolocation: Geolocation, private httpClient: HttpClient, private locationRepository: LocationRepository, private friendsRepository: FriendsRepository, private friendsState: FriendsState, private datePipe: DatePipe) {
+   constructor(private store: Store, private modalController: ModalController, private geolocation: Geolocation, private httpClient: HttpClient, private locationRepository: LocationRepository, private friendsRepository: FriendsRepository, private friendsState: FriendsState, private datePipe: DatePipe, private toastController: ToastController) {
       this.data.filter(item => item.name.includes(''));
    }
 
@@ -50,7 +51,7 @@ export class GymsearchComponent implements OnInit {
    currLongitude: Number;
    MAPS_API_KEY = environment.mapsApiKey;
    gymsSubscription: Subscription;
-   currentFriendsInfo: any = [[{profilePhoto: "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png", friendDisplayName: "testfdn", workoutName: "testWN", date: "02-02-2023", startTime: Timestamp.now(), endTime: Timestamp.now()}]];
+   currentFriendsInfo: any = [[{ profilePhoto: "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png", friendDisplayName: "testfdn", workoutName: "testWN", date: "02-02-2023", startTime: Timestamp.now(), endTime: Timestamp.now() }]];
    gyms: any = {
       results: [
          { name: "default", business_status: "default", photos: [{ photo_reference: "default" }], rating: "default", vicinity: "default", place_id: "default", friendsLocationInfo: [[]] }, { friendsLocationInfo: [] }
@@ -131,9 +132,14 @@ export class GymsearchComponent implements OnInit {
 
             console.log(this.userFriendIds)
 
+            const permission = await GeolocationCapacitor.checkPermissions();
+            if (permission.location === 'denied') {
+               // Request permission if it's denied
+               await GeolocationCapacitor.requestPermissions();
+            }
             const coordinates = await this.getCurrentLocation();
-            this.currLatitude = coordinates.latitude;
-            this.currLongitude = coordinates.longitude;
+            this.currLatitude = coordinates!.latitude;
+            this.currLongitude = coordinates!.longitude;
             // this.currLatitude = -25.7694108
             // this.currLongitude = 28.259215
             console.log('Latitude:', this.currLatitude);
@@ -141,7 +147,7 @@ export class GymsearchComponent implements OnInit {
             console.log('maxDistance:', this.maxDistance);
             await this.loadData();
             console.log(this.gymUsers);
-            console.log(this.gyms);
+            // console.log(this.gyms);
          }
       });
       //  this.userFriendIds= await firstValueFrom(this.friends$);
@@ -205,7 +211,7 @@ export class GymsearchComponent implements OnInit {
 
    ngOnDestroy() {
       this.friendsSubscription.unsubscribe();
-    }
+   }
 
    // async searchNearbyGyms() {
    //    this.getCurrentLocation().then((coordinates: GeolocationCoordinates) => {
@@ -237,46 +243,48 @@ export class GymsearchComponent implements OnInit {
 
    async loadData() {
       try {
-        const maxRetries = 5;
-        let nextPageToken = this.nextPageToken || "";
-    
-        for (let retryCount = 0; retryCount < maxRetries; retryCount++) {
-         if (this.maxDistance>50){
-            alert("Search Radius must be less than 50km");
-            break;
-         }
-          const url = `https://us-central1-synapsesolutions-b4c95.cloudfunctions.net/nearbyGymProxyRequest?latitude=${this.currLatitude}&longitude=${this.currLongitude}&radius=${this.maxDistance * 1000}&key=${this.MAPS_API_KEY}&nextPageToken=${nextPageToken}`;
-         //  const url = `http://127.0.0.1:5005/sweatsession/us-central1/nearbyGymProxyRequest?latitude=${this.currLatitude}&longitude=${this.currLongitude}&radius=${this.maxDistance * 1000}&key=${this.MAPS_API_KEY}&nextPageToken=${nextPageToken}`;
-          console.log(url);
-    
-          const response = await fetch(url);
-          const data = await response.json();
-    
-          console.log(data);
-          console.log(data.results);
-    
-          let responseStatus = data.status;
-          this.gyms = data;
-    
-          await this.getGymUsersForGyms(this.userFriendIds);
-          this.nextPageToken = data.next_page_token; // Get the new nextPageToken
+         const maxRetries = 5;
+         let nextPageToken = this.nextPageToken || "";
 
-          if (responseStatus == "OK") {
-            break; // Exit the loop if the response status is "OK"
-          }
-    
-          if (retryCount < maxRetries - 1) {
-            // If this is not the last retry, wait for a while before retrying.
-            await new Promise((resolve) => setTimeout(resolve, 1000)); // Wait for 1 second before retrying.
-          }
-        } 
-        return this.gyms;
+         for (let retryCount = 0; retryCount < maxRetries; retryCount++) {
+            if (this.maxDistance > 50 || this.maxDistance < 0) {
+               alert("Search Radius must be positive and less than 50km");
+               break;
+            }
+            const url = `https://us-central1-synapsesolutions-b4c95.cloudfunctions.net/nearbyGymProxyRequest?latitude=${this.currLatitude}&longitude=${this.currLongitude}&radius=${this.maxDistance * 1000}&key=${this.MAPS_API_KEY}&nextPageToken=${nextPageToken}`;
+            //  const url = `http://127.0.0.1:5005/sweatsession/us-central1/nearbyGymProxyRequest?latitude=${this.currLatitude}&longitude=${this.currLongitude}&radius=${this.maxDistance * 1000}&key=${this.MAPS_API_KEY}&nextPageToken=${nextPageToken}`;
+            //  const url = `http://127.0.0.1:5005/synapsesolutions-b4c95/us-central1/nearbyGymProxyRequest?latitude=${this.currLatitude}&longitude=${this.currLongitude}&radius=${this.maxDistance * 1000}&key=${this.MAPS_API_KEY}&nextPageToken=${nextPageToken}`;
+            // console.log(url);
+
+            const response = await fetch(url);
+            // console.log(response)
+            const data = await response.json();
+
+            // console.log(data);
+            console.log(data.results);
+
+            let responseStatus = data.status;
+            this.gyms = data;
+
+            this.nextPageToken = data.next_page_token; // Get the new nextPageToken
+
+            if (responseStatus == "OK") {
+               break; // Exit the loop if the response status is "OK"
+            }
+
+            if (retryCount < maxRetries - 1) {
+               // If this is not the last retry, wait for a while before retrying.
+               await new Promise((resolve) => setTimeout(resolve, 1000)); // Wait for 1 second before retrying.
+            }
+         }
+         await this.getGymUsersForGyms(this.userFriendIds);
+         return this.gyms;
       } catch (error) {
-        console.error(error);
-        return this.gyms;
+         // console.error(error);
+         return this.gyms;
       }
-    }
-    
+   }
+
 
    triggerfilter() {
       this.filteredData$ = this.searchTerm$.pipe(
@@ -315,20 +323,21 @@ export class GymsearchComponent implements OnInit {
 
    selectGym(name: string, chosenPlaceId: string, time: string = "", date: string = "", duration: string = "", workoutName: string = "") {
       console.log(name, chosenPlaceId, time, date, duration, workoutName);
-      this.modalController.dismiss({ selectedGym: name, placeId: chosenPlaceId, selectedTime: time, selectedDate: date, selectedDuration:duration, selectedWorkoutName: workoutName });
+      this.modalController.dismiss({ selectedGym: name, placeId: chosenPlaceId, selectedTime: time, selectedDate: date, selectedDuration: duration, selectedWorkoutName: workoutName });
       // alert("gym with name: "+name+"place id: "+place_id);
    }
 
    async joinSession(name: string, id: string, time: string, date: string, endTime: string, workoutName: string) {
       console.log(name, id, time, date, endTime, workoutName);
       this.selectGym(name, id, time, date, endTime, workoutName);
-      await this.modalController.dismiss({ selectedGym: name, placeId: id, selectedTime: time, selectedDate: date, selectedDuration:endTime, selectedWorkoutName: workoutName });
+      await this.modalController.dismiss({ selectedGym: name, placeId: id, selectedTime: time, selectedDate: date, selectedDuration: endTime, selectedWorkoutName: workoutName });
       this.selectGym(name, id, time, date, endTime, workoutName);
-      await this.modalController.dismiss({ selectedGym: name, placeId: id, selectedTime: time, selectedDate: date, selectedDuration:endTime, selectedWorkoutName: workoutName });
+      await this.modalController.dismiss({ selectedGym: name, placeId: id, selectedTime: time, selectedDate: date, selectedDuration: endTime, selectedWorkoutName: workoutName });
       // alert("gym with name: "+name+"place id: "+place_id);
    }
 
-   getCurrentLocation(): Promise<GeolocationCoordinates> {
+   getCurrentLocation(): Promise<GeolocationCoordinates|null> {
+
       return this.geolocation.getCurrentPosition().then((position: GeolocationPosition) => {
          const { latitude, longitude } = position.coords;
          // this.searchNearbyGyms().then((gyms) => {
@@ -346,7 +355,17 @@ export class GymsearchComponent implements OnInit {
             speed: position.coords.speed
          };
          return geolocationCoordinates;
-      });
+      }).catch(error => {
+         // User denied location access
+         if(error.code === error.PERMISSION_DENIED) {
+           // Dismiss modal
+           this.dismissModal(); 
+   
+           // Show message to user
+           this.locationToast
+         }
+         return null
+       });
    }
 
    getPhotoUrl(photoReference: string | undefined): string {
@@ -416,8 +435,8 @@ export class GymsearchComponent implements OnInit {
       console.log(place_id);
       this.currentFriendsInfo = fInfo;
       console.log(this.currentFriendsInfo);
-      this.gymChosen=gymChosen;
-      this.chosenPlaceId=place_id;
+      this.gymChosen = gymChosen;
+      this.chosenPlaceId = place_id;
       this.modal.present()
    }
 
@@ -426,18 +445,28 @@ export class GymsearchComponent implements OnInit {
       // this.store.dispatch(new StageOtheruserInfo(user));
    }
 
-   calcShape(r: number, i: number){
-      if (r-i>0.25 && r-i<0.75){
+   calcShape(r: number, i: number) {
+      if (r - i > 0.25 && r - i < 0.75) {
          return "star-half";
-      }else{
+      } else {
          return "star";
       }
    }
 
+   async locationToast() {
+
+      const toast = await this.toastController.create({
+        message: 'Please allow location access',
+        duration: 2000
+      });
+      toast.present();
+    
+    }
+
    // onModalPresent(event: Event) {
 
    //    console.log('Modal presented');
-      
+
    //    console.log(this.currentFriendsInfo);
 
    //    for (let friend of this.currentFriendsInfo){
@@ -446,6 +475,6 @@ export class GymsearchComponent implements OnInit {
    //       console.log("profilephoto")
    //       console.log(friend[0].profilePhoto)
    //    }
-    
+
    //  }
 }

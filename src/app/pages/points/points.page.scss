@@ -7,6 +7,7 @@ ion-item.userPointsSection::part(native) {
     --border-radius: 12px;
     color: white;
     margin: 0 auto;
+    overflow: initial;
     width: calc(100% - 30px);
     margin-top: 15px;
     display: flex;
@@ -32,6 +33,7 @@ ion-item.userPointsSection::part(native) {
 
 .userPointsImg {
     width: 50px;
+    --overflow: visible;
 }
 
 ion-item.workoutPlanPointsSection::part(native) {
@@ -75,7 +77,7 @@ ion-button {
     --background: #457B9D;
   --background-hover: #457B9D;
   --color: white;
-  font-size: 25px;
+  font-size: 24px;
   height: 40px;
   --border-radius: 12px;
 }

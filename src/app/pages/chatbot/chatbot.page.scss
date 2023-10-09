@@ -3,7 +3,7 @@
   border-radius: 15px;
   padding: 10px;
   margin-bottom: 10px;
-  margin-right: auto; // Push the message to the left
+  margin-left: auto; // Push the message to the left
   max-width: 70%; // Limit the width to a percentage of the container
   align-self: flex-start; 
   
@@ -25,7 +25,7 @@ ion-footer{
    color: #000;
    border-radius: 15px;
    padding: 10px;
-   margin-left: auto; 
+   margin-right: auto; 
    max-width: 70%; 
    align-self: flex-end; 
    white-space: pre-line;
@@ -87,29 +87,6 @@ ion-footer{
     filter: none;
   }
 
-  // .input-field-container {
-  //   display: flex;
-  //   align-items: center;
-  //   flex: 1; 
-  // }
-  
-  // .message-input-field {
-  //   margin-right: 10px; 
-  //   flex: 1; 
-  // }
-    
-  .typing-indicator{
-    background-color: #e2e6e9; 
-    color: #000;
-    border-radius: 15px;
-    padding: 10px;
-    margin-left: auto; 
-    max-width: 70%; 
-    align-self: flex-end; 
-    white-space: pre-line;
-    margin-bottom: 10px;
-  }
-
   @keyframes ellipsis {
     0% {
       content: '.';
@@ -127,9 +104,9 @@ ion-footer{
     color: #000;
     border-radius: 15px;
     padding: 10px;
-    margin-left: auto;
+    margin-left: 10px; /* Adjust the margin-left to position it to the left */
     max-width: 70%;
-    align-self: flex-end;
+    align-self: flex-start; /* Align it to the start (left) */
     white-space: pre-line;
     margin-bottom: 10px;
     position: relative;
@@ -144,7 +121,7 @@ ion-footer{
     position: absolute;
     width: 0;
     height: 0;
-    left: 5px;
+    left: -10px; /* Adjust the left position to move it to the left */
     bottom: -3px;
     border-style: solid;
     border-width: 10px 10px 0;
@@ -156,8 +133,4 @@ ion-footer{
     font-size: 20px;
     animation: ellipsis 0.75s infinite;
   }
-
-  // .input-field-footer .message-input-field .input-field-container ion-textarea{
-  //   padding-top: 4%;
-  // }
   
