@@ -18,6 +18,7 @@ export class GoalviewPage  implements OnInit {
 
   today: string;
   tommorow: string;
+  starteddate: any;
   constructor(private fb: FormBuilder,
               private store: Store,
               private fitnessgaolservive: FitnessgoalService,
@@ -167,17 +168,27 @@ export class GoalviewPage  implements OnInit {
   }
 
   isValid(formData :any) {
+
+    if(formData.start != null)
+    {
+      this.starteddate = formData.start;
+    }
+
     if (
         formData.name != null &&
         formData.description != null &&
         formData.start != null &&
         formData.end != null &&
         this.Taskses.length > 0
-    ) {
-      // console.log('Form is valid');
+    )
+    {
+
+
+
       return true;
-    } else {
-      // console.log('Form is not valid');
+    }
+    else
+    {
       return false;
     }
   }
