@@ -194,8 +194,7 @@
 
 
 .ios body[color-theme="light"] {
-  //
-  --main-color: #F58653; //Tangerine Orange
+  /** color theme **/
   --primary-color: #628BA0; // Slate Blue
   --secondary-color: #79919D; // Steel BLue
   --secondary-variant-color: #BFDBEA; // Light Sky Blue
@@ -205,7 +204,7 @@
 
   --input-field-color: white;
   --button-secondary-color: white;
-  --ion-background-color: #ffffff;
+  --ion-background-color: var(--background-color);
 
   --ion-text-color: var(--primary-color);
 
@@ -240,16 +239,7 @@
   --ion-tab-bar-color: #0077ff;
   --ion-item-divider-color: var(--background-color);
   --ion-modal-background-color: var(--background-color);
-  --ion-label-color: #0077ff;
-
-  h2
-  {
-    color: #0077ff;
-  }
-  p
-  {
-    color: #0077ff;
-  }
+  --ion-label-color: var(--primary-color);
 }
 
   .ios ion-modal {
