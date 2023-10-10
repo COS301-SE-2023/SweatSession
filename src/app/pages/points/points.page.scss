@@ -1,11 +1,11 @@
 :root {
-    --custom-red: #FF0000; /* Replace with your desired shade of red */
+    // --custom-red: #FF0000; /* Replace with your desired shade of red */
 }
 
 ion-item.userPointsSection::part(native) {
-    --background: #1D3557;
+    // --background: #1D3557;
     --border-radius: 12px;
-    color: white;
+    // color: white;
     margin: 0 auto;
     overflow: initial;
     width: calc(100% - 30px);
@@ -37,9 +37,9 @@ ion-item.userPointsSection::part(native) {
 }
 
 ion-item.workoutPlanPointsSection::part(native) {
-    --background: #1D3557;
+    // --background: #1D3557;
     --border-radius: 12px;
-    color: white;
+    // color: white;
     margin: 0 auto;
     width: calc(100% - 30px);
     margin-top: 30px;
@@ -74,9 +74,9 @@ ion-button {
     width: 100%;
     margin-bottom: 10px;
 
-    --background: #457B9D;
-  --background-hover: #457B9D;
-  --color: white;
+//     --background: #457B9D;
+//   --background-hover: #457B9D;
+//   --color: white;
   font-size: 24px;
   height: 40px;
   --border-radius: 12px;
@@ -92,8 +92,8 @@ ion-button {
 }
 
 .custom-progress-bar {
-    --background: #E63946;
-    --progress-background: #A8DADC;
+    // --background: #E63946;
+    // --progress-background: #A8DADC;
   width: 100%;
   height: 20px;
   border-radius: 12px;
@@ -112,9 +112,9 @@ ion-button {
 
 .wpPointsSection{
     width: 100%;
-    --background: #1D3557;
-    --border-color: #1D3557;
-    color: white;
+    // --background: #1D3557;
+    // --border-color: #1D3557;
+    // color: white;
 }
 
 .wpNumberValue {
@@ -130,9 +130,9 @@ ion-button {
 }
 
 ion-item.workoutSessionPointsSection::part(native) {
-    --background: #1D3557;
-    --border-radius: 12px;
-    color: white;
+    // --background: #1D3557;
+    // --border-radius: 12px;
+    // color: white;
     margin: 0 auto;
     width: calc(100% - 30px);
     margin-top: 15px;
