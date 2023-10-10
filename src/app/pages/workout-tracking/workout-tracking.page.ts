@@ -1,5 +1,5 @@
   import { Component, OnInit } from '@angular/core';
-  import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
+  import {FormBuilder, FormGroup, FormArray, Validators} from '@angular/forms';
   import { AbstractControl } from '@angular/forms';
   import { take } from 'rxjs/operators';
   import { ExerciseService } from '../../services/exercise/exercise.service';
@@ -21,6 +21,7 @@ import { NavigationService } from 'src/app/services';
     exercisesArray: Exercise[] = [];
     deletedExercises: string[] = [];
     selectedExercises: any = {};
+    Incount: 0;
 
     constructor(
       private formBuilder: FormBuilder,
@@ -91,15 +92,45 @@ import { NavigationService } from 'src/app/services';
 
     addExercise() {
       const exerciseControl = this.formBuilder.group({
-        name: [''],
-        sets: [''],
-        reps: [''],
-        weight: [''],
-        duration: ['']
+        name: [null,[Validators.required]],
+        sets: [null,[Validators.required, Validators.min(2)]],
+        reps: [null,[Validators.required, Validators.min(2)]],
+        weight: [null, [Validators.required, Validators.min(2)]],
+        duration: [null, [Validators.required, Validators.min(1)]],
       });
+
       (this.workoutForm.get('exercises') as FormArray).push(exerciseControl);
     }
-    
+
+    IsItvalid()
+    {
+      const Outcount : number = this.workoutForm.get('exercises')?.value.length;
+      this.Incount = 0;
+
+      this.workoutForm.get('exercises')?.value.forEach((element: any) =>
+      {
+        if
+        (
+            element.name != null && element.sets != null &&
+            element.reps != null && element.weight != null &&
+            element.duration != null
+        )
+        {
+          this.Incount++;
+        }
+
+      });
+
+      if (this.Incount === Outcount)
+        {
+            return true;
+        }
+      else
+      {
+        return false;
+      }
+    }
+
     deleteExercise(index: number) {
       const exercise = this.exercisesArray[index];
       if (exercise.id) {
@@ -108,6 +139,7 @@ import { NavigationService } from 'src/app/services';
       this.exercises.removeAt(index);
       this.updateSelectedExerciseValues();
     }
+
     public async saveExercise(exerciseData: Exercise, index: number) {
       let exercise = this.exercisesArray[index];
     
@@ -161,6 +193,8 @@ import { NavigationService } from 'src/app/services';
       const selectedValue = (event.target as HTMLSelectElement).value;
       this.selectedExercises[exerciseNo] = selectedValue;
     }
+
+
   
     hasWeight(exerciseNo: number){
       // console.log(this.selectedExercises);
