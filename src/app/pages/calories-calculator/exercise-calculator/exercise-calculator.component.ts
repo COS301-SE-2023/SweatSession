@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { getAuth } from '@angular/fire/auth';
-import { FormBuilder, FormGroup, FormArray, AbstractControl } from '@angular/forms';
+import {FormBuilder, FormGroup, FormArray, AbstractControl, Validators} from '@angular/forms';
 import { take, tap } from 'rxjs';
 import { Exercise } from 'src/app/models/exercise.model';
 import { ExerciseService, WorkoutscheduleService } from 'src/app/services';
@@ -50,6 +50,7 @@ export class ExerciseCalculatorComponent implements OnInit {
     // "pushUps": 8,
   }
   selectedExercises: any = {};
+  Incount: 0;
   // exerciseOptions: string[] = ["Exercise 1", "Exercise 2", "Exercise 3", "Exercise 4"];
 
   constructor(
@@ -66,9 +67,12 @@ export class ExerciseCalculatorComponent implements OnInit {
   async ngOnInit() {
     const auth = getAuth();
     this.currUserId = auth.currentUser?.uid;
-    if (this.currUserId != undefined) {
+    if (this.currUserId != undefined)
+    {
       sessionStorage.setItem('currUserId', this.currUserId);
-    } else {
+    }
+    else
+    {
       this.currUserId = sessionStorage.getItem('currUserId')!;
     }
     // this.exerciseService.getExerciseByScheduleId(this.scheduleId).pipe(take(1)).subscribe((exercises) => {
@@ -94,17 +98,49 @@ export class ExerciseCalculatorComponent implements OnInit {
 
   async addExercise() {
     const exerciseControl = this.formBuilder.group({
-      name: [''],
-      sets: [''],
-      reps: [''],
-      weight: [''],
-      duration: ['']
+      name: ['',[Validators.required]],
+      sets: ['',[Validators.required, Validators.min(2)]],
+      reps: ['',[Validators.required, Validators.min(2)]],
+      weight: ['', [Validators.required, Validators.min(2)]],
+      duration: ['', [Validators.required, Validators.min(1)]],
     });
     (this.workoutForm.get('exercises') as FormArray).push(exerciseControl);
     // await this.calculateTotalCaloriesBurned();
     console.log(this.workoutForm.get('exercises') as FormArray);
   }
 
+
+  IsItvalid()
+  {
+    const Outcount : number = this.workoutForm.get('exercises')?.value.length;
+    this.Incount = 0;
+
+    this.workoutForm.get('exercises')?.value.forEach((element: any) =>
+    {
+      if
+      (
+          element.name != '' &&
+          element.sets != '' &&
+          element.reps != '' &&
+          element.weight != '' &&
+          element.duration != ''
+      )
+      {
+        this.Incount++;
+      }
+
+    });
+
+    if (this.Incount === Outcount)
+    {
+      return true;
+    }
+    else
+    {
+      return false;
+    }
+
+  }
   get exercises(): FormArray {
     return this.workoutForm.get('exercises') as FormArray;
   }
