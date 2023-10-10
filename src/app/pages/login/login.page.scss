@@ -10,11 +10,11 @@
             .welcome-title {
                 font-size: x-large;
                 font-weight: bolder;
-                color: var(--main-color);
+                // color: var(--main-color);
             }
 
             .welcome-subtitle {
-                color: var(--primary-color);
+                // color: var(--primary-color);
             }
         }
         
@@ -23,7 +23,7 @@
             .input-field-container {
                 margin-top: 20px;
                 .input-field {
-                    background-color: var(--input-field-color);
+                    // background-color: var(--input-field-color);
                     margin-top: 10px;
                     border-radius: 10px;
                 }
@@ -47,7 +47,7 @@
         }
 
         .register-link, .forgot-password {
-          color: var(--primary-color);
+        //   color: var(--primary-color);
           font-weight: bold;
         }
 
@@ -59,7 +59,7 @@
             .line {
                 flex: 1;
                 height: 1px;
-                background-color: #ccc;
+                // background-color: #ccc;
                 margin: 0 10px;
             }
               
@@ -67,7 +67,7 @@
                 font-weight: bold;
                 font-size: 16px;
                 padding: 0 10px;
-                color: var(--primary-color)
+                // color: var(--primary-color)
             }
         }
     }
