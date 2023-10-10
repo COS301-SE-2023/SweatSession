@@ -2,7 +2,6 @@
   <ion-searchbar [placeholder]="placeholder"
     [(ngModel)] = "searchTerms.searchQuery"
     (ionInput) = onSearchInput($event)
-    color="light"
     animated
   ></ion-searchbar>
   <ion-list *ngIf="searchTerms.showSuggestions">
