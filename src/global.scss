@@ -24,65 +24,62 @@
 @import "@ionic/angular/css/text-alignment.css";
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
-@import "theme/colortheme.scss";
+// @import "theme/colortheme.scss";
 
-// ion-item{
-//     --highlight-height: 0;
-//     --inner-border-width: 0;
+
+// ion-header {
+//   --ion-header-border-width: 0;
+//   --ion-header-box-shadow: none;
 // }
-ion-header {
-  --ion-header-border-width: 0;
-  --ion-header-box-shadow: none;
-}
 
-ion-footer {
-    background-color: var(--background-color);
-    --border: none;
-}
+// ion-footer {
+//     background-color: var(--background-color);
+//     --border: none;
+// }
 
-ion-content {
-    overflow-y: auto;
-    --background: var(--background-color);
-}
+// ion-content {
+//     overflow-y: auto;
+//     --background: var(--background-color);
+// }
 
-ion-card {
-    --background: var(--background-color);
-}
+// ion-card {
+//     --background: var(--background-color);
+// }
 
-ion-modal {
-    background-color: var(--background-color);
-}
+// ion-modal {
+//     background-color: var(--background-color);
+// }
 
 .larger-back-button {
     --padding-start: 12px; 
     --padding-end: 12px; 
     font-size: 24px; 
-    color: var(--primary-color) !important;
+    // color: var(--primary-color) !important;
 }
 
 ion-title {
     text-align: center;
 }
 
-ion-toolbar {
-    --background: var(--background-color);
-    --color: var(--primary-color) !important;
-}
+// ion-toolbar {
+//     --background: var(--background-color);
+//     --color: var(--primary-color) !important;
+// }
 
-ion-toolbar *{
-    --color: var(--primary-color) !important;
-}
+// ion-toolbar *{
+//     --color: var(--primary-color) !important;
+// }
 
-ion-toolbar ion-item {
-    --background: transparent;
-    --color: var(--primary-color) !important;
-}
+// ion-toolbar ion-item {
+//     --background: transparent;
+//     --color: var(--primary-color) !important;
+// }
 
-* {
-    font-family: 'Montserrat', sans-serif;
-    transition: .2;
-    --color: var(--secondary-color) !important;
-}
+// * {
+//     font-family: 'Montserrat', sans-serif;
+//     transition: .2;
+//     --color: var(--secondary-color) !important;
+// }
 
 ion-chip {
     background-color: transparent;
@@ -101,19 +98,19 @@ ion-spinner {
     height: 100%;
 }
 
-ion-fab-button  {
-    --background: var(--main-color);
-    --background-hover: var(--ripple-main-color);
-    --background-activated: var(--ripple-main-color);
-    --background-focused: var(--ripple-main-color);
-    --color: white !important;
-    --ripple-color: var(--ripple-main-color);
-    opacity: 0.9;
-}
+// ion-fab-button  {
+//     --background: var(--main-color);
+//     --background-hover: var(--ripple-main-color);
+//     --background-activated: var(--ripple-main-color);
+//     --background-focused: var(--ripple-main-color);
+//     --color: white !important;
+//     --ripple-color: var(--ripple-main-color);
+//     opacity: 0.9;
+// }
 
 ion-segment {
     border-radius: 0px;
-    background-color: var(--primary-color);
+    // background-color: var(--primary-color);
 }
 
 .message-input-field {
@@ -163,10 +160,10 @@ swiper-container::part(bullet-active) {
 }
 
 ion-button:not(.backbutton,.default-button, .white-button) {
-    --background: var(--main-color);
-    --background-hover: var(--ripple-main-color);
-    --background-activated: var(--ripple-main-color);
-    --background-focused: var(--ripple-main-color);
+    // --background: var(--main-color);
+    // --background-hover: var(--ripple-main-color);
+    // --background-activated: var(--ripple-main-color);
+    // --background-focused: var(--ripple-main-color);
     --border-radius: 10px;
     --padding: 10px;
   
@@ -174,20 +171,20 @@ ion-button:not(.backbutton,.default-button, .white-button) {
     --border-width: 2px;
     --border-color: var(--main-color);
   
-    --color: white !important;
+    // --color: white !important;
 }
 
 .white-button {
-    --background: var(--button-secondary-color);
-    --color: var(--primary-color);
+    // --background: var(--button-secondary-color);
+    // --color: var(--primary-color);
     --border-radius: 10px;
-    --background-hover: var(--ripple-white-color);
-    --background-activated: var(--ripple-white-color);
-    --background-focused: var(--ripple-white-color);
+    // --background-hover: var(--ripple-white-color);
+    // --background-activated: var(--ripple-white-color);
+    // --background-focused: var(--ripple-white-color);
 
     --border-style: solid;
     --border-width: 2px;
-    --border-color: var(--button-secondary-color);
+    // --border-color: var(--button-secondary-color);
 }
 
 ion-segment {
@@ -227,7 +224,7 @@ swiper-container {
 }
 
 swiper-container::part(bullet-active) {
-    background-color: var(--main-color);
+    // background-color: var(--main-color);
     position: relative;
     bottom: -10px;
 }
@@ -239,7 +236,7 @@ swiper-container::part(bullet) {
 
 .clickable:hover {
     zoom:1.05;
-    color: var(--secondary-variant-color);
+    // color: var(--secondary-variant-color);
 }
 
 .group-options {
@@ -265,5 +262,5 @@ html {
 }
 
 canvas {
-    background-color: var(--background-color);
+    // background-color: var(--background-color);
 }

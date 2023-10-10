@@ -194,17 +194,28 @@
 
 
 .ios body[color-theme="light"] {
+  //
+  --main-color: #F58653; //Tangerine Orange
+  --primary-color: #628BA0; // Slate Blue
+  --secondary-color: #79919D; // Steel BLue
+  --secondary-variant-color: #BFDBEA; // Light Sky Blue
+  --background-color: #F2F8FC; // Pale Baby Blue
+  --ripple-main-color: #f1a785;
+  --ripple-white-color: whitesmoke;
+
+  --input-field-color: white;
+  --button-secondary-color: white;
   --ion-background-color: #ffffff;
 
-  --ion-text-color: #0077ff;
+  --ion-text-color: var(--primary-color);
 
-  --ion-color-step-50: #274c77;
+  --ion-color-step-50: var(--background-color);
   --ion-color-step-100: #204d9a;
   --ion-color-step-150: #1e6eda;
   --ion-color-step-200: #3a7cee;
   --ion-color-step-250: #588cec;
   --ion-color-step-300: #72a1ef;
-  --ion-color-step-350: #274c77;
+  --ion-color-step-350: var(--background-color);
   --ion-color-step-400: #b0d4ff;
   --ion-color-step-450: #c7e2f8;
   --ion-color-step-500: #fcf7f7;
@@ -219,25 +230,25 @@
   --ion-color-step-950: #f2f2f2;
 
 
-  --ion-item-background: #274c77;
+  --ion-item-background: var(--background-color);
 
-  --ion-card-background: #274c77;
-  --ion-toolbar-background: #274c77;
-  --ion-item-background: #274c77;
-  --ion-tab-bar-background: #274c77;
-  --ion-tab-bar-border-color: #274c77;
-  --ion-tab-bar-color: #ffffff;
-  --ion-item-divider-color: #274c77;
-  --ion-modal-background-color: #274c77;
-  --ion-label-color: #ffffff;
+  --ion-card-background: var(--background-color);
+  --ion-toolbar-background: var(--background-color);
+  --ion-item-background: var(--background-color);
+  --ion-tab-bar-background: var(--background-color);
+  --ion-tab-bar-border-color: var(--background-color);
+  --ion-tab-bar-color: #0077ff;
+  --ion-item-divider-color: var(--background-color);
+  --ion-modal-background-color: var(--background-color);
+  --ion-label-color: #0077ff;
 
   h2
   {
-    color: #ffffff;
+    color: #0077ff;
   }
   p
   {
-    color: #ffffff;
+    color: #0077ff;
   }
 }
 
