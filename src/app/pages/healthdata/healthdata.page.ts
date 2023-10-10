@@ -40,17 +40,19 @@ export class HealthDataPage implements OnInit {
     private profileService: ProfileService, 
     private firestore: AngularFirestore, 
     private notifyService: NotifyService) {
+
     this.healthDataForm = this.formBuilder.group({
-      height: ['', Validators.required],
-      weight: ['', Validators.required],
-      diet: ['', Validators.required],
-      medicalConditions: ['', Validators.required],
-      workoutCommitment: ['', Validators.required],
+      height: ['', [Validators.required, Validators.min(100), Validators.max(251)]],
+      weight: ['', [Validators.required, Validators.min(30), Validators.max(640)]], // Weight should be a number
       gender: ['', Validators.required],
-      age: ['', Validators.required], 
+      age: ['', [Validators.required, Validators.min(16), Validators.max(130)]], // Age should be a number
+      diet: [''],
+      medicalConditions: [''],
+      weightGoals: ['', Validators.required],
+      workoutCommitment: ['', Validators.required],
       displayName: [''],
       currUserId: [''],
-      weightGoals: ['', Validators.required],
+
     });
   }
 
