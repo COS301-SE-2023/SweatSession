@@ -30,20 +30,20 @@
         <ion-select-option value="Push ups">Push ups</ion-select-option>
       </ion-select>
     </ion-item>
-  
+
     <ion-item lines="none">
-      <ion-label position="stacked">Weight</ion-label>
-      <ion-input placeholder="Enter Weight (kg)" formControlName="weight" type="number"></ion-input>
+        <ion-label position="stacked">Weight(kg)</ion-label>
+        <ion-input placeholder="Enter Weight" formControlName="weight" type="number"></ion-input>
     </ion-item>
-  
+
     <ion-item lines="none">
         <ion-label position="stacked">Repetitions</ion-label>
         <ion-input placeholder="Enter Reps" formControlName="reps" type="number"></ion-input>
     </ion-item>
-  
+
     <ion-item lines="none">
         <ion-label position="stacked">Date</ion-label>
-        <ion-input type="date" displayFormat="YYYY/MM/DD" formControlName="date"></ion-input>
+        <ion-input max="{{getTodayDate()}}" type="date" displayFormat="YYYY/MM/DD" formControlName="date"></ion-input>
     </ion-item>
 
     <ion-item lines="none">
@@ -61,6 +61,12 @@
     <ion-item lines="none">
       <ion-label position="stacked">Notes</ion-label>
       <ion-input placeholder="Enter Notes" formControlName="notes" type="txt"></ion-input>
+    </ion-item>
+
+    <ion-item lines="none">
+      <ion-note color="danger" *ngIf="!isValid(PersonalBestForm.value)">
+        *All fields are required
+      </ion-note>
     </ion-item>
 
     <ion-button type="submit" class="submit-button" expand="block" [disabled]="!isValid(PersonalBestForm.value)"><ion-icon slot="start" name="checkmark"></ion-icon>Submit</ion-button>

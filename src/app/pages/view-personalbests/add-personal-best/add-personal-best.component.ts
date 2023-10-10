@@ -73,12 +73,12 @@ export class AddPersonalBestComponent implements OnInit {
   ngOnInit() 
   {
     this.PersonalBestForm = this.formBuilder.group({
-      exercise: null,
-      weight: null,
-      reps: null,
-      date: null,
-      location: null,
-      notes: null,
+      exercise: [null, [Validators.required]],
+      weight: [null, [Validators.required, Validators.min(0)]],
+      reps: [null, [Validators.required, Validators.min(0)]],
+      date: [null, [Validators.required]],
+      location: [null, [Validators.required]],
+      notes: [null, [Validators.required]],
     });
 
     this.PersonalBestForm.valueChanges.subscribe((formData) => {
