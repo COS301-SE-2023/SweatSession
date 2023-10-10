@@ -68,7 +68,7 @@ export class ExerciseExplorerPage implements  AfterViewInit  {
     this.renderer.setSize(canvas.clientWidth, canvas.clientHeight);
 
     this.scene = new THREE.Scene();
-    this.scene.background = new THREE.Color(0xffffff);
+    this.scene.background = new THREE.Color(0x000000);
     this.camera = new THREE.PerspectiveCamera(75, canvas.clientWidth / canvas.clientHeight, 0.1, 1000);
     this.camera.position.set(10, 10, 5);
     //this.camera.position.z = 5;
