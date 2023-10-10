@@ -8,6 +8,7 @@
     height: 100%;
     margin:0px;
     border-radius: 0px;
+    background-color: transparent;
 }
 
 .profile-label {
@@ -57,9 +58,6 @@ ion-title {
     display: flex;
     justify-content: center;
     margin-top: 20px;
-}
-
-ion-icon {
 }
 
 .edit-button {

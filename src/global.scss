@@ -24,28 +24,64 @@
 @import "@ionic/angular/css/text-alignment.css";
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
+@import "theme/colortheme.scss";
 
+// ion-item{
+//     --highlight-height: 0;
+//     --inner-border-width: 0;
+// }
+ion-header {
+  --ion-header-border-width: 0;
+  --ion-header-box-shadow: none;
+}
 
+ion-footer {
+    background-color: var(--background-color);
+    --border: none;
+}
 
 ion-content {
     overflow-y: auto;
+    --background: var(--background-color);
+}
+
+ion-card {
+    --background: var(--background-color);
+}
+
+ion-modal {
+    background-color: var(--background-color);
 }
 
 .larger-back-button {
     --padding-start: 12px; 
     --padding-end: 12px; 
     font-size: 24px; 
-    color: white !important;
+    color: var(--primary-color) !important;
 }
 
 ion-title {
     text-align: center;
 }
 
+ion-toolbar {
+    --background: var(--background-color);
+    --color: var(--primary-color) !important;
+}
+
+ion-toolbar *{
+    --color: var(--primary-color) !important;
+}
+
+ion-toolbar ion-item {
+    --background: transparent;
+    --color: var(--primary-color) !important;
+}
 
 * {
     font-family: 'Montserrat', sans-serif;
     transition: .2;
+    --color: var(--secondary-color) !important;
 }
 
 ion-chip {
@@ -65,18 +101,19 @@ ion-spinner {
     height: 100%;
 }
 
-//ion-fab-button  {
-//    --background: #A8DADC;
-//    --background-hover: #9ce0be;
-//    --background-activated: #88f4be;
-//    --background-focused: #88f4be;
-//    --color: #457b9d;
-//    --ripple-color: deeppink;
-//    opacity: 0.9;
-//}
+ion-fab-button  {
+    --background: var(--main-color);
+    --background-hover: var(--ripple-main-color);
+    --background-activated: var(--ripple-main-color);
+    --background-focused: var(--ripple-main-color);
+    --color: white !important;
+    --ripple-color: var(--ripple-main-color);
+    opacity: 0.9;
+}
 
 ion-segment {
     border-radius: 0px;
+    background-color: var(--primary-color);
 }
 
 .message-input-field {
@@ -125,26 +162,37 @@ swiper-container::part(bullet-active) {
     opacity: 0.9;
 }
 
-// colors
-// #A8DADC;
-// #457b9d
+ion-button:not(.backbutton,.default-button, .white-button) {
+    --background: var(--main-color);
+    --background-hover: var(--ripple-main-color);
+    --background-activated: var(--ripple-main-color);
+    --background-focused: var(--ripple-main-color);
+    --border-radius: 10px;
+    --padding: 10px;
+  
+    --border-style: solid;
+    --border-width: 2px;
+    --border-color: var(--main-color);
+  
+    --color: white !important;
+}
 
-ion-button:not(.backbutton,.default-button) {
-    //--background: linear-gradient(135deg, #A8DADC 10%, #457b9d 100%); //#A8DADC;
-    //--background-hover: #457b9d;
-    //--background-activated: #457b9d;
-    //--background-focused: #457b9d;
-    border-radius: 8px;
+.white-button {
+    --background: var(--button-secondary-color);
+    --color: var(--primary-color);
+    --border-radius: 10px;
+    --background-hover: var(--ripple-white-color);
+    --background-activated: var(--ripple-white-color);
+    --background-focused: var(--ripple-white-color);
 
     --border-style: solid;
     --border-width: 2px;
-    //--border-color: #457b9d;
-
-    //--color: white !important;//#457b9d;
+    --border-color: var(--button-secondary-color);
 }
 
 ion-segment {
     border-radius: 0px;
+    background-color: transparent;
 }
 
 .zero-content-container {
@@ -166,8 +214,8 @@ ion-segment {
         padding: 20px;
         .slides-headers {
             font-weight: bolder;
-            //color: #457B9D;
-            //--background: transparent;
+            // color: #457B9D;
+            --background: transparent;
         }
     }
 }
@@ -179,7 +227,7 @@ swiper-container {
 }
 
 swiper-container::part(bullet-active) {
-    background-color: #155ff8; // #A8DADC;
+    background-color: var(--main-color);
     position: relative;
     bottom: -10px;
 }
@@ -191,7 +239,7 @@ swiper-container::part(bullet) {
 
 .clickable:hover {
     zoom:1.05;
-    color: #1D3557;
+    color: var(--secondary-variant-color);
 }
 
 .group-options {
@@ -213,11 +261,9 @@ swiper-container::part(bullet) {
 /* For Firefox */
 html {
     scrollbar-width: none;
+    // background-color: #A8DADC;
 }
 
-// color theme
-// 0% {color: #1D3557;}
-// 25% {color: #457B9D;}
-// 50% {color: #A8DADC;}
-// 75% {color: #E63946;}
-// 100% {color: #F1FAEE;}
+canvas {
+    background-color: var(--background-color);
+}

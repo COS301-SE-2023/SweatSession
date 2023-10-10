@@ -8,6 +8,7 @@
     height: 100%;
     margin:0px;
     border-radius: 0px;
+    background-color: transparent;
 }
 
 .profile-label {
@@ -24,9 +25,6 @@
     width: 100%;
     padding-bottom: 20px;
 }
-
-swiper-container::part(bullet-active) {
-  }
 
 .otheruser-profile-activity {
     width: 100%;
@@ -56,7 +54,4 @@ ion-title {
     display: flex;
     justify-content: center;
     margin-top: 20px;
-}
-
-ion-icon {
 }
