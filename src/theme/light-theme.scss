@@ -45,6 +45,10 @@ body[color-theme="light"] {
   --ion-item-divider-color: var(--primary-color);
   --ion-modal-background-color: var(--background-color);
   --ion-label-color: var(--primary-color);
+  
+  ion-menu-button {
+    color: var(--primary-color);
+  }
 
   ion-text, p {
     color: var(--primary-text-color);
