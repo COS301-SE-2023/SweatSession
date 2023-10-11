@@ -101,6 +101,14 @@ body[color-theme="light"] {
   .message-timestamp {
     color: rgb(46, 46, 46);
   }
+
+  swiper-container::part(bullet-active) {
+    background-color: var(--primary-color); // #A8DADC;
+  }
+
+  .circle {
+    background-color: var(--primary-color);
+  }
 }
 
 // body[color-theme="light"] {

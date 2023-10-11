@@ -86,10 +86,6 @@ ion-segment {
     transition: 0.5;
 }
 
-swiper-container::part(bullet-active) {
-    background-color: #001b34; // #A8DADC;
-}
-
 .message-send-fab-button {
     width: 40px;
     height: 40px;
@@ -159,7 +155,6 @@ swiper-container {
 }
 
 swiper-container::part(bullet-active) {
-    // background-color: var(--main-color);
     position: relative;
     bottom: -10px;
 }
