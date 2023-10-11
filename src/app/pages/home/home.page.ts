@@ -31,15 +31,12 @@ export class HomePage implements OnInit {
   ngOnInit() 
   {
 
-    if(localStorage.getItem('darkmode')=='true')
-    {
-        document.body.setAttribute('color-theme','dark');
-        this.darkmode = true;
-
-    }else
-    {
-        document.body.setAttribute('color-theme','light');
-        this.darkmode = false;
+    if(localStorage.getItem('darkmode')=='true') {
+      document.body.setAttribute('color-theme','dark');
+      this.darkmode = true;
+    } else {
+      document.body.setAttribute('color-theme','light');
+      this.darkmode = false;
     }
 
     this.authAPI.getCurrentUserId().then((id) => {
