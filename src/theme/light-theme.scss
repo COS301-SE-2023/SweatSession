@@ -1,6 +1,7 @@
 body[color-theme="light"] {
     /** color theme **/
   --primary-color: #628BA0;
+  --primary-text-color: #628BA0;
   --secondary-color: #79919D;
   --secondary-variant-color: #BFDBEA;
   --background-color: #F2F8FC;
@@ -10,7 +11,7 @@ body[color-theme="light"] {
   --button-secondary-color: white;
   --ion-background-color: var(--background-color-light);
 
-  --ion-text-color: var(--primary-color);
+  --ion-text-color: var(--primary-text-color);
 
   --ion-color-step-50: var(--background-color);
   --ion-color-step-100: #204d9a;
@@ -46,7 +47,7 @@ body[color-theme="light"] {
   --ion-label-color: var(--primary-color);
 
   ion-text, p {
-    color: var( --secondary-color);
+    color: var(--primary-text-color);
   }
 
   ion-button:not(ion-buttons ion-button), ion-fab-button {
@@ -61,4 +62,86 @@ body[color-theme="light"] {
   ion-buttons ion-button {
     --color: var(--primary-color)
   }
+
+  ion-segment-button {
+    --indicator-color: var(--primary-color);
+  }
+
+  /* Android styles */
+  ion-segment-button.md {
+    --color-checked: var(--primary-color);
+  }
+  
+  /* iOS styles */
+  ion-segment-button.ios {
+    --color-checked: white;
+  }
+
+  ion-icon.md {
+    color: var(--primary-color);
+  }
+
+  ion-button:not(ion-buttons ion-button) ion-icon.md, ion-fab-button ion-icon.md{
+    color: white;
+  }
+
+  .message .message-content{
+    background-color: rgb(201, 201, 201);
+    color: black;
+    .smaller-item {
+      color: black;
+    }
+  }
+
+  .message-sent .message-content {
+    background-color: var(--secondary-variant-color); // #dcf8c6;
+    color: black;
+  }
+
+  .message-timestamp {
+    color: rgb(46, 46, 46);
+  }
 }
+
+// body[color-theme="light"] {
+//   --primary-color: #4a87a5;
+
+//   --ion-background-color: #F2F8FC;
+//   --ion-background-color-rgb: 255, 255, 255;
+//   --ion-text-color: var(--primary-color);
+//   --ion-text-color-rgb: 0, 0, 0;
+  
+//   --ion-color-step-50: #F2F8FC;
+//   --ion-color-step-100: #F2F8FC;
+//   --ion-color-step-150: #F2F8FC;
+//   --ion-color-step-200: #F2F8FC;
+//   --ion-color-step-250: #F2F8FC;
+//   --ion-color-step-300: #F2F8FC;
+//   --ion-color-step-350: #F2F8FC;
+//   --ion-color-step-400: #F2F8FC;
+//   --ion-color-step-450: #F2F8FC;
+//   --ion-color-step-500: #F2F8FC;
+//   --ion-color-step-550: #F2F8FC;
+//   --ion-color-step-600: #F2F8FC;
+//   --ion-color-step-650: #F2F8FC;
+//   --ion-color-step-700: #F2F8FC;
+//   --ion-color-step-750: #F2F8FC;
+//   --ion-color-step-800: #F2F8FC;
+//   --ion-color-step-850: #F2F8FC;
+//   --ion-color-step-900: #F2F8FC;
+//   --ion-color-step-950: #F2F8FC;
+  
+//   --ion-item-background: #F2F8FC;
+//   --ion-card-background: #F2F8FC;
+//   --ion-toolbar-background: #F2F8FC;
+//   --ion-item-background: #F2F8FC;
+//   --ion-tab-bar-background: #F2F8FC;
+//   --ion-tab-bar-border-color: #F2F8FC;
+//   --ion-tab-bar-color: var(--primary-color);
+//   --ion-item-divider-color: #F2F8FC;
+//   --ion-modal-background-color: #F2F8FC;
+  
+//   ion-text, p {
+//     color: var(--primary-color);
+//   }
+// }

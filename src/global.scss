@@ -117,16 +117,9 @@ ion-button:not(.backbutton,.default-button, .white-button) {
 }
 
 .white-button {
-    // --background: var(--button-secondary-color);
-    // --color: var(--primary-color);
     --border-radius: 10px;
-    // --background-hover: var(--ripple-white-color);
-    // --background-activated: var(--ripple-white-color);
-    // --background-focused: var(--ripple-white-color);
-
     --border-style: solid;
     --border-width: 2px;
-    // --border-color: var(--button-secondary-color);
 }
 
 ion-segment {
