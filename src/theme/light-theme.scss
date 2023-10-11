@@ -10,8 +10,9 @@ body[color-theme="light"] {
   --input-field-color: white;
   --button-secondary-color: white;
   --ion-background-color: var(--background-color-light);
+  --ion-color-primary: var(--primary-text-color);
 
-  --ion-text-color: var(--primary-text-color);
+  --ion-text-color: var(--primary-color);
 
   --ion-color-step-50: var(--background-color);
   --ion-color-step-100: #204d9a;
@@ -47,7 +48,7 @@ body[color-theme="light"] {
   --ion-label-color: var(--primary-color);
   
   ion-menu-button {
-    color: var(--primary-color);
+    color: var(--primary-text-color);
   }
 
   ion-text, p {
