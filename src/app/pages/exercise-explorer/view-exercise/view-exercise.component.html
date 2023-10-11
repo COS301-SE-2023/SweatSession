@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header class="ion-no-border">
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-button class="default-button" (click)="dismissModal()">
@@ -13,8 +13,8 @@
   <ion-item-divider>
     <ion-label> {{receivedBodypart.toLocaleUpperCase()}} EXERCISES</ion-label>
   </ion-item-divider>
-  <ion-card *ngFor="let ExerciseTuple of ExerciseDetails" style="--ion-background-color: #A8DADCFF">
-    <ion-card style="border-style: solid; border-width: thick;">
+  <ion-card *ngFor="let ExerciseTuple of ExerciseDetails">
+    <ion-card>
       <video controls style="width: 100%;" playsinline="" preload="metadata" muted="" autoplay="" loop="">
         <source [src]="ExerciseTuple.video.url" type="video/mp4">
       </video>

@@ -28,9 +28,7 @@ export class HomePage implements OnInit {
     private setpr: SetProfileService,
     private store: Store) { }
 
-  ngOnInit() 
-  {
-
+  ngOnInit() {
     if(localStorage.getItem('darkmode')=='true') {
       document.body.setAttribute('color-theme','dark');
       this.darkmode = true;

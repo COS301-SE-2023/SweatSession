@@ -1,9 +1,9 @@
 <ion-card>
   <ion-item class="schedule-header" id="viewer" lines="none">
     <ion-icon name="receipt-outline"></ion-icon>
-    <ion-text class="schedule-name">
+    <ion-card-header class="schedule-name">
       {{schedule.name}}
-    </ion-text>
+    </ion-card-header>
     <ion-button slot="end" (click)="join()" *ngIf="inSession()" [disabled]="joined()">{{ joined() ? "Joined" : "Join" }}</ion-button>
     <ion-icon name="chevron-down-outline" slot="end" (click)="viewSchedule()" *ngIf="!isSlideShow"></ion-icon>
     <ion-icon name="chevron-up-outline" slot="end" (click)="viewSchedule()" *ngIf="isSlideShow"></ion-icon>
