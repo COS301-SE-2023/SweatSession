@@ -63,3 +63,35 @@ ion-input {
   padding-right: 0px;
   margin-right: 0px;
 }
+
+.outer-container {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  .inner-container {
+    width: 100%;
+    padding: 20px;
+    .title-container {
+        text-align: center;
+        .title {
+            font-weight: bolder;
+        }
+    }
+
+    .input-field-container {
+      margin-top: 20px;
+      .input-field {
+        background-color: white;
+        margin-top: 10px;
+        border-radius: 10px;
+        border: 2px solid var(--primary-color);
+        border-radius: 8px;
+        .member-status {
+          flex: 1;
+          text-align: center;
+          margin: 10px;
+        }
+      }
+    }
+  }
+}
