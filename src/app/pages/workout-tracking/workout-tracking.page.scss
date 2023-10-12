@@ -99,4 +99,7 @@ ion-toolbar ion-item{
 .inputField-container {
   text-align: start;
   margin-bottom: 10px;
+  .input-field {
+    border-radius: 8px;
+  }
 }
