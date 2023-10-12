@@ -21,142 +21,146 @@
   </div>
 
   <form [formGroup]="healthDataForm" *ngIf="!isLoading" (ngSubmit)="saveHealthData()">
-    <ion-list class="centered">
-
-        <ion-grid>
-            <ion-row>
-              <ion-item>
-                <ion-col size="6">
-                  <ion-item class="full-width" lines="none">
-                    <div class="input-field">
-                      <ion-label class="customlabel">Height (cm)</ion-label>
-                      <ion-input formControlName="height" type="number"></ion-input>
-                    </div>
-
-                  </ion-item>
-                </ion-col>
-
-                <ion-col size="6">
-                  <ion-item class="full-width" lines="none">
-                    <div class="input-field">
-                      <ion-label class="customlabel">Weight (kg)</ion-label>
-                      <ion-input formControlName="weight" type="text"></ion-input>
-                    </div>
-
-
-                  </ion-item>
-
-                </ion-col>
-              </ion-item>
-            </ion-row>
-          <ion-row>
-            <ion-item>
-              <ion-col size="6">
-                <ion-item class="full-width" lines="none">
-                  <div class="input-field">
-                    <ion-label class="customlabel">Sex</ion-label>
-                    <ion-select formControlName="gender">
-                      <ion-select-option value="Male">Male</ion-select-option>
-                      <ion-select-option value="Female">Female</ion-select-option>
-                      <ion-select-option value="Prefer not to say">Prefer not to say</ion-select-option>
-                    </ion-select>
-                  </div>
-                </ion-item>
-              </ion-col>
-
-              <ion-col size="6">
-                <ion-item class="full-width" lines="none">
-                  <div class="input-field">
-                    <ion-label class="customlabel">Age</ion-label>
-                    <ion-input formControlName="age" type="text"></ion-input>
-                  </div>
-                </ion-item>
-              </ion-col>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="6">
+          <div class="input-field-container">
+            <ion-label class="customlabel">Height (cm)</ion-label>
+            <ion-item class="input-field" lines="none">
+              <ion-input formControlName="height" type="number"></ion-input>
             </ion-item>
-          </ion-row>
+          </div>
+        </ion-col>
 
-        </ion-grid>
+        <ion-col size="6">
+          <div class="input-field-container">
+            <ion-label class="customlabel">Weight (kg)</ion-label>
+            <ion-item class="input-field" lines="none">
+              <ion-input formControlName="weight" type="text"></ion-input>
+            </ion-item>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="6">
+            
+          <div class="input-field-container">
+            <ion-label class="customlabel">Sex</ion-label>
+            <ion-item class="input-field" lines="none">
+              <ion-select formControlName="gender">
+                <ion-select-option value="Male">Male</ion-select-option>
+                <ion-select-option value="Female">Female</ion-select-option>
+                <ion-select-option value="Prefer not to say">Prefer not to say</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </div>
+      </ion-col>
 
+        <ion-col size="6">
+          <div class="input-field-container">
+            <ion-label class="customlabel">Age</ion-label>
+            <ion-item class="input-field" lines="none">
+              <ion-input formControlName="age" type="text"></ion-input>
+            </ion-item>
+          </div>
+        </ion-col>
+      </ion-row>
 
-      <ion-item class="full-width">
-        <div class="input-field">
-          <ion-label class="customlabel">Diet</ion-label>
-          <ion-input formControlName="diet" type="text"></ion-input>
+      <ion-row>
+        <ion-col size="12">
+          <div class="input-field-container">
+            <ion-label class="customlabel">Diet</ion-label>
+            <ion-item class="input-field" lines="none">
+              <ion-input formControlName="diet" type="text"></ion-input>
+            </ion-item>
+          </div>
+        </ion-col>
+      </ion-row>
+  
+
+  
+      <ion-row>
+        <ion-col size="12">
+          <div class="input-field-container">
+            <ion-label class="customlabel">Medical Conditions</ion-label>
+            <ion-item class="input-field" lines="none">
+              <ion-input formControlName="medicalConditions" type="text"></ion-input>
+            </ion-item>
+          </div>
+        </ion-col>
+      </ion-row>
+  
+      <ion-row>
+        <ion-col size="12">
+          <div class="input-field-container">
+            <ion-label class="customlabel" for="weightGoals">Weight Goals</ion-label>
+            <ion-item class="input-field" lines="none">
+              <ion-select formControlName="weightGoals" class="form-control">
+                <ion-select-option value="-1">Lose 1Kg per Week</ion-select-option>
+                <ion-select-option value="-0.75">Lose 0.75kg per week</ion-select-option>
+                <ion-select-option value="-0.5">Lose 0.5kg per week</ion-select-option>
+                <ion-select-option value="-0.25">Lose 0.25kg per week</ion-select-option>
+                <ion-select-option value="0">Maintain Weight</ion-select-option>
+                <ion-select-option value="0.25">Gain 0.25kg per week</ion-select-option>
+                <ion-select-option value="0.5">Gain 0.5kg per week</ion-select-option>
+                <ion-select-option value="0.75">Gain 0.75kg per week</ion-select-option>
+                <ion-select-option value="1">Gain 1kg per week</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </div>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="12">
+        <div class="input-field-container">
+          <ion-label class="customlabel" for="workoutCommitment">Workout Commitment</ion-label>
+          <ion-item class="input-field" lines="none">
+            <ion-select formControlName="workoutCommitment" class="form-control">
+              <ion-select-option value="Low Commitment (0-1 days/week)">Low Commitment (0-1 days/week)</ion-select-option>
+              <ion-select-option value="Medium Commitment (2-3 days/week)">Medium Commitment (2-3 days/week)</ion-select-option>
+              <ion-select-option value="High Commitment (4-5 days/week)">High Commitment (4-5 days/week)</ion-select-option>
+              <ion-select-option value="Extreme Commitment (6+ days/week)">Extreme Commitment (6+ days/week)</ion-select-option>
+            </ion-select>
+          </ion-item>
         </div>
-      </ion-item>
+        </ion-col>
+      </ion-row>
 
-      <ion-item class="full-width">
-        <div class="input-field">
-          <ion-label class="customlabel">Medical Conditions</ion-label>
-          <ion-input formControlName="medicalConditions" type="text"></ion-input>
-        </div>
-      </ion-item>
-      <ion-item class="full-width">
-        <div class="input-field">
-          <ion-label class="customlabel" for="weightGoals">Weight Goals:</ion-label>
-          <select formControlName="weightGoals" class="form-control">
-            <option value="-1">Lose 1Kg per Week</option>
-            <option value="-0.75">Lose 0.75kg per week</option>
-            <option value="-0.5">Lose 0.5kg per week</option>
-            <option value="-0.25">Lose 0.25kg per week</option>
-            <option value="0">Maintain Weight</option>
-            <option value="0.25">Gain 0.25kg per week</option>
-            <option value="0.5">Gain 0.5kg per week</option>
-            <option value="0.75">Gain 0.75kg per week</option>
-            <option value="1">Gain 1kg per week</option>
-          </select>
-        </div>
-      </ion-item>
-      <ion-item class="full-width">
-        <div class="input-field">
-          <ion-label class="customlabel" for="workoutCommitment">Workout Commitment:</ion-label>
-            <select formControlName="workoutCommitment" class="form-control">
-              <option value="Low Commitment (0-1 days/week)">Low Commitment (0-1 days/week)</option>
-              <option value="Medium Commitment (2-3 days/week)">Medium Commitment (2-3 days/week)</option>
-              <option value="High Commitment (4-5 days/week)">High Commitment (4-5 days/week)</option>
-              <option value="Extreme Commitment (6+ days/week)">Extreme Commitment (6+ days/week)</option>
-            </select>
-        </div>
-      </ion-item>
-      <ion-grid>
-        <ion-row>
-            <ion-note color="danger" *ngIf="healthDataForm.get('weight')?.hasError('required')" class="error-message">
-              *Weight is required.
-            </ion-note>
-            <ion-note color="danger" *ngIf="healthDataForm.get('weight')?.hasError('min') || healthDataForm.get('weight')?.hasError('max')" class="error-message">
-              *Please a valid weight in kg
-            </ion-note>
-        </ion-row>
-        <ion-row>
-            <ion-note color="danger" *ngIf="healthDataForm.get('height')?.hasError('required')" class="error-message">
-              *Height is required.
-            </ion-note>
-            <ion-note color="danger" *ngIf="healthDataForm.get('height')?.hasError('min') || healthDataForm.get('height')?.hasError('max')" class="error-message">
-              *Please a valid height in cm
-            </ion-note>
-        </ion-row>
-        <ion-row>
-            <ion-note color="danger" *ngIf="healthDataForm.get('age')?.hasError('required')" class="error-message">
-              *Age is required.
-            </ion-note>
-            <ion-note color="danger" *ngIf="healthDataForm.get('age')?.hasError('min')" class="error-message">
-              *you must be at least 16 years old
-            </ion-note>
-            <ion-note color="danger" *ngIf="healthDataForm.get('age')?.hasError('max')" class="error-message">
-              *you must be at most 130 years old
-            </ion-note>
-        </ion-row>
-        <ion-row>
-            <ion-note color="danger" *ngIf="!healthDataForm.valid">
-              *Please fill in all the fields
-            </ion-note>
-        </ion-row>
-
-
-      </ion-grid>
-
+      <ion-row>
+          <ion-note color="danger" *ngIf="healthDataForm.get('weight')?.hasError('required')" class="error-message">
+            *Weight is required.
+          </ion-note>
+          <ion-note color="danger" *ngIf="healthDataForm.get('weight')?.hasError('min') || healthDataForm.get('weight')?.hasError('max')" class="error-message">
+            *Please a valid weight in kg
+          </ion-note>
+      </ion-row>
+      <ion-row>
+          <ion-note color="danger" *ngIf="healthDataForm.get('height')?.hasError('required')" class="error-message">
+            *Height is required.
+          </ion-note>
+          <ion-note color="danger" *ngIf="healthDataForm.get('height')?.hasError('min') || healthDataForm.get('height')?.hasError('max')" class="error-message">
+            *Please a valid height in cm
+          </ion-note>
+      </ion-row>
+      <ion-row>
+          <ion-note color="danger" *ngIf="healthDataForm.get('age')?.hasError('required')" class="error-message">
+            *Age is required.
+          </ion-note>
+          <ion-note color="danger" *ngIf="healthDataForm.get('age')?.hasError('min')" class="error-message">
+            *you must be at least 16 years old
+          </ion-note>
+          <ion-note color="danger" *ngIf="healthDataForm.get('age')?.hasError('max')" class="error-message">
+            *you must be at most 130 years old
+          </ion-note>
+      </ion-row>
+      <ion-row>
+          <ion-note color="danger" *ngIf="!healthDataForm.valid">
+            *Please fill in all the fields
+          </ion-note>
+      </ion-row>
+    </ion-grid>
 
       <ion-button class="submit"  expand="block" type="submit" [disabled]="!healthDataForm.valid" (click)="startBeating()">Submit</ion-button>
-    </ion-list>
   </form>
 </ion-content>
