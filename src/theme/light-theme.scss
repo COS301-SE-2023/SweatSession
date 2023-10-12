@@ -114,6 +114,27 @@ body[color-theme="light"] {
   .circle {
     background-color: var(--primary-color);
   }
+
+  ion-card {
+    ion-card-title {
+      color: var(--primary-color);
+    }
+    color: var(--primary-color);
+  }
+
+  .schedule-header, .exercise-button {
+    background-color: var(--primary-color);
+    color: white;
+    .schedule-name, ion-icon {
+      color: white;
+    }
+  }
+
+  .input-field {
+    border: 2px solid var(--primary-color);
+    border-radius: 8px;
+  }
+
 }
 
 // body[color-theme="light"] {

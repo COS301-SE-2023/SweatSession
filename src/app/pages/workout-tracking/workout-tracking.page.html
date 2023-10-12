@@ -22,45 +22,60 @@
         <div formArrayName="exercises" *ngFor="let exercise of exercises.controls; index as i">
           <div class="exercise-number">Exercise {{ i + 1 }}</div>
           <div [formGroupName]="i">
-            <ion-item lines="none">
-              <ion-select formControlName="name" placeholder="Select an exercise" (change)="exerciseSelected($event, i)">
-                <ion-select-option value="Barbell Curls">Barbell Curls</ion-select-option>
-                <ion-select-option value="Barbell Rows">Barbell Rows</ion-select-option>
-                <ion-select-option value="Bench Presses">Bench Presses</ion-select-option>
-                <ion-select-option value="Bicep Curls">Bicep Curls</ion-select-option>
-                <ion-select-option value="Burpees">Burpees</ion-select-option>
-                <ion-select-option value="Calf Raises">Calf Raises</ion-select-option>
-                <ion-select-option value="Chest Press">Chest Press</ion-select-option>
-                <ion-select-option value="Crunches">Crunches</ion-select-option>
-                <ion-select-option value="Deadlifts">Deadlifts</ion-select-option>
-                <ion-select-option value="Dumbbell Rows">Dumbbell Rows</ion-select-option>
-                <ion-select-option value="Jumping Jacks">Jumping Jacks</ion-select-option>
-                <ion-select-option value="Leg Curls">Leg Curls</ion-select-option>
-                <ion-select-option value="Leg Presses">Leg Presses</ion-select-option>
-                <ion-select-option value="Lunges">Lunges</ion-select-option>
-                <ion-select-option value="Planks">Planks</ion-select-option>
-                <ion-select-option value="Pull-Ups">Pull-Ups</ion-select-option>
-                <ion-select-option value="Push-Ups">Push-Ups</ion-select-option>
-                <ion-select-option value="Seated Cable Rows">Seated Cable Rows</ion-select-option>
-                <ion-select-option value="Sit-Ups">Sit-Ups</ion-select-option>
-                <ion-select-option value="Squats">Squats</ion-select-option>
-                <ion-select-option value="Stretches">Stretches</ion-select-option>
-                <ion-select-option value="Tricep Curls">Tricep Curls</ion-select-option>
-              </ion-select>
-            </ion-item>
+            <div class="inputField-container">
+              <ion-label>Exercise name*</ion-label>
+              <ion-item lines="none" class="input-field">
+                <ion-select formControlName="name" placeholder="Select an exercise" (change)="exerciseSelected($event, i)">
+                  <ion-select-option value="Barbell Curls">Barbell Curls</ion-select-option>
+                  <ion-select-option value="Barbell Rows">Barbell Rows</ion-select-option>
+                  <ion-select-option value="Bench Presses">Bench Presses</ion-select-option>
+                  <ion-select-option value="Bicep Curls">Bicep Curls</ion-select-option>
+                  <ion-select-option value="Burpees">Burpees</ion-select-option>
+                  <ion-select-option value="Calf Raises">Calf Raises</ion-select-option>
+                  <ion-select-option value="Chest Press">Chest Press</ion-select-option>
+                  <ion-select-option value="Crunches">Crunches</ion-select-option>
+                  <ion-select-option value="Deadlifts">Deadlifts</ion-select-option>
+                  <ion-select-option value="Dumbbell Rows">Dumbbell Rows</ion-select-option>
+                  <ion-select-option value="Jumping Jacks">Jumping Jacks</ion-select-option>
+                  <ion-select-option value="Leg Curls">Leg Curls</ion-select-option>
+                  <ion-select-option value="Leg Presses">Leg Presses</ion-select-option>
+                  <ion-select-option value="Lunges">Lunges</ion-select-option>
+                  <ion-select-option value="Planks">Planks</ion-select-option>
+                  <ion-select-option value="Pull-Ups">Pull-Ups</ion-select-option>
+                  <ion-select-option value="Push-Ups">Push-Ups</ion-select-option>
+                  <ion-select-option value="Seated Cable Rows">Seated Cable Rows</ion-select-option>
+                  <ion-select-option value="Sit-Ups">Sit-Ups</ion-select-option>
+                  <ion-select-option value="Squats">Squats</ion-select-option>
+                  <ion-select-option value="Stretches">Stretches</ion-select-option>
+                  <ion-select-option value="Tricep Curls">Tricep Curls</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </div>
 
-            <ion-item lines="none">
-              <ion-input formControlName="sets" type="number" placeholder="Sets" *ngIf="hasSets(i)"></ion-input>
-            </ion-item>
-            <ion-item lines="none">
-              <ion-input formControlName="reps" type="number" placeholder="Repetitions" *ngIf="hasReps(i)"></ion-input>
-            </ion-item>
-            <ion-item lines="none">
-              <ion-input formControlName="weight" type="number" placeholder="Weight (kg)" *ngIf="hasWeight(i)"></ion-input>
-            </ion-item>
-            <ion-item lines="none">
-              <ion-input formControlName="duration" type="number" placeholder="Duration (min)"></ion-input>
-            </ion-item>
+            <div class="inputField-container" *ngIf="hasSets(i)">
+              <ion-label>Sets*</ion-label>
+              <ion-item lines="none" class="input-field">
+                <ion-input formControlName="sets" type="number" placeholder="Sets"></ion-input>
+              </ion-item>
+            </div>
+            <div class="inputField-container" *ngIf="hasReps(i)">
+              <ion-label>Reps*</ion-label>
+              <ion-item lines="none" class="input-field">
+                <ion-input formControlName="reps" type="number" placeholder="Repetitions"></ion-input>
+              </ion-item>
+            </div>
+            <div class="inputField-container" *ngIf="hasWeight(i)">
+              <ion-label>weight*</ion-label>
+              <ion-item lines="none" class="input-field">
+                <ion-input formControlName="weight" type="number" placeholder="Weight (kg)"></ion-input>
+              </ion-item>
+            </div>
+            <div class="inputField-container">
+              <ion-label>duration*</ion-label>
+              <ion-item lines="none" class="input-field">
+                <ion-input formControlName="duration" type="number" placeholder="Duration (min)"></ion-input>
+              </ion-item>
+            </div>
 
           </div>
           <ion-button color="danger" type="button" (click)="deleteExercise(i)">
