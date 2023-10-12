@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Action, Selector, State, StateContext, Store } from "@ngxs/store";
 import { IMessage, IChatFriend, IGetChatFriends, IGetMessages, ISendMessage, IDeleteMessage, IProfileModel, IFriendsModel, IGroup, IGetGroups, IAddChatGroup, IJoinGroup, IRemoveChatGroup, IExitChatGroup, IGetGroup } from "src/app/models";
-import { DeleteMessage, GetMessages, SendMessage, GetChatFriends, StageChatFriend, GetFriendsProfiles, GetChatFriend, RemoveChatFriendSession, SendGroupMessage, RemoveChatGroupSession, AddChatGroup, JoinChatGroup, RemoveChatGroup, ExitChatGroup, StageChatGroup, GetGroupMessages, GetGroup, GetUserGroups, GetGroups, GetUser, StopChatFriendsLoading, RemoveChatGroupUser } from 'src/app/actions';
+import { DeleteMessage, GetMessages, SendMessage, GetChatFriends, StageChatFriend, GetFriendsProfiles, GetChatFriend, RemoveChatFriendSession, SendGroupMessage, RemoveChatGroupSession, AddChatGroup, JoinChatGroup, RemoveChatGroup, ExitChatGroup, StageChatGroup, GetGroupMessages, GetGroup, GetUserGroups, GetGroups, GetUser, StopChatFriendsLoading, RemoveChatGroupUser, AddGroupAdmin, EditGroup } from 'src/app/actions';
 import { AuthApi } from "../auth";
 import { FriendsService, MessagesService, NavigationService, OtheruserService } from "src/app/services";
 import { delay, of, switchMap, tap } from "rxjs";
@@ -292,7 +292,6 @@ export class MessagesState {
                 group: payload
             }
             this.service.addChatGroup(request);
-            this.navigation.back();
         }
     }
 
@@ -329,7 +328,6 @@ export class MessagesState {
             }
 
             this.service.removeChatGroup(request);
-            console.log('remove here...')
         }
     }
 
@@ -348,9 +346,8 @@ export class MessagesState {
     @Action(GetGroup)
     async getGroup(ctx: StateContext<MessagesStateModel>) {
         const group: IGroup = JSON.parse(sessionStorage.getItem("chatGroup")!);
-        (await this.groupService.getGroup(group.id!)).pipe(
-            tap((response)=>{
-                console.table(response);
+        return (await this.groupService.getGroup(group.id!)).pipe(
+            tap(async (response)=>{
                 ctx.patchState({
                     chatGroup: response
                 })
@@ -367,7 +364,25 @@ export class MessagesState {
         const currentUserId = await this.authApi.getCurrentUserId()
         if(currentUserId) {
             payload.adminId = currentUserId;
-            this.service.removeChatGroupUser(payload);
+            await this.service.removeChatGroupUser(payload);
+        }
+    }
+
+    @Action(AddGroupAdmin)
+    async addAdmin(ctx: StateContext<MessagesStateModel>, {payload}: AddGroupAdmin) {
+        const currentUserId = await this.authApi.getCurrentUserId()
+        if(currentUserId) {
+            payload.userId = currentUserId;
+            await this.groupService.addAdmin(payload);
+        }
+    }
+
+    @Action(EditGroup)
+    async editGroupProfile(ctx: StateContext<MessagesStateModel>, {payload}: EditGroup) {
+        const currentUserId = await this.authApi.getCurrentUserId()
+        if(currentUserId) {
+            payload.userId = currentUserId;
+            await this.groupService.editGroupProfile(payload);
         }
     }
 

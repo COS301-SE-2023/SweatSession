@@ -134,6 +134,13 @@ body[color-theme="light"] {
     border: 2px solid var(--primary-color);
   }
 
+  .group-options {
+    background-color: var(--primary-color);
+    *, ion-icon {
+      color: white;
+    }
+  }
+
 }
 
 // body[color-theme="light"] {

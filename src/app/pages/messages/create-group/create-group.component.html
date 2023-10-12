@@ -10,45 +10,51 @@
 </ion-header>
 
 <ion-content>
-  <ion-grid>
-    <ion-row>
-      <ion-col>
-        <ion-item>
-          <ion-label position="floating">Group Name</ion-label>
-          <ion-input type="text" [(ngModel)]="group.displayName"></ion-input>
-        </ion-item>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>
-        <ion-item>
-          <ion-label position="floating">Group Description</ion-label>
-          <ion-textarea [(ngModel)]="group.bio"></ion-textarea>
-        </ion-item>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>
-        <ion-item lines="none">
-          <ion-label position="stacked">Profile Photo</ion-label>
-          <input type="file" (change)="onFileSelected($event)" accept="image/*" />
-        </ion-item>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>
-        <ion-item *ngIf="group.profileURL" lines="none">
-          <ion-label>Selected Photo:</ion-label>
-          <ion-avatar slot="end">
-            <img [src]="group.profileURL" />
-          </ion-avatar>
-        </ion-item>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>
-        <ion-button expand="block" (click)="createGroup()" [disabled]="!isValidInput()">Create Group</ion-button>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+  <div class="outer-grid">
+    <ion-grid>
+      <ion-row class="ion-justify-content-center">
+        <ion-col size="12" size-lg="6">
+          <div class="title-container">
+            <h1 class="title"> Create Your Fitness Group</h1>
+            <h3 class="subtitle">Build a Community, Achieve Your Fitness Goals Together.</h3>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-justify-content-center">
+        <ion-col size="12" size-md="6"><div class="group-profile-container">
+          <div class="group-profile-inner-container">
+            <ion-avatar (click)="selectFile()" style="cursor: pointer; position: relative;">
+              <ion-img [src]="group.profileURL"></ion-img>
+              <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+                <p style="text-align: center; padding-top: 20%; font-weight: bolder;">Tap to select a new image</p>
+              </div>
+            </ion-avatar>
+            <input type="file" (change)="onFileSelected($event)" id="CreateGroupProfileImgInput" accept="image/*" style="display: none"/>
+          </div>
+        </div>
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-justify-content-center">
+        <ion-col size="12" size-md="6">
+          <ion-label position="floating">Group Name*</ion-label>
+          <ion-item class="input-field" lines="none">
+            <ion-input type="text" [(ngModel)]="group.displayName" placeholder="Enter Group Name"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-justify-content-center">
+        <ion-col size="12" size-md="6">
+          <ion-label position="floating">Group Description*</ion-label>
+          <ion-item class="input-field" lines="none">
+            <ion-textarea rows='4' autoGrow="true" maxlength="300" [(ngModel)]="group.bio" placeholder="Enter group description Name"></ion-textarea>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-justify-content-center">
+        <ion-col size="12" size-md="6">
+          <ion-button expand="block" (click)="createGroup()" [disabled]="!isValidInput()">Create Group</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
 </ion-content>

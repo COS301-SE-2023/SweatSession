@@ -117,3 +117,14 @@ export interface IRemoveChatGroupUser {
     userId: string;
     groupId: string;
 }
+
+export interface IEditGroup {
+    userId?: string;
+    group: IGroup
+}
+
+export interface IAddAmin {
+    userId?: string;
+    userIds: string[];
+    groupId: string;
+}

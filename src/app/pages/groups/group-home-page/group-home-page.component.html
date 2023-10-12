@@ -15,22 +15,22 @@
       </div>
       <div class="group-options" *ngIf="showOptions">
         <ion-list class="transparent-list">
-          <ion-item class="transparent-item" (click)="exitGroup()" *ngIf="!isOwner()">
+          <ion-item lines="none" class="transparent-item" (click)="exitGroup()" *ngIf="!isOwner()">
             <ion-icon name="exit-outline" slot="start"></ion-icon>
             <ion-label>Exit Group</ion-label>
           </ion-item>
-          <ion-item class="transparent-item" (click)="deleteGroup()" *ngIf="isOwner()">
+          <ion-item lines="none" class="transparent-item" (click)="deleteGroup()" *ngIf="isOwner()">
             <ion-icon name="trash-outline" slot="start"></ion-icon>
             <ion-label>Delete Group</ion-label>
           </ion-item>
-          <ion-item class="transparent-item" (click)="editGroup()" *ngIf="isAdmin()">
+          <ion-item lines="none" class="transparent-item" (click)="editGroup(); openModal()" *ngIf="isAdmin()" >
             <ion-icon name="create-outline" slot="start"></ion-icon>
             <ion-label>Edit Group</ion-label>
           </ion-item>
-          <ion-item class="transparent-item" (click)="reportGroup()">
+          <!-- <ion-item lines="none" class="transparent-item" (click)="reportGroup()">
             <ion-icon name="alert-outline" slot="start"></ion-icon>
             <ion-label>Report</ion-label>
-          </ion-item>
+          </ion-item> -->
         </ion-list>
       </div>      
       <div class="profile-inner-wrapper">
@@ -79,6 +79,8 @@
           <group-user *ngFor="let userId of selectedGroup.members"
           [userId]="userId"
           [currentUserId]="currentUserId"
+          [isCurrentUserAdmin]="isAdmin()"
+          [groupId]="selectedGroup.id!"
           ></group-user>
         </ion-list>
       </div>
@@ -105,5 +107,15 @@
          </div>
       </div>
     </div>
+
+    <!-- <ion-modal #modal [isOpen]="isModalOpen">
+      <ng-template>
+        
+        <ion-content>
+          <edit-group
+            [group]="selectedGroup"></edit-group>
+        </ion-content>
+      </ng-template>
+    </ion-modal> -->
 
 </ion-content>
