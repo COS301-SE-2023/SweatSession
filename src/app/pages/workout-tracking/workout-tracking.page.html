@@ -52,31 +52,40 @@
               </ion-item>
             </div>
 
-            <div class="inputField-container" *ngIf="hasSets(i)">
-              <ion-label>Sets*</ion-label>
-              <ion-item lines="none" class="input-field">
-                <ion-input formControlName="sets" type="number" placeholder="Sets"></ion-input>
-              </ion-item>
-            </div>
-            <div class="inputField-container" *ngIf="hasReps(i)">
-              <ion-label>Reps*</ion-label>
-              <ion-item lines="none" class="input-field">
-                <ion-input formControlName="reps" type="number" placeholder="Repetitions"></ion-input>
-              </ion-item>
-            </div>
-            <div class="inputField-container" *ngIf="hasWeight(i)">
-              <ion-label>weight*</ion-label>
-              <ion-item lines="none" class="input-field">
-                <ion-input formControlName="weight" type="number" placeholder="Weight (kg)"></ion-input>
-              </ion-item>
-            </div>
-            <div class="inputField-container">
-              <ion-label>duration*</ion-label>
-              <ion-item lines="none" class="input-field">
-                <ion-input formControlName="duration" type="number" placeholder="Duration (min)"></ion-input>
-              </ion-item>
-            </div>
-
+           <ion-row>
+             <ion-col size="6" size-lg="3">
+              <div class="inputField-container" *ngIf="hasSets(i)">
+                <ion-label>Sets*</ion-label>
+                <ion-item lines="none" class="input-field">
+                  <ion-input formControlName="sets" type="number" placeholder="Sets"></ion-input>
+                </ion-item>
+              </div>
+             </ion-col>
+             <ion-col size="6" size-lg="3">
+              <div class="inputField-container" *ngIf="hasReps(i)">
+                <ion-label>Reps*</ion-label>
+                <ion-item lines="none" class="input-field">
+                  <ion-input formControlName="reps" type="number" placeholder="Repetitions"></ion-input>
+                </ion-item>
+              </div>
+             </ion-col>
+             <ion-col size="6" size-lg="3">
+              <div class="inputField-container" *ngIf="hasWeight(i)">
+                <ion-label>weight*</ion-label>
+                <ion-item lines="none" class="input-field">
+                  <ion-input formControlName="weight" type="number" placeholder="Weight (kg)"></ion-input>
+                </ion-item>
+              </div>
+             </ion-col>
+             <ion-col size="6" size-lg="3">
+              <div class="inputField-container">
+                <ion-label>duration*</ion-label>
+                <ion-item lines="none" class="input-field">
+                  <ion-input formControlName="duration" type="number" placeholder="Duration (min)"></ion-input>
+                </ion-item>
+              </div>
+             </ion-col>
+           </ion-row>
           </div>
           <ion-button color="danger" type="button" (click)="deleteExercise(i)">
             <ion-icon name="trash"></ion-icon>
