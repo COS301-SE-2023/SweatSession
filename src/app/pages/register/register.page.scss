@@ -24,7 +24,8 @@
         .input-field-container {
             margin-top: 20px;
             .input-field {
-                background-color: var(--input-field-color);
+                border: 2px solid var(--primary-color);
+                // background-color: var(--input-field-color);
                 margin-top: 10px;
                 border-radius: 10px;
             }

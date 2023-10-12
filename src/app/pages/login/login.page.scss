@@ -23,6 +23,7 @@
             .input-field-container {
                 margin-top: 20px;
                 .input-field {
+                    border: 2px solid var(--primary-color);
                     // background-color: var(--input-field-color);
                     margin-top: 10px;
                     border-radius: 10px;
