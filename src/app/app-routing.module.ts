@@ -36,7 +36,7 @@ const routes: Routes = [
   },
   {
     path: 'splash',
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
     data: { authGuardPipe: redirectLoggedOut },
     loadChildren: () => import('./pages/splash/splash.module').then(m => m.SplashPageModule)
   },
