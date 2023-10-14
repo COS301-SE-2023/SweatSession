@@ -5,7 +5,7 @@
 
 
 .friend-container {
-    background: #A8DADC;
+    // background: #A8DADC;
     border-radius: 15px;
     padding-left: 0%;
     padding-right: 0%;
@@ -19,9 +19,9 @@
 }
 
 .gymDetails {
-    background: #A8DADC;
+    // background: #A8DADC;
     border-radius: 15px;
-    color: white !important;
+    // color: white !important;
     // margin-bottom: 5%;
 }
 
@@ -47,8 +47,8 @@
 .locationCard {
     // margin: 10%;
     padding: 5%;
-    background: #A8DADC;
-    color: white !important;
+    // background: #A8DADC;
+    // color: white !important;
 }
 
 .gymImage {
@@ -57,11 +57,11 @@
 }
 
 .whiteText {
-    color: white;
+    // color: white;
 }
 
 .blackText {
-    color: black;
+    // color: black;
 }
 
 .friendsHeader {
@@ -87,7 +87,7 @@ ion-card-subtitle {
 .ratingIcon {
     // color: grey;
     margin-bottom: -2px;
-    filter: drop-shadow(1px 1px 0 black);
+    // filter: drop-shadow(1px 1px 0 black);
 }
 
 .friendDisplayName {
@@ -107,27 +107,27 @@ ion-card-subtitle {
 .selectGym {
     // padding-top: 0%;
     margin-top: 0%;
-    background: #1D3557;
+    // background: #1D3557;
     border-radius: 25px;
-    color: white !important;
+    // color: white !important;
     font-size: 20px;
     font-weight: 700;
     text-align: center;
-    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5);
+    // box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5);
     cursor: pointer;
 }
 
 .showFriendsOrNot {
-    background: #1D3557;
+    // background: #1D3557;
     border-radius: 15px;
-    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5);
+    // box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5);
     cursor: pointer;
 }
 
 .nextPage {
     border-radius: 50px;
-    --background: white;
-    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5);
+    // --background: white;
+    // box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5);
     cursor: pointer;
     text-align: center;
     width: 40%;
@@ -202,7 +202,7 @@ ion-input {
     --padding-start: 12px;
     --padding-end: 12px;
     font-size: 24px;
-    color: white;
+    // color: white;
 }
 
 li {

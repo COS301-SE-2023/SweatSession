@@ -74,7 +74,7 @@ import { NavController } from "@ionic/angular";
         .doc();
         messageDoc.set(request.chat);
       } else {
-        this.notify.presentFailureToast("Failed, not a member any more");
+        this.notify.presentFailureToast("Failed, you are not a member anymore");
         this.router.navigateRoot("/home");
       }
      } catch(error) {
@@ -235,10 +235,10 @@ import { NavController } from "@ionic/angular";
         .collection<IGroup>(`users/${request.userId}/userGroups`)
         .doc(groupDocument.id)
         .set(request.group);
-        await this.notify.presentSuccessToast("group created successfully.");
+        await this.notify.presentSuccessToast("Group created successfully");
         this.router.navigateRoot('/home/messages')
       }catch(error){
-        await this.notify.presentFailureToast("group creation failed.");
+        await this.notify.presentFailureToast("Group creation failed");
         // alert("ERROR: "+error)
       }
     }
@@ -258,7 +258,7 @@ import { NavController } from "@ionic/angular";
                 .collection<IGroup>(`users/${request.userId}/userGroups`)
                 .doc(request.group.id)
                 .set(request.group);
-                this.notify.presentSuccessToast(`Joined group successfully.`)
+                this.notify.presentSuccessToast(`Joined group successfully`)
               } else {
                 throw 'error: Already a member.'
               }
@@ -266,7 +266,7 @@ import { NavController } from "@ionic/angular";
           })
         ).subscribe();
       } catch (error) {
-        this.notify.presentFailureToast("already a member");
+        this.notify.presentFailureToast("You are already a member");
       }
     }
 
@@ -288,14 +288,14 @@ import { NavController } from "@ionic/angular";
               groupDoc.update({
                 members: members
               });
-              this.notify.presentSuccessToast("you left the group successfully.");
+              this.notify.presentSuccessToast("You left the group");
             } else {
               throw "Error: Owner can not leave a group";
             }
           })
         ).subscribe();
       }catch(error){
-        this.notify.presentFailureToast("Error occured, please try again :(");
+        this.notify.presentFailureToast("Error occured, please try again");
       }
     }
 
@@ -316,11 +316,11 @@ import { NavController } from "@ionic/angular";
 
             groupDoc.delete();
             this.navigation.back();
-            this.notify.presentSuccessToast(`${group?.displayName} removed successfully.`)
+            this.notify.presentSuccessToast(`${group?.displayName} removed successfully`)
           })
         ).subscribe();
       }catch(error){
-        this.notify.presentFailureToast(`Failed to remove group.`)
+        this.notify.presentFailureToast(`Failed to remove group`)
         console.log(error);
       }
     }
@@ -359,17 +359,17 @@ import { NavController } from "@ionic/angular";
                 .doc<IGroup>(`users/${request.userId}/userGroups/${request.groupId}`)
                 .delete();
                 docRef.update({members: group.members})
-                this.notify.presentSuccessToast("Group member removed successfully.");
+                this.notify.presentSuccessToast("Group member removed successfully");
               } else {
-                this.notify.presentFailureToast(`Failed to remove user. You are not an admin!!!`);
+                this.notify.presentFailureToast(`Failed to remove user. You are not an admin!`);
               }
             } else {
-              console.log("can't remove the owner of the group");
+              console.log("Can't remove the owner of the group");
             }
           })
         ).subscribe();
       } catch(error) {
-        this.notify.presentFailureToast(`Failed to remove user.`)
+        this.notify.presentFailureToast(`Failed to remove user`)
       }
     }
   }

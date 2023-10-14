@@ -43,7 +43,7 @@ export class GroupRepository {
             })
         ).subscribe();
        } catch(error){
-        this.notify.presentFailureToast('Error: Group Edit Failed :-(');
+        this.notify.presentFailureToast('Error: Group Edit Failed');
        }
     }
 
@@ -67,7 +67,7 @@ export class GroupRepository {
              })
          ).subscribe();
         } catch(error){
-         this.notify.presentFailureToast('Error: Action Failed :-(');
+         this.notify.presentFailureToast('Error: Action Failed');
         }
      }
 }
