@@ -1,0 +1,73 @@
+<ion-header class="ion-no-border">
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <backbutton></backbutton>
+        </ion-buttons>
+        <ion-title>Health Data</ion-title>
+
+        <ion-buttons class="edit-button" slot="end">
+          <ion-button class="default-button"  routerLink="/healthdata" >
+            <ion-icon name="create-outline" class="larger-back-button"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <ion-card>
+            <ion-card-header>
+              <ion-card-title>Health Data</ion-card-title>
+            </ion-card-header>
+
+                  <ion-card-content>
+                    Charts go here
+                  </ion-card-content>
+
+        </ion-card>
+
+        <ion-card class="welcome-card">
+          <ion-card-header>
+            <ion-card-title>Health Data details</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-item>
+              <ion-label>Age</ion-label>
+              <ion-input type="text" value="21" readonly></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label>Height</ion-label>
+              <ion-input type="text" value="5' 10" readonly></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label>Weight</ion-label>
+              <ion-input type="text" value="150 lbs" readonly></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label>Blood Type</ion-label>
+              <ion-input type="text" value="O+" readonly></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label>Medical Conditions</ion-label>
+              <ion-input type="text" value="None" readonly></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label>Medications</ion-label>
+              <ion-input type="text" value="None" readonly></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label>Allergies</ion-label>
+              <ion-input type="text" value="None" readonly></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label>Emergency Contact</ion-label>
+              <ion-input type="text" value="None" readonly></ion-input>
+            </ion-item>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
