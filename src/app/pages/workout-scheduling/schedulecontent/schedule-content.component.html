@@ -21,9 +21,9 @@
             <ion-icon class="schedule-value-icon" name="timer-outline"></ion-icon><ion-text class="schedule-value">{{schedule.duration}} minutes</ion-text><br>
           </ion-col>
           <ion-col size="4" *ngIf="!isCompleted() && !schedule.filledExerciseList">
-            <div class="weightlifting-animation">
+            <!-- <div class="weightlifting-animation">
               <ion-icon src="/assets/dumbbell-exercise-svgrepo-com.svg" size="large" *ngFor="let i of [1,2,3]"></ion-icon>
-            </div>
+            </div> -->
             <button class="exercise-button" (click)="schedule.workoutAdded ? viewWorkout(schedule) : addWorkout(schedule)"
             >
               <ion-icon name="add-circle"></ion-icon> {{ schedule.workoutAdded ? 'View Workout' : 'Add Workout' }}
@@ -34,7 +34,7 @@
       <!-- <div *ngIf="isCompleted()"> -->
       <!-- <div *ngIf="isCompleted()"> -->
       <div *ngIf="exercises.length>0">
-        <h2 *ngIf="!schedule.filledExerciseList">Your session has ended. Which exercises were you able to finish</h2>
+        <h2 *ngIf="!schedule.filledExerciseList">Your session has ended. Which exercises were you able to finish?</h2>
         <h2 *ngIf="schedule.filledExerciseList">Exercise checklist completed</h2>
         <swiper-container pagination="{hideOnClick: true}">
           <swiper-slide *ngFor="let exercise of exercises">
@@ -55,7 +55,7 @@
             </ion-card>
           </swiper-slide>
         </swiper-container>
-        <ion-button (click)="submit()" [disabled]="schedule.filledExerciseList">{{ schedule.filledExerciseList ? 'submitted' : 'submit' }}</ion-button>
+        <ion-button (click)="submit()" [disabled]="schedule.filledExerciseList">{{ schedule.filledExerciseList ? 'Submitted' : 'Submit' }}</ion-button>
 
       </div>
       
