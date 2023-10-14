@@ -8,6 +8,7 @@ import { HealthDataDisplayPageRoutingModule } from './health-data-display-routin
 
 import { HealthDataDisplayPage } from './health-data-display.page';
 import {BackButtonDirectiveModule} from "../../directives";
+import {NgChartsModule} from "ng2-charts";
 
 @NgModule({
     imports: [
@@ -15,7 +16,8 @@ import {BackButtonDirectiveModule} from "../../directives";
         FormsModule,
         IonicModule,
         HealthDataDisplayPageRoutingModule,
-        BackButtonDirectiveModule
+        BackButtonDirectiveModule,
+        NgChartsModule
     ],
   declarations: [HealthDataDisplayPage]
 })

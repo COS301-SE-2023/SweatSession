@@ -19,11 +19,16 @@
       <ion-col size="12">
         <ion-card>
             <ion-card-header>
-              <ion-card-title>Health Data</ion-card-title>
+              <ion-card-title>Health Charts</ion-card-title>
             </ion-card-header>
 
+<!--          [options]="chartOptions"-->
                   <ion-card-content>
-                    Charts go here
+                    <canvas baseChart
+                            [datasets]="chartData"
+                            [labels]="chartLabels"
+                            [type]="chartType">
+                    </canvas>
                   </ion-card-content>
 
         </ion-card>
