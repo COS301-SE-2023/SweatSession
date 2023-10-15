@@ -10,6 +10,7 @@ import { PointsApi, WorkoutSchedulingState } from 'src/app/states';
 import { register } from 'swiper/element/bundle';
 import {WorkoutscheduleService} from 'src/app/services/workoutschedule/workoutschedule.service';
 import { getAuth } from 'firebase/auth';
+import { NoticeService } from 'src/app/services/notifications/notice.service';
 
 register();
 
@@ -26,7 +27,13 @@ export class DashboardPage implements OnInit {
   workoutlists: IGetWorkoutSchedules;
   auth = getAuth();
   currUserId = this.auth.currentUser?.uid;
-  constructor(private store:Store, private pointsApi: PointsApi, private workoutscheduleservice: WorkoutscheduleService ) { 
+  day : string ;
+  daynum : number ;
+  date : string ;
+  shortdate : string[] ;
+
+
+  constructor(private store:Store, private pointsApi: PointsApi, private workoutscheduleservice: WorkoutscheduleService, private noticeService: NoticeService) { 
     this.workoutlists = {
       userId: this.currUserId! // Replace 'yourUserIdHere' with the actual user ID.
     };
@@ -53,27 +60,32 @@ export class DashboardPage implements OnInit {
   (await this.workoutscheduleservice.getSchedules(request)).subscribe((workouts: IGotWorkoutSchedules) => {
     this.workoutlist = workouts;
     for(let i=0 ; i<this.workoutlist.schedules.length; i++){
-      if(this.workoutlist.schedules[i].date == this.getMinDate()){
-        console.log("today date");
+      if(this.workoutlist.schedules[i].date?.toString() == this.getMinDate()){
+        const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+        this.daynum = new Date().getDay() ;
+        this.day = weekday[this.daynum];
+        this.date = new Date().toTimeString() ;
+        this.shortdate = this.date.split(':' , 2);
+        this.createNotifications("SWEATSESSION" , this.day + ' ' +this.shortdate[0] + ':' + this.shortdate[1] + ' ' , "REMINDER!! You have a workout scheduled today at " + this.workoutlist.schedules[i].location )  ;
       }
 
     }
-    console.log(this.workoutlist);
-    console.log(this.getMinDate());
+     
   });
 }
 
-getMinDate(): Date {
-  const currentDate = new Date();
-  const currentYear = currentDate.getFullYear();
-  const currentMonth = currentDate.getMonth();
-  const currentDay = currentDate.getDate();
+ getMinDate(): string {
+    const currentDate = new Date();
+    const currentYear = currentDate.getFullYear();
+    const currentMonth = (currentDate.getMonth() + 1).toString().padStart(2, '0');
+    const currentDay = currentDate.getDate().toString().padStart(2, '0');
 
-  return new Date(currentYear, currentMonth, currentDay);
-}
+    return `${currentYear}-${currentMonth}-${currentDay}`;
+  }
 
-
-
+  createNotifications(sendername: string , sentdate: string , message: string){
+    this.noticeService.createNotices(sendername , sentdate , message , this.currUserId! , this.currUserId! , '/assets/Asset 5.png');
+  }
 
 
 
