@@ -6,6 +6,7 @@ import { getAuth } from '@angular/fire/auth';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { NotifyService } from 'src/app/services/notify/notify.service';
+import {HealthDataService} from "../../services/healthDataService/healthData.service";
 
 @Component({
   selector: 'app-healthdata',
@@ -39,7 +40,8 @@ export class HealthDataPage implements OnInit {
   constructor(private formBuilder: FormBuilder, 
     private profileService: ProfileService, 
     private firestore: AngularFirestore, 
-    private notifyService: NotifyService) {
+    private notifyService: NotifyService,
+              private healthDataService: HealthDataService) {
 
     this.healthDataForm = this.formBuilder.group({
       height: ['', [Validators.required, Validators.min(100), Validators.max(251)]],
@@ -104,6 +106,7 @@ export class HealthDataPage implements OnInit {
   }
 
   async saveHealthData() {
+
     if (!this.healthDataForm.valid) {
       return;
     }
@@ -123,7 +126,11 @@ export class HealthDataPage implements OnInit {
         ...this.healthDataForm.value,
         userId: this.currUserId, 
       });
+
       await this.notifyService.presentSuccessToast('Health data added Successfully.');
     }
+
+    this.healthDataService.addWeightData(this.currUserId, this.healthDataForm.value.weight);
+
   }
 }

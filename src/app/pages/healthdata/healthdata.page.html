@@ -161,6 +161,11 @@
       </ion-row>
     </ion-grid>
 
-      <ion-button class="submit"  expand="block" type="submit" [disabled]="!healthDataForm.valid" (click)="startBeating()">Submit</ion-button>
+      <ion-button class="submit"  expand="block" type="submit"
+                  [disabled]="!healthDataForm.valid"
+                  (click)="startBeating()"
+      >
+          Submit
+      </ion-button>
   </form>
 </ion-content>

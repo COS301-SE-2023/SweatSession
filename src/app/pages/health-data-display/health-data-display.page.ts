@@ -19,6 +19,7 @@ export class HealthDataDisplayPage implements OnInit {
   }
 
   setChartData() {
+
     this.chartData = [
       { data: [90, 83, 73, 52, 559], label: 'Weight' },
       { data: [1, 2, 3], label: 'Calories' },
