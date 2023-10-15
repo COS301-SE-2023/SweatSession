@@ -191,7 +191,9 @@ import { NavigationService } from 'src/app/services';
 
     exerciseSelected(event: Event, exerciseNo: number) {
       const selectedValue = (event.target as HTMLSelectElement).value;
+      console.log(selectedValue);
       this.selectedExercises[exerciseNo] = selectedValue;
+      console.log(this.selectedExercises);
     }
 
 
