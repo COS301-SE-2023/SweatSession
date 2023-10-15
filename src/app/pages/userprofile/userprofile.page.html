@@ -46,7 +46,11 @@
           <ion-label>Activities</ion-label>
         </ion-item>
       </div>
-      <swiper-container [slidesPerView]="2" centered-slides="true"  pagination="{hideOnClick: true}">
+      <swiper-container [slidesPerView]="2"
+                        centered-slides="true"
+                        pagination="{hideOnClick: true}"
+
+      >
         <swiper-slide>
           <ion-card routerLink="/fitnessgoals">
             <ion-card-content>
@@ -63,7 +67,7 @@
               <ion-card-title>
                 <ion-icon name="analytics"></ion-icon>
               </ion-card-title>
-              <ion-text>Performance</ion-text>
+              <ion-text>Bests</ion-text>
             </ion-card-content>
           </ion-card>
         </swiper-slide>
