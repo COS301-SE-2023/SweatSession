@@ -1,152 +1,106 @@
-<div class="ion-text-center">
-  <ion-card>
-    <ion-card-title>
-      <h1>Exercise Calculator</h1>
-    </ion-card-title>
-    <ion-card-content>
-      <h2 class="heading-container">Add your workout plan here</h2>
-      <div class="grid-container ion-text-center">
-        <ion-select
-          class="submit"
-          placeholder="Import a Workout"
-          (change)="workoutSelected($event)"
-        >
-          <!--              <ion-select-option value="" hidden selected>Import a Workout</ion-select-option>-->
-          <ion-select-option
-            *ngFor="let workout of plannedWorkouts"
-            [value]="workout.id"
-            >{{ workout.name }}</ion-select-option
+<ion-card class="ion-text-center">
+  <ion-card-title>
+    <h1>Exercise Calculator</h1>
+  </ion-card-title>
+  <ion-card-content>
+    <div class="heading-container">
+      <h2 style="font-size: 20px;">Add your workout plan</h2>
+    </div>
+    <div class="grid-container ion-text-center">
+      <select
+        class="submit"
+        placeholder="name"
+        (change)="workoutSelected($event)"
+      >
+        <option value="" hidden selected>Import a Workout</option>
+        <option *ngFor="let workout of plannedWorkouts" [value]="workout.id">{{ workout.name }}</option>
+      </select>
+      <div class="form-container">
+        <form [formGroup]="workoutForm">
+          <div
+            formArrayName="exercises"
+            *ngFor="let exercise of exercises.controls; index as i"
           >
-        </ion-select>
-
-        <div class="form-container">
-          <ion-form [formGroup]="workoutForm">
-            <ion-card
-              ArrayName="exercises"
-              *ngFor="let exercise of exercises.controls; index as i"
-            >
-              <!--              <ion-label class="exercise-number">Exercise {{ i + 1 }}</ion-label>-->
-              <!--              <ion-card [formGroupName]="i">-->
-              <ion-select
+            <div class="exercise-number">Exercise {{ i + 1 }}</div>
+            <div [formGroupName]="i">
+              <select
                 formControlName="name"
-                placeholder="Select an exercise"
+                placeholder="name"
                 (change)="exerciseSelected($event, i)"
               >
                 <!-- <option value="" disabled selected>Select an exercise</option> -->
                 <!-- <option *ngFor="let option of exerciseOptions" [value]="option">{{ option }}</option> -->
-                <!-- <ion-select-option value="" hidden selected>Select an exercise</ion-select-option> -->
-                <ion-select-option value="Barbell Curls"
-                  >Barbell Curls</ion-select-option
-                >
-                <ion-select-option value="Barbell Rows"
-                  >Barbell Rows</ion-select-option
-                >
-                <ion-select-option value="Bench Presses"
-                  >Bench Presses</ion-select-option
-                >
-                <ion-select-option value="Bicep Curls"
-                  >Bicep Curls</ion-select-option
-                >
-                <ion-select-option value="Burpees">Burpees</ion-select-option>
-                <ion-select-option value="Calf Raises"
-                  >Calf Raises</ion-select-option
-                >
-                <ion-select-option value="Chest Press"
-                  >Chest Press</ion-select-option
-                >
-                <ion-select-option value="Crunches">Crunches</ion-select-option>
-                <ion-select-option value="Deadlifts"
-                  >Deadlifts</ion-select-option
-                >
-                <ion-select-option value="Dumbbell Rows"
-                  >Dumbbell Rows</ion-select-option
-                >
-                <ion-select-option value="Jumping Jacks"
-                  >Jumping Jacks</ion-select-option
-                >
-                <ion-select-option value="Leg Curls"
-                  >Leg Curls</ion-select-option
-                >
-                <ion-select-option value="Leg Presses"
-                  >Leg Presses</ion-select-option
-                >
-                <ion-select-option value="Lunges">Lunges</ion-select-option>
-                <ion-select-option value="Planks">Planks</ion-select-option>
-                <ion-select-option value="Pull-Ups">Pull-Ups</ion-select-option>
-                <ion-select-option value="Push-Ups">Push-Ups</ion-select-option>
-                <ion-select-option value="Seated Cable Rows"
-                  >Seated Cable Rows</ion-select-option
-                >
-                <ion-select-option value="Sit-Ups">Sit-Ups</ion-select-option>
-                <ion-select-option value="Squats">Squats</ion-select-option>
-                <ion-select-option value="Stretches"
-                  >Stretches</ion-select-option
-                >
-                <ion-select-option value="Tricep Curls"
-                  >Tricep Curls</ion-select-option
-                >
-              </ion-select>
-
-              <ion-input
+                <option value="" hidden selected>Select an exercise</option>
+                <option value="Barbell Curls">Barbell Curls</option>
+                <option value="Barbell Rows">Barbell Rows</option>
+                <option value="Bench Presses">Bench Presses</option>
+                <option value="Bicep Curls">Bicep Curls</option>
+                <option value="Burpees">Burpees</option>
+                <option value="Calf Raises">Calf Raises</option>
+                <option value="Chest Press">Chest Press</option>
+                <option value="Crunches">Crunches</option>
+                <option value="Deadlifts">Deadlifts</option>
+                <option value="Dumbbell Rows">Dumbbell Rows</option>
+                <option value="Jumping Jacks">Jumping Jacks</option>
+                <option value="Leg Curls">Leg Curls</option>
+                <option value="Leg Presses">Leg Presses</option>
+                <option value="Lunges">Lunges</option>
+                <option value="Planks">Planks</option>
+                <option value="Pull-Ups">Pull-Ups</option>
+                <option value="Push-Ups">Push-Ups</option>
+                <option value="Seated Cable Rows">Seated Cable Rows</option>
+                <option value="Sit-Ups">Sit-Ups</option>
+                <option value="Squats">Squats</option>
+                <option value="Stretches">Stretches</option>
+                <option value="Tricep Curls">Tricep Curls</option>
+                <!-- <option value="Cycling">Cycling</option>
+                <option value="TreadMill">Treadmill</option> -->
+                <!-- <option value="Crunches">Crunches</option> -->
+                <!-- <option value="pushUps">Push-Ups</option> -->
+              </select>
+              <input
                 formControlName="sets"
                 placeholder="Sets"
                 *ngIf="hasSets(i)"
-              ></ion-input>
-              <ion-input
+              />
+              <input
                 formControlName="reps"
                 placeholder="Repetitions"
                 *ngIf="hasReps(i)"
-              ></ion-input>
-              <ion-input
+              />
+              <input
                 formControlName="weight"
                 placeholder="Weight (kg)"
                 *ngIf="hasWeight(i)"
-              ></ion-input>
-              <ion-input
-                formControlName="duration"
-                placeholder="Duration (min)"
-              ></ion-input>
+              />
+              <input formControlName="duration" placeholder="Duration (min)" />
+              <!-- [(ngModel)]="name" [(ngModel)]="sets" [(ngModel)]="reps" [(ngModel)]="weight" -->
+            </div>
+            <ion-button
+              color="danger"
+              type="button"
+              (click)="deleteExercise(i)"
+            >
+              <ion-icon name="trash"></ion-icon>
+            </ion-button>
+          </div>
 
-              <ion-button
-                color="danger"
-                type="button"
-                (click)="deleteExercise(i)"
-              >
-                <ion-icon name="trash"></ion-icon>
-              </ion-button>
-            </ion-card>
-
-            <ion-grid>
-              <ion-row>
-                <ion-col size="3">
-                  <ion-button
-                    class="adder"
-                    type="button"
-                    (click)="addExercise()"
-                  >
-                    <ion-icon name="add"></ion-icon>
-                  </ion-button>
-                </ion-col>
-                <ion-col size="9">
-                  <ion-button
-                    class="submitbutton"
-                    type="button"
-                    (click)="calculateTotalCaloriesBurned()"
-                    [disabled]="!IsItvalid()"
-                  >
-                    Calculate
-                  </ion-button>
-                </ion-col>
-              </ion-row>
-            </ion-grid>
-          </ion-form>
-        </div>
+          <ion-button class="adder" type="button" (click)="addExercise()">
+            <ion-icon name="add"></ion-icon>
+          </ion-button>
+          <ion-button
+            class="submitbutton"
+            type="button"
+            (click)="calculateTotalCaloriesBurned()"
+          >
+            Calculate Calories
+          </ion-button>
+        </form>
       </div>
-
-      <div class="grid-container">
-        <pre>{{ message }}</pre>
-        <!-- <pre class="message"><h3>{{ message }}</h3></pre> -->
-      </div>
-    </ion-card-content>
-  </ion-card>
-</div>
+    </div>
+    <div class="grid-container">
+      <pre>{{ message }}</pre>
+      <!-- <pre class="message"><h3>{{ message }}</h3></pre> -->
+    </div>
+  </ion-card-content>
+</ion-card>
