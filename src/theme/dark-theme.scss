@@ -41,4 +41,16 @@ body[color-theme="dark"] {
     color: #4185ff;
   }
 
+  select{
+    background-color: #010a1b;
+  }
+
+  input[formControlName="sets"],
+  input[formControlName="reps"],
+  input[formControlName="weight"],
+  input[formControlName="duration"] {
+    background-color: #010a1b;
+    border-color: grey;
+    border-width: 2px;
+  }
 }

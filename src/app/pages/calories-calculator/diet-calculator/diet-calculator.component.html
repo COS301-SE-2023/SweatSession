@@ -11,7 +11,7 @@
     <ion-button expand="block" (click)="calculateNutrition()">Calculate</ion-button>
 
     <ion-card *ngIf="totalNutrition">
-      <ion-card-header>Summary of Nutritional Information</ion-card-header>
+      <h2>Summary of Nutritional Information</h2>
       <ion-card-content>
         <p>Total Calories: {{ totalNutrition.calories | number:'1.2-2' }}</p>
         <p>Protein: {{ totalNutrition.protein | number:'1.2-2' }}g</p>
