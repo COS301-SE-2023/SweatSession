@@ -32,16 +32,20 @@
           <ion-icon name="close-circle-outline"></ion-icon>
         </ion-button>
       </div>
-      <div style="display:flex ; align-items:center" >
+      <div style="align-items:center" >
+        <div style="display:flex " >
         <ion-avatar slot="start">
           <img alt="Silhouette of a person's head" src={{notice.profileurl}} />
         </ion-avatar>
-        <ion-grid>
+            <p ><b style="font-size: 18px;">&nbsp;{{notice.sendername}}</b></p>
+        </div>
+        
+            <ion-grid>
           <ion-row>
-            <p class="Bcard2"><b style="font-size: 18px;">&nbsp;{{notice.sendername}}</b></p>
-          </ion-row>  
-          <p class="Bcard">&nbsp;{{notice.message}}</p>
+          <p >&nbsp;{{notice.message}}</p>
+        </ion-row>
         </ion-grid>
+    
       </div>
       <div class="flex-center4" *ngIf="notice.message == 'Sent you a Friend Request!'">
         <ion-button color="success" size="small" (click)="addFriend(notice)">Accept</ion-button>

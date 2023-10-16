@@ -253,6 +253,10 @@ export class ExerciseCalculatorComponent implements OnInit {
   }
 
   async workoutSelected(event: Event) {
+    const noOfExercises = (this.workoutForm.get('exercises') as FormArray).length;
+    for (let e = 0;e<noOfExercises;e++){
+      this.deleteExercise(0);
+    }
     const selectedValue = (event.target as HTMLSelectElement).value;
     this.selectedWorkoutId = selectedValue;
     console.log(this.selectedWorkoutId);

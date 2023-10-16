@@ -1,13 +1,17 @@
 <ion-card class="ion-text-center">
+  <ion-card-title>
+    <h1>Diet Calculator</h1>
+  </ion-card-title>
   <ion-card-content>
+    <h2 style="font-size: 20px;">Enter your meal:</h2>
     <ion-item>
-      <ion-label position="floating">Enter your meal:</ion-label>
+      <!-- <ion-label position="floating" style="font-size: 20px; text-align: center;">Enter your meal:</ion-label> -->
       <ion-textarea [(ngModel)]="meal" rows="5"></ion-textarea>
     </ion-item>
     <ion-button expand="block" (click)="calculateNutrition()">Calculate</ion-button>
 
     <ion-card *ngIf="totalNutrition">
-      <ion-card-header>Summary of Nutritional Information</ion-card-header>
+      <h2 style="font-size: 18px;">Summary of Nutritional Information</h2>
       <ion-card-content>
         <p>Total Calories: {{ totalNutrition.calories | number:'1.2-2' }}</p>
         <p>Protein: {{ totalNutrition.protein | number:'1.2-2' }}g</p>
