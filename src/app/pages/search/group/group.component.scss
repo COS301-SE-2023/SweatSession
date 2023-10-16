@@ -1,9 +1,4 @@
-ion-avatar:not(.search-results-avatars) {
-    height: 30px;
-    width: 30px;
-}
-
-.search-results-avatars {
+ion-avatar {
     height: 50px;
     width: 50px;
     margin: 10px;
@@ -76,5 +71,25 @@ ion-buttons {
 100% {
     transform: translateX(-100%);
 }
+}
+
+.profile-img-container{
+    ion-avatar {
+        margin: auto;
+    }
+}
+
+.group-item {
+    text-align: center;
+    margin-top: 0px;
+    padding-top: 0px;
+}
+
+p {
+    font-style: italic;
+}
+
+.user-name {
+    font-weight: bolder;
 }
   

@@ -1,6 +1,6 @@
 import { Store } from '@ngxs/store';
-import { Component, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { IonTabs, NavController } from '@ionic/angular';
 import { AuthApi } from 'src/app/states/auth/auth.api';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -16,7 +16,7 @@ import { Logout } from 'src/app/actions';
   styleUrls: ['./home.page.scss'],
 })
 export class HomePage implements OnInit {
-
+  @ViewChild('tabs', { static: false }) tabs: IonTabs;
   noticeamount : number ;
   sub : Subscription ;
   DisplayName$? = "na";

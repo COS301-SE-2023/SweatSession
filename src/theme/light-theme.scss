@@ -15,22 +15,22 @@ body[color-theme="light"] {
   --ion-text-color: var(--primary-color);
 
   --ion-color-step-50: var(--background-color);
-  --ion-color-step-100: #204d9a;
-  --ion-color-step-150: #1e6eda;
+  --ion-color-step-100: var(--background-color);
+  --ion-color-step-150: var(--background-color);
   --ion-color-step-200: #3a7cee;
   --ion-color-step-250: #588cec;
   --ion-color-step-300: #72a1ef;
   --ion-color-step-350: var(--background-color);
-  --ion-color-step-400: #b0d4ff;
+  --ion-color-step-400: var(--primary-color);
   --ion-color-step-450: #c7e2f8;
   --ion-color-step-500: #fcf7f7;
-  --ion-color-step-550: #f5f5f5;
+  --ion-color-step-550: var(--primary-color);
   --ion-color-step-600: #999999;
   --ion-color-step-650: #a6a6a6;
   --ion-color-step-700: #b3b3b3;
   --ion-color-step-750: #bfbfbf;
   --ion-color-step-800: #cccccc;
-  --ion-color-step-850: #d9d9d9;
+  --ion-color-step-850: var(--primary-color);
   --ion-color-step-900: #e6e6e6;
   --ion-color-step-950: #f2f2f2;
 
@@ -42,7 +42,7 @@ body[color-theme="light"] {
   --ion-item-background: var(--background-color);
   --ion-tab-bar-background: var(--background-color);
   --ion-tab-bar-border-color: var(--background-color);
-  --ion-tab-bar-color: var(--primary-color);
+  --ion-tab-bar-color: #79878f;
   --ion-item-divider-color: var(--primary-color);
   --ion-modal-background-color: var(--background-color);
   --ion-label-color: var(--primary-color);
@@ -80,10 +80,6 @@ body[color-theme="light"] {
   /* iOS styles */
   ion-segment-button.ios {
     --color-checked: white;
-  }
-
-  ion-icon.md {
-    color: var(--primary-color);
   }
 
   ion-button:not(ion-buttons ion-button) ion-icon.md, ion-fab-button ion-icon.md{
@@ -130,6 +126,14 @@ body[color-theme="light"] {
     }
   }
 
+  .goal-header {
+    --background: var(--primary-color);
+    color: white;
+    .goal-name {
+      color: white;
+    }
+  }
+
   .input-field {
     border: 2px solid var(--primary-color);
   }
@@ -141,6 +145,19 @@ body[color-theme="light"] {
     }
   }
 
+  ion-alert {
+    --background: var(--background-color);
+    color: var(--primary-color);
+  }
+
+  ion-alert *.md {
+    color: var(--primary-color);
+  }
+
+  ion-tab-button.ios{
+    --color: #79878f;
+    --color-selected: var(--primary-color);
+  }
 }
 
 // body[color-theme="light"] {

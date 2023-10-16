@@ -16,13 +16,14 @@
         <ion-col size="12">
           <div class="group-profile-container">
             <div class="group-profile-inner-container">
-              <ion-avatar (click)="selectFile()" style="cursor: pointer; position: relative;">
-                <ion-img [src]="editGroup.profileURL"></ion-img>
-                <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
-                  <p style="text-align: center; padding-top: 20%; font-weight: bolder;">Tap to select a new image</p>
-                </div>
+              <ion-avatar class="ion-justify-content-center">
+                <ion-img [src]="group.profileURL"></ion-img>
               </ion-avatar>
-            
+              <ion-fab class="select-image-icon">
+                <ion-fab-button (click)="selectFile()">
+                  <ion-icon name="image-outline"></ion-icon>
+                </ion-fab-button>
+              </ion-fab>
               <input type="file" id="GroupProfileImgInput" accept="image/*" (change)="onFileSelected($event)" style="display: none">
             </div>
           </div>
