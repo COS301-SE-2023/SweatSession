@@ -11,9 +11,9 @@
 
         <ion-card *ngFor="let goal of getFilteredGoals()">
             <ion-item-sliding>
-            <ion-item id="viewer">
+            <ion-item class="goal-header" id="viewer">
                 <ion-icon name="basketball-outline"></ion-icon>
-                <ion-text>
+                <ion-text class="goal-name">
                     {{goal.name}}
                 </ion-text>
                 <ion-icon slot="end" name="chevron-forward-outline" (click)="viewGoal(goal.id)"></ion-icon>

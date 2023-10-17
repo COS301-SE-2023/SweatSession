@@ -24,7 +24,7 @@
             <div class="inputField-container">
               <ion-label>Exercise name*</ion-label>
               <ion-item lines="none" class="input-field">
-                <ion-select formControlName="name" placeholder="Select an exercise" (change)="exerciseSelected($event, i)">
+                <ion-select formControlName="name" placeholder="Select an exercise" (ionChange)="exerciseSelected($event, i)">
                   <ion-select-option value="Barbell Curls">Barbell Curls</ion-select-option>
                   <ion-select-option value="Barbell Rows">Barbell Rows</ion-select-option>
                   <ion-select-option value="Bench Presses">Bench Presses</ion-select-option>

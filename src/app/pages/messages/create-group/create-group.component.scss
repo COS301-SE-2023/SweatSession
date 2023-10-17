@@ -25,3 +25,25 @@ ion-row {
       width: 200px;
   }
 }
+
+.group-profile-inner-container {
+  position: relative;
+  display: inline-block;
+}
+
+.select-image-icon {
+  position: absolute;
+  top: 50%;
+  right: -20px;
+  font-size: 2rem;
+  color: #007bff;
+  cursor: pointer;
+}
+
+.input-field {
+  margin-top: 10px;
+}
+
+ion-row {
+  margin-bottom: 20px;
+}

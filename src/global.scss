@@ -151,7 +151,13 @@ ion-segment {
 swiper-container {
     position: relative;
     height: fit-content;
-    padding: 20px;
+    padding-bottom: 20px;
+    padding-top: 0px;
+    swiper-slide {
+        ion-card {
+            margin-top: 0px;
+        }
+    }
 }
 
 swiper-container::part(bullet-active) {
@@ -195,3 +201,4 @@ canvas {
 .input-field {
     border-radius: 8px;
 }
+

@@ -1,7 +1,7 @@
 .form-container {
     border-radius: 25px;
     padding: 20px;
-    width: 80%;
+    // width: 80%;
     text-align: center;
     margin: auto;
     // color: black;
@@ -89,4 +89,12 @@
     // width: 80%;
     // text-align: center;
     // margin: auto;
+}
+
+.inputField-container {
+  text-align: start;
+  margin-bottom: 10px;
+  .input-field {
+    border-radius: 8px;
+  }
 }

@@ -3,6 +3,7 @@ body[color-theme="dark"] {
   --ion-background-color-rgb: 0,0,0;
 
   --ion-text-color: #4185ff;
+  --segment-button-color: #4185ff;
   --ion-text-color-rgb: 255,255,255;
 
   --ion-color-step-50: #001b34;
@@ -15,13 +16,14 @@ body[color-theme="dark"] {
   --ion-color-step-400: #001b34;
   --ion-color-step-450: #737373;
   --ion-color-step-500: #808080;
-  --ion-color-step-550: #8c8c8c;
+  --ion-color-step-550: var( --ion-text-color);
+  // --ion-color-step-550: #8c8c8c;
   --ion-color-step-600: #4185FF;
   --ion-color-step-650: #a6a6a6;
   --ion-color-step-700: #b3b3b3;
   --ion-color-step-750: #bfbfbf;
   --ion-color-step-800: #cccccc;
-  --ion-color-step-850: #d9d9d9;
+  --ion-color-step-850: var(--ion-text-color);
   --ion-color-step-900: #e6e6e6;
   --ion-color-step-950: #f2f2f2;
 
@@ -38,7 +40,7 @@ body[color-theme="dark"] {
   --ion-fab-button-color: #010a1b;
 
   ion-text, p {
-    color: #4185ff;
+    color: var(--ion-text-color);
   }
 
   select{
@@ -52,5 +54,21 @@ body[color-theme="dark"] {
     background-color: #010a1b;
     border-color: grey;
     border-width: 2px;
+  }
+
+  ion-segment-button.ios {
+    --indicator-color: var(--segment-button-color);
+  }
+  
+  /* iOS styles */
+  ion-segment-button.ios {
+    --color-checked: white;
+  }
+
+  .group-options {
+    background-color: #001b34;
+    *, ion-icon {
+      color: #4185ff;
+    }
   }
 }
