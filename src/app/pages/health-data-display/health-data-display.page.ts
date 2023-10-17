@@ -47,7 +47,7 @@ export class HealthDataDisplayPage implements OnInit {
                 this.currUserId = user.uid;
                 sessionStorage.setItem('currUserId', this.currUserId);
                 // this.healthDataForm.patchValue({ currUserId: this.currUserId }); // Set currUserId in the form
-                this.isLoading = false;
+                this.isLoading = true;
                 await this.fetchHealthData();
             } else {
                 this.currUserId = sessionStorage.getItem('currUserId');
@@ -74,7 +74,7 @@ export class HealthDataDisplayPage implements OnInit {
                         this.healthData.medicalConditions = (data[0]! as healthData).medicalConditions;
                         this.healthData.workoutCommitment = (data[0]! as healthData).workoutCommitment;
                         this.healthData.weightGoals = (data[0]! as healthData).weightGoals;
-                        console.table(this.healthData);
+                        this.isLoading = false;
                     }
                 });
 

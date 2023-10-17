@@ -13,7 +13,7 @@
       </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content *ngIf="!isLoading; else loaderContent">
 <ion-grid>
     <ion-row>
       <ion-col size="12">
@@ -34,9 +34,9 @@
         </ion-card>
             <ion-grid>
                 <ion-row>
-                    <ion-col size="12">
-                            <ion-label class="customlabel">Health Details</ion-label>>
-                    </ion-col>
+                    <ion-card-header>
+                        <ion-card-title>Health Details</ion-card-title>
+                    </ion-card-header>
                 </ion-row>
 
               <ion-row>
@@ -61,7 +61,7 @@
                 <ion-row>
                     <ion-col size="6">
                         <div class="input-field-container">
-                            <ion-label class="customlabel">Height</ion-label>
+                            <ion-label class="customlabel">Height(Cm)</ion-label>
                             <ion-item class="input-field" lines="none">
                                 <ion-input value="{{this.healthData.height}}" readonly></ion-input>
                             </ion-item>
@@ -69,7 +69,7 @@
                     </ion-col>
                     <ion-col size="6">
                         <div class="input-field-container">
-                            <ion-label class="customlabel">Weight</ion-label>
+                            <ion-label class="customlabel">Weight(Kg)</ion-label>
                             <ion-item class="input-field" lines="none">
                                 <ion-input value="{{this.healthData.weight}}" readonly></ion-input>
                             </ion-item>
@@ -123,4 +123,11 @@
       </ion-col>
     </ion-row>
   </ion-grid>
+
 </ion-content>
+
+<ng-template #loaderContent>
+    <div class="loader-wrapper">
+        <ion-spinner></ion-spinner>
+    </div>
+</ng-template>

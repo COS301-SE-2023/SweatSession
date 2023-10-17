@@ -4,7 +4,7 @@
     <ion-segment-button value="2">Overdue</ion-segment-button>
   </ion-segment>
 
-  <ion-content [scrollEvents]="true" *ngIf="isLoading; else loaderContent">
+  <ion-content [scrollEvents]="true" *ngIf="!isLoading; else loaderContent">
 
       <ng-container *ngIf="getFilteredGoals().length > 0; else ngemptyTemp ">
 
