@@ -26,7 +26,7 @@ describe('locationBasedServices integration Testing', () => {
         cy.visit('http://localhost:4200/SweatSession/addSchedule')
         // cy.visit('https://sweatsession.web.appSweatSession/addSchedule')
         cy.wait(5000);
-        cy.get('ion-icon[name="location"]').click();
+        cy.get('ion-icon[name="location-outline"]').click();
         cy.wait(10000);
 
         //checks
