@@ -103,7 +103,7 @@ export class ScheduleContentComponent implements OnInit {
   counter() {
     let l =setInterval(() => {
       this.fraction()
-    }, 1000 * 10)
+    }, 1000 * 1)
   }
 
   timeLeft() {
@@ -194,15 +194,18 @@ export class ScheduleContentComponent implements OnInit {
       if (this.inSession()) {
         if (this.schedule.status !== "inSession") {
           this.schedule.status = "inSession";
-          this.store.dispatch(new UpdateWorkoutSchedule(this.schedule));
+          console.log("insession")
+          // this.store.dispatch(new UpdateWorkoutSchedule(this.schedule));
         }
       } else if (this.schedule.status !== "completed" && this.joined()) {
         this.schedule.status = "completed";
-        this.store.dispatch(new UpdateWorkoutSchedule(this.schedule))
-        this.count.t
+        console.log("completed")
+        // this.store.dispatch(new UpdateWorkoutSchedule(this.schedule))
+        // this.count.t
       } else if(this.schedule.status !== "uncompleted" && !this.joined()) {
         this.schedule.status = "uncompleted";
-        this.store.dispatch(new UpdateWorkoutSchedule(this.schedule))
+        console.log("uncompleted")
+        // this.store.dispatch(new UpdateWorkoutSchedule(this.schedule))
         console.log("uncompleted");
       }
     }
