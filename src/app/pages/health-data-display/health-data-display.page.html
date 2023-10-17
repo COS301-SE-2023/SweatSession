@@ -32,16 +32,14 @@
                   </ion-card-content>
 
         </ion-card>
-
-<!--        <ion-card class="welcome-card">-->
-<!--          <ion-card-header>-->
-<!--            <ion-card-title>Health Data details</ion-card-title>-->
-<!--          </ion-card-header>-->
-<!--          <ion-card-content>-->
-
             <ion-grid>
-              <ion-row>
+                <ion-row>
+                    <ion-col size="12">
+                            <ion-label class="customlabel">Health Details</ion-label>>
+                    </ion-col>
+                </ion-row>
 
+              <ion-row>
                 <ion-col size="6">
                   <div class="input-field-container">
                     <ion-label class="customlabel">Age</ion-label>
@@ -95,7 +93,15 @@
                         <div class="input-field-container">
                             <ion-label class="customlabel">Weight Goals</ion-label>
                             <ion-item class="input-field" lines="none">
-                                <ion-input value="{{this.healthData.weightGoals}}" readonly></ion-input>
+                                <ion-input *ngIf="this.healthData.weightGoals == -0.1" value="Lose 1kg per week" readonly></ion-input>
+                                <ion-input *ngIf="this.healthData.weightGoals == -0.75" value="Lose 0.75kg per week" readonly></ion-input>
+                                <ion-input *ngIf="this.healthData.weightGoals == -0.5" value="Lose 0.5kg per week" readonly></ion-input>
+                                <ion-input *ngIf="this.healthData.weightGoals == -0.25" value="Lose 0.25kg per week" readonly></ion-input>
+                                <ion-input *ngIf="this.healthData.weightGoals == 0." value="Maintain Weight" readonly></ion-input>
+                                <ion-input *ngIf="this.healthData.weightGoals == 0.25" value="Gain 0.25kg per week" readonly></ion-input>
+                                <ion-input *ngIf="this.healthData.weightGoals == 0.5" value="Gain 0.5kg per week" readonly></ion-input>
+                                <ion-input *ngIf="this.healthData.weightGoals == 0.75" value="Gain 0.75kg per week" readonly></ion-input>
+                                <ion-input *ngIf="this.healthData.weightGoals == 1" value="Gain 1kg per week" readonly></ion-input>
                             </ion-item>
                         </div>
                     </ion-col>
@@ -106,7 +112,7 @@
                         <div class="input-field-container">
                             <ion-label class="customlabel">Workout Commitments</ion-label>
                             <ion-item class="input-field" lines="none">
-                                <ion-input value="{{this.healthData.workoutCommitment}}" readonly></ion-input>
+                                <ion-input  readonly value="{{this.healthData.workoutCommitment}}"></ion-input>
                             </ion-item>
                         </div>
                     </ion-col>
