@@ -15,7 +15,7 @@ describe('Authentication Page Testing', () => {
         // wait 2 secs
         cy.wait(2000);
         //fill in the form
-        cy.get('ion-input[formControlName="email"]').type('samuraifari@gmail.com');
+        cy.get('ion-input[formControlName="email"]').type('testuser@gmail.com');
         cy.get('ion-input[formControlName="password"]').type('@T123456');
         cy.get('ion-button[type="submit"]').click();
         cy.url().should('include', '/dashboard');
