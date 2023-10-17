@@ -32,6 +32,6 @@ describe('locationBasedServices integration Testing', () => {
         //checks
         cy.get('ion-title').should('have.css', 'font-family', 'Montserrat, sans-serif')
         cy.contains('ion-title', 'Select Location')
-        cy.get('ion-button').contains('Close').should('be.visible').click()
+        cy.get('ion-icon[name="arrow-back"]').should('be.visible').click()
     });
 });
