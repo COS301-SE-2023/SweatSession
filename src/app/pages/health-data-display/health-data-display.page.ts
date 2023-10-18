@@ -3,7 +3,8 @@ import {ChartDataset, ChartOptions, ChartType} from "chart.js";
 import {takeUntil} from "rxjs/operators";
 import {getAuth} from "@angular/fire/auth";
 import {AngularFirestore} from "@angular/fire/compat/firestore";
-import {healthData} from "../../models/exercise.model";
+import {healthData, weightdata} from "../../models/exercise.model";
+import {HealthDataService} from "../../services/healthDataService/healthData.service";
 
 @Component({
   selector: 'app-health-data-display',
@@ -19,7 +20,8 @@ export class HealthDataDisplayPage implements OnInit {
   currUserId: string | undefined | null;
   isLoading: boolean = true;
 
-  constructor(private firestore: AngularFirestore) {
+  constructor(private firestore: AngularFirestore,
+              private healthdataservice: HealthDataService) {
 
   }
 
@@ -35,24 +37,29 @@ export class HealthDataDisplayPage implements OnInit {
             weightGoals: 0,
             workoutCommitment: ''
       }
-    this.setChartData();
-    this.setupProfile();
+      this.chartData = [
+            { data: [], label: 'Weight' },
+          { data: [], label: 'Calories'}
+        ];
 
+      this.setupProfile();
   }
-    async setupProfile() {
+
+     setupProfile() {
         const auth = getAuth();
 
-        auth.onAuthStateChanged(async (user) => {
-            if (user) {
-                this.currUserId = user.uid;
-                sessionStorage.setItem('currUserId', this.currUserId);
-                // this.healthDataForm.patchValue({ currUserId: this.currUserId }); // Set currUserId in the form
-                this.isLoading = true;
-                await this.fetchHealthData();
-            } else {
-                this.currUserId = sessionStorage.getItem('currUserId');
-            }
-        });
+
+        if (this.currUserId!=undefined)
+        {
+            sessionStorage.setItem('currUserId', this.currUserId);
+        }
+        else
+        {
+            this.currUserId = sessionStorage.getItem('currUserId') ?? "";
+        }
+
+        this.fetchHealthData();
+        this.setChartData();
     }
 
     async fetchHealthData() {
@@ -86,13 +93,28 @@ export class HealthDataDisplayPage implements OnInit {
 
   setChartData() {
 
-    this.chartData = [
-      { data: [90, 83, 73, 52, 559], label: 'Weight' },
-      { data: [1, 2, 3], label: 'Calories' },
+      if(this.currUserId)
+      {
+          this.healthdataservice.fetchWeightData(this.currUserId).then(
+              (data) => {
+                  data.forEach((Weightdata: weightdata) => {
+                      console.log("Feeelings");
+                      if(Weightdata)
+                      {
+                          console.table(Weightdata);
+                          this.chartData[0].data.push(Weightdata.weight);
+                          this.chartLabels.push(Weightdata.date.toString());
+                          console.log("Moonlight");
+                      }
+                  });
+              }
+          );
 
-    ];
-    this.chartLabels = ['January', 'February', 'March', 'April', 'May'];
-
+      }
+      else
+      {
+          console.log("currUserId is null");
+      }
   }
 
 }

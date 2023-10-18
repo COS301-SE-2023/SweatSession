@@ -34,3 +34,9 @@ export interface healthData {
     workoutCommitment: string;
     weightGoals: number;
 }
+
+export interface weightdata {
+    weight: number;
+    date: Date;
+    userId: string;
+}
