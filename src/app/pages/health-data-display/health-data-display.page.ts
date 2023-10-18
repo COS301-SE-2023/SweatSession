@@ -54,6 +54,7 @@ export class HealthDataDisplayPage implements OnInit {
             }
         });
     }
+
     async fetchHealthData() {
         if (this.currUserId) {
             this.firestore
@@ -81,6 +82,7 @@ export class HealthDataDisplayPage implements OnInit {
 
         }
     }
+
 
   setChartData() {
 

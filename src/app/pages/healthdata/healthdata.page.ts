@@ -107,6 +107,7 @@ export class HealthDataPage implements OnInit {
     }
   }
 
+
   async saveHealthData() {
 
     if (!this.healthDataForm.valid) {
@@ -132,7 +133,7 @@ export class HealthDataPage implements OnInit {
       await this.notifyService.presentSuccessToast('Health data added Successfully.');
     }
 
-    this.healthDataService.addweightdata(this.healthDataForm.value.weight);
+    this.healthDataService.addWeightData(this.healthDataForm.value.weight, this.currUserId);
 
   }
 }
