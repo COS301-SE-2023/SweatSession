@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ChartDataset, ChartOptions, ChartType} from "chart.js";
-import {takeUntil} from "rxjs/operators";
+// import {takeUntil} from "rxjs/operators";
 import {getAuth} from "@angular/fire/auth";
 import {AngularFirestore} from "@angular/fire/compat/firestore";
 import {healthData, weightdata} from "../../models/exercise.model";
@@ -49,12 +49,10 @@ export class HealthDataDisplayPage implements OnInit {
         const auth = getAuth();
 
 
-        if (this.currUserId!=undefined)
-        {
+        if (this.currUserId!=undefined) {
             sessionStorage.setItem('currUserId', this.currUserId);
         }
-        else
-        {
+        else {
             this.currUserId = sessionStorage.getItem('currUserId') ?? "";
         }
 
@@ -95,21 +93,21 @@ export class HealthDataDisplayPage implements OnInit {
 
       if(this.currUserId)
       {
-          this.healthdataservice.fetchWeightData(this.currUserId).then(
-              (data) => {
-                  data.forEach((Weightdata: weightdata) => {
-                      // console.log("Feeelings");
-                      if(Weightdata)
-                      {
-                          // console.table(Weightdata);
-                          this.chartData[0].data.push(Weightdata.weight);
-                          this.chartLabels.push(Weightdata.date.toString());
-                          // console.log("Moonlight");
-                      }
-                  });
-                  this.sortchatLabels();
-                  this.isLoading = false;
-              }
+          this.healthdataservice.fetchWeightData(this.currUserId).subscribe((data) => {
+            data.forEach((Weightdata: weightdata) => {
+                // console.log("Feeelings");
+                if(Weightdata)
+                {
+                    // console.table(Weightdata);
+                    this.chartData[0].data.push(Weightdata.weight);
+                    this.chartLabels.push(Weightdata.date.toString());
+                    // console.log("Moonlight");
+                }
+            });
+            this.sortchatLabels();
+            this.isLoading = false;
+        }
+              
           );
 
       }

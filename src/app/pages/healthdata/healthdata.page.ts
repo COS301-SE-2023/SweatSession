@@ -109,7 +109,6 @@ export class HealthDataPage implements OnInit {
     }
   }
 
-
   async saveHealthData() {
 
     if (!this.healthDataForm.valid) {
