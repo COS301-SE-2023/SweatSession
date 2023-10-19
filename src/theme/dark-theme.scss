@@ -71,4 +71,12 @@ body[color-theme="dark"] {
       color: #4185ff;
     }
   }
+
+  swiper-container::part(bullet-active) {
+    background-color: #4185ff;
+  }
+
+  swiper-container::part(bullet) {
+    background-color: #4185ff;
+  }
 }
