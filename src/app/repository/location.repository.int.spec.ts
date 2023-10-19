@@ -286,6 +286,7 @@ describe('LocationRepository Integration Tests', () => {
             { hours: 16, minutes: 30 },
             Timestamp.fromDate(new Date("01-08-2023 16:00")),
             'Test workout session',
+            'Tuks gym'
         );
         expect(newGymSession.date).toEqual(new Date("01-08-2023"));
         expect(newGymSession.endTime).toEqual(Timestamp.fromDate(new Date("01-08-2023 16:00")));
