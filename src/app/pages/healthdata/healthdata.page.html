@@ -7,7 +7,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
+<ion-content  *ngIf="!isLoading; else loaderContent" class="ion-padding">
   <div class="spinner-container" *ngIf="isLoading">
     <ion-spinner></ion-spinner>
   </div>
@@ -20,7 +20,7 @@
     Enter all your health data here for catered results
   </div>
 
-  <form [formGroup]="healthDataForm" *ngIf="!isLoading" (ngSubmit)="saveHealthData()">
+  <form [formGroup]="healthDataForm" *ngIf="!isLoading; else loaderContent" (ngSubmit)="saveHealthData()">
     <ion-grid>
       <ion-row>
         <ion-col size="6">
@@ -168,4 +168,11 @@
           Submit
       </ion-button>
   </form>
+
 </ion-content>
+
+<ng-template #loaderContent>
+  <div class="loader-wrapper">
+    <ion-spinner></ion-spinner>
+  </div>
+</ng-template>

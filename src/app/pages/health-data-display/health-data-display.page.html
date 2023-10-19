@@ -13,7 +13,7 @@
       </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content >
 <ion-grid>
     <ion-row>
       <ion-col size="12">
@@ -22,8 +22,14 @@
               <ion-card-title>Health Charts</ion-card-title>
             </ion-card-header>
 
+<!--            *ngIf="chartData.length > 0"-->
+<!--            [datasets]="chartData"-->
+<!--            [labels]="chartLabels"-->
+<!--            [options]="chartOptions"-->
+<!--            [type]="chartType">-->
+
 <!--          [options]="chartOptions"-->
-                  <ion-card-content>
+                  <ion-card-content *ngIf="!isLoading; else loaderContent">
                     <canvas baseChart
                             [datasets]="chartData"
                             [labels]="chartLabels"
@@ -32,47 +38,102 @@
                   </ion-card-content>
 
         </ion-card>
+            <ion-grid>
+                <ion-row>
+                    <ion-card-header>
+                        <ion-card-title class="ion-align-self-center">Health Details</ion-card-title>
+                    </ion-card-header>
+                </ion-row>
 
-        <ion-card class="welcome-card">
-          <ion-card-header>
-            <ion-card-title>Health Data details</ion-card-title>
-          </ion-card-header>
-          <ion-card-content>
-            <ion-item>
-              <ion-label>Age</ion-label>
-              <ion-input type="text" value="21" readonly></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-label>Height</ion-label>
-              <ion-input type="text" value="5' 10" readonly></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-label>Weight</ion-label>
-              <ion-input type="text" value="150 lbs" readonly></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-label>Blood Type</ion-label>
-              <ion-input type="text" value="O+" readonly></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-label>Medical Conditions</ion-label>
-              <ion-input type="text" value="None" readonly></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-label>Medications</ion-label>
-              <ion-input type="text" value="None" readonly></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-label>Allergies</ion-label>
-              <ion-input type="text" value="None" readonly></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-label>Emergency Contact</ion-label>
-              <ion-input type="text" value="None" readonly></ion-input>
-            </ion-item>
-          </ion-card-content>
-        </ion-card>
+              <ion-row>
+                <ion-col size="6">
+                  <div class="input-field-container">
+                    <ion-label class="customlabel">Age</ion-label>
+                    <ion-item class="input-field" lines="none">
+                      <ion-input value="{{this.healthData.age}}" readonly></ion-input>
+                    </ion-item>
+                  </div>
+                </ion-col>
+                <ion-col size="6">
+                  <div class="input-field-container">
+                    <ion-label class="customlabel">Gender</ion-label>
+                    <ion-item class="input-field" lines="none">
+                      <ion-input value="{{this.healthData.gender}}" readonly></ion-input>
+                    </ion-item>
+                  </div>
+                </ion-col>
+              </ion-row>
+
+                <ion-row>
+                    <ion-col size="6">
+                        <div class="input-field-container">
+                            <ion-label class="customlabel">Height(Cm)</ion-label>
+                            <ion-item class="input-field" lines="none">
+                                <ion-input value="{{this.healthData.height}}" readonly></ion-input>
+                            </ion-item>
+                        </div>
+                    </ion-col>
+                    <ion-col size="6">
+                        <div class="input-field-container">
+                            <ion-label class="customlabel">Weight(Kg)</ion-label>
+                            <ion-item class="input-field" lines="none">
+                                <ion-input value="{{this.healthData.weight}}" readonly></ion-input>
+                            </ion-item>
+                        </div>
+                    </ion-col>
+                </ion-row>
+
+                <ion-row>
+                    <ion-col size="12">
+                        <div class="input-field-container">
+                            <ion-label class="customlabel">Medical Condition</ion-label>
+                            <ion-item class="input-field" lines="none">
+                                <ion-input value="{{this.healthData.medicalConditions}}" readonly></ion-input>
+                            </ion-item>
+                        </div>
+                    </ion-col>
+                </ion-row>
+
+                <ion-row>
+                    <ion-col size="12">
+                        <div class="input-field-container">
+                            <ion-label class="customlabel">Weight Goals</ion-label>
+                            <ion-item class="input-field" lines="none">
+                                <ion-input *ngIf="this.healthData.weightGoals == -0.1" value="Lose 1kg per week" readonly></ion-input>
+                                <ion-input *ngIf="this.healthData.weightGoals == -0.75" value="Lose 0.75kg per week" readonly></ion-input>
+                                <ion-input *ngIf="this.healthData.weightGoals == -0.5" value="Lose 0.5kg per week" readonly></ion-input>
+                                <ion-input *ngIf="this.healthData.weightGoals == -0.25" value="Lose 0.25kg per week" readonly></ion-input>
+                                <ion-input *ngIf="this.healthData.weightGoals == 0." value="Maintain Weight" readonly></ion-input>
+                                <ion-input *ngIf="this.healthData.weightGoals == 0.25" value="Gain 0.25kg per week" readonly></ion-input>
+                                <ion-input *ngIf="this.healthData.weightGoals == 0.5" value="Gain 0.5kg per week" readonly></ion-input>
+                                <ion-input *ngIf="this.healthData.weightGoals == 0.75" value="Gain 0.75kg per week" readonly></ion-input>
+                                <ion-input *ngIf="this.healthData.weightGoals == 1" value="Gain 1kg per week" readonly></ion-input>
+                            </ion-item>
+                        </div>
+                    </ion-col>
+                </ion-row>
+
+                <ion-row>
+                    <ion-col size="12">
+                        <div class="input-field-container">
+                            <ion-label class="customlabel">Workout Commitments</ion-label>
+                            <ion-item class="input-field" lines="none">
+                                <ion-input  readonly value="{{this.healthData.workoutCommitment}}"></ion-input>
+                            </ion-item>
+                        </div>
+                    </ion-col>
+                </ion-row>
+
+            </ion-grid>
+
       </ion-col>
     </ion-row>
   </ion-grid>
+
 </ion-content>
+
+<ng-template #loaderContent>
+    <div class="loader-wrapper">
+        <ion-spinner></ion-spinner>
+    </div>
+</ng-template>

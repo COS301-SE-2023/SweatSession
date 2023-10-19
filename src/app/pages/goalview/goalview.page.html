@@ -10,7 +10,7 @@
 <ion-content [fullscreen]="true" class="form-content">
   <form [formGroup]="goalForm" (ngSubmit)="onSubmit()" class="ion-padding">
     <ion-item-divider style="border-radius: 7px; padding: 5px">
-      <ion-card-title>Goal details</ion-card-title>
+      <ion-card-title>Goal Details</ion-card-title>
     </ion-item-divider>
     <ion-row class="ion-justify-content-center">
       <ion-col size="12" size-lg="6">
@@ -42,7 +42,7 @@
     </ion-row>
 
     <ion-row class="ion-justify-content-center">
-      <ion-col size="12" size-lg="6">
+      <ion-col size="12" size-lg="6" style="margin-bottom: 20px;">
         <div class="input-field-container">
           <ion-label position="stacked"><h2 style="font-weight: bold">Description</h2></ion-label>
           <ion-item class="input-field" lines="none">
@@ -52,7 +52,7 @@
       </ion-col>
     </ion-row>
 
-    <form [formGroup]="TaskForm">
+    <form [formGroup]="TaskForm" style="margin-bottom: 20px;">
       <ion-item-divider style="border-radius: 7px">
         <ion-card-title >Tasks</ion-card-title>
         <ion-icon name = "add" size="large" (click)="addControl()" slot = "end" ></ion-icon>

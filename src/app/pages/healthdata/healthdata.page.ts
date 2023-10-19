@@ -7,6 +7,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { NotifyService } from 'src/app/services/notify/notify.service';
 import {HealthDataService} from "../../services/healthDataService/healthData.service";
+import {HealthDataDisplayPage} from "../health-data-display/health-data-display.page";
 
 @Component({
   selector: 'app-healthdata',
@@ -41,7 +42,8 @@ export class HealthDataPage implements OnInit {
     private profileService: ProfileService, 
     private firestore: AngularFirestore, 
     private notifyService: NotifyService,
-              private healthDataService: HealthDataService) {
+              private healthDataService: HealthDataService,
+              ) {
 
     this.healthDataForm = this.formBuilder.group({
       height: ['', [Validators.required, Validators.min(100), Validators.max(251)]],
@@ -81,7 +83,9 @@ export class HealthDataPage implements OnInit {
   async fetchHealthData() {
     if (this.currUserId) {
       this.firestore
-        .collection('healthdata', (ref) => ref.where('userId', '==', this.currUserId))
+        .collection('healthdata',
+            (ref) => ref
+                .where('userId', '==', this.currUserId))
         .valueChanges()
         .pipe(takeUntil(this.ngUnsubscribe))
         .subscribe((data) => {
@@ -130,7 +134,7 @@ export class HealthDataPage implements OnInit {
       await this.notifyService.presentSuccessToast('Health data added Successfully.');
     }
 
-    this.healthDataService.addWeightData(this.currUserId, this.healthDataForm.value.weight);
+    this.healthDataService.addWeightData(this.healthDataForm.value.weight, this.currUserId);
 
   }
 }

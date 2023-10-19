@@ -51,7 +51,7 @@
         <ion-button color="success" size="small" (click)="addFriend(notice)">Accept</ion-button>
         <ion-button color="danger" size="small" (click)="clearNotification(notice.id!); rejectFriendRequest(notice , notice.senderid! , notice.senttoid!);">Reject</ion-button>
       </div>
-      <div class="flex-center4" *ngIf="notice.message == 'Added you to join a workout session'">
+      <div class="flex-center4" *ngIf="notice.message == 'Invited you to join a workout session'">
         <ion-button color="success" size="small" (click)="acceptToJoinWorkout(notice)">Accept</ion-button>
         <ion-button color="danger" size="small" (click)="rejectToJoinWorkou(notice);">Reject</ion-button>
       </div>

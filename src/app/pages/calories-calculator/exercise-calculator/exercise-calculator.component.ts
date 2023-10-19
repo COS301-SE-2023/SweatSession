@@ -50,6 +50,7 @@ export class ExerciseCalculatorComponent implements OnInit {
     // "pushUps": 8,
   }
   selectedExercises: any = {};
+  // formValid = false;
   Incount: 0;
   // exerciseOptions: string[] = ["Exercise 1", "Exercise 2", "Exercise 3", "Exercise 4"];
 
@@ -97,11 +98,15 @@ export class ExerciseCalculatorComponent implements OnInit {
   }
 
   async addExercise() {
+    console.log(this.exercisesArray)
     const exerciseControl = this.formBuilder.group({
       name: ['',[Validators.required]],
-      sets: ['',[Validators.required, Validators.min(2)]],
-      reps: ['',[Validators.required, Validators.min(2)]],
-      weight: ['', [Validators.required, Validators.min(2)]],
+      sets: ['',[]],
+      reps: ['',[]],
+      weight: ['', []],
+      // sets: ['',[Validators.required, Validators.min(2)]],
+      // reps: ['',[Validators.required, Validators.min(2)]],
+      // weight: ['', [Validators.required, Validators.min(2)]],
       duration: ['', [Validators.required, Validators.min(1)]],
     });
     (this.workoutForm.get('exercises') as FormArray).push(exerciseControl);
@@ -263,6 +268,18 @@ export class ExerciseCalculatorComponent implements OnInit {
     await this.getSessionWorkout(this.selectedWorkoutId);
 
     console.log(this.selectedWorkout);
+  }
+
+  isValidInput(){
+
+    let isValid = true;
+    this.exercises.controls.forEach(control => {
+      if (!control.valid) {
+        // this.formValid = false;
+        isValid = false;
+      }
+    });
+    return isValid;
   }
 
   hasWeight(exerciseNo: number) {

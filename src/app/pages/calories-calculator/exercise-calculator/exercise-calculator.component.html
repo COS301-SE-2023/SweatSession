@@ -99,6 +99,7 @@
             class="submitbutton"
             type="button"
             (click)="calculateTotalCaloriesBurned()"
+            [disabled]="!isValidInput()"
           >
             Calculate Calories
           </ion-button>
