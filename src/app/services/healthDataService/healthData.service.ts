@@ -3,6 +3,7 @@ import {AngularFirestore, QuerySnapshot} from '@angular/fire/compat/firestore';
 import {finalize, takeUntil} from 'rxjs/operators';
 import {getAuth} from "@angular/fire/auth";
 import {weightdata} from "../../models/exercise.model";
+// import {CalorieTargetComponent} from "../../pages/calories-calculator/calorie-target/calorie-target.component";
 import {Observable} from "rxjs";
 
 
@@ -12,7 +13,8 @@ import {Observable} from "rxjs";
 export class HealthDataService {
 
     currUserId: string | undefined | null;
-  constructor(private firestore: AngularFirestore) { }
+  constructor(private firestore: AngularFirestore,
+              ) { }
 
   async getHealthData(userId: string) {
     return new Promise<any[]>((resolve, reject) => {
@@ -65,6 +67,7 @@ export class HealthDataService {
                     const data = doc.data() as weightdata; // Accessing data from each DocumentSnapshot
                     weightData.push({
                         weight: data.weight,
+                        calories: data.calories,
                         userId: data.userId,
                         date: data.date,
                     });
@@ -81,6 +84,8 @@ export class HealthDataService {
         const currentDate = new Date();
         const formattedDate = currentDate.toISOString().split('T')[0]; // Format date as YYYY-MM-DD
 
+        // const targetCalories:number = this.CalCalculator.calculateTargetCalories();
+        const targetCalories:number = 2000;
         // Check if the document with the same date exists
         const existingDocRef = this.firestore.collection('chartdata').ref
             .where('date', '==', formattedDate).where('userId', '==', userId);
@@ -92,6 +97,7 @@ export class HealthDataService {
             await this.firestore.collection('chartdata')
                 .add({
                 weight: weight,
+                calories:targetCalories,
                 userId: userId,
                 date: formattedDate,
             });

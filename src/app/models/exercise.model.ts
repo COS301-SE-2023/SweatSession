@@ -37,6 +37,7 @@ export interface healthData {
 
 export interface weightdata {
     weight: number;
+    calories: number;
     date: Date;
     userId: string;
 }

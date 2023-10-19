@@ -39,7 +39,7 @@ export class HealthDataDisplayPage implements OnInit {
       }
       this.chartData = [
             { data: [], label: 'Weight' },
-          // { data: [], label: 'Calories'}
+          { data: [], label: 'Calories'}
         ];
 
       this.setupProfile();
@@ -103,6 +103,7 @@ export class HealthDataDisplayPage implements OnInit {
                       {
                           // console.table(Weightdata);
                           this.chartData[0].data.push(Weightdata.weight);
+                          this.chartData[1].data.push(Weightdata.calories);
                           this.chartLabels.push(Weightdata.date.toString());
                           // console.log("Moonlight");
                       }
