@@ -177,7 +177,7 @@ export class ExerciseExplorerPage implements  AfterViewInit  {
   async presentAlert() {
     const alert = await this.alertController.create({
       header: '3D-Model',
-      message: 'Click on the model to view exercises!',
+      message: 'Click on the muscles of the model to view exercises!',
       buttons: ['OK']
     });
     

@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
+import {AngularFirestore, QuerySnapshot} from '@angular/fire/compat/firestore';
 import {finalize, takeUntil} from 'rxjs/operators';
 import {getAuth} from "@angular/fire/auth";
+import {weightdata} from "../../models/exercise.model";
+import {Observable} from "rxjs";
 
 
 @Injectable({
@@ -39,7 +41,7 @@ export class HealthDataService {
     });
   }
 
-    async setupProfile() {
+  setupProfile() {
         const auth = getAuth();
 
         auth.onAuthStateChanged(async (user) => {
@@ -52,48 +54,58 @@ export class HealthDataService {
         });
     }
 
-  async addweightdata(weight: number)
-  {
-      this.setupProfile();
-      const userId = this.currUserId;
-        const healthDataId = await this.checkChartDataExistence(userId!,weight);
-  }
+    async fetchWeightData(userId: string) {
+        const weightData: weightdata[] = [];
 
-  checkChartDataExistence(userId: string, weight: number) {
-      // check if the userid has the same date as today in chartdata
-      //if it does, then update the add the weight to the chartdata
-      // if it does, then update the weight
-      // if it doesn't, then create a new entry
-      //
-      //   const snapshot = this.firestore
-      //       .collection('chartdata', (ref) => ref.where('userId', '==', userId))
-      //       .get()
-      //       .toPromise();
-      //       //if chartdata collection doesnt exist create one
-      //       snapshot?.then(
-      //           (data) => {
-      //               if (!data?.empty) {
-      //                   this.firestore
-      //                       .collection('chartdata')
-      //                       .doc(data?['weight'])
-      //                       .update({
-      //                           weight: weight,
-      //                       });
-      //               } else {
-      //                   this.firestore
-      //                       .collection('chartdata')
-      //                       .add({
-      //                           userId: userId,
-      //                           weight: weight,
-      //                       });
-      //               }
-      //           },
-      //           (error) => {
-      //               console.log(error);
-      //           }
-      //       )
-
-      return "Eix";
+        await this.firestore.collection('chartdata', (ref) =>
+            ref.where('userId', '==', userId)
+        ).get().toPromise().then((querySnapshot) => {
+            if (querySnapshot) {
+                querySnapshot.docs.forEach((doc) => {
+                    const data = doc.data() as weightdata; // Accessing data from each DocumentSnapshot
+                    weightData.push({
+                        weight: data.weight,
+                        userId: data.userId,
+                        date: data.date,
+                    });
+                });
+                // console.table(weightData);
             }
+        });
+
+        return weightData;
+    }
+
+
+    async addWeightData(weight: number, userId: string) {
+        const currentDate = new Date();
+        const formattedDate = currentDate.toISOString().split('T')[0]; // Format date as YYYY-MM-DD
+
+        // Check if the document with the same date exists
+        const existingDocRef = this.firestore.collection('chartdata').ref
+            .where('date', '==', formattedDate).where('userId', '==', userId);
+
+        const existingDocs = await existingDocRef.get();
+
+        if (existingDocs.empty) {
+            // If the document doesn't exist, create a new one
+            await this.firestore.collection('chartdata')
+                .add({
+                weight: weight,
+                userId: userId,
+                date: formattedDate,
+            });
+        } else {
+            // If a document with the same date exists, update it
+            const docId = existingDocs.docs[0].id;
+            await this.firestore.collection('chartdata').doc(docId).update({
+                weight: weight,
+                userId: userId,
+                date: formattedDate,
+            });
+        }
+
+    }
+
 
 }
