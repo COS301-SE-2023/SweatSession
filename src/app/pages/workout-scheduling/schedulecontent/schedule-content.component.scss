@@ -54,18 +54,19 @@ ion-icon.inactive {
 }
 
 .exercise-button {
-    //background-color: #E63946;
-    //color: #fff;
     border: none;
     border-radius: 5px;
     padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;
-    // transition: background-color 0.3s ease-in-out;
   }
   
   .completed {
     text-decoration: line-through;
+  }
+
+  .exercise-card {
+    margin-top: 20px;
   }
   
 

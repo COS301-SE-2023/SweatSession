@@ -31,14 +31,14 @@
           </ion-col>
         </ion-row>
       </ion-grid>
-      <!-- <div *ngIf="isCompleted()"> -->
+  
       <div *ngIf="isCompleted()">
       <!-- <div *ngIf="exercises.length>0"> -->
         <h2 *ngIf="!schedule.filledExerciseList">Your session has ended. Which exercises were you able to finish?</h2>
         <h2 *ngIf="schedule.filledExerciseList">Exercise checklist completed</h2>
         <swiper-container pagination="{hideOnClick: true}">
           <swiper-slide *ngFor="let exercise of exercises">
-            <ion-card [ngClass]="{ 'completed': exercise.completed }">
+            <ion-card [ngClass]="{ 'completed': exercise.completed }" class="exercise-card">
               <ion-card-content>
                 <ion-checkbox [ngClass]="{ 'completed':  exercise.completed  }"
                   [value]="exercise.id"

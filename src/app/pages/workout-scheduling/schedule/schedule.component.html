@@ -1,11 +1,17 @@
 <!-- <search class="custom-search" [data]="schedules" [placeholder]="'Find Scheduled Sessions'">Find schedule</search> -->
 
-<div *ngFor="let schedule of schedules;  let i=index" class="schedules">
-  <schedule-content 
-    [schedule]="schedule" 
-    [friends]="friends"
-  ></schedule-content>
-</div>
+<ion-grid>
+  <ion-row>
+    <ion-col size="12" size-md="6" size-lg="4" *ngFor="let schedule of schedules;  let i=index" >
+      <div class="schedules">
+        <schedule-content 
+          [schedule]="schedule" 
+          [friends]="friends"
+        ></schedule-content>
+      </div>
+    </ion-col>
+  </ion-row>
+</ion-grid>
 
 <div [hidden]="schedules.length > 0">
   <ion-card>
