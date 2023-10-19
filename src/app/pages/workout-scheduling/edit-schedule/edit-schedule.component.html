@@ -66,6 +66,9 @@
           <ion-input type = "number" value="{{schedule.duration}}" [(ngModel)]="schedule.duration" (ionChange)="checkChange()"></ion-input>
         </ion-item>
       </div>
+      <ion-note *ngIf="!IsvalidDuration()" color="danger">
+        *Duration should be greater than 10 minutes
+      </ion-note>
     </ion-col>
   </ion-row>
   <ion-button expand="block" (click) = "editSchedule()" [disabled]="!isChange" style="padding-top: 5px">Save</ion-button>

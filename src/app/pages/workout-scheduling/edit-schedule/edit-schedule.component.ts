@@ -83,4 +83,11 @@ export class EditScheduleComponent  implements OnInit {
 
     return `${currentYear}-${currentMonth}-${currentDay}`;
   }
+
+  IsvalidDuration() {
+    if(this.schedule.duration! < 10) {
+      return false;
+    }
+    return true;
+  }
 }
