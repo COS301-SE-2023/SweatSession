@@ -100,7 +100,7 @@ export class AddScheduleComponent  implements OnInit {
   isValidInput() {
     const { name, location, duration, time, date, } = this.schedule;
 
-    if ( name && location && duration && time && date && this.isDateTimeValid() && this.IsvalidDuration())
+    if ( name && location && duration && time && date && this.isDateTimeValid() )//&& this.IsvalidDuration())
     {
       return true;
     }

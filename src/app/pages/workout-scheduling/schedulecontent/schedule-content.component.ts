@@ -151,8 +151,19 @@ export class ScheduleContentComponent implements OnInit {
     return false;
   }
 
+  // isCompleted() {
+  //   if (this.schedule.status === "completed") {
+  //     return true;
+  //   }
+  //   return false;
+  // }
+
   isCompleted() {
-    if (this.schedule.status === "completed") {
+    const completeAt = this.schedule.completeAt!.toDate().getTime();
+    const scheduledTime = new Date(`${this.schedule.date}T${this.schedule.time}`).getTime();
+    const now = new Date().getTime();
+    let joinStatus = this.schedule.joined;
+    if(joinStatus && now >= completeAt ) {
       return true;
     }
     return false;
