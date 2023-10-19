@@ -1,0 +1,19 @@
+ion-card-header, ion-card-title, ion-card-content, ion-button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center; 
+  }
+  
+  ion-card-title {
+    font-size: 2em;
+    font-weight: bold;
+  }
+
+  ion-item-divider {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
