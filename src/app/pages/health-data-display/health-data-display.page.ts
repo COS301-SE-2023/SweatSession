@@ -39,7 +39,7 @@ export class HealthDataDisplayPage implements OnInit {
       }
       this.chartData = [
             { data: [], label: 'Weight' },
-          { data: [], label: 'Calories'}
+          // { data: [], label: 'Calories'}
         ];
 
       this.setupProfile();
@@ -58,8 +58,8 @@ export class HealthDataDisplayPage implements OnInit {
             this.currUserId = sessionStorage.getItem('currUserId') ?? "";
         }
 
-        this.fetchHealthData();
         this.setChartData();
+        this.fetchHealthData();
     }
 
     async fetchHealthData() {
@@ -82,7 +82,7 @@ export class HealthDataDisplayPage implements OnInit {
                         this.healthData.medicalConditions = (data[0]! as healthData).medicalConditions;
                         this.healthData.workoutCommitment = (data[0]! as healthData).workoutCommitment;
                         this.healthData.weightGoals = (data[0]! as healthData).weightGoals;
-                        this.isLoading = false;
+                        // this.isLoading = false;
                     }
                 });
 
@@ -98,15 +98,17 @@ export class HealthDataDisplayPage implements OnInit {
           this.healthdataservice.fetchWeightData(this.currUserId).then(
               (data) => {
                   data.forEach((Weightdata: weightdata) => {
-                      console.log("Feeelings");
+                      // console.log("Feeelings");
                       if(Weightdata)
                       {
-                          console.table(Weightdata);
+                          // console.table(Weightdata);
                           this.chartData[0].data.push(Weightdata.weight);
                           this.chartLabels.push(Weightdata.date.toString());
-                          console.log("Moonlight");
+                          // console.log("Moonlight");
                       }
                   });
+                  this.sortchatLabels();
+                  this.isLoading = false;
               }
           );
 
@@ -115,6 +117,13 @@ export class HealthDataDisplayPage implements OnInit {
       {
           console.log("currUserId is null");
       }
+  }
+
+  sortchatLabels()
+  {
+      this.chartLabels.sort((a, b) => {
+          return new Date(a).getTime() - new Date(b).getTime();
+      });
   }
 
 }

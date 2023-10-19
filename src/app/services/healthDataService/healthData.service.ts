@@ -69,56 +69,13 @@ export class HealthDataService {
                         date: data.date,
                     });
                 });
-                console.table(weightData);
+                // console.table(weightData);
             }
         });
 
         return weightData;
     }
 
-
-
-
-
-    //  fetchWeighthData() {
-    //     this.setupProfile();
-    //     const Weightdata:weightdata[]  = [];
-    //
-    //     if (this.currUserId) {
-    //         // console.log("About to fetch weight data");
-    //         this.firestore
-    //             .collection('chartdata',
-    //                 (ref) => ref
-    //             .where('userId', '==', this.currUserId))
-    //             .valueChanges()
-    //             .pipe()
-    //             .subscribe((data) => {
-    //
-    //                 if (data.length > 0) {
-    //
-    //                     data.forEach((dataa) => {
-    //
-    //                         const DATA: weightdata = {
-    //                             weight : (dataa as weightdata).weight,
-    //                             date : (dataa as weightdata).date,
-    //                             userId : (dataa as weightdata).userId
-    //                         };
-    //
-    //                         // console.table(DATA);
-    //                         Weightdata.push(DATA);
-    //                         console.table("Weightdata" + Weightdata);
-    //                     });
-    //                 }
-    //                 else
-    //                 {
-    //                     console.log("No data found");
-    //                 }
-    //             });
-    //         return Weightdata;
-    //     }
-    //
-    //     return null;
-    // }
 
     async addWeightData(weight: number, userId: string) {
         const currentDate = new Date();

@@ -13,7 +13,7 @@
       </ion-toolbar>
 </ion-header>
 
-<ion-content *ngIf="!isLoading; else loaderContent">
+<ion-content >
 <ion-grid>
     <ion-row>
       <ion-col size="12">
@@ -22,8 +22,14 @@
               <ion-card-title>Health Charts</ion-card-title>
             </ion-card-header>
 
+<!--            *ngIf="chartData.length > 0"-->
+<!--            [datasets]="chartData"-->
+<!--            [labels]="chartLabels"-->
+<!--            [options]="chartOptions"-->
+<!--            [type]="chartType">-->
+
 <!--          [options]="chartOptions"-->
-                  <ion-card-content>
+                  <ion-card-content *ngIf="!isLoading; else loaderContent">
                     <canvas baseChart
                             [datasets]="chartData"
                             [labels]="chartLabels"
