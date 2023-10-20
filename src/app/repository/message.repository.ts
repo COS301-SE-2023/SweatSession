@@ -16,7 +16,8 @@ import { IMessage,
    IExitChatGroup,
    IRemoveChatGroup,
    IGetGroup,
-   IRemoveChatGroupUser} from "../models";
+   IRemoveChatGroupUser,
+   IDeleteGroupMessage} from "../models";
 import { AngularFirestore, AngularFirestoreCollection } from "@angular/fire/compat/firestore";
 import { Observable,lastValueFrom, map, tap } from "rxjs";
 import { NotifyService } from "../services/notify/notify.service";
@@ -207,22 +208,41 @@ import { NavController } from "@ionic/angular";
     }
 
     deleteMessage(request: IDeleteMessage) {
-       try {
-        const messageDoc = this.firestore.doc(`messages/${request.userId}/${request.otheruserId}/${request.messageId}`).delete();
+      try {
+      const messageDoc = this.firestore.doc(`messages/${request.userId}/${request.otheruserId}/${request.messageId}`).delete();
 
-        const response:IDeletedMessage = {
-            validate: true
-        }
+      const response:IDeletedMessage = {
+          validate: true
+      }
 
-        return response;
-       }catch(error) {
-        // alert("alert: "+error);
-        const response:IDeletedMessage = {
-            validate: false
-        }
+      return response;
+      }catch(error) {
+      // alert("alert: "+error);
+      const response:IDeletedMessage = {
+          validate: false
+      }
 
-        return response;
-       }
+      return response;
+      }
+    }
+
+    deleteGroupMessage(request: IDeleteGroupMessage) {
+      try {
+      const messageDoc = this.firestore.doc(`groups/${request.groupId}/messages/${request.messageId}`).delete();
+
+      const response:IDeletedMessage = {
+          validate: true
+      }
+
+      return response;
+      }catch(error) {
+      // alert("alert: "+error);
+      const response:IDeletedMessage = {
+          validate: false
+      }
+
+      return response;
+      }
     }
 
     async addChatGroup(request: IAddChatGroup) {

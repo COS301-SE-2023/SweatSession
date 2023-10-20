@@ -62,6 +62,12 @@ export interface IDeleteMessage {
     messageId: string;
 }
 
+export interface IDeleteGroupMessage {
+    userId?: string;
+    groupId: string;
+    messageId: string;
+}
+
 export interface IDeletedMessage {
     validate: boolean;
 }

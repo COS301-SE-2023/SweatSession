@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IAddChatGroup, IDeleteMessage, IExitChatGroup, IGetChatFriends, IGetGroups, IGetMessages, IJoinGroup, IRemoveChatGroup, IRemoveChatGroupUser, ISendMessage } from 'src/app/models';
+import { IAddChatGroup, IDeleteGroupMessage, IDeleteMessage, IExitChatGroup, IGetChatFriends, IGetGroups, IGetMessages, IJoinGroup, IRemoveChatGroup, IRemoveChatGroupUser, ISendMessage } from 'src/app/models';
 import { MessageRepository } from 'src/app/repository';
 
 @Injectable({
@@ -63,5 +63,9 @@ export class MessagesService {
 
   async removeChatGroupUser(request: IRemoveChatGroupUser) {
     return this.repository.removeChatGroupUser(request);
+  }
+
+  async deleteGroupMessage(request: IDeleteGroupMessage) {
+    return this.repository. deleteGroupMessage(request);
   }
 }
