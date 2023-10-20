@@ -101,4 +101,14 @@ body[color-theme="dark"] {
   .message-timestamp {
     color: rgb(46, 46, 46);
   }
+
+  ion-checkbox {
+    --size: 32px;
+    // --checkbox-background-checked: var(--primary-color);
+  }
+  
+  ion-checkbox::part(container) {
+    border-radius: 50%;
+    // border: 2px solid var(--primary-color);
+  }
 }

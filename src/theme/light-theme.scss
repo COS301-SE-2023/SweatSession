@@ -118,7 +118,7 @@ body[color-theme="light"] {
     color: var(--primary-color);
   }
 
-  .schedule-header, .exercise-button {
+  .schedule-header{
     background-color: var(--primary-color);
     color: white;
     .schedule-name, ion-icon {
@@ -157,6 +157,20 @@ body[color-theme="light"] {
   ion-tab-button.ios{
     --color: #79878f;
     --color-selected: var(--primary-color);
+  }
+
+  ion-checkbox {
+    --size: 32px;
+    --checkbox-background-checked: var(--primary-color);
+  }
+  
+  ion-checkbox::part(container) {
+    border-radius: 50%;
+    border: 2px solid var(--primary-color);
+  }
+
+  .item-field {
+    --background: var(--secondary-variant-color);
   }
 }
 
