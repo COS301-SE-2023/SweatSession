@@ -44,7 +44,7 @@ import { NavController } from "@ionic/angular";
       //add to receiver collection
       const otheruserMessegeDoc = this.firestore
         .collection<IMessage>(`messages/${request.chat.receiverId}/${request.chat.senderId}`)
-        .doc();
+        .doc(messageDoc.ref.id);
       otheruserMessegeDoc.set(request.chat);
 
       //update user collection
@@ -210,6 +210,7 @@ import { NavController } from "@ionic/angular";
     deleteMessage(request: IDeleteMessage) {
       try {
       const messageDoc = this.firestore.doc(`messages/${request.userId}/${request.otheruserId}/${request.messageId}`).delete();
+      this.firestore.doc(`messages/${request.otheruserId}/${request.userId}/${request.messageId}`).delete();
 
       const response:IDeletedMessage = {
           validate: true
@@ -217,7 +218,7 @@ import { NavController } from "@ionic/angular";
 
       return response;
       }catch(error) {
-      // alert("alert: "+error);
+      alert("alert: "+error);
       const response:IDeletedMessage = {
           validate: false
       }

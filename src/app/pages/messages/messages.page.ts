@@ -74,4 +74,11 @@ export class MessagesPage implements OnInit {
   onSegmentChange(event: any) {
     this.selectedSegment = event.detail.value;
   }
+
+  isNull(chat: any) {
+    if(chat) {
+      return true;
+    }
+    return false;
+  }
 }
