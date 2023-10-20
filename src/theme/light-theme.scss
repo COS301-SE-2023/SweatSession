@@ -119,7 +119,7 @@ body[color-theme="light"] {
   }
 
   .schedule-header{
-    background-color: var(--primary-color);
+    --background: var(--primary-color);
     color: white;
     .schedule-name, ion-icon {
       color: white;

@@ -23,7 +23,7 @@ export class EditScheduleComponent  implements OnInit {
   ngOnInit() {}
 
   checkChange() {
-    if(this.isDateTimeValid()) {
+    if(this.isDateTimeValid() && this.IsvalidDuration()) {
       this.isChange = true;
     } else {
       this.isChange = false;
