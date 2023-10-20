@@ -72,6 +72,7 @@ export class WorkoutSchedulingPage {
   }
 
   onSegmentChange(event: any) {
+    this.filterSchedules();
     this.selectedSegment = event.detail.value;
   }
 
