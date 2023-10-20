@@ -1,4 +1,4 @@
-<ion-card style="margin-bottom: 0px;">
+<ion-card style="margin-bottom: 0px;" class="schedule-content-card">
   <ion-item class="schedule-header" id="viewer" lines="none">
     <ion-icon name="receipt-outline"></ion-icon>
     <ion-card-header class="schedule-name">
@@ -58,7 +58,7 @@
         </div>
         <div class="exercise-content">
           <ion-item *ngFor="let exercise of exercises" lines="none">
-            <ion-checkbox
+            <ion-checkbox slot="start"
             [value]="exercise.id"
             labelPlacement="end" 
             justify="start"
