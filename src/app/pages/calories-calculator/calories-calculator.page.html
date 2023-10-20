@@ -5,22 +5,22 @@
     </ion-buttons>
     <ion-title>Calorie Calculator</ion-title>
   </ion-toolbar>
-  <ion-segment value="target" (ionChange)="onSegmentChange($event)">
-    <ion-segment-button value="target">
-      <ion-label>Target</ion-label>
-    </ion-segment-button>
-    <ion-segment-button value="diet">
-      <ion-label>Intake</ion-label>
-    </ion-segment-button>
-    <ion-segment-button value="exercise">
-      <ion-label>Workout</ion-label>
-    </ion-segment-button>
-  </ion-segment>
 </ion-header>
 
 <ion-content>
   <div class="outer-container">
     <div class="inner-container">
+      <ion-segment value="target" (ionChange)="onSegmentChange($event)">
+        <ion-segment-button value="target">
+          <ion-label>Target</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="diet">
+          <ion-label>Intake</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="exercise">
+          <ion-label>Workout</ion-label>
+        </ion-segment-button>
+      </ion-segment>
       <ion-card class="summary ion-text-center">
         <h2>Calories Summary</h2>
         <h4>You require {{ targetCalories$ | async }} calories per day.</h4>
