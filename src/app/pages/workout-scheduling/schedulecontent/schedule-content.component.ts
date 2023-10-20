@@ -135,7 +135,7 @@ export class ScheduleContentComponent implements OnInit {
     }
 
     if(this.isCompleted()) {
-      return "completed";
+      return "Completed";
     }
     return "Workout Session Overdue";
   }
@@ -337,5 +337,9 @@ export class ScheduleContentComponent implements OnInit {
     } else {
       this.completedExercises = [];
     }
+  }
+
+  toDate() {
+    return new Date(`${this.schedule.date}T${this.schedule.time}`);
   }
 }

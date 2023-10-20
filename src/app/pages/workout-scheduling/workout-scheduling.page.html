@@ -5,16 +5,15 @@
    </ion-buttons>
     <ion-title>Workout Schedule</ion-title>
   </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
   <ion-segment (ionChange)="onSegmentChange($event)" value="0" [scrollable]="true">
     <ion-segment-button value="0">All</ion-segment-button>
     <ion-segment-button value="1">In Session</ion-segment-button>
     <ion-segment-button value="2">Completed</ion-segment-button>
     <ion-segment-button value="3">Incomplete</ion-segment-button>
   </ion-segment>
+</ion-header>
 
+<ion-content [fullscreen]="true">
   <workout-schedule id="0" [hidden]="selectedSegment !== '0'"
   [categoryName]="''"  
   [schedules] = "schedules"
