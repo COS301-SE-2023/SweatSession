@@ -12,10 +12,6 @@
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
-</ion-header>
-
-
-<ion-content class="main" >
   <div class="group-options" *ngIf="showOptions">
     <ion-list class="transparent-list">
       <ion-item lines="none" class="transparent-item" (click)="clearNotifications()">
@@ -24,13 +20,19 @@
       </ion-item>
     </ion-list>
   </div>
+</ion-header>
+
+
+<ion-content class="main" >
 
   <div *ngIf="noticeamount > 0" >
     <ion-card class="Mcard" *ngFor="let notice of noticeList2">
       <div class="right-align-label2">
-        <ion-button  fill="clear" class="delete-button" size="small" (click)="clearNotification(notice.id!)">
-          <ion-icon name="close-circle-outline"></ion-icon>
-        </ion-button>
+        <ion-buttons>
+          <ion-button class="delete-button" size="small" (click)="clearNotification(notice.id!)">
+            <ion-icon name="close-circle-outline"></ion-icon>
+          </ion-button>
+        </ion-buttons>
       </div>
       <div style="align-items:center" >
         <div style="display:flex " >
