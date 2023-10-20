@@ -111,8 +111,8 @@ import { NavigationService } from 'src/app/services';
       {
         if
         (
-            element.name != null && element.sets != null &&
-            element.reps != null && element.weight != null &&
+            element.name != null &&
+            // element.reps != null && element.weight != null && && element.sets != null
             element.duration != null
         )
         {
