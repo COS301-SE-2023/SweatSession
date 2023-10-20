@@ -32,21 +32,21 @@
           <ion-label>TDEE Value</ion-label>
           <ion-label [class]="getValueColor(TDEEValue, 'TDEE')">{{ TDEEValue | number: '1.0-0' }}</ion-label>
         </ion-item>
-        <ion-item class="transparent-item">
+        <ion-item class="transparent-item" lines="none">
           <ion-label>Target Calories</ion-label>
           <ion-label [class]="getValueColor(targetCalories, 'target')">{{ targetCalories | number: '1.0-0' }}</ion-label>
         </ion-item>
       </ion-list>
 
 
-      <div class="ion-padding">
-                          <ion-button
-                            fill="outline"
-                            routerLink="/health-data-display">
-                            <ion-icon name="heart" class="heart-icon" color="danger"></ion-icon>
-                             Health Form
-                          </ion-button>
-        </div>
-
+      <div class="ion-margin-top">
+        <ion-button
+          fill="outline"
+          expand="block"
+          routerLink="/health-data-display">
+          <ion-icon name="heart" class="heart-icon" color="danger"></ion-icon>
+            Health Form
+        </ion-button>
+      </div>
   </ion-card-content>
 </ion-card>

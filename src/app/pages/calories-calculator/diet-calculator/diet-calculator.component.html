@@ -3,16 +3,14 @@
     <h1>Diet Calculator</h1>
   </ion-card-title>
   <ion-card-content>
-    <h2 style="font-size: 20px;">Enter your meal:</h2>
-    <ion-item>
-      <!-- <ion-label position="floating" style="font-size: 20px; text-align: center;">Enter your meal:</ion-label> -->
-      <ion-textarea [(ngModel)]="meal" rows="5"></ion-textarea>
+    <ion-item lines="none" class="input-field">
+      <ion-textarea label="Enter your meal" labelPlacement="stacked" [(ngModel)]="meal" rows="5"></ion-textarea>
     </ion-item>
-    <ion-button expand="block" (click)="calculateNutrition()">Calculate</ion-button>
+    <ion-button class="ion-margin-top" expand="block" (click)="calculateNutrition()">Calculate</ion-button>
 
-    <ion-card *ngIf="totalNutrition">
-      <h2 style="font-size: 18px;">Summary of Nutritional Information</h2>
-      <ion-card-content>
+    <div *ngIf="totalNutrition">
+      <h2 style="font-size: 18px; margin-top: 20px;">Summary of Nutritional Information</h2>
+      <div class="inner-container ion-padding">
         <p>Total Calories: {{ totalNutrition.calories | number:'1.2-2' }}</p>
         <p>Protein: {{ totalNutrition.protein | number:'1.2-2' }}g</p>
         <p>Carbohydrates: {{ totalNutrition.carbohydrates | number:'1.2-2' }}g</p>
@@ -20,8 +18,8 @@
         <p>Dietary Fiber: {{ totalNutrition.fiber | number:'1.2-2' }}g</p>
         <p>Sugars: {{ totalNutrition.sugars | number:'1.2-2' }}g</p>
         <p>Sodium: {{ totalNutrition.sodium | number:'1.2-2' }}mg</p>
-      </ion-card-content>
-    </ion-card>
+      </div>
+    </div>
 
     <ion-list class="transparent-list" *ngIf="foods">
       <ion-item lines="none" class="transparent-item" *ngFor="let food of foods">

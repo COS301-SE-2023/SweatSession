@@ -5,97 +5,32 @@
     </ion-buttons>
     <ion-title>Calorie Calculator</ion-title>
   </ion-toolbar>
+  <ion-segment value="target" (ionChange)="onSegmentChange($event)">
+    <ion-segment-button value="target">
+      <ion-label>Target</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="diet">
+      <ion-label>Intake</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="exercise">
+      <ion-label>Workout</ion-label>
+    </ion-segment-button>
+  </ion-segment>
 </ion-header>
 
 <ion-content>
   <div class="outer-container">
-    <ion-content>
-      <div class="inner-container">
-        <ion-segment value="target" (ionChange)="onSegmentChange($event)">
-          <ion-segment-button value="target">
-            <ion-label>Target</ion-label>
-          </ion-segment-button>
-          <ion-segment-button value="diet">
-            <ion-label>Intake</ion-label>
-          </ion-segment-button>
-          <ion-segment-button value="exercise">
-            <ion-label>Workout</ion-label>
-          </ion-segment-button>
-        </ion-segment>
+    <div class="inner-container">
+      <ion-card class="summary ion-text-center">
+        <h2>Calories Summary</h2>
+        <h4>You require {{ targetCalories$ | async }} calories per day.</h4>
+        <h4>You consume {{ dietCalories$ | async }} calories per day.</h4>
+        <h4>Your workout burns {{ workoutCalories$ | async }} calories.</h4>
+      </ion-card>
 
-        <ion-card class="summary ion-text-center">
-          <h2>Calories Summary</h2>
-          <h4>You require {{ targetCalories$ | async }} calories per day.</h4>
-          <h4>You consume {{ dietCalories$ | async }} calories per day.</h4>
-          <h4>Your workout burns {{ workoutCalories$ | async }} calories.</h4>
-        </ion-card>
-
-        <calorie-target [hidden]="selectedSegment !=='target'"></calorie-target>
-        <diet-calculator [hidden]="selectedSegment !=='diet'"></diet-calculator>
-        <exercise-calculator
-          [hidden]="selectedSegment !=='exercise'"
-        ></exercise-calculator>
-      </div>
-    </ion-content>
+      <calorie-target [hidden]="selectedSegment !=='target'"></calorie-target>
+      <diet-calculator [hidden]="selectedSegment !=='diet'"></diet-calculator>
+      <exercise-calculator [hidden]="selectedSegment !=='exercise'"></exercise-calculator>
+    </div>
   </div>
-
-  <!-- make the code from here until -->
-  <!-- <ion-card class="ion-text-center">
-    <ion-card-title>
-      <h1>Calories Calculator</h1>
-    </ion-card-title>
-    <ion-card-content>
-      <ion-list>
-        <ion-item lines="none">
-          <div class="icon-container">
-            <ion-icon name="calculator" class="calculator-icon"></ion-icon>
-          </div>
-        </ion-item>
-        <ion-item lines="none">
-          <ion-label>BMR Value: {{calculateandGet_BMR()}}</ion-label>
-        </ion-item>
-        <ion-item lines="none">
-          <ion-label
-            >TDEE Value: {{calculateandGet_TDEE()}} calories per day</ion-label
-          >
-        </ion-item>
-        <ion-item lines="none">
-          <ion-label>Commitment Level</ion-label>
-          <ion-select [(ngModel)]="commitmentLevel">
-            <ion-select-option value="1.2"
-              >Little to no exercise</ion-select-option
-            >
-            <ion-select-option value="1.375"
-              >Light exercise (1–3 days per week)</ion-select-option
-            >
-            <ion-select-option value="1.55"
-              >Moderate exercise (3–5 days per week)</ion-select-option
-            >
-            <ion-select-option value="1.725"
-              >Heavy exercise (6–7 days per week)</ion-select-option
-            >
-            <ion-select-option value="1.9"
-              >Very heavy exercise (twice per day, extra heavy
-              workouts)</ion-select-option
-            >
-          </ion-select>
-        </ion-item>
-        <ion-item lines="none">
-          <ion-label>Weight Goals</ion-label>
-          <ion-select [(ngModel)]="weightGoals">
-            <ion-select-option value="0.8">Lose Weight</ion-select-option>
-            <ion-select-option value="1">Maintain Weight</ion-select-option>
-            <ion-select-option value="1.2">Gain Weight</ion-select-option>
-          </ion-select>
-        </ion-item>
-        <ion-item lines="none">
-          <ion-label
-            >Calories Consumption: {{calculateTargetCalories()}}</ion-label
-          >
-        </ion-item>
-                       <ion-button>Calculate</ion-button>-->
-  <!-- </ion-list>
-    </ion-card-content>
-  </ion-card> -->
-  <!-- here into a component -->
 </ion-content>
