@@ -46,7 +46,7 @@
       <ion-row *ngIf="!isCompleted() && !schedule.filledExerciseList">
         <ion-col size="12">
           <ion-button expand="block" class="exercise-button" (click)="schedule.workoutAdded ? viewWorkout(schedule) : addWorkout(schedule)">
-            <ion-icon [name]="schedule.workoutAdded ? 'barbell-outline': 'add-circle'"></ion-icon> {{ schedule.workoutAdded ? 'View Exercises' : 'Add Exercises' }}
+            <ion-icon name="add-circle"></ion-icon> {{'Add/View Exercises'}}
           </ion-button>
         </ion-col>
       </ion-row>
