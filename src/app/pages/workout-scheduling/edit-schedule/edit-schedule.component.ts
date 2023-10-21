@@ -5,6 +5,8 @@ import { IWorkoutScheduleModel } from 'src/app/models';
 import { GymsearchComponent } from '../../search/gymsearch/gymsearch.component';
 import { ModalController } from '@ionic/angular';
 import { Timestamp } from 'firebase/firestore';
+import { Exercise } from 'src/app/models/exercise.model';
+import { ExerciseService } from 'src/app/services';
 
 @Component({
   selector: 'edit-schedule',
@@ -13,10 +15,12 @@ import { Timestamp } from 'firebase/firestore';
 })
 export class EditScheduleComponent  implements OnInit {
   @Input() schedule:IWorkoutScheduleModel;
+  @Input() exercises:  Exercise[] = [];
   isChange = false;
   placeId = null;
   constructor(private store:Store, 
               private modalController: ModalController,
+              private exerciseService: ExerciseService
               // private cdr: ChangeDetectorRef
               ) { }
 
@@ -44,6 +48,7 @@ export class EditScheduleComponent  implements OnInit {
     // }
     this.schedule.joined = false;
     this.schedule.filledExerciseList = false;
+    this.updateExercises();
     this.store.dispatch(new UpdateWorkoutSchedule(this.schedule))
   }
 
@@ -92,5 +97,14 @@ export class EditScheduleComponent  implements OnInit {
       return false;
     }
     return true;
+  }
+
+  updateExercises() {
+    this.exercises.forEach((exercise)=>{
+      if(exercise.completed) {
+        exercise.completed = false;
+        this.exerciseService.updateExercise(exercise.id! , exercise)
+      }
+    })
   }
 }
