@@ -327,6 +327,7 @@ export class ScheduleContentComponent implements OnInit {
       } else {
         this.currUserId = sessionStorage.getItem('currUserId')!;
       }
+      this.badgesRepository.addBadge(this.currUserId, 0);  //Starter's Success badge
       this.pointsRepository.completeWorkoutPlanPoints(this.currUserId);
     }
   }
