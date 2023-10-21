@@ -38,10 +38,12 @@ export class EditScheduleComponent  implements OnInit {
     let notifyAt = completeAt;
     notifyAt.setMinutes(notifyAt.getMinutes()-5);
     this.schedule.notifyAt = Timestamp.fromDate(notifyAt);
-    if(completeAt > now ) {
-      this.schedule.joined = false;
-      this.schedule.filledExerciseList = false;
-    }
+    // if(completeAt > now ) {
+    //   this.schedule.joined = false;
+    //   this.schedule.filledExerciseList = false;
+    // }
+    this.schedule.joined = false;
+    this.schedule.filledExerciseList = false;
     this.store.dispatch(new UpdateWorkoutSchedule(this.schedule))
   }
 

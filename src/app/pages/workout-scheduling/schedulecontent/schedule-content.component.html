@@ -63,7 +63,7 @@
             labelPlacement="end" 
             justify="start"
             [checked]="exercise.completed"
-            [disabled]="exercise.completed"
+            [disabled]="schedule.filledExerciseList"
             (ionChange)="toggleExerciseCompletion(exercise)">
           </ion-checkbox>
           <ion-label [ngClass]="{ 'completed':  exercise.completed  }">
