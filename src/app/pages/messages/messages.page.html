@@ -20,8 +20,12 @@
                   <ion-label class="user-name-label">
                     <h2 class="user-name">{{ chatFriend.user.displayName! }}</h2>
                   </ion-label>
-                  <p class="timestamp" *ngIf="!isNull(chatFriend.lastChat?.date)">{{ chatFriend.lastChat?.date?.toDate() | date:'MMM d, hh:mm a' }}</p>
-                  <!-- <p *ngIf="!isNull(chatFriend.lastChat?.date)">{{"message deleted..."}}</p> -->
+                  <p class="timestamp" *ngIf="chatFriend?.lastChat?.date; else defaultTimestamp">
+                    {{ chatFriend?.lastChat?.date?.toDate() | date:'MMM d, hh:mm a' }}
+                  </p>
+                  <ng-template #defaultTimestamp>
+                    <p class="default-message">{{"message deleted..."}}</p>
+                  </ng-template>
                 </div>
                 <p class="last-message">{{"~ " + chatFriend.lastChat?.text }}</p>
               </ion-label>

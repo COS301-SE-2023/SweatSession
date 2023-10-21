@@ -151,13 +151,6 @@ export class ScheduleContentComponent implements OnInit {
     return false;
   }
 
-  // isCompleted() {
-  //   if (this.schedule.status === "completed") {
-  //     return true;
-  //   }
-  //   return false;
-  // }
-
   isCompleted() {
     const completeAt = this.schedule.completeAt!.toDate().getTime();
     const scheduledTime = new Date(`${this.schedule.date}T${this.schedule.time}`).getTime();
@@ -205,19 +198,11 @@ export class ScheduleContentComponent implements OnInit {
       if (this.inSession()) {
         if (this.schedule.status !== "inSession") {
           this.schedule.status = "inSession";
-          console.log("insession")
-          // this.store.dispatch(new UpdateWorkoutSchedule(this.schedule));
         }
       } else if (this.schedule.status !== "completed" && this.joined()) {
         this.schedule.status = "completed";
-        console.log("completed")
-        // this.store.dispatch(new UpdateWorkoutSchedule(this.schedule))
-        // this.count.t
       } else if(this.schedule.status !== "uncompleted" && !this.joined()) {
         this.schedule.status = "uncompleted";
-        console.log("uncompleted")
-        // this.store.dispatch(new UpdateWorkoutSchedule(this.schedule))
-        console.log("uncompleted");
       }
     }
     this.ratio = timeDiff / diff;
@@ -327,8 +312,11 @@ export class ScheduleContentComponent implements OnInit {
       } else {
         this.currUserId = sessionStorage.getItem('currUserId')!;
       }
-      this.badgesRepository.addBadge(this.currUserId, 0);  //Starter's Success badge
-      this.pointsRepository.completeWorkoutPlanPoints(this.currUserId);
+
+      if(this.exercises.length == this.completedExercises.length) {
+        this.badgesRepository.addBadge(this.currUserId, 0);
+        this.pointsRepository.completeWorkoutPlanPoints(this.currUserId);
+      }
     }
   }
 
