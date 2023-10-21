@@ -76,9 +76,9 @@ export class MessagesPage implements OnInit {
   }
 
   isNull(chat: any) {
-    if(chat) {
-      return true;
+    if(chat != null || chat != undefined) {
+      return false;
     }
-    return false;
+    return true;
   }
 }
