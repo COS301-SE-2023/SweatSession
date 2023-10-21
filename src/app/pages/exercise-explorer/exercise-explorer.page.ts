@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import {BehaviorSubject} from "rxjs";
 import {ViewExerciseComponent} from "./view-exercise/view-exercise.component";
+import { Store } from '@ngxs/store';
 
 @Component({
   selector: 'app-exercise-explorer',
@@ -23,7 +24,8 @@ export class ExerciseExplorerPage implements  AfterViewInit  {
   constructor(private modalController: ModalController,
               private router:Router,
               private platform: Platform,
-              private alertController: AlertController) { }
+              private alertController: AlertController,
+              private store: Store) { }
 
 
   @ViewChild('canvas') private canvasRef: ElementRef;
@@ -68,7 +70,19 @@ export class ExerciseExplorerPage implements  AfterViewInit  {
     this.renderer.setSize(canvas.clientWidth, canvas.clientHeight);
 
     this.scene = new THREE.Scene();
-    this.scene.background = new THREE.Color(0x000000);
+    /////
+    if(localStorage.getItem('darkmode')=='true') {
+      this.scene.background = new THREE.Color(0x000000);
+      
+    } else {
+      this.scene.background = new THREE.Color(0xF2F8FC);
+      
+    }
+
+
+    /////
+
+    //this.scene.background = new THREE.Color(0x000000);
     this.camera = new THREE.PerspectiveCamera(75, canvas.clientWidth / canvas.clientHeight, 0.1, 1000);
     this.camera.position.set(10, 10, 5);
     //this.camera.position.z = 5;
