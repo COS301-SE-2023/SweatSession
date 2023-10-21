@@ -20,13 +20,14 @@ import { Timestamp } from 'firebase/firestore';
 import { take } from 'rxjs/operators';
 import { DatePipe } from '@angular/common';
 import { profile } from 'console';
+import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 
 
 @Component({
    selector: 'gymsearch',
    templateUrl: './gymsearch.component.html',
    styleUrls: ['./gymsearch.component.scss'],
-   providers: [DatePipe],
+   providers: [DatePipe, AndroidPermissions],
 })
 export class GymsearchComponent implements OnInit {
    currUserId: string | undefined | null;
@@ -34,7 +35,7 @@ export class GymsearchComponent implements OnInit {
    gymChosen: string;
    chosenPlaceId: string;
    friendsSubscription: Subscription;
-   constructor(private store: Store, private modalController: ModalController, private geolocation: Geolocation, private httpClient: HttpClient, private locationRepository: LocationRepository, private friendsRepository: FriendsRepository, private friendsState: FriendsState, private datePipe: DatePipe, private toastController: ToastController) {
+   constructor(private store: Store, private modalController: ModalController, private geolocation: Geolocation, private httpClient: HttpClient, private locationRepository: LocationRepository, private friendsRepository: FriendsRepository, private friendsState: FriendsState, private datePipe: DatePipe, private toastController: ToastController, private androidPermissions: AndroidPermissions) {
       this.data.filter(item => item.name.includes(''));
    }
 
@@ -131,6 +132,51 @@ export class GymsearchComponent implements OnInit {
 
 
             console.log(this.userFriendIds)
+
+            
+            this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION)
+            .then((resultCoarse) => {
+              if (resultCoarse.hasPermission) {
+                // ACCESS_COARSE_LOCATION permission is granted
+                // You can use Geolocation API here
+                // Call Geolocation API here
+              } else {
+                // Request ACCESS_COARSE_LOCATION permission
+                this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION)
+                  .then((reqResult) => {
+                    if (reqResult.hasPermission) {
+                      // Permission granted; you can get the location now
+                      // Call Geolocation API here
+                    } else {
+                      // Permission still not granted; handle accordingly
+                    }
+                  });
+              }
+            });
+
+            this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.ACCESS_FINE_LOCATION)
+            .then((resultCoarse) => {
+              if (resultCoarse.hasPermission) {
+                // ACCESS_COARSE_LOCATION permission is granted
+                // You can use Geolocation API here
+                // Call Geolocation API here
+              } else {
+                // Request ACCESS_COARSE_LOCATION permission
+                this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.ACCESS_FINE_LOCATION)
+                  .then((reqResult) => {
+                    if (reqResult.hasPermission) {
+                      // Permission granted; you can get the location now
+                      // Call Geolocation API here
+                    } else {
+                      // Permission still not granted; handle accordingly
+                    }
+                  });
+              }
+            });
+
+
+
+
 
             const permission = await GeolocationCapacitor.checkPermissions();
             if (permission.location === 'denied') {

@@ -2203,6 +2203,13 @@
   resolved "https://registry.npmjs.org/@humanwhocodes/object-schema/-/object-schema-1.2.1.tgz"
   integrity sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==
 
+"@ionic-native/android-permissions@^5.36.0":
+  version "5.36.0"
+  resolved "https://registry.yarnpkg.com/@ionic-native/android-permissions/-/android-permissions-5.36.0.tgz#1f2e1a7b5e5cd826b9a585b8f68a4156ade68960"
+  integrity sha512-kwjDKOhQs9KPo47LxQbkmLJ30coZzeJewA2u7I8DFae2kyD3usvGAgjWoY+x4xPsaA1NZ3IZNklaQOH/csIW7w==
+  dependencies:
+    "@types/cordova" latest
+
 "@ionic-native/core@^5.36.0":
   version "5.36.0"
   resolved "https://registry.npmjs.org/@ionic-native/core/-/core-5.36.0.tgz"
