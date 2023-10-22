@@ -7,7 +7,10 @@
   </ion-toolbar>
 </ion-header>
 <ion-content [fullscreen]="true">
-  <div class="image-container">
+  <div class="image-container" *ngIf="darkmode">
+    <img src="../../../assets/Asset 19.png" alt="Image" class="centered-image"/>
+  </div>
+  <div class="image-container" *ngIf="!darkmode">
     <img src="../../../assets/Asset 2.png" alt="Image" class="centered-image"/>
   </div>
 
