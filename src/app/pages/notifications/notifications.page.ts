@@ -67,6 +67,8 @@ export class NotificationsPage implements OnInit {
           this.noticeList2.push(this.noticeList[i]);
         }
       }
+      this.noticeList2 = this.noticeList2.reverse();
+      this.noticeList2 = this.noticeList2.reverse();
       this.noticeamount = this.noticeList2.length;
       console.log('Number of notices:', this.noticeamount);
       this.sendNotifications(this.noticeamount);
