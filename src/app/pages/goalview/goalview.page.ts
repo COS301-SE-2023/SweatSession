@@ -179,7 +179,8 @@ export class GoalviewPage  implements OnInit {
         formData.description != null &&
         formData.start != null &&
         formData.end != null &&
-        this.Taskses.length > 0
+        this.Taskses.length > 0 &&
+        (new Date(formData.start)) < (new Date(formData.end))
     )
     {
 
