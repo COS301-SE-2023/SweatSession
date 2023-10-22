@@ -13,6 +13,7 @@ import {BackButtonDirectiveModule} from "../../directives";
 import { ExerciseCalculatorComponent } from './exercise-calculator/exercise-calculator.component';
 import { CalorieTargetComponent } from './calorie-target/calorie-target.component';
 import { DietCalculatorComponent } from './diet-calculator/diet-calculator.component';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 @NgModule({
     imports: [
@@ -24,6 +25,7 @@ import { DietCalculatorComponent } from './diet-calculator/diet-calculator.compo
         HttpClientModule,
         ReactiveFormsModule
     ],
-  declarations: [CaloriesCalculatorPage, ExerciseCalculatorComponent, CalorieTargetComponent, DietCalculatorComponent]
+  declarations: [CaloriesCalculatorPage, ExerciseCalculatorComponent, CalorieTargetComponent, DietCalculatorComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class CaloriesCalculatorPageModule {}

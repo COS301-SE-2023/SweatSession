@@ -7,6 +7,8 @@ import {AngularFirestore} from "@angular/fire/compat/firestore";
 import {ProfileService} from "../../services";
 import {CalorieSummary} from "./calorie-summary";
 import { Observable } from 'rxjs';
+import { register } from 'swiper/element/bundle';
+register();
 
 @Component({
   selector: 'app-calories-calculator',
