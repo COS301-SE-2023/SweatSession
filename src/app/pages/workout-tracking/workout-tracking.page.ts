@@ -22,6 +22,7 @@ import { NavigationService } from 'src/app/services';
     deletedExercises: string[] = [];
     selectedExercises: any = {};
     Incount: 0;
+    darkmode : boolean = false;
 
     constructor(
       private formBuilder: FormBuilder,
@@ -45,6 +46,11 @@ import { NavigationService } from 'src/app/services';
     }
 
     ngOnInit(): void {
+      if(localStorage.getItem('darkmode')=='true') {
+        this.darkmode = true;
+      } else {
+        this.darkmode = false;
+      }
         this.exerciseService.getExerciseByScheduleId(this.scheduleId).pipe(take(1)).subscribe((exercises) => {
           this.exercisesArray = exercises.map((exercise) => ({
             ...exercise,
