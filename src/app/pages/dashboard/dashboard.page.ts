@@ -66,7 +66,7 @@ export class DashboardPage implements OnInit {
         this.day = weekday[this.daynum];
         this.date = new Date().toTimeString() ;
         this.shortdate = this.date.split(':' , 2);
-        this.createNotifications("SWEATSESSION" , this.day + ' ' +this.shortdate[0] + ':' + this.shortdate[1] + ' ' , "REMINDER!! You have a workout scheduled today at " + this.workoutlist.schedules[i].location )  ;
+        //this.createNotifications("SWEATSESSION" , this.day + ' ' +this.shortdate[0] + ':' + this.shortdate[1] + ' ' , "REMINDER!! You have a workout scheduled today at " + this.workoutlist.schedules[i].location )  ;
       }
 
     }

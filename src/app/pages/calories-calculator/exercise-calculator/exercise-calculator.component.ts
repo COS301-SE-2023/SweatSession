@@ -6,6 +6,8 @@ import { Exercise } from 'src/app/models/exercise.model';
 import { ExerciseService, WorkoutscheduleService } from 'src/app/services';
 import { HealthDataService } from 'src/app/services/healthDataService/healthData.service';
 import { CalorieSummary } from "../calorie-summary";
+import { register } from 'swiper/element/bundle';
+register();
 
 @Component({
   selector: 'exercise-calculator',
