@@ -95,7 +95,7 @@ export class HealthDataService {
   }
 
 
-  async addWeightData(weight: number, userId: string) {
+  async addWeightData(weight: number,Tcalories:number, userId: string) {
     const currentDate = new Date();
     const formattedDate = currentDate.toISOString().split('T')[0]; // Format date as YYYY-MM-DD
 
@@ -109,6 +109,7 @@ export class HealthDataService {
         // If the document doesn't exist, create a new one
         await this.firestore.collection('chartdata')
             .add({
+            calories: Tcalories,
             weight: weight,
             userId: userId,
             date: formattedDate,
@@ -117,6 +118,7 @@ export class HealthDataService {
         // If a document with the same date exists, update it
         const docId = existingDocs.docs[0].id;
         await this.firestore.collection('chartdata').doc(docId).update({
+            calories: Tcalories,
             weight: weight,
             userId: userId,
             date: formattedDate,
