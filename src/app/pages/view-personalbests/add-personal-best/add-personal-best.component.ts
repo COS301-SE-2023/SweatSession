@@ -17,7 +17,7 @@ export class AddPersonalBestComponent implements OnInit {
   showForm: boolean = false;
   placeId: string;
   location: string;
-  myVariable: string = "Click on the location icon";
+  myVariable: string = "Select location";
   repsBest:boolean = false;
   weightBest: boolean = false;
   
