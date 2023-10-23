@@ -20,6 +20,8 @@
     <li><a href="">User Manual</a></li>
     <li><a href="">Technical Installation Manual</a></li>
     <li><a href="https://github.com/orgs/COS301-SE-2023/projects/36">Project Board</a></li>
+    <li><a href="">Architecture</a></li>
+    <li><a href="">Deployment Diagram</a></li>
   </ul>
 
 
@@ -114,6 +116,13 @@ I am a passionate 3rd year Computer Science student studying at the University o
   </a>
   </tr>
 </table>
+
+## Contact Us
+[![Email](https://img.shields.io/badge/Email-the.synapse.solution%40gmail.com-brightgreen)](mailto:the.synapse.solution@gmail.com)
+
+
+## Client
+![image](https://github.com/COS301-SE-2023/SweatSession/assets/95973048/e8f25642-1c1e-455b-a715-6f221046df8b)
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
