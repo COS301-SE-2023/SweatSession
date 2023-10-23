@@ -12,15 +12,13 @@
 
 ### Table of Contents
  <ul>
-    <li><a href="#Synapse Solutions - SweatSession - Project Description">Project Description</a></li>
-    <li><a href="#Technologies">Technologies</a></li>
-    <li><a href="#Members">Members</a></li>
     <li><a href="https://github.com/COS301-SE-2023/SweatSession/wiki/SRS_Demo4#introduction">Project Description</a></li>
+    <li><a href="">Project Day Video</a></li>
+    <li><a href="#Technologies">Technologies</a></li>
+    <li><a href="#Members">Our Team</a></li>
     <li><a href="https://github.com/COS301-SE-2023/SweatSession/wiki/SRS_Demo4">SRS Document</a></li>
     <li><a href="">User Manual</a></li>
-    <li><a href="">Our Team</a></li>
-    <li><a href="">Project Day Video</a></li>
-    <li><a href="">Our Team</a></li>
+    <li><a href="">Technical Installation Manual</a></li>
     <li><a href="https://github.com/orgs/COS301-SE-2023/projects/36">Project Board</a></li>
   </ul>
 
