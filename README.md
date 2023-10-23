@@ -9,37 +9,20 @@
   
 </div>
 <!-- TABLE OF CONTENTS -->
-<details>
-  <summary>Table of Contents</summary>
-  <ol>
-    <li><a href="#Synapse Solutions - SweatSession - Project Description">Project Description</a></li>
-    <li><a href="#Technologies">Technologies</a></li>
-    <li><a href="#Members">Members</a></li>
-  </ol>
-</details>
 
 ### Table of Contents
  <ul>
     <li><a href="#Synapse Solutions - SweatSession - Project Description">Project Description</a></li>
     <li><a href="#Technologies">Technologies</a></li>
     <li><a href="#Members">Members</a></li>
-   </ul>
+    <li><a href="https://github.com/COS301-SE-2023/SweatSession/wiki/SRS_Demo4#introduction">Project Description</a></li>
+    <li><a href="https://github.com/COS301-SE-2023/SweatSession/wiki/SRS_Demo4">SRS Document</a></li>
+    <li><a href="">User Manual</a></li>
+    <li><a href="">Our Team</a></li>
+    <li><a href="">Project Day Video</a></li>
+    <li><a href="">Our Team</a></li>
+  </ul>
 
-## Synapse Solutions - SweatSession - Project Description
-
-The purpose of SweatSession is to develop a social, location-based mobile app that will enable users to
-schedule workout sessions with their friends, track their progress, view their friends' personal bests, and earn
-rewards for achieving their fitness goals. The app aims to provide a platform that will make it easy for users to
-connect with workout partners, track their progress, and earn rewards. By incorporating social and gamification
-elements such as leaderboards amongst friends, the app hopes to encourage users to adopt a healthy and
-active lifestyle.
-The app will have many subsystems that will be integrated to provide its functionality. A non-exhaustive list of
-such subsystems will be the location-based element so that users can schedule workouts together, the social
-element in order to add friends as well as view their workout plans, personal bests, etc., a leaderboard element
-amongst friends based on workout times and more.
-The project presents many design elements that will have to be catered for such as a robust and scalable back-
-end to accommodate multiple users, designing an intuitive and aesthetic design to ensure that users continue to
-use the app, location-based services and more
 
 
 ## Technologies
