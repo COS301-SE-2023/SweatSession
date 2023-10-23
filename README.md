@@ -7,9 +7,6 @@
 
 ![Asset 12](https://github.com/COS301-SE-2023/SweatSession/assets/95973048/447bbb1f-c415-4d27-b3af-f222304674c9)
   
-<!-- The Au Pair -->
- 
-  <a href="https://theaupair.life/"><strong>🌐 theaupair.life</strong></a>
 </div>
 <!-- TABLE OF CONTENTS -->
 <details>
