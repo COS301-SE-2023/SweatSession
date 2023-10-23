@@ -1,10 +1,16 @@
+<div align="center">
+
 [![System Status](https://img.shields.io/pingpong/status/sp_2b59949b563642c28c83a659aebcbdd0)](https://localhost.pingpong.host/)
 [![Issues closed][closedissues-shield]](https://github.com/COS301-SE-2023/SweatSession/issues?q=is%3Aissue+is%3Aclosed) <br />
 [![Commits][commits-shield]](https://github.com/COS301-SE-2023/SweatSession/issues)
 [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=COS301-SE-2023_SweatSession&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=COS301-SE-2023_SweatSession)
 
 ![Asset 12](https://github.com/COS301-SE-2023/SweatSession/assets/95973048/447bbb1f-c415-4d27-b3af-f222304674c9)
-
+  
+<!-- The Au Pair -->
+ 
+  <a href="https://theaupair.life/"><strong>🌐 theaupair.life</strong></a>
+</div>
 <!-- TABLE OF CONTENTS -->
 <details>
   <summary>Table of Contents</summary>
