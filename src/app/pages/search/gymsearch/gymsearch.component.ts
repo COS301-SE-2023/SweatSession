@@ -35,7 +35,7 @@ export class GymsearchComponent implements OnInit {
    gymChosen: string;
    chosenPlaceId: string;
    friendsSubscription: Subscription;
-   constructor(private store: Store, private modalController: ModalController, private geolocation: Geolocation, private httpClient: HttpClient, private locationRepository: LocationRepository, private friendsRepository: FriendsRepository, private friendsState: FriendsState, private datePipe: DatePipe, private toastController: ToastController, private androidPermissions: AndroidPermissions) {
+   constructor(private store: Store, private modalController: ModalController, private geolocation: Geolocation, private httpClient: HttpClient, private locationRepository: LocationRepository, private friendsRepository: FriendsRepository, private friendsState: FriendsState, private datePipe: DatePipe, private toastController: ToastController, private badgesRepository: BadgesRepository, private androidPermissions: AndroidPermissions) {
       this.data.filter(item => item.name.includes(''));
    }
 
