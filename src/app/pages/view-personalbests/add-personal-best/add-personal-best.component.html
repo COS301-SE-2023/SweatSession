@@ -64,12 +64,34 @@
     </ion-item>
 
     <ion-item lines="none">
-      <ion-note color="danger" *ngIf="!isValid(PersonalBestForm.value)">
-        *All fields are required
-      </ion-note>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-note color="danger" *ngIf="!isValid(PersonalBestForm.value)">
+              *All fields are required
+            </ion-note>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-note color="danger" *ngIf="!isrepsvalid()">
+              *Your Reps best is Lower than your previous best
+            </ion-note>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-note color="danger" *ngIf="!isweightvalid()">
+              *Your Weight best is Lower than your previous best
+            </ion-note>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+
     </ion-item>
 
-    <ion-button type="submit" class="submit-button" expand="block" [disabled]="!isValid(PersonalBestForm.value)"><ion-icon slot="start" name="checkmark"></ion-icon>Submit</ion-button>
+    <ion-button type="submit" class="submit-button" expand="block" [disabled]="!(isValid(PersonalBestForm.value) && isrepsvalid() && isweightvalid())"><ion-icon slot="start" name="checkmark"></ion-icon>Submit</ion-button>
   </form>
   </ion-card>
 </ion-content>

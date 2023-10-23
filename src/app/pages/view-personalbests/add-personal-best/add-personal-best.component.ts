@@ -18,6 +18,8 @@ export class AddPersonalBestComponent implements OnInit {
   placeId: string;
   location: string;
   myVariable: string = "Click on the location icon";
+  repsBest:boolean = false;
+  weightBest: boolean = false;
   
   constructor(private modalController: ModalController,
         private formBuilder: FormBuilder,
@@ -62,7 +64,7 @@ export class AddPersonalBestComponent implements OnInit {
       notes: formData.notes,
     }
 
-    console.table(PersonalBest);
+    // console.table(PersonalBest);
     this.personalbestService.addPersonalbest(PersonalBest);
 
     this.PersonalBestForm.reset();
@@ -82,9 +84,60 @@ export class AddPersonalBestComponent implements OnInit {
     });
 
     this.PersonalBestForm.valueChanges.subscribe((formData) => {
+
+      this.personalbestService.getExercisesByName(formData.exercise).subscribe((data) => {
+        if(data.length == 0)
+        {
+          this.weightBest = true;
+          this.repsBest = true;
+        }
+        else
+        {
+            let largestweight = 0;
+            let largestreps = 0;
+
+          data.forEach((element) => {
+            if(element.reps! > largestreps)
+            {
+              largestreps = element.reps!;
+            }
+            if(element.weight! > largestweight)
+            {
+              largestweight = element.weight!;
+            }
+          });
+
+          if(largestreps <= formData.reps)
+          {
+            this.repsBest = true;
+          }
+          else
+          {
+            this.repsBest = false;
+          }
+
+          if(largestweight <= formData.weight)
+          {
+            this.weightBest = true;
+          }
+          else
+          {
+            this.weightBest = false;
+          }
+        }
+      });
+
       this.isValid(formData);
     });
 
+  }
+
+  isrepsvalid() {
+    return this.repsBest;
+  }
+
+  isweightvalid() {
+    return this.weightBest;
   }
 
   getTodayDate(): string {
