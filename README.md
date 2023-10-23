@@ -18,6 +18,13 @@
   </ol>
 </details>
 
+### Table of Contents
+ <ul>
+    <li><a href="#Synapse Solutions - SweatSession - Project Description">Project Description</a></li>
+    <li><a href="#Technologies">Technologies</a></li>
+    <li><a href="#Members">Members</a></li>
+   </ul>
+
 ## Synapse Solutions - SweatSession - Project Description
 
 The purpose of SweatSession is to develop a social, location-based mobile app that will enable users to
