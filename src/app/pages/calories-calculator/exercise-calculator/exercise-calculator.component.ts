@@ -105,10 +105,10 @@ export class ExerciseCalculatorComponent implements OnInit {
     console.log(this.exercisesArray)
     const exerciseControl = this.formBuilder.group({
       name: ['',[Validators.required]],
-      sets: ['1',[]],
-      reps: ['2',[]],
-      weight: ['10', []],
-      duration: ['2', [Validators.required, Validators.min(1)]],
+      sets: ['',[]],
+      reps: ['',[]],
+      weight: ['', []],
+      duration: ['', [Validators.required, Validators.min(1)]],
     });
     (this.workoutForm.get('exercises') as FormArray).push(exerciseControl);
     // this.scrollToBottom();
