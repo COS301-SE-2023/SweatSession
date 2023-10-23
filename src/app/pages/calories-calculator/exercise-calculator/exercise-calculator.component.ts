@@ -111,7 +111,7 @@ export class ExerciseCalculatorComponent implements OnInit {
       duration: ['2', [Validators.required, Validators.min(1)]],
     });
     (this.workoutForm.get('exercises') as FormArray).push(exerciseControl);
-    this.scrollToBottom();
+    // this.scrollToBottom();
   }
 
 
@@ -267,7 +267,7 @@ export class ExerciseCalculatorComponent implements OnInit {
     console.log(this.selectedWorkoutId);
     await this.getSessionWorkout(this.selectedWorkoutId);
 
-    this.scrollToBottom();
+    // this.scrollToBottom();
   }
 
   isValidInput(){
