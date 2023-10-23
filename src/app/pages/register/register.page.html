@@ -1,71 +1,73 @@
-<div class="outerContainer" style="background-color: #A8DADC;">
-  <ion-card style="background-color: #A8DADC;">
-    <div class="inner-container" style="background-color: white;">
-        <img src="/assets/Asset 1.png" />
+<ion-content [fullscreen]="true" class="outer-container">
+  <div class="auth-container">
+    <ion-grid>
+      <ion-row >
+        <ion-col size="12" size-md="6" size-lg="4" class="welcome-container">
+          <h1 class="welcome-title">Welcome!</h1>
+          <p class="welcome-subtitle">Create a New Account</p>
+        </ion-col>
+      </ion-row>
+      <ion-row class="form-container">
+        <ion-col size="12" size-md="6" size-lg="4">
+          <form  
+          [formGroup]="registrationForm"
+          ngxsForm="register.registrationForm"
+          (submit)="AcceptUserTerms()">
+            <div class="input-field-container">
+              <ion-label>Email</ion-label>
+              <ion-item class="input-field" lines="none">
+                <ion-input type="email" placeholder="Enter your email"  formControlName="email" required></ion-input>
+              </ion-item>
+            </div>
+            <div class="input-field-container">
+              <ion-label>Password</ion-label>
+              <ion-item class="input-field" lines="none">
+                <ion-input type="password" placeholder="Enter your password"
+                  name="password"
+                  minlength="6"
+                  maxlength="25"
+                  formControlName="password"
+                  required
+                ></ion-input>
+              </ion-item>
+            </div>
+            <div class="input-field-container">
+              <ion-label>Confirm Password</ion-label>
+              <ion-item class="input-field" lines="none">
+                <ion-input type="password" placeholder="Enter your password"
+                  name="cPassword"
+                  minlength="6"
+                  maxlength="25"
+                  formControlName="cPassword"
+                  required
+                ></ion-input>
+              </ion-item>
+            </div>
+            <div class="remember-me-input">
+              <ion-checkbox class="custom-checkbox"></ion-checkbox>
+              <ion-label class="r-label">Remember me</ion-label>
+            </div>           
 
-        <div class="text-container">
-          <h5>Sign up</h5>
-          <ion-text>Please register an account</ion-text>
-        </div>
-      <form [formGroup]="registrationForm"
-      ngxsForm="register.registrationForm"
-      (submit)="AcceptUserTerms()">
-        <ion-item class="input-item">
-          <ion-label position="floating">
-            <ion-icon src="/assets/vector-icon.svg"></ion-icon>  Email
-          </ion-label>
-          <ion-input
-            type="email"
-            name="email"
-            formControlName="email"
-            required
-          ></ion-input>
-        </ion-item>
-  
-        <ion-item class="input-item">
-          <ion-label position="floating">
-            🔑 Password
-          </ion-label>
-          <ion-input
-            type="password"
-            name="password"
-            minlength="6"
-            maxlength="25"
-            formControlName="password"
-            required
-          ></ion-input>
-        </ion-item>
-  
-        <ion-item class="input-item">
-          <ion-label position="floating">
-            🔑 Confirm Password
-          </ion-label>
-          <ion-input
-            type="password"
-            name="cPassword"
-            minlength="6"
-            maxlength="25"
-            formControlName="cPassword"
-            required
-          ></ion-input>
-        </ion-item>
-  
-        <ion-button 
-          expand="block" 
-          type="submit" 
-          class="registerButton"
-        >Create Account</ion-button>
-      </form>
-      
-      <ion-card-subtitle>
-        Already have an account?
-        <hr>
-      </ion-card-subtitle>
-      <ion-button class="signIn-buttons" expand="block" (click)="continueWithGoogleAuth()">
-        <ion-icon name="logo-google" style="padding-right:5%;"></ion-icon>
-        <ion-text>Continue with google</ion-text>
-      </ion-button>
-      <ion-button class="signIn-buttons" expand="block" routerLink="/login">Sign in</ion-button>
-    </div>
-    </ion-card>
-</div>
+            <div class="button-container">
+              <ion-button id="loginButton" expand="block" type="submit">Register</ion-button>
+              <div class="division-section">
+                <div class="line"></div>
+                <div class="or">OR</div>
+                <div class="line"></div>
+              </div>
+              <ion-button class="loginButton" expand="block" (click)="continueWithGoogleAuth()" class="white-button">
+                <ion-icon name="logo-google" style="padding-right:5%;"></ion-icon>
+                Continue with Google
+              </ion-button>
+            </div>
+          </form>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="12" size-md="6" size-lg="4" class="bottom-message-container">
+          <ion-text>Already have an account? <span class="register-link" routerLink="/login">Sign in</span></ion-text>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

@@ -1,4 +1,4 @@
-import { IGetMessages, IGroup, IMessage, IRemoveChatGroupUser } from "../models";
+import { IDeleteGroupMessage, IGetMessages, IGroup, IMessage, IRemoveChatGroupUser } from "../models";
 
 export class GetChatFriends {
     static readonly type = "[messages] get chat friends";
@@ -23,6 +23,12 @@ export class DeleteMessage {
     static readonly type = "[messages] delete a message";
     constructor(public payload: IMessage) {}
 }
+
+export class DeleteGroupMessage {
+    static readonly type = "[messages] delete group message";
+    constructor(public payload: IDeleteGroupMessage) {}
+}
+
 
 export class StageChatFriend {
     static readonly type = "[messages] sage chat friend";

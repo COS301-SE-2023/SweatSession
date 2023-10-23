@@ -59,19 +59,20 @@ export class WorkoutSchedulingPage {
 
   filterSchedules() {
    this.completedSchedules = this.schedules.filter((schedule)=>
-      schedule.status! === "completed"
+      this.isCompleted(schedule)
     )
 
     this.uncompletedSchedules = this.schedules.filter((schedule)=>
-      schedule.status!.match('uncompleted')
+      this.isUncomplete(schedule)
     )
 
     this.inSessionSchedules = this.schedules.filter((schedule)=>
-      schedule.status!.match("inSession")
+      this.inSession(schedule)
     )
   }
 
   onSegmentChange(event: any) {
+    this.filterSchedules();
     this.selectedSegment = event.detail.value;
   }
 
@@ -80,5 +81,38 @@ export class WorkoutSchedulingPage {
     this.friends$.subscribe((response)=>{
       this.friends = response
     })
+  }
+
+  inSession(schedule: IWorkoutScheduleModel) {
+    const completeAt = schedule.completeAt!.toDate().getTime();
+    const scheduledTime = new Date(`${schedule.date}T${schedule.time}`).getTime();
+    const now = new Date().getTime();
+
+    if (now >= scheduledTime && now < completeAt) {
+      return true;
+    }
+    return false;
+  }
+
+  isCompleted(schedule: IWorkoutScheduleModel) {
+    const completeAt = schedule.completeAt!.toDate().getTime();
+    const scheduledTime = new Date(`${schedule.date}T${schedule.time}`).getTime();
+    const now = new Date().getTime();
+    let joinStatus = schedule.joined;
+    if(joinStatus && now >= completeAt ) {
+      return true;
+    }
+    return false;
+  }
+
+  isUncomplete(schedule: IWorkoutScheduleModel) {
+    const completeAt = schedule.completeAt!.toDate().getTime();
+    const scheduledTime = new Date(`${schedule.date}T${schedule.time}`).getTime();
+    const now = new Date().getTime();
+    let joinStatus = schedule.joined;
+    if(!joinStatus && (now < scheduledTime || now > completeAt) ) {
+      return true;
+    }
+    return false;
   }
 }

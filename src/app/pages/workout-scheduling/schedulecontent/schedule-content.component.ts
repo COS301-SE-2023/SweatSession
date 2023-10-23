@@ -103,7 +103,7 @@ export class ScheduleContentComponent implements OnInit {
   counter() {
     let l =setInterval(() => {
       this.fraction()
-    }, 1000 * 10)
+    }, 1000 * 1)
   }
 
   timeLeft() {
@@ -135,7 +135,7 @@ export class ScheduleContentComponent implements OnInit {
     }
 
     if(this.isCompleted()) {
-      return "completed";
+      return "Completed";
     }
     return "Workout Session Overdue";
   }
@@ -152,7 +152,11 @@ export class ScheduleContentComponent implements OnInit {
   }
 
   isCompleted() {
-    if (this.schedule.status === "completed") {
+    const completeAt = this.schedule.completeAt!.toDate().getTime();
+    const scheduledTime = new Date(`${this.schedule.date}T${this.schedule.time}`).getTime();
+    const now = new Date().getTime();
+    let joinStatus = this.schedule.joined;
+    if(joinStatus && now >= completeAt ) {
       return true;
     }
     return false;
@@ -194,16 +198,11 @@ export class ScheduleContentComponent implements OnInit {
       if (this.inSession()) {
         if (this.schedule.status !== "inSession") {
           this.schedule.status = "inSession";
-          this.store.dispatch(new UpdateWorkoutSchedule(this.schedule));
         }
       } else if (this.schedule.status !== "completed" && this.joined()) {
         this.schedule.status = "completed";
-        this.store.dispatch(new UpdateWorkoutSchedule(this.schedule))
-        this.count.t
       } else if(this.schedule.status !== "uncompleted" && !this.joined()) {
         this.schedule.status = "uncompleted";
-        this.store.dispatch(new UpdateWorkoutSchedule(this.schedule))
-        console.log("uncompleted");
       }
     }
     this.ratio = timeDiff / diff;
@@ -313,7 +312,11 @@ export class ScheduleContentComponent implements OnInit {
       } else {
         this.currUserId = sessionStorage.getItem('currUserId')!;
       }
-      this.pointsRepository.completeWorkoutPlanPoints(this.currUserId);
+
+      if(this.exercises.length == this.completedExercises.length) {
+        this.badgesRepository.addBadge(this.currUserId, 0);
+        this.pointsRepository.completeWorkoutPlanPoints(this.currUserId);
+      }
     }
   }
 
@@ -323,5 +326,9 @@ export class ScheduleContentComponent implements OnInit {
     } else {
       this.completedExercises = [];
     }
+  }
+
+  toDate() {
+    return new Date(`${this.schedule.date}T${this.schedule.time}`);
   }
 }

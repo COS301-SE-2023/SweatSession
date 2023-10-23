@@ -28,7 +28,7 @@ export class GoalcardComponent  implements OnInit {
   GOALS : IGOAL[] = [];
   selectedSegment: string = '0';
   @ViewChild('loaderContent') loaderContentTemplate: any;
-  isLoading :boolean = false;
+  isLoading :boolean = true;
 
 
 
@@ -69,7 +69,7 @@ export class GoalcardComponent  implements OnInit {
             //calculate days left
             
             this.GOALS = data.goals;
-            this.isLoading = true;
+            this.isLoading = false;
           });
     }
 

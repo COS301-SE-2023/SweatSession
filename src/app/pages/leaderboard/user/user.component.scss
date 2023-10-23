@@ -8,7 +8,6 @@
     .stats {
         display: flex;
         justify-content: center;
-        color: #457B9D;
     }
     
     ion-item {
@@ -34,7 +33,7 @@ ion-col {
     0% {border-color: #A8DADC; color: #A8DADC;}
     25% {border-color: #457B9D; color: #457B9D;}
     50% {border-color: #1D3557; color: #1D3557;}
-    75% {border-color: #E63946; color: #E63946;}
+    75% {border-color: #0a1773; color: #11227e;}
     100% {border-color: #F1FAEE; color: #F1FAEE;}
 } 
 
@@ -58,8 +57,8 @@ ion-row {
 
 .user-name {
     font-weight: bold;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-    background: linear-gradient(90deg, #1D3557, black);
-    background-clip: text; 
-    -webkit-text-fill-color: transparent;
+    //text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    //background: linear-gradient(90deg, #1D3557, black);
+    //background-clip: text;
+    //-webkit-text-fill-color: transparent;
 }

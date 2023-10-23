@@ -1,61 +1,88 @@
+<ion-content class="ion-padding" [fullscreen]="true">
+    <div class="outer-profile-container">
+       <div class="inner-profile-container">
+        <div class="profile-pic-contaniner">
+            <ion-toast trigger="open-toast" color = "success" position = "top" message= "Profile Picture Saved" [duration]="1500" icon="shield-checkmark-outline"></ion-toast>
+            <ion-toast trigger="SDP" color = "success" position = "top" message="Personal Info Saved" [duration]="1500" icon="shield-checkmark-outline"></ion-toast>
+        
+            <!-- <ion-item-divider >
+                <ion-label slot="start">Profile Picture</ion-label>
+                <!-- <ion-icon name="create-outline" slot="end" size="large" (click)="selectFile()"></ion-icon> 
+                <input  type="file" id = "fileInput" accept="image/*" (change)="onFileSelected($event)" style="display: none">
+            </ion-item-divider> -->
+        
+        
+            <div class="profile-img-container">
+                <ion-avatar class="profile-image">
+                    <ion-img [src]="getDp()"></ion-img>
+                </ion-avatar>
+                <ion-fab class="select-image-icon">
+                    <ion-fab-button (click)="selectFile()">
+                      <ion-icon name="image-outline"></ion-icon>
+                    </ion-fab-button>
+                </ion-fab>
+                <input  type="file" id = "fileInput" accept="image/*" (change)="onFileSelected($event)" style="display: none">
+            </div>
+       </div>
 
-<ion-card>
-    <ion-toast trigger="open-toast" color = "success" position = "top" message= "Profile Picture Saved" [duration]="1500" icon="shield-checkmark-outline"></ion-toast>
-    <ion-toast trigger="SDP" color = "success" position = "top" message="Personal Info Saved" [duration]="1500" icon="shield-checkmark-outline"></ion-toast>
-
-    <ion-item-divider style="background-color: #A8DADC;">
-        <ion-label slot="start">Profile Picture</ion-label>
-        <ion-icon name="create-outline" slot="end" size="large" (click)="selectFile()"></ion-icon>
-        <input  type="file" id = "fileInput" accept="image/*" (change)="onFileSelected($event)" style="display: none">
-    </ion-item-divider>
-
-
-    <div class="profile-img-container">
-        <ion-avatar class="profile-image">
-            <ion-img [src]="getDp()"></ion-img>
-        </ion-avatar>
-    </div>
-
-    <ion-row>
-        <ion-col class="ion-text-center">
-            <ion-button fill="outline" id="SDP" expand="block" size="small" (click)="saveProfile()" [disabled]="!file">Save Picture</ion-button>
-        </ion-col>
-    </ion-row>
-
-
-</ion-card>
-
-<ion-card>
-
-    <ion-item-divider style="background-color: #A8DADC; padding: 10px">
-        <ion-label slot="start">Personal Info</ion-label>
-    </ion-item-divider>
-
-    <ion-list>
+        <div class="profile-info-container">
+            <ion-item-divider style=" padding: 10px">
+                <ion-label slot="start">Personal Info</ion-label>
+            </ion-item-divider>
+            
             <form [formGroup]="profileForm">
-                <ion-item >
-                    <ion-input label="Display Name"  labelPlacement="stacked" type = "text" formControlName= "displayName" placeholder="Enter Display Name" maxlength="20"></ion-input>
-                </ion-item>
-
-                <ion-item >
-                    <ion-input label="Name"  labelPlacement="stacked" type = "text" formControlName= "name"  placeholder="Enter Name" maxlength="50"></ion-input>
-                </ion-item>
-
-                <ion-item >
-                    <ion-input label="Bio({{ remainingCharacters }})"  labelPlacement="stacked" type = "text" formControlName= "bio" placeholder="Enter Bio" maxlength="120"
-                               (input)="updateCharacterCount()" #bioInput></ion-input>
-<!--                    <div class="character-count"></div>-->
-                </ion-item>
-
-                <ion-item >
-                <ion-input label="Email"  labelPlacement="stacked" type = "email" formControlName= "email" placeholder="Enter Email"></ion-input>
-                </ion-item>
-
-                <ion-item>
-                    <ion-input label="Phone Number" labelPlacement="stacked" type = "text" formControlName= "phoneNumber" placeholder="Enter Phone Number"></ion-input>
-                </ion-item>
-
-                <ion-button id="open-toast" expand="block" (click)="saveProfile()" [disabled] = "!isEditMode"> Save </ion-button>
+                <ion-grid>
+                    <ion-row class="ion-justify-content-center">
+                        <ion-col size="6" size-lg="6">
+                            <div class="input-fiel-container">
+                                <ion-item lines="none" class="input-field">
+                                    <ion-input label="Display Name"  labelPlacement="stacked" type = "text" formControlName= "displayName" placeholder="Enter Display Name" maxlength="20"></ion-input>
+                                </ion-item>
+                            </div>
+                        </ion-col>
+                        <ion-col size="6" size-lg="6">
+                            <div class="input-fiel-container">
+                                <ion-item lines="none" class="input-field">
+                                    <ion-input label="Name"  labelPlacement="stacked" type = "text" formControlName= "name"  placeholder="Enter Name" maxlength="50"></ion-input>
+                                </ion-item>
+                            </div>
+                        </ion-col>
+                    </ion-row>
+                
+                    <ion-row class="ion-justify-content-center">
+                        <ion-col size="12" size-lg="6">
+                            <div class="input-fiel-container">
+                                <ion-item lines="none" class="input-field">
+                                    <ion-input label="Bio({{ remainingCharacters }})"  labelPlacement="stacked" type = "text" formControlName= "bio" placeholder="Enter Bio" maxlength="120" (input)="updateCharacterCount()" #bioInput></ion-input>
+                                </ion-item>
+                            </div>
+                        </ion-col>
+                    </ion-row>
+                
+                    <ion-row class="ion-justify-content-center">
+                        <ion-col size="12" size-lg="6">
+                            <div class="input-fiel-container">
+                                <ion-item lines="none" class="input-field">
+                                    <ion-input label="Email"  labelPlacement="stacked" type = "email" formControlName= "email" placeholder="Enter Email" [disabled]="true"></ion-input>
+                                </ion-item>
+                            </div>
+                        </ion-col>
+                    </ion-row>
+                
+                    <ion-row class="ion-justify-content-center">
+                        <ion-col size="12" size-lg="6">
+                            <div class="input-fiel-container">
+                                <ion-item lines="none" class="input-field">
+                                    <ion-input label="Phone Number" labelPlacement="stacked" type = "text" formControlName= "phoneNumber" placeholder="Enter Phone Number"></ion-input>
+                                </ion-item>
+                            </div>
+                        </ion-col>
+                    </ion-row>
+                
+                    <ion-button id="open-toast" expand="block" (click)="saveProfile()" [disabled] = "!isEditMode"> Save </ion-button>
+                </ion-grid>
             </form>
-    </ion-list>
-</ion-card>
+        </div>
+       </div>
+    </div>
+</ion-content>

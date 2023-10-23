@@ -1,6 +1,6 @@
 <ion-content [fullscreen]="true" *ngIf="user!=null">
   <ion-card class="otheruser-profile">
-    <div class="profile-outer-container">
+    <ion-toolbar class="profile-outer-container">
       <div class="back-button">
         <ion-buttons>
           <backbutton slot="start" (click)="backtoPreviousPage()"></backbutton>
@@ -39,9 +39,9 @@
           View Request
         </ion-button>
       </div>
-    </div>
-   
-    <div class="otheruser-profile-activity">
+    </ion-toolbar>
+
+  <ion-content class="otheruser-profile-activity">
       <div class="slide-header">
         <ion-item class="slides-headers first-header">
           <ion-icon name="body" slot="start"></ion-icon> 
@@ -55,7 +55,7 @@
               <ion-card-title>
                 <ion-icon name="people"></ion-icon>
               </ion-card-title>
-              <h2>{{friends!.length + " Friends"}}</h2>
+              <ion-text>{{friends!.length + " Friends"}}</ion-text>
             </ion-card-content>
           </ion-card>
         </swiper-slide>
@@ -65,7 +65,7 @@
               <ion-card-title>
                 <ion-icon name="people"></ion-icon>
               </ion-card-title>
-              <h2>0 Groups</h2>
+              <ion-text>0 Groups</ion-text>
             </ion-card-content>
           </ion-card>
         </swiper-slide>
@@ -75,7 +75,7 @@
               <ion-card-title>
                 <ion-icon name="barbell"></ion-icon>
               </ion-card-title>
-              <h2>{{workoutSchedules!.length}} Sessions</h2>
+              <ion-text>{{workoutSchedules!.length}} Sessions</ion-text>
             </ion-card-content>
           </ion-card>
         </swiper-slide>
@@ -96,7 +96,7 @@
               <ion-card-title>
                 <ion-icon name="medal"></ion-icon>
               </ion-card-title>
-              <h2 *ngIf="badges$ | async as badges; else loaderContent">{{badges.receivedBadges.length}} Badges</h2>
+              <ion-text *ngIf="badges$ | async as badges; else loaderContent">{{badges.receivedBadges.length}} Badges</ion-text>
               <ng-template #loaderContent>
                 <div class="loader-wrapper">
                   <ion-spinner></ion-spinner>
@@ -111,16 +111,17 @@
               <ion-card-title>
                 <ion-icon name="star"></ion-icon>
               </ion-card-title>
-              <h2 *ngIf="points$ | async as points; else loaderContent">{{points.userPoints}} Points</h2>
-              <ng-template #loaderContent>
-                <div class="loader-wrapper">
-                  <ion-spinner></ion-spinner>
-                </div>
-              </ng-template>
+              <ion-text *ngIf="points$ | async as points; else loaderContent">{{points.userPoints}} Points</ion-text>
             </ion-card-content>
           </ion-card>
         </swiper-slide>
       </swiper-container>
+  </ion-content>
+    </ion-card>
+
+  <ng-template #loaderContent>
+    <div class="loader-wrapper">
+      <ion-spinner></ion-spinner>
     </div>
-   </ion-card>
+  </ng-template>
 </ion-content>

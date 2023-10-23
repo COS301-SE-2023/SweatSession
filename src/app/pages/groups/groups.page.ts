@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
-import { GetGroup, GetUserGroups, StageChatGroup } from 'src/app/actions';
+import { GetGroup, GetUserGroups, StageChatGroup, StageGroup } from 'src/app/actions';
 import { IGroup } from 'src/app/models';
 import { MessagesState } from 'src/app/states';
 
@@ -35,6 +35,10 @@ export class GroupsPage implements OnInit {
 
   addGroup() {
     this.nav.navigateRoot("/creategroup");
+  }
+
+  selectGroup(group:IGroup) {
+    this.store.dispatch(new StageGroup(group.id!))
   }
 
 }

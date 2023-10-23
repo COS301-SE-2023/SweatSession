@@ -1,9 +1,3 @@
-.larger-back-button {
-    --padding-start: 12px; 
-    --padding-end: 12px; 
-    font-size: 24px; 
-}
-
 body {
     width: 100vw;
     height: 100vh;
@@ -17,9 +11,7 @@ body {
     align-items: center;
     height: 100vh; /* Optional: This centers the container vertically as well */
   }
-  
-  .center{
-    align-items: center;
-    justify-content: center;
-    display: flex;
+
+  .center {
+    text-align: center;
   }

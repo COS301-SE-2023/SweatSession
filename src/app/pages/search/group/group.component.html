@@ -9,18 +9,19 @@
   
   <div class="search-suggestions" *ngIf="searchTerms.showSuggestions">
     <ion-list class="transparent-list">
-      <ion-item lines="none"
+      <ion-item lines="none" class="transparent-item"
         *ngFor="let suggestion of searchTerms.filteredSuggestions"
         (click)="selectGroup(suggestion)">
-        <ion-avatar slot="start">
+        <ion-avatar slot="start" class="search-results-avatars">
           <ion-img src ="{{suggestion.profileURL}}"></ion-img>
         </ion-avatar>
         <ion-label>
-          <h2>{{ suggestion.displayName }}</h2>
+          <h2 class="user-name">{{ suggestion.displayName }}</h2>
           <p>{{"~ " + suggestion.bio}}</p>
         </ion-label>
       </ion-item>
-      <ion-item lines="none" *ngIf="showNoResults && this.searchTerms.filteredSuggestions!.length==0">
+      <ion-item lines="none" class="transparent-item"
+        *ngIf="showNoResults && this.searchTerms.filteredSuggestions!.length==0">
         <ion-text>No groups found</ion-text>
       </ion-item>
     </ion-list>
@@ -31,27 +32,22 @@
       <ion-row>
         <ion-col size="12">
           <div class="slide-header">
-            <ion-item class="header">
+            <ion-item class="header transparent-item">
               <ion-icon name="people" slot="start"></ion-icon> 
               <ion-label>Suggested Groups</ion-label>
             </ion-item>
           </div>
         </ion-col>
       </ion-row>
-      <ion-row *ngFor="let row of rows">
-        <ion-col *ngFor="let item of row" size="6">
-          <ion-item>
+      <ion-row>
+        <ion-col *ngFor="let group of groups" (click)="selectGroup(group)">
+          <ion-item lines="none" class="transparent-item">
             <ion-avatar slot="start">
-              <ion-img [src]="item.profileURL"></ion-img>
+              <ion-img [src]="group.profileURL"></ion-img>
             </ion-avatar>
             <ion-label class="label">
-              <h5>{{item.displayName}}</h5>
-              <p class="overflow-hidden">{{item.bio}}</p>
-              <ion-buttons>
-                <ion-button class="default-button" expand="block" (click)="selectGroup(item)">
-                  <ion-icon name="chevron-forward-outline" class="view-button"></ion-icon>
-                </ion-button>
-              </ion-buttons>
+              <h2 class="user-name">{{group.displayName}}</h2>
+              <p class="overflow-hidden">{{"~ "+group.bio}}</p>
             </ion-label>
           </ion-item>
         </ion-col>

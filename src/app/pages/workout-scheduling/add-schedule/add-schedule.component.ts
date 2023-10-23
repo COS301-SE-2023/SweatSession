@@ -30,11 +30,13 @@ export class AddScheduleComponent  implements OnInit {
   daynum : number ;
   date : string ;
   shortdate : string[] ;
+  duration: number;
 
   constructor(private popoverController: PopoverController, private store: Store, private modalController: ModalController, private locationRepository: LocationRepository, private noticeService: NoticeService) { }
 
   ngOnInit() {
     this.displayCurrentUser(this.currUserId!);
+    this.duration = 10;
   }
 
   closePopup() {
@@ -98,8 +100,11 @@ export class AddScheduleComponent  implements OnInit {
   isValidInput() {
     const { name, location, duration, time, date, } = this.schedule;
 
-    if ( name && location && duration && time && date && this.isDateTimeValid()) 
+    if ( name && location && duration && time && date && this.isDateTimeValid() && this.IsvalidDuration())
+    {
       return true;
+    }
+
     return false;
   }
 
@@ -151,11 +156,23 @@ export class AddScheduleComponent  implements OnInit {
   }
 
   createNotifications(sendername: string , sentdate: string , message: string){
-    this.noticeService.createNotices(sendername , sentdate , message , this.currUserId! , this.currUserId! , '/assets/Asset 5.png');
+    this.noticeService.createNotices(sendername , sentdate , message , this.currUserId! , this.currUserId! , '/assets/Asset 3.png');
+  }
+
+  IsvalidDuration() {
+    if(this.schedule.duration! < 1)
+    {
+      return false;
+    }
+    else
+    {
+      return true;
+    }
   }
 
   valueChanged(event: any) {
     const newTimeValue = event.detail.value;
+    // this.isValidInput();
     console.log(newTimeValue);
   }
 }

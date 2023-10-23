@@ -1,11 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { getAuth } from '@angular/fire/auth';
-import { FormBuilder, FormGroup, FormArray, AbstractControl } from '@angular/forms';
+import {FormBuilder, FormGroup, FormArray, AbstractControl, Validators} from '@angular/forms';
 import { take, tap } from 'rxjs';
 import { Exercise } from 'src/app/models/exercise.model';
 import { ExerciseService, WorkoutscheduleService } from 'src/app/services';
 import { HealthDataService } from 'src/app/services/healthDataService/healthData.service';
 import { CalorieSummary } from "../calorie-summary";
+import { register } from 'swiper/element/bundle';
+import { IonContent } from '@ionic/angular';
+register();
 
 @Component({
   selector: 'exercise-calculator',
@@ -14,6 +17,7 @@ import { CalorieSummary } from "../calorie-summary";
 })
 export class ExerciseCalculatorComponent implements OnInit {
 
+  @ViewChild('contentElement', { static: false }) contentElement: IonContent;
   workoutForm: FormGroup;
   exercisesArray: Exercise[] = [];
   scheduleId: string;
@@ -50,6 +54,8 @@ export class ExerciseCalculatorComponent implements OnInit {
     // "pushUps": 8,
   }
   selectedExercises: any = {};
+  // formValid = false;
+  Incount: 0;
   // exerciseOptions: string[] = ["Exercise 1", "Exercise 2", "Exercise 3", "Exercise 4"];
 
   constructor(
@@ -66,9 +72,12 @@ export class ExerciseCalculatorComponent implements OnInit {
   async ngOnInit() {
     const auth = getAuth();
     this.currUserId = auth.currentUser?.uid;
-    if (this.currUserId != undefined) {
+    if (this.currUserId != undefined)
+    {
       sessionStorage.setItem('currUserId', this.currUserId);
-    } else {
+    }
+    else
+    {
       this.currUserId = sessionStorage.getItem('currUserId')!;
     }
     // this.exerciseService.getExerciseByScheduleId(this.scheduleId).pipe(take(1)).subscribe((exercises) => {
@@ -93,18 +102,50 @@ export class ExerciseCalculatorComponent implements OnInit {
   }
 
   async addExercise() {
+    console.log(this.exercisesArray)
     const exerciseControl = this.formBuilder.group({
-      name: [''],
-      sets: [''],
-      reps: [''],
-      weight: [''],
-      duration: ['']
+      name: ['',[Validators.required]],
+      sets: ['1',[]],
+      reps: ['2',[]],
+      weight: ['10', []],
+      duration: ['2', [Validators.required, Validators.min(1)]],
     });
     (this.workoutForm.get('exercises') as FormArray).push(exerciseControl);
-    // await this.calculateTotalCaloriesBurned();
-    console.log(this.workoutForm.get('exercises') as FormArray);
+    this.scrollToBottom();
   }
 
+
+  IsItvalid()
+  {
+    const Outcount : number = this.workoutForm.get('exercises')?.value.length;
+    this.Incount = 0;
+
+    this.workoutForm.get('exercises')?.value.forEach((element: any) =>
+    {
+      if
+      (
+          element.name != '' &&
+          element.sets != '' &&
+          element.reps != '' &&
+          element.weight != '' &&
+          element.duration != ''
+      )
+      {
+        this.Incount++;
+      }
+
+    });
+
+    if (this.Incount === Outcount)
+    {
+      return true;
+    }
+    else
+    {
+      return false;
+    }
+
+  }
   get exercises(): FormArray {
     return this.workoutForm.get('exercises') as FormArray;
   }
@@ -217,12 +258,28 @@ export class ExerciseCalculatorComponent implements OnInit {
   }
 
   async workoutSelected(event: Event) {
+    const noOfExercises = (this.workoutForm.get('exercises') as FormArray).length;
+    for (let e = 0;e<noOfExercises;e++){
+      this.deleteExercise(0);
+    }
     const selectedValue = (event.target as HTMLSelectElement).value;
     this.selectedWorkoutId = selectedValue;
     console.log(this.selectedWorkoutId);
     await this.getSessionWorkout(this.selectedWorkoutId);
 
-    console.log(this.selectedWorkout);
+    this.scrollToBottom();
+  }
+
+  isValidInput(){
+
+    let isValid = true;
+    this.exercises.controls.forEach(control => {
+      if (!control.valid) {
+        // this.formValid = false;
+        isValid = false;
+      }
+    });
+    return isValid;
   }
 
   hasWeight(exerciseNo: number) {
@@ -261,33 +318,9 @@ export class ExerciseCalculatorComponent implements OnInit {
     return true;
   }
 
-  // public async saveExercise(exerciseData: Exercise, index: number) {
-  //   let exercise = this.exercisesArray[index];
-
-  //   if (exercise) {
-  //     Object.assign(exercise, exerciseData);
-  //   }
-  // }
-
-  // public async saveExercises() { 
-  //   console.log('Initial exercisesArray:', this.exercisesArray);
-  //   console.log('Form exercises:', this.exercises.controls);
-  //   const promises = this.exercises.controls.map((exerciseControl: AbstractControl, index: number) => {
-  //     const exerciseData = {
-  //       scheduleId: this.scheduleId,
-  //       name: exerciseControl.get('name')?.value ?? "",
-  //       sets: exerciseControl.get('sets')?.value ?? 0,
-  //       reps: exerciseControl.get('reps')?.value ?? 0,
-  //       weight: exerciseControl.get('weight')?.value ?? 0,
-  //       duration: exerciseControl.get('duration')?.value ?? 0,
-  //     };
-  //     console.log(exerciseData)
-  //     return this.saveExercise(exerciseData, index);
-  //   });
-
-  //   await Promise.all(promises);
-
-  //   console.log('All exercises saved.');
-  //   console.log(this.exercisesArray);
-  // }
+  scrollToBottom() {
+    setTimeout(() => {
+      this.contentElement.scrollToBottom();
+    }, 100);
+  }
 }

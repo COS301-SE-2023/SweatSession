@@ -1,0 +1,40 @@
+.outer-container {
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.group-profile-container {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+
+    ion-avatar {
+        height: 200px;
+        width: 200px;
+        border: 2px solid var(--primary-color);
+    }
+}
+
+  
+  .group-profile-inner-container {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .select-image-icon {
+    position: absolute;
+    top: 50%;
+    right: -20px;
+    font-size: 2rem;
+    color: #007bff;
+    cursor: pointer;
+  }
+
+  .input-field {
+    margin-top: 10px;
+  }
+
+  ion-row {
+    margin-bottom: 20px;
+  }

@@ -1,14 +1,14 @@
 <ion-content>
   <ion-card class="otheruser-profile" *ngIf="isLoading; else loaderContent">
-    <div class="profile-outer-container">
+    <ion-toolbar class="profile-outer-container">
       <div class="back-button">
        <ion-buttons slot="start">
-        <backbutton class></backbutton>
+        <backbutton></backbutton>
        </ion-buttons>
 
        <ion-buttons class="edit-button">
         <ion-button class="default-button"  routerLink="/setprofile" >
-          <ion-icon name="create-outline" class="larger-back-button"  style="color: white !important;"></ion-icon>
+          <ion-icon name="create-outline" class="larger-back-button"></ion-icon>
         </ion-button>
        </ion-buttons>
       </div>
@@ -24,7 +24,7 @@
           <h1>{{displayName$}}</h1>
         </div>
               <ion-row>
-                <ion-col class = "theCol">{{myBio$}}</ion-col>
+                <ion-col>{{myBio$}}</ion-col>
               </ion-row>
       </ion-label>
       <div class="group-buttons">
@@ -37,23 +37,27 @@
           {{getGroupsSize()}}
         </ion-button>
       </div>
-    </div>
+    </ion-toolbar>
    
-    <div class="otheruser-profile-activity">
+    <ion-content class="otheruser-profile-activity">
       <div class="slide-header">
         <ion-item class="slides-headers first-header">
           <ion-icon name="body" slot="start"></ion-icon> 
           <ion-label>Activities</ion-label>
         </ion-item>
       </div>
-      <swiper-container [slidesPerView]="2" centered-slides="true"  pagination="{hideOnClick: true}">
+      <swiper-container [slidesPerView]="2"
+                        centered-slides="true"
+                        pagination="{hideOnClick: true}"
+
+      >
         <swiper-slide>
           <ion-card routerLink="/fitnessgoals">
             <ion-card-content>
               <ion-card-title>
                 <ion-icon name="american-football"></ion-icon>
               </ion-card-title>
-              <h2>Goals</h2>
+              <ion-text>Goals</ion-text>
             </ion-card-content>
           </ion-card>
         </swiper-slide>
@@ -63,17 +67,17 @@
               <ion-card-title>
                 <ion-icon name="analytics"></ion-icon>
               </ion-card-title>
-              <h2>Performance</h2>
+              <ion-text>Bests</ion-text>
             </ion-card-content>
           </ion-card>
         </swiper-slide>
         <swiper-slide>
-          <ion-card routerLink="/healthdata">
+          <ion-card routerLink="/health-data-display">
             <ion-card-content>
               <ion-card-title>
                 <ion-icon name="heart"></ion-icon>
               </ion-card-title>
-              <h2>Health Data</h2>
+              <ion-text>Health Data</ion-text>
             </ion-card-content>
           </ion-card>
         </swiper-slide>
@@ -94,7 +98,7 @@
               <ion-card-title>
                 <ion-icon name="medal"></ion-icon>
               </ion-card-title>
-              <h2>Badges</h2>
+              <ion-text>Badges</ion-text>
             </ion-card-content>
           </ion-card>
         </swiper-slide>
@@ -104,12 +108,12 @@
               <ion-card-title>
                 <ion-icon name="star"></ion-icon>
               </ion-card-title>
-              <h2>Points</h2>
+              <ion-text>Points</ion-text>
             </ion-card-content>
           </ion-card>
         </swiper-slide>
       </swiper-container>
-    </div>
+    </ion-content>
    </ion-card>
 
   <ng-template #loaderContent>

@@ -67,7 +67,7 @@ export class WorkoutscheduleRepository {
           schedule: schedule,
           validate: true,
         };
-        await this.notify.presentSuccessToast("schedule added successfully");
+        await this.notify.presentSuccessToast("Session added successfully");
         return response;
     } catch (error) {
       

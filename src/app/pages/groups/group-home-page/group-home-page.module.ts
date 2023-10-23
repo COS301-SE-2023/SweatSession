@@ -10,6 +10,7 @@ import { AuthModule } from '@angular/fire/auth';
 import { GroupStateModule, MessageStateModule, OtheruserStateModule } from 'src/app/states';
 import { GroupUserComponentModule } from '../../messages/group-user/group-user.module';
 import { GroupHomePageRoutingModule } from './group-home-routing.module';
+import { EditGroupComponent } from '../edit-group/edit-group.component';
 
 @NgModule({
   imports: [
@@ -24,6 +25,6 @@ import { GroupHomePageRoutingModule } from './group-home-routing.module';
     GroupStateModule,
     GroupHomePageRoutingModule
   ],
-  declarations: [GroupHomePageComponent],
+  declarations: [GroupHomePageComponent, EditGroupComponent],
 })
 export class GroupsHomePageModule {}

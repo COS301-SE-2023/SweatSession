@@ -4,7 +4,6 @@
     // border-bottom-right-radius: 24px;
     padding: 10px;
     // background: #A8DADC;
-    background: #E63946;
     position: relative;
 }
 
@@ -37,10 +36,6 @@ ion-title {
     text-align: center;
 }
 
-ion-avatar {
-    background-color: white;
-}
-
 ion-segment {
     border-radius: 0px;
 }
@@ -61,9 +56,9 @@ ion-segment {
         width: 100%;
         display: flex;
         justify-content: flex-end;
-        .default-button {
-            color: white !important;
-        }
+        // .default-button {
+        //     color: white !important;
+        // }
     }
 }
 

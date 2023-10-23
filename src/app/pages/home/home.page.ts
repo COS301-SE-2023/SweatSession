@@ -1,6 +1,6 @@
 import { Store } from '@ngxs/store';
-import { Component, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { IonTabs, NavController } from '@ionic/angular';
 import { AuthApi } from 'src/app/states/auth/auth.api';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -16,20 +16,27 @@ import { Logout } from 'src/app/actions';
   styleUrls: ['./home.page.scss'],
 })
 export class HomePage implements OnInit {
-
+  @ViewChild('tabs', { static: false }) tabs: IonTabs;
   noticeamount : number ;
   sub : Subscription ;
   DisplayName$? = "na";
   ProfilePicture$? = "na";
   getU : IGetProfile = {userId: 'na'};
-
+  darkmode : boolean = false;
   constructor(private nav:NavController,private noticehomeService: NoticehomeService ,
     private authAPI: AuthApi,
     private setpr: SetProfileService,
     private store: Store) { }
 
-  ngOnInit() 
-  {
+  ngOnInit() {
+    if(localStorage.getItem('darkmode')=='true') {
+      document.body.setAttribute('color-theme','dark');
+      this.darkmode = true;
+    } else {
+      document.body.setAttribute('color-theme','light');
+      this.darkmode = false;
+    }
+
     this.authAPI.getCurrentUserId().then((id) => {
       this.getU.userId = id;
       this.setpr.getProfile(this.getU).subscribe((profile) => {
@@ -52,6 +59,22 @@ export class HomePage implements OnInit {
         this.noticeamount = data
       }
     )
+  }
+
+  onToggletheme(event: any)
+  {
+
+    if(event.detail.checked)
+    {
+      document.body.setAttribute('color-theme','dark');
+      localStorage.setItem('darkmode','true');
+    }
+    else
+    {
+      document.body.setAttribute('color-theme','light');
+        localStorage.setItem('darkmode','false');
+    }
+
   }
 
   goToSettings() {

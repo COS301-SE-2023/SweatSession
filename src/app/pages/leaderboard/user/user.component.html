@@ -11,13 +11,12 @@
           <ion-img [src]='user.profileURL'></ion-img>
         </ion-avatar>
         <ion-label>
-          <ion-text class="user-name" *ngIf="!isCurrentUser">
-            {{user.displayName}}
-          </ion-text>
-          <ion-text class="user-name" *ngIf="isCurrentUser">
-            {{user.displayName}} (You)
-          </ion-text>
-    
+            <ion-text class="user-name" *ngIf="!isCurrentUser">
+              {{user.displayName}}
+            </ion-text>
+            <ion-text class="user-name" *ngIf="isCurrentUser">
+              {{user.displayName}} (You)
+            </ion-text>
           <p>{{"~ " + user.bio}}</p>
         </ion-label>
       </ion-item>

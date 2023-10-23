@@ -24,6 +24,7 @@ export interface IWorkoutScheduleModel {
 //request
 export interface IGetWorkoutSchedules {
     userId: string;
+   
 }
 
 export interface IAddWorkoutSchedule {

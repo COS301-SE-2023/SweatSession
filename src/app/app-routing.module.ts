@@ -36,7 +36,7 @@ const routes: Routes = [
   },
   {
     path: 'splash',
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
     data: { authGuardPipe: redirectLoggedOut },
     loadChildren: () => import('./pages/splash/splash.module').then(m => m.SplashPageModule)
   },
@@ -223,7 +223,11 @@ const routes: Routes = [
   {
     path: 'user-manual',
     loadChildren: () => import('./pages/user-manual/user-manual.module').then( m => m.UserManualPageModule)
+  },  {
+    path: 'health-data-display',
+    loadChildren: () => import('./pages/health-data-display/health-data-display.module').then( m => m.HealthDataDisplayPageModule)
   },
+
 
 
 ];

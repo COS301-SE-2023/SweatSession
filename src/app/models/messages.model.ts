@@ -62,6 +62,12 @@ export interface IDeleteMessage {
     messageId: string;
 }
 
+export interface IDeleteGroupMessage {
+    userId?: string;
+    groupId: string;
+    messageId: string;
+}
+
 export interface IDeletedMessage {
     validate: boolean;
 }
@@ -115,5 +121,16 @@ export interface IGetGroup {
 export interface IRemoveChatGroupUser {
     adminId: string;
     userId: string;
+    groupId: string;
+}
+
+export interface IEditGroup {
+    userId?: string;
+    group: IGroup
+}
+
+export interface IAddAmin {
+    userId?: string;
+    userIds: string[];
     groupId: string;
 }

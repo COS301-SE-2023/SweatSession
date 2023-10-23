@@ -3,10 +3,14 @@ import { Select, Store } from '@ngxs/store';
 import { ChartDataset, ChartOptions, ChartType } from 'chart.js';
 import { Observable, tap } from 'rxjs';
 import { GetWorkoutSchedules } from 'src/app/actions';
-import { IWorkoutScheduleModel } from 'src/app/models';
+import { IGetWorkoutSchedules } from 'src/app/models';
+import { IGotWorkoutSchedules } from 'src/app/models';
 import { IBadges } from 'src/app/models/badges.model';
 import { PointsApi, WorkoutSchedulingState } from 'src/app/states';
 import { register } from 'swiper/element/bundle';
+import {WorkoutscheduleService} from 'src/app/services/workoutschedule/workoutschedule.service';
+import { getAuth } from 'firebase/auth';
+import { NoticeService } from 'src/app/services/notifications/notice.service';
 
 register();
 
@@ -18,10 +22,30 @@ register();
 export class DashboardPage implements OnInit {
   
   sessionsCompleted: Number = 0;
-  constructor(private store:Store, private pointsApi: PointsApi) { }
+  Flag: Boolean = false;
+  workoutlist: IGotWorkoutSchedules;
+  workoutlists: IGetWorkoutSchedules;
+  auth = getAuth();
+  currUserId = this.auth.currentUser?.uid;
+  day : string ;
+  daynum : number ;
+  date : string ;
+  shortdate : string[] ;
+
+
+  constructor(private store:Store, private pointsApi: PointsApi, private workoutscheduleservice: WorkoutscheduleService, private noticeService: NoticeService) { 
+    this.workoutlists = {
+      userId: this.currUserId! // Replace 'yourUserIdHere' with the actual user ID.
+    };
+  }
 
   ngOnInit(){
     this.getSessionsAttended()
+    if(!this.Flag){
+      this.getWorkoutScheduled(this.workoutlists);
+      this.Flag = true;
+
+    }
   }
 
   getSessionsAttended() {
@@ -31,4 +55,38 @@ export class DashboardPage implements OnInit {
       })
     ).subscribe();
   }
+
+  async getWorkoutScheduled(request: IGetWorkoutSchedules){
+  (await this.workoutscheduleservice.getSchedules(request)).subscribe((workouts: IGotWorkoutSchedules) => {
+    this.workoutlist = workouts;
+    for(let i=0 ; i<this.workoutlist.schedules.length; i++){
+      if(this.workoutlist.schedules[i].date?.toString() == this.getMinDate()){
+        const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+        this.daynum = new Date().getDay() ;
+        this.day = weekday[this.daynum];
+        this.date = new Date().toTimeString() ;
+        this.shortdate = this.date.split(':' , 2);
+        //this.createNotifications("SWEATSESSION" , this.day + ' ' +this.shortdate[0] + ':' + this.shortdate[1] + ' ' , "REMINDER!! You have a workout scheduled today at " + this.workoutlist.schedules[i].location )  ;
+      }
+
+    }
+     
+  });
+}
+
+ getMinDate(): string {
+    const currentDate = new Date();
+    const currentYear = currentDate.getFullYear();
+    const currentMonth = (currentDate.getMonth() + 1).toString().padStart(2, '0');
+    const currentDay = currentDate.getDate().toString().padStart(2, '0');
+
+    return `${currentYear}-${currentMonth}-${currentDay}`;
+  }
+
+  createNotifications(sendername: string , sentdate: string , message: string){
+    this.noticeService.createNotices(sendername , sentdate , message , this.currUserId! , this.currUserId! , '/assets/Asset 3.png');
+  }
+
+
+
 }

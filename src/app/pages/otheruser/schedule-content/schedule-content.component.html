@@ -1,19 +1,44 @@
 <ion-card>
-  <ion-item lines="none">
+  <ion-item class="schedule-header" lines="none">
     <ion-icon name="receipt-outline" slot="start"></ion-icon>
-    <ion-text>
+    <ion-card-header class="schedule-name">
       {{schedule.name}}
-    </ion-text>
+    </ion-card-header>
     <ion-icon name="chevron-down-outline" slot="end" (click)="viewSchedule()" *ngIf="!isSlideShow"></ion-icon>
     <ion-icon name="chevron-up-outline" slot="end" (click)="viewSchedule()" *ngIf="isSlideShow"></ion-icon>
   </ion-item>
   <div *ngIf="isSlideShow">
     <ion-card-content>
-        <ion-icon name="barbell-outline"></ion-icon><ion-text class="schedule-value">{{schedule.name}}</ion-text><br>
-        <ion-icon name="calendar-outline"></ion-icon><ion-text class="schedule-value">{{schedule.date}}</ion-text><br>
-        <ion-icon name="time-outline"></ion-icon><ion-text class="schedule-value">{{schedule.time}}</ion-text><br>
-        <ion-icon name="location-outline"></ion-icon><ion-text class="schedule-value">{{schedule.location}}</ion-text><br>
-        <ion-icon name="timer-outline"></ion-icon><ion-text class="schedule-value">{{schedule.duration}} minutes</ion-text><br>
+      <ion-row>
+        <ion-col size="6">
+          <ion-item class="item-field" lines="none">
+            <ion-icon class="schedule-value-icon" name="calendar-outline"></ion-icon>
+            <ion-text class="schedule-value">{{ toDate() | date:'MMM d' }}</ion-text>
+          </ion-item>
+        </ion-col>
+        <ion-col size="6">
+          <ion-item class="item-field" lines="none">
+            <ion-icon class="schedule-value-icon" name="time-outline"></ion-icon>
+            <ion-text class="schedule-value">{{schedule.time}}</ion-text>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="12">
+          <ion-item class="item-field" lines="none">
+            <ion-icon class="schedule-value-icon" name="location-outline"></ion-icon>
+            <ion-text class="schedule-value">{{schedule.location}}</ion-text>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="12">
+          <ion-item class="item-field" lines="none">
+            <ion-icon class="schedule-value-icon" name="timer-outline"></ion-icon>
+            <ion-text class="schedule-value">{{schedule.duration}} minutes</ion-text>
+          </ion-item>
+        </ion-col>
+      </ion-row>
     </ion-card-content>
   </div>
 </ion-card>
