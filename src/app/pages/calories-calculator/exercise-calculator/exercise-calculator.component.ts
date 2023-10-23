@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { getAuth } from '@angular/fire/auth';
 import {FormBuilder, FormGroup, FormArray, AbstractControl, Validators} from '@angular/forms';
 import { take, tap } from 'rxjs';
@@ -7,6 +7,7 @@ import { ExerciseService, WorkoutscheduleService } from 'src/app/services';
 import { HealthDataService } from 'src/app/services/healthDataService/healthData.service';
 import { CalorieSummary } from "../calorie-summary";
 import { register } from 'swiper/element/bundle';
+import { IonContent } from '@ionic/angular';
 register();
 
 @Component({
@@ -16,6 +17,7 @@ register();
 })
 export class ExerciseCalculatorComponent implements OnInit {
 
+  @ViewChild('contentElement', { static: false }) contentElement: IonContent;
   workoutForm: FormGroup;
   exercisesArray: Exercise[] = [];
   scheduleId: string;
@@ -103,17 +105,13 @@ export class ExerciseCalculatorComponent implements OnInit {
     console.log(this.exercisesArray)
     const exerciseControl = this.formBuilder.group({
       name: ['',[Validators.required]],
-      sets: ['',[]],
-      reps: ['',[]],
-      weight: ['', []],
-      // sets: ['',[Validators.required, Validators.min(2)]],
-      // reps: ['',[Validators.required, Validators.min(2)]],
-      // weight: ['', [Validators.required, Validators.min(2)]],
-      duration: ['', [Validators.required, Validators.min(1)]],
+      sets: ['1',[]],
+      reps: ['2',[]],
+      weight: ['10', []],
+      duration: ['2', [Validators.required, Validators.min(1)]],
     });
     (this.workoutForm.get('exercises') as FormArray).push(exerciseControl);
-    // await this.calculateTotalCaloriesBurned();
-    console.log(this.workoutForm.get('exercises') as FormArray);
+    this.scrollToBottom();
   }
 
 
@@ -269,7 +267,7 @@ export class ExerciseCalculatorComponent implements OnInit {
     console.log(this.selectedWorkoutId);
     await this.getSessionWorkout(this.selectedWorkoutId);
 
-    console.log(this.selectedWorkout);
+    this.scrollToBottom();
   }
 
   isValidInput(){
@@ -320,33 +318,9 @@ export class ExerciseCalculatorComponent implements OnInit {
     return true;
   }
 
-  // public async saveExercise(exerciseData: Exercise, index: number) {
-  //   let exercise = this.exercisesArray[index];
-
-  //   if (exercise) {
-  //     Object.assign(exercise, exerciseData);
-  //   }
-  // }
-
-  // public async saveExercises() { 
-  //   console.log('Initial exercisesArray:', this.exercisesArray);
-  //   console.log('Form exercises:', this.exercises.controls);
-  //   const promises = this.exercises.controls.map((exerciseControl: AbstractControl, index: number) => {
-  //     const exerciseData = {
-  //       scheduleId: this.scheduleId,
-  //       name: exerciseControl.get('name')?.value ?? "",
-  //       sets: exerciseControl.get('sets')?.value ?? 0,
-  //       reps: exerciseControl.get('reps')?.value ?? 0,
-  //       weight: exerciseControl.get('weight')?.value ?? 0,
-  //       duration: exerciseControl.get('duration')?.value ?? 0,
-  //     };
-  //     console.log(exerciseData)
-  //     return this.saveExercise(exerciseData, index);
-  //   });
-
-  //   await Promise.all(promises);
-
-  //   console.log('All exercises saved.');
-  //   console.log(this.exercisesArray);
-  // }
+  scrollToBottom() {
+    setTimeout(() => {
+      this.contentElement.scrollToBottom();
+    }, 100);
+  }
 }
