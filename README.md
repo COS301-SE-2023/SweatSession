@@ -5,12 +5,12 @@
 [![Commits][commits-shield]](https://github.com/COS301-SE-2023/SweatSession/issues)
 [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=COS301-SE-2023_SweatSession&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=COS301-SE-2023_SweatSession)
 
-![Asset 12](https://github.com/COS301-SE-2023/SweatSession/assets/95973048/447bbb1f-c415-4d27-b3af-f222304674c9)
+<img src="https://github.com/COS301-SE-2023/SweatSession/raw/main/assets/95973048/447bbb1f-c415-4d27-b3af-f222304674c9/Asset%2012.png" alt="Asset 12" width="200" height="200">
   
 </div>
 <!-- TABLE OF CONTENTS -->
 
-### Table of Contents
+## Table of Contents
  <ul>
     <li><a href="https://github.com/COS301-SE-2023/SweatSession/wiki/SRS_Demo4#introduction">Project Description</a></li>
     <li><a href="">Project Day Video</a></li>
