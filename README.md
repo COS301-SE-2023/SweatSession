@@ -15,13 +15,13 @@
     <li><a href="https://github.com/COS301-SE-2023/SweatSession/wiki/SRS_Demo4#introduction">Project Description</a></li>
     <li><a href="">Project Day Video</a></li>
     <li><a href="#Technologies">Technologies</a></li>
-    <li><a href="#Members">Our Team</a></li>
+    <li><a href="https://github.com/COS301-SE-2023/SweatSession/wiki/Our-Team#members">Our Team</a></li>
     <li><a href="https://github.com/COS301-SE-2023/SweatSession/wiki/SRS_Demo4">SRS Document</a></li>
-    <li><a href="">User Manual</a></li>
-    <li><a href="">Technical Installation Manual</a></li>
+    <li><a href="https://github.com/COS301-SE-2023/SweatSession/wiki/User-Manual">User Manual</a></li>
+    <li><a href="https://github.com/COS301-SE-2023/SweatSession/wiki/Technical-Installation-Manual">Technical Installation Manual</a></li>
     <li><a href="https://github.com/orgs/COS301-SE-2023/projects/36">Project Board</a></li>
-    <li><a href="">Architecture</a></li>
-    <li><a href="">Deployment Diagram</a></li>
+    <li><a href="https://github.com/COS301-SE-2023/SweatSession/wiki/Architectural-Requirements-(Demo-4)">Architecture</a></li>
+    <li><a href="https://github.com/COS301-SE-2023/SweatSession/wiki/SRS_Demo4#deployment-diagram">Deployment Diagram</a></li>
   </ul>
 
 
@@ -122,7 +122,7 @@ I am a passionate 3rd year Computer Science student studying at the University o
 
 
 ## Client
-![image](https://github.com/COS301-SE-2023/SweatSession/assets/95973048/e8f25642-1c1e-455b-a715-6f221046df8b)
+<img src="https://github.com/COS301-SE-2023/SweatSession/assets/95973048/e8f25642-1c1e-455b-a715-6f221046df8b" alt="Asset 12" width="200">
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
