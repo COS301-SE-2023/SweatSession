@@ -156,10 +156,6 @@ export class ExerciseExplorerPage implements  AfterViewInit  {
       else if (intersects[0].object.name == "Object_5"){
         this.openExercisePage('calves');
       }
-      else if (intersects[0].object.name == "Object_21"){
-        this.openExercisePage('abdominal');
-        // console.log('stomach clicked');
-      }
       else if (intersects[0].object.name == "Object_18"){
         // console.log('gluteal muscle clicked');
         this.openExercisePage('glutes');
@@ -172,7 +168,15 @@ export class ExerciseExplorerPage implements  AfterViewInit  {
         this.openExercisePage('forearms');
         // console.log('midarm clicked');
       }
+      else if (intersects[0].object.name == "Object_9"){
+        this.openExercisePage('forearms');
+        // console.log('midarm clicked');
+      }
       else if (intersects[0].object.name == "Object_10"){
+        this.openExercisePage('deltoids');
+        // console.log('shoulders clicked');
+      }
+      else if (intersects[0].object.name == "Object_21"){
         this.openExercisePage('deltoids');
         // console.log('shoulders clicked');
       }
