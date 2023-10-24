@@ -15,6 +15,7 @@
     <li><a href="https://github.com/COS301-SE-2023/SweatSession/wiki/SRS_Demo4#introduction">Project Description</a></li>
     <li><a href="">Project Day Video</a></li>
     <li><a href="#Technologies">Technologies</a></li>
+    <li><a href="https://github.com/COS301-SE-2023/SweatSession/wiki/Coding-Standards">Coding Standards</a></li>
     <li><a href="https://github.com/COS301-SE-2023/SweatSession/wiki/Our-Team#members">Our Team</a></li>
     <li><a href="https://github.com/COS301-SE-2023/SweatSession/wiki/SRS_Demo4">SRS Document</a></li>
     <li><a href="https://github.com/COS301-SE-2023/SweatSession/wiki/User-Manual">User Manual</a></li>
