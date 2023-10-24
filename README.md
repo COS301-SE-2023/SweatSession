@@ -61,7 +61,7 @@ I'm currently in my 3rd year of undergraduate studies at the University of Preto
         <img src="https://img.icons8.com/material-rounded/24/000000/github.png" width="30" height="30"/>
       </a>
       <a href="https://www.linkedin.com/in/daniel-bezuidenhout-2469a3297/">
-      <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white"/>
+      <img src="https://img.icons8.com/fluency/24/000000/linkedin.png"/>
   </tr></table>
 
 <table style="border: none;">
