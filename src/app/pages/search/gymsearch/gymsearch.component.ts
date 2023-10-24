@@ -3,7 +3,7 @@ import { IonContent, IonModal, ModalController, ToastController } from '@ionic/a
 import { of, Observable, Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map, startWith } from 'rxjs/operators';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
-import { Geolocation as GeolocationCapacitor } from '@capacitor/geolocation';
+// import { Geolocation as GeolocationCapacitor } from '@capacitor/geolocation';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { LocationsService } from 'src/app/services/location/location.services';
@@ -178,11 +178,11 @@ export class GymsearchComponent implements OnInit {
 
 
 
-            const permission = await GeolocationCapacitor.checkPermissions();
-            if (permission.location === 'denied') {
-               // Request permission if it's denied
-               await GeolocationCapacitor.requestPermissions();
-            }
+            // const permission = await GeolocationCapacitor.checkPermissions();
+            // if (permission.location === 'denied') {
+            //    // Request permission if it's denied
+            //    await GeolocationCapacitor.requestPermissions();
+            // }
             const coordinates = await this.getCurrentLocation();
             this.currLatitude = coordinates!.latitude;
             this.currLongitude = coordinates!.longitude;
