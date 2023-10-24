@@ -1,9 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
+import { Observable } from 'rxjs';
 import { GetOtheruserFriends, StageOtheruserInfo, SubscribeToAuthState } from 'src/app/actions';
 import { IFriendsModel } from 'src/app/models';
 import { AuthState, OtheruserState } from 'src/app/states';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'otheruser-friends',

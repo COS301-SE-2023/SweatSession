@@ -1,14 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import {FormArray, FormBuilder, FormControl, FormGroup} from '@angular/forms';
-import {IAddGOAL, IGOAL, IGOALS, ITASK} from "../../models";
-import {Store} from "@ngxs/store";
-import {FitnessgoalService, NavigationService} from "../../services";
-import {AuthApi} from "../../states";
-import {getAuth} from "@angular/fire/auth";
-import {Router} from "@angular/router";
-import {forEach} from "@angular-devkit/schematics";
-import firebase from "firebase/compat/app";
-import {AngularFirestore} from "@angular/fire/compat/firestore";
+import { getAuth } from "@angular/fire/auth";
+import { AngularFirestore } from "@angular/fire/compat/firestore";
+import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from "@angular/router";
+import { Store } from "@ngxs/store";
+import { IAddGOAL, IGOAL, IGOALS, ITASK } from "../../models";
+import { FitnessgoalService, NavigationService } from "../../services";
+import { AuthApi } from "../../states";
 @Component({
   selector: 'app-goalview',
   templateUrl: './goalview.page.html',
@@ -18,6 +16,7 @@ export class GoalviewPage  implements OnInit {
 
   today: string;
   tommorow: string;
+  starteddate: any;
   constructor(private fb: FormBuilder,
               private store: Store,
               private fitnessgaolservive: FitnessgoalService,
@@ -167,17 +166,28 @@ export class GoalviewPage  implements OnInit {
   }
 
   isValid(formData :any) {
+
+    if(formData.start != null)
+    {
+      this.starteddate = formData.start;
+    }
+
     if (
         formData.name != null &&
         formData.description != null &&
         formData.start != null &&
         formData.end != null &&
-        this.Taskses.length > 0
-    ) {
-      // console.log('Form is valid');
+        this.Taskses.length > 0 &&
+        (new Date(formData.start)) < (new Date(formData.end))
+    )
+    {
+
+
+
       return true;
-    } else {
-      // console.log('Form is not valid');
+    }
+    else
+    {
       return false;
     }
   }

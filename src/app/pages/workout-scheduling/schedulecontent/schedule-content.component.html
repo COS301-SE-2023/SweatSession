@@ -1,69 +1,85 @@
-<ion-card>
+<ion-card style="margin-bottom: 0px;" class="schedule-content-card">
   <ion-item class="schedule-header" id="viewer" lines="none">
     <ion-icon name="receipt-outline"></ion-icon>
-    <ion-text class="schedule-name">
+    <ion-card-header class="schedule-name">
       {{schedule.name}}
-    </ion-text>
+    </ion-card-header>
     <ion-button slot="end" (click)="join()" *ngIf="inSession()" [disabled]="joined()">{{ joined() ? "Joined" : "Join" }}</ion-button>
-    <ion-icon name="chevron-down-outline" slot="end" (click)="viewSchedule()" *ngIf="!isSlideShow"></ion-icon>
-    <ion-icon name="chevron-up-outline" slot="end" (click)="viewSchedule()" *ngIf="isSlideShow"></ion-icon>
+    <ion-icon [name]=" isSlideShow ? 'chevron-up-outline': 'chevron-down-outline'" slot="end" (click)="viewSchedule()" *ngIf="!isEditSlide"></ion-icon>
+    <ion-icon name="close" slot="end" (click)="toggleEditSlide()" *ngIf="isEditSlide"></ion-icon>
+    
   </ion-item>
 
-  <div class="content" *ngIf="isSlideShow">
+  <div class="content" *ngIf="isSlideShow && !isEditSlide">
     <ion-card-content>
-      <ion-grid>
-        <ion-row>
-          <ion-col size="8">
-            <ion-icon class="schedule-value-icon" name="barbell-outline"></ion-icon><ion-text class="schedule-value">{{schedule.name}}</ion-text><br>
-            <ion-icon class="schedule-value-icon" name="calendar-outline"></ion-icon><ion-text class="schedule-value">{{schedule.date}}</ion-text><br>
-            <ion-icon class="schedule-value-icon" name="time-outline"></ion-icon><ion-text class="schedule-value">{{schedule.time}}</ion-text><br>
-            <ion-icon class="schedule-value-icon" name="location-outline"></ion-icon><ion-text class="schedule-value">{{schedule.location}}</ion-text><br>
-            <ion-icon class="schedule-value-icon" name="timer-outline"></ion-icon><ion-text class="schedule-value">{{schedule.duration}} minutes</ion-text><br>
-          </ion-col>
-          <ion-col size="4" *ngIf="!isCompleted() && !schedule.filledExerciseList">
-            <div class="weightlifting-animation">
-              <ion-icon src="/assets/dumbbell-exercise-svgrepo-com.svg" size="large" *ngFor="let i of [1,2,3]"></ion-icon>
-            </div>
-            <button class="exercise-button" (click)="schedule.workoutAdded ? viewWorkout(schedule) : addWorkout(schedule)"
-            >
-              <ion-icon name="add-circle"></ion-icon> {{ schedule.workoutAdded ? 'View Workout' : 'Add Workout' }}
-            </button>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-      <!-- <div *ngIf="isCompleted()"> -->
-      <!-- <div *ngIf="isCompleted()"> -->
-      <div *ngIf="exercises.length>0">
-        <h2 *ngIf="!schedule.filledExerciseList">Your session has ended. Which exercises were you able to finish</h2>
-        <h2 *ngIf="schedule.filledExerciseList">Exercise checklist completed</h2>
-        <swiper-container pagination="{hideOnClick: true}">
-          <swiper-slide *ngFor="let exercise of exercises">
-            <ion-card [ngClass]="{ 'completed': exercise.completed }">
-              <ion-card-content>
-                <ion-checkbox [ngClass]="{ 'completed':  exercise.completed  }"
-                  [value]="exercise.id"
-                  labelPlacement="end" 
-                  justify="start"
-                  [checked]="exercise.completed"
-                  [disabled]="exercise.completed"
-                  (ionChange)="toggleExerciseCompletion(exercise)">
-                  <ion-label>
-                    {{exercise.name}}
-                  </ion-label>
-                </ion-checkbox>
-              </ion-card-content>
-            </ion-card>
-          </swiper-slide>
-        </swiper-container>
-        <ion-button (click)="submit()" [disabled]="schedule.filledExerciseList">{{ schedule.filledExerciseList ? 'submitted' : 'submit' }}</ion-button>
+      <ion-row>
+        <ion-col size="6">
+          <ion-item class="item-field" lines="none">
+            <ion-icon class="schedule-value-icon" name="calendar-outline"></ion-icon>
+            <ion-text class="schedule-value">{{ toDate() | date:'MMM d' }}</ion-text>
+          </ion-item>
+        </ion-col>
+        <ion-col size="6">
+          <ion-item class="item-field" lines="none">
+            <ion-icon class="schedule-value-icon" name="time-outline"></ion-icon>
+            <ion-text class="schedule-value">{{schedule.time}}</ion-text>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="12">
+          <ion-item class="item-field" lines="none">
+            <ion-icon class="schedule-value-icon" name="location-outline"></ion-icon>
+            <ion-text class="schedule-value">{{schedule.location}}</ion-text>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="12">
+          <ion-item class="item-field" lines="none">
+            <ion-icon class="schedule-value-icon" name="timer-outline"></ion-icon>
+            <ion-text class="schedule-value">{{schedule.duration}} minutes</ion-text>
+          </ion-item>
+        </ion-col>
+      </ion-row>
 
-      </div>
+      <ion-row *ngIf="!isCompleted() && !schedule.filledExerciseList">
+        <ion-col size="12">
+          <ion-button expand="block" class="exercise-button" (click)="schedule.workoutAdded ? viewWorkout(schedule) : addWorkout(schedule)">
+            <ion-icon name="add-circle"></ion-icon> {{'Add/View Exercises'}}
+          </ion-button>
+        </ion-col>
+      </ion-row>
       
+      <div *ngIf="isCompleted()">
+        <div class="exercise-fill-header">
+          <h2 *ngIf="!schedule.filledExerciseList">Your session has ended. Which exercises were you able to finish?</h2>
+          <h2 *ngIf="schedule.filledExerciseList">Exercise checklist completed</h2>
+        </div>
+        <div class="exercise-content">
+          <ion-item *ngFor="let exercise of exercises" lines="none">
+            <ion-checkbox slot="start"
+            [value]="exercise.id"
+            labelPlacement="end" 
+            justify="start"
+            [checked]="exercise.completed"
+            [disabled]="schedule.filledExerciseList"
+            (ionChange)="toggleExerciseCompletion(exercise)">
+          </ion-checkbox>
+          <ion-label [ngClass]="{ 'completed':  exercise.completed  }">
+            {{exercise.name}}
+          </ion-label>
+          </ion-item>
+          <ion-button expand="block" class="exercise-submit-button ion-margin" (click)="submit()" [disabled]="schedule.filledExerciseList">{{ schedule.filledExerciseList ? 'Submitted' : 'Submit' }}</ion-button>
+        </div>
+      </div>
     </ion-card-content>
   </div>
 
   <ion-card-content *ngIf="isEditSlide">
-    <edit-schedule [schedule]="schedule"></edit-schedule>
+    <edit-schedule 
+      [schedule]="schedule"
+      [exercises]="exercises"></edit-schedule>
   </ion-card-content>
 
   <div class="info">

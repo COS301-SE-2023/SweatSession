@@ -1,12 +1,11 @@
 import { Injectable } from "@angular/core";
-import { Action, State, StateContext, Store, Selector } from "@ngxs/store";
 import { Navigate } from "@ngxs/router-plugin";
-import { Router } from "@angular/router";
-import { FriendsService } from "src/app/services";
-import { AddFriendAction, CreateFriendRequest, GetFriendsAction, RemoveFriendAction, RemoveFriendRequest } from "src/app/actions";
-import { IAddFriend, IAddedFriend, IFriendRequest, IFriendsModel, IGetFriends, IGotFriends, IRemoveFriend } from "src/app/models";
-import { AuthApi } from '../auth/auth.api';
+import { Action, Selector, State, StateContext, Store } from "@ngxs/store";
 import { catchError, of, tap } from "rxjs";
+import { AddFriendAction, CreateFriendRequest, GetFriendsAction, RemoveFriendAction, RemoveFriendRequest } from "src/app/actions";
+import { IAddFriend, IFriendRequest, IFriendsModel, IGetFriends, IGotFriends, IRemoveFriend } from "src/app/models";
+import { FriendsService } from "src/app/services";
+import { AuthApi } from '../auth/auth.api';
 
 export interface FriendsStateModel {
     friends: IFriendsModel[];

@@ -18,10 +18,17 @@ ion-avatar {
     width:35px;
 }
 
-*{
-    font-family: 'Montserrat', sans-serif;
+ion-badge {
+    position: absolute;
+    font-size: 8pt;
+    right: -1px;
+    top: -3px;
+    z-index: 99;
 }
 
+.button-div {
+    position: relative;
+}
 .menu-label{
     margin-left: 10px;
 }
@@ -32,13 +39,6 @@ ion-item {
 
 ion-title {
     text-align: center;
-    ion-chip {
-        background-color: transparent;
-    }
-}
-
-.menu-icons {
-    color: #457b9d;
 }
 
 .name {

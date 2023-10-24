@@ -1,10 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
 import { Select, Store } from '@ngxs/store';
 import { Observable, switchMap, tap } from 'rxjs';
-import { ExitChatGroup, GetGroup, JoinChatGroup, LoadGroupHompage, RemoveChatGroup, RemoveGroup, StageChatGroup, StageGroup, SubscribeToAuthState } from 'src/app/actions';
+import { ExitChatGroup, GetGroup, JoinChatGroup, LoadGroupHompage, RemoveChatGroup, RemoveGroup, StageChatGroup, SubscribeToAuthState } from 'src/app/actions';
 import { IGroup } from 'src/app/models';
-import { AuthState, MessagesState } from 'src/app/states';
+import { AuthState } from 'src/app/states';
 import { GroupState } from 'src/app/states/group/group.state';
+import { EditGroupComponent } from '../edit-group/edit-group.component';
 
 @Component({
   selector: 'group-home-page',
@@ -20,8 +22,9 @@ export class GroupHomePageComponent  implements OnInit {
   currentUserId = '';
   groupid: string;
   showOptions = false;
+  isModalOpen = false;
 
-  constructor(private store: Store) { }
+  constructor(private store: Store, private modalCtrl: ModalController) { }
 
   ngOnInit() {this.initialize()}
 
@@ -45,6 +48,23 @@ export class GroupHomePageComponent  implements OnInit {
 
   onSegmentChange(event: any) {
     this.selectedSegment = event.detail.value;
+  }
+
+  async openModal() {
+
+    const modal = await this.modalCtrl.create({
+      component: EditGroupComponent,
+      componentProps: {
+        group: this.selectedGroup,
+      }
+    });
+  
+    await modal.present();
+    this.isModalOpen=true;
+  }
+
+  closeModal() {
+    this.isModalOpen=false;
   }
 
   isGroupMember() {
@@ -89,7 +109,9 @@ export class GroupHomePageComponent  implements OnInit {
 
 
   isAdmin() {
-    return this.selectedGroup.admin?.includes(this.currentUserId);
+    if(this.selectedGroup.admin?.includes(this.currentUserId))
+      return true;
+    return false;
   }
 
   isOwner() {

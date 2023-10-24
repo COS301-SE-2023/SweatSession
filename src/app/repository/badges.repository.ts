@@ -1,8 +1,8 @@
 //import * as admin from 'firebase-admin';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
-import { IBadges } from 'src/app/models/badges.model';
 import { Injectable } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import firebase from 'firebase/compat/app';
+import { IBadges } from 'src/app/models/badges.model';
 
 
 @Injectable({
@@ -73,7 +73,7 @@ export class BadgesRepository {
             const gymsVisited = data?.['gymsVisited'] || [];
     
             if (gymsVisited.length==5) {
-                this.addBadge(currUserId, 7);//7 Active Adventurer badge
+                this.addBadge(currUserId, 6);//6 Active Adventurer badge
             }
         }
     }
@@ -85,8 +85,7 @@ export class BadgesRepository {
         //3 Record Breaker
         //4 Workout Warrior
         //5 Dynamic Duo
-        //6 Push-ups Pro
-        //7 Active Adventurer
+        //6 Active Adventurer
         const badgeDocRef = this.firestore.collection('badges').doc(currUserId);
         const fieldValue = firebase.firestore.FieldValue;
 

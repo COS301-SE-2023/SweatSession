@@ -1,11 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { Select, Store } from '@ngxs/store';
-import { Observable, tap } from 'rxjs';
-import { GetOtheruserProfile, GetUser, StageOtheruserInfo } from 'src/app/actions';
-import { IProfileModel } from 'src/app/models';
+import { Observable } from 'rxjs';
+import { RemoveChatGroupUser, StageOtheruserInfo } from 'src/app/actions';
+import { IProfileModel, IRemoveChatGroupUser } from 'src/app/models';
 import { MessagesService } from 'src/app/services';
-import { MessagesState, OtheruserState } from 'src/app/states';
+import { OtheruserState } from 'src/app/states';
 
 @Component({
   selector: 'group-user',
@@ -17,6 +17,9 @@ export class GroupUserComponent  implements OnInit {
   @Input() currentUserId: string;
   @Select(OtheruserState.returnOtherUserProfile) profile$: Observable<IProfileModel>;
   @Input() profile: IProfileModel;
+  @Input() groupId: string;
+  @Input() isCurrentUserAdmin: boolean = false;
+
   load = true;
 
   constructor(private store:Store, private nav: NavController,private service: MessagesService) {}
@@ -31,5 +34,14 @@ export class GroupUserComponent  implements OnInit {
 
   viewOtherUser(){
     this.store.dispatch(new StageOtheruserInfo(this.profile));
+  }
+
+  removeUser() {
+    let payload: IRemoveChatGroupUser = {
+      adminId: this.currentUserId,
+      userId: this.userId,
+      groupId: this.groupId
+    }
+    this.store.dispatch(new RemoveChatGroupUser(payload));
   }
 }

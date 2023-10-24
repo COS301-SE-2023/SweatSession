@@ -1,23 +1,24 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
-import { IAddWorkoutSchedule, 
-    IUpdateWorkoutSchedule, 
-    IGetWorkoutSchedules, 
-    IRemoveWorkoutSchedule, 
-    IGotWorkoutSchedules, 
-    IAddedWorkoutSchedule,
-    IRemovedWorkoutSchedule,
-    IUpdatedWorkoutSchedule,
-    IWorkoutScheduleModel,
-    IAddSweatbuddies,
-    IAddSweatbuddy,
-    IRequestToJoin,
-    IRequestToAdd,
-    IProfileModel,
-    IScheduleRequest,
-    IGetSchedule} 
-    from '../models';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Observable, lastValueFrom, map } from 'rxjs';
+import {
+  IAddSweatbuddies,
+  IAddSweatbuddy,
+  IAddWorkoutSchedule,
+  IAddedWorkoutSchedule,
+  IGetSchedule,
+  IGetWorkoutSchedules,
+  IGotWorkoutSchedules,
+  IProfileModel,
+  IRemoveWorkoutSchedule,
+  IRemovedWorkoutSchedule,
+  IRequestToAdd,
+  IRequestToJoin,
+  IScheduleRequest,
+  IUpdateWorkoutSchedule,
+  IUpdatedWorkoutSchedule,
+  IWorkoutScheduleModel
+} from '../models';
 import { NotifyService } from '../services/notify/notify.service';
 
 @Injectable({
@@ -67,7 +68,7 @@ export class WorkoutscheduleRepository {
           schedule: schedule,
           validate: true,
         };
-        await this.notify.presentSuccessToast("schedule added successfully");
+        await this.notify.presentSuccessToast("Session added successfully");
         return response;
     } catch (error) {
       

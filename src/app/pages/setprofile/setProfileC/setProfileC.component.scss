@@ -94,7 +94,6 @@
   padding: 0;
   background: transparent;
   position: relative;
-  overflow: hidden;
 }
 
 .user-thumb--edit .custom-file::before {
@@ -116,9 +115,26 @@
 .profile-img-container  {
   width: fit-content;
   margin: auto;
+  position: relative;
 }
 .profile-image {
-  height: 150px;
-  width: 150px;
+  height: 200px;
+  width: 200px;
+  margin-top: 20px;
   margin-bottom: 20px;
+}
+
+.select-image-icon {
+  position: absolute;
+  top: 50%;
+  right: -20px;
+  font-size: 2rem;
+  color: #007bff;
+  cursor: pointer;
+}
+
+.outer-profile-container {
+  height: 100%;
+  display: flex;
+  align-items: center;
 }

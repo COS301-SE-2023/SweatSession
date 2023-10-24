@@ -1,6 +1,6 @@
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
-import { IProfileModel, IUserModel } from 'src/app/models/profile.model';
 import { Injectable } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { IProfileModel, IUserModel } from 'src/app/models/profile.model';
 
 
 @Injectable({

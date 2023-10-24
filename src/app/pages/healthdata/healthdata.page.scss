@@ -10,23 +10,12 @@
   }
 }
 
-.form-control{
-  margin-top: 5%;
-  margin-bottom: 5%;
-}
-
 .heart-beat {
   animation: beat 0.5s infinite;
 }
 
-.customlabel{
-  margin-top: 5%;
-  font-size: 1.2rem;
-}
-
 .health-icon {
   font-size: 7rem;
-  color: #E63946;
   margin: 1rem;
 }
 
@@ -36,29 +25,10 @@
 
 .submit{
   margin-top: 15px;
-  --background: #E63946;
-  --color: white;
-  --border: none;
-  --border-style: solid;
-  --border-width: 2px;
-  --border-color: #E63946;
 }
 
 .cont{
   height: 200px;
-  width: 100%;
-}
-
-.full-width {
-  width: 100%;
-}
-  
-.input-field {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  align-self: center;
   width: 100%;
 }
 
@@ -78,5 +48,8 @@
   align-items: center;
   height: 100%;
 }
-  
+
+.input-field-container {
+    margin-top: 15px;
+  }
   

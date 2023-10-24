@@ -1,13 +1,10 @@
 import { Injectable } from '@angular/core';
+import { getAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import firebase from 'firebase/compat/app';
 import 'firebase/compat/firestore';
-import { Exercise } from '../../models/exercise.model';
 import { map } from 'rxjs/operators';
 import { BadgesRepository } from 'src/app/repository';
-import { getAuth } from '@angular/fire/auth';
-import { NavigationService } from '../navigation/navigation.service';
-import { NotifyService } from '../notify/notify.service';
+import { Exercise } from '../../models/exercise.model';
 
 @Injectable({
   providedIn: 'root',

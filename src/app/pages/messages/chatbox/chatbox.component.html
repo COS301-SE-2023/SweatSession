@@ -11,15 +11,14 @@
     </div>
   
     <ng-template #loaderContent>
-      <ion-item lines="none">
+      <ion-item lines="none" class="transparent-item">
         <div class="loader-wrapper">
           <ion-spinner></ion-spinner>
         </div>
       </ion-item>
     </ng-template>
   </div>
-
-  <div class="message-content">
+  <div class="message-content" (click)="showOptions()">
     <div class="message-sender" *ngIf="showUser && profile && currentUserId !== message.senderId">
       <div *ngIf="profile.profileURL; else loaderContent">
        <p class="smaller-item">
@@ -41,4 +40,9 @@
       <span>{{ message.date?.toDate() | date:'MMM d, hh:mm a' }}</span>
     </div>
   </div>
+  <ion-buttons *ngIf="isShowOptions">
+    <ion-button class="default-button" (click)="deleteMessage()">
+      <ion-icon name="trash"></ion-icon>
+    </ion-button>
+  </ion-buttons>
 </div>

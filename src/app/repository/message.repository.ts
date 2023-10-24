@@ -16,7 +16,8 @@ import { IMessage,
    IExitChatGroup,
    IRemoveChatGroup,
    IGetGroup,
-   IRemoveChatGroupUser} from "../models";
+   IRemoveChatGroupUser,
+   IDeleteGroupMessage} from "../models";
 import { AngularFirestore, AngularFirestoreCollection } from "@angular/fire/compat/firestore";
 import { Observable,lastValueFrom, map, tap } from "rxjs";
 import { NotifyService } from "../services/notify/notify.service";
@@ -28,7 +29,10 @@ import { NavController } from "@ionic/angular";
   })
   export class MessageRepository {
 
-    constructor(private firestore: AngularFirestore, private notify: NotifyService, private navigation: NavigationService, private router: NavController) {}
+    constructor(private firestore: AngularFirestore, 
+      private notify: NotifyService, 
+      private navigation: NavigationService, 
+      private router: NavController) {}
 
     async sendMessage(request: ISendMessage) {
       //add to current user collection
@@ -40,7 +44,7 @@ import { NavController } from "@ionic/angular";
       //add to receiver collection
       const otheruserMessegeDoc = this.firestore
         .collection<IMessage>(`messages/${request.chat.receiverId}/${request.chat.senderId}`)
-        .doc();
+        .doc(messageDoc.ref.id);
       otheruserMessegeDoc.set(request.chat);
 
       //update user collection
@@ -71,7 +75,7 @@ import { NavController } from "@ionic/angular";
         .doc();
         messageDoc.set(request.chat);
       } else {
-        this.notify.presentFailureToast("Failed, not a member any more");
+        this.notify.presentFailureToast("Failed, you are not a member anymore");
         this.router.navigateRoot("/home");
       }
      } catch(error) {
@@ -154,12 +158,9 @@ import { NavController } from "@ionic/angular";
         map((snapshot)=>{
           let groups: IGroup[] = [];
 
-          snapshot.forEach((doc)=>{
-            const group = {
-              id: doc.payload.doc.id,
-              ...doc.payload.doc.data()
-            }
-
+          snapshot.forEach(async (doc)=>{
+            const group = await this.getGroup(doc.payload.doc.id);
+      
             groups.push(group);
           })
 
@@ -178,7 +179,8 @@ import { NavController } from "@ionic/angular";
         map((snapshot)=>{
           let groups: IGroup[] = [];
 
-          snapshot.forEach((doc)=>{
+          snapshot.forEach(async (doc)=>{
+           
             const group = {
               id: doc.payload.doc.id,
               ...doc.payload.doc.data()
@@ -195,23 +197,53 @@ import { NavController } from "@ionic/angular";
       )
     }
 
+    async getGroup(groupId: string) {
+      const docRef = this.firestore.doc<IGroup>(`groups/${groupId}`);
+      let group: IGroup = (await lastValueFrom(docRef.get())).data()!;
+      group = {
+        ...group,
+        id: docRef.ref.id
+      }
+      return group;
+    }
+
     deleteMessage(request: IDeleteMessage) {
-       try {
-        const messageDoc = this.firestore.doc(`messages/${request.userId}/${request.otheruserId}/${request.messageId}`).delete();
+      try {
+      const messageDoc = this.firestore.doc(`messages/${request.userId}/${request.otheruserId}/${request.messageId}`).delete();
+      this.firestore.doc(`messages/${request.otheruserId}/${request.userId}/${request.messageId}`).delete();
 
-        const response:IDeletedMessage = {
-            validate: true
-        }
+      const response:IDeletedMessage = {
+          validate: true
+      }
 
-        return response;
-       }catch(error) {
-        // alert("alert: "+error);
-        const response:IDeletedMessage = {
-            validate: false
-        }
+      return response;
+      }catch(error) {
+      alert("alert: "+error);
+      const response:IDeletedMessage = {
+          validate: false
+      }
 
-        return response;
-       }
+      return response;
+      }
+    }
+
+    deleteGroupMessage(request: IDeleteGroupMessage) {
+      try {
+      const messageDoc = this.firestore.doc(`groups/${request.groupId}/messages/${request.messageId}`).delete();
+
+      const response:IDeletedMessage = {
+          validate: true
+      }
+
+      return response;
+      }catch(error) {
+      // alert("alert: "+error);
+      const response:IDeletedMessage = {
+          validate: false
+      }
+
+      return response;
+      }
     }
 
     async addChatGroup(request: IAddChatGroup) {
@@ -224,9 +256,10 @@ import { NavController } from "@ionic/angular";
         .collection<IGroup>(`users/${request.userId}/userGroups`)
         .doc(groupDocument.id)
         .set(request.group);
-        this.notify.presentSuccessToast("group added successfully.");
+        await this.notify.presentSuccessToast("Group created successfully");
+        this.router.navigateRoot('/home/messages')
       }catch(error){
-        this.notify.presentFailureToast("group creation failed.");
+        await this.notify.presentFailureToast("Group creation failed");
         // alert("ERROR: "+error)
       }
     }
@@ -246,7 +279,7 @@ import { NavController } from "@ionic/angular";
                 .collection<IGroup>(`users/${request.userId}/userGroups`)
                 .doc(request.group.id)
                 .set(request.group);
-                this.notify.presentSuccessToast(`Joined group successfully.`)
+                this.notify.presentSuccessToast(`Joined group successfully`)
               } else {
                 throw 'error: Already a member.'
               }
@@ -254,7 +287,7 @@ import { NavController } from "@ionic/angular";
           })
         ).subscribe();
       } catch (error) {
-        this.notify.presentFailureToast("already a member");
+        this.notify.presentFailureToast("You are already a member");
       }
     }
 
@@ -276,14 +309,14 @@ import { NavController } from "@ionic/angular";
               groupDoc.update({
                 members: members
               });
-              this.notify.presentSuccessToast("you left the group successfully.");
+              this.notify.presentSuccessToast("You left the group");
             } else {
               throw "Error: Owner can not leave a group";
             }
           })
         ).subscribe();
       }catch(error){
-        this.notify.presentFailureToast("Error occured, please try again :(");
+        this.notify.presentFailureToast("Error occured, please try again");
       }
     }
 
@@ -304,11 +337,11 @@ import { NavController } from "@ionic/angular";
 
             groupDoc.delete();
             this.navigation.back();
-            this.notify.presentSuccessToast(`${group?.displayName} removed successfully.`)
+            this.notify.presentSuccessToast(`${group?.displayName} removed successfully`)
           })
         ).subscribe();
       }catch(error){
-        this.notify.presentFailureToast(`Failed to remove group.`)
+        this.notify.presentFailureToast(`Failed to remove group`)
         console.log(error);
       }
     }
@@ -336,24 +369,28 @@ import { NavController } from "@ionic/angular";
 
     async removeChatGroupUser(request: IRemoveChatGroupUser) {
       try {
-        const groupDoc = this.firestore.doc<IGroup>(`groups/${request.groupId}`).get().pipe (
+        const docRef=  this.firestore.doc<IGroup>(`groups/${request.groupId}`);
+        docRef.get().pipe(
           map((doc)=>{
             const group = doc.data();
             if(request.userId != group?.createBy) {
-              if(request.groupId == group?.id && group?.admin?.includes(request.adminId)) {
+              if(request.groupId == docRef.ref.id && group?.admin?.includes(request.adminId)) {
                 group.members = group?.members?.filter((userId)=> userId != request.userId);
                 this.firestore
                 .doc<IGroup>(`users/${request.userId}/userGroups/${request.groupId}`)
                 .delete();
-                this.notify.presentSuccessToast("Group member removed successfully.");
+                docRef.update({members: group.members})
+                this.notify.presentSuccessToast("Group member removed successfully");
+              } else {
+                this.notify.presentFailureToast(`Failed to remove user. You are not an admin!`);
               }
             } else {
-              console.log("can't remove the owner of the group");
+              console.log("Can't remove the owner of the group");
             }
           })
-        )
+        ).subscribe();
       } catch(error) {
-        this.notify.presentFailureToast(`Failed to remove user.`)
+        this.notify.presentFailureToast(`Failed to remove user`)
       }
     }
   }

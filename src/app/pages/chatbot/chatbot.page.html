@@ -1,4 +1,4 @@
-<ion-header></ion-header>
+<ion-header class="ion-no-border"></ion-header>
 <br><br><br>
 <ion-content>
   <div [ngClass]="{'blur-background': isBlurred, 'default-background': !isBlurred}"></div>
@@ -20,13 +20,13 @@
 <ion-footer class="input-field-footer">
   <ion-item lines="none" class="message-input-field">
     <div class="input-field-container input-field-wrapper">
-      <ion-textarea [autoGrow]="true" placeholder="Enter your Question" [(ngModel)]="userMessage"></ion-textarea>
+      <ion-textarea [autoGrow]="true" rows="1" placeholder="Enter your Question" [(ngModel)]="userMessage"></ion-textarea>
     </div>
 
-    <ion-fab horizontal="end" vertical ="bottom">
-      <ion-fab-button class="message-send-fab-button custom-icon-color" [color]="isText() ? '' : 'medium'" [disabled]="!isText()" (click)="sendUserMessage()">
-        <ion-icon name="send"></ion-icon>
-      </ion-fab-button>
-    </ion-fab>
+    <ion-buttons slot="end">
+      <ion-button class="message-send-fab-button default-button" [color]="isText() ? '' : 'medium'" [disabled]="!isText()" (click)="sendUserMessage()">
+        <ion-icon name="send" class="message-send-icon"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-item>
 </ion-footer>

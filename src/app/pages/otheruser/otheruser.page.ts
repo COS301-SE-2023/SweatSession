@@ -1,24 +1,20 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { Component, OnInit } from '@angular/core';
+import { ModalController, NavController } from '@ionic/angular';
 import { Select, Store } from '@ngxs/store';
-import { Observable } from 'rxjs';
-import {GetUsersAction} from 'src/app/actions/profile.action'
-import { AddFriendAction, CheckIFSendFriendRequest, CreateFriendRequest, GetOtheruserFriends, GetOtheruserSchedules, LoadOtherUserProfile, RemoveFriendAction, RemoveUser } from 'src/app/actions';
-import { IFriendsModel, IProfileModel, IWorkoutScheduleModel , IGotProfile } from 'src/app/models';
-import { Profile } from 'src/app/models/notice.model';
-import { OtherUserStateModel, OtheruserState } from 'src/app/states';
-import { NoticeService } from 'src/app/services/notifications/notice.service';
 import { getAuth } from 'firebase/auth';
-import { NavigationService } from 'src/app/services';
+import { Observable } from 'rxjs';
+import { CheckIFSendFriendRequest, CreateFriendRequest, GetOtheruserFriends, GetOtheruserSchedules, LoadOtherUserProfile, RemoveFriendAction, RemoveUser } from 'src/app/actions';
 import { SetOtherUserBadgesId, SetOtherUserBadgesName } from 'src/app/actions/otheruserbadges.actions';
-import { PointsApi } from 'src/app/states/points/points.api';
-import { IPoints } from 'src/app/models/points.model';
+import { IFriendsModel, IProfileModel, IWorkoutScheduleModel } from 'src/app/models';
 import { IBadges } from 'src/app/models/badges.model';
+import { Profile } from 'src/app/models/notice.model';
+import { IPoints } from 'src/app/models/points.model';
+import { NoticeService } from 'src/app/services/notifications/notice.service';
+import { OtheruserState } from 'src/app/states';
 import { BadgesApi } from 'src/app/states/badges/badges.api';
-import { DocumentSnapshot } from 'firebase/firestore';
+import { PointsApi } from 'src/app/states/points/points.api';
 import { register } from 'swiper/element/bundle';
-import {ImageModalComponent} from "../userprofile/image-modal/image-modal.component";
-import { AnimationController, ModalController } from '@ionic/angular';
+import { ImageModalComponent } from "../userprofile/image-modal/image-modal.component";
 register();
 
 @Component({

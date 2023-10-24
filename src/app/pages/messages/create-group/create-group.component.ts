@@ -9,7 +9,9 @@ import { IGroup} from 'src/app/models';
   styleUrls: ['./create-group.component.scss'],
 })
 export class CreateGroupComponent  implements OnInit {
-  group:IGroup = {}
+  group:IGroup = {
+    profileURL: "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png",
+  }
   constructor(private store: Store) { }
 
   ngOnInit() {}
@@ -28,9 +30,8 @@ export class CreateGroupComponent  implements OnInit {
   }
 
   createGroup() {
-    if(!this.group.profileURL)
-      this.group.profileURL = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png";
     this.store.dispatch(new AddChatGroup(this.group));
+    this.reset();
   }
 
   isValidInput() {
@@ -42,4 +43,15 @@ export class CreateGroupComponent  implements OnInit {
     return false;
   }
 
+  selectFile() {
+    document.getElementById('CreateGroupProfileImgInput')?.click();
+  }
+
+  reset() {
+    this.group= {
+      profileURL: "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png",
+      bio:'',
+      displayName: ''
+    }
+  }
 }

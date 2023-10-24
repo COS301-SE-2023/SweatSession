@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {  ViewChild, ElementRef, AfterViewInit } from '@angular/core';
-import {ToastController} from "@ionic/angular";
+import { AngularFirestore } from "@angular/fire/compat/firestore";
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { getAuth } from '@angular/fire/auth';
-import {AngularFirestore} from "@angular/fire/compat/firestore";
-import {ProfileService} from "../../services";
-import {CalorieSummary} from "./calorie-summary";
 import { Observable } from 'rxjs';
+import { register } from 'swiper/element/bundle';
+import { ProfileService } from "../../services";
+import { CalorieSummary } from "./calorie-summary";
+register();
 
 @Component({
   selector: 'app-calories-calculator',

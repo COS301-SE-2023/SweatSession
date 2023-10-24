@@ -1,19 +1,13 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {IAddGOAL, IGOAL} from 'src/app/models/fitnessgoals.model';
-import { IGOALS } from 'src/app/models/fitnessgoals.model';
-import {FormArray, FormBuilder, FormControl, FormGroup} from "@angular/forms";
-import {Selector, Store} from "@ngxs/store";
-import {AddGoalAction} from "../../../actions/fitnessgoals/fitnessgoals.action";
-import {FitnessgoalService} from "../../../services/fitnessgoal/goal.service";
-import {AuthApi} from "../../../states/auth/auth.api";
+import { Time } from "@angular/common";
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { getAuth } from "@angular/fire/auth";
+import { FormBuilder } from "@angular/forms";
 import { Router } from '@angular/router';
-import {getAuth} from "@angular/fire/auth";
-import {FitnessgoalViewPageModule} from "../../fitnessgoal-view/fitnessgoal-view.module";
-import {FitnessgoalViewPage} from "../../fitnessgoal-view/fitnessgoal-view.page";
-import {today} from "ionicons/icons";
-import {convertChangeEventsToLogMessage} from "nx/src/daemon/server/watcher";
-import {Time} from "@angular/common";
-import { event } from 'firebase-functions/v1/analytics';
+import { Store } from "@ngxs/store";
+import { IGOAL } from 'src/app/models/fitnessgoals.model';
+import { FitnessgoalService } from "../../../services/fitnessgoal/goal.service";
+import { AuthApi } from "../../../states/auth/auth.api";
+import { FitnessgoalViewPage } from "../../fitnessgoal-view/fitnessgoal-view.page";
 
 @Component({
   selector: 'app-goalcard',
@@ -28,7 +22,7 @@ export class GoalcardComponent  implements OnInit {
   GOALS : IGOAL[] = [];
   selectedSegment: string = '0';
   @ViewChild('loaderContent') loaderContentTemplate: any;
-  isLoading :boolean = false;
+  isLoading :boolean = true;
 
 
 
@@ -69,7 +63,7 @@ export class GoalcardComponent  implements OnInit {
             //calculate days left
             
             this.GOALS = data.goals;
-            this.isLoading = true;
+            this.isLoading = false;
           });
     }
 

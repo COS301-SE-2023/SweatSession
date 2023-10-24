@@ -1,18 +1,17 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { getAuth } from "@angular/fire/auth";
+import { ActivatedRoute } from '@angular/router';
+import { AnimationController, ModalController, NavController } from '@ionic/angular';
 import { Select, Store } from '@ngxs/store';
-import {Observable, Subscription, tap} from 'rxjs';
-import { IGetProfile, IGroup } from 'src/app/models';
+import { Observable } from 'rxjs';
+import { GetUserGroups } from 'src/app/actions';
 import { GetFriendsAction } from 'src/app/actions/friend.action';
+import { IGetProfile, IGroup } from 'src/app/models';
 import { SetProfileService } from 'src/app/services';
 import { FriendsState, MessagesState } from 'src/app/states';
 import { AuthApi } from 'src/app/states/auth/auth.api';
-import {getAuth} from "@angular/fire/auth";
 import { register } from 'swiper/element/bundle';
-import {Router, NavigationStart, ActivatedRoute} from '@angular/router';
-import { GetUserGroups } from 'src/app/actions';
-import {ImageModalComponent } from './image-modal/image-modal.component';
-import { AnimationController, ModalController } from '@ionic/angular';
+import { ImageModalComponent } from './image-modal/image-modal.component';
 
 register();
 

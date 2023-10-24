@@ -4,16 +4,16 @@
     <ion-segment-button value="2">Overdue</ion-segment-button>
   </ion-segment>
 
-  <ion-content [scrollEvents]="true" *ngIf="isLoading; else loaderContent">
+  <ion-content [scrollEvents]="true" *ngIf="!isLoading; else loaderContent">
 
       <ng-container *ngIf="getFilteredGoals().length > 0; else ngemptyTemp ">
 
 
         <ion-card *ngFor="let goal of getFilteredGoals()">
             <ion-item-sliding>
-            <ion-item id="viewer">
+            <ion-item class="goal-header" id="viewer">
                 <ion-icon name="basketball-outline"></ion-icon>
-                <ion-text>
+                <ion-text class="goal-name">
                     {{goal.name}}
                 </ion-text>
                 <ion-icon slot="end" name="chevron-forward-outline" (click)="viewGoal(goal.id)"></ion-icon>
@@ -32,7 +32,7 @@
                     <ion-icon name="speedometer-outline"></ion-icon><ion-text class="schedule-value">{{(goal.progress!)}}% Done</ion-text><br>
                     <ion-icon name="alert-circle-outline"></ion-icon><ion-text class="schedule-value">{{getDaysleft(goal)}} Days Left</ion-text><br>
                     <ion-icon name="american-football-outline"></ion-icon><ion-text class="schedule-value">{{goal.Tasks!.length}} Tasks</ion-text><br>
-                    <ion-icon name="calendar-outline"></ion-icon><ion-text class="schedule-value">Started: {{goal.startDate}}</ion-text><br>
+                    <ion-icon name="calendar-outline"></ion-icon><ion-text class="schedule-value">Start: {{goal.startDate}}</ion-text><br>
                     <ion-icon name="alarm-outline"></ion-icon><ion-text class="schedule-value">Ending: {{goal.endDate}}</ion-text><br>
                 </div>
             </ion-card-content>
@@ -40,6 +40,8 @@
       </ng-container>
 
       <ng-template #ngemptyTemp>
+          <ion-content scroll-y="false">
+
 
         <ion-card *ngIf="isSelected('0')" class="zero-content-container">
             <div class="inner-zero-content-wrapper">
@@ -66,7 +68,7 @@
               </div>
           </ion-card>
 
-
+          </ion-content>
         </ng-template>
   </ion-content>
 

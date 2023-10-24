@@ -25,39 +25,15 @@
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
 
-
-// ion-item{
-//     --highlight-height: 0;
-//     --inner-border-width: 0;
-// }
-
-ion-content {
-    overflow-y: auto;
-}
-
 .larger-back-button {
     --padding-start: 12px; 
     --padding-end: 12px; 
     font-size: 24px; 
-    color: white !important;
+    // color: var(--primary-color) !important;
 }
 
 ion-title {
     text-align: center;
-}
-
-ion-toolbar {
-    --background: #E63946;
-    --color: white !important;
-}
-
-ion-toolbar *{
-    --color: white !important;
-}
-
-ion-toolbar ion-item {
-    --background: #E63946;
-    --color: white !important;
 }
 
 * {
@@ -70,7 +46,7 @@ ion-chip {
 }
 
 ion-spinner {
-    --color: #E63946; //#A8DADC;
+    --color: #001b34; //#A8DADC;
     width: 1.2rem;
     height: 1.2rem;
 }
@@ -82,24 +58,15 @@ ion-spinner {
     height: 100%;
 }
 
-ion-fab-button  {
-    --background: #A8DADC;
-    --background-hover: #9ce0be;
-    --background-activated: #88f4be;
-    --background-focused: #88f4be;
-    --color: #457b9d;
-    --ripple-color: deeppink;
-    opacity: 0.9;
-}
-
 ion-segment {
     border-radius: 0px;
+    // background-color: var(--primary-color);
 }
 
 .message-input-field {
     border: 2px solid #457B9D;
     border-radius: 10px;
-
+    --inner-padding-end: 0px;
     .input-field-wrapper {
         width: 85%;
         padding: 0px;
@@ -119,10 +86,6 @@ ion-segment {
     transition: 0.5;
 }
 
-swiper-container::part(bullet-active) {
-    background-color: #E63946 // #A8DADC;
-}
-
 .message-send-fab-button {
     width: 40px;
     height: 40px;
@@ -139,30 +102,25 @@ swiper-container::part(bullet-active) {
 .large-icon {
     width: 200px;
     height: 200px;
-    color: #457B9D;
     opacity: 0.9;
 }
 
-// colors
-// #A8DADC;
-// #457b9d
-
-ion-button:not(.backbutton,.default-button) {
-    --background: linear-gradient(135deg, #A8DADC 10%, #457b9d 100%); //#A8DADC;
-    --background-hover: #457b9d;
-    --background-activated: #457b9d;
-    --background-focused: #457b9d;
-    border-radius: 8px;
-  
+ion-button:not(.backbutton,.default-button, .white-button) {
+    --border-radius: 10px;
+    --padding: 10px;
     --border-style: solid;
     --border-width: 2px;
-    --border-color: #457b9d;
-  
-    --color: white !important;//#457b9d;
+}
+
+.white-button {
+    --border-radius: 10px;
+    --border-style: solid;
+    --border-width: 2px;
 }
 
 ion-segment {
     border-radius: 0px;
+    background-color: transparent;
 }
 
 .zero-content-container {
@@ -184,7 +142,7 @@ ion-segment {
         padding: 20px;
         .slides-headers {
             font-weight: bolder;
-            color: #457B9D;
+            // color: #457B9D;
             --background: transparent;
         }
     }
@@ -193,11 +151,16 @@ ion-segment {
 swiper-container {
     position: relative;
     height: fit-content;
-    padding: 20px;
+    padding-bottom: 20px;
+    padding-top: 0px;
+    swiper-slide {
+        ion-card {
+            margin-top: 0px;
+        }
+    }
 }
 
 swiper-container::part(bullet-active) {
-    background-color:#E63946; // #A8DADC;
     position: relative;
     bottom: -10px;
 }
@@ -209,7 +172,7 @@ swiper-container::part(bullet) {
 
 .clickable:hover {
     zoom:1.05;
-    color: #1D3557;
+    // color: var(--secondary-variant-color);
 }
 
 .group-options {
@@ -217,15 +180,29 @@ swiper-container::part(bullet) {
     position: absolute;
     right: 10px;
     z-index: 999;
-    box-shadow: 0px 4px 20px 0px #31460457;
-    padding: 5px;
-    border-radius: 2px;
-    background-color: #A8DADC;
+    border-radius: 8px;
 }
 
-// color theme
-// 0% {color: #1D3557;}
-// 25% {color: #457B9D;}
-// 50% {color: #A8DADC;}
-// 75% {color: #E63946;}
-// 100% {color: #F1FAEE;}
+/* Hide scrollbars for Webkit browsers (e.g., Chrome, Safari) */
+::-webkit-scrollbar {
+    display: none;
+}
+
+/* For Firefox */
+html {
+    scrollbar-width: none;
+    // background-color: #A8DADC;
+}
+
+canvas {
+    --background: var(--background-color);
+}
+
+.input-field {
+    border-radius: 8px;
+}
+
+.calories-content-cards {
+    box-shadow: none;
+    background-color: transparent;
+}

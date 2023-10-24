@@ -5,7 +5,6 @@ ion-text {
 ion-item{
     --highlight-height: 0;
     --inner-border-width: 0;
-    --background: #A8DADC;
 }
 
 ion-card, ion-item {
@@ -15,4 +14,9 @@ ion-card, ion-item {
 .custom-search {
     border-radius: 12px;
     margin-bottom: 0;
+}
+
+ion-col {
+    padding: 0px;
+    margin: 0px;
 }

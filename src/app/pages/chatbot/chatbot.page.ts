@@ -10,7 +10,7 @@ import { takeUntil } from 'rxjs/operators';
 @Component({
   selector: 'app-chatbot',
   templateUrl: './chatbot.page.html',
-  styleUrls: ['./chatbot.page.scss','../global.scss'],
+  styleUrls: ['./chatbot.page.scss'],
 })
 export class ChatbotPage implements OnInit {
 

@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header class="ion-no-border">
   <ion-toolbar>
     <ion-buttons slot="start">
       <backbutton></backbutton>
@@ -17,14 +17,14 @@
       </span>
     </ion-item>
 
-    <ion-item class="workoutPlanPointsSection">
+    <ion-item lines="none" class="workoutPlanPointsSection">
       <h2 class="pointsHeader" style="margin:None">Complete Your Workout Plan</h2>
       <div class="progressContainer">
         <ion-text class="progressHeader">Progress: </ion-text>
         <ion-text class="progressText">0/1</ion-text>
       </div>
       <ion-progress-bar value="0.0" class="custom-progress-bar" style="--ion-color-primary: var(--custom-red);"></ion-progress-bar>
-      <ion-item class="wpPointsSection">
+      <ion-item lines="none" class="wpPointsSection">
       <ion-text class="workoutPlanPoints">Points:</ion-text>
       <span class="workoutPlanPointsContent">
         <ion-text class="wpNumberValue">50</ion-text>
@@ -36,14 +36,14 @@
     </ion-item>
 
 
-    <ion-item class="workoutSessionPointsSection" *ngIf="workoutSessionsAttended$ | async as workoutSessionsAttended; else elseBlock">
+    <ion-item lines="none" class="workoutSessionPointsSection" *ngIf="workoutSessionsAttended$ | async as workoutSessionsAttended; else elseBlock">
       <h2 class="pointsHeader" style="margin:None">Attend 3 Workout Sessions</h2>
       <div class="progressContainer">
         <ion-text class="progressHeader">Progress: </ion-text>
         <ion-text class="progressText">{{ workoutSessionsAttended }}/3</ion-text>
       </div>
       <ion-progress-bar [value]="+workoutSessionsAttended / 3" class="custom-progress-bar" style="--ion-color-primary: var(--custom-red);"></ion-progress-bar>
-      <ion-item class="wpPointsSection">
+      <ion-item lines="none" class="wpPointsSection">
       <ion-text class="workoutPlanPoints">Points:</ion-text>
       <span class="workoutPlanPointsContent">
         <ion-text class="wpNumberValue">75</ion-text>
@@ -53,14 +53,14 @@
     <ion-button routerLink="/workout-scheduling">View Gym Schedule</ion-button>
     </ion-item>
     <ng-template #elseBlock>
-      <ion-item class="workoutSessionPointsSection">
+      <ion-item lines="none" class="workoutSessionPointsSection">
         <h2 class="pointsHeader" style="margin:None">Attend 3 Workout Sessions</h2>
         <div class="progressContainer">
           <ion-text class="progressHeader">Progress: </ion-text>
           <ion-text class="progressText">0/3</ion-text>
         </div>
         <ion-progress-bar [value]="0.0" class="custom-progress-bar" style="--ion-color-primary: var(--custom-red);"></ion-progress-bar>
-        <ion-item class="wpPointsSection">
+        <ion-item lines="none" class="wpPointsSection">
         <ion-text class="workoutPlanPoints">Points:</ion-text>
         <span class="workoutPlanPointsContent">
           <ion-text class="wpNumberValue">75</ion-text>
@@ -71,14 +71,14 @@
       </ion-item>
     </ng-template>
 
-    <ion-item class="workoutSessionPointsSection">
+    <ion-item lines="none" class="workoutSessionPointsSection">
       <h2 class="pointsHeader" style="margin:None">Complete a fitness goal</h2>
       <div class="progressContainer">
         <ion-text class="progressHeader">Progress: </ion-text>
         <ion-text class="progressText">0/1</ion-text>
       </div>
       <ion-progress-bar value="0.0" class="custom-progress-bar" style="--ion-color-primary: var(--custom-red);"></ion-progress-bar>
-      <ion-item class="wpPointsSection">
+      <ion-item lines="none" class="wpPointsSection">
       <ion-text class="workoutPlanPoints">Points:</ion-text>
       <span class="workoutPlanPointsContent">
         <ion-text class="wpNumberValue">100</ion-text>

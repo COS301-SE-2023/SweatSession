@@ -1,54 +1,75 @@
-.logo {
-    display: block;
-    max-width: 70%;
-    height: auto;
-    margin: 0 auto;
-    text-align: center;
-    border: none;
-  }
-  
-* {
-    font-family: 'Montserrat', sans-serif;
-}
-  
-.inner-container {
-    text-align: center;
-    padding: 16px; 
-    width: 85%;
-    border-radius: 12px;
-}
+.outer-container {
+    .auth-container {
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        .welcome-container {
+            text-align: center;
+            .welcome-title {
+                font-size: x-large;
+                font-weight: bolder;
+                // color: var(--main-color);
+            }
 
-ion-card {
-    margin: 16px;
-    border-radius: 12px;
-}
+            .welcome-subtitle {
+                // color: var(--primary-color);
+            }
+        }
+        
+        .form-container {
+            margin-top: 20px;
+            .input-field-container {
+                margin-top: 20px;
+                .input-field {
+                    border: 2px solid var(--primary-color);
+                    // background-color: var(--input-field-color);
+                    margin-top: 10px;
+                    border-radius: 10px;
+                }
+            }
+        
+            .forgot-password {
+                margin-top: 20px;
+                margin-bottom: 20px;
+                display: flex;
+                justify-content: flex-end;
+            }
+        
+            .button-container {
+                margin-top: 40px;
+            }
+        }
 
-ion-content {
-    background-color: white; 
-}
+        .bottom-message-container {
+            margin-top: 20px;
+            text-align: center;
+        }
 
-#loginButton {
-    --background: #E63946;
-    border-radius: 12px;
-    ion-text {
-        --background: #E63946;
+        .register-link, .forgot-password {
+        //   color: var(--primary-color);
+          font-weight: bold;
+        }
+
+        .division-section {
+            display: flex;
+            align-items: center;
+            margin: 20px 0;
+        
+            .line {
+                flex: 1;
+                height: 1px;
+                background-color: #ccc;
+                margin: 0 10px;
+            }
+              
+            .or {
+                font-weight: bold;
+                font-size: 16px;
+                padding: 0 10px;
+                // color: var(--primary-color)
+            }
+        }
     }
-}
-
-img[src="/assets/Asset 1.png"] {
-    width: 50%;
-    height: auto;
-    background: transparent;
-    border-radius: 0;
-    border: none; 
-    outline: none; 
-    outline-color: transparent; 
-}
-
-.loginButton {
-    --background: #E63946;
-    --color: white !important;
-    --border-style: solid;
-    --border-width: 2px;
-    --border-color: #E63946;
 }

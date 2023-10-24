@@ -1,12 +1,9 @@
-import {IGOAL, IAddGOAL, IGotGOAL, IRemovedWorkoutSchedule} from 'src/app/models';
 import { Injectable } from '@angular/core';
-import { goalsRepository } from '../../repository';
-import { FitnessgoalService } from 'src/app/services';
-import { Action, State, StateContext, Store, Selector } from "@ngxs/store";
+import { Action, State, StateContext, Store } from "@ngxs/store";
 import { AddGoalAction } from "src/app/actions";
+import { IGOAL } from 'src/app/models';
+import { FitnessgoalService } from 'src/app/services';
 import { AuthApi } from '../auth/auth.api';
-import { catchError, of, tap } from "rxjs";
-import {Navigate} from "@ngxs/router-plugin";
 
 export interface FitnessgoalStateModel {
     fitnessgoal: IGOAL[],

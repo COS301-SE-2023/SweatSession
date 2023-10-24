@@ -1,16 +1,20 @@
 <ion-content [fullscreen]="true">
   <ion-card class="full-screen-card">
    <div class="inner-wrapper">
-    <div class="logo-container">
-      <img class="logo-img" src="assets/sweatsessionlogotransparent1.png" alt="logo">
+    <div class="logo-container" *ngIf="darkmode">
+      <img class="logo-img" src="../../../assets/Asset 21.png" alt="logo">
     </div>
+    <div class="logo-container" *ngIf="!darkmode">
+      <img class="logo-img" src="../../../assets/Asset 20.png" alt="logo">
+    </div>
+   
     <ion-card-header style="text-align: center;">
       <ion-card-title style="margin-top: 10px;">About</ion-card-title>
       <ion-card-subtitle></ion-card-subtitle>
     </ion-card-header>
   
     <ion-card-content>
-      SweatSession is a fitness app that allows users to track their workouts progress, and make some friends along the way.
+      SweatSession is a fitness app that allows users to track their workout progress and connect with friends.
     </ion-card-content>
   
     <button class="learn-more getSButton" routerLink="/login">

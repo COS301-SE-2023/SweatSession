@@ -1,0 +1,62 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-title>Edit Group Profile</ion-title>
+    <ion-buttons slot="start">
+      <ion-button class="default-button" (click)="closeModal()">
+        <ion-icon name="arrow-back-outline" class="larger-back-button"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen="true">
+  <div class="outer-container">
+    <ion-grid>
+      <ion-row class="ion-justify-content-center">
+        <ion-col size="12">
+          <div class="group-profile-container">
+            <div class="group-profile-inner-container">
+              <ion-avatar class="ion-justify-content-center">
+                <ion-img [src]="group.profileURL"></ion-img>
+              </ion-avatar>
+              <ion-fab class="select-image-icon">
+                <ion-fab-button (click)="selectFile()">
+                  <ion-icon name="image-outline"></ion-icon>
+                </ion-fab-button>
+              </ion-fab>
+              <input type="file" id="GroupProfileImgInput" accept="image/*" (change)="onFileSelected($event)" style="display: none">
+            </div>
+          </div>
+        </ion-col>
+      </ion-row>
+  
+      <ion-row class="ion-justify-content-center">
+        <ion-col size="12">
+          <div class="input-field-container">
+            <ion-label>Group name</ion-label>
+            <ion-item lines="none" class="input-field">
+              <ion-input type="text" (ionInput)="isChange()" [(ngModel)]="editGroup.displayName"></ion-input>
+            </ion-item>
+          </div>
+        </ion-col>
+      </ion-row>
+  
+      <ion-row class="ion-justify-content-center">
+        <ion-col size="12">
+          <div class="input-field-container">
+            <ion-label>Group bio</ion-label>
+            <ion-item lines="none" class="input-field">
+              <ion-textarea rows='4' (ionInput)="isChange()"  maxlength="120" type="text" [(ngModel)]="editGroup.bio"></ion-textarea>
+            </ion-item>
+          </div>
+        </ion-col>
+      </ion-row>
+  
+      <ion-row class="ion-justify-content-center">
+        <ion-col size="12">
+          <ion-button (click)="edit()" [disabled]="!valuesChanged" expand="block">Save</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

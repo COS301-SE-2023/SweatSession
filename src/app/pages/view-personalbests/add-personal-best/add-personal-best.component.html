@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header class="ion-no-border">
   <ion-toolbar>
     <ion-buttons slot="start">
       <backbutton></backbutton>
@@ -8,57 +8,131 @@
 </ion-header>
 
 <ion-content>
-  <ion-card style="background-color: #A8DADC; padding: 5px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
+  <ion-card style="padding: 5px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
     <ion-card-title style="padding-top: 10px;">Add Personal best</ion-card-title>
       <ion-card-content>
           <ion-img src="../../../assets/goalsBanner.jpg"></ion-img>
       </ion-card-content>
+
+
   </ion-card>
 
-  <form [formGroup]="PersonalBestForm" (ngSubmit)="onSubmit()" class="ion-padding">
-    <ion-item>
-      <ion-label>Select Exercise</ion-label>
-      <ion-select formControlName="exercise" placeholder="EXERCISE">
-        <ion-select-option value="Bench Press">Bench Press</ion-select-option>
-        <ion-select-option value="Squats">Squats</ion-select-option>
-        <ion-select-option value="Deadlifts">Deadlifts</ion-select-option>
-        <ion-select-option value="Overhead Press">Overhead Press</ion-select-option>
-        <ion-select-option value="Barbell Rows">Barbell Rows</ion-select-option>
-        <ion-select-option value="Push ups">Push ups</ion-select-option>
-      </ion-select>
-    </ion-item>
-  
-    <ion-item>
-      <ion-label position="stacked">Weight</ion-label>
-      <ion-input placeholder="Enter Weight (kg)" formControlName="weight" type="number"></ion-input>
-    </ion-item>
-  
-    <ion-item>
-        <ion-label position="stacked">Repetitions</ion-label>
-        <ion-input placeholder="Enter Reps" formControlName="reps" type="number"></ion-input>
-    </ion-item>
-  
-    <ion-item>
-        <ion-label position="stacked">Date</ion-label>
-        <ion-input type="date" displayFormat="YYYY/MM/DD" formControlName="date"></ion-input>
-    </ion-item>
 
-    <ion-item>
-      <ion-label position="stacked">Location</ion-label>
-      <div class="wrapper">
-        <div class="input">
-          <ion-input type="text" formControlName="location" [placeholder]="myVariable" class="location"></ion-input>
+  <form [formGroup]="PersonalBestForm" (ngSubmit)="onSubmit()" class="ion-padding">
+
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="12" size-lg="6">
+        <div class="input-field-container">
+          <ion-label position="stacked"><h2 style="font-weight: bold">Exercise</h2></ion-label>
+          <ion-item class="input-field" lines="none">
+            <ion-select placeholder="Select Exercise" labelPlacement="stacked" formControlName="exercise">
+              <ion-select-option value="Bench Press">Bench Press</ion-select-option>
+              <ion-select-option value="Squats">Squats</ion-select-option>
+              <ion-select-option value="Deadlifts">Deadlifts</ion-select-option>
+              <ion-select-option value="Overhead Press">Overhead Press</ion-select-option>
+              <ion-select-option value="Barbell Rows">Barbell Rows</ion-select-option>
+              <ion-select-option value="Push ups">Push ups</ion-select-option>
+            </ion-select>
+          </ion-item>
         </div>
-        <div class="icon"> 
-          <ion-icon name="location-outline" (click)="openLocationModal()" class="location-icon"></ion-icon>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="12" size-xs="6" size-md="6" size-lg="6">
+        <div class="input-field-container">
+          <ion-label position="stacked"><h2 style="font-weight: bold">Weight(kg)</h2></ion-label>
+          <ion-item class="input-field" lines="none">
+            <ion-input placeholder="Enter Weight" formControlName="weight" type="number"></ion-input>
+          </ion-item>
         </div>
-      </div>
+      </ion-col>
+      <ion-col size="12" size-xs="6" size-md="6" size-lg="6">
+        <div class="input-field-container">
+          <ion-label position="stacked"><h2 style="font-weight: bold">Repetitions</h2></ion-label>
+          <ion-item class="input-field" lines="none" lines = "none">
+            <ion-input placeholder="Enter Reps" formControlName="reps" type="number"></ion-input>
+          </ion-item>
+        </div>
+      </ion-col>
+    </ion-row>
+
+
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="12" size-xs="6" size-md="6" size-lg="6">
+        <div class="input-field-container">
+          <ion-label position="stacked"><h2 style="font-weight: bold">Date</h2></ion-label>
+          <ion-item class="input-field" lines="none">
+            <ion-input max="{{getTodayDate()}}" type="date" displayFormat="YYYY/MM/DD" formControlName="date"></ion-input>
+          </ion-item>
+        </div>
+      </ion-col>
+      <ion-col size="12" size-xs="6" size-md="6" size-lg="6">
+        <div class="input-field-container">
+          <ion-label position="stacked"><h2 style="font-weight: bold">Location</h2></ion-label>
+          <ion-item class="input-field" lines="none" lines = "none">
+            <div class="wrapper">
+              <div class="input">
+                <ion-input type="text" formControlName="location" [placeholder]="myVariable" class="location"></ion-input>
+              </div>
+              <div class="icon">
+                <ion-icon name="location-outline" (click)="openLocationModal()" class="location-icon"></ion-icon>
+              </div>
+            </div>
+          </ion-item>
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="12" size-lg="6">
+        <div class="input-field-container">
+          <ion-label position="stacked"><h2 style="font-weight: bold">Notes</h2></ion-label>
+          <ion-item class="input-field" lines="none" lines = "none">
+<!--            <ion-input placeholder="Enter Notes" formControlName="notes" type="txt"></ion-input>-->
+            <ion-textarea rows="4" autogrow="true" type="text" placeholder="leave a note" formControlName="notes"></ion-textarea>
+          </ion-item>
+        </div>
+      </ion-col>
+    </ion-row>
+
+<!--    <ion-item lines="none">-->
+<!--      <ion-label position="stacked">Notes</ion-label>-->
+<!--      <ion-input placeholder="Enter Notes" formControlName="notes" type="txt"></ion-input>-->
+<!--    </ion-item>-->
+
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="12" size-lg="6">
+    <ion-item lines="none">
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-note color="danger" *ngIf="!isValid(PersonalBestForm.value)">
+              *All fields are required
+            </ion-note>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-note color="danger" *ngIf="!isrepsvalid()">
+              *Your Reps best is Lower than your previous best
+            </ion-note>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-note color="danger" *ngIf="!isweightvalid()">
+              *Your Weight best is Lower than your previous best
+            </ion-note>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+
     </ion-item>
-    
-    <ion-item>
-      <ion-label position="stacked">Notes</ion-label>
-      <ion-input placeholder="Enter Notes" formControlName="notes" type="txt"></ion-input>
-    </ion-item>
-    <ion-button type="submit" class="submit-button" expand="block" [disabled]="!isValid(PersonalBestForm.value)"><ion-icon slot="start" name="checkmark"></ion-icon>Submit</ion-button>
+        </ion-col>
+    </ion-row>
+    <ion-button type="submit" class="submit-button" expand="block" [disabled]="!(isValid(PersonalBestForm.value) && isrepsvalid() && isweightvalid())"><ion-icon slot="start" name="checkmark"></ion-icon>Submit</ion-button>
   </form>
+
 </ion-content>

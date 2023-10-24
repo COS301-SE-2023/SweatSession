@@ -17,4 +17,8 @@ export class ScheduleContentComponent  implements OnInit {
   viewSchedule(){
     this.isSlideShow=!this.isSlideShow;
   }
+
+  toDate() {
+    return new Date(`${this.schedule.date}T${this.schedule.time}`);
+  }
 }

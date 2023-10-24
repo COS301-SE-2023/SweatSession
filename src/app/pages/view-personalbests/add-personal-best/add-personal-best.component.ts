@@ -1,11 +1,11 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
-import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { IPersonalBest } from 'src/app/models';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ModalController } from '@ionic/angular';
+import { IPersonalBest } from 'src/app/models';
+import { NavigationService } from 'src/app/services';
 import { PersonalbestService } from 'src/app/services/personalbest/personalbest.service';
 import { GymsearchComponent } from '../../search/gymsearch/gymsearch.component';
-import { NavigationService } from 'src/app/services';
 
 @Component({
   selector: 'add-personal-best',
@@ -17,7 +17,9 @@ export class AddPersonalBestComponent implements OnInit {
   showForm: boolean = false;
   placeId: string;
   location: string;
-  myVariable: string = "Click on the location icon";
+  myVariable: string = "Select location";
+  repsBest:boolean = false;
+  weightBest: boolean = false;
   
   constructor(private modalController: ModalController,
         private formBuilder: FormBuilder,
@@ -62,7 +64,7 @@ export class AddPersonalBestComponent implements OnInit {
       notes: formData.notes,
     }
 
-    console.table(PersonalBest);
+    // console.table(PersonalBest);
     this.personalbestService.addPersonalbest(PersonalBest);
 
     this.PersonalBestForm.reset();
@@ -73,18 +75,69 @@ export class AddPersonalBestComponent implements OnInit {
   ngOnInit() 
   {
     this.PersonalBestForm = this.formBuilder.group({
-      exercise: null,
-      weight: null,
-      reps: null,
-      date: null,
-      location: null,
-      notes: null,
+      exercise: [null, [Validators.required]],
+      weight: [null, [Validators.required, Validators.min(0)]],
+      reps: [null, [Validators.required, Validators.min(0)]],
+      date: [null, [Validators.required]],
+      location: [null, [Validators.required]],
+      notes: [null, [Validators.required]],
     });
 
     this.PersonalBestForm.valueChanges.subscribe((formData) => {
+
+      this.personalbestService.getExercisesByName(formData.exercise).subscribe((data) => {
+        if(data.length == 0)
+        {
+          this.weightBest = true;
+          this.repsBest = true;
+        }
+        else
+        {
+            let largestweight = 0;
+            let largestreps = 0;
+
+          data.forEach((element) => {
+            if(element.reps! > largestreps)
+            {
+              largestreps = element.reps!;
+            }
+            if(element.weight! > largestweight)
+            {
+              largestweight = element.weight!;
+            }
+          });
+
+          if(largestreps <= formData.reps)
+          {
+            this.repsBest = true;
+          }
+          else
+          {
+            this.repsBest = false;
+          }
+
+          if(largestweight <= formData.weight)
+          {
+            this.weightBest = true;
+          }
+          else
+          {
+            this.weightBest = false;
+          }
+        }
+      });
+
       this.isValid(formData);
     });
 
+  }
+
+  isrepsvalid() {
+    return this.repsBest;
+  }
+
+  isweightvalid() {
+    return this.weightBest;
   }
 
   getTodayDate(): string {

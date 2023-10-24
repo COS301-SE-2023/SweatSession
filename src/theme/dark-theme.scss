@@ -1,0 +1,118 @@
+body[color-theme="dark"] {
+  --ion-background-color: #010a1b;
+  --ion-background-color-rgb: 0,0,0;
+
+  --ion-text-color: #4185ff;
+  --segment-button-color: #4185ff;
+  --ion-text-color-rgb: 255,255,255;
+
+  --ion-color-step-50: #001b34;
+  --ion-color-step-100: #172a43;
+  --ion-color-step-150: #2b3b52;
+  --ion-color-step-200: #3f4c62;
+  --ion-color-step-250: #525e72;
+  --ion-color-step-300: #667082;
+  --ion-color-step-350: #00081a;
+  --ion-color-step-400: #001b34;
+  --ion-color-step-450: #737373;
+  --ion-color-step-500: #808080;
+  --ion-color-step-550: var( --ion-text-color);
+  // --ion-color-step-550: #8c8c8c;
+  --ion-color-step-600: #4185FF;
+  --ion-color-step-650: #a6a6a6;
+  --ion-color-step-700: #b3b3b3;
+  --ion-color-step-750: #bfbfbf;
+  --ion-color-step-800: #cccccc;
+  --ion-color-step-850: var(--ion-text-color);
+  --ion-color-step-900: #e6e6e6;
+  --ion-color-step-950: #f2f2f2;
+
+  --ion-item-background: #010a1b;
+
+  --ion-card-background: #001b34;
+  --ion-toolbar-background: #001b34;
+  --ion-item-background: #001b34;
+  --ion-tab-bar-background: #001b34;
+  --ion-tab-bar-border-color: #010a1b;
+  --ion-tab-bar-color: #ffffff;
+  --ion-item-divider-color: #010a1b;
+  --ion-modal-background-color: #001b34;
+  --ion-fab-button-color: #010a1b;
+
+  --background-image: url('../assets/Asset 19.png');
+
+  ion-text, p {
+    color: var(--ion-text-color);
+  }
+
+  select{
+    background-color: #010a1b;
+  }
+
+  input[formControlName="sets"],
+  input[formControlName="reps"],
+  input[formControlName="weight"],
+  input[formControlName="duration"] {
+    background-color: #010a1b;
+    border-color: grey;
+    border-width: 2px;
+  }
+
+  ion-segment-button.ios {
+    --indicator-color: var(--segment-button-color);
+  }
+  
+  /* iOS styles */
+  ion-segment-button.ios {
+    --color-checked: white;
+  }
+
+  .group-options {
+    background-color: #001b34;
+    *, ion-icon {
+      color: #4185ff;
+    }
+  }
+
+  swiper-container::part(bullet-active) {
+    background-color: #4185ff;
+  }
+
+  swiper-container::part(bullet) {
+    background-color: #4185ff;
+  }
+
+  .message .message-content{
+    background-color: rgb(201, 201, 201);
+    color: black;
+    .smaller-item {
+      color: black;
+    }
+  }
+
+  .message-sent .message-content {
+    background-color: #BFDBEA;
+    color: black;
+  }
+
+  .message-timestamp {
+    color: rgb(46, 46, 46);
+  }
+
+  ion-checkbox {
+    --size: 32px;
+    // --checkbox-background-checked: var(--primary-color);
+  }
+  
+  ion-checkbox::part(container) {
+    border-radius: 50%;
+    // border: 2px solid var(--primary-color);
+  }
+
+  .schedule-content-card.md {
+    ion-icon{
+      color: #4185FF;
+    }
+  }
+  
+}

@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header class="ion-no-border">
   <ion-toolbar>
    <ion-buttons slot="start">
     <backbutton></backbutton>
@@ -14,7 +14,6 @@
     <ion-segment-button value="2">Completed</ion-segment-button>
     <ion-segment-button value="3">Incomplete</ion-segment-button>
   </ion-segment>
-
   <workout-schedule id="0" [hidden]="selectedSegment !== '0'"
   [categoryName]="''"  
   [schedules] = "schedules"

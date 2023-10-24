@@ -1,5 +1,5 @@
 <ion-menu contentId="main-content">
-  <ion-header>
+  <ion-header class="ion-no-border">
     <ion-toolbar class="toolbar">
       <ion-title>Menu</ion-title>
     </ion-toolbar>
@@ -16,14 +16,14 @@
     </ion-item> -->
    
 
-    <ion-item lines="none" class="clickable" (click)="userLogout()">
-      <ion-icon name="log-out-outline" class="menu-icons"></ion-icon>
-      <ion-label class="menu-label">
-        Logout
-      </ion-label>
-      <ion-icon name="chevron-forward-outline" slot="end" class="menu-icons"></ion-icon>
-    </ion-item>
 
+
+    <ion-item lines="none" class="clickable">
+      <ion-icon name="moon-outline" class="menu-icons"></ion-icon>
+      <ion-toggle class="menu-label" (ionChange)="onToggletheme($event)" [(ngModel)]="darkmode">
+        Dark Mode
+      </ion-toggle>
+    </ion-item>
     <ion-item lines="none" class="clickable" (click)="openhelpwebsite()">
       <ion-icon name="help-circle-outline" class="menu-icons"></ion-icon>
       <ion-label class="menu-label">
@@ -32,18 +32,25 @@
       <ion-icon name="chevron-forward-outline" slot="end" class="menu-icons"></ion-icon>
     </ion-item>
   </ion-content>
+  <ion-item lines="none" class="clickable" (click)="userLogout()">
+    <ion-icon name="log-out-outline" class="menu-icons"></ion-icon>
+    <ion-label class="menu-label">
+      Logout
+    </ion-label>
+    <ion-icon name="chevron-forward-outline" slot="end" class="menu-icons"></ion-icon>
+  </ion-item>
 </ion-menu>
 
 
 
-<ion-header>
+<ion-header class="ion-no-border">
   <ion-toolbar class="toolbar">
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>
       <ion-chip class="clickable" routerLink="/userprofile">
-        <ion-item style="margin-top: 2px">
+        <ion-item class="transparent-item" style="margin-top: 2px">
           <ion-avatar>
             <img src={{ProfilePicture$}}/> 
           </ion-avatar>
@@ -58,40 +65,47 @@
               routerLink="/workout-scheduling"
               class="clickable" slot="end">
     </ion-icon>
-    <ion-badge color="success" slot="end">{{noticeamount}}</ion-badge>
-    <ion-icon name="notifications-outline" 
-              routerLink="/notifications"
-              class="clickable" slot="end">
-    </ion-icon>
+
+    <div class="button-div" style="padding-right: 10px" slot="end">
+      <ion-badge color="dark">{{noticeamount}}</ion-badge>
+      <ion-icon name="notifications-outline"
+      routerLink="/notifications"
+
+      >
+      </ion-icon>
+    </div>
+
   </ion-toolbar>
 </ion-header>
 
 <ion-content id="main-content">
-  <ion-router-outlet> </ion-router-outlet>
+  <ion-router-outlet></ion-router-outlet>
 </ion-content>
   
 <ion-tabs>
   <ion-tab-bar slot="bottom">
     <ion-tab-button tab="dashboard">
-      <ion-icon name="home-outline"></ion-icon>
+      <ion-icon name="home" class="tab-icon"></ion-icon>
       Home
     </ion-tab-button>
     
     <ion-tab-button tab="messages">
-      <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
+      <ion-icon name="chatbubble-ellipses" class="tab-icon"></ion-icon>
       Messages
-    </ion-tab-button >
+    </ion-tab-button>
 
     <ion-tab-button tab="search">
-      <ion-icon name="search"></ion-icon>
+      <ion-icon name="search" class="tab-icon"></ion-icon>
       Search
     </ion-tab-button>
+    
     <ion-tab-button tab="leaderboard">
-      <ion-icon name="bar-chart-outline"></ion-icon>
+      <ion-icon name="bar-chart" class="tab-icon"></ion-icon>
       Boards
     </ion-tab-button>
+    
     <ion-tab-button tab="chatbot">
-      <ion-icon name="logo-ionitron"></ion-icon>
+      <ion-icon name="logo-ionitron" class="tab-icon"></ion-icon>
       Chatbot
     </ion-tab-button>
   </ion-tab-bar>

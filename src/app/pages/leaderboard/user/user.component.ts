@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
-import { StageOtheruserInfo, SubscribeToAuthState } from 'src/app/actions';
+import { StageOtheruserInfo } from 'src/app/actions';
 import { IProfileModel } from 'src/app/models';
 import { IBadges } from 'src/app/models/badges.model';
 import { BadgesApi } from 'src/app/states/badges/badges.api';

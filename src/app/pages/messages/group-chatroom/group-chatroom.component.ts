@@ -38,7 +38,9 @@ export class GroupChatroomComponent  implements OnInit {
     this.userId$.pipe(
       tap((response)=> this.currentUserId = response),
       switchMap(()=>this.group$),
-      tap((response)=> this.group = response),
+      tap((response)=> {
+        this.group = response;
+      } ),
       switchMap(()=>this.chats$),
       tap((response)=> this.chats = response),
     ).subscribe(()=>{

@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
-import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import {
   AuthGuard,
   redirectLoggedInTo,
   redirectUnauthorizedTo
 } from '@angular/fire/auth-guard';
+import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AddScheduleComponent } from './pages/workout-scheduling/add-schedule/add-schedule.component';
 
 const redirectLoggedOut = () => redirectUnauthorizedTo(['login']);
@@ -36,7 +36,7 @@ const routes: Routes = [
   },
   {
     path: 'splash',
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
     data: { authGuardPipe: redirectLoggedOut },
     loadChildren: () => import('./pages/splash/splash.module').then(m => m.SplashPageModule)
   },
@@ -224,6 +224,11 @@ const routes: Routes = [
     path: 'user-manual',
     loadChildren: () => import('./pages/user-manual/user-manual.module').then( m => m.UserManualPageModule)
   },
+  {
+    path: 'health-data-display',
+    loadChildren: () => import('./pages/health-data-display/health-data-display.module').then( m => m.HealthDataDisplayPageModule)
+  },
+
 
 
 ];

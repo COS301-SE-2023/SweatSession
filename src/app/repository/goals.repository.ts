@@ -1,15 +1,12 @@
 //import * as admin from 'firebase-admin';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
-import {IAddGOAL, IGOAL, IGOALS, IAddedGoal, ITASK} from 'src/app/models/fitnessgoals.model';
 import { Injectable } from '@angular/core';
-import {getCurrentUserId} from "../actions";
-import {from, map} from "rxjs";
-import {considerSettingUpAutocompletion} from "@angular/cli/src/utilities/completion";
-import {collection} from "@angular/fire/firestore";
+import { getAuth } from "@angular/fire/auth";
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { map } from "rxjs";
+import { IAddGOAL, IGOAL, ITASK } from 'src/app/models/fitnessgoals.model';
 import { AuthApi } from 'src/app/states/auth/auth.api';
-import {getAuth} from "@angular/fire/auth";
-import { PointsRepository } from './points.repository';
 import { NotifyService } from '../services/notify/notify.service';
+import { PointsRepository } from './points.repository';
 
 @Injectable({
     providedIn: 'root'

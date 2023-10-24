@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Select, Store } from '@ngxs/store';
+import { NavController } from '@ionic/angular';
+import { Store } from '@ngxs/store';
 //import { ReactiveFormsModule } from '@angular/forms';
-import {ContinueWithGoogleAction, Register} from 'src/app/actions/register';
+import { ContinueWithGoogleAction, Register } from 'src/app/actions/register';
 //import {RegisterPageModule} from './register.module'
 import { AlertController } from '@ionic/angular';
 
@@ -39,11 +39,20 @@ export class RegisterPage implements OnInit {
   async AcceptUserTerms() {
     const alert = await this.alertController.create({
       header: 'Terms and Conditions',
-      message: 'Some text for the terms and conditions that can be really long and stuff and Some text for the terms and conditions that can be really long and stuff and',
+      message: `By using this app, you agree to our Terms and Conditions:  
+
+- For personal use only. No modifications allowed. You may not distribute the app as your own.
+
+- We're not liable for any damages from app use.
+
+- Our app uses the Google Places API for Location Based Services.
+
+- You retain ownership of any content you submit or post on the app. However, by posting content, you grant us permission to display your information to other users.
+`,
       buttons: [
         {
           text: 'Decline',
-          role: 'cancel',
+          role: 'Cancel',
         },
         {
           text: 'Accept',

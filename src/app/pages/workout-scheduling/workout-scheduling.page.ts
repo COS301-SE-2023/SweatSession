@@ -1,13 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { PopoverController, LoadingController, NavController } from '@ionic/angular';
+import { Component } from '@angular/core';
+import { NavController, PopoverController } from '@ionic/angular';
 // import { PopoutAddScheduleComponent } from './popout-add-schedule/popout-add-schedule.component';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Select, Store } from '@ngxs/store';
+import { Observable } from 'rxjs';
+import { GetFriendsProfiles, GetWorkoutSchedules } from 'src/app/actions';
+import { IProfileModel, IWorkoutScheduleModel } from 'src/app/models';
 import { MessagesState, WorkoutSchedulingState } from 'src/app/states';
-import { Observable, tap } from 'rxjs';
-import { IProfileModel, ISearchTerms, IWorkoutScheduleModel } from 'src/app/models';
-import { GetChatFriends, GetFriendsProfiles, GetWorkoutSchedules } from 'src/app/actions';
-import { ActivatedRoute } from '@angular/router';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-workout-scheduling',
@@ -59,19 +58,20 @@ export class WorkoutSchedulingPage {
 
   filterSchedules() {
    this.completedSchedules = this.schedules.filter((schedule)=>
-      schedule.status! === "completed"
+      this.isCompleted(schedule)
     )
 
     this.uncompletedSchedules = this.schedules.filter((schedule)=>
-      schedule.status!.match('uncompleted')
+      this.isUncomplete(schedule)
     )
 
     this.inSessionSchedules = this.schedules.filter((schedule)=>
-      schedule.status!.match("inSession")
+      this.inSession(schedule)
     )
   }
 
   onSegmentChange(event: any) {
+    this.filterSchedules();
     this.selectedSegment = event.detail.value;
   }
 
@@ -80,5 +80,38 @@ export class WorkoutSchedulingPage {
     this.friends$.subscribe((response)=>{
       this.friends = response
     })
+  }
+
+  inSession(schedule: IWorkoutScheduleModel) {
+    const completeAt = schedule.completeAt!.toDate().getTime();
+    const scheduledTime = new Date(`${schedule.date}T${schedule.time}`).getTime();
+    const now = new Date().getTime();
+
+    if (now >= scheduledTime && now < completeAt) {
+      return true;
+    }
+    return false;
+  }
+
+  isCompleted(schedule: IWorkoutScheduleModel) {
+    const completeAt = schedule.completeAt!.toDate().getTime();
+    const scheduledTime = new Date(`${schedule.date}T${schedule.time}`).getTime();
+    const now = new Date().getTime();
+    let joinStatus = schedule.joined;
+    if(joinStatus && now >= completeAt ) {
+      return true;
+    }
+    return false;
+  }
+
+  isUncomplete(schedule: IWorkoutScheduleModel) {
+    const completeAt = schedule.completeAt!.toDate().getTime();
+    const scheduledTime = new Date(`${schedule.date}T${schedule.time}`).getTime();
+    const now = new Date().getTime();
+    let joinStatus = schedule.joined;
+    if(!joinStatus && (now < scheduledTime || now > completeAt) ) {
+      return true;
+    }
+    return false;
   }
 }

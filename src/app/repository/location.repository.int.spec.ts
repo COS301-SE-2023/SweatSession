@@ -1,8 +1,8 @@
 // // location.repository.spec.js
 
-import { LocationRepository } from './location.repository';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { LocationGymSession } from '../models/location.model';
+import { LocationRepository } from './location.repository';
 
 // import { AngularFirestore, CollectionReference, DocumentReference } from '@angular/fire/compat/firestore';
 // import {
@@ -13,7 +13,7 @@ import { LocationGymSession } from '../models/location.model';
 //   } from '@angular/fire/app';
 // import { AngularFireModule } from '@angular/fire/compat';
 // import { environment } from 'src/environments/environment';
-import { Timestamp } from 'firebase/firestore';// Firestore, getFirestore,
+import { Timestamp } from 'firebase/firestore'; // Firestore, getFirestore,
 // import { NgModule } from '@angular/core';
 // import { connectFirestoreEmulator, initializeFirestore } from '@angular/fire/firestore';
 // // import { getFirestore } from '@angular/fire/firestore';
@@ -133,51 +133,43 @@ import { Timestamp } from 'firebase/firestore';// Firestore, getFirestore,
 // // });
 
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { AppComponent } from 'src/app/app.component';
-import { Geolocation } from '@ionic-native/geolocation/ngx';
 
-import * as admin from 'firebase-admin';
 
+import { getAnalytics, provideAnalytics } from '@angular/fire/analytics';
 import {
-    initializeFirestore,
-    provideFirestore,
+    getApp,
+    initializeApp,
+    provideFirebaseApp
+} from '@angular/fire/app';
+import { connectAuthEmulator, getAuth, provideAuth } from '@angular/fire/auth';
+import {
+    Firestore,
     connectFirestoreEmulator,
     getFirestore,
-    Firestore,
+    initializeFirestore,
+    provideFirestore,
 } from '@angular/fire/firestore';
-import { environment } from 'src/environments/environment';
-import { provideAuth, getAuth, connectAuthEmulator } from '@angular/fire/auth';
 import {
     getRemoteConfig,
     provideRemoteConfig
 } from '@angular/fire/remote-config';
-import { getAnalytics, provideAnalytics } from '@angular/fire/analytics';
-import {
-    FirebaseOptions,
-    initializeApp,
-    provideFirebaseApp,
-    getApp
-} from '@angular/fire/app';
-import {
-    connectDatabaseEmulator,
-    getDatabase,
-    provideDatabase
-} from '@angular/fire/database';
+import { environment } from 'src/environments/environment';
 
-import { NgxsModule } from '@ngxs/store';
-import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
-import { AngularFirestore, AngularFirestoreModule } from '@angular/fire/compat/firestore';
-import { AngularFireModule } from '@angular/fire/compat';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { HttpClient, HttpHandler } from '@angular/common/http';
-import { HttpClientModule } from '@angular/common/http';
-import { ProfileService } from '../services';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFirestore, AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
+import { NgxsModule } from '@ngxs/store';
 import { of } from 'rxjs';
+import { ProfileService } from '../services';
 
 
 

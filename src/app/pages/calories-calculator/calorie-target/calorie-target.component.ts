@@ -1,13 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { getAuth } from "@angular/fire/auth";
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProfileService } from 'src/app/services/profile/profile.service';
-import {healthData} from "../../../models/exercise.model";
-import {SetProfileService} from "../../../services";
-import {HealthDataService} from "../../../services/healthDataService/healthData.service";
-import {wait} from "nx-cloud/lib/utilities/waiter";
-import {auth} from "firebase-admin";
-import {getAuth} from "@angular/fire/auth";
+import { healthData } from "../../../models/exercise.model";
+import { SetProfileService } from "../../../services";
+import { HealthDataService } from "../../../services/healthDataService/healthData.service";
 import { CalorieSummary } from '../calorie-summary';
 
 @Component({

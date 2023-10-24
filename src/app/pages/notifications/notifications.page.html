@@ -1,42 +1,59 @@
-<ion-header>
+<ion-header class="ion-no-border">
   <ion-toolbar>
     <ion-buttons slot="start">
       <backbutton></backbutton>
     </ion-buttons>
     <ion-title>Notifications</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button class="default-button" (click)="showGroupOptions()">
+        <ion-icon *ngIf="!showOptions" name="ellipsis-vertical"></ion-icon>
+        <ion-icon *ngIf="showOptions" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
+  <div class="group-options" *ngIf="showOptions">
+    <ion-list class="transparent-list">
+      <ion-item lines="none" class="transparent-item" (click)="clearNotifications()">
+        <ion-icon name="trash-outline" slot="start"></ion-icon>
+        <ion-label>Clear All</ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
 </ion-header>
-<br>
 
 
 <ion-content class="main" >
-  <div *ngIf="noticeamount > 0" class="flex-center3" style=" background: none; ">
-    <ion-button  color="light" size="default"  (click)="clearNotifications()">Clear All</ion-button>
-  </div>
-    
+
   <div *ngIf="noticeamount > 0" >
     <ion-card class="Mcard" *ngFor="let notice of noticeList2">
       <div class="right-align-label2">
-        <ion-button  fill="clear" class="delete-button" size="small" (click)="clearNotification(notice.id!)">
-          <ion-icon name="close-circle-outline"  ></ion-icon>
-        </ion-button>
+        <ion-buttons>
+          <ion-button class="delete-button" size="small" (click)="clearNotification(notice.id!)">
+            <ion-icon name="close-circle-outline"></ion-icon>
+          </ion-button>
+        </ion-buttons>
       </div>
-      <div style="display:flex ; align-items:center" >
+      <div style="align-items:center" >
+        <div style="display:flex " >
         <ion-avatar slot="start">
           <img alt="Silhouette of a person's head" src={{notice.profileurl}} />
         </ion-avatar>
-        <ion-grid>
+            <p ><b style="font-size: 18px;">&nbsp;{{notice.sendername}}</b></p>
+        </div>
+        
+            <ion-grid>
           <ion-row>
-            <ion-label class="Bcard2"><b style="font-size: 18px;">&nbsp;{{notice.sendername}}</b></ion-label>
-          </ion-row>  
-          <ion-label class="Bcard">&nbsp;{{notice.message}}</ion-label>
+            &nbsp;<p >{{notice.message}}</p>
+        </ion-row>
         </ion-grid>
+    
       </div>
       <div class="flex-center4" *ngIf="notice.message == 'Sent you a Friend Request!'">
         <ion-button color="success" size="small" (click)="addFriend(notice)">Accept</ion-button>
         <ion-button color="danger" size="small" (click)="clearNotification(notice.id!); rejectFriendRequest(notice , notice.senderid! , notice.senttoid!);">Reject</ion-button>
       </div>
-      <div class="flex-center4" *ngIf="notice.message == 'Added you to join a workout session'">
+      <div class="flex-center4" *ngIf="notice.message == 'Invited you to join a workout session'">
         <ion-button color="success" size="small" (click)="acceptToJoinWorkout(notice)">Accept</ion-button>
         <ion-button color="danger" size="small" (click)="rejectToJoinWorkou(notice);">Reject</ion-button>
       </div>

@@ -1,11 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { PopoverController } from '@ionic/angular';
 import { Select, Store } from '@ngxs/store';
+import { Observable } from 'rxjs';
 import { GetOtheruserSchedules, LoadSchedule } from 'src/app/actions';
 import { IWorkoutScheduleModel } from 'src/app/models';
-import { ScheduleContentComponent } from '../../workout-scheduling/schedulecontent/schedule-content.component';
 import { OtheruserState } from 'src/app/states';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'otheruser-schedules',

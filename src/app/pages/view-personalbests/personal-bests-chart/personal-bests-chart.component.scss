@@ -6,9 +6,7 @@ ion-item {
     position: absolute;
     top: 0;
     left: 100%;
-    background-color: lightgray;
     padding: 5px;
-    color: white;
     opacity: 0;
     transition: opacity 0.3s ease;
   }
@@ -26,7 +24,6 @@ ion-item {
 
   .chart-card {
     padding: 20px;
-    color: #0d0d0d;
   }
 
 .rounded-button
@@ -40,18 +37,15 @@ ion-radio {
   --border-radius: 4px;
   --inner-border-radius: 4px;
 
-  --color: #ddd;
-  --color-checked: #E63946;
+
 }
 
 ion-radio.ios {
   width: 20px;
   height: 20px;
 
-  border: 2px solid #ddd;
   border-radius: 4px;
 }
 
 .radio-checked.ios {
-  border-color: #E63946;
 }

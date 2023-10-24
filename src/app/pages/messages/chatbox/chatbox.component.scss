@@ -14,13 +14,17 @@
     max-width: 70%;
     padding: 8px;
     border-radius: 8px;
-    background-color: #e2e6e9;
-    color: #000;
 }
-  
-.message-sent .message-content {
-    background-color: #A8DADC; // #dcf8c6;
-}
+
+// .message .message-content
+// {
+//     background-color: rgba(255, 255, 255, 0.21);
+//     color: #ffffff;
+// }
+// .message-sent .message-content {
+//     background-color: #001f54; // #dcf8c6;
+//     color: #ffffff;
+// }
   
 .message-bubble {
     word-wrap: break-word;
@@ -30,7 +34,7 @@
     display: flex;
     justify-content: flex-end;
     font-size: 12px;
-    color: #999;
+    // color: #999;
     margin-top: 4px;
 }
 

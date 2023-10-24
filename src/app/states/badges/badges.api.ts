@@ -1,12 +1,10 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { doc, docData, Firestore } from '@angular/fire/firestore';
 import { IBadges } from 'src/app/models/badges.model';
-import { BadgesRepository } from 'src/app/repository/badges.repository'
 
+import { getAuth } from '@angular/fire/auth';
 import { NavController } from '@ionic/angular';
 import { AuthApi } from '../auth/auth.api';
-import { getAuth } from '@angular/fire/auth';
 // import { AuthState } from 'src/app/states/auth';
 
 @Injectable({

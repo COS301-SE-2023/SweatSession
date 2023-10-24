@@ -1,7 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
-import { GetOtheruserProfile, GetProfileAction, StageOtheruserInfo } from 'src/app/actions';
+import { DeleteGroupMessage, DeleteMessage, StageOtheruserInfo } from 'src/app/actions';
 import { IMessage, IProfileModel } from 'src/app/models';
 import { MessagesService } from 'src/app/services';
 import { OtheruserState } from 'src/app/states';
@@ -17,6 +17,7 @@ export class ChatboxComponent  implements OnInit {
   @Input() showUser: boolean = false;
   @Select(OtheruserState.returnOtherUserProfile) profile$: Observable<IProfileModel>;
   profile: IProfileModel = {};
+  isShowOptions = false;
 
   constructor(private store:Store, private service: MessagesService) { }
 
@@ -34,5 +35,22 @@ export class ChatboxComponent  implements OnInit {
 
   stageUser() {
     this.store.dispatch(new StageOtheruserInfo(this.profile))
+  }
+
+  showOptions() {
+    if(this.currentUserId == this.message.senderId)
+      this.isShowOptions = !this.isShowOptions;
+  }
+
+  deleteMessage() {
+    if(!this.showUser) {
+      this.store.dispatch(new DeleteMessage(this.message));
+    } else{
+      let request = {
+        groupId: this.message.receiverId!,
+        messageId: this.message.id!
+      }
+      this.store.dispatch(new DeleteGroupMessage(request))
+    }
   }
 }

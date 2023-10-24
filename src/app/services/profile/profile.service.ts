@@ -1,12 +1,9 @@
 import { Injectable } from '@angular/core';
-import firebase from 'firebase/compat/app';
 import 'firebase/compat/firestore';
-import { environment } from 'src/environments/environment';
-import { firestore } from 'firebase-functions/v1';
-import { ProfileRepository } from 'src/app/repository/profile.repository';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { IProfileModel , IGetProfile, IGotProfile,} from 'src/app/models';
+import { IGetProfile, IGotProfile, IProfileModel, } from 'src/app/models';
+import { ProfileRepository } from 'src/app/repository/profile.repository';
 
 @Injectable({
   providedIn: 'root'

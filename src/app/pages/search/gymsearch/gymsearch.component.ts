@@ -1,25 +1,25 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IonContent, IonModal, ModalController, ToastController } from '@ionic/angular';
-import { of, Observable, Subject, Subscription, firstValueFrom } from 'rxjs';
+import { of, Observable, Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map, startWith } from 'rxjs/operators';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { Geolocation as GeolocationCapacitor } from '@capacitor/geolocation';
 import { environment } from 'src/environments/environment';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { LocationsService } from 'src/app/services/location/location.services';
-import { getFunctions, httpsCallable } from '@angular/fire/functions';
-import { FriendsService } from 'src/app/services';
-import { getAuth, user } from '@angular/fire/auth';
-import { FriendsRepository } from 'src/app/repository';
+// import { getFunctions, httpsCallable } from '@angular/fire/functions';
+// import { FriendsService } from 'src/app/services';
+import { getAuth } from '@angular/fire/auth';
+import { BadgesRepository, FriendsRepository } from 'src/app/repository';
 import { FriendsState } from 'src/app/states';
 import { Select, Store } from '@ngxs/store';
 import { IFriendsModel } from 'src/app/models';
 import { GetFriendsAction } from 'src/app/actions';
 import { LocationRepository } from 'src/app/repository/location.repository';
 import { Timestamp } from 'firebase/firestore';
-import { take } from 'rxjs/operators';
+// import { take } from 'rxjs/operators';
 import { DatePipe } from '@angular/common';
-import { profile } from 'console';
+// import { profile } from 'console';
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 
 
@@ -35,7 +35,7 @@ export class GymsearchComponent implements OnInit {
    gymChosen: string;
    chosenPlaceId: string;
    friendsSubscription: Subscription;
-   constructor(private store: Store, private modalController: ModalController, private geolocation: Geolocation, private httpClient: HttpClient, private locationRepository: LocationRepository, private friendsRepository: FriendsRepository, private friendsState: FriendsState, private datePipe: DatePipe, private toastController: ToastController, private androidPermissions: AndroidPermissions) {
+   constructor(private store: Store, private modalController: ModalController, private geolocation: Geolocation, private httpClient: HttpClient, private locationRepository: LocationRepository, private friendsRepository: FriendsRepository, private friendsState: FriendsState, private datePipe: DatePipe, private toastController: ToastController, private badgesRepository: BadgesRepository, private androidPermissions: AndroidPermissions) {
       this.data.filter(item => item.name.includes(''));
    }
 
@@ -374,6 +374,14 @@ export class GymsearchComponent implements OnInit {
    }
 
    async joinSession(name: string, id: string, time: string, date: string, endTime: string, workoutName: string) {
+      const auth = getAuth();
+      this.currUserId = auth.currentUser?.uid;
+      if (this.currUserId != undefined) {
+         sessionStorage.setItem('currUserId', this.currUserId);
+      } else {
+         this.currUserId = sessionStorage.getItem('currUserId');
+      }
+      this.badgesRepository.addBadge(this.currUserId!, 5); //Dynamic Duo Badge
       console.log(name, id, time, date, endTime, workoutName);
       this.selectGym(name, id, time, date, endTime, workoutName);
       await this.modalController.dismiss({ selectedGym: name, placeId: id, selectedTime: time, selectedDate: date, selectedDuration: endTime, selectedWorkoutName: workoutName });
@@ -382,7 +390,7 @@ export class GymsearchComponent implements OnInit {
       // alert("gym with name: "+name+"place id: "+place_id);
    }
 
-   getCurrentLocation(): Promise<GeolocationCoordinates|null> {
+   getCurrentLocation(): Promise<GeolocationCoordinates | null> {
 
       return this.geolocation.getCurrentPosition().then((position: GeolocationPosition) => {
          const { latitude, longitude } = position.coords;
@@ -403,15 +411,15 @@ export class GymsearchComponent implements OnInit {
          return geolocationCoordinates;
       }).catch(error => {
          // User denied location access
-         if(error.code === error.PERMISSION_DENIED) {
-           // Dismiss modal
-           this.dismissModal(); 
-   
-           // Show message to user
-           this.locationToast
+         if (error.code === error.PERMISSION_DENIED) {
+            // Dismiss modal
+            this.dismissModal();
+
+            // Show message to user
+            this.locationToast
          }
          return null
-       });
+      });
    }
 
    getPhotoUrl(photoReference: string | undefined): string {
@@ -502,12 +510,12 @@ export class GymsearchComponent implements OnInit {
    async locationToast() {
 
       const toast = await this.toastController.create({
-        message: 'Please allow location access',
-        duration: 2000
+         message: 'Please allow location access',
+         duration: 2000
       });
       toast.present();
-    
-    }
+
+   }
 
    // onModalPresent(event: Event) {
 

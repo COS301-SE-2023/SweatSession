@@ -1,31 +1,24 @@
-import { LoadSchedule, AddSweatBuddies, AddSweatBuddy, RequestToJoinWorkout, SendAddRequest } from 'src/app/actions';
 import { Injectable } from "@angular/core";
-import { Action, State, StateContext, Store, Selector } from "@ngxs/store";
 import { Navigate } from "@ngxs/router-plugin";
-import { Router } from "@angular/router";
-import { AddWorkoutSchedule, 
-        GetWorkoutSchedules,
-        UpdateWorkoutAdded,
-        RemoveWorkoutSchedule,
-        UpdateWorkoutSchedule } 
-        from "src/app/actions";
-import { IAddSweatbuddy, IAddWorkoutSchedule, 
-        IAddedWorkoutSchedule,
-        IGetWorkoutSchedules,
-        IGotWorkoutSchedules,
-        IRemoveWorkoutSchedule,
-        IRemovedWorkoutSchedule,
-        IRequestToAdd,
-        IUpdateWorkoutSchedule,
-        IUpdatedWorkoutSchedule,
-        IWorkoutScheduleModel } 
-        from "src/app/models";
-import { NavigationService, WorkoutscheduleService } from "src/app/services";
-import { time } from "console";
-import { AuthApi } from '../auth/auth.api';
+import { Action, Selector, State, StateContext, Store } from "@ngxs/store";
 import { catchError, of, tap } from 'rxjs';
-import { forEach } from 'cypress/types/lodash';
+import {
+    AddSweatBuddies, AddSweatBuddy, AddWorkoutSchedule,
+    GetWorkoutSchedules, LoadSchedule, RemoveWorkoutSchedule, RequestToJoinWorkout, SendAddRequest, UpdateWorkoutAdded, UpdateWorkoutSchedule
+} from 'src/app/actions';
+import {
+    IAddWorkoutSchedule,
+    IGetWorkoutSchedules,
+    IGotWorkoutSchedules,
+    IRemoveWorkoutSchedule,
+    IRemovedWorkoutSchedule,
+    IRequestToAdd,
+    IUpdateWorkoutSchedule,
+    IWorkoutScheduleModel
+} from "src/app/models";
+import { NavigationService, WorkoutscheduleService } from "src/app/services";
 import { NoticeService } from 'src/app/services/notifications/notice.service';
+import { AuthApi } from '../auth/auth.api';
 
 export interface WorkoutSchedulingStateModel {
     schedules: IWorkoutScheduleModel[];

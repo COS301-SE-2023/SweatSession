@@ -3,11 +3,11 @@
 
 
 <ion-card>
-  <ion-item-divider  style="background-color: #A8DADC; padding: 2%; border-radius: 10px; text-align: center; font-size: 1.5rem;">
+  <ion-item-divider  style=" padding: 2%; border-radius: 10px; text-align: center; font-size: 1.5rem;">
     <ion-label>Progress Chart</ion-label>
   </ion-item-divider>
 
-  <ion-grid style=" color: #000000;">
+  <ion-grid >
     <ion-row class="ion-align-items-center ion-justify-content-center"> <!-- Center content vertically and horizontally -->
       <ion-col size="6">
         <ion-row class="ion-align-items-center ion-justify-content-center"> <!-- Center content vertically and horizontally -->
@@ -57,7 +57,7 @@
 
 </ion-card>
 
-  <ion-card class = "chart-card " style="background-color:#A8DADC; color: black; weight:10">
+  <ion-card class = "chart-card ">
   <ion-card-subtitle class = "max-height-card-content-chart">
     <canvas baseChart
             *ngIf="chartData.length > 0"
@@ -71,21 +71,21 @@
 </ion-card>
 
 <ion-card>
-      <ion-item-divider  style="background-color: #A8DADC; padding: 2%; border-radius: 10px; text-align: center; font-size: 1.5rem;">
+      <ion-item-divider  style=" padding: 2%; border-radius: 10px; text-align: center; font-size: 1.5rem;">
         <ion-label>Latest {{showExercise}} Bests</ion-label>
       </ion-item-divider>
 
               <ion-card-content class="max-height-card-content">
 
                   <ion-item-sliding *ngFor="let personalBest of personalBestsData">
-                    <ion-item clsss = "chart-card" style="background-color:#A8DADC; color: black; weight:10" lines="none">
+                    <ion-item clsss = "chart-card" style=" color: black; weight:10" lines="none">
 
                       <ion-label>
-                        <h2>{{ personalBest.location }}</h2>
+                        <h2 style="color: #3a7be0">{{ personalBest.location }}</h2>
                         <p>{{ personalBest.date | date:'dd-MMM-yyyy' }}</p>
                       </ion-label>
 
-                      <ion-note slot="end" color="black">
+                      <ion-note slot="end">
                         <p>Reps: {{ personalBest.reps }}</p>
                         <p>Weight: {{ personalBest.weight }}</p>
                       </ion-note>

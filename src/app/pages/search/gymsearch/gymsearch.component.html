@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header class="ion-no-border">
   <ion-toolbar>
    <ion-item lines="none">
     <ion-title style="margin-left: -7%">Select Location</ion-title>
@@ -68,11 +68,11 @@
           </ion-card-content>
 
           <ng-template #dontShowFriends>
-            <ion-card-header class="whiteText showFriendsOrNot" style="font-size: 16px; font-weight: 700; text-align: center;" (click)="toggleFriends(gym.place_id, gym.friendsLocationInfo, gymChosen)">
-              <!-- ; toggleFriends(gym.place_id) -->
-              {{showFriends[gym.place_id] ? 'Hide' : 'Show'}} Friends Workout Sessions
-            </ion-card-header>
-            <ion-icon name="chevron-down-outline"></ion-icon>
+            <ion-button class="whiteText showFriendsOrNot" style="font-size: 20px; font-weight: 700; text-align: center;" (click)="toggleFriends(gym.place_id, gym.friendsLocationInfo, gymChosen)" expand="block">
+              <!-- ; toggleFriends(gym.place_id){{showFriends[gym.place_id] ? 'Hide' : 'Show'}}  -->
+              Friends Workouts
+              <ion-icon name="chevron-down-outline"></ion-icon>
+            </ion-button>
             <ion-modal #modal trigger="open-modal" [initialBreakpoint]="0.75" [breakpoints]="[0, 0.25, 0.5, 0.75, 0.9]">
               <ng-container *ngIf="currentFriendsInfo && currentFriendsInfo[0] && currentFriendsInfo[0].length > 0; else noFriends">
                 <!-- <ion-card-header class="blackText friendsHeader">
@@ -92,7 +92,7 @@
                               <p class="dateAndTime">{{ formatDate(gymSession.date) }}</p>
                               <p class="dateAndTime" style="margin-top: -10px;">{{ gymSession.startTime }}-{{ formatTime(gymSession.endTime) }}</p>
                             </div>
-                            <ion-button style="--background: #A8DADC; --color: black; margin: auto; padding-right: 10px;" (click)="joinSession(gym.name, gym.place_id, gymSession.startTime, gymSession.date, gymSession.endTime, gymSession.workoutName)">Join <br>SweatSession</ion-button>
+                            <ion-button style="margin: auto; padding-right: 10px;" (click)="joinSession(gym.name, gym.place_id, gymSession.startTime, gymSession.date, gymSession.endTime, gymSession.workoutName)">Join <br>SweatSession</ion-button>
                           </div>
                         </li>
                       </ul>
@@ -110,20 +110,20 @@
             </ion-card-header>
           </ng-template>
         </ion-card-content>
-        <ion-card-content (click)="selectGym(gym.name, gym.place_id)" class="selectGym">
+        <ion-button (click)="selectGym(gym.name, gym.place_id)" class="selectGym" expand="block">
           Select Gym
-        </ion-card-content>
+        </ion-button>
     </ion-card>
   <!-- </ng-container> -->
   </ng-container>
 </ng-container>
 
 
-<ion-item class="nextPage" *ngIf="nextPageToken" (click)="nextPage()">
+<ion-button class="nextPage" *ngIf="nextPageToken" (click)="nextPage()">
   <!-- <div class="next-page-content"> =='' && gyms.results.length; else noResults--> 
     Next Page: <ion-icon name="arrow-forward"></ion-icon> 
   <!-- </div> -->
-</ion-item>
+</ion-button>
 <ng-template #noResults>
   No more results. Please Reload.
 </ng-template> 

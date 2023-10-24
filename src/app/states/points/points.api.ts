@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { doc, docData, Firestore } from '@angular/fire/firestore';
 import { IPoints } from 'src/app/models/points.model';
 
+import { getAuth } from '@angular/fire/auth';
 import { NavController } from '@ionic/angular';
 import { AuthApi } from '../auth/auth.api';
-import { getAuth } from '@angular/fire/auth';
 
 @Injectable({
   providedIn: 'root'

@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { map, Observable, of } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { IBadges } from 'src/app/models/badges.model';
 import { AuthApi } from 'src/app/states/auth/auth.api';
 // import { BadgesService } from 'src/app/services/badges/badges.service';
-import { SubscribeToOtherUserBadges } from 'src/app/actions/otheruserbadges.actions';
 import { Select, Store } from '@ngxs/store';
+import { SubscribeToOtherUserBadges } from 'src/app/actions/otheruserbadges.actions';
 import { OtherUserBadgesState } from 'src/app/states/otheruserbadges/otheruserbadges.state';
 
 @Component({
@@ -51,17 +51,19 @@ export class OtherUserBadgesPage implements OnInit {
     received:false
   },{
     header:"Dynamic Duo",
-    receivedDescription:"Congratulations! You have completed 50 workout sessions with a friend",
-    notReceivedDescription:"Complete 50 workout sessions with a friend to earn this badge",
-    imageName:"assets/badges/dynamicduo.png",
-    received:false
-  },{
-    header:"Push-Up Pro",
-    receivedDescription:"Congratulations! You did 100 push-ups in a day",
-    notReceivedDescription:"Do 100 push-ups in a day to earn this badge",
-    imageName:"assets/badges/pushupspro.png",
-    received:false
-  },{
+      receivedDescription:"Congratulations! You have joined a workout session with a friend",
+      notReceivedDescription:"Join a workout session with a friend to earn this badge",
+      imageName:"assets/badges/dynamicduo.png",
+      received:false
+  }
+  // ,{
+  //   header:"Push-Up Pro",
+  //   receivedDescription:"Congratulations! You did 100 push-ups in a day",
+  //   notReceivedDescription:"Do 100 push-ups in a day to earn this badge",
+  //   imageName:"assets/badges/pushupspro.png",
+  //   received:false
+  // }
+  ,{
     header:"Active Adventurer",
     receivedDescription:"Congratulations! You did a workout session at 5 gyms",
     notReceivedDescription:"Do a workout session at 5 gyms to earn this badge",

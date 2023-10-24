@@ -1,12 +1,12 @@
 import { Injectable } from "@angular/core";
-import { Action, Selector, State, StateContext, Store } from "@ngxs/store";
-import { IMessage, IChatFriend, IGetChatFriends, IGetMessages, ISendMessage, IDeleteMessage, IProfileModel, IFriendsModel, IGroup, IGetGroups, IAddChatGroup, IJoinGroup, IRemoveChatGroup, IExitChatGroup, IGetGroup } from "src/app/models";
-import { DeleteMessage, GetMessages, SendMessage, GetChatFriends, StageChatFriend, GetFriendsProfiles, GetChatFriend, RemoveChatFriendSession, SendGroupMessage, RemoveChatGroupSession, AddChatGroup, JoinChatGroup, RemoveChatGroup, ExitChatGroup, StageChatGroup, GetGroupMessages, GetGroup, GetUserGroups, GetGroups, GetUser, StopChatFriendsLoading, RemoveChatGroupUser } from 'src/app/actions';
-import { AuthApi } from "../auth";
-import { FriendsService, MessagesService, NavigationService, OtheruserService } from "src/app/services";
-import { delay, of, switchMap, tap } from "rxjs";
 import { Navigate } from "@ngxs/router-plugin";
+import { Action, Selector, State, StateContext, Store } from "@ngxs/store";
+import { tap } from "rxjs";
+import { AddChatGroup, AddGroupAdmin, DeleteGroupMessage, DeleteMessage, EditGroup, ExitChatGroup, GetChatFriend, GetChatFriends, GetFriendsProfiles, GetGroup, GetGroupMessages, GetGroups, GetMessages, GetUser, GetUserGroups, JoinChatGroup, RemoveChatFriendSession, RemoveChatGroup, RemoveChatGroupSession, RemoveChatGroupUser, SendGroupMessage, SendMessage, StageChatFriend, StageChatGroup, StopChatFriendsLoading } from 'src/app/actions';
+import { IAddChatGroup, IChatFriend, IDeleteMessage, IExitChatGroup, IFriendsModel, IGetChatFriends, IGetGroups, IGetMessages, IGroup, IJoinGroup, IMessage, IProfileModel, IRemoveChatGroup, ISendMessage } from "src/app/models";
+import { FriendsService, MessagesService, NavigationService, OtheruserService } from "src/app/services";
 import { GroupService } from "src/app/services/group/group.service";
+import { AuthApi } from "../auth";
 
 export interface MessagesStateModel {
     chats?: IMessage[];
@@ -160,6 +160,17 @@ export class MessagesState {
         }
     }
 
+    @Action(DeleteGroupMessage)
+    async deleteGroupMessage(ctx: StateContext<MessagesStateModel>, {payload}: DeleteGroupMessage) {
+        const currentUserId = await this.authApi.getCurrentUserId();
+        if(currentUserId) {
+            payload.userId = currentUserId;
+            await this.service.deleteGroupMessage(payload);
+        }else {
+            ctx.dispatch(new Navigate(['home/dashboard']));
+        }
+    }
+
     @Action(StageChatFriend)
     async stageChatFriend(ctx: StateContext<MessagesStateModel>, {payload}: StageChatFriend) {
         sessionStorage.setItem('chatFriend', payload);
@@ -292,7 +303,6 @@ export class MessagesState {
                 group: payload
             }
             this.service.addChatGroup(request);
-            this.navigation.back();
         }
     }
 
@@ -329,7 +339,6 @@ export class MessagesState {
             }
 
             this.service.removeChatGroup(request);
-            console.log('remove here...')
         }
     }
 
@@ -348,9 +357,8 @@ export class MessagesState {
     @Action(GetGroup)
     async getGroup(ctx: StateContext<MessagesStateModel>) {
         const group: IGroup = JSON.parse(sessionStorage.getItem("chatGroup")!);
-        (await this.groupService.getGroup(group.id!)).pipe(
-            tap((response)=>{
-                console.table(response);
+        return (await this.groupService.getGroup(group.id!)).pipe(
+            tap(async (response)=>{
                 ctx.patchState({
                     chatGroup: response
                 })
@@ -367,7 +375,25 @@ export class MessagesState {
         const currentUserId = await this.authApi.getCurrentUserId()
         if(currentUserId) {
             payload.adminId = currentUserId;
-            this.service.removeChatGroupUser(payload);
+            await this.service.removeChatGroupUser(payload);
+        }
+    }
+
+    @Action(AddGroupAdmin)
+    async addAdmin(ctx: StateContext<MessagesStateModel>, {payload}: AddGroupAdmin) {
+        const currentUserId = await this.authApi.getCurrentUserId()
+        if(currentUserId) {
+            payload.userId = currentUserId;
+            await this.groupService.addAdmin(payload);
+        }
+    }
+
+    @Action(EditGroup)
+    async editGroupProfile(ctx: StateContext<MessagesStateModel>, {payload}: EditGroup) {
+        const currentUserId = await this.authApi.getCurrentUserId()
+        if(currentUserId) {
+            payload.userId = currentUserId;
+            await this.groupService.editGroupProfile(payload);
         }
     }
 

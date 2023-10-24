@@ -1,4 +1,3 @@
-import { IWorkoutScheduleModel } from "./workoutSchedule.model";
 
 export interface ISearchTerms{
     searchQuery?: string;

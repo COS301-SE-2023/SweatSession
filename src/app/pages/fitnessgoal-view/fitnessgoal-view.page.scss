@@ -14,15 +14,12 @@ ion-checkbox::part(container) {
 
 
 #checklist {
-  --background: #fff;
-  --text: #414856;
   --check: #4f29f0;
   --disabled: #c3c8de;
   --width: 100px;
   --height: 180px;
   --border-radius: 10px;
   background: var(--background);
-  width: var(--width);
   height: var(--height);
   border-radius: var(--border-radius);
   position: relative;
@@ -72,7 +69,6 @@ ion-checkbox::part(container) {
   -moz-appearance: none;
   position: relative;
   height: 15px;
-  width: 15px;
   outline: none;
   border: 0;
   margin: 0 15px 0 0;

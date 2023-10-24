@@ -1,5 +1,49 @@
-ion-item {
-    ion-label {
-      font-weight: bold;
-    }
+.outer-grid {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.title-container {
+  text-align: center;
+  .title {
+      font-weight: bolder;
+  }
+}
+
+ion-row {
+  margin-top: 20px;
+}
+
+.group-profile-container {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+
+  ion-avatar {
+      height: 200px;
+      width: 200px;
+  }
+}
+
+.group-profile-inner-container {
+  position: relative;
+  display: inline-block;
+}
+
+.select-image-icon {
+  position: absolute;
+  top: 50%;
+  right: -20px;
+  font-size: 2rem;
+  color: #007bff;
+  cursor: pointer;
+}
+
+.input-field {
+  margin-top: 10px;
+}
+
+ion-row {
+  margin-bottom: 20px;
 }

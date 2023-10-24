@@ -1,7 +1,7 @@
 <div class="outer-container">
   <ion-content>
     <div class="inner-container">
-      <ion-header>
+      <ion-header class="ion-no-border">
         <ion-segment (ionChange)="onSegmentChange($event)" value="chats">
           <ion-segment-button value="chats">Chats</ion-segment-button>
           <ion-segment-button value="groups">Groups</ion-segment-button>
@@ -20,15 +20,21 @@
                   <ion-label class="user-name-label">
                     <h2 class="user-name">{{ chatFriend.user.displayName! }}</h2>
                   </ion-label>
-                  <p class="timestamp">{{ chatFriend.lastChat!.date?.toDate() | date:'MMM d, hh:mm a' }}</p>
+                  <p class="timestamp" *ngIf="chatFriend?.lastChat?.date">
+                    {{ chatFriend?.lastChat?.date?.toDate() | date:'MMM d, hh:mm a' }}
+                  </p>
                 </div>
-                <p class="last-message">{{"~ " + chatFriend.lastChat!.text }}</p>
+                <p class="last-message" *ngIf="chatFriend?.lastChat?.date; else defaultTimestamp">{{"~ " + chatFriend.lastChat?.text }}</p>
+                <ng-template #defaultTimestamp>
+                  <p class="default-message">{{"~ Last message deleted..."}}</p>
+                </ng-template>
               </ion-label>
             </ion-item>
 
             <div class="zero-content-container" *ngIf="chatFriends.length === 0">
               <div class="inner-zero-content-wrapper">
-                <ion-icon class="large-icon" name="person"></ion-icon><br>
+                <!-- <ion-icon class="large-icon" name="person"></ion-icon> -->
+                <ion-icon name="chatbubbles" class="large-icon"></ion-icon><br>
                 <ion-text>
                   You don't have any chats at the moment.
                 </ion-text>
@@ -86,7 +92,8 @@
   <ion-modal #modal trigger="open-modal" [initialBreakpoint]="0.5" [breakpoints]="[0, 0.25, 0.5, 0.75]">
     <ng-template>
       <ion-content>
-        <ion-searchbar placeholder="Search" (click)="modal.setCurrentBreakpoint(0.75)"></ion-searchbar>
+        <!-- <ion-searchbar placeholder="Search" (click)="modal.setCurrentBreakpoint(0.75)"></ion-searchbar> -->
+        <h2 class="ion-text-center">Your Sweat Buddies</h2>
         <ion-list class="friends-list">
           <ion-item  *ngFor="let friend of friends" lines="none" (click)="stageUser(friend,modal)">
             <ion-avatar slot="start">

@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ModalController, ToastController } from '@ionic/angular';
 import { Store } from '@ngxs/store';
-import { AddSweatBuddies, AddSweatBuddy } from 'src/app/actions';
-import { IProfileModel, IWorkoutScheduleModel } from 'src/app/models';
+import { AddSweatBuddies } from 'src/app/actions';
+import { IWorkoutScheduleModel } from 'src/app/models';
 
 @Component({
   selector: 'app-friends-list',
