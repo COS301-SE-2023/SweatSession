@@ -59,7 +59,7 @@ export class HomePage implements OnInit {
   }
 
   openhelpwebsite() {
-    window.location.href = 'https://drive.google.com/file/d/1QVv3vk6EiRsO7b123LUXclGO4n4Fs5ML/view?usp=sharing';
+    window.location.href = 'https://drive.google.com/file/d/1FO49XGFE1FJEOyHoBlKEkKIhqO7e71mr/view?usp=sharing';
   }
 
   // async displayProfile() {
