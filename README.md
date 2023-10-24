@@ -29,7 +29,7 @@
 
 ## Technologies
 
-[![Angular][Angular.io]][Angular-url] [![Node][Node.js]][Node-url] [![TypeScript][typescript-badge]][typescript-url] [![JavaScript][javascript-badge]][javascript-url] [![Ionic][ionic-badge]][ionic-url] [![Firestore][firestore-badge]][firestore-url] [![Git][git-badge]][git-url] [![Jest][jest-badge]][jest-url] [![Cypress][cypress-badge]][cypress-url] [![GitHub Actions][github-actions-badge]][github-actions-url] [![OpenAI API Badge][openai-badge]][openai-url] [![GitHub Places API][google-places-badge]][google-places-url]
+[![Angular][Angular.io]][Angular-url] [![TypeScript][typescript-badge]][typescript-url] [![JavaScript][javascript-badge]][javascript-url] [![Ionic][ionic-badge]][ionic-url] [![Firestore][firestore-badge]][firestore-url] [![Git][git-badge]][git-url] [![Jest][jest-badge]][jest-url] [![Cypress][cypress-badge]][cypress-url] [![GitHub Actions][github-actions-badge]][github-actions-url] [![OpenAI API Badge][openai-badge]][openai-url] [![GitHub Places API][google-places-badge]][google-places-url]
 
 ## Contact Us
 [![Email](https://img.shields.io/badge/Email-the.synapse.solution%40gmail.com-brightgreen)](mailto:the.synapse.solution@gmail.com)
