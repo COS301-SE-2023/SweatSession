@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {FitnessgoalService, NavigationService} from "../../services";
-import {forEach} from "@angular-devkit/schematics";
-import {ITASK,IGOAL} from "../../models";
-import { AuthApi } from 'src/app/states/auth/auth.api';
-import {getAuth} from "@angular/fire/auth";
-import { getCurrentUserId } from 'src/app/actions';
+import { getAuth } from "@angular/fire/auth";
 import { Router } from '@angular/router';
 import { NoticeService } from 'src/app/services/notifications/notice.service';
+import { AuthApi } from 'src/app/states/auth/auth.api';
+import { IGOAL, ITASK } from "../../models";
+import { FitnessgoalService, NavigationService } from "../../services";
 
 
 @Component({

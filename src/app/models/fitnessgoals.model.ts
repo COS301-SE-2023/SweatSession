@@ -1,5 +1,3 @@
-import {IWorkoutScheduleModel} from "./workoutSchedule.model";
-import {FormGroup} from "@angular/forms";
 
 
 export interface IGOAL {

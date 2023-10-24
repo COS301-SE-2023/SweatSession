@@ -1,16 +1,11 @@
-import { ModalController, Platform } from '@ionic/angular';
-import { OnDestroy } from '@angular/core';
-import { Component, OnInit, AfterViewInit, Input, ViewChild, ElementRef } from '@angular/core';
-import * as THREE from "three";
-import  MouseMeshInteraction  from 'src/app/services/exercise-explorer/exercise-explorer.service';
-import { GLTFLoader, GLTF } from 'three/examples/jsm/loaders/GLTFLoader.js';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
-import { CSS2DRenderer } from 'three/examples/jsm/renderers/CSS2DRenderer.js';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { AlertController } from '@ionic/angular';
-import {BehaviorSubject} from "rxjs";
-import {ViewExerciseComponent} from "./view-exercise/view-exercise.component";
+import { AlertController, ModalController, Platform } from '@ionic/angular';
 import { Store } from '@ngxs/store';
+import * as THREE from "three";
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import { ViewExerciseComponent } from "./view-exercise/view-exercise.component";
 
 @Component({
   selector: 'app-exercise-explorer',

@@ -1,13 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { PopoverController, LoadingController, NavController } from '@ionic/angular';
+import { Component } from '@angular/core';
+import { NavController, PopoverController } from '@ionic/angular';
 // import { PopoutAddScheduleComponent } from './popout-add-schedule/popout-add-schedule.component';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Select, Store } from '@ngxs/store';
+import { Observable } from 'rxjs';
+import { GetFriendsProfiles, GetWorkoutSchedules } from 'src/app/actions';
+import { IProfileModel, IWorkoutScheduleModel } from 'src/app/models';
 import { MessagesState, WorkoutSchedulingState } from 'src/app/states';
-import { Observable, tap } from 'rxjs';
-import { IProfileModel, ISearchTerms, IWorkoutScheduleModel } from 'src/app/models';
-import { GetChatFriends, GetFriendsProfiles, GetWorkoutSchedules } from 'src/app/actions';
-import { ActivatedRoute } from '@angular/router';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-workout-scheduling',

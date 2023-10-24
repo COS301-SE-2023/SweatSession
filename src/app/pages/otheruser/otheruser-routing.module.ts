@@ -1,9 +1,7 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 
 import { OtheruserPage } from './otheruser.page';
-import { FriendsComponent } from './friends/friends.component';
-import { SchedulesComponent } from './schedules/schedules.component';
 
 const routes: Routes = [
   {

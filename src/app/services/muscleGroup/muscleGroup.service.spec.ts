@@ -1,5 +1,4 @@
 import { MuscleGroupService } from './muscleGroup.service';
-import { MUSCLE_GROUP_DATA } from '../../models/muscleGroup.model';
 
 
 describe('MuscleGroupService', () => {

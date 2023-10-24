@@ -1,55 +1,52 @@
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { Geolocation } from '@ionic-native/geolocation/ngx';
 
-import * as admin from 'firebase-admin';
-import {
-  initializeFirestore,
-  provideFirestore,
-  connectFirestoreEmulator,
-  getFirestore,
-  Firestore,
-} from '@angular/fire/firestore';
-import { environment } from '../environments/environment';
-import { provideAuth, getAuth, connectAuthEmulator } from '@angular/fire/auth';
-import {
-  getRemoteConfig,
-  provideRemoteConfig
-} from '@angular/fire/remote-config';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { getAnalytics, provideAnalytics } from '@angular/fire/analytics';
 import {
-  FirebaseOptions,
+  getApp,
   initializeApp,
-  provideFirebaseApp,
-  getApp
+  provideFirebaseApp
 } from '@angular/fire/app';
+import { connectAuthEmulator, getAuth, provideAuth } from '@angular/fire/auth';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFirestore, AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import {
   connectDatabaseEmulator,
   getDatabase,
   provideDatabase
 } from '@angular/fire/database';
 import {
-  connectStorageEmulator,
-  getStorage,
-  provideStorage
-} from '@angular/fire/storage';
+  Firestore,
+  connectFirestoreEmulator,
+  getFirestore,
+  initializeFirestore,
+  provideFirestore,
+} from '@angular/fire/firestore';
 import {
   connectFunctionsEmulator,
   getFunctions,
   provideFunctions
 } from '@angular/fire/functions';
-import { NgxsModule } from '@ngxs/store';
+import {
+  getRemoteConfig,
+  provideRemoteConfig
+} from '@angular/fire/remote-config';
+import {
+  connectStorageEmulator,
+  getStorage,
+  provideStorage
+} from '@angular/fire/storage';
 import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
-import { AngularFirestore, AngularFirestoreModule } from '@angular/fire/compat/firestore';
-import { AngularFireModule } from '@angular/fire/compat';
-import { CUSTOM_ELEMENTS_SCHEMA, isDevMode } from '@angular/core';
-import { HttpClient, HttpHandler } from '@angular/common/http';
-import { HttpClientModule } from '@angular/common/http';
+import { NgxsModule } from '@ngxs/store';
+import { environment } from '../environments/environment';
 // import { ServiceWorkerModule } from '@angular/service-worker';
 
  

@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
+import { IAddGOAL, ITASK } from 'src/app/models';
 import { goalsRepository } from '../../repository';
-import {IAddGOAL, IGOAL, IGOALS, ITASK} from 'src/app/models';
-import {Selector} from "@ngxs/store";
-import {map} from "rxjs";
 
 @Injectable({
     providedIn: 'root'

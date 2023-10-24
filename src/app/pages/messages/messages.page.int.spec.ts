@@ -1,11 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule, NavController } from '@ionic/angular';
-import { of } from 'rxjs';
-import { MessagesPage } from './messages.page';
-import { MessagesState } from 'src/app/states';
 import { NgxsModule, Store } from '@ngxs/store';
-import { GetChatFriends, GetFriendsProfiles, GetUserGroups, StageChatFriend, StageChatGroup } from 'src/app/actions';
+import { of } from 'rxjs';
+import { StageChatFriend, StageChatGroup } from 'src/app/actions';
 import { IChatFriend, IGroup, IProfileModel } from 'src/app/models';
+import { MessagesPage } from './messages.page';
 
 describe('MessagesPage', () => {
   let component: MessagesPage;

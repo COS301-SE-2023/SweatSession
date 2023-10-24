@@ -1,4 +1,4 @@
-import {IGOAL,IGOALS} from "../../models/fitnessgoals.model";
+import { IGOAL } from "../../models/fitnessgoals.model";
 
 export class AddGoalAction {
     static readonly type = "[fitnessgoals] Add Goal";

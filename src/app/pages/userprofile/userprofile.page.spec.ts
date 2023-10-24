@@ -1,11 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NavController } from '@ionic/angular';
 import { Store } from '@ngxs/store';
-import { of } from 'rxjs';
-import { UserprofilePage } from './userprofile.page';
-import { FriendsState } from 'src/app/states';
-import { AuthApi } from 'src/app/states/auth/auth.api';
 import { SetProfileService } from 'src/app/services';
+import { AuthApi } from 'src/app/states/auth/auth.api';
+import { UserprofilePage } from './userprofile.page';
 
 describe('UserprofilePage', () => {
   let component: UserprofilePage;

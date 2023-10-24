@@ -1,8 +1,8 @@
 //import * as admin from 'firebase-admin';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
-import { IBadges } from 'src/app/models/badges.model';
 import { Injectable } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import firebase from 'firebase/compat/app';
+import { IBadges } from 'src/app/models/badges.model';
 
 
 @Injectable({

@@ -1,17 +1,18 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, QuerySnapshot} from '@angular/fire/compat/firestore';
+import { AngularFirestore, QuerySnapshot } from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
-import { IAddFriend,
-     IAddedFriend,
-     IFriendRequest,
-     IFriendsModel, 
-     IGetFriends, 
-     IGotFriends, 
-     IProfileModel, 
-     IRemoveFriend, 
-     IRemovedFriend} 
-     from '../models';
+import { map } from 'rxjs/operators';
+import {
+  IAddFriend,
+  IAddedFriend,
+  IFriendRequest,
+  IFriendsModel,
+  IGetFriends,
+  IGotFriends,
+  IProfileModel,
+  IRemoveFriend,
+  IRemovedFriend
+} from '../models';
 import { BadgesRepository } from './badges.repository';
 import { OtheruserRepository } from './otheruser.repository';
 

@@ -1,12 +1,11 @@
-import { time } from 'console';
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { IonContent } from '@ionic/angular';
 import { Select, Store } from '@ngxs/store';
 import { Timestamp } from 'firebase/firestore';
-import { Observable, tap, switchMap } from 'rxjs';
+import { Observable, switchMap, tap } from 'rxjs';
 import { GetChatFriend, GetMessages, RemoveChatFriendSession, SendMessage, StageOtheruserInfo, SubscribeToAuthState } from 'src/app/actions';
 import { IMessage, IProfileModel } from 'src/app/models';
 import { AuthState, MessagesState } from 'src/app/states';
-import { IonContent } from '@ionic/angular';
 
 @Component({
   selector: 'chatroom',

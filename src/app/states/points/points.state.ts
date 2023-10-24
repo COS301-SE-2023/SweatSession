@@ -1,10 +1,10 @@
 import { Injectable } from "@angular/core";
-import { State, Store, Selector, Action, StateContext } from "@ngxs/store";
+import { Action, Selector, State, StateContext, Store } from "@ngxs/store";
 import produce from "immer";
+import { tap } from 'rxjs';
 import { SetPoints, SubscribeToPoints } from "src/app/actions/points.actions";
 import { IPoints } from "src/app/models/points.model";
 import { PointsApi } from "./points.api";
-import { Observable, tap } from 'rxjs';
 
 
 export interface PointsStateModel {

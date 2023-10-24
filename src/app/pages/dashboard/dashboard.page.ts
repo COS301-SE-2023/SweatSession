@@ -1,16 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Select, Store } from '@ngxs/store';
-import { ChartDataset, ChartOptions, ChartType } from 'chart.js';
-import { Observable, tap } from 'rxjs';
-import { GetWorkoutSchedules } from 'src/app/actions';
-import { IGetWorkoutSchedules } from 'src/app/models';
-import { IGotWorkoutSchedules } from 'src/app/models';
-import { IBadges } from 'src/app/models/badges.model';
-import { PointsApi, WorkoutSchedulingState } from 'src/app/states';
-import { register } from 'swiper/element/bundle';
-import {WorkoutscheduleService} from 'src/app/services/workoutschedule/workoutschedule.service';
+import { Store } from '@ngxs/store';
 import { getAuth } from 'firebase/auth';
+import { tap } from 'rxjs';
+import { IGetWorkoutSchedules, IGotWorkoutSchedules } from 'src/app/models';
 import { NoticeService } from 'src/app/services/notifications/notice.service';
+import { WorkoutscheduleService } from 'src/app/services/workoutschedule/workoutschedule.service';
+import { PointsApi } from 'src/app/states';
+import { register } from 'swiper/element/bundle';
 
 register();
 

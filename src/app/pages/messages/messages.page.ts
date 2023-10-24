@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { Select, Store } from '@ngxs/store';
-import { Observable, forkJoin, switchMap, tap } from 'rxjs';
-import { GetChatFriends, GetFriendsProfiles, GetUserGroups, StageChatFriend, StageChatGroup, StopChatFriendsLoading } from 'src/app/actions';
+import { Observable } from 'rxjs';
+import { GetChatFriends, GetFriendsProfiles, GetUserGroups, StageChatFriend, StageChatGroup } from 'src/app/actions';
 import { IChatFriend, IGroup, IProfileModel } from 'src/app/models';
 import { MessagesState } from 'src/app/states';
 

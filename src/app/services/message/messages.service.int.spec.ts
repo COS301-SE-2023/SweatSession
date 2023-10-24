@@ -1,20 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
-import { MessagesService } from './messages.service';
-import { MessageRepository } from 'src/app/repository';
 import {
-  IAddChatGroup,
-  IDeleteMessage,
-  IExitChatGroup,
   IGetChatFriends,
-  IGetGroups,
-  IGetMessages,
-  IJoinGroup,
   IMessage,
   IProfileModel,
-  IRemoveChatGroup,
-  ISendMessage,
+  ISendMessage
 } from 'src/app/models';
+import { MessageRepository } from 'src/app/repository';
+import { MessagesService } from './messages.service';
 
 const mockChat: IMessage = {
   id: "messageId"

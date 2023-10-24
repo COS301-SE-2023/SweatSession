@@ -1,12 +1,11 @@
-import { Store } from '@ngxs/store';
 import { Component, OnInit } from '@angular/core';
-import { Select } from '@ngxs/store';
-import { Observable, switchMap, tap, lastValueFrom, forkJoin, map, filter } from 'rxjs';
+import { Select, Store } from '@ngxs/store';
+import { Observable, forkJoin, map, switchMap, tap } from 'rxjs';
 import { GetFriendsAction, GetUsersAction, SubscribeToAuthState } from 'src/app/actions';
-import { IFriendsModel, IProfileModel, IPoints } from 'src/app/models';
+import { IFriendsModel, IPoints, IProfileModel } from 'src/app/models';
+import { IBadges } from 'src/app/models/badges.model';
 import { AuthState, FriendsState, OtheruserState, PointsApi } from 'src/app/states';
 import { BadgesApi } from 'src/app/states/badges/badges.api';
-import { IBadges } from 'src/app/models/badges.model';
 @Component({
   selector: 'app-leaderboard',
   templateUrl: './leaderboard.page.html',

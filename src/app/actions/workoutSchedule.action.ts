@@ -1,9 +1,9 @@
-import { IAddSweatbuddies, IAddSweatbuddy, IRemoveWorkoutSchedule,
-        IRequestToAdd,
-        IRequestToJoin,
-        IUpdateWorkoutSchedule,
-        IWorkoutScheduleModel } 
-        from "../models";
+import {
+    IAddSweatbuddies, IAddSweatbuddy,
+    IRequestToAdd,
+    IRequestToJoin,
+    IWorkoutScheduleModel
+} from "../models";
 
 export class GetWorkoutSchedules {
     static readonly type = '[workoutSchedule] get workout schedule';

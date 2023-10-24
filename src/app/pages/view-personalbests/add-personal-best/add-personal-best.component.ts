@@ -1,11 +1,11 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
-import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { IPersonalBest } from 'src/app/models';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ModalController } from '@ionic/angular';
+import { IPersonalBest } from 'src/app/models';
+import { NavigationService } from 'src/app/services';
 import { PersonalbestService } from 'src/app/services/personalbest/personalbest.service';
 import { GymsearchComponent } from '../../search/gymsearch/gymsearch.component';
-import { NavigationService } from 'src/app/services';
 
 @Component({
   selector: 'add-personal-best',

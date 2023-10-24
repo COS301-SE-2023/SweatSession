@@ -1,10 +1,9 @@
-import { Injectable, OnInit } from "@angular/core";
-import { Action, State, StateContext, Store, Selector } from "@ngxs/store";
-import { Router } from "@angular/router";
-import { OtheruserService, ProfileService } from "src/app/services";
-import { GetProfileAction } from "src/app/actions/profile.action";
-import { IGetProfile,IGotProfile, IProfileModel } from "src/app/models";
+import { Injectable } from "@angular/core";
+import { Action, Selector, State, StateContext, Store } from "@ngxs/store";
 import { tap } from "rxjs/operators";
+import { GetProfileAction } from "src/app/actions/profile.action";
+import { IGetProfile, IGotProfile, IProfileModel } from "src/app/models";
+import { OtheruserService, ProfileService } from "src/app/services";
 
 export class ProfileStateModel {
     profile?: IProfileModel[];

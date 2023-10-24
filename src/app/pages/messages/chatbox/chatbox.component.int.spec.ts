@@ -1,11 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ChatboxComponent } from './chatbox.component';
-import { Select, Store } from '@ngxs/store';
-import { Observable, of } from 'rxjs';
-import { IProfileModel, IMessage } from 'src/app/models';
-import { GetOtheruserProfile, StageOtheruserInfo } from 'src/app/actions';
-import { MessagesService } from 'src/app/services';
 import { IonicModule } from '@ionic/angular';
+import { Store } from '@ngxs/store';
+import { of } from 'rxjs';
+import { StageOtheruserInfo } from 'src/app/actions';
+import { IMessage, IProfileModel } from 'src/app/models';
+import { MessagesService } from 'src/app/services';
+import { ChatboxComponent } from './chatbox.component';
 
 describe('ChatboxComponent', () => {
   let component: ChatboxComponent;

@@ -1,16 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController, PopoverController } from '@ionic/angular';
 import { Store } from '@ngxs/store';
+import { getAuth } from 'firebase/auth';
 import { Timestamp } from 'firebase/firestore';
 import { AddWorkoutSchedule } from 'src/app/actions';
-import { AddGymSessionLocation } from 'src/app/actions/location.actions';
 import { IWorkoutScheduleModel } from 'src/app/models';
-import { LocationRepository } from 'src/app/repository/location.repository';
-import { GymsearchComponent } from '../../search/gymsearch/gymsearch.component';
-import { NoticeService } from 'src/app/services/notifications/notice.service';
-import { getAuth } from 'firebase/auth';
 import { Profile } from 'src/app/models/notice.model';
-import { URL } from 'url';
+import { LocationRepository } from 'src/app/repository/location.repository';
+import { NoticeService } from 'src/app/services/notifications/notice.service';
+import { GymsearchComponent } from '../../search/gymsearch/gymsearch.component';
 
 @Component({
   selector: 'add-schedule',
