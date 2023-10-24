@@ -10,20 +10,22 @@
 </div>
 <!-- TABLE OF CONTENTS -->
 
-## Table of Contents
- <ul>
-    <li><a href="https://github.com/COS301-SE-2023/SweatSession/wiki/SRS_Demo4#introduction">Project Description</a></li>
-    <li><a href="https://drive.google.com/file/d/1PFd2cfWhJBJVUJ7C1yWsmRKLXTyO8bVA/view?usp=sharing">Project Day Video</a></li>
-    <li><a href="#Technologies">Technologies</a></li>
-    <li><a href="https://github.com/COS301-SE-2023/SweatSession/wiki/Coding-Standards">Coding Standards</a></li>
-    <li><a href="https://github.com/COS301-SE-2023/SweatSession/wiki/Our-Team#members">Our Team</a></li>
-    <li><a href="https://github.com/COS301-SE-2023/SweatSession/wiki/SRS_Demo4">SRS Document</a></li>
-    <li><a href="https://github.com/COS301-SE-2023/SweatSession/wiki/User-Manual">User Manual</a></li>
-    <li><a href="https://github.com/COS301-SE-2023/SweatSession/wiki/Technical-Installation-Manual">Technical Installation Manual</a></li>
-    <li><a href="https://github.com/orgs/COS301-SE-2023/projects/36">Project Board</a></li>
-    <li><a href="https://github.com/COS301-SE-2023/SweatSession/wiki/Architectural-Requirements-(Demo-4)">Architecture</a></li>
-    <li><a href="https://github.com/COS301-SE-2023/SweatSession/wiki/SRS_Demo4#deployment-diagram">Deployment Diagram</a></li>
-  </ul>
+# SweatSession Project
+
+| Section                               | Link                                                                                   |
+|---------------------------------------|----------------------------------------------------------------------------------------|
+| **Project Description**               | [Project Description](https://github.com/COS301-SE-2023/SweatSession/wiki/SRS_Demo4#introduction)      |
+| **Project Day Video**                | [Watch Project Day Video](https://drive.google.com/file/d/1PFd2cfWhJBJVUJ7C1yWsmRKLXTyO8bVA/view?usp=sharing) |
+| **Technologies**                      | [Technologies Used](#technologies)                                                |
+| **Coding Standards**                 | [Coding Standards](https://github.com/COS301-SE-2023/SweatSession/wiki/Coding-Standards) |
+| **Our Team**                          | [Meet Our Team](https://github.com/COS301-SE-2023/SweatSession/wiki/Our-Team#members)      |
+| **SRS Document**                     | [SRS Document](https://github.com/COS301-SE-2023/SweatSession/wiki/SRS_Demo4)              |
+| **User Manual**                      | [User Manual](https://github.com/COS301-SE-2023/SweatSession/wiki/User-Manual)            |
+| **Technical Installation Manual**     | [Technical Installation Manual](https://github.com/COS301-SE-2023/SweatSession/wiki/Technical-Installation-Manual) |
+| **Project Board**                    | [Project Board](https://github.com/orgs/COS301-SE-2023/projects/36)                     |
+| **Architecture**                      | [Architecture Requirements](https://github.com/COS301-SE-2023/SweatSession/wiki/Architectural-Requirements-(Demo-4)) |
+| **Deployment Diagram**               | [View Deployment Diagram](https://github.com/COS301-SE-2023/SweatSession/wiki/SRS_Demo4#deployment-diagram) |
+
 
 
 
