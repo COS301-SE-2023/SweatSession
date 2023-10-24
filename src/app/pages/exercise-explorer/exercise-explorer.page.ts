@@ -177,7 +177,7 @@ export class ExerciseExplorerPage implements  AfterViewInit  {
         // console.log('shoulders clicked');
       }
       else if (intersects[0].object.name == "Object_21"){
-        this.openExercisePage('deltoids');
+        this.openExercisePage('traps');
         // console.log('shoulders clicked');
       }
       else if (intersects[0].object.name == "Object_14"){
