@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
+import { IAddFriend, IFriendRequest, IGetFriends, IRemoveFriend } from 'src/app/models';
 import { FriendsRepository } from '../../repository';
-import { IGetFriends, IAddFriend, IRemoveFriend, IGotFriends, IFriendRequest } from 'src/app/models';
 
 @Injectable({
   providedIn: 'root'

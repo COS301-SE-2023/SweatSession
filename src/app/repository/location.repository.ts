@@ -1,16 +1,11 @@
+import { Time } from '@angular/common';
 import { Injectable } from '@angular/core';
-import firebase from 'firebase/compat/app';
-import { AngularFirestore, DocumentSnapshot, QueryDocumentSnapshot, QuerySnapshot } from '@angular/fire/compat/firestore';
-import { Observable } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
-import { BadgesRepository } from './badges.repository';
-import { OtheruserRepository } from './otheruser.repository';
 import { getAuth } from '@angular/fire/auth';
-import { getDocs, Timestamp } from "firebase/firestore";
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { Firestore, collection } from '@angular/fire/firestore';
+import { Timestamp, getDocs } from "firebase/firestore";
+import { LocationGymSession } from '../models/location.model';
 import { ProfileService } from '../services';
-import { getLocaleDirection, Time } from '@angular/common';
-import { ILocation, LocationGymSession, LocationGymSession2 } from '../models/location.model';
-import { collection, doc, docData, Firestore, getDoc } from '@angular/fire/firestore';
 
 
 

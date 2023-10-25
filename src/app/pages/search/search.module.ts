@@ -1,18 +1,18 @@
-import { NgModule, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 
-import { IonicModule, ToastController } from '@ionic/angular';
+import { IonicModule } from '@ionic/angular';
 
 import { SearchPageRoutingModule } from './search-routing.module';
 
+import { AuthModule, OtheruserStateModule } from 'src/app/states';
+import { GroupsHomePageModule } from '../groups/group-home-page/group-home-page.module';
+import { GroupSearchComponent } from './group/group.component';
+import { GymsearchComponent } from './gymsearch/gymsearch.component';
 import { SearchPage } from './search.page';
 import { UsersearchComponent } from './usersearch/usersearch.component';
-import { GymsearchComponent } from './gymsearch/gymsearch.component';
-import { OtheruserStateModule, AuthModule } from 'src/app/states';
-import { GroupSearchComponent } from './group/group.component';
-import { GroupsHomePageModule } from '../groups/group-home-page/group-home-page.module';
 
 
 @NgModule({

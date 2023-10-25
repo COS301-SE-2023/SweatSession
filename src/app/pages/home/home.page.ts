@@ -1,13 +1,12 @@
-import { Store } from '@ngxs/store';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IonTabs, NavController } from '@ionic/angular';
-import { AuthApi } from 'src/app/states/auth/auth.api';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Store } from '@ngxs/store';
 import { Subscription } from 'rxjs';
-import { NoticehomeService } from 'src/app/services/notifications/noticehome.service';
-import { SetProfileService } from 'src/app/services';
-import { IGetFriends, IGetProfile } from 'src/app/models';
 import { Logout } from 'src/app/actions';
+import { IGetProfile } from 'src/app/models';
+import { SetProfileService } from 'src/app/services';
+import { NoticehomeService } from 'src/app/services/notifications/noticehome.service';
+import { AuthApi } from 'src/app/states/auth/auth.api';
 
 
 @Component({
@@ -82,7 +81,7 @@ export class HomePage implements OnInit {
   }
 
   openhelpwebsite() {
-    window.location.href = 'https://drive.google.com/file/d/1QVv3vk6EiRsO7b123LUXclGO4n4Fs5ML/view?usp=sharing';
+    window.location.href = 'https://drive.google.com/file/d/1FO49XGFE1FJEOyHoBlKEkKIhqO7e71mr/view?usp=sharing';
   }
 
   // async displayProfile() {

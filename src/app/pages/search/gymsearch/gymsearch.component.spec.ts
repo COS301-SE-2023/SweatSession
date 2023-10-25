@@ -1,18 +1,18 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { IonicModule } from '@ionic/angular';
-import { NgxsModule, Store } from '@ngxs/store';
-import { GymsearchComponent } from './gymsearch.component';
-import { Geolocation } from '@ionic-native/geolocation/ngx';
-import { HttpClient } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { IonicModule } from '@ionic/angular';
+import { NgxsModule } from '@ngxs/store';
 import { LocationRepository } from 'src/app/repository/location.repository';
+import { GymsearchComponent } from './gymsearch.component';
 // import { AngularFireModule } from '@angular/fire';
+import { NgFor, NgIf } from '@angular/common';
+import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA, NgModule } from '@angular/core';
 import { AngularFirestore, AngularFirestoreModule } from '@angular/fire/compat/firestore';
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
-import { AuthApi } from 'src/app/states';
-import { FriendsRepository } from 'src/app/repository';
-import { NgIf, NgFor } from '@angular/common';
 import { of } from 'rxjs';
+import { FriendsRepository } from 'src/app/repository';
+import { AuthApi } from 'src/app/states';
 @NgModule({
   declarations: [GymsearchComponent],
   schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],

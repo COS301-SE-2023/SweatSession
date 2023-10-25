@@ -1,7 +1,4 @@
-import { trigger } from '@angular/animations';
-import { Component, OnInit } from '@angular/core';
-import { on } from 'events';
-import { ISearchTerms } from 'src/app/models';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-search',

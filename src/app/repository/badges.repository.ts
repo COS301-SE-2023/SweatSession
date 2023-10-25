@@ -1,8 +1,8 @@
 //import * as admin from 'firebase-admin';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
-import { IBadges } from 'src/app/models/badges.model';
 import { Injectable } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import firebase from 'firebase/compat/app';
+import { IBadges } from 'src/app/models/badges.model';
 
 
 @Injectable({
@@ -40,7 +40,7 @@ export class BadgesRepository {
         //preturn await admin.firestore().collection('profiles').doc(newProfile.userId).create(newProfile);
     }
     async socialiteBadge(currUserId: string) {
-        const badgeDocRef = this.firestore.collection('badges').doc(currUserId);
+        const badgeDocRef = this.firestore.collection('profiles').doc(currUserId);
         const fieldValue = firebase.firestore.FieldValue;
 
         return badgeDocRef.update({
@@ -49,7 +49,7 @@ export class BadgesRepository {
     }
 
     async stretchingStarBadge(currUserId: string) {
-        const badgeDocRef = this.firestore.collection('badges').doc(currUserId);
+        const badgeDocRef = this.firestore.collection('profiles').doc(currUserId);
         const fieldValue = firebase.firestore.FieldValue;
 
         return badgeDocRef.update({
@@ -58,14 +58,14 @@ export class BadgesRepository {
     }
 
     async activeAdventurerBadge(currUserId: string, gymName: string){
-        const badgeDocRef = this.firestore.collection('badges').doc(currUserId);
+        const badgeDocRef = this.firestore.collection('profiles').doc(currUserId);
         const fieldValue = firebase.firestore.FieldValue;
 
         await badgeDocRef.update({
             gymsVisited: fieldValue.arrayUnion(gymName)
         });
 
-        const updatedBadgeDocRef = this.firestore.collection('badges').doc(currUserId);
+        const updatedBadgeDocRef = this.firestore.collection('profiles').doc(currUserId);
         const docSnapshot = await updatedBadgeDocRef.get().toPromise(); // Convert Observable to Promise
     
         if (docSnapshot && docSnapshot.exists) {
@@ -86,7 +86,7 @@ export class BadgesRepository {
         //4 Workout Warrior
         //5 Dynamic Duo
         //6 Active Adventurer
-        const badgeDocRef = this.firestore.collection('badges').doc(currUserId);
+        const badgeDocRef = this.firestore.collection('profiles').doc(currUserId);
         const fieldValue = firebase.firestore.FieldValue;
 
         return badgeDocRef.update({

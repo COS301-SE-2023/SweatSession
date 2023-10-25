@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FitnessgoalState} from "../../states";
+import { getAuth } from "@angular/fire/auth";
 import { Router } from '@angular/router';
-import {GoalcardComponent} from "./goalcard/goalcard.component";
-import {getAuth} from "@angular/fire/auth";
-import {IGOAL} from "../../models";
-import {FitnessgoalService} from "../../services/fitnessgoal/goal.service";
+import { IGOAL } from "../../models";
+import { FitnessgoalService } from "../../services/fitnessgoal/goal.service";
+import { GoalcardComponent } from "./goalcard/goalcard.component";
 
 @Component({
   selector: 'app-fitnessgoals',

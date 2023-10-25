@@ -14,9 +14,11 @@ export interface IProfileModel {
     points?: number;
     groupIds?: string[];
     friendRequests?: string[];
-    sessionsCompleted?: number;
+    sessionsCompleted?: number; 
     badgesNumber?: number;
     scheduleParticipationRequested?: IScheduleRequest[];
+    receivedBadges?: Number[],
+    gymsVisited?: string[]
 }
 
 //requests

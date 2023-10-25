@@ -1,4 +1,4 @@
-import { IDeleteGroupMessage, IGetMessages, IGroup, IMessage, IRemoveChatGroupUser } from "../models";
+import { IDeleteGroupMessage, IGroup, IMessage, IRemoveChatGroupUser } from "../models";
 
 export class GetChatFriends {
     static readonly type = "[messages] get chat friends";

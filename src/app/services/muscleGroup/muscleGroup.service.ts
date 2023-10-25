@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { MuscleGroup, Video, MUSCLE_GROUP_DATA } from '../../models/muscleGroup.model';
+import { MUSCLE_GROUP_DATA, Video } from '../../models/muscleGroup.model';
 
 @Injectable({
   providedIn: 'root'

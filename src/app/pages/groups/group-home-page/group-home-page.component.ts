@@ -1,10 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { Select, Store } from '@ngxs/store';
 import { Observable, switchMap, tap } from 'rxjs';
-import { ExitChatGroup, GetGroup, JoinChatGroup, LoadGroupHompage, RemoveChatGroup, RemoveGroup, StageChatGroup, StageGroup, SubscribeToAuthState } from 'src/app/actions';
+import { ExitChatGroup, GetGroup, JoinChatGroup, LoadGroupHompage, RemoveChatGroup, RemoveGroup, StageChatGroup, SubscribeToAuthState } from 'src/app/actions';
 import { IGroup } from 'src/app/models';
-import { AuthState, MessagesState } from 'src/app/states';
+import { AuthState } from 'src/app/states';
 import { GroupState } from 'src/app/states/group/group.state';
 import { EditGroupComponent } from '../edit-group/edit-group.component';
 

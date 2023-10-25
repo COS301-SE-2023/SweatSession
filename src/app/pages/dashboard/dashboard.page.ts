@@ -1,16 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { Select, Store } from '@ngxs/store';
-import { ChartDataset, ChartOptions, ChartType } from 'chart.js';
-import { Observable, tap } from 'rxjs';
-import { GetWorkoutSchedules } from 'src/app/actions';
-import { IGetWorkoutSchedules } from 'src/app/models';
-import { IGotWorkoutSchedules } from 'src/app/models';
-import { IBadges } from 'src/app/models/badges.model';
-import { PointsApi, WorkoutSchedulingState } from 'src/app/states';
-import { register } from 'swiper/element/bundle';
-import {WorkoutscheduleService} from 'src/app/services/workoutschedule/workoutschedule.service';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { Store } from '@ngxs/store';
 import { getAuth } from 'firebase/auth';
+import { tap } from 'rxjs';
+import { IGetWorkoutSchedules, IGotWorkoutSchedules, IProfileModel } from 'src/app/models';
 import { NoticeService } from 'src/app/services/notifications/notice.service';
+import { WorkoutscheduleService } from 'src/app/services/workoutschedule/workoutschedule.service';
+import { PointsApi } from 'src/app/states';
+import { register } from 'swiper/element/bundle';
 
 register();
 
@@ -33,7 +30,7 @@ export class DashboardPage implements OnInit {
   shortdate : string[] ;
 
 
-  constructor(private store:Store, private pointsApi: PointsApi, private workoutscheduleservice: WorkoutscheduleService, private noticeService: NoticeService) { 
+  constructor(private store:Store,private firestore: AngularFirestore, private pointsApi: PointsApi, private workoutscheduleservice: WorkoutscheduleService, private noticeService: NoticeService) { 
     this.workoutlists = {
       userId: this.currUserId! // Replace 'yourUserIdHere' with the actual user ID.
     };
@@ -51,9 +48,49 @@ export class DashboardPage implements OnInit {
   getSessionsAttended() {
     this.pointsApi.points$().pipe(
       tap((response)=>{
-        this.sessionsCompleted = response.workoutSessionsAttended ? response.workoutSessionsAttended : 0;
+        this.sessionsCompleted = response.sessionsCompleted ? response.sessionsCompleted : 0;
       })
     ).subscribe();
+  }
+
+  update() {
+    const docRef = this.firestore.collection<IProfileModel>('profiles').snapshotChanges();
+  
+    docRef.subscribe((querySnapshot) => {
+      querySnapshot.forEach((docChange) => {
+        const docData = docChange.payload.doc.data() as IProfileModel;
+        const docId = docChange.payload.doc.id;
+  
+        const defaults: Partial<IProfileModel> = {
+          groupIds: [],
+          friendRequests: [],
+          sessionsCompleted: 0,
+          badgesNumber: 0,
+          scheduleParticipationRequested: [],
+          receivedBadges: [],
+          gymsVisited: [],
+        };
+  
+        // Merge the default values with the existing data
+        const newData = { ...defaults, ...docData };
+  
+        // Perform the update
+        this.firestore.collection<IProfileModel>('profiles').doc(docId).update({
+          groupIds: [],
+          sessionsCompleted: 0,
+          badgesNumber: 0,
+          scheduleParticipationRequested: [],
+          receivedBadges: [],
+          gymsVisited: [],
+        })
+          .then(() => {
+            console.log(`Document with ID ${docId} successfully updated.`);
+          })
+          .catch((error) => {
+            console.error(`Error updating document: ${error}`);
+          });
+      });
+    });
   }
 
   async getWorkoutScheduled(request: IGetWorkoutSchedules){

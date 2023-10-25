@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
-import {AngularFirestore, QuerySnapshot} from '@angular/fire/compat/firestore';
-import {finalize, map, takeUntil} from 'rxjs/operators';
-import {getAuth} from "@angular/fire/auth";
-import {weightdata} from "../../models/exercise.model";
-import {Observable, lastValueFrom} from "rxjs";
-import { WebGLLights } from 'three';
+import { getAuth } from "@angular/fire/auth";
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { finalize, map } from 'rxjs/operators';
+import { weightdata } from "../../models/exercise.model";
 import { NavigationService } from '../navigation/navigation.service';
 
 

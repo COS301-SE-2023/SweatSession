@@ -1,8 +1,8 @@
 //import * as admin from 'firebase-admin';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
-import { IPoints } from 'src/app/models/points.model';
 import { Injectable } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import firebase from 'firebase/compat/app';
+import { IPoints } from 'src/app/models/points.model';
 import { BadgesRepository } from './badges.repository';
 
 
@@ -29,7 +29,7 @@ export class PointsRepository {
     }
 
     async workoutSessionPoints(currUserId: string) {
-        const pointsDocRef = this.firestore.collection('points').doc(currUserId);
+        const pointsDocRef = this.firestore.collection('profiles').doc(currUserId);
         const fieldValue = firebase.firestore.FieldValue;
     
         const docSnapshot = await pointsDocRef.get().toPromise(); // Convert Observable to Promise
@@ -43,7 +43,7 @@ export class PointsRepository {
     
             if (newWorkoutSessionsAttended % 3 === 0) {
                 updatedFields = {
-                    userPoints: fieldValue.increment(75),
+                    points: fieldValue.increment(75),
                     workoutSessionsAttended: fieldValue.increment(1)
                 };
             } else {
@@ -64,20 +64,20 @@ export class PointsRepository {
     }
     
     async fitnessGoalsPoints(currUserId: string) {
-        const pointsDocRef = this.firestore.collection('points').doc(currUserId);
+        const pointsDocRef = this.firestore.collection('profiles').doc(currUserId);
         const fieldValue = firebase.firestore.FieldValue;
 
         return pointsDocRef.update({
-            userPoints: fieldValue.increment(100)
+            points: fieldValue.increment(100)
         });
     }
 
     async completeWorkoutPlanPoints(currUserId: string) {
-        const pointsDocRef = this.firestore.collection('points').doc(currUserId);
+        const pointsDocRef = this.firestore.collection('profiles').doc(currUserId);
         const fieldValue = firebase.firestore.FieldValue;
 
         return pointsDocRef.update({
-            userPoints: fieldValue.increment(50)
+            points: fieldValue.increment(50)
         });
     }
 }

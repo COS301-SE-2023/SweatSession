@@ -1,8 +1,8 @@
 import { TestBed } from '@angular/core/testing';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
-import { MessageRepository } from './message.repository';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { of } from 'rxjs';
-import { IMessage, IProfileModel } from '../models';
+import { IProfileModel } from '../models';
+import { MessageRepository } from './message.repository';
 
 let messageRepository: MessageRepository;
 const mockProfileData: IProfileModel = {

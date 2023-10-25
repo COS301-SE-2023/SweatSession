@@ -1,4 +1,3 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 // import { FriendsRepository } from '../../repository';
 // import { IGetFriends, IAddFriend, IRemoveFriend, IGotFriends } from 'src/app/models';

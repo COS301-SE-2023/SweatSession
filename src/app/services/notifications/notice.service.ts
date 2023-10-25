@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
-import { collectionData, collection, addDoc, Firestore, deleteDoc, doc, setDoc, getDoc, where, query } from '@angular/fire/firestore';
+import { Firestore, addDoc, collection, collectionData, deleteDoc, doc } from '@angular/fire/firestore';
 import { getAuth } from 'firebase/auth';
 import { Observable } from 'rxjs';
 import { IRequestToAdd } from 'src/app/models';
 import { Notice, Profile } from 'src/app/models/notice.model';
-import { ProfileService } from '../profile/profile.service';
 import { ProfileRepository } from 'src/app/repository/profile.repository';
 
 @Injectable({

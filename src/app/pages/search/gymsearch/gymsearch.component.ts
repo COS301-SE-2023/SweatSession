@@ -1,15 +1,15 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IonContent, IonModal, ModalController, ToastController } from '@ionic/angular';
-import { of, Observable, Subject, Subscription, firstValueFrom } from 'rxjs';
+import { of, Observable, Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map, startWith } from 'rxjs/operators';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
-import { Geolocation as GeolocationCapacitor } from '@capacitor/geolocation';
+// import { Geolocation as GeolocationCapacitor } from '@capacitor/geolocation';
 import { environment } from 'src/environments/environment';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { LocationsService } from 'src/app/services/location/location.services';
-import { getFunctions, httpsCallable } from '@angular/fire/functions';
-import { FriendsService } from 'src/app/services';
-import { getAuth, user } from '@angular/fire/auth';
+// import { getFunctions, httpsCallable } from '@angular/fire/functions';
+// import { FriendsService } from 'src/app/services';
+import { getAuth } from '@angular/fire/auth';
 import { BadgesRepository, FriendsRepository } from 'src/app/repository';
 import { FriendsState } from 'src/app/states';
 import { Select, Store } from '@ngxs/store';
@@ -17,9 +17,9 @@ import { IFriendsModel } from 'src/app/models';
 import { GetFriendsAction } from 'src/app/actions';
 import { LocationRepository } from 'src/app/repository/location.repository';
 import { Timestamp } from 'firebase/firestore';
-import { take } from 'rxjs/operators';
+// import { take } from 'rxjs/operators';
 import { DatePipe } from '@angular/common';
-import { profile } from 'console';
+// import { profile } from 'console';
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 
 
@@ -35,17 +35,7 @@ export class GymsearchComponent implements OnInit {
    gymChosen: string;
    chosenPlaceId: string;
    friendsSubscription: Subscription;
-   constructor(private store: Store, 
-      private modalController: ModalController, 
-      private geolocation: Geolocation, 
-      private httpClient: HttpClient, 
-      private locationRepository: LocationRepository, 
-      private friendsRepository: FriendsRepository, 
-      private friendsState: FriendsState, 
-      private datePipe: DatePipe, 
-      private toastController: ToastController, 
-      private badgesRepository: BadgesRepository, 
-      private androidPermissions: AndroidPermissions) {
+   constructor(private store: Store, private modalController: ModalController, private geolocation: Geolocation, private httpClient: HttpClient, private locationRepository: LocationRepository, private friendsRepository: FriendsRepository, private friendsState: FriendsState, private datePipe: DatePipe, private toastController: ToastController, private badgesRepository: BadgesRepository, private androidPermissions: AndroidPermissions) {
       this.data.filter(item => item.name.includes(''));
    }
 
@@ -188,11 +178,11 @@ export class GymsearchComponent implements OnInit {
 
 
 
-            const permission = await GeolocationCapacitor.checkPermissions();
-            if (permission.location === 'denied') {
-               // Request permission if it's denied
-               await GeolocationCapacitor.requestPermissions();
-            }
+            // const permission = await GeolocationCapacitor.checkPermissions();
+            // if (permission.location === 'denied') {
+            //    // Request permission if it's denied
+            //    await GeolocationCapacitor.requestPermissions();
+            // }
             const coordinates = await this.getCurrentLocation();
             this.currLatitude = coordinates!.latitude;
             this.currLongitude = coordinates!.longitude;

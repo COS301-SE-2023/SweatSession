@@ -1,11 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { Select, Store } from '@ngxs/store';
-import { Observable, tap } from 'rxjs';
-import { GetOtheruserProfile, GetUser, RemoveChatGroupUser, StageOtheruserInfo } from 'src/app/actions';
-import { IProfileModel, IRemoveChatGroup, IRemoveChatGroupUser } from 'src/app/models';
+import { Observable } from 'rxjs';
+import { RemoveChatGroupUser, StageOtheruserInfo } from 'src/app/actions';
+import { IProfileModel, IRemoveChatGroupUser } from 'src/app/models';
 import { MessagesService } from 'src/app/services';
-import { MessagesState, OtheruserState } from 'src/app/states';
+import { OtheruserState } from 'src/app/states';
 
 @Component({
   selector: 'group-user',

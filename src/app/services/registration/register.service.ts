@@ -45,7 +45,14 @@ export class RegisterService {
         weight: '0',
         points: 0,
         sessionsCompleted: 0,
+        badgesNumber: 0,
+        scheduleParticipationRequested: [],
+        receivedBadges: [],
+        gymsVisited: [],
+        friendRequests: [],
+        groupIds: []
       }
+
       console.log(newProfile);
       //this.repository.createUser(newUser);
       //this.repository.createProfile({});

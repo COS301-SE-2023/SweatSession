@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 //import { RegisterAuth as AuthActionRegister } from 'src/app/actions/auth';
-import { Register as RegisterAction, ContinueWithGoogleAction} from 'src/app/actions/register';
-import { Action, State, StateContext, Store } from '@ngxs/store';
-import {AuthApi} from 'src/app/states/auth/auth.api';
-import { RegisterService } from 'src/app/services';
 import { getAdditionalUserInfo } from '@angular/fire/auth';
+import { Action, State, StateContext, Store } from '@ngxs/store';
+import { ContinueWithGoogleAction, Register as RegisterAction } from 'src/app/actions/register';
+import { RegisterService } from 'src/app/services';
+import { AuthApi } from 'src/app/states/auth/auth.api';
 // import {} from 'functions/src/';
 
 export interface RegisterStateModel {

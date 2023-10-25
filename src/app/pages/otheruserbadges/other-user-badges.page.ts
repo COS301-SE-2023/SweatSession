@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { map, Observable, of } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { IBadges } from 'src/app/models/badges.model';
 import { AuthApi } from 'src/app/states/auth/auth.api';
 // import { BadgesService } from 'src/app/services/badges/badges.service';
-import { SubscribeToOtherUserBadges } from 'src/app/actions/otheruserbadges.actions';
 import { Select, Store } from '@ngxs/store';
+import { SubscribeToOtherUserBadges } from 'src/app/actions/otheruserbadges.actions';
 import { OtherUserBadgesState } from 'src/app/states/otheruserbadges/otheruserbadges.state';
 
 @Component({

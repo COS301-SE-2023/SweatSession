@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { doc, docData, Firestore } from '@angular/fire/firestore';
 import { IBadges } from 'src/app/models/badges.model';
-import { BadgesRepository } from 'src/app/repository/badges.repository'
 
+import { getAuth } from '@angular/fire/auth';
 import { NavController } from '@ionic/angular';
 import { AuthApi } from '../auth/auth.api';
-import { getAuth } from '@angular/fire/auth';
+import { IProfileModel } from 'src/app/models';
 // import { AuthState } from 'src/app/states/auth';
 
 @Injectable({
@@ -30,10 +29,15 @@ export class BadgesApi {
     // alert(currUserId);
     const docRef = doc(
       this.firestore,
-      `badges/${this.currUserId}`
+      `profiles/${this.currUserId}`
     ).withConverter<IBadges>({       //convert our firestore data into the IBadges type
       fromFirestore: (snapshot) => {
-        return (snapshot.data() as IBadges);
+        const profile: IProfileModel = snapshot.data() as IProfileModel
+        let badges: IBadges ={
+          receivedBadges: profile.receivedBadges!,
+          gymsVisited: profile.gymsVisited
+        }
+        return (badges);
       },
       toFirestore: (it: IBadges) => it,
     });
@@ -43,10 +47,15 @@ export class BadgesApi {
   otheruserbadges$(id: string) {
     const docRef = doc(
       this.firestore,
-      `badges/${id}`
+      `profiles/${id}`
     ).withConverter<IBadges>({       //convert our firestore data into the IBadges type
       fromFirestore: (snapshot) => {
-        return (snapshot.data() as IBadges);
+        const profile: IProfileModel = snapshot.data() as IProfileModel
+        let badges: IBadges ={
+          receivedBadges: profile.receivedBadges!,
+          gymsVisited: profile.gymsVisited
+        }
+        return (badges);
       },
       toFirestore: (it: IBadges) => it,
     });

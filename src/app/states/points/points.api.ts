@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { doc, docData, Firestore } from '@angular/fire/firestore';
 import { IPoints } from 'src/app/models/points.model';
 
+import { getAuth } from '@angular/fire/auth';
 import { NavController } from '@ionic/angular';
 import { AuthApi } from '../auth/auth.api';
-import { getAuth } from '@angular/fire/auth';
+import { IProfileModel } from 'src/app/models';
 
 @Injectable({
   providedIn: 'root'
@@ -26,10 +26,15 @@ export class PointsApi {
     // alert(currUserId);
     const docRef = doc(
       this.firestore,
-      `points/${this.currUserId}`
+      `profiles/${this.currUserId}`
     ).withConverter<IPoints>({       //convert our firestore data into the IPoints type
       fromFirestore: (snapshot) => {
-        return (snapshot.data() as IPoints);
+        const profile: IProfileModel = snapshot.data() as IProfileModel
+        let points: IPoints ={
+          userPoints: profile.points!,
+          sessionsCompleted: profile.sessionsCompleted
+        }
+        return (points);
       },
       toFirestore: (it: IPoints) => it,
     });
@@ -39,10 +44,15 @@ export class PointsApi {
   otherUserPoints$(id: string) {
     const docRef = doc(
       this.firestore,
-      `points/${id}`
+      `profiles/${id}`
     ).withConverter<IPoints>({       //convert our firestore data into the IPoints type
       fromFirestore: (snapshot) => {
-        return (snapshot.data() as IPoints);
+        const profile: IProfileModel = snapshot.data() as IProfileModel
+        let points: IPoints ={
+          userPoints: profile.points!,
+          sessionsCompleted: profile.sessionsCompleted
+        }
+        return (points);
       },
       toFirestore: (it: IPoints) => it,
     });

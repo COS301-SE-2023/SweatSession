@@ -1,14 +1,11 @@
-import { IonicModule } from '@ionic/angular';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { NavController } from '@ionic/angular';
+import { IonicModule, NavController } from '@ionic/angular';
+import { Store } from '@ngxs/store';
 import { Observable, of } from 'rxjs';
-import { GroupUserComponent } from './group-user.component';
+import { IProfileModel } from 'src/app/models';
 import { MessagesService } from 'src/app/services';
 import { OtheruserState } from 'src/app/states';
-import { IProfileModel } from 'src/app/models';
-import { Store } from '@ngxs/store';
-import { StageOtheruserInfo } from 'src/app/actions';
+import { GroupUserComponent } from './group-user.component';
 
 describe('GroupUserComponent', () => {
   let component: GroupUserComponent;

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Platform } from '@ionic/angular';
 // import { FileOpener } from '@ionic-native/file-opener/ngx';
 @Component({
   selector: 'app-download',

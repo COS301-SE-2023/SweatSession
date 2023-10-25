@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { LoginAuth as AuthActionLogin } from 'src/app/actions/auth';
-import { Login as LoginAction} from 'src/app/actions/login';
 import { Action, State, StateContext, Store } from '@ngxs/store';
-import {AuthApi} from 'src/app/states/auth/auth.api';
+import { Login as LoginAction } from 'src/app/actions/login';
+import { AuthApi } from 'src/app/states/auth/auth.api';
 
 export interface LoginStateModel {
   loginForm: {

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Select, Store } from '@ngxs/store';
+import { NavController } from '@ionic/angular';
+import { Store } from '@ngxs/store';
 //import { ReactiveFormsModule } from '@angular/forms';
-import {ContinueWithGoogleAction, Register} from 'src/app/actions/register';
+import { ContinueWithGoogleAction, Register } from 'src/app/actions/register';
 //import {RegisterPageModule} from './register.module'
 import { AlertController } from '@ionic/angular';
 

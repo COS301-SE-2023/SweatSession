@@ -1,18 +1,14 @@
-import { TestBed, async, ComponentFixture } from '@angular/core/testing';
-import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
-import { IonicModule, NavController } from '@ionic/angular';
-import { FormArray } from '@angular/forms';
+import { ComponentFixture, TestBed, async } from '@angular/core/testing';
+import { FormArray, FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import {
-  Router,
-  ActivatedRoute,
-  ActivatedRouteSnapshot,
+  Router
 } from '@angular/router';
+import { IonicModule, NavController } from '@ionic/angular';
 import { of } from 'rxjs';
 
-import { WorkoutTrackingPage } from './workout-tracking.page';
-import { ExerciseService } from '../../services/exercise/exercise.service';
-import { Exercise } from '../../models/exercise.model';
 import { BackButtonDirectiveModule } from 'src/app/directives';
+import { ExerciseService } from '../../services/exercise/exercise.service';
+import { WorkoutTrackingPage } from './workout-tracking.page';
 
 class NavControllerMock {
   navigateForward(): Promise<any> {

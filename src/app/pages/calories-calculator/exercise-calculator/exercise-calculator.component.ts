@@ -1,13 +1,13 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { getAuth } from '@angular/fire/auth';
-import {FormBuilder, FormGroup, FormArray, AbstractControl, Validators} from '@angular/forms';
-import { take, tap } from 'rxjs';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { IonContent } from '@ionic/angular';
+import { take } from 'rxjs';
 import { Exercise } from 'src/app/models/exercise.model';
 import { ExerciseService, WorkoutscheduleService } from 'src/app/services';
 import { HealthDataService } from 'src/app/services/healthDataService/healthData.service';
-import { CalorieSummary } from "../calorie-summary";
 import { register } from 'swiper/element/bundle';
-import { IonContent } from '@ionic/angular';
+import { CalorieSummary } from "../calorie-summary";
 register();
 
 @Component({
@@ -105,13 +105,13 @@ export class ExerciseCalculatorComponent implements OnInit {
     console.log(this.exercisesArray)
     const exerciseControl = this.formBuilder.group({
       name: ['',[Validators.required]],
-      sets: ['1',[]],
-      reps: ['2',[]],
-      weight: ['10', []],
-      duration: ['2', [Validators.required, Validators.min(1)]],
+      sets: ['',[]],
+      reps: ['',[]],
+      weight: ['', []],
+      duration: ['', [Validators.required, Validators.min(1)]],
     });
     (this.workoutForm.get('exercises') as FormArray).push(exerciseControl);
-    this.scrollToBottom();
+    // this.scrollToBottom();
   }
 
 
@@ -267,7 +267,7 @@ export class ExerciseCalculatorComponent implements OnInit {
     console.log(this.selectedWorkoutId);
     await this.getSessionWorkout(this.selectedWorkoutId);
 
-    this.scrollToBottom();
+    // this.scrollToBottom();
   }
 
   isValidInput(){

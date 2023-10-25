@@ -26,7 +26,7 @@ export class PointsPage implements OnInit {
   }
 
   // get progressValue(): number {
-  //   const workoutSessionsAttended = (await this.workoutSessionsAttended$.toPromise()) || 0;
+  //   const workoutSessionsAttended = (await this.sessionsCompleted$.toPromise()) || 0;
   //   return workoutSessionsAttended / 3;
   // }
 

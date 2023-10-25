@@ -1,15 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Store } from '@ngxs/store';
-import { GetProfileAction, } from '../../../actions/profile.action';
-import { IGetProfile,IProfileModel } from '../../../models';
-import { FormControl, FormGroup ,ReactiveFormsModule,FormsModule} from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+import { NavigationStart, Router } from "@angular/router";
 import { ModalController } from '@ionic/angular';
+import { Store } from '@ngxs/store';
+import { Subscription } from "rxjs";
 import { SetProfileService } from 'src/app/services';
 import { AuthApi } from 'src/app/states/auth/auth.api';
-import { getCurrentUserId } from 'src/app/actions';
-import { UserprofilePage } from 'src/app/pages/userprofile/userprofile.page'
-import {NavigationStart, Router} from "@angular/router";
-import {Subscription} from "rxjs";
+import { IGetProfile, IProfileModel } from '../../../models';
 
 
 @Component({

@@ -1,19 +1,13 @@
 import { TestBed } from '@angular/core/testing';
-import { AngularFirestore, CollectionReference, DocumentReference } from '@angular/fire/compat/firestore';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { of } from 'rxjs';
-import { WorkoutscheduleRepository } from './workoutSchedule.repository';
 import {
-  IAddWorkoutSchedule,
-  IUpdateWorkoutSchedule,
-  IGetWorkoutSchedules,
   IRemoveWorkoutSchedule,
-  IGotWorkoutSchedules,
-  IAddedWorkoutSchedule,
-  IRemovedWorkoutSchedule,
+  IUpdateWorkoutSchedule,
   IUpdatedWorkoutSchedule,
-  IWorkoutScheduleModel,
+  IWorkoutScheduleModel
 } from '../models';
-import { Timestamp } from 'firebase/firestore';
+import { WorkoutscheduleRepository } from './workoutSchedule.repository';
 
 describe('WorkoutscheduleRepository', () => {
   let repository: WorkoutscheduleRepository;

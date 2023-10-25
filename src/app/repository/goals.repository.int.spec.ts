@@ -1,18 +1,15 @@
-import {TestBed}  from "@angular/core/testing";
-import {AngularFirestore} from '@angular/fire/compat/firestore';
-import {of} from "rxjs";
-import {goalsRepository} from "./goals.repository";
+import { TestBed } from "@angular/core/testing";
+import { Auth } from "@angular/fire/auth";
+import { AngularFireModule } from "@angular/fire/compat";
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { getAuth } from "firebase/auth";
+import { of } from "rxjs";
 import {
-    IGOAL,
-    IAddedGoal,
     IAddGOAL,
-    IGotGOAL,
-    ITASK,
+    ITASK
 } from '../models';
-import {Auth} from "@angular/fire/auth";
-import {AuthApi} from "../states";
-import {AngularFireModule} from "@angular/fire/compat";
-import {getAuth} from "firebase/auth";
+import { AuthApi } from "../states";
+import { goalsRepository } from "./goals.repository";
 
 describe('goalsRepository', () => {
     let repository: goalsRepository;

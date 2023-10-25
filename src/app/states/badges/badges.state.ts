@@ -1,14 +1,12 @@
 import { Injectable } from '@angular/core';
-import { User } from '@angular/fire/auth';
 import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
-import { Navigate } from '@ngxs/router-plugin';
 
 import { BadgesApi } from './badges.api';
 
 import produce from 'immer';
-import { Observable, tap } from 'rxjs';
-import { IBadges } from 'src/app/models/badges.model';
+import { tap } from 'rxjs';
 import { SetBadges, SubscribeToBadges } from 'src/app/actions/badges.actions';
+import { IBadges } from 'src/app/models/badges.model';
 
 export interface BadgesStateModel {
   //currUser: User | null;

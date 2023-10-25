@@ -32,17 +32,11 @@
 //   }
 // }
 import { Injectable } from '@angular/core';
-import firebase from 'firebase/compat/app';
 import 'firebase/compat/firestore';
-import { environment } from 'src/environments/environment';
-import { firestore } from 'firebase-functions/v1';
-import { ProfileRepository } from 'src/app/repository/profile.repository';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { IProfileModel , IGetProfile, IGotProfile, IUpdateProfile,} from 'src/app/models';
-import { computeStackId } from '@ionic/angular/directives/navigation/stack-utils';
-import { AuthApi } from 'src/app/states/auth/auth.api';
-import { getCurrentUserId } from 'src/app/actions';
+import { IGetProfile, IGotProfile, IProfileModel } from 'src/app/models';
+import { ProfileRepository } from 'src/app/repository/profile.repository';
 
 
 @Injectable({

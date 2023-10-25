@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {ChartDataset, ChartOptions, ChartType} from "chart.js";
+import { ChartDataset, ChartType } from "chart.js";
 // import {takeUntil} from "rxjs/operators";
-import {getAuth} from "@angular/fire/auth";
-import {AngularFirestore} from "@angular/fire/compat/firestore";
-import {healthData, weightdata} from "../../models/exercise.model";
-import {HealthDataService} from "../../services/healthDataService/healthData.service";
+import { getAuth } from "@angular/fire/auth";
+import { AngularFirestore } from "@angular/fire/compat/firestore";
+import { healthData, weightdata } from "../../models/exercise.model";
+import { HealthDataService } from "../../services/healthDataService/healthData.service";
 
 @Component({
   selector: 'app-health-data-display',

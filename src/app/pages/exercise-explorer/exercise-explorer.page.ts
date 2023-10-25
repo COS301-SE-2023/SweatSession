@@ -1,16 +1,11 @@
-import { ModalController, Platform } from '@ionic/angular';
-import { OnDestroy } from '@angular/core';
-import { Component, OnInit, AfterViewInit, Input, ViewChild, ElementRef } from '@angular/core';
-import * as THREE from "three";
-import  MouseMeshInteraction  from 'src/app/services/exercise-explorer/exercise-explorer.service';
-import { GLTFLoader, GLTF } from 'three/examples/jsm/loaders/GLTFLoader.js';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
-import { CSS2DRenderer } from 'three/examples/jsm/renderers/CSS2DRenderer.js';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { AlertController } from '@ionic/angular';
-import {BehaviorSubject} from "rxjs";
-import {ViewExerciseComponent} from "./view-exercise/view-exercise.component";
+import { AlertController, ModalController, Platform } from '@ionic/angular';
 import { Store } from '@ngxs/store';
+import * as THREE from "three";
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import { ViewExerciseComponent } from "./view-exercise/view-exercise.component";
 
 @Component({
   selector: 'app-exercise-explorer',
@@ -161,10 +156,6 @@ export class ExerciseExplorerPage implements  AfterViewInit  {
       else if (intersects[0].object.name == "Object_5"){
         this.openExercisePage('calves');
       }
-      else if (intersects[0].object.name == "Object_21"){
-        this.openExercisePage('abdominal');
-        // console.log('stomach clicked');
-      }
       else if (intersects[0].object.name == "Object_18"){
         // console.log('gluteal muscle clicked');
         this.openExercisePage('glutes');
@@ -177,8 +168,16 @@ export class ExerciseExplorerPage implements  AfterViewInit  {
         this.openExercisePage('forearms');
         // console.log('midarm clicked');
       }
+      else if (intersects[0].object.name == "Object_9"){
+        this.openExercisePage('forearms');
+        // console.log('midarm clicked');
+      }
       else if (intersects[0].object.name == "Object_10"){
         this.openExercisePage('deltoids');
+        // console.log('shoulders clicked');
+      }
+      else if (intersects[0].object.name == "Object_21"){
+        this.openExercisePage('traps');
         // console.log('shoulders clicked');
       }
       else if (intersects[0].object.name == "Object_14"){

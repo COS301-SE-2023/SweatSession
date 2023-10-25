@@ -1,10 +1,9 @@
 // chatbot.service.spec.ts
-import { TestBed } from '@angular/core/testing';
 import { HttpClient } from '@angular/common/http';
+import { TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { ChatbotService } from './chatbot.service';
-import { environment } from 'src/environments/environment'; 
 
 describe('ChatbotService', () => {
   let service: ChatbotService;

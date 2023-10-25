@@ -1,7 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
-import { DeleteGroupMessage, DeleteMessage, GetOtheruserProfile, GetProfileAction, StageOtheruserInfo } from 'src/app/actions';
+import { DeleteGroupMessage, DeleteMessage, StageOtheruserInfo } from 'src/app/actions';
 import { IMessage, IProfileModel } from 'src/app/models';
 import { MessagesService } from 'src/app/services';
 import { OtheruserState } from 'src/app/states';

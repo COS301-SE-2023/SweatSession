@@ -1,14 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { ProfileService } from '../../services';
 import { getAuth } from '@angular/fire/auth';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { NotifyService } from 'src/app/services/notify/notify.service';
-import {HealthDataService} from "../../services/healthDataService/healthData.service";
-import {HealthDataDisplayPage} from "../health-data-display/health-data-display.page";
-import {CalorieTargetComponent} from "../calories-calculator/calorie-target/calorie-target.component";
+import { ProfileService } from '../../services';
+import { HealthDataService } from "../../services/healthDataService/healthData.service";
 @Component({
   selector: 'app-healthdata',
   templateUrl: './healthdata.page.html',
