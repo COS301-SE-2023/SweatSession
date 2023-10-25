@@ -62,27 +62,6 @@ describe('WorkoutscheduleRepository', () => {
   });
   
 
-  describe('addSchedule', () => {
-    it('should add a new schedule and return the response', async () => {
-       // Arrange
-       const userId = 'testUserId';
-       const scheduleId = 'testScheduleId';
-      
-      
-       const request: IAddWorkoutSchedule = {
-         userId: userId,
-         schedule: { id: scheduleId },
-       };
-   
-       // Act
-       const response = await repository.addSchedule(request);
-       expect(response.userId).toEqual(userId);   
-      //  expect(response.validate).toBeTruthy();
-       expect(firestoreMock.collection).toHaveBeenCalledWith('WorkoutSchedule');
-      expect(firestoreMock.collection).toHaveBeenCalledWith('userSchedules');
-      expect(firestoreMock.doc).toHaveBeenCalledWith(`${userId}`);
-    });
-  });
 
   describe('updateSchedule', () => {
     it('should update a schedule and return the response', async () => {

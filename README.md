@@ -1,48 +1,35 @@
-# SweatSession
+<div align="center">
 
-[![Code coverage][codecov-shield]](https://codecov.io/gh/COS301-SE-2023/SweatSession)
 [![System Status](https://img.shields.io/pingpong/status/sp_2b59949b563642c28c83a659aebcbdd0)](https://localhost.pingpong.host/)
 [![Issues closed][closedissues-shield]](https://github.com/COS301-SE-2023/SweatSession/issues?q=is%3Aissue+is%3Aclosed) <br />
 [![Commits][commits-shield]](https://github.com/COS301-SE-2023/SweatSession/issues)
 [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=COS301-SE-2023_SweatSession&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=COS301-SE-2023_SweatSession)
 
-
+<img src="https://github.com/COS301-SE-2023/SweatSession/assets/95973048/447bbb1f-c415-4d27-b3af-f222304674c9" alt="Asset 12" width="200" height="200">
+  
+</div>
 <!-- TABLE OF CONTENTS -->
-<details>
-  <summary>Table of Contents</summary>
-  <ol>
-    <li><a href="#Synapse Solutions - SweatSession - Project Description">Project Description</a></li>
+
+## Table of Contents
+ <ul>
+    <li><a href="https://github.com/COS301-SE-2023/SweatSession/wiki/SRS_Demo4#introduction">Project Description</a></li>
+    <li><a href="">Project Day Video</a></li>
     <li><a href="#Technologies">Technologies</a></li>
-    <li><a href="#Members">Members</a></li>
-  </ol>
-</details>
+    <li><a href="#Members">Our Team</a></li>
+    <li><a href="https://github.com/COS301-SE-2023/SweatSession/wiki/SRS_Demo4">SRS Document</a></li>
+    <li><a href="">User Manual</a></li>
+    <li><a href="">Technical Installation Manual</a></li>
+    <li><a href="https://github.com/orgs/COS301-SE-2023/projects/36">Project Board</a></li>
+    <li><a href="">Architecture</a></li>
+    <li><a href="">Deployment Diagram</a></li>
+  </ul>
 
-## Synapse Solutions - SweatSession - Project Description
-
-The purpose of SweatSession is to develop a social, location-based mobile app that will enable users to
-schedule workout sessions with their friends, track their progress, view their friends' personal bests, and earn
-rewards for achieving their fitness goals. The app aims to provide a platform that will make it easy for users to
-connect with workout partners, track their progress, and earn rewards. By incorporating social and gamification
-elements such as leaderboards amongst friends, the app hopes to encourage users to adopt a healthy and
-active lifestyle.
-The app will have many subsystems that will be integrated to provide its functionality. A non-exhaustive list of
-such subsystems will be the location-based element so that users can schedule workouts together, the social
-element in order to add friends as well as view their workout plans, personal bests, etc., a leaderboard element
-amongst friends based on workout times and more.
-The project presents many design elements that will have to be catered for such as a robust and scalable back-
-end to accommodate multiple users, designing an intuitive and aesthetic design to ensure that users continue to
-use the app, location-based services and more
 
 
 ## Technologies
 
 [![Angular][Angular.io]][Angular-url] [![Node][Node.js]][Node-url] [![TypeScript][typescript-badge]][typescript-url] [![JavaScript][javascript-badge]][javascript-url] [![Ionic][ionic-badge]][ionic-url] [![Firestore][firestore-badge]][firestore-url] [![Git][git-badge]][git-url] [![Jest][jest-badge]][jest-url] [![Cypress][cypress-badge]][cypress-url] [![GitHub Actions][github-actions-badge]][github-actions-url] [![OpenAI API Badge][openai-badge]][openai-url] [![GitHub Places API][google-places-badge]][google-places-url]
 
-[Demo 1 Video]()
-[Functional Requirements (SRS) documents](https://github.com/COS301-SE-2023/SweatSession/wiki)
-[GitHub Project Board](https://github.com/orgs/COS301-SE-2023/projects/36)
-
-[DEMO 2 SRS Documents](https://github.com/COS301-SE-2023/SweatSession/wiki/SRS_Demo2)
 ### Members
 
 <table style="border: none;">
@@ -129,6 +116,13 @@ I am a passionate 3rd year Computer Science student studying at the University o
   </a>
   </tr>
 </table>
+
+## Contact Us
+[![Email](https://img.shields.io/badge/Email-the.synapse.solution%40gmail.com-brightgreen)](mailto:the.synapse.solution@gmail.com)
+
+
+## Client
+![image](https://github.com/COS301-SE-2023/SweatSession/assets/95973048/e8f25642-1c1e-455b-a715-6f221046df8b)
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->

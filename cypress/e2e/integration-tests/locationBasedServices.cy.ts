@@ -26,12 +26,12 @@ describe('locationBasedServices integration Testing', () => {
         cy.visit('http://localhost:4200/SweatSession/addSchedule')
         // cy.visit('https://sweatsession.web.appSweatSession/addSchedule')
         cy.wait(5000);
-        cy.get('ion-icon[name="location"]').click();
+        cy.get('ion-icon[name="location-outline"]').click();
         cy.wait(10000);
 
         //checks
         cy.get('ion-title').should('have.css', 'font-family', 'Montserrat, sans-serif')
         cy.contains('ion-title', 'Select Location')
-        cy.get('ion-button').contains('Close').should('be.visible').click()
+        cy.get('ion-icon[name="arrow-back"]').should('be.visible').click()
     });
 });

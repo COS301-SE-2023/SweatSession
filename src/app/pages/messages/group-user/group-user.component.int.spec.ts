@@ -56,7 +56,7 @@ describe('GroupUserComponent', () => {
     component = fixture.componentInstance;
     component.userId = 'mockUserId';
     component.currentUserId = 'mockCurrentUserId';
-    component.modal = {}; 
+    //component.modal = {}; 
     fixture.detectChanges();
   });
 
