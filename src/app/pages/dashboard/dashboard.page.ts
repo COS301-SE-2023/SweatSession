@@ -29,7 +29,7 @@ export class DashboardPage implements OnInit {
   shortdate : string[] ;
 
 
-  constructor(private store:Store,private firestore: AngularFirestore, private pointsApi: PointsApi, private workoutscheduleservice: WorkoutscheduleService, private noticeService: NoticeService) { 
+  constructor(private store:Store, private pointsApi: PointsApi, private workoutscheduleservice: WorkoutscheduleService, private noticeService: NoticeService) { 
     this.workoutlists = {
       userId: this.currUserId! // Replace 'yourUserIdHere' with the actual user ID.
     };
