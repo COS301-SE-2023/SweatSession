@@ -53,46 +53,6 @@ export class DashboardPage implements OnInit {
     ).subscribe();
   }
 
-  update() {
-    const docRef = this.firestore.collection<IProfileModel>('profiles').snapshotChanges();
-  
-    docRef.subscribe((querySnapshot) => {
-      querySnapshot.forEach((docChange) => {
-        const docData = docChange.payload.doc.data() as IProfileModel;
-        const docId = docChange.payload.doc.id;
-  
-        const defaults: Partial<IProfileModel> = {
-          groupIds: [],
-          friendRequests: [],
-          sessionsCompleted: 0,
-          badgesNumber: 0,
-          scheduleParticipationRequested: [],
-          receivedBadges: [],
-          gymsVisited: [],
-        };
-  
-        // Merge the default values with the existing data
-        const newData = { ...defaults, ...docData };
-  
-        // Perform the update
-        this.firestore.collection<IProfileModel>('profiles').doc(docId).update({
-          groupIds: [],
-          sessionsCompleted: 0,
-          badgesNumber: 0,
-          scheduleParticipationRequested: [],
-          receivedBadges: [],
-          gymsVisited: [],
-        })
-          .then(() => {
-            console.log(`Document with ID ${docId} successfully updated.`);
-          })
-          .catch((error) => {
-            console.error(`Error updating document: ${error}`);
-          });
-      });
-    });
-  }
-
   async getWorkoutScheduled(request: IGetWorkoutSchedules){
   (await this.workoutscheduleservice.getSchedules(request)).subscribe((workouts: IGotWorkoutSchedules) => {
     this.workoutlist = workouts;

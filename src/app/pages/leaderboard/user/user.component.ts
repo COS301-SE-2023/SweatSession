@@ -5,7 +5,6 @@ import { Observable } from 'rxjs';
 import { StageOtheruserInfo } from 'src/app/actions';
 import { IProfileModel } from 'src/app/models';
 import { IBadges } from 'src/app/models/badges.model';
-import { BadgesApi } from 'src/app/states/badges/badges.api';
 @Component({
   selector: 'leaderboard-user',
   templateUrl: './user.component.html',
@@ -19,9 +18,9 @@ export class UserComponent  implements OnInit {
   sessionsCompleted = 0;
   badges$: Observable<IBadges>;
 
-  constructor(private store:Store,private nav:NavController,private badgesApi: BadgesApi) {}
+  constructor(private store:Store,private nav:NavController) {}
 
-  ngOnInit() {this.getBadges()}
+  ngOnInit() {}
 
   viewOtherUser(){
     if(this.isCurrentUser){
@@ -29,9 +28,5 @@ export class UserComponent  implements OnInit {
     }else{
       this.store.dispatch(new StageOtheruserInfo(this.user));
     }
-  }
-
-  getBadges() {
-    this.badges$ = this.badgesApi.otheruserbadges$(this.user.userId!);
   }
 }

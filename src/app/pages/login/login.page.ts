@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { AlertController, NavController } from '@ionic/angular';
 import { FormBuilder, Validators } from '@angular/forms'; //, AbstractControl, ValidatorFn, ValidationErrors 
 import { Store } from '@ngxs/store';
 import {Login} from 'src/app/actions/login';
@@ -10,7 +10,8 @@ import { ContinueWithGoogleAction } from 'src/app/actions';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-
+  errorMessage = "";
+  showErrorMessage = false;
   loginForm = this.loginFormBuilder.group({
     email: ['',[Validators.email],],
     password: ['', [Validators.minLength(6), Validators.maxLength(25)]],
@@ -18,7 +19,8 @@ export class LoginPage implements OnInit {
   constructor(
     private Nav: NavController,
     private readonly loginFormBuilder: FormBuilder,
-    private readonly store: Store
+    private readonly store: Store,
+    private alertController: AlertController
   ) { }
 
   get email() {
@@ -37,11 +39,31 @@ export class LoginPage implements OnInit {
       if (loginEmail != null && loginPassword!=null){
         this.store.dispatch(new Login(loginEmail,loginPassword));
       }
+    }else {
+      this.errorMessage = "Missing inputs, please fill all input fields";
+      this.showErrorMessage = true;
+      this.InvalidInforAlert();
     }
   }
 
   continueWithGoogleAuth() {
     this.store.dispatch(new ContinueWithGoogleAction());
+  }
+
+  async InvalidInforAlert()
+  {
+    const alert = await this.alertController.create({
+      header: 'Invalid Login Information',
+      message: 'Make sure that the password is at least 6 characters long and you have entered a valid registered email address',
+      buttons: [
+        {
+          text: 'Ok',
+          role: 'cancel',
+        },
+      ],
+    });
+    await alert.present();
+
   }
 
   ngOnInit() {

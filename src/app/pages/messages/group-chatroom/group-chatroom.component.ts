@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { IonContent } from '@ionic/angular';
 import { Select, Store } from '@ngxs/store';
 import { Timestamp } from 'firebase/firestore';
-import { Observable, switchMap, tap } from 'rxjs';
+import { Observable, Subscription, switchMap, tap } from 'rxjs';
 import { ExitChatGroup, GetGroup, GetGroupMessages, RemoveChatGroup, RemoveChatGroupSession, SendGroupMessage, StageGroup, SubscribeToAuthState } from 'src/app/actions';
 import { IGroup, IMessage } from 'src/app/models';
 import { NavigationService } from 'src/app/services';
@@ -26,6 +26,7 @@ export class GroupChatroomComponent  implements OnInit {
 
   @ViewChild('contentElement', { static: false }) contentElement: IonContent;
   message: IMessage = {text: ''};
+  private userSubscription: Subscription;
   
   constructor(private store: Store, private navigation: NavigationService, private notify: NotifyService) { }
 
@@ -35,7 +36,7 @@ export class GroupChatroomComponent  implements OnInit {
     this.store.dispatch(new GetGroup());
     this.store.dispatch(new GetGroupMessages());
     this.store.dispatch(new SubscribeToAuthState());
-    this.userId$.pipe(
+    this.userSubscription = this.userId$.pipe(
       tap((response)=> this.currentUserId = response),
       switchMap(()=>this.group$),
       tap((response)=> {
@@ -109,5 +110,11 @@ export class GroupChatroomComponent  implements OnInit {
 
   isOwner() {
     return this.group?.createBy == this.currentUserId;
+  }
+
+  ngOnDestroy() {
+    if (this.userSubscription) {
+      this.userSubscription.unsubscribe();
+    }
   }
 }
