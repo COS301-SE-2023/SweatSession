@@ -172,12 +172,20 @@ export class ExerciseExplorerPage implements  AfterViewInit  {
         this.openExercisePage('forearms');
         // console.log('midarm clicked');
       }
+      else if (intersects[0].object.name == "Object_7"){
+        this.openExercisePage('forearms');
+        // console.log('midarm clicked');
+      }
+      else if (intersects[0].object.name == "Object_15"){
+        this.openExercisePage('forearms');
+        // console.log('midarm clicked');
+      }
       else if (intersects[0].object.name == "Object_10"){
         this.openExercisePage('deltoids');
         // console.log('shoulders clicked');
       }
-      else if (intersects[0].object.name == "Object_21"){
-        this.openExercisePage('traps');
+      else if (intersects[0].object.name == "Object_6"){
+        this.openExercisePage('deltoids');
         // console.log('shoulders clicked');
       }
       else if (intersects[0].object.name == "Object_14"){
