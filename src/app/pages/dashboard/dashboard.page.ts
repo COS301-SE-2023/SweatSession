@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Store } from '@ngxs/store';
 import { getAuth } from 'firebase/auth';
 import { tap } from 'rxjs';
-import { IGetWorkoutSchedules, IGotWorkoutSchedules, IProfileModel } from 'src/app/models';
+import { IGetWorkoutSchedules, IGotWorkoutSchedules } from 'src/app/models';
 import { NoticeService } from 'src/app/services/notifications/notice.service';
 import { WorkoutscheduleService } from 'src/app/services/workoutschedule/workoutschedule.service';
 import { PointsApi } from 'src/app/states';
