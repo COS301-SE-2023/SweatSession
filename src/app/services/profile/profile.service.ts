@@ -59,6 +59,10 @@ export class ProfileService {
   async getUser(userId: string) {
     return this.repository.getUser(userId);
   }
+
+  async getUserProfilesRanked() {
+    return this.repository.getUserProfilesRanked();
+  }
 }
 
 

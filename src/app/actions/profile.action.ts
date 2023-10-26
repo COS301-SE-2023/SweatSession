@@ -15,3 +15,8 @@ export class GetUsersAction {
     static readonly type = "[profile] get user profiles";
     constructor() { }
 }
+
+export class GetUsersRanked {
+ static readonly type = "[] get users ranked by points";
+ constructor() { }
+}

@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
-import { Observable, forkJoin, map, switchMap, tap } from 'rxjs';
-import { GetFriendsAction, GetUsersAction, SubscribeToAuthState } from 'src/app/actions';
+import { Observable, Subscription, forkJoin, map, switchMap, tap } from 'rxjs';
+import { GetFriendsAction, GetUsersAction, GetUsersRanked, SubscribeToAuthState } from 'src/app/actions';
 import { IFriendsModel, IPoints, IProfileModel } from 'src/app/models';
 import { IBadges } from 'src/app/models/badges.model';
-import { AuthState, FriendsState, OtheruserState, PointsApi } from 'src/app/states';
+import { ProfileService } from 'src/app/services';
+import { AuthState,ProfileState, FriendsState, OtheruserState, PointsApi } from 'src/app/states';
 import { BadgesApi } from 'src/app/states/badges/badges.api';
 @Component({
   selector: 'app-leaderboard',
@@ -13,7 +14,7 @@ import { BadgesApi } from 'src/app/states/badges/badges.api';
 })
 export class LeaderboardPage implements OnInit {
 
-  @Select(OtheruserState.returnProfiles) users$ : Observable<IProfileModel[]>;
+  @Select(ProfileState.returnProfiles) users$ : Observable<IProfileModel[]>;
   @Select(FriendsState.returnFriends) friends$ : Observable<IFriendsModel[]>;
   @Select(AuthState.getCurrUserId) userId$!: Observable<string>;
   points$: Observable<IPoints>;
@@ -23,8 +24,9 @@ export class LeaderboardPage implements OnInit {
   selectedSegment: any="everyone";
   isLoading = true;
   badges$: Observable<IBadges>;
+  private userSubscription: Subscription;
 
-  constructor(private store:Store, private pointsApi: PointsApi, private badgesApi: BadgesApi) { }
+  constructor(private store:Store, private pointsApi: PointsApi, private badgesApi: BadgesApi, private profileService: ProfileService) { }
 
   ngOnInit() {
    this.initialize();
@@ -35,45 +37,21 @@ export class LeaderboardPage implements OnInit {
    */
   initialize() {
     this.store.dispatch(new SubscribeToAuthState());
-    this.store.dispatch(new GetUsersAction());
     this.store.dispatch(new GetFriendsAction());
+    this.store.dispatch(new GetUsersRanked());
   
-    this.userId$.pipe(
+    this.userSubscription = this.userId$.pipe(
       tap((response) => {
         this.userId = response;
       }),
       switchMap(() => this.users$),
       tap((response) => {
         this.users = response;
+        console.table(response);
       }),
-      switchMap(() => {
-        const requests = this.users.map(user =>
-          this.pointsApi.otherUserPoints$(user.userId!).pipe(
-            tap(response => {
-              user.points = response ? response.userPoints : 0;
-              user.sessionsCompleted = response.workoutSessionsAttended ? response.workoutSessionsAttended : 0;
-              this.badgesApi.otheruserbadges$(user.userId!).subscribe((result)=>{
-                user.badgesNumber = result.receivedBadges.length;
-                this.users.sort((userA, userB) =>{
-                  if(userB.points! == userA.points!) {
-                    if(userB.badgesNumber! == userA.badgesNumber!) {
-                      return userB.sessionsCompleted! - userA.sessionsCompleted!
-                    }
-                   return userB.badgesNumber! - userA.badgesNumber!
-                  }
-                  return userB.points! - userA.points!
-                });
-                this.users = [...this.users];
-              })
-            }),
-            switchMap(()=>this.friends$),
-            map((response)=>{
-              this.updateFriends(response);
-              this.sortProfiles(this.friends);
-            })
-          )
-        );
-        return forkJoin(requests);
+      switchMap(()=> this.friends$),
+      tap((response)=>{
+        this.updateFriends(response);
       })
     ).subscribe();
   }
@@ -93,6 +71,8 @@ export class LeaderboardPage implements OnInit {
         this.friends.push(user);
       }
     });
+
+    this.sortProfiles(this.friends);
   }
 
   /**
@@ -122,5 +102,11 @@ export class LeaderboardPage implements OnInit {
 
   onSegmentChange(event: any) {
     this.selectedSegment = event.detail.value;
+  }
+
+  ngOnDestroy() {
+    if (this.userSubscription) {
+      this.userSubscription.unsubscribe();
+    }
   }
 }

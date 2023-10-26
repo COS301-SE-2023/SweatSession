@@ -5,7 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { LeaderboardPageRoutingModule } from './leaderboard-routing.module';
 import { LeaderboardPage } from './leaderboard.page';
 import { UserComponent } from './user/user.component';
-import { AuthModule, FriendsStateModule, OtheruserStateModule } from 'src/app/states';
+import { AuthModule, FriendsStateModule, OtheruserStateModule, ProfileStateModule } from 'src/app/states';
 
 @NgModule({
   imports: [
@@ -15,7 +15,8 @@ import { AuthModule, FriendsStateModule, OtheruserStateModule } from 'src/app/st
     LeaderboardPageRoutingModule,
     OtheruserStateModule,
     FriendsStateModule,
-    AuthModule
+    AuthModule,
+    ProfileStateModule
   ],
   declarations: [LeaderboardPage, UserComponent]
 })

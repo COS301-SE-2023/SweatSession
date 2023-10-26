@@ -96,4 +96,37 @@ export class ProfileRepository {
     return profile;
   }
 
-}
+  getUserProfilesRanked(): Observable<IProfileModel[]> {
+    const profilesCollection = this.firestore.collection<IProfileModel>(`profiles`, (ref) =>
+      ref.orderBy('points', 'desc').limit(50));
+  
+    return profilesCollection.get().pipe(
+      map((snapshot) => {
+        let profiles: IProfileModel[] = [];
+        snapshot.forEach((doc) => {
+          const profile = {
+            ...doc.data(),
+            id: doc.id
+          };
+          profiles.push(profile);
+        });
+  
+        return this.sortProfiles(profiles);
+      })
+    );
+  }
+
+  sortProfiles(profiles: IProfileModel[]){
+    const p = profiles.sort((userA, userB) =>{
+       if(userB.points! == userA.points!) {
+         if(userB.badgesNumber! == userA.badgesNumber!) {
+           return userB.sessionsCompleted! - userA.sessionsCompleted!
+         }
+        return userB.badgesNumber! - userA.badgesNumber!
+       }
+       return userB.points! - userA.points!
+     });
+ 
+     return [...p];
+   }
+}  

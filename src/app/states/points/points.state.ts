@@ -32,7 +32,7 @@ export interface PointsStateModel {
 
     @Selector()
     static workoutSessionsAttended(state: PointsStateModel) {
-      return Number(state.points?.workoutSessionsAttended)%3
+      return Number(state.points?.sessionsCompleted)%3
     }
   
     @Action(SubscribeToPoints)

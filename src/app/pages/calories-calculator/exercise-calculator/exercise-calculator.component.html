@@ -4,7 +4,13 @@
   </ion-card-title>
   <ion-card-content>
     <div class="heading-container">
-      <h2 style="font-size: 20px;">Add your workout plan</h2>
+      <h2 *ngIf="message.trim()==''" style="font-size: 20px;">Add your workout plan</h2>
+      <h2 *ngIf="message.trim()!=''" style="font-size: 20px;">Exercises Breakdown</h2>
+    </div>
+    <div class="grid-container" *ngIf="message.trim()!=''">
+      <div class="exercise-breakdown">
+        <pre>{{ message }}</pre>
+      </div>
     </div>
     <div class="grid-container ion-text-center">
       <div class="form-container">
@@ -92,25 +98,28 @@
               <ion-icon name="trash"></ion-icon>
             </ion-button>
           </div>
-  
-          <ion-button class="adder" type="button" (click)="addExercise()" [disabled]="exercises.length >= 10">
-            <ion-icon name="add"></ion-icon>
-          </ion-button>
-          
-           <ion-button
-            class="submitbutton"
-            type="button"
-            (click)="calculateTotalCaloriesBurned()"
-            [disabled]="!isValidInput()"
-          >
-            Calculate Calories
-          </ion-button>
         </form>
       </div>
     </div>
-    <div class="grid-container">
-      <pre>{{ message }}</pre>
-      <!-- <pre class="message"><h3>{{ message }}</h3></pre> -->
-    </div>
+    
   </ion-card-content>
+  <div class="end" #scrollToElement>
+  </div>
 </ion-card>
+
+<div style="position: fixed; bottom: 0px; opacity: 1;" class="input-field-footer footer-div">
+  <div class="submit-button">
+    <ion-button class="adder" type="button" (click)="addExercise()" [disabled]="exercises.length >= 10">
+      <ion-icon name="add"></ion-icon>
+    </ion-button>
+    
+    <ion-button
+    class="submitbutton"
+    type="button"
+    (click)="calculateTotalCaloriesBurned()"
+    [disabled]="!isValidInput()"
+    >
+      Calculate Calories
+    </ion-button>
+  </div>
+</div>

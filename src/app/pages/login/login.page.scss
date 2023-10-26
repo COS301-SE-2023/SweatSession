@@ -73,3 +73,14 @@
         }
     }
 }
+
+.error-item {
+    --background: var( --ion-color-danger);
+    color: white;
+    border-radius: 8px;
+    .error-message {
+      width: fit-content;
+      margin: auto;
+      color: white;
+    }
+  }

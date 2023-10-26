@@ -7,7 +7,7 @@
           Name
         </ion-label>
         <ion-item class="input-field" lines="none">
-          <ion-input type="text" value="{{schedule.name}}" [(ngModel)]="schedule.name" (ionChange)="checkChange()"></ion-input>
+          <ion-input type="text" value="{{schedule.name}}" [(ngModel)]="schedule.name" (ionInput)="checkChange()"></ion-input>
         </ion-item>
       </div>
     </ion-col>
@@ -20,7 +20,7 @@
           <ion-icon name="calendar-outline"></ion-icon> Date
         </ion-label>
         <ion-item class="input-field" lines="none">
-          <ion-input type ="date" value="{{schedule.date}}" [(ngModel)]="schedule.date" [min]="getMinDate()" (ionChange)="checkChange()"></ion-input>
+          <ion-input type ="date" value="{{schedule.date}}" [(ngModel)]="schedule.date" [min]="getMinDate()" (ionInput)="checkChange()"></ion-input>
         </ion-item>
       </div>
     </ion-col>
@@ -30,7 +30,7 @@
           <ion-icon name="time-outline"></ion-icon> Time
         </ion-label>
         <ion-item class="input-field" lines="none">
-          <ion-input type = "time"value="{{schedule.time}}" [min]="getMinTime()" [(ngModel)]="schedule.time" (ionChange)="checkChange()"></ion-input>
+          <ion-input type = "time"value="{{schedule.time}}" [min]="getMinTime()" [(ngModel)]="schedule.time" (ionInput)="checkChange()"></ion-input>
         </ion-item>
       </div>
     </ion-col>
@@ -63,7 +63,7 @@
           <ion-icon name="timer-outline"></ion-icon> Duration (min)
         </ion-label>
         <ion-item class="input-field" lines="none">
-          <ion-input type = "number" value="{{schedule.duration}}" [(ngModel)]="schedule.duration" (ionChange)="checkChange()"></ion-input>
+          <ion-input type = "number" value="{{schedule.duration}}" [(ngModel)]="schedule.duration" (ionInput)="checkChange()"></ion-input>
         </ion-item>
       </div>
       <ion-note *ngIf="!IsvalidDuration()" color="danger">
