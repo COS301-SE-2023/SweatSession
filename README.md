@@ -12,7 +12,7 @@
 
 # SweatSession Advert
 
-https://github.com/COS301-SE-2023/SweatSession/assets/113734523/ef389b7b-5a1e-4e2d-9250-867c28eb6760
+https://github.com/COS301-SE-2023/SweatSession/assets/113734523/a0932b70-32fd-4713-abcb-ab2a64769c28
 
 # SweatSession Project
 
