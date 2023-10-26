@@ -63,6 +63,7 @@
     "immer": "^9.0.19",
     "ionic-select-searchable": "^2.10.0",
     "ionicons": "^7.0.0",
+    "ng-circle-progress": "^1.7.1",
     "ng2-charts": "^5.0.1",
     "ng2-search-filter": "^0.5.1",
     "node-fetch": "^3.3.2",

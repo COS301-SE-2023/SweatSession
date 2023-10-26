@@ -10204,6 +10204,13 @@ neo-async@^2.6.2:
   resolved "https://registry.npmjs.org/neo-async/-/neo-async-2.6.2.tgz"
   integrity sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==
 
+ng-circle-progress@^1.7.1:
+  version "1.7.1"
+  resolved "https://registry.yarnpkg.com/ng-circle-progress/-/ng-circle-progress-1.7.1.tgz#24ac5af2ecd4e2d5fa231bd12c610f974f42a57d"
+  integrity sha512-XAsd/FRWC4lqO7pUakwniO1c+ew3zr+Un/pZ58aqdE1aq3iS7kquxDmzOOCZ2XoUhU/6vC31e/DSYHvlHhITkA==
+  dependencies:
+    tslib "^2.0.0"
+
 ng2-charts@^5.0.1:
   version "5.0.1"
   resolved "https://registry.npmjs.org/ng2-charts/-/ng2-charts-5.0.1.tgz"
