@@ -158,12 +158,9 @@ export class AddScheduleComponent  implements OnInit {
   }
 
   IsvalidDuration() {
-    if(this.schedule.duration! < 1)
-    {
+    if(this.schedule.duration! < 10) {
       return false;
-    }
-    else
-    {
+    } else {
       return true;
     }
   }

@@ -19,6 +19,7 @@ export class WorkoutSchedulingPage {
   completedSchedules: IWorkoutScheduleModel[]=[];
   uncompletedSchedules: IWorkoutScheduleModel[]=[];
   inSessionSchedules: IWorkoutScheduleModel[]=[];
+  upComingSchedules: IWorkoutScheduleModel[]=[];
 
   selectedSegment: string = '0';
  
@@ -68,6 +69,10 @@ export class WorkoutSchedulingPage {
     this.inSessionSchedules = this.schedules.filter((schedule)=>
       this.inSession(schedule)
     )
+
+    this.upComingSchedules = this.schedules.filter((schedule)=>
+    this.isUpcoming(schedule)
+    )
   }
 
   onSegmentChange(event: any) {
@@ -109,7 +114,16 @@ export class WorkoutSchedulingPage {
     const scheduledTime = new Date(`${schedule.date}T${schedule.time}`).getTime();
     const now = new Date().getTime();
     let joinStatus = schedule.joined;
-    if(!joinStatus && (now < scheduledTime || now > completeAt) ) {
+    if(!joinStatus && (now > completeAt) ) {
+      return true;
+    }
+    return false;
+  }
+
+  isUpcoming(schedule: IWorkoutScheduleModel) {
+    const scheduledTime = new Date(`${schedule.date}T${schedule.time}`).getTime();
+    const now = new Date().getTime();
+    if(now < scheduledTime) {
       return true;
     }
     return false;

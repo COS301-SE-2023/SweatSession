@@ -144,7 +144,7 @@ export class WorkoutscheduleRepository {
 
   getSchedules(request: IGetWorkoutSchedules): Observable<IGotWorkoutSchedules> {
       const friendsCollection = this.firestore.collection<IWorkoutScheduleModel>(
-      `WorkoutSchedule/${request.userId}/userSchedules`
+      `WorkoutSchedule/${request.userId}/userSchedules`, (ref) => ref.orderBy('date', 'asc')
       );
   
     return friendsCollection.snapshotChanges().pipe(

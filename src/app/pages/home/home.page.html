@@ -49,7 +49,7 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>
-      <ion-chip class="clickable" routerLink="/userprofile">
+      <ion-chip class="clickable" routerLink="/userprofile" *ngIf="!isProfileNull(); else loaderContent">
         <ion-item class="transparent-item" style="margin-top: 2px">
           <ion-avatar>
             <img src={{ProfilePicture$}}/> 
@@ -60,6 +60,21 @@
           </div>
         </ion-item>
       </ion-chip>
+      <ng-template #loaderContent>
+        <div class="loader-wrapper">
+          <ion-chip>
+            <ion-item class="transparent-item" style="margin-top: 2px">
+              <ion-avatar>
+                <ion-skeleton-text animated="true" style="height: 100%; width: 100%; border-radius: 50%;"></ion-skeleton-text>
+              </ion-avatar>
+            
+              <div class="name">
+                <ion-skeleton-text animated="true" style="height: 15px; width: 80px; border-radius: 8px"></ion-skeleton-text>
+              </div>
+            </ion-item>
+          </ion-chip>
+        </div>
+      </ng-template>
     </ion-title>
     <ion-icon name="receipt-outline" 
               routerLink="/workout-scheduling"

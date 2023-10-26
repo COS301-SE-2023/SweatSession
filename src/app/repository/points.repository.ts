@@ -4,6 +4,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import firebase from 'firebase/compat/app';
 import { IPoints } from 'src/app/models/points.model';
 import { BadgesRepository } from './badges.repository';
+import { lastValueFrom } from 'rxjs';
 
 
 
@@ -32,7 +33,7 @@ export class PointsRepository {
         const pointsDocRef = this.firestore.collection('profiles').doc(currUserId);
         const fieldValue = firebase.firestore.FieldValue;
     
-        const docSnapshot = await pointsDocRef.get().toPromise(); // Convert Observable to Promise
+        const docSnapshot = await lastValueFrom(pointsDocRef.get()); // Convert Observable to Promise
     
         if (docSnapshot && docSnapshot.exists) {
             const data = docSnapshot.data() as { [key: string]: any }; // Typecast data as an object with any keys
@@ -54,7 +55,7 @@ export class PointsRepository {
             if (newWorkoutSessionsAttended == 20){
                 this.badgesRepository.addBadge(currUserId, 4);//Workout Warrior
             }
-    
+            console.log(currentWorkoutSessionsAttended);
             return pointsDocRef.update(updatedFields);
         } else {
             // Handle the case when the document does not exist
