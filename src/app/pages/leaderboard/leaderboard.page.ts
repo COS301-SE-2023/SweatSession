@@ -47,7 +47,6 @@ export class LeaderboardPage implements OnInit {
       switchMap(() => this.users$),
       tap((response) => {
         this.users = response;
-        console.table(response);
       }),
       switchMap(()=> this.friends$),
       tap((response)=>{
