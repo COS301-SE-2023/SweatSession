@@ -100,15 +100,14 @@ export class ProfileRepository {
     const profilesCollection = this.firestore.collection<IProfileModel>(`profiles`, (ref) =>
       ref.orderBy('points', 'desc').limit(50));
   
-    return profilesCollection.snapshotChanges().pipe(
+    return profilesCollection.get().pipe(
       map((snapshot) => {
         let profiles: IProfileModel[] = [];
         snapshot.forEach((doc) => {
           const profile = {
-            ...doc.payload.doc.data(),
-            id: doc.payload.doc.id
+            ...doc.data(),
+            id: doc.id
           };
-  
           profiles.push(profile);
         });
   
