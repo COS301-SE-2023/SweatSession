@@ -84,6 +84,12 @@ export class HomePage implements OnInit {
     window.location.href = 'https://drive.google.com/file/d/1FO49XGFE1FJEOyHoBlKEkKIhqO7e71mr/view?usp=sharing';
   }
 
+  isProfileNull() {
+    if(this.DisplayName$ === 'na' || this.ProfilePicture$ === 'na')
+      return true;
+    return false;
+  }
+
   // async displayProfile() {
   //   // this.userId$.subscribe(async (response)=>{
   //   //   if(response) {
