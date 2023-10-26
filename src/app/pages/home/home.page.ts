@@ -81,7 +81,7 @@ export class HomePage implements OnInit {
   }
 
   openhelpwebsite() {
-    window.location.href = 'https://drive.google.com/file/d/1FO49XGFE1FJEOyHoBlKEkKIhqO7e71mr/view?usp=sharing';
+    window.location.href = 'https://drive.google.com/file/d/1DTfJ4ZNe7tvPslUQD8sV_GCthRnSPMA1/view?usp=sharing';
   }
 
   isProfileNull() {
