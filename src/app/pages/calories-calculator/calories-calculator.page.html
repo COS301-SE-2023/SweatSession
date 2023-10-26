@@ -20,10 +20,23 @@
     </ion-segment-button>
   </ion-segment>
   <ion-card class="summary ion-text-center">
-    <h2>Calories Summary</h2>
+    <!-- <h2>Calories Summary</h2>
     <h4>You require {{ targetCalories$ | async }} calories per day.</h4>
     <h4>You consume {{ dietCalories$ | async }} calories per day.</h4>
-    <h4>Your workout burns {{ workoutCalories$ | async }} calories.</h4>
+    <h4>Your workout burns {{ workoutCalories$ | async }} calories.</h4> -->
+    <circle-progress
+      [percent]="(totalDietCalories+totalWorkoutCalories / totalTargetCalories) * 100"
+      [radius]="80"
+      [outerStrokeWidth]="8"
+      [innerStrokeWidth]="2"
+      [outerStrokeColor]="'#78C000'"
+      [innerStrokeColor]="'#C7E596'"
+      [animation]="true"
+      [animationDuration]="300"
+      [title]="returntitle()"
+      [subtitle]="'Target Calories'"
+      class="circle-progress-container"
+    ></circle-progress>
   </ion-card>
 
   <calorie-target [hidden]="selectedSegment !=='target'"></calorie-target>

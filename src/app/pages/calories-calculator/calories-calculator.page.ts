@@ -49,10 +49,23 @@ export class CaloriesCalculatorPage implements OnInit {
 
   ngOnInit() {
     this.calorieSummary = new CalorieSummary();
+    this. initialize();
   }
 
   onSegmentChange(event: any) {
     this.selectedSegment = event.detail.value;
+  }
+
+  initialize() {
+    this.targetCalories$.subscribe((response)=>{
+      this.totalTargetCalories = response;
+    })
+    this.dietCalories$.subscribe((response)=>{
+      this.totalDietCalories = response;
+    })
+    this.workoutCalories$.subscribe((response)=>{
+      this.totalWorkoutCalories = response;
+    })
   }
 
   targetCalories(){
@@ -65,5 +78,9 @@ export class CaloriesCalculatorPage implements OnInit {
 
   workoutCalories(){
     return CalorieSummary.workoutCalories;
+  }
+
+   returntitle() {
+    return `${this.totalDietCalories + this.totalWorkoutCalories}/${this.totalTargetCalories}`
   }
 }
