@@ -131,11 +131,11 @@
   height: 100vh;
 }
 
-.inner-container {
-  // padding-top: 50px;
+ion-col {
+  padding: 0px;
 }
 
-// .summary{
-//   padding: 1%;
-//   // color:#ffffff;
-// }
+circle-progress {
+  --outerStrokeColor:#1d00c0;
+  --innerStrokeColor:#96cce5;
+}

@@ -19,25 +19,65 @@
       <ion-label>Workout</ion-label>
     </ion-segment-button>
   </ion-segment>
-  <ion-card class="summary ion-text-center">
-    <!-- <h2>Calories Summary</h2>
-    <h4>You require {{ targetCalories$ | async }} calories per day.</h4>
-    <h4>You consume {{ dietCalories$ | async }} calories per day.</h4>
-    <h4>Your workout burns {{ workoutCalories$ | async }} calories.</h4> -->
-    <circle-progress
-      [percent]="(totalDietCalories+totalWorkoutCalories / totalTargetCalories) * 100"
-      [radius]="80"
-      [outerStrokeWidth]="8"
-      [innerStrokeWidth]="2"
-      [outerStrokeColor]="'#78C000'"
-      [innerStrokeColor]="'#C7E596'"
-      [animation]="true"
-      [animationDuration]="300"
-      [title]="returntitle()"
-      [subtitle]="'Target Calories'"
-      class="circle-progress-container"
-    ></circle-progress>
-  </ion-card>
+  
+  <ion-row class="ion-text-center">
+    <ion-col size="12">
+      <h3 class="ion-text-center">Total Calories</h3>
+      <circle-progress
+        [percent]="((totalDietCalories + totalWorkoutCalories) / totalTargetCalories) * 100"
+        [radius]="60"
+        [outerStrokeWidth]="8"
+        [innerStrokeWidth]="2"
+        [outerStrokeColor]="checkTheme() ? '#4185ff' : '#628BA0'"
+        [innerStrokeColor]="checkTheme() ? '#749de9' : '#BFDBEA'"
+        [titleColor]="checkTheme() ? '#4185ff' : '#628BA0'"
+        [subtitleColor]="checkTheme() ? '#4185ff' : '#628BA0'"
+        [animation]="true"
+        [animationDuration]="300"
+        [title]="returnTitle().replace('%', '')"
+        [subtitle]="'/ '+totalTargetCalories.toString()"
+        [showUnits]="false"
+      ></circle-progress>
+    </ion-col>
+  </ion-row>
+  <ion-row class="ion-text-center">
+    <ion-col size="6">
+      <ion-label>Workout Calories</ion-label>
+      <circle-progress
+        [percent]="(totalWorkoutCalories / totalTargetCalories) * 100"
+        [radius]="50"
+        [outerStrokeWidth]="8"
+        [innerStrokeWidth]="2"
+        [outerStrokeColor]="checkTheme() ? '#4185ff' : '#628BA0'"
+        [innerStrokeColor]="checkTheme() ? '#749de9' : '#BFDBEA'"
+        [titleColor]="checkTheme() ? '#4185ff' : '#628BA0'"
+        [subtitleColor]="checkTheme() ? '#4185ff' : '#628BA0'"
+        [animation]="true"
+        [animationDuration]="300"
+        [title]="returnWorkoutTitle().replace('%', '')"
+        [subtitle]="'/ '+totalTargetCalories.toString()"
+        [showUnits]="false"
+      ></circle-progress>
+    </ion-col>
+    <ion-col size="6">
+      <ion-label>Diet Calories</ion-label>
+      <circle-progress
+        [percent]="(totalDietCalories / totalTargetCalories) * 100"
+        [radius]="50"
+        [outerStrokeWidth]="8"
+        [innerStrokeWidth]="2"
+        [outerStrokeColor]="checkTheme() ? '#4185ff' : '#628BA0'"
+        [innerStrokeColor]="checkTheme() ? '#749de9' : '#BFDBEA'"
+        [titleColor]="checkTheme() ? '#4185ff' : '#628BA0'"
+        [subtitleColor]="checkTheme() ? '#4185ff' : '#628BA0'"
+        [animation]="true"
+        [animationDuration]="300"
+        [title]="returnDietTitle().replace('%', '')"
+        [subtitle]="'/ '+totalTargetCalories.toString()"
+        [showUnits]="false"
+      ></circle-progress>
+    </ion-col>
+  </ion-row>
 
   <calorie-target [hidden]="selectedSegment !=='target'"></calorie-target>
   <diet-calculator [hidden]="selectedSegment !=='diet'"></diet-calculator>

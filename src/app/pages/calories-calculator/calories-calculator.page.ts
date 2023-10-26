@@ -28,6 +28,7 @@ export class CaloriesCalculatorPage implements OnInit {
   targetCalories$: Observable<number> = CalorieSummary.targetCalories$;
   dietCalories$: Observable<number> = CalorieSummary.dietCalories$;
   workoutCalories$: Observable<number> = CalorieSummary.workoutCalories$;
+  darkmode=false;
 
   selectedSegment: string = 'target';
   calorieSummary: any;
@@ -66,6 +67,7 @@ export class CaloriesCalculatorPage implements OnInit {
     this.workoutCalories$.subscribe((response)=>{
       this.totalWorkoutCalories = response;
     })
+    this.checkTheme();
   }
 
   targetCalories(){
@@ -80,7 +82,22 @@ export class CaloriesCalculatorPage implements OnInit {
     return CalorieSummary.workoutCalories;
   }
 
-   returntitle() {
-    return `${this.totalDietCalories + this.totalWorkoutCalories}/${this.totalTargetCalories}`
+  returnTitle() {
+    return `${this.totalDietCalories + this.totalWorkoutCalories}`;
+  }
+  
+  returnWorkoutTitle() {
+    return `${this.totalWorkoutCalories}`
+  }
+
+  returnDietTitle() {
+    return `${this.totalDietCalories}`
+  }
+
+  checkTheme() {
+    if(localStorage.getItem('darkmode')=='true') {
+      return true;
+    } 
+    return false;
   }
 }

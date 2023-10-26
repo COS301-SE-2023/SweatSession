@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { getAuth } from '@angular/fire/auth';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IonContent } from '@ionic/angular';
@@ -18,6 +18,7 @@ register();
 export class ExerciseCalculatorComponent implements OnInit {
 
   @ViewChild('contentElement', { static: false }) contentElement: IonContent;
+  @ViewChild('scrollToElement') scrollToElement: ElementRef;
   workoutForm: FormGroup;
   exercisesArray: Exercise[] = [];
   scheduleId: string;
@@ -111,6 +112,7 @@ export class ExerciseCalculatorComponent implements OnInit {
       duration: ['', [Validators.required, Validators.min(1)]],
     });
     (this.workoutForm.get('exercises') as FormArray).push(exerciseControl);
+    await this.scrollToElement.nativeElement.scrollIntoView({ behavior: 'smooth', block: 'end' });
     // this.scrollToBottom();
   }
 

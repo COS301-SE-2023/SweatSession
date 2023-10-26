@@ -1,27 +1,28 @@
-<ion-card class="ion-text-center calories-content-cards">
-  <ion-card-title>
+<ion-card class="calories-content-cards">
+  <!-- <ion-card-title class="ion-text-center">
     <h1>Diet Calculator</h1>
-  </ion-card-title>
+  </ion-card-title> -->
   <ion-card-content>
-    <ion-item lines="none" class="input-field">
+    <!-- <ion-item lines="none" class="input-field">
       <ion-textarea label="Enter your meal" labelPlacement="stacked" [(ngModel)]="meal" rows="5"></ion-textarea>
     </ion-item>
-    <ion-button class="ion-margin-top" expand="block" (click)="calculateNutrition()">Calculate</ion-button>
+    <ion-button class="ion-margin-top" expand="block" (click)="calculateNutrition()">Calculate</ion-button> -->
 
     <div *ngIf="totalNutrition">
-      <h2 style="font-size: 18px; margin-top: 20px;">Summary of Nutritional Information</h2>
-      <div class="inner-container ion-padding">
+      <h1 style="font-size: 18px; font-weight:bold; margin-top: 15px;" class="ion-text-center">Summary of Nutritional Information</h1>
+      <div class="ion-padding summary-results">
         <p>Total Calories: {{ totalNutrition.calories | number:'1.2-2' }}</p>
-        <p>Protein: {{ totalNutrition.protein | number:'1.2-2' }}g</p>
         <p>Carbohydrates: {{ totalNutrition.carbohydrates | number:'1.2-2' }}g</p>
         <p>Fats: {{ totalNutrition.fats | number:'1.2-2' }}g</p>
+        <p>Protein: {{ totalNutrition.protein | number:'1.2-2' }}g</p>
         <p>Dietary Fiber: {{ totalNutrition.fiber | number:'1.2-2' }}g</p>
         <p>Sugars: {{ totalNutrition.sugars | number:'1.2-2' }}g</p>
         <p>Sodium: {{ totalNutrition.sodium | number:'1.2-2' }}mg</p>
       </div>
     </div>
 
-    <ion-list class="transparent-list" *ngIf="foods">
+    <ion-list class="transparent-list" *ngIf="foods.length>0">
+      <h1 style="font-size: 18px; font-weight:bold; margin-top: 15px;" class="ion-text-center">Meal Break down</h1>
       <ion-item lines="none" class="transparent-item" *ngFor="let food of foods">
         <ion-row class="flex-container">
           <ion-col size="6" size-md="3">
@@ -43,6 +44,18 @@
           </ion-col>
         </ion-row>
       </ion-item>
-    </ion-list>    
+    </ion-list>
   </ion-card-content>
 </ion-card>
+<ion-footer class="ion-no-border" style="position: fixed; bottom: 0px; opacity: 1;" class="input-field-footer">
+  <ion-item lines="none" class="message-input-field">
+    <div class="input-field-wrapper">
+      <ion-textarea placeholder="Enter your meal" labelPlacement="stacked" [(ngModel)]="meal" rows="1" autoGrow="true"></ion-textarea>
+    </div>
+    <ion-buttons slot="end">
+      <ion-button class="message-send-fab-button default-button" (click)="calculateNutrition()">
+        <ion-icon name="send" class="message-send-icon"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-item>
+</ion-footer>

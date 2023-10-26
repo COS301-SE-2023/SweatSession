@@ -174,6 +174,29 @@ body[color-theme="light"] {
   .item-field {
     --background: var(--secondary-variant-color);
   }
+
+  .summary-results p{
+    width: fit-content;
+    display: inline-block;
+    padding: 5px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    background-color: var(--primary-color);
+    border-radius: 8px;
+    text-align: start;
+    color: white;
+  }
+
+  ion-footer, .footer-div {
+    background-color: var(--background-color);
+  }
+
+  .exercise-breakdown {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 20px;
+    border-radius: 8px;
+  }
 }
 
 // body[color-theme="light"] {
