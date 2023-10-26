@@ -111,7 +111,7 @@ export class ExerciseExplorerPage implements  AfterViewInit  {
     requestAnimationFrame(this.animate.bind(this));
     // Rotate the model (optional)
     if (this.gltfModel) {
-      this.gltfModel.rotation.y += 0.01;
+      this.gltfModel.rotation.y += 0.005;
     }
     this.controls.update(); // Update the controls
 
