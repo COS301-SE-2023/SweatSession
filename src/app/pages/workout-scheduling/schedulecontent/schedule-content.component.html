@@ -51,7 +51,7 @@
         </ion-col>
       </ion-row>
       
-      <div *ngIf="isCompleted()">
+      <div *ngIf="isCompleted() && exercises.length>0">
         <div class="exercise-fill-header">
           <h2 *ngIf="!schedule.filledExerciseList">Your session has ended. Which exercises were you able to finish?</h2>
           <h2 *ngIf="schedule.filledExerciseList">Exercise checklist completed</h2>

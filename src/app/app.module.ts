@@ -47,6 +47,7 @@ import {
 import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
 import { NgxsModule } from '@ngxs/store';
 import { environment } from '../environments/environment';
+import { NgCircleProgressModule } from 'ng-circle-progress';
 // import { ServiceWorkerModule } from '@angular/service-worker';
 
  
@@ -62,6 +63,7 @@ import { environment } from '../environments/environment';
     NgxsModule.forRoot(),
     IonicModule.forRoot(), 
     NgxsRouterPluginModule.forRoot(),
+    NgCircleProgressModule.forRoot(),
     AppRoutingModule,
     HttpClientModule,
     AngularFirestoreModule,

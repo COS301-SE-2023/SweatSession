@@ -47,7 +47,7 @@ export class DashboardPage implements OnInit {
   getSessionsAttended() {
     this.pointsApi.points$().pipe(
       tap((response)=>{
-        this.sessionsCompleted = response.workoutSessionsAttended ? response.workoutSessionsAttended : 0;
+        this.sessionsCompleted = response.sessionsCompleted ? response.sessionsCompleted : 0;
       })
     ).subscribe();
   }

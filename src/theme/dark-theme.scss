@@ -115,4 +115,26 @@ body[color-theme="dark"] {
     }
   }
   
+  .summary-results p{
+    width: fit-content;
+    display: inline-block;
+    padding: 5px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    background-color: #4185ff;
+    border-radius: 8px;
+    text-align: start;
+    color: white;
+  }
+
+  ion-footer, .footer-div {
+    background-color: var(--ion-background-color);
+  }
+
+  .exercise-breakdown {
+    background-color: #4185ff;
+    color: white;
+    padding: 20px;
+    border-radius: 8px;
+  }
 }

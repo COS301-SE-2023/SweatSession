@@ -1,20 +1,22 @@
 import { Injectable } from "@angular/core";
 import { Action, Selector, State, StateContext, Store } from "@ngxs/store";
 import { tap } from "rxjs/operators";
-import { GetProfileAction } from "src/app/actions/profile.action";
+import { GetProfileAction, GetUsersRanked } from "src/app/actions/profile.action";
 import { IGetProfile, IGotProfile, IProfileModel } from "src/app/models";
 import { OtheruserService, ProfileService } from "src/app/services";
 
 export class ProfileStateModel {
     profile?: IProfileModel[];
     otheruser?: IProfileModel;
+    profiles?: IProfileModel[];
 }
 
 @State<ProfileStateModel>({
     name: "profile",
     defaults: {
         profile: undefined,
-        otheruser: {}
+        otheruser: {},
+        profiles: []
     }
 })
 
@@ -61,8 +63,22 @@ export class ProfileState{
       }
     }
 
+    @Action(GetUsersRanked)
+    async getUsersRanked(ctx: StateContext<ProfileStateModel>) {
+      return (await this.profileService.getUserProfilesRanked()).pipe(tap((response)=>{
+        ctx.patchState({
+          profiles: response
+        })
+      }))
+    }
+
     @Selector()
     static returnProfile(state: ProfileStateModel) {
         return state.profile;
+    }
+
+    @Selector()
+    static returnProfiles(state: ProfileStateModel) {
+        return state.profiles;
     }
 }

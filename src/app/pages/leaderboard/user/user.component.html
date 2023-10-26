@@ -28,7 +28,6 @@
         </div>
         <div class="user-pr">
           <ion-text>Badges</ion-text><br>
-          <!-- <ion-text *ngIf="badges$ | async as badges; else loaderContent">{{badges.receivedBadges.length}}</ion-text> -->
           <ion-text>{{user.badgesNumber}}</ion-text>
           <ng-template #loaderContent>
             <div class="loader-wrapper">

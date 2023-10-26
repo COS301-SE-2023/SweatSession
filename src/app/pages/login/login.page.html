@@ -7,6 +7,11 @@
           <p class="welcome-subtitle">Login to your account</p>
         </ion-col>
       </ion-row>
+      <div class="error-message-container" *ngIf="showErrorMessage">
+        <ion-item lines="none" class="error-item">
+         <ion-text class="error-message"> {{errorMessage}}</ion-text>
+        </ion-item>
+      </div>
       <ion-row class="form-container">
         <ion-col size="12" size-md="6" size-lg="4">
           <form  
